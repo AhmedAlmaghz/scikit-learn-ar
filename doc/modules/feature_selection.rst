@@ -1,5 +1,3 @@
-بالتأكيد! فيما يلي ترجمة لنص RST المحدد إلى اللغة العربية، مع اتباع التعليمات التي قدمتها:
-
 .. currentmodule:: sklearn.feature_selection
 
 .. _feature_selection:
