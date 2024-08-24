@@ -1,66 +1,59 @@
-  هذا نص بتنسيق RST أريد ترجمته إلى اللغة العربية، مع الحفاظ على الرموز الخاصة والرياضية والروابط والتاجات والشفرة البرمجية دون ترجمة:
+يُعرِّف سكايت-ليرن واجهة برمجة تطبيقات (API) بسيطة لإنشاء الرسوم البيانية لتعلم الآلة. وتتمثل الميزات الرئيسية لهذه الواجهة في إجراء الحسابات مرة واحدة والمرونة في تعديل الرسوم البيانية بعد ذلك. هذا القسم مخصص للمطورين الذين يرغبون في تطوير أو صيانة أدوات إنشاء الرسوم البيانية. وللاستخدام، يجب أن يرجع المستخدمون إلى دليل المستخدم.
 
-    .. _plotting_api:
+نظرة عامة على واجهة برمجة التطبيقات للرسم البياني
+-------------------------------------------------
 
-    ================================
-    التطوير باستخدام واجهة برمجة التطبيقات للرسم البياني
-    ================================
+يتم تضمين هذا المنطق في كائن عرض حيث يتم تخزين البيانات المحسوبة ويتم إجراء الرسم البياني في طريقة "رسم". تحتوي طريقة "__init__" الخاصة بكائن العرض فقط على البيانات اللازمة لإنشاء الرسم البياني. وتأخذ طريقة "رسم" كمعلمات تلك التي لها علاقة فقط بالرسم البياني، مثل محاور matplotlib. ستقوم طريقة "رسم" بتخزين كائنات matplotlib الفنية كسمات، مما يسمح بتعديلات الأسلوب من خلال كائن العرض. يجب أن تحدد فئة "العرض" طريقة أو كلا الطريقتين: "من_المُقدِّر" و "من_التنبؤات". تسمح هذه الطرق بإنشاء كائن "العرض" من المُقدِّر وبعض البيانات أو من القيم الحقيقية والمتنبأ بها. بعد أن تقوم هذه الطرق بإنشاء كائن العرض بالقيم المحسوبة، يتم استدعاء طريقة عرض "رسم". لاحظ أن طريقة "رسم" تحدد سمات تتعلق بـ matplotlib، مثل كائن الخط. يسمح هذا بالتخصيصات بعد استدعاء طريقة "رسم".
 
-    يحدد Scikit-learn واجهة برمجة تطبيقات بسيطة لإنشاء مرئيات للتعلم الآلي. تتمثل الميزات الأساسية لهذه الواجهة في تشغيل العمليات الحسابية مرة واحدة والحصول على المرونة لضبط المرئيات بعد الحقيقة. هذا القسم مخصص للمطورين الذين يرغبون في تطوير أدوات الرسم البياني أو صيانتها. بالنسبة للاستخدام، يجب على المستخدمين الرجوع إلى :ref:`دليل المستخدم <visualizations>`.
+على سبيل المثال، يحدد "RocCurveDisplay" الطرق والسمات التالية::
 
-    نظرة عامة على واجهة برمجة التطبيقات للرسم البياني
-    --------------------------------
+   class RocCurveDisplay:
+       def __init__(self, fpr, tpr, roc_auc, estimator_name):
+           ...
+           self.fpr = fpr
+           self.tpr = tpr
+           self.roc_auc = roc_auc
+           self.estimator_name = estimator_name
 
-    يتم تغليف هذا المنطق في كائن عرض حيث يتم تخزين البيانات المحسوبة ويتم إجراء الرسم البياني في طريقة `plot`. تحتوي طريقة `__init__` لكائن العرض فقط على البيانات اللازمة لإنشاء المرئيات. تأخذ طريقة `plot` محددات لها علاقة بالتصور فقط، مثل محاور matplotlib. ستقوم طريقة `plot` بتخزين فناني matplotlib كسمات مما يسمح بالتعديلات على النمط من خلال كائن العرض. يجب أن يحدد فئة `Display` طريقة أو طريقتين للفئة: `from_estimator` و `from_predictions`. تسمح هذه الطرق بإنشاء كائن `Display` من التقدير وبعض البيانات أو من القيم الحقيقية والمتوقعة. بعد إنشاء طرق الفئة هذه لكائن العرض مع القيم المحسوبة، ثم استدعاء طريقة العرض للكائن. لاحظ أن الطريقة `plot` تحدد السمات المتعلقة ب matplotlib، مثل الفنان للخط. هذا يسمح بالتخصيصات بعد استدعاء طريقة `plot`.
+       @classmethod
+       def from_estimator(cls, estimator, X, y):
+           # الحصول على التنبؤات
+           y_pred = estimator.predict_proba(X)[:, 1]
+           return cls.from_predictions(y, y_pred, estimator.__class__.__name__)
 
-    على سبيل المثال، يحدد `RocCurveDisplay` الطرق والسمات التالية::
+       @classmethod
+       def from_predictions(cls, y, y_pred, estimator_name):
+           # إجراء حساب ROC من y و y_pred
+           fpr, tpr, roc_auc = ...
+           viz = RocCurveDisplay(fpr, tpr, roc_auc, estimator_name)
+           return viz.plot()
 
-       class RocCurveDisplay:
-           def __init__(self, fpr, tpr, roc_auc, estimator_name):
-               ...
-               self.fpr = fpr
-               self.tpr = tpr
-               self.roc_auc = roc_auc
-               self.estimator_name = estimator_name
+       def plot(self, ax=None, name=None, **kwargs):
+           ...
+           self.line_ = ...
+           self.ax_ = ax
+           self.figure_ = ax.figure_
 
-           @classmethod
-           def from_estimator(cls, estimator, X, y):
-               # الحصول على التوقعات
-               y_pred = estimator.predict_proba(X)[:, 1]
-               return cls.from_predictions(y, y_pred, estimator.__class__.__name__)
+اقرأ المزيد في :ref:sphx_glr_auto_examples_miscellaneous_plot_roc_curve_visualization_api.py` ودليل المستخدم <visualizations>.
 
-           @classmethod
-           def from_predictions(cls, y, y_pred, estimator_name):
-               # قم بحساب ROC من y و y_pred
-               fpr, tpr, roc_auc = ...
-               viz = RocCurveDisplay(fpr, tpr, roc_auc, estimator_name)
-               return viz.plot()
+الرسم البياني باستخدام محاور متعددة
+----------------------------------
 
-           def plot(self, ax=None, name=None, **kwargs):
-               ...
-               self.line_ = ...
-               self.ax_ = ax
-               self.figure_ = ax.figure_
+تدعم بعض أدوات إنشاء الرسوم البيانية، مثل :func:`~sklearn.inspection.PartialDependenceDisplay.from_estimator` و :class:`~sklearn.inspection.PartialDependenceDisplay`، الرسم البياني على محاور متعددة. يتم دعم سيناريوهين مختلفين:
 
-    اقرأ المزيد في :ref:`sphx_glr_auto_examples_miscellaneous_plot_roc_curve_visualization_api.py` ودليل المستخدم :ref:`<visualizations>`.
+1. إذا تم تمرير قائمة من المحاور، فسيتحقق "رسم" مما إذا كان عدد المحاور متوافقًا مع عدد المحاور التي يتوقعها، ثم يقوم بالرسم على تلك المحاور.
+2. إذا تم تمرير محور واحد، فإن هذا المحور يحدد مساحة لمحاور متعددة ليتم وضعها. في هذه الحالة، نقترح استخدام matplotlib's'~matplotlib.gridspec.GridSpecFromSubplotSpec` لتقسيم المساحة::
 
-    الرسم البياني مع محاور متعددة
-    ---------------------------
+   import matplotlib.pyplot as plt
+   from matplotlib.gridspec import GridSpecFromSubplotSpec
 
-    تدعم بعض أدوات الرسم البياني مثل :func:`~sklearn.inspection.PartialDependenceDisplay.from_estimator` و :class:`~sklearn.inspection.PartialDependenceDisplay` الرسم البياني على محاور متعددة. يتم دعم سيناريوهين مختلفين:
+   fig, ax = plt.subplots()
+   gs = GridSpecFromSubplotSpec(2, 2, subplot_spec=ax.get_subplotspec())
 
-    1. إذا تم تمرير قائمة محاور، فإن `plot` سيتحقق مما إذا كان عدد المحاور يتوافق مع عدد المحاور التي يتوقعها ثم يرسم على تلك المحاور. 2. إذا تم تمرير محور واحد، فإن ذلك المحور يحدد مساحة لمحاور متعددة يتم وضعها. في هذه الحالة، نوصي باستخدام `~matplotlib.gridspec.GridSpecFromSubplotSpec` من matplotlib لتقسيم المساحة::
+   ax_top_left = fig.add_subplot(gs[0, 0])
+   ax_top_right = fig.add_subplot(gs[0, 1])
+   ax_bottom = fig.add_subplot(gs[1, :])
 
-       import matplotlib.pyplot as plt
-       from matplotlib.gridspec import GridSpecFromSubplotSpec
+بشكل افتراضي، تكون كلمة "ax" الأساسية في طريقة "رسم" هي "لا شيء". في هذه الحالة، يتم إنشاء محور واحد ويتم استخدام واجهة برمجة تطبيقات "gridspec" لإنشاء مناطق للرسم فيها.
 
-       fig, ax = plt.subplots()
-       gs = GridSpecFromSubplotSpec(2, 2, subplot_spec=ax.get_subplotspec())
-
-       ax_top_left = fig.add_subplot(gs[0, 0])
-       ax_top_right = fig.add_subplot(gs[0, 1])
-       ax_bottom = fig.add_subplot(gs[1, :])
-
-    بشكل افتراضي، الكلمة `ax` في `plot` هي `None`. في هذه الحالة، يتم إنشاء المحور الفردي ويتم استخدام واجهة برمجة التطبيقات (API) الخاصة بـ Gridspec لإنشاء المناطق للرسم فيها.
-
-    انظر على سبيل المثال، :meth:`~sklearn.inspection.PartialDependenceDisplay.from_estimator` الذي يرسم خطوط متعددة ومخططات باستخدام هذه الواجهة. يتم حفظ المحاور التي تحدد مربع الحدود في سمة `bounding_ax_`. يتم تخزين المحاور الفردية التي تم إنشاؤها في ndarray `axes_`، والتي تتوافق مع موضع المحاور على الشبكة. يتم تعيين المواضع غير المستخدمة إلى `None`. علاوة على ذلك، يتم تخزين فناني matplotlib في `lines_` و `contours_` حيث يكون المفتاح هو الموضع الموجود على الشبكة. عندما يتم تمرير قائمة من المحاور، فإن `axes_`، `lines_`، و `contours_` تكون مصفوفة أحادية البعد تتوافق مع قائمة المحاور التي تم تمريرها.
+على سبيل المثال، قم بزيارة :meth:`~sklearn.inspection.PartialDependenceDisplay.from_estimator` الذي يقوم برسم خطوط وخطوط محيط متعددة باستخدام واجهة برمجة التطبيقات هذه. يتم حفظ المحور الذي يحدد حدود الصندوق في سمة "bounding_ax_". يتم تخزين المحاور الفردية التي تم إنشاؤها في مصفوفة "axes_"، والتي تتوافق مع موضع المحور على الشبكة. يتم تعيين المواضع التي لا يتم استخدامها إلى "لا شيء". علاوة على ذلك، يتم تخزين كائنات matplotlib الفنية في "lines_" و "contours_" حيث يكون المفتاح هو الموضع على الشبكة. عندما يتم تمرير قائمة من المحاور، تكون "axes_" و "lines_" و "contours_" عبارة عن مصفوفة أحادية الأبعاد تتوافق مع قائمة المحاور التي تم تمريرها.
