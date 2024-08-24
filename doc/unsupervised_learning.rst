@@ -1,21 +1,15 @@
-  هذا نص بتنسيق RST أريد ترجمته إلى اللغة العربية، مع الحفاظ على الرموز الخاصة والرموز والمعادلات الرياضية والروابط والتاجات والشفرة البرمجية دون ترجمة:
-
-.. _unsupervised-learning:
-
-التعلم بدون إشراف
---------------------
+التعلم غير الخاضع للإشراف
+=========================
 
 .. toctree::
     :maxdepth: 2
 
-    modules/mixture
-    modules/manifold
-    modules/clustering
-    modules/biclustering
-    modules/decomposition
-    modules/covariance
-    modules/outlier_detection
-    modules/density
-    modules/neural_networks_unsupervised
-    
-    (ملاحظة: لم تتم ترجمة الروابط أعلاه، يرجى استبدالها بالروابط العربية المقابلة عند توفرها.)
+    نماذج المزج <modules/mixture>
+    نماذج المَنيْفولد <modules/manifold>
+    التجميع <modules/clustering>
+    التجميع الثنائي <modules/biclustering>
+    التحليل إلى مكونات <modules/decomposition>
+    نماذج التغاير <modules/covariance>
+    كشف النقاط الشاذة <modules/outlier_detection>
+    تقدير الكثافة <modules/density>
+    الشبكات العصبية للتعلم غير الخاضع للإشراف <modules/neural_networks_unsupervised>
