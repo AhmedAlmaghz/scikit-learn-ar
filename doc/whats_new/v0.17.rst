@@ -1,0 +1,327 @@
+هذا النص هو ملف تغييرات لنسخة 0.17 من مكتبة Scikit-learn، وهي مكتبة تعلم آلي شهيرة في لغة البرمجة بايثون.
+
+**18 فبراير 2016**
+
+سجل التغييرات:
+
+**إصلاح الأخطاء:**
+
+- تم ترقية Joblib المضمّن إلى الإصدار 0.9.4 الذي يصلح خطأً مهمًا في "Joblib.Parallel" والذي يمكن أن يؤدي إلى نتائج خاطئة دون ضجيج عند العمل على مجموعات بيانات أكبر من 1 ميجابايت.
+
+- تم إصلاح قراءة Pickles Bunch التي تم إنشاؤها باستخدام Scikit-learn version <= 0.16. قد يؤثر هذا على المستخدمين الذين قاموا بالفعل بتنزيل مجموعة بيانات باستخدام Scikit-learn 0.16 ويقومون بتحميلها باستخدام Scikit-learn 0.17. راجع القضية 6196 لمعرفة كيفية تأثير ذلك على "datasets.fetch_20newsgroups". بواسطة Loic Esteve.
+
+- تم إصلاح خطأ منع استخدام ROC AUC score لإجراء بحث الشبكة على عدة وحدات معالجة مركزية / أنوية على صفائف كبيرة. راجع القضية 6147. بواسطة Olivier Grisel.
+
+- تم إصلاح خطأ منع الإعداد الصحيح لمعلمة "presort" في "ensemble.GradientBoostingRegressor". راجع القضية 5857. بواسطة Andrew McCulloh.
+
+- تم إصلاح خطأ Joblib عند تقييم غموض نموذج "decomposition.LatentDirichletAllocation". راجع القضية 6258. بواسطة Chyi-Kwei Yau.
+**5 نوفمبر 2015**
+
+سجل التغييرات
+سأقوم بترجمة هذا النص من اللغة الإنجليزية إلى اللغة العربية.
+
+الميزات الجديدة
+....................
+
+- يمكن ملاءمة جميع فئات التوسيع (Scaler) ما عدا فئة RobustScaler الموجودة في وحدة المعالجة المسبقة (preprocessing) عبر الإنترنت عن طريق استدعاء partial_fit. بواسطة Giorgio Patrini.
+
+- تنفذ الفئة الجديدة VotingClassifier في وحدة ensemble قاعدة تصويت "الأغلبية" / "التصويت اللين" لمصنف المجموعة لدمج المقدرات من أجل التصنيف. بواسطة Sebastian Raschka.
+
+- توفر الفئة الجديدة RobustScaler في وحدة المعالجة المسبقة بديلاً لـ StandardScaler لضبط مركز الميزة وحجمها، وهي طريقة قوية ضد القيم الشاذة. بواسطة Thomas Unterthiner.
+
+- توفر الفئة الجديدة MaxAbsScaler في وحدة المعالجة المسبقة بديلاً لـ MinMaxScaler لضبط نطاق الميزة عندما تكون البيانات مركزة بالفعل أو مبعثرة. بواسطة Thomas Unterthiner.
+
+- تحول الفئة الجديدة FunctionTransformer في وحدة المعالجة المسبقة دالة Python إلى كائن محول متوافق مع الأنابيب (Pipelines). بواسطة جو جيفنيك.
+
+- تقوم الفئتان الجديدتان LabelKFold وLabelShuffleSplit في وحدة cross_validation بتوليد طيات التدريب والاختبار، على التوالي، والتي تشبه KFold وShuffleSplit، باستثناء أن الطيات مشروطة بمصفوفة تسميات. بواسطة Brian McFee، وJean Kossaifi، وجيلز لوب.
+
+- تنفذ LatentDirichletAllocation في وحدة التحليل التوافقي (decomposition) نموذج موضوع Latent Dirichlet Allocation باستخدام الاستدلال التبايني عبر الإنترنت. بواسطة Chyi-Kwei Yau، مع استناد التعليمات البرمجية إلى تنفيذ بواسطة مات هوفمان.
+
+- ينفذ المحلّل الجديد "sag" (Stochastic Average Gradient) متاحًا في كل من LogisticRegression وRidge في وحدة linear_model. هذا المحلل فعال للغاية للمجموعات الكبيرة من البيانات. بواسطة داني سوليفان وتوم دوبري لا تور.
+
+- ينفذ المحلل الجديد "cd" (Coordinate Descent) في NMF في وحدة التحليل التوافقي. لا يزال المحلل السابق المستند إلى Projected Gradient متاحًا من خلال تعيين معلمة جديدة "solver" إلى "pg"، ولكنه مهمل وسيتم إزالته في الإصدار 0.19، إلى جانب ProjectedGradientNMF والمعلمات "sparseness" و"eta" و"beta" و"nls_max_iter". تتحكم المعلمات الجديدة "alpha" و"l1_ratio" في التنظيم L1 وL2، ويضيف "shuffle" خطوة خلط في محلل "cd". بواسطة توم دوبري لا تور وماثيو بلونديل.
+
+التحسينات
+....................
+- تدعم TSNE في وحدة manifold الآن التحسين التقريبي عبر طريقة Barnes-Hut، مما يؤدي إلى ملاءمة أسرع بكثير. بواسطة كريستوفر إريك مودي.
+
+- تدعم MeanShift في وحدة cluster الآن التنفيذ المتوازي، كما هو منفذ في دالة "mean_shift". بواسطة مارتينو سوربارو.
+
+- تدعم GaussianNB في وحدة naive_bayes الآن الملاءمة مع "sample_weight". بواسطة جان هندريك ميتزن.
+
+- تدعم DummyClassifier في وحدة dummy الآن استراتيجية الملاءمة المسبقة. بواسطة أرنو جولي.
+
+- تمت إضافة طريقة "fit_predict" لـ GMM والفئات الفرعية في وحدة mixture. بواسطة كوري لورنز.
+
+- تمت إضافة مقياس label_ranking_loss في وحدة metrics. بواسطة أرنو جولي.
+
+- تمت إضافة مقياس cohen_kappa_score في وحدة metrics.
+
+- تمت إضافة معلمة "warm_start" البانية إلى نماذج المجموعة bagging لزيادة حجم المجموعة في نماذج المجموعة bagging. بواسطة تيم هيد.
+
+- تمت إضافة خيار لاستخدام مقاييس الانحدار متعددة الإخراج بدون متوسط. بواسطة كونستانتين شميلكوف ومايكل إيكينبيرج.
+
+- تمت إضافة خيار "stratify" إلى train_test_split في وحدة cross_validation للتقسيم الطبقي. بواسطة ميروسلاف باتشكاروف.
+
+- تدعم دالة export_graphviz في وحدة tree الآن التحسينات الجمالية لـ DecisionTreeClassifier وDecisionTreeRegressor، بما في ذلك خيارات لتلوين العقد حسب فئتها الأساسية أو عدم نقائها، وعرض أسماء المتغيرات، واستخدام نسب العقد بدلاً من أعداد العينات الخام. بواسطة تريفور ستيفنز.
+
+- تم تحسين سرعة محلل "newton-cg" في LogisticRegression، من خلال تجنب حساب الخسارة. بواسطة ماثيو بلونديل وتوم دوبري لا تور.
+
+- تم إهمال قاعدة "class_weight='auto'" في المصنفات التي تدعم "class_weight" واستبدالها بخيار "class_weight='balanced'"، والذي له صيغة وتفسير أبسط. بواسطة هانا والاش وأندرياس مولر.
+
+- تمت إضافة معلمة "class_weight" لوزن العينات تلقائيًا حسب تكرار الفئة لـ PassiveAggressiveClassifier في وحدة linear_model. بواسطة تريفور ستيفنز.
+
+- تمت إضافة روابط خلفية من صفحات مرجع API إلى دليل المستخدم. بواسطة أندرياس مولر.
+
+- تم تمديد معلمة "labels" إلى f1_score وfbeta_score وrecall_score وprecision_score في وحدة sklearn.metrics. أصبح من الممكن الآن تجاهل تسمية واحدة أو أكثر، كما هو الحال في مشكلة متعددة التصنيفات بها فئة أغلبية يجب تجاهلها. بواسطة جويل نوثمان.
+
+- تمت إضافة دعم "sample_weight" إلى RidgeClassifier في وحدة linear_model. بواسطة تريفور ستيفنز.
+
+- توفير خيار للإخراج المبعثر من cosine_similarity في وحدة sklearn.metrics.pairwise. بواسطة جايديف ديشباندي.
+
+- تمت إضافة دالة minmax_scale في وحدة المعالجة المسبقة لتوفير واجهة دالة لـ MinMaxScaler. بواسطة توماس أونترثينر.
+
+- يمكن لـ "dump_svmlight_file" الآن التعامل مع مجموعات البيانات متعددة التصنيفات. بواسطة تشيه وي تشانغ.
+
+- محمل مجموعة بيانات RCV1 (fetch_rcv1) في وحدة sklearn.datasets. بواسطة توم دوبري لا تور.
+
+- تمت إضافة مجموعة بيانات "سرطان الثدي في ويسكونسن" الكلاسيكية للتصنيف ثنائي التصنيف إلى scikit-learn، وهي متاحة باستخدام load_breast_cancer في وحدة datasets.
+
+- تمت الترقية إلى joblib 0.9.3 للاستفادة من الدفعات التلقائية للمهام القصيرة. وهذا يجعل من الممكن لـ scikit-learn الاستفادة من التوازي عند تنفيذ العديد من المهام القصيرة جدًا بالتوازي، على سبيل المثال بواسطة GridSearchCV meta-estimator مع "n_jobs> 1" المستخدمة مع شبكة كبيرة من المعلمات على مجموعة بيانات صغيرة. بواسطة فلاد نيكولاي، وأوليفر جريسيل، ولويك إستيف.
+
+- للحصول على مزيد من التفاصيل حول التغييرات في joblib 0.9.3، راجع ملاحظات الإصدار: https://github.com/joblib/joblib/blob/master/CHANGES.rst#release-093
+
+- تم تحسين سرعة DictLearning في وحدة التحليل التوافقي (ثلاث مرات لكل تكرار) باستخدام طريقة الانحدار المنسق من Lasso في وحدة linear_model. بواسطة آرثر مينش.
+
+- معالجة متوازية (خيطية) للاستعلامات عن أقرب جيران (باستخدام شجرة الكرات) بواسطة نيكولاي مايوروف.
+
+- السماح لـ make_multilabel_classification في وحدة datasets بإخراج "y" مبعثر. بواسطة كاشف رسول.
+
+- تقبل DBSCAN في وحدة cluster الآن مصفوفة مبعثرة من المسافات المحسوبة مسبقًا، مما يسمح بذاكرة فعالة لحساب المسافة مسبقًا. بواسطة جويل نوثمان.
+
+- تعرض DecisionTreeClassifier في وحدة tree الآن طريقة "apply" للحصول على مؤشرات الأوراق التي يتم التنبؤ بالعينات على أنها. بواسطة دانييل جالفيز وجيلز لوب.
+
+- تسريع شجرة القرار، وغابات القرار، وغابات القرار المتطرفة، ومقدرات التعزيز التدريجي عن طريق حساب بديل لقيمة عدم النقاء أثناء نمو الشجرة. القيمة البديلة هي أن الانقسام الذي يزيد هذه القيمة إلى الحد الأقصى يزيد أيضًا من عدم النقاء. بواسطة أرنو جولي، وجاكوب شريبر، وجيلز لوب.
+
+- تسريع الطرق القائمة على الشجرة عن طريق تقليل عدد الحسابات اللازمة عند حساب مقياس عدم النقاء مع مراعاة العلاقة الخطية للإحصاءات المحسوبة. التأثير ملحوظ بشكل خاص مع الأشجار المتطرفة وعلى مجموعات البيانات ذات الميزات الفئوية أو المبعثرة. بواسطة أرنو جولي.
+
+- تعرض GradientBoostingRegressor وGradientBoostingClassifier في وحدة ensemble الآن طريقة "apply" لاسترداد مؤشرات الأوراق التي ينتهي بها الأمر في كل محاولة. بواسطة جاكوب شريبر.
+
+- تمت إضافة دعم "sample_weight" إلى LinearRegression في وحدة linear_model. بواسطة سوني هو.
+
+- تمت إضافة "n_iter_without_progress" إلى TSNE في وحدة manifold للتحكم في معيار الإيقاف. بواسطة سانتي فيلابا.
+
+- تمت إضافة معلمة اختيارية "random_state" في Ridge في وحدة linear_model، لتعيين بذرة مولد الأرقام شبه العشوائي المستخدمة في محلل "sag". بواسطة توم دوبري لا تور.
+
+- تمت إضافة معلمة اختيارية "warm_start" في LogisticRegression في وحدة linear_model. إذا تم تعيينها على True، فسيتم تهيئة المحللين "lbfgs" و"newton-cg" و"sag" باستخدام المعاملات المحسوبة في الملاءمة السابقة. بواسطة توم دوبري لا تور.
+
+- تمت إضافة دعم "sample_weight" إلى LogisticRegression في وحدة linear_model لمحاليل "lbfgs" و"newton-cg" و"sag". بواسطة فالنتين ستولبونوف. تمت إضافة الدعم لمحلل "liblinear" بواسطة مانوج كومار.
+
+- تمت إضافة معلمة اختيارية "presort" إلى GradientBoostingRegressor وGradientBoostingClassifier في وحدة ensemble، مع الحفاظ على سلوك الإعداد الافتراضي كما هو. يسمح هذا لـ Gradient Boosters بتعطيل الفرز المسبق عند بناء أشجار عميقة أو استخدام بيانات مبعثرة. بواسطة جاكوب شريبر.
+
+- تم تعديل roc_curve في وحدة metrics لإسقاط عتبات غير ضرورية بشكل افتراضي. بواسطة جراهام كليناجان.
+
+- تمت إضافة SelectFromModel في وحدة feature_selection، وهي محول علوي يمكن استخدامه مع المقدرات التي تحتوي على سمة "coef_" أو "feature_importances_" لاختيار ميزات مهمة للبيانات المدخلة. بواسطة ماهيشاكيا ويجيواردينا، وجويل نوثمان، ومانوج كومار.
+
+- تمت إضافة دالة laplacian_kernel في وحدة metrics.pairwise. بواسطة كلايد فير.
+
+- يسمح GraphLasso في وحدة covariance بالتحكم المنفصل في معيار التقارب لمشكلة Elastic-Net الفرعية عبر معلمة "enet_tol".
+
+- تم تحسين الإخراج التفصيلي في DictionaryLearning في وحدة التحليل التوافقي.
+
+- لم تعد RandomForestClassifier وRandomForestRegressor في وحدة ensemble تخزن بشكل صريح العينات المستخدمة في المعايرة، مما يؤدي إلى تقليل كبير في بصمة الذاكرة لنماذج الغابات العشوائية المخزنة.
+
+- تمت إضافة خيار "positive" إلى Lars وlars_path في وحدة linear_model لإجبار المعاملات على أن تكون موجبة.
+
+- تمت إضافة معلمة "X_norm_squared" إلى euclidean_distances في وحدة metrics.pairwise لتوفير القيم المربعة المسبقة لحساب المسافات لـ "X".
+
+- تمت إضافة طريقة "fit_predict" إلى Pipeline في وحدة pipeline.
+
+- تمت إضافة دالة minmax_scale في وحدة المعالجة المسبقة.
+
+تصحيحات الأخطاء
+.................
+
+- إصلاح عدم التحديد في DummyClassifier في وحدة dummy مع إخراج متعدد التصنيفات المبعثر. بواسطة أندرياس مولر.
+
+- إصلاح شكل الإخراج لـ RANSACRegressor في وحدة linear_model إلى "(n_samples,)". بواسطة أندرياس مولر.
+
+- إصلاح خطأ في DictLearning في وحدة التحليل التوافقي عند "n_jobs <0". بواسطة أندرياس مولر.
+
+- إصلاح خطأ حيث يمكن لـ RandomizedSearchCV في وحدة grid_search استهلاك الكثير من الذاكرة لشبكات منفصلة كبيرة. بواسطة جويل نوثمان.
+
+- إصلاح خطأ في LogisticRegressionCV في وحدة linear_model حيث يتم تجاهل العقوبة في الملاءمة النهائية. بواسطة مانوج كومار.
+
+- إصلاح خطأ في ForestClassifier في وحدة ensemble أثناء حساب oob_score وX عبارة عن مصفوفة sparse.csc_matrix. بواسطة أنكور أنكان.
+
+- تتعامل جميع برامج الانحدار الآن بشكل متسق مع التحذير عند إعطاء "y" على شكل "(n_samples، 1)". بواسطة أندرياس مولر وهنري لين.
+
+- إصلاح في إعادة تعيين الفئة في KMeans في وحدة cluster للإدخال المبعثر بواسطة لارس فيتنسك.
+
+- إصلاح خطأ في LinearDiscriminantAnalysis في وحدة التحليل التمييزي الذي قد يتسبب في عدم تناسق مصفوفات التغاير عند استخدام الانكماش. بواسطة مارتن بيلينجر.
+
+- إصلاح cross_val_predict في وحدة cross_validation للمقدرات ذات التنبؤات المبعثرة. بواسطة بودها براكاش.
+
+- إصلاح طريقة "predict_proba" لـ LogisticRegression في وحدة linear_model لاستخدام soft-max بدلاً من التوحيد one-vs-rest. بواسطة مانوج كومار.
+
+- إصلاح طريقة "partial_fit" لـ SGDClassifier في وحدة linear_model عند استدعائها مع "average=True". بواسطة أندرو لامب.
+فيما يلي ترجمة لنص ReStructuredText المحدد إلى اللغة العربية:
+
+- تستخدم برامج استرجاع مجموعات البيانات أسماء ملفات مختلفة في Python 2 وPython 3 لتجنب مشكلات التوافق مع التخليل (Pickling). بواسطة Olivier Grisel. (:issue:`5355`)
+
+- تم إصلاح خلل في :class:`naive_bayes.GaussianNB` الذي كان يتسبب في اعتماد نتائج التصنيف على المقياس. بواسطة Jake Vanderplas.
+
+- تم إصلاح مشكلة مؤقتة في :class:`linear_model.Ridge`، والتي كانت غير صحيحة عند ملاءمة المقاطع في حالة البيانات المبعثرة. ويغير الإصلاح تلقائيًا المحلّل إلى "sag" في هذه الحالة.
+  :issue:`5360` بواسطة Tom Dupre la Tour.
+
+- تم إصلاح خلل في الأداء في `decomposition.RandomizedPCA` على البيانات التي تحتوي على عدد كبير من الميزات وعينات أقل. (:issue:`4478`)
+  بواسطة Andreas Müller، وLoic Esteve، وGiorgio Patrini.
+
+- تم إصلاح خلل في `cross_decomposition.PLS` الذي كان ينتج عنه مخرجات غير مستقرة ومتغيرة حسب المنصة، وكان يفشل في 'fit_transform'.
+  بواسطة Arthur Mensch.
+
+- تم إجراء إصلاحات على فئة "Bunch" المستخدمة لتخزين مجموعات البيانات.
+
+- تم إصلاح مشكلة في `ensemble.plot_partial_dependence` التي كانت تتجاهل معلمة "percentiles".
+
+- لم يعد توفير "set" كمعجم في "CountVectorizer" يؤدي إلى نتائج غير متسقة عند التخليل.
+
+- تم إصلاح الشروط التي يتم بموجبها الحاجة إلى إعادة حساب مصفوفة غرام المحسوبة مسبقًا في :class:`linear_model.LinearRegression`،
+  :class:`linear_model.OrthogonalMatchingPursuit`،
+  :class:`linear_model.Lasso`، و:class:`linear_model.ElasticNet`.
+
+- تم إصلاح تخطيط الذاكرة غير المتسق في محلل الانحدار التدريجي الذي أثر على `linear_model.DictionaryLearning` و`covariance.GraphLasso`. (:issue:`5337`)
+  بواسطة Olivier Grisel.
+
+- لم تعد فئة :class:`manifold.LocallyLinearEmbedding` تتجاهل معلمة "reg".
+
+- يمكن الآن تخليل أقرب جيران المقدرات مع مقاييس المسافة المخصصة.
+  (:issue:`4362`)
+
+- تم إصلاح خلل في :class:`pipeline.FeatureUnion` حيث لم يتم التعامل مع "transformer_weights" بشكل صحيح عند إجراء عمليات البحث الشبكي.
+
+- تم إصلاح خلل في :class:`linear_model.LogisticRegression` و:class:`linear_model.LogisticRegressionCV` عند استخدام
+  ``class_weight='balanced'`` أو ``class_weight='auto'``.
+  بواسطة Tom Dupre la Tour.
+
+- تم إصلاح الخلل :issue:`5495` عند
+  تنفيذ OVR(SVC(decision_function_shape="ovr")). تم الإصلاح بواسطة
+  Elvis Dohmatob.
+
+ملخص التغييرات في واجهة برمجة التطبيقات (API):
+فيما يلي ترجمة للنص الموجود بتنسيق ReStructuredText إلى اللغة العربية:
+
+-------------------
+
+- تم إيقاف استخدام الخاصية `data_min` و `data_max` و `data_range` في
+  :class:`preprocessing.MinMaxScaler`، ولن تكون متاحة بدءًا من الإصدار 0.19. بدلاً من ذلك، تعرض الفئة الآن `data_min_` و `data_max_`
+  و `data_range_`. بواسطة :user:`Giorgio Patrini <giorgiop>`.
+
+- تحتوي جميع فئات المحول (Scaler) الآن على خاصية `scale_`، والتي تمثل إعادة التحجيم الخاصة بكل خاصية والتي تطبقها طرق `transform` الخاصة بها. تم إيقاف استخدام الخاصية القديمة `std_`
+  في :class:`preprocessing.StandardScaler`، وتم استبدالها بخاصية `scale_`؛ ولن تكون متاحة في الإصدار 0.19. بواسطة :user:`Giorgio Patrini <giorgiop>`.
+
+- أصبح لفئتي :class:`svm.SVC` و :class:`svm.NuSVC` الآن معلمة ``decision_function_shape``
+  لجعل دالة القرار الخاصة بهما ذات شكل ``(n_samples, n_classes)``
+  عن طريق تعيين ``decision_function_shape='ovr'``. سيكون هذا هو السلوك الافتراضي
+  بدءًا من الإصدار 0.19. بواسطة `Andreas Müller`_.
+
+- تم إيقاف تمرير مصفوفات البيانات أحادية البعد كمدخلات للمقدّرات (estimators)، حيث تسبب ذلك في حدوث ارتباك في كيفية تفسير عناصر المصفوفة كسمات أو عينات. من المتوقع الآن أن تكون جميع مصفوفات البيانات ذات شكل واضح ``(n_samples, n_features)``.
+  بواسطة :user:`Vighnesh Birodkar <vighneshbirodkar>`.
+
+- تم نقل `lda.LDA` و `qda.QDA` إلى
+  :class:`discriminant_analysis.LinearDiscriminantAnalysis` و
+  :class:`discriminant_analysis.QuadraticDiscriminantAnalysis`.
+
+- تم نقل معلمتي ``store_covariance`` و ``tol`` من
+  طريقة التهيئة (fit method) إلى المنشئ (constructor) في
+  :class:`discriminant_analysis.LinearDiscriminantAnalysis` وتم
+  نقل معلمتي ``store_covariances`` و ``tol`` من طريقة التهيئة إلى المنشئ في
+  :class:`discriminant_analysis.QuadraticDiscriminantAnalysis`.
+
+- لن تدعم النماذج الموروثة من ``_LearntSelectorMixin`` بعد الآن طرق التحول (transform methods). (على سبيل المثال، غابات القرار العشوائية، والتعزيز التدريجي، والانحدار اللوجستي،
+  وأشجار القرار، ونماذج SVM، والنماذج المتعلقة بـ SGD). قم بتغليف هذه النماذج حول
+  المحول الفائق (metatransformer) :class:`feature_selection.SelectFromModel` لإزالة
+  الميزات (وفقًا لـ `coefs_` أو `feature_importances_`)
+  والتي تكون أقل من قيمة عتبة معينة بدلاً من ذلك.
+
+- يقوم :class:`cluster.KMeans` بإعادة تشغيل تعيينات المجموعات في حالة عدم التقارب،
+  لضمان اتساق ``predict(X)`` و ``labels_``. بواسطة
+  :user:`Vighnesh Birodkar <vighneshbirodkar>`.
+
+- تم وضع علامة على نماذج التصنيف والنماذج الانحدارية على هذا النحو باستخدام
+  خاصية ``_estimator_type``.
+
+- توفر معلمات التحقق من صحة التقاطع دائمًا مؤشرات إلى مجموعات التدريب والاختبار،
+  وليس أقنعة منطقية.
+
+- تم إيقاف استخدام ``decision_function`` في جميع النماذج الانحدارية وسيتم
+  إزالتها في الإصدار 0.19. استخدم ``predict`` بدلاً من ذلك.
+
+- تم إيقاف استخدام `datasets.load_lfw_pairs` وسيتم إزالتها في الإصدار 0.19.
+  استخدم :func:`datasets.fetch_lfw_pairs` بدلاً من ذلك.
+
+- تمت إزالة وحدة ``hmm`` التي تم إيقاف استخدامها.
+
+- تمت إزالة معلمة ``Bootstrap`` للتحقق من صحة التقاطع التي تم إيقاف استخدامها.
+
+- تمت إزالة الفئتين ``Ward`` و ``WardAgglomerative`` اللتين تم إيقاف استخدامهما.
+  استخدم :class:`cluster.AgglomerativeClustering` بدلاً من ذلك.
+
+- أصبحت دالة `cross_validation.check_cv` الآن دالة عامة.
+
+- تم إيقاف استخدام خاصية ``residues_`` للفئة :class:`linear_model.LinearRegression` وسيتم
+  إزالتها في الإصدار 0.19.
+
+- تم نقل معلمة ``n_jobs`` التي تم إيقاف استخدامها في :class:`linear_model.LinearRegression` إلى
+  المنشئ.
+
+- تمت إزالة معلمة ``class_weight`` التي تم إيقاف استخدامها من طريقة ``fit``
+  في :class:`linear_model.SGDClassifier`. استخدم معلمة الإنشاء بدلاً من ذلك.
+
+- تمت إزالة الدعم الذي تم إيقاف استخدامه لتنسيق التصنيف المتعدد المكون من تسلسل التسلسلات (أو قائمة القوائم). لتحويل من وإلى تنسيق مصفوفة المؤشرات الثنائية المدعومة، استخدم
+  :class:`MultiLabelBinarizer <preprocessing.MultiLabelBinarizer>`.
+
+- سيتم تغيير سلوك استدعاء طريقة ``inverse_transform`` للفئة ``Pipeline.pipeline``
+  في الإصدار 0.19. لن تقوم بعد الآن بإعادة تشكيل الإدخال أحادي البعد إلى إدخال ثنائي الأبعاد.
+
+- تمت إزالة الخصائص التي تم إيقاف استخدامها ``indicator_matrix_`` و ``multilabel_`` و ``classes_``
+  من الفئة :class:`preprocessing.LabelBinarizer`.
+
+- تم إيقاف استخدام ``gamma=0`` في :class:`svm.SVC` و :class:`svm.SVR` لضبط
+  غاما تلقائيًا إلى ``1. / n_features`` وسيتم إزالتها في الإصدار 0.19.
+  استخدم ``gamma="auto"`` بدلاً من ذلك.
+
+المساهمون في الكود
+-------------------
+Aaron Schumacher، Adithya Ganesh، akitty، Alexandre Gramfort، Alexey Grigorev،
+Ali Baharev، Allen Riddell، Ando Saabas، Andreas Mueller، Andrew Lamb، Anish
+Shah، Ankur Ankan، Anthony Erlinger، Ari Rouvinen، Arnaud Joly، Arnaud Rachez،
+Arthur Mensch، banilo، Barmaley.exe، benjaminirving، Boyuan Deng، Brett Naul،
+Brian McFee، Buddha Prakash، Chi Zhang، Chih-Wei Chang، Christof Angermueller،
+Christoph Gohlke، Christophe Bourguignat، Christopher Erick Moody، Chyi-Kwei
+Yau، Cindy Sridharan، CJ Carey، Clyde-fare، Cory Lorenz، Dan Blanchard، Daniel
+Galvez، Daniel Kronovet، Danny Sullivan، Data1010، David، David D Lowe، David
+Dotson، djipey، Dmitry Spikhalskiy، Donne Martin، Dougal J. Sutherland، Dougal
+Sutherland، edson duarte، Eduardo Caro، Eric Larson، Eric Martin، Erich
+Schubert، Fernando Carrillo، Frank C. Eckert، Frank Zalkow، Gael Varoquaux،
+Ganiev Ibraim، Gilles Louppe، Giorgio Patrini، giorgiop، Graham Clenaghan،
+Gryllos Prokopis، gwulfs، Henry Lin، Hsuan-Tien Lin، Immanuel Bayer، Ishank
+Gulati، Jack Martin، Jacob Schreiber، Jaidev Deshpande، Jake Vanderplas، Jan
+Hendrik Metzen، Jean Kossaifi، Jeffrey04، Jeremy، jfraj، Jiali Mei،
+Joe Jevnik، Joel Nothman، John Kirkham، John Wittenauer، Joseph، Joshua Loyal،
+Jungkook Park، KamalakerDadi، Kashif Rasul، Keith Goodman، Kian Ho، Konstantin
+Shmelkov، Kyler Brown، Lars Buitinck، Lilian Besson، Loic Esteve، Louis Tiao،
+maheshakya، Maheshakya Wijewardena، Manoj Kumar، MarkTab marktab.net، Martin
+Ku، Martin Spacek، MartinBpr، martinosorb، MaryanMorel، Masafumi Oyamada،
+Mathieu Blondel، Matt Krump، Matti Lyra، Maxim Kolganov، mbillinger، mhg،
+Michael Heilman، Michael Patterson، Miroslav Batchkarov، Nelle Varoquaux،
+Nicolas، Nikolay Mayorov، Olivier Grisel، Omer Katz، Óscar Nájera، Pauli
+Virtanen، Peter Fischer، Peter Prettenhofer، Phil Roth، pianomania، Preston
+Parry، Raghav RV، Rob Zinkov، Robert Layton، Rohan Ramanath، Saket Choudhary،
+Sam Zhang، santi، saurabh.bansod، scls19fr، Sebastian Raschka، Sebastian
+Saeger، Shivan Sornarajah، SimonPL، sinhrks، Skipper Seabold، Sonny Hu، sseg،
+Stephen Hoover، Steven De Gryze، Steven Seguin، Theodore Vasiloudis، Thomas
+Unterthiner، Tiago Freitas Pereira، Tian Wang، Tim Head، Timothy Hopper،
+tokoroten، Tom Dupré la Tour، Trevor Stephens، Valentin Stolbunov، Vighnesh
+Birodkar، Vinayak Mehta، Vincent، Vincent Michel، vstolbunov، wangz10، Wei Xue،
+Yucheng Low، Yury Zhauniarovich، Zac Stewart، zhai_pro، Zichen Wang
