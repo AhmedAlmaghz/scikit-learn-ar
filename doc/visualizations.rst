@@ -1,8 +1,10 @@
-==============
-التصويرات
-==============
+.. _visualizations:
 
-يعرّف Scikit-learn واجهة بسيطة لإنشاء تصويرات للتعلم الآلي. الميزة الأساسية لهذه الواجهة هي السماح بإنشاء رسومات سريعة وتعديلات بصرية دون إعادة الحساب. نحن نوفر فئات `Display` التي تعرض طريقتين لإنشاء الرسومات: `from_estimator` و `from_predictions`. ستأخذ طريقة `from_estimator` مقدّرًا مجهزًا وبعض البيانات (`X` و `y`) وستنشئ كائن `Display`. في بعض الأحيان ، نرغب في حساب التنبؤات مرة واحدة فقط ويجب استخدام `from_predictions` بدلاً من ذلك. في المثال التالي ، نرسم منحنى ROC لآلة متجه الدعم المجهزة:
+===============
+التمثيل المرئي
+===============
+
+يحدد Scikit-learn واجهة برمجة تطبيقات (API) بسيطة لإنشاء التمثيلات المرئية لتعلم الآلة. الميزة الرئيسية لواجهة برمجة التطبيقات هذه هي السماح بالضبط المرئي والرسوم البيانية السريعة دون إعادة الحساب. نوفر فئات "العرض" التي تعرض طريقتين لإنشاء الرسوم البيانية: "from_estimator" و "from_predictions". ستأخذ طريقة "from_estimator" مصنفًا ملائمًا وبعض البيانات ("X" و "y") وتنشئ كائن "عرض". في بعض الأحيان، قد نرغب في حساب التوقعات مرة واحدة فقط، وفي هذه الحالة يجب استخدام "from_predictions" بدلاً من ذلك. في المثال التالي، نقوم برسم منحنى ROC لآلة ناقلات الدعم الملائمة:
 
 .. plot::
    :context: close-figs
@@ -14,14 +16,14 @@
     from sklearn.datasets import load_wine
 
     X, y = load_wine(return_X_y=True)
-    y = y == 2  # make binary
+    y = y == 2  # جعل البيانات ثنائية التصنيف
     X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
     svc = SVC(random_state=42)
     svc.fit(X_train, y_train)
 
     svc_disp = RocCurveDisplay.from_estimator(svc, X_test, y_test)
 
-يعيد كائن `svc_disp` ويسمح لنا بمواصلة استخدام منحنى ROC الذي تم حسابه بالفعل ل SVC في الرسومات المستقبلية. في هذه الحالة ، يكون `svc_disp` هو: class:`~sklearn.metrics.RocCurveDisplay` الذي يخزن القيم المحسوبة كسمة تسمى `roc_auc` و `fpr` و `tpr`. كن على دراية بأنه يمكننا الحصول على التنبؤات من آلة متجه الدعم ثم استخدام `from_predictions` بدلاً من `from_estimator`. بعد ذلك ، نقوم بتدريب مُصنف الغابة العشوائية ونعيد رسم منحنى roc المحسوب مسبقًا باستخدام طريقة `plot` لكائن `Display`.
+يسمح كائن "svc_disp" الذي تم إرجاعه لنا بمواصلة استخدام منحنى ROC المحسوب بالفعل لآلة ناقلات الدعم في الرسوم البيانية المستقبلية. في هذه الحالة، "svc_disp" هو :class:`~sklearn.metrics.RocCurveDisplay` الذي يخزن القيم المحسوبة كسمات تسمى "roc_auc" و "fpr" و "tpr". لاحظ أنه كان بإمكاننا الحصول على التوقعات من آلة ناقلات الدعم ثم استخدام "from_predictions" بدلاً من "from_estimator". بعد ذلك، نقوم بتدريب مصنف غابة عشوائي ونرسم مرة أخرى منحنى ROC المحسوب مسبقًا باستخدام طريقة "plot" لكائن "العرض".
 
 .. plot::
    :context: close-figs
@@ -37,7 +39,7 @@
     rfc_disp = RocCurveDisplay.from_estimator(rfc, X_test, y_test, ax=ax, alpha=0.8)
     svc_disp.plot(ax=ax, alpha=0.8)
 
-لاحظ أننا نمرر `alpha=0.8` إلى وظائف الرسم لضبط قيم ألفا للمنحنيات.
+لاحظ أننا نمرر "alpha=0.8" إلى دالات الرسم لتعديل قيم ألفا للمنحنيات.
 
 .. rubric:: أمثلة
 
@@ -46,7 +48,7 @@
 * :ref:`sphx_glr_auto_examples_miscellaneous_plot_display_object_visualization.py`
 * :ref:`sphx_glr_auto_examples_calibration_plot_compare_calibration.py`
 
-تتوفر أدوات الرسم
+أدوات الرسوم البيانية المتاحة
 ============================
 
 كائنات العرض
@@ -67,4 +69,4 @@
    model_selection.LearningCurveDisplay
    model_selection.ValidationCurveDisplay
 
-    
+آمل أن تكون هذه الترجمة مفيدة! إذا كانت هناك أي مصطلحات محددة في النص الأصلي تفضل أن تظل باللغة الإنجليزية، فيرجى إبلاغي بذلك، وسأحرص على تضمينها في الترجمة.
