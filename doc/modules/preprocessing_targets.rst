@@ -1,5 +1,3 @@
-هذا هو نص RST مترجم إلى اللغة العربية مع اتباع التعليمات المحددة:
-
 .. currentmodule:: sklearn.preprocessing
 
 .. _preprocessing_targets:
