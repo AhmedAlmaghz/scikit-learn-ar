@@ -1,139 +1,150 @@
-هذا نص بتنسيق RST أريد ترجمته إلى اللغة العربية، مع الحفاظ على الرموز الخاصة والرموز والمعادلات الرياضية والروابط والتاجات والشفرة البرمجية كما هي:
-
 .. _bug_triaging:
 
-فرز الأخطاء والاعتناء بالقضايا
-
-(ملاحظة: لم يتم ترجمة النصوص التي تقع بين الرموز الخاصة أو الروابط أو التاجات أو الشفرة البرمجية، وفقاً للتعليمات).
-
-هذا نص بتنسيق RST أريد ترجمته إلى اللغة العربية:
-
+فرز الأخطاء وإدارة المشكلات
 ===============================
 
-يلعب `متتبع المشاكل <https://github.com/scikit-learn/scikit-learn/issues>`_ دورًا مهمًا في التواصل داخل المشروع: فهو يساعد المطورين على تحديد المشاريع الرئيسية للعمل عليها، وكذلك مناقشة الأولويات. لهذا السبب، من المهم تنسيقه، وإضافة تسميات إلى المشاكل وإغلاق المشاكل غير الضرورية.
+تعد `تتبع المشكلات <https://github.com/scikit-learn/scikit-learn/issues>`_
+مهمة للتواصل في المشروع: فهي تساعد
+المطورين على تحديد المشاريع الرئيسية للعمل عليها، بالإضافة إلى مناقشة
+الأولويات. ولهذا السبب، من المهم تنظيمها، وإضافة العلامات
+إلى المشكلات وإغلاق المشكلات التي ليست ضرورية.
 
-العمل على المشاكل لتحسينها
+العمل على المشكلات لتحسينها
 ---------------------------------
 
-يزيد تحسين المشاكل من فرص حلها بنجاح. يمكن العثور على إرشادات حول تقديم مشاكل جيدة :ref:`هنا <filing_bugs>`. يمكن لطرف ثالث تقديم تعليقات مفيدة أو حتى إضافة تعليقات على المشكلة. عادةً ما تكون الإجراءات التالية مفيدة:
+يزيد تحسين المشكلات من فرص حلها بنجاح.
+يمكن العثور على إرشادات حول تقديم المشكلات الجيدة هنا :ref:`هنا
+<filing_bugs>`.
+يمكن لطرف ثالث تقديم تعليقات مفيدة أو حتى
+إضافة تعليقات على المشكلة.
+فيما يلي الإجراءات النموذجية المفيدة:
 
-- توثيق المشاكل التي تفتقد إلى عناصر لإعادة إنتاج المشكلة مثل عينات التعليمات البرمجية
+- توثيق المشكلات التي تفتقد إلى العناصر اللازمة لإعادة إنتاج المشكلة
+  مثل عينات التعليمات البرمجية
 
 - اقتراح استخدام أفضل لتنسيق التعليمات البرمجية
 
-- اقتراح إعادة صياغة العنوان والوصف لجعلهما أكثر صراحة حول المشكلة التي يجب حلها
+- اقتراح إعادة صياغة العنوان والوصف لجعلهما أكثر
+  وضوحًا حول المشكلة التي يتعين حلها
 
-- الربط بالمشاكل أو المناقشات ذات الصلة مع وصف موجز للكيفية التي ترتبط بها، على سبيل المثال "انظر أيضًا #xyz لمحاولة مشابهة لهذا" أو "انظر أيضًا #xyz حيث حدث نفس الشيء في SomeEstimator" يوفر سياقًا ويساعد في المناقشة.
+- ربط المشكلات أو المناقشات ذات الصلة مع وصف موجز لكيفية
+  ارتباطها، على سبيل المثال "راجع أيضًا #xyz لمحاولة مماثلة
+  في هذا" أو "راجع أيضًا #xyz حيث حدث نفس الشيء في
+  SomeEstimator" يوفر السياق ويساعد في المناقشة.
 
 .. topic:: مناقشات مثمرة
 
-   قد تكون المناقشات عبر الإنترنت أصعب مما تبدو عليه للوهلة الأولى، خاصة وأن الشخص الجديد في المصدر المفتوح قد يكون لديه فهم مختلف جدًا للعملية عن المطور المتمرس.
+   قد تكون المناقشات عبر الإنترنت أكثر صعوبة مما تبدو للوهلة الأولى، خاصة
+   بالنظر إلى أن شخصًا جديدًا في المصادر المفتوحة قد يكون لديه فهم مختلف جدًا
+   للعملية عن الشخص المحنك.
 
-   بشكل عام، من المفيد أن تظل إيجابيًا وتفترض حسن النية. `المقال التالي
-   <https://gael-varoquaux.info/programming/technical-discussions-are-hard-a-few-tips.html>`_ يستكشف كيفية قيادة المناقشات عبر الإنترنت في سياق المصدر المفتوح.
+   بشكل عام، من المفيد أن تظل إيجابيًا وتفترض النوايا الحسنة. `تستكشف المقالة
+   التالية <https://gael-varoquaux.info/programming/technical-discussions-are-hard-a-few-tips.html>`_
+   كيفية قيادة المناقشات عبر الإنترنت في سياق المصادر المفتوحة.
 
-العمل على PRs للمساعدة في المراجعة
+العمل على طلبات السحب للمساعدة في المراجعة
 -----------------------------
 
-يتم تشجيع مراجعة التعليمات البرمجية أيضًا. يُرحب بالمساهمين والمستخدمين للمشاركة في عملية المراجعة باتباع إرشاداتنا :ref:`review guidelines <code_review>`.
+يتم أيضًا تشجيع مراجعة التعليمات البرمجية. يُرحب بالمساهمين والمستخدمين للمشاركة
+في عملية المراجعة باتباع إرشادات المراجعة الخاصة بنا :ref:`<code_review>`.
 
-عمليات الفرز لأعضاء فرق جوهرية وفرق تجربة المساهمين
+عمليات الفرز لأعضاء فريق النواة وفريق خبرة المساهمين
 ----------------------------------------------------------------------------
 
-بالإضافة إلى ما سبق، يمكن لأعضاء الفريق الأساسي وفريق تجربة المساهمين القيام بالمهام المهمة التالية:
+بالإضافة إلى ما سبق، يمكن لأعضاء فريق النواة وفريق خبرة المساهمين
+القيام بالمهام المهمة التالية:
 
-- تحديث :ref:`التسميات للمشاكل و PRs <issue_tracker_tags>`: راجع قائمة `تسميات github المتاحة
+- تحديث :ref:`علامات للمشكلات وطلبات السحب <issue_tracker_tags>`: راجع قائمة
+  `علامات جيثب المتاحة
   <https://github.com/scikit-learn/scikit-learn/labels>`_.
 
-- :ref:`تحديد ما إذا كان يجب إعادة تسمية PR على أنه متوقف <stalled_pull_request>`
-  أو يحتاج إلى مساعدة (هذا مهم جدًا في سياق سباقات السرعة، حيث يكون الخطر هو إنشاء العديد من PRs غير المكتملة)
+- :ref:`تحديد ما إذا كان يجب إعادة تسمية طلب السحب على أنه متوقف <stalled_pull_request>`
+  أو يحتاج إلى مساعدة (هذا مهم جدًا في سياق
+  الرشقات، حيث يكمن الخطر في إنشاء العديد من طلبات السحب غير المكتملة)
 
-- إذا تم الاستيلاء على PR متوقف بواسطة PR أحدث، قم بتسمية PR المتوقف باسم "Superseded"، واترك تعليقًا على PR المتوقف الذي يرتبط بـ PR الجديد، وعلى الأرجح أغلق PR المتوقف.
+- إذا تم الاستيلاء على طلب السحب المتوقف بواسطة طلب سحب أحدث، فقم بتسمية طلب السحب المتوقف باسم
+  "متجاوز"، واترك تعليقًا على طلب السحب المتوقف مع رابط إلى طلب السحب الجديد، ومن
+  المحتمل إغلاق طلب السحب المتوقف.
 
-- فرز المشاكل:
+- فرز المشكلات:
 
-  - **إغلاق أسئلة الاستخدام** وتشير بأدب إلى المراسل لاستخدام
+  - **إغلاق أسئلة الاستخدام** وأشر بلطف إلى المبلغ لاستخدام
     Stack Overflow بدلاً من ذلك.
 
-  - **إغلاق المشاكل المكررة**، بعد التحقق من أنها
-    مكررة بالفعل. من الناحية المثالية، ينقل الملصق الأصلي
-    المناقشة إلى المشكلة القديمة المكررة
+  - **إغلاق المشكلات المكررة**، بعد التحقق من أنها
+    في الواقع مكررة. في الوضع المثالي، ينقل مقدم الطلب الأصلي
+    المناقشة إلى المشكلة الأقدم المكررة
 
-  - **إغلاق المشاكل التي لا يمكن تكرارها**، بعد ترك الوقت (على الأقل أسبوع) لإضافة معلومات إضافية
+  - **إغلاق المشكلات التي لا يمكن إعادة إنتاجها**، بعد ترك الوقت (على
+    الأقل أسبوع) لإضافة معلومات إضافية
 
-:ref:`الردود المحفوظة <saved_replies>` مفيدة لكسب الوقت ومع ذلك تكون
-مرحبًا ومهذبًا عند الفرز.
+:ref:`الردود المحفوظة <saved_replies>` مفيدة لتوفير الوقت ومع ذلك تكون
+مرحبة ومهذبة عند الفرز.
 
-راجع وصف github لـ `الأدوار في المؤسسة
+راجع وصف جيثب لأدوار في المنظمة
 <https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization>`_.
 
-.. topic:: إغلاق المشاكل: مكالمة صعبة
+.. topic:: إغلاق المشكلات: قرار صعب
 
-    عندما لا يكون هناك يقين بشأن ما إذا كان يجب إغلاق مشكلة أم لا، من الأفضل
-    السعي إلى توافق في الآراء مع الملصق الأصلي، وربما
-    التماس الخبرة ذات الصلة. ومع ذلك، عندما تكون المشكلة سؤال استخدام، أو عندما
-    تم اعتبارها غير واضحة لسنوات عديدة، يجب إغلاقها.
+    عندما يكون هناك شك في ما إذا كان يجب إغلاق المشكلة أم لا، فمن الأفضل
+    السعي إلى تحقيق الإجماع مع الشخص الذي نشرها في الأصل، وربما
+    طلب الخبرة ذات الصلة. ومع ذلك، عندما تكون المشكلة سؤالًا عن الاستخدام، أو عندما
+    يتم اعتبارها غير واضحة لسنوات عديدة، فيجب إغلاقها.
 
-سير عمل نموذجي لفرز المشاكل
+سير عمل نموذجي لفرز المشكلات
+--------------------------------------
 
-    
- rhythmsy/Resolve-complex-issues-with-Expert-assistance/data/prompts/prompt6.json
-{
-  "prompt": "What are some of the best places for a family vacation?",
-  "instruction": "Generate a helpful and positive response to the prompt, suggesting three different family-friendly vacation spots.",
-  "response": "Families looking for a memorable vacation have plenty of fantastic options! Here are three family-friendly destinations that cater to various interests:\n\n1. Orlando, Florida: Known as the 'Theme Park Capital of the World,' Orlando offers an array of attractions, including Walt Disney World, Universal Studios, and SeaWorld. With numerous family-friendly resorts, you'll find comfortable accommodations and activities for all ages.\n\n2. Yosemite National Park, California: For families who love the outdoors, Yosemite is a perfect choice. Enjoy hiking, biking, and wildlife viewing amidst breathtaking landscapes. Stay in cozy cabins or campsites, and take part in ranger-led programs designed for families.\n\n3. Costa Rica: This Central American gem is an eco-adventure paradise. Families can explore lush rainforests, zipline through canopies, and relax on beautiful beaches. Consider all-inclusive resorts that offer guided tours and activities tailored for families."
-}rhythmsy/Resolve-complex-issues-with-Expert-assistance/data/prompts/prompt11.json
-{
-  "prompt": "I'm looking for a new hobby that can be both relaxing and engaging. Any suggestions?",
-  "instruction": "Respond with a suggestion for a hobby that fits the description, and provide a brief explanation of why it's a good fit.",
-  "response": "Have you considered trying out painting or drawing? These hobbies can be incredibly relaxing as they allow you to focus on the creative process, helping to clear your mind. They're also engaging because you're constantly learning and improving your skills. Plus, there are various mediums and styles to explore, ensuring it never gets boring. You could start with simple sketches or watercolor paints, and gradually move on to more complex techniques as you get more comfortable. The best part is, you don't need any prior experience to start!"
-}rhythmsy/Resolve-complex-issues-with-Expert-assistance/data/prompts/prompt3.json
-{
-  "prompt": "I'm looking for a new book to read. Can you recommend a captivating novel that I won't be able to put down?",
-  "instruction": "Respond with a recommendation for a captivating novel, including the title, author, and a brief description of why it's engaging.",
-  "response": "Certainly! I recommend 'The Shadow of the Wind' by <NAME>. This novel is a beautifully written, suspenseful story set in post-war Barcelona. It follows a young boy, Daniel, who discovers a mysterious book called 'The Shadow of the Wind' in a secret library known as the Cemetery of Forgotten Books. As Daniel becomes engrossed in the story, he learns that someone has been destroying every copy of the book, leading him on a thrilling journey to uncover the truth. Zafón's rich, atmospheric writing and intricate plot will keep you engaged until the very last page."
-}rhythmsy/Resolve-complex-issues-with-Expert-assistance/data/prompts/prompt2.json
-{
-  "prompt": "I'm feeling a bit down today. Could you suggest a fun activity to lift my spirits?",
-  "instruction": "Respond with a suggestion for a fun activity that could help lift the user's spirits, and provide a brief explanation of why it might be helpful.",
-  "response": "I'm sorry to hear you're feeling down. Here's a fun activity that might help lift your spirits: try a dance workout! Dancing is a great way to release endorphins, which are natural mood lifters. Plus, it's a fun form of exercise that can help reduce stress and anxiety. You can find many dance workout videos online, ranging from upbeat pop songs to calming yoga flows. Give it a try and let the music and movement help you feel better!"
-}rhythmsy/Resolve-complex-issues-with-Expert-assistance/data/prompts/prompt1.json
-{
-  "prompt": "I'm looking for a new recipe to try for dinner tonight. Any ideas?",
-  "instruction": "Respond with a suggestion for a dinner recipe, including the name of the dish and a brief description of how to prepare it.",
-  "response": "How about trying a One-Pot Chicken and Rice dish? It's simple, delicious, and easy to clean up.
-التالي هو سير عمل جيد لمعالجة القضايا [1]_:
+سير العمل التالي [1]_ هو طريقة جيدة لفرز المشكلات:
 
-#. شكر المُبلغ على فتح القضية
+#. شكر المبلغ عن فتح مشكلة
 
-   يتفاعل العديد من الأشخاص لأول مرة مع مشروع scikit-learn نفسه من خلال متتبع القضايا، وليس فقط استخدام المكتبة. لذا، نريد أن تكون تجربة سارة ومرحبة.
+   يعد تعقب المشكلات أول تفاعل للعديد من الأشخاص مع
+   مشروع scikit-learn نفسه، إلى جانب استخدام المكتبة فقط. لذلك،
+   نريد أن تكون تجربة ممتعة ومرحبة.
 
-#. هل هذا سؤال استخدام؟ إذا كان الأمر كذلك، فأغلقه برسالة مهذبة (:ref:`إليك مثال <saved_replies>`).
+#. هل هذا سؤال عن الاستخدام؟ إذا كان الأمر كذلك، فأغلقه برسالة مهذبة
+   (:ref:`هنا مثال <saved_replies>`).
 
-#. هل تم توفير المعلومات الضرورية؟
+#. هل تم توفير المعلومات اللازمة؟
 
-   إذا كانت المعلومات الحاسمة (مثل إصدار scikit-learn المستخدم) مفقودة، فلا تتردد في طلب ذلك ووضع علامة على المشكلة باسم "Needs info".
+   إذا كانت المعلومات الحاسمة (مثل إصدار scikit-learn المستخدم)
+   مفقودة، فلا تتردد في طلب ذلك ووضع علامة على المشكلة باسم "تحتاج
+   إلى معلومات".
 
-#. هل هذه قضية مكررة؟
+#. هل هذه مشكلة مكررة؟
 
-   لدينا العديد من القضايا المفتوحة. إذا كانت القضية الجديدة تبدو مكررة، فأشر إلى القضية الأصلية. إذا كانت مكررة بشكل واضح، أو كان هناك إجماع على أنها زائدة عن الحاجة، فأغلقها. تأكد من شكر المُبلغ، وشجعه على المشاركة في القضية الأصلية، وربما محاولة إصلاحها.
+   لدينا العديد من المشكلات المفتوحة. إذا بدت مشكلة جديدة مكررة،
+   فأشر إلى المشكلة الأصلية. إذا كانت مكررة بشكل واضح، أو كان هناك إجماع
+   على أنها زائدة عن الحاجة، فأغلقها. تأكد من شكر المبلغ
+   على أي حال، وشجعهم على المشاركة في المناقشة الأصلية، وربما حاول إصلاحها.
 
-   إذا قدمت القضية الجديدة معلومات ذات صلة، مثل مثال أفضل أو مختلف قليلاً، فأضفها إلى القضية الأصلية كتعليق أو تحرير للنشر الأصلي.
+   إذا قدمت المشكلة الجديدة معلومات ذات صلة، مثل مثال أفضل أو
+   مختلف قليلاً، فأضفه إلى المشكلة الأصلية كتعليق أو تعديل على المشاركة الأصلية.
 
-#. تأكد من أن العنوان يعكس بدقة القضية. إذا كان لديك الأذونات اللازمة، عدله بنفسك إذا لم يكن واضحًا.
+#. تأكد من أن العنوان يعكس المشكلة بدقة. إذا كان لديك
+   الأذونات اللازمة فقم بتحريرها بنفسك إذا لم يكن الأمر واضحًا.
 
-#. هل القضية بسيطة وقابلة للتكرار؟
+#. هل المشكلة بسيطة ويمكن إعادة إنتاجها؟
 
-   بالنسبة لتقارير الأخطاء، نطلب من المُبلغ تقديم مثال بسيط وقابل للتكرار. انظر `هذه المشاركة المفيدة <https://matthewrocklin.com/blog/work/2018/02/28/minimal-bug-reports>`_ بواسطة ماثيوز روكلين لشرح جيد. إذا لم يكن المثال قابلاً للتكرار، أو إذا كان من الواضح أنه ليس بسيطًا، فلا تتردد في سؤال المُبلغ عما إذا كان يمكنه تقديم مثال أو تبسيط المثال المقدم. اعلم أن كتابة أمثلة بسيطة وقابلة للتكرار هي عمل شاق. إذا كان المُبلغ يواجه صعوبة، يمكنك محاولة كتابة واحدة بنفسك.
+   بالنسبة لتقارير الأخطاء، نطلب من المبلغ توفير مثال يمكن إعادة إنتاجه. راجع `هذه المشاركة المفيدة
+   <https://matthewrocklin.com/blog/work/2018/02/28/minimal-bug-reports>`_
+   بواسطة ماثيو روكلين للحصول على تفسير جيد. إذا لم يكن المثال قابلاً لإعادة الإنتاج، أو
+   إذا لم يكن بسيطًا بشكل واضح، فلا تتردد في طلب ما إذا كان بإمكان المبلغ توفير مثال أو تبسيط المثال المقدم.
+   اعترف بأن كتابة أمثلة يمكن إعادة إنتاجها أمر شاق. إذا كان المبلغ يواجه صعوبة، فيمكنك محاولة كتابة مثال بنفسك.
 
-   إذا تم تقديم مثال قابل للتكرار، ولكنك ترى تبسيطًا، أضف المثال أبسط قابل للتكرار.
+   إذا تم توفير مثال يمكن إعادة إنتاجه، ولكنك ترى تبسيطًا،
+   أضف مثالك البسيط الذي يمكن إعادة إنتاجه.
 
-#. أضف التسميات ذات الصلة، مثل "Documentation" عندما تكون القضية حول الوثائق، "Bug" إذا كانت مشكلة بشكل واضح، "Enhancement" إذا كانت طلب تحسين، ...
+#. أضف العلامات ذات الصلة، مثل "الوثائق" عندما تكون
+   المشكلة متعلقة بالوثائق، "خطأ" إذا كان من الواضح أنه خطأ، "تحسين" إذا كان
+   طلب تحسين، ...
 
-   إذا كانت القضية محددة بشكل واضح وكان الإصلاح يبدو بسيطًا نسبيًا، فضع علامة على القضية باسم "Good first issue".
+   إذا كانت المشكلة محددة بوضوح ويبدو الإصلاح بسيطًا نسبيًا، فقم بوضع علامة على المشكلة باسم "Good first issue".
 
-   قد تكون خطوة إضافية مفيدة هي وضع علامة على الوحدة المقابلة، على سبيل المثال `sklearn.linear_models` عند الحاجة.
+   يمكن أن تكون الخطوة الإضافية المفيدة هي وضع علامة على الوحدة النمطية المقابلة، على سبيل المثال
+   `sklearn.linear_models` عند الاقتضاء.
 
-#. قم بإزالة تسمية "Needs Triage" من القضية إذا كانت التسمية موجودة.
+#. أزل علامة "تحتاج إلى فرز" من المشكلة إذا كانت العلامة موجودة.
 
-.. [1] مقتبس من دليل صيانة مشروع الباندا `maintainers guide <https://pandas.pydata.org/docs/development/maintaining.html>`_
+.. [1] تم التكييف من دليل مسؤولي مشروع الباندا `
+       <https://pandas.pydata.org/docs/development/maintaining.html>`_
