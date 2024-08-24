@@ -1,29 +1,37 @@
-=======
-تثبيت scikit-learn
-=======
+.. _تعليمات-التثبيت:
 
-هناك عدة طرق مختلفة لتثبيت حزمة scikit-learn:
+========================
+تثبيت سكايت-ليرن
+========================
 
-* :ref:`تثبيت الإصدار الرسمي الأخير <install_official_release>`. هذه هي أفضل طريقة لمعظم المستخدمين، حيث ستوفر إصدارًا مستقرًا وتتوفر حزم جاهزة لمعظم المنصات.
+هناك طرق مختلفة لتثبيت سكايت-ليرن:
 
-* تثبيت إصدار scikit-learn المقدم من :ref:`نظام التشغيل الخاص بك أو توزيع بايثون الذي تستخدمه <install_by_distribution>`. هذه طريقة سريعة لأولئك الذين لديهم أنظمة تشغيل أو توزيعات بايثون توزع scikit-learn. ولكن قد لا توفر أحدث إصدار.
+* :ref:`تثبيت آخر إصدار رسمي <تثبيت_الإصدار_الرسمي>`. هذه
+  أفضل طريقة لمعظم المستخدمين. سيوفر نسخة مستقرة
+  وتتوفر حزم مسبقة البناء لمعظم المنصات.
 
-* :ref:`بناء الحزمة من المصدر <install_bleeding_edge>`. هذه الطريقة الأفضل للمستخدمين الذين يرغبون في الحصول على أحدث الميزات والذين لا يخشون تشغيل التعليمات البرمجية الجديدة. كما أنها مطلوبة للمستخدمين الذين يرغبون في المساهمة في المشروع.
+* تثبيت إصدار سكايت-ليرن الذي يوفره
+  :ref:`نظام التشغيل أو توزيع بايثون <التثبيت_حسب_التوزيع>`.
+  هذه طريقة سريعة لأولئك الذين لديهم أنظمة تشغيل أو توزيعات بايثون
+  تقوم بتوزيع سكايت-ليرن.
+  قد لا يوفر أحدث إصدار.
 
-.. _install_official_release:
+* :ref:`بناء الحزمة من المصدر
+  <تثبيت_النسخة_الأحدث>`. هذه الطريقة أفضل للمستخدمين الذين يريدون
+  أحدث الميزات ولا يخشون تشغيل
+  التعليمات البرمجية الجديدة تمامًا. هذا مطلوب أيضًا للمستخدمين الذين يرغبون في المساهمة في
+  المشروع.
 
-تثبيت الإصدار الرسمي الأخير
-    
-(ملاحظة: يرجى العلم أنني لم أقم بترجمة الرموز الخاصة والرموز والمعادلات الرياضية والروابط والتاجات والشفرة البرمجية كما طلبت في السؤال.)
 
-هذا نص بتنسيق RST الذي تريد ترجمته إلى اللغة العربية. سأحرص على عدم ترجمة الرموز الخاصة، والرموز والمعادلات الرياضية، والروابط والتاجات، والشفرة البرمجية.
+.. _تثبيت_الإصدار_الرسمي:
 
-=============================
+تثبيت آخر إصدار
+=================
 
 .. raw:: html
 
   <style>
-    /* Show caption on large screens */
+    /* إظهار التعليق التوضيحي على الشاشات الكبيرة */
     @media screen and (min-width: 960px) {
       .install-instructions .sd-tab-set {
         --tab-caption-width: 20%;
@@ -44,334 +52,325 @@
   .. tab-set::
     :class: tabs-os
 
-    .. tab-item:: Windows
+    .. tab-item:: ويندوز
       :class-label: tab-4
 
       .. tab-set::
         :class: tabs-package-manager
 
-        .. tab-item:: pip
+        .. tab-item:: باي باي
           :class-label: tab-6
           :sync: package-manager-pip
 
-          قم بتثبيت الإصدار 64-بت من Python 3، على سبيل المثال من
+          قم بتثبيت إصدار 64 بت من بايثون 3، على سبيل المثال من
           `الموقع الرسمي <https://www.python.org/downloads/windows/>`__.
 
-          الآن، قم بإنشاء `بيئة افتراضية (venv)
-          <https://docs.python.org/3/tutorial/venv.html>`_ وتثبيت scikit-learn.
-          لاحظ أن البيئة الافتراضية خيارية ولكن ينصح بها بشدة، لتجنب التعارضات المحتملة مع الحزم الأخرى.
+          الآن قم بإنشاء `بيئة افتراضية (venv)
+          <https://docs.python.org/3/tutorial/venv.html>`_ وثبت سكايت-ليرن.
+          لاحظ أن البيئة الافتراضية اختيارية ولكن يوصى بها بشدة،
+          لتجنب أي تعارضات محتملة مع الحزم الأخرى.
 
           .. prompt:: powershell
 
             python -m venv sklearn-env
-            sklearn-env\Scripts\activate  # تنشيط
+            sklearn-env\Scripts\activate  # التنشيط
             pip install -U scikit-learn
 
-          للتحقق من التثبيت، يمكنك استخدام:
+          للتحقق من تثبيتك، يمكنك استخدام ما يلي:
 
           .. prompt:: powershell
 
-            python -m pip show scikit-learn  # إظهار إصدار scikit-learn والموقع
+            python -m pip show scikit-learn  # إظهار إصدار وتموقع سكايت-ليرن
             python -m pip freeze             # إظهار جميع الحزم المثبتة في البيئة
             python -c "import sklearn; sklearn.show_versions()"
 
-        .. tab-item:: conda
+        .. tab-item:: كوندا
           :class-label: tab-6
           :sync: package-manager-conda
 
           .. include:: ./install_instructions_conda.rst
 
-    .. tab-item:: MacOS
+    .. tab-item:: ماك أو إس
       :class-label: tab-4
 
       .. tab-set::
         :class: tabs-package-manager
 
-        .. tab-item:: pip
+        .. tab-item:: باي باي
           :class-label: tab-6
           :sync: package-manager-pip
 
-          قم بتثبيت Python 3 باستخدام `homebrew <https://brew.sh/>`_ (`brew install python`)
+          قم بتثبيت بايثون 3 باستخدام `هومبريو <https://brew.sh/>`_ (`brew install python`)
           أو عن طريق تثبيت الحزمة يدويًا من `الموقع الرسمي
           <https://www.python.org/downloads/macos/>`__.
 
-          الآن، قم بإنشاء `بيئة افتراضية (venv)
-          <https://docs.python.org/3/tutorial/venv.html>`_ وتثبيت scikit-learn.
-          لاحظ أن البيئة الافتراضية خيارية ولكن ينصح بها بشدة، لتجنب التعارضات المحتملة مع الحزم الأخرى.
+          الآن قم بإنشاء `بيئة افتراضية (venv)
+          <https://docs.python.org/3/tutorial/venv.html>`_ وثبت سكايت-ليرن.
+          لاحظ أن البيئة الافتراضية اختيارية ولكن يوصى بها بشدة،
+          لتجنب أي تعارضات محتملة مع الحزم الأخرى.
 
           .. prompt:: bash
 
             python -m venv sklearn-env
-            source sklearn-env/bin/activate  # تنشيط
+            source sklearn-env/bin/activate  # التنشيط
             pip install -U scikit-learn
 
-          للتحقق من التثبيت، يمكنك استخدام:
+          للتحقق من تثبيتك، يمكنك استخدام ما يلي:
 
           .. prompt:: bash
 
-            python -m pip show scikit-learn  # إظهار إصدار scikit-learn والموقع
+            python -m pip show scikit-learn  # إظهار إصدار وتموقع سكايت-ليرن
             python -m pip freeze             # إظهار جميع الحزم المثبتة في البيئة
             python -c "import sklearn; sklearn.show_versions()"
 
-        .. tab-item:: conda
+        .. tab-item:: كوندا
           :class-label: tab-6
           :sync: package-manager-conda
 
           .. include:: ./install_instructions_conda.rst
 
-    .. tab-item:: Linux
+    .. tab-item:: لينكس
       :class-label: tab-4
 
       .. tab-set::
         :class: tabs-package-manager
 
-        .. tab-item:: pip
+        .. tab-item:: باي باي
           :class-label: tab-6
           :sync: package-manager-pip
 
-          عادةً ما يكون Python 3 مثبتًا بشكل افتراضي على معظم توزيعات Linux. للتحقق مما إذا كان لديك Python 3 مثبتًا، جرّب:
+          عادة ما يكون بايثون 3 مثبتًا بشكل افتراضي على معظم توزيعات لينكس. للتحقق مما إذا كان
+          مثبتًا، جرب ما يلي:
 
           .. prompt:: bash
 
             python3 --version
             pip3 --version
 
-          إذا لم يكن لديك Python 3 مثبتًا، يرجى تثبيت `python3` و
-          `python3-pip` من مدير الحزم الخاص بالتوزيعة.
+          إذا لم يكن لديك بايثون 3 مثبتًا، يرجى تثبيت `python3` و
+          `python3-pip` من مدير حزم توزيعك.
 
-          الآن، قم بإنشاء `بيئة افتراضية (venv)
-          <https://docs.python.org/3/tutorial/venv.html>`_ وتثبيت scikit-learn.
-          لاحظ أن البيئة الافتراضية خيارية ولكن ينصح بها بشدة، لتجنب التعارضات المحتملة مع الحزم الأخرى.
+          الآن قم بإنشاء `بيئة افتراضية (venv)
+          <https://docs.python.org/3/tutorial/venv.html>`_ وثبت سكايت-ليرن.
+          لاحظ أن البيئة الافتراضية اختيارية ولكن يوصى بها بشدة،
+          لتجنب أي تعارضات محتملة مع الحزم الأخرى.
 
           .. prompt:: bash
 
             python3 -m venv sklearn-env
-            source sklearn-env/bin/activate  # تنشيط
+            source sklearn-env/bin/activate  # التنشيط
             pip3 install -U scikit-learn
 
-          للتحقق من التثبيت، يمكنك استخدام:
+          للتحقق من تثبيتك، يمكنك استخدام ما يلي:
 
           .. prompt:: bash
 
-            python3 -m pip show scikit-learn  # إظهار إصدار scikit-learn والموقع
+            python3 -m pip show scikit-learn  # إظهار إصدار وتموقع سكايت-ليرن
             python3 -m pip freeze             # إظهار جميع الحزم المثبتة في البيئة
             python3 -c "import sklearn; sklearn.show_versions()"
 
-        .. tab-item:: conda
+        .. tab-item:: كوندا
           :class-label: tab-6
           :sync: package-manager-conda
 
           .. include:: ./install_instructions_conda.rst
 
 
-استخدام بيئة معزولة مثل pip venv أو conda يجعل من الممكن
-تثبيت إصدار محدد من scikit-learn مع pip أو conda وتبعياتها
-بشكل مستقل عن أي حزم Python مثبتة مسبقًا. بشكل خاص في Linux
-ينصح بعدم تثبيت حزم pip بجانب الحزم المدارة بواسطة
-مدير الحزم الخاص بالتوزيعة (apt، dnf، pacman...).
+يُمكِّن استخدام بيئة معزولة مثل باي باي فينف أو كوندا من
+تثبيت إصدار محدد من سكايت-ليرن باستخدام باي باي أو كوندا واعتماداته
+بمعزل عن أي حزم بايثون مثبتة مسبقًا. خاصة في لينكس، لا يُنصح بتثبيت حزم باي باي
+بجانب الحزم التي يديرها مدير حزم التوزيع (أبت، دنياف، باكمان...).
 
-لاحظ أنه يجب عليك دائمًا تذكر تنشيط البيئة التي اخترتها
-قبل تشغيل أي أمر Python كلما تبدأ جلسة طرفية جديدة.
+لاحظ أنه يجب عليك دائمًا تذكر تنشيط بيئة اختيارك
+قبل تشغيل أي أمر بايثون في كل مرة تبدأ فيها جلسة طرفية جديدة.
 
-إذا لم تقم بتثبيت NumPy أو SciPy بعد، يمكنك أيضًا تثبيتها باستخدام
-conda أو pip. عند استخدام pip، يرجى التأكد من استخدام *binary wheels*،
-وأن NumPy و SciPy لا يتم إعادة ترجمتها من المصدر، والتي يمكن أن تحدث عند استخدام
-تكوينات معينة من نظام التشغيل والأجهزة (مثل Linux على
-Raspberry Pi).
+إذا لم تقم بتثبيت نومبي أو سايباي بعد، فيمكنك أيضًا تثبيتهما باستخدام
+كوندا أو باي باي. عند استخدام باي باي، يرجى التأكد من استخدام *عجلات ثنائية*،
+وألا يتم إعادة تجميع نومبي وسايباي من المصدر، والذي يمكن أن يحدث عند استخدام
+تكوينات معينة من نظام التشغيل والأجهزة (مثل لينكس على
+راسبيري باي).
 
-تتطلب إمكانيات التخطيط في Scikit-learn (أي، الدوال التي تبدأ بـ `plot\_`
-والفئات التي تنتهي بـ `Display`) Matplotlib. تتطلب الأمثلة
-Matplotlib وبعض الأمثلة تتطلب scikit-image، أو pandas، أو seaborn.
-يتم سرد الحد الأدنى لإصدار تبعيات scikit-learn أدناه مع الغرض منها.
+تتطلب قدرات سكايت-ليرن للرسم البياني (أي الدالات التي تبدأ بـ `plot_ `
+والفئات التي تنتهي بـ `Display`) ماتبلوتليب. تتطلب الأمثلة
+ماتبلوتليب ويتطلب بعض الأمثلة سكايت-إيماج أو بانداس أو سيبورن. يتم سرد الحد الأدنى
+من إصدارات اعتمادات سكايت-ليرن أدناه جنبًا إلى جنب مع الغرض منها.
 
 .. include:: min_dependency_table.rst
 
 .. warning::
 
-    
+    كان سكايت-ليرن 0.20 هو الإصدار الأخير الذي يدعم بايثون 2.7 و 3.4.
+    دعم سكايت-ليرن 0.21 بايثون 3.5-3.7.
+    دعم سكايت-ليرن 0.22 بايثون 3.5-3.8.
+    تطلب سكايت-ليرن 0.23-0.24 بايثون 3.6 أو أحدث.
+    دعم سكايت-ليرن 1.0 بايثون 3.7-3.10.
+    تدعم سكايت-ليرن 1.1 و 1.2 و 1.3 بايثون 3.8-3.12
+    يتطلب سكايت-ليرن 1.4 بايثون 3.9 أو أحدث.
 
-(ملاحظة: لم تتم ترجمة محتوى الملف المضمن `min_dependency_table.rst` حيث أنه غير متوفر في النص الأصلي.)
+.. _التثبيت_حسب_التوزيع:
 
-هذا نص بتنسيق RST أريد ترجمته إلى اللغة العربية، مع الحفاظ على الرموز الخاصة والرموز والمعادلات الرياضية والروابط والتاجات والشفرة البرمجية:
+توزيعات الطرف الثالث من سكايت-ليرن
+=================================
 
-كانت Scikit-learn 0.20 آخر إصدار يدعم بايثون 2.7 وبايثون 3.4.
+توفر بعض توزيعات الطرف الثالث إصدارات من
+سكايت-ليرن مدمجة مع أنظمة إدارة الحزم الخاصة بها.
 
-دعم Scikit-learn 0.21 بايثون 3.5-3.7.
+يمكن أن يجعل هذا التثبيت والترقية أسهل بكثير للمستخدمين نظرًا لأن
+التكامل يشمل القدرة على تثبيت
+الاعتمادات تلقائيًا (نومبي، سايباي) التي يحتاجها سكايت-ليرن.
 
-دعم Scikit-learn 0.22 بايثون 3.5-3.8.
+فيما يلي قائمة غير مكتملة بأنظمة التشغيل وتوزيعات بايثون
+التي توفر إصداراتها الخاصة من سكايت-ليرن.
 
-تطلب Scikit-learn 0.23-0.24 بايثون 3.6 أو أحدث.
-
-دعم Scikit-learn 1.0 بايثون 3.7-3.10.
-
-يدعم Scikit-learn 1.1 و1.2 و1.3 بايثون 3.8-3.12
-
-يحتاج Scikit-learn 1.4 إلى بايثون 3.9 أو أحدث.
-
-.. _install_by_distribution:
-
-التوزيعات الخارجية لـ Scikit-learn
-
-(المقصود بالتوزيعات الخارجية هي التوزيعات التي توفرها جهات خارجية وليست التوزيعات الرسمية)
-
-هذا نص بتنسيق RST أريد ترجمته إلى اللغة العربية. لا تترجم الرموز الخاصة ولا الرموز والمعادلات الرياضية ولا تترجم الروابط والتاجات ولا الشفرة البرمجية:
-
-=========================================
-
-توفر بعض توزيعات الجهات الخارجية إصدارات من scikit-learn مدمجة مع أنظمة إدارة الحزم الخاصة بها.
-
-يمكن أن تجعل هذه التوزيعات عملية التثبيت والترقية أسهل بكثير للمستخدمين، نظرًا لأن التكامل يشمل القدرة على تثبيت التبعيات (numpy، scipy) التي يتطلبها scikit-learn تلقائيًا.
-
-فيما يلي قائمة غير كاملة بأنظمة التشغيل وتوزيعات Python التي توفر إصدارها الخاص من scikit-learn.
-
-Alpine Linux
+ألباين لينكس
 ------------
 
-يتم توفير حزمة Alpine Linux من خلال `المستودعات الرسمية <https://pkgs.alpinelinux.org/packages?name=py3-scikit-learn>`__ باسم ``py3-scikit-learn`` لـ Python.
-يمكن تثبيتها عن طريق كتابة الأمر التالي:
+تتوفر حزمة ألباين لينكس من خلال `المستودعات الرسمية
+<https://pkgs.alpinelinux.org/packages?name=py3-scikit-learn>`__ باسم
+``py3-scikit-learn`` لبايثون.
+يمكن تثبيته عن طريق كتابة الأمر التالي:
 
 .. prompt:: bash
 
- sudo apk add py3-scikit-learn
+  sudo apk add py3-scikit-learn
 
 
-Arch Linux
+أرتش لينكس
 ----------
 
-يتم توفير حزمة Arch Linux من خلال `المستودعات الرسمية <https://www.archlinux.org/packages/?q=scikit-learn>`_ باسم ``python-scikit-learn`` لـ Python.
-يمكن تثبيتها عن طريق كتابة الأمر التالي:
+تتوفر حزمة أرتش لينكس من خلال `المستودعات الرسمية
+<https://www.archlinux.org/packages/?q=scikit-learn>`_ باسم
+``python-scikit-learn`` لبايثون.
+يمكن تثبيته عن طريق كتابة الأمر التالي:
 
 .. prompt:: bash
 
- sudo pacman -S python-scikit-learn
+  sudo pacman -S python-scikit-learn
 
 
-Debian/Ubuntu
+دبيان/أوبونتو
 -------------
 
-تُقسم حزمة Debian/Ubuntu إلى ثلاث حزم مختلفة تسمى ``python3-sklearn`` (وحدات python)، و ``python3-sklearn-lib`` (عمليات التنفيذ منخفضة المستوى والارتباطات)، و ``python3-sklearn-doc`` (الوثائق).
-لاحظ أن scikit-learn يتطلب Python 3، وبالتالي الحاجة إلى استخدام أسماء الحزم ذات البادئة `python3-`.
+تم تقسيم حزمة دبيان/أوبونتو إلى ثلاث حزم مختلفة تسمى
+``python3-sklearn`` (وحدات بايثون)، ``python3-sklearn-lib`` (التطبيقات
+والروابط منخفضة المستوى)، ``python3-sklearn-doc`` (الوثائق).
+لاحظ أن سكايت-ليرن يتطلب بايثون 3، وبالتالي الحاجة إلى استخدام أسماء الحزم
+ذات البادئة `python3-`.
 يمكن تثبيت الحزم باستخدام ``apt-get``:
 
 .. prompt:: bash
 
- sudo apt-get install python3-sklearn python3-sklearn-lib python3-sklearn-doc
+  sudo apt-get install python3-sklearn python3-sklearn-lib python3-sklearn-doc
 
 
-Fedora
+فيدورا
 ------
 
-تسمى حزمة Fedora ``python3-scikit-learn`` لإصدار Python 3، وهو الإصدار الوحيد المتوفر في Fedora.
-يمكن تثبيتها باستخدام ``dnf``:
+تسمى حزمة فيدورا ``python3-scikit-learn`` للإصدار 3 من بايثون،
+وهو الإصدار الوحيد المتاح في فيدورا.
+يمكن تثبيته باستخدام ``dnf``:
 
 .. prompt:: bash
 
- sudo dnf install python3-scikit-learn
+  sudo dnf install python3-scikit-learn
 
 
-NetBSD
+نت بي إس دي
 ------
 
-يتوفر scikit-learn عبر `pkgsrc-wip <http://pkgsrc-wip.sourceforge.net/>`_:
+سكايت-ليرن متاح عبر `pkgsrc-wip <http://pkgsrc-wip.sourceforge.net/>`_:
 https://pkgsrc.se/math/py-scikit-learn
 
 
-MacPorts for Mac OSX
+ماك بورتس لنظام ماك أو إس إكس
 --------------------
 
-تسمى حزمة MacPorts ``py<XY>-scikits-learn``،
-حيث ``XY`` تدل على إصدار Python.
-يمكن تثبيتها عن طريق كتابة الأمر التالي:
+تسمى حزمة ماك بورتس ``py<XY>-scikits-learn``،
+حيث ``XY`` تشير إلى إصدار بايثون.
+يمكن تثبيته عن طريق كتابة الأمر التالي:
 
 .. prompt:: bash
 
- sudo port install py39-scikit-learn
+  sudo port install py39-scikit-learn
 
 
-Anaconda و Enthought Deployment Manager لجميع الأنظمة الأساسية المدعومة
+أناكوندا وإينثوت دبلويمنت ماناجر لجميع المنصات المدعومة
 ---------------------------------------------------------------------
 
-كل من `Anaconda <https://www.anaconda.com/download>`_ و
-`Enthought Deployment Manager <https://assets.enthought.com/downloads/>`_
-يشحنان scikit-learn بالإضافة إلى مجموعة كبيرة من مكتبات Python العلمية لنظامي التشغيل Windows و Mac OSX و Linux.
+يأتي كل من `أناكوندا <https://www.anaconda.com/download>`_ و
+`إينثوت دبلويمنت ماناجر <https://assets.enthought.com/downloads/>`_
+مع سكايت-ليرن بالإضافة إلى مجموعة كبيرة من مكتبات بايثون العلمية لنظام
+ويندوز وماك أو إس إكس ولينكس.
 
-تقدم Anaconda scikit-learn كجزء من توزيعها المجاني.
+تقدم أناكوندا سكايت-ليرن كجزء من توزيعها المجاني.
 
 
-Intel Extension for Scikit-learn
+إنتل إكستينشن لسكايت-ليرن
 --------------------------------
 
-تحافظ Intel على حزمة x86_64 محسّنة، متوفرة في PyPI (عبر `pip`)،
-وفي قنوات `main` و `conda-forge` و `intel` conda:
+تحافظ إنتل على حزمة x86_64 المحسنة، المتاحة في باي باي آي (عبر `باي باي`)،
+وفي قنوات `main` و`conda-forge` و`intel` كوندا:
 
 .. prompt:: bash
 
- conda install scikit-learn-intelex
+  conda install scikit-learn-intelex
 
-تحتوي هذه الحزمة على إصدار محسّن من Intel للعديد من المُقدّرين. عندما
-لا يوجد إصدار بديل، يتم استخدام تنفيذ scikit-learn كخيار احتياطي. تأتي
-هذه الحلول المحسّنة من مكتبة oneDAL بلغة C ++ وهي مُحسّنة
-لبنية x86_64، وهي مُحسّنة لوحدات المعالجة المركزية Intel متعددة النواة.
+تحتوي هذه الحزمة على إصدار محسن من إنتل للعديد من الخوارزميات. عندما
+لا يوجد تنفيذ بديل، يتم استخدام تنفيذ سكايت-ليرن كخيار ثانوي. تأتي هذه الخوارزميات المحسنة
+من مكتبة سي++ ون ديل وهي محسنة لهندسة x86_64، ومحسنة لمعالجات إنتل متعددة النواة.
 
-لاحظ أن هذه الحلول ليست ممكّنة افتراضيًا، يرجى الرجوع إلى
-`scikit-learn-intelex <https://intel.github.io/scikit-learn-intelex/latest/what-is-patching.html>`_
-الوثائق لمزيد من التفاصيل حول سيناريوهات الاستخدام. مثال التصدير المباشر:
+لاحظ أن هذه الخوارزميات غير مفعلة افتراضيًا، يرجى الرجوع إلى
+وثائق `scikit-learn-intelex <https://intel.github.io/scikit-learn-intelex/latest/what-is-patching.html>`_
+لمزيد من التفاصيل حول سيناريوهات الاستخدام. مثال على الاستخدام المباشر:
 
 .. prompt:: python >>>
 
- from sklearnex.neighbors import NearestNeighbors
+  from sklearnex.neighbors import NearestNeighbors
 
-يتم التحقق من التوافق مع حلول scikit-learn القياسية عن طريق تشغيل مجموعة اختبار
-scikit-learn الكاملة عبر التكامل المستمر الآلي كما هو مذكور في
-https://github.com/intel/scikit-learn-intelex. إذا كنت تلاحظ أي مشكلة
-مع `scikit-learn-intelex`، يرجى الإبلاغ عن المشكلة في
-`متعقب المشكلات <https://github.com/intel/scikit-learn-intelex/issues>`__.
+يتم التحقق من التوافق مع خوارزميات سكايت-ليرن القياسية عن طريق تشغيل
+جناح اختبار سكايت-ليرن الكامل عبر تكامل مستمر تلقائي كما هو مبلغ عنه
+على https://github.com/intel/scikit-learn-intelex. إذا لاحظت أي مشكلة
+مع `scikit-learn-intelex`، يرجى الإبلاغ عن المشكلة على
+`مسجل المشكلات <https://github.com/intel/scikit-learn-intelex/issues>`__ الخاص بهم.
 
 
-WinPython for Windows
+وينبايثون لنظام ويندوز
 ---------------------
 
-يقوم مشروع `WinPython <https://winpython.github.io/>`_ بتوزيع
-scikit-learn كإضافة إضافية.
+يقوم مشروع `وينبايثون <https://winpython.github.io/>`_ بتوزيع
+سكايت-ليرن كإضافة إضافية.
 
 
 استكشاف الأخطاء وإصلاحها
-=======================
-
-إذا واجهت حالات فشل غير متوقعة عند تثبيت scikit-learn، فيمكنك إرسال مشكلة إلى
-`متعقب المشكلات <https://github.com/scikit-learn/scikit-learn/issues>`_.
-قبل ذلك، يرجى أيضًا التأكد من التحقق من المشكلات الشائعة التالية.
+إذا واجهتك أخطاء غير متوقعة أثناء تثبيت سكيت-ليرن، يمكنك تقديم مشكلة إلى "تتبع المشكلات <https://github.com/scikit-learn/scikit-learn/issues>". قبل ذلك، يرجى التأكد أيضًا من التحقق من مشكلات عامة التالية.
 
 .. _windows_longpath:
 
-خطأ ناتج عن حد طول مسار الملف في Windows
----------------------------------------
+خطأ بسبب حد طول مسار الملف في نظام التشغيل Windows
+-------------------------------------------------
 
-قد يحدث أن تفشل pip في تثبيت الحزم عند الوصول إلى حد حجم المسار الافتراضي لـ Windows إذا تم تثبيت Python في موقع متداخل مثل
-بنية مجلد `AppData` تحت دليل المستخدم الرئيسي، على سبيل المثال::
+قد يحدث أن يفشل باي باي في تثبيت الحزم عند الوصول إلى حد حجم المسار الافتراضي في نظام التشغيل Windows إذا تم تثبيت بايثون في موقع متداخل مثل هيكل مجلد "AppData" ضمن دليل المنزل للمستخدم، على سبيل المثال::
 
     C:\Users\username>C:\Users\username\AppData\Local\Microsoft\WindowsApps\python.exe -m pip install scikit-learn
     Collecting scikit-learn
     ...
     Installing collected packages: scikit-learn
-    ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory: 'C:\\Users\\username\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.7_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python37\\site-packages\\sklearn\\datasets\\tests\\data\\openml\\292\\api-v1-json-data-list-data_name-australian-limit-2-data_version-1-status-deactivated.json.gz'
+    ERROR: Failed to build sklearn C:\Users\username\AppData\Local\Temp\pip-install-q29_u2a2\scikit-learn\
+    ...
+    ERROR: Could not build wheels for sklearn which use PEP 517 and cannot be installed directly
 
-في هذه الحالة، من الممكن رفع هذا الحد في سجل Windows باستخدام
-أداة ``regedit``:
+في هذه الحالة، يمكن رفع هذا الحد في سجل Windows باستخدام أداة "regedit":
 
-#. اكتب "regedit" في قائمة ابدأ في Windows لإطلاق ``regedit``.
+#. اكتب "regedit" في قائمة ابدأ في Windows لتشغيل "regedit".
 
-#. انتقل إلى مفتاح
-   ``Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem``.
+#. انتقل إلى
+   ``Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem``
+   المفتاح.
 
-#. قم بتحرير قيمة خاصية ``LongPathsEnabled`` لهذا المفتاح وقم بتعيينها على 1.
+#. قم بتحرير قيمة خاصية "LongPathsEnabled" لهذا المفتاح وضبطها على 1.
 
-#. أعد تثبيت scikit-learn (مع تجاهل التثبيت المكسور السابق):
+#. أعد تثبيت سكيت-ليرن (مع تجاهل التثبيت السابق المعطوب):
 
    .. prompt:: powershell
 
       pip install --exists-action=i scikit-learn
-    
-  
-
-(ملحوظة: لم يتم ترجمة أسماء الحزم والروابط والتاجات والشفرة البرمجية طبقاً لشروط الترجمة)
