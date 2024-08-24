@@ -1,70 +1,71 @@
-هذا نص بتنسيق RST أريد ترجمته إلى اللغة العربية، مع الحفاظ على الرموز الخاصة والرموز والمعادلات الرياضية والروابط والتاجات والشفرة البرمجية:
-
 .. _advanced-installation:
 
 .. include:: ../min_dependency_substitutions.rst
 
 ==================================================
-تثبيت إصدار التطوير من scikit-learn
+تثبيت نسخة التطوير من scikit-learn
 ==================================================
 
-يقدم هذا القسم شرحًا عن كيفية تثبيت **الفرع الرئيسي** من scikit-learn. يمكن القيام بذلك إما عن طريق تثبيت بناء ليلي أو بناء من المصدر.
+يقدم هذا القسم طريقة تثبيت **الفرع الرئيسي** من scikit-learn. يمكن القيام بذلك إما عن طريق تثبيت نسخة ليلية أو البناء من المصدر.
 
 .. _install_nightly_builds:
 
-تثبيت البناء الليلي
+تثبيت النسخ الليلية
 =========================
 
-تقوم خوادم التكامل المستمر لمشروع scikit-learn ببناء واختبار وتحميل حزم wheel للإصدار الأحدث من Python على أساس ليلي.
+تقوم خوادم التكامل المستمر لمشروع scikit-learn ببناء واختبار وتحميل حزم العجلات لأحدث إصدار من Python بشكل يومي.
 
-يعد تثبيت البناء الليلي أسرع طريقة لـ:
+تثبيت نسخة ليلية هي أسرع طريقة للقيام بما يلي:
 
-- تجربة ميزة جديدة سيتم إصدارها في الإصدار التالي (أي ميزة من طلب سحب تمت إضافته مؤخرًا إلى الفرع الرئيسي)؛
+- تجربة ميزة جديدة سيتم شحنها في الإصدار التالي (أي ميزة من طلب سحب تم دمجها مؤخرًا في الفرع الرئيسي).
+- التحقق مما إذا كان قد تم إصلاح خطأ واجهته منذ الإصدار الأخير.
 
-- التحقق مما إذا كان الخطأ الذي واجهته قد تم إصلاحه منذ الإصدار الأخير.
-
-يمكنك تثبيت البناء الليلي لـ scikit-learn باستخدام الفهرس `scientific-python-nightly-wheels` من سجل PyPI لـ `anaconda.org`:
+يمكنك تثبيت النسخة الليلية من scikit-learn باستخدام الفهرس `scientific-python-nightly-wheels` من سجل PyPI على `anaconda.org`:
 
 .. prompt:: bash $
 
- pip install --pre --extra-index https://pypi.anaconda.org/scientific-python-nightly-wheels/simple scikit-learn
+  pip install --pre --extra-index https://pypi.anaconda.org/scientific-python-nightly-wheels/simple scikit-learn
 
-لاحظ أنه قد يكون من الضروري إلغاء تثبيت scikit-learn أولاً لتتمكن من تثبيت البناء الليلي لـ scikit-learn.
+ملاحظة: قد يكون من الضروري أولاً إلغاء تثبيت scikit-learn للتمكن من تثبيت النسخ الليلية من scikit-learn.
 
 .. _install_bleeding_edge:
 
 البناء من المصدر
+====================
 
-    
-
-بناء المشروع من المصدر مطلوب للعمل على مساهمة (إصلاح الخلل، ميزة جديدة، تحسين الشفرة أو الوثائق).
+البناء من المصدر مطلوب للعمل على مساهمة (إصلاح خطأ، ميزة جديدة، تحسين التعليمات البرمجية أو الوثائق).
 
 .. _git_repo:
 
-#. استخدم Git للتحقق من آخر مصدر من مستودع scikit-learn على Github.:
+#. استخدم `Git <https://git-scm.com/>`_ للاطلاع على أحدث مصدر من
+   `مستودع scikit-learn <https://github.com/scikit-learn/scikit-learn>`_ على
+   Github.:
 
    .. prompt:: bash $
 
-     git clone git@github.com:scikit-learn/scikit-learn.git  # أضف --depth 1 إذا كان الاتصال الخاص بك بطيئًا
+     git clone git@github.com:scikit-learn/scikit-learn.git  # add --depth 1 if your connection is slow
      cd scikit-learn
 
-   إذا كنت تخطط لتقديم طلب سحب، يجب أن تستنسخ من شوكتك بدلاً من ذلك.
+   إذا كنت تخطط لإرسال طلب سحب، فيجب عليك الاستنساخ من الشوكة الخاصة بك بدلاً من ذلك.
 
-#. قم بتثبيت إصدار حديث من Python (3.9 أو أحدث في وقت الكتابة) على سبيل المثال باستخدام Miniforge3_. يوفر Miniforge توزيعًا يعتمد على conda لـ Python والمكتبات العلمية الأكثر شيوعًا.
+#. قم بتثبيت إصدار حديث من Python (3.9 أو أحدث في وقت الكتابة) باستخدام Miniforge3_. يوفر Miniforge توزيعًا يعتمد على conda لـ Python وأكثر المكتبات العلمية شيوعًا.
 
-   إذا قمت بتثبيت Python باستخدام conda، نوصي بإنشاء `بيئة conda`_ مخصصة مع جميع تبعيات البناء الخاصة بـ scikit-learn (وتحديدًا NumPy_، SciPy_، Cython_، meson-python_ و Ninja_):
+   إذا قمت بتثبيت Python باستخدام conda، فنحن نوصي بإنشاء بيئة `conda` مخصصة بجميع تبعيات البناء لـ scikit-learn
+   (أي NumPy_، SciPy_، Cython_، meson-python_ وNinja_):
 
    .. prompt:: bash $
 
      conda create -n sklearn-env -c conda-forge python numpy scipy cython meson-python ninja
 
-   ليس من الضروري دائمًا ولكن من الأسلم فتح موجه جديد قبل تنشيط بيئة conda المنشأة حديثًا.
+   ليس من الضروري دائمًا ولكن من الأفضل فتح موجه أوامر جديد قبل تنشيط بيئة conda التي تم إنشاؤها حديثًا.
 
    .. prompt:: bash $
 
      conda activate sklearn-env
 
-#. **بديل لـ conda:** يمكنك استخدام منشآت بديلة لـ Python بشرط أن تكون حديثة بما فيه الكفاية (3.9 أو أعلى في وقت الكتابة). فيما يلي مثال على كيفية إنشاء بيئة بناء لنظام Linux Python. يتم تثبيت تبعيات البناء باستخدام `pip` في virtualenv_ مخصص لتجنب الإخلال ببرامج Python الأخرى المثبتة على النظام:
+#. **بديل conda:** يمكنك استخدام تثبيتات بديلة من Python بشرط أن تكون حديثة بما فيه الكفاية (3.9 أو أعلى في وقت الكتابة).
+   فيما يلي مثال على كيفية إنشاء بيئة بناء لنظام Linux Python. يتم تثبيت تبعيات البناء باستخدام `pip` في بيئة virtualenv_
+   مخصصة لتجنب تعطيل برامج Python الأخرى المثبتة على النظام:
 
    .. prompt:: bash $
 
@@ -72,9 +73,10 @@
      source sklearn-env/bin/activate
      pip install wheel numpy scipy cython meson-python ninja
 
-#. قم بتثبيت مترجم مع دعم OpenMP_ لمنصتك. راجع التعليمات الخاصة :ref:`compiler_windows`، :ref:`compiler_macos`، :ref:`compiler_linux` و :ref:`compiler_freebsd`.
+#. قم بتثبيت برنامج مجمع مع دعم OpenMP_ لمنصتك. راجع التعليمات الخاصة بـ :ref:`compiler_windows`، :ref:`compiler_macos`، :ref:`compiler_linux`
+   و :ref:`compiler_freebsd`.
 
-#. بناء المشروع مع pip:
+#. قم ببناء المشروع باستخدام pip:
 
    .. prompt:: bash $
 
@@ -82,25 +84,30 @@
         --verbose --no-build-isolation \
         --config-settings editable-verbose=true
 
-#. تحقق من أن scikit-learn المثبت لديه رقم إصدار ينتهي بـ `.dev0`:
+#. تحقق من أن إصدار scikit-learn المثبت لديه رقم إصدار ينتهي بـ `.dev0`:
 
    .. prompt:: bash $
 
      python -c "import sklearn; sklearn.show_versions()"
 
-#. يرجى الرجوع إلى :ref:`developers_guide` و :ref:`pytest_tips` لتشغيل الاختبارات على الوحدة التي اخترتها.
+#. يرجى الرجوع إلى :ref:`developers_guide` و :ref:`pytest_tips` لتشغيل الاختبارات على الوحدة النمطية التي تختارها.
 
 .. note::
 
-    `--config-settings editable-verbose=true` هو اختياري ولكن يوصى به لتجنب المفاجآت عند استيراد `sklearn`. `meson-python` ينفذ منشآت قابلة للتحرير بإعادة بناء `sklearn` عند تنفيذ `import sklearn`. مع الإعداد الموصى به سترى رسالة عندما يحدث هذا، بدلاً من الانتظار المحتمل دون تغذية راجعة و التساؤل عما يستغرق وقتًا طويلاً. مكافأة: هذا يعني أنه عليك فقط تشغيل أمر `pip install` مرة واحدة، سيتم إعادة بناء `sklearn` تلقائيًا عند استيراد `sklearn`.
+    `--config-settings editable-verbose=true` اختياري ولكن يوصى به
+    لتجنب المفاجآت عند استيراد `sklearn`. ينفذ `meson-python` التثبيتات القابلة للتحرير عن طريق إعادة بناء `sklearn` عند تنفيذ `import sklearn`.
+    مع الإعداد الموصى به، ستظهر رسالة عندما يحدث هذا،
+    بدلاً من الانتظار المحتمل دون تعليقات وتتساءل
+    ما الذي يستغرق كل هذا الوقت. المكافأة: هذا يعني أنه يتعين عليك تشغيل أمر `pip install` مرة واحدة فقط، سيتم إعادة بناء `sklearn` تلقائيًا عند
+    استيراد `sklearn`.
 
 التبعيات
 ------------
 
-تبعيات وقت التشغيل
+التبعيات وقت التشغيل
 ~~~~~~~~~~~~~~~~~~~~
 
-يتطلب Scikit-learn التبعيات التالية في كل من وقت البناء ووقت التشغيل:
+يتطلب scikit-learn التبعيات التالية في كل من وقت البناء ووقت التشغيل:
 
 - Python (>= 3.8)،
 - NumPy (>= |NumpyMinVersion|)،
@@ -111,27 +118,30 @@
 تبعيات البناء
 ~~~~~~~~~~~~~~~~~~
 
-يتطلب بناء Scikit-learn أيضًا:
+يتطلب بناء Scikit-learn أيضًا ما يلي:
 
 ..
-    # تحتاج الأماكن التالية إلى التوافق فيما يتعلق بإصدار Cython:
+    # يجب أن تكون الأماكن التالية متزامنة فيما يتعلق بإصدار Cython:
     # - ملف تكوين .circleci
     # - sklearn/_build_utils/__init__.py
     # - دليل التثبيت المتقدم
 
 - Cython >= |CythonMinVersion|
-- مترجم C/C++ ومكتبة وقت تشغيل OpenMP_ مطابقة. راجع :ref:`platform system specific instructions <platform_specific_instructions>` للحصول على مزيد من التفاصيل.
+- برنامج مجمع C/C++ ومكتبة وقت تشغيل OpenMP_ المطابقة. راجع
+  :ref:`تعليمات نظام المنصة المحددة <platform_specific_instructions>` لمزيد من التفاصيل.
 
 .. note::
 
-   إذا لم يتم دعم OpenMP من قبل المترجم، فسيتم البناء مع تعطيل وظائف OpenMP. هذا غير موصى به لأنه سيجبر بعض المقدرين على العمل في الوضع التسلسلي بدلاً من الاستفادة من التوازي المستند إلى الخيوط. سيؤدي تعيين متغير البيئة ``SKLEARN_FAIL_NO_OPENMP`` (قبل cythonization) إلى إجبار البناء على الفشل إذا لم يتم دعم OpenMP.
+   إذا لم يكن OpenMP مدعومًا بواسطة المجمع، فسيتم إجراء البناء مع تعطيل وظائف OpenMP. لا يوصى بذلك لأنه سيجبر بعض الخوارزميات على العمل في الوضع التسلسلي بدلاً من الاستفادة من التوازي القائم على الخيوط. سيؤدي تعيين متغير البيئة ``SKLEARN_FAIL_NO_OPENMP``
+   (قبل عملية cythonization) إلى فشل البناء إذا لم يكن OpenMP مدعومًا.
 
-منذ الإصدار 0.21، يكتشف scikit-learn تلقائيًا ويستخدم مكتبة الجبر الخطي التي يستخدمها SciPy **في وقت التشغيل**. لذلك لا يوجد تبعية بناء لـ scikit-learn على تنفيذ BLAS / LAPACK مثل OpenBlas أو Atlas أو Blis أو MKL.
+منذ الإصدار 0.21، يكتشف scikit-learn تلقائيًا ويستخدم مكتبة الجبر الخطي المستخدمة بواسطة SciPy **في وقت التشغيل**. لذلك، لا يعتمد scikit-learn على وقت البناء على تنفيذ BLAS/LAPACK مثل OpenBlas أو Atlas أو Blis
+   أو MKL.
 
 تبعيات الاختبار
 ~~~~~~~~~~~~~~~~~
 
-يتطلب تشغيل الاختبارات:
+يتطلب تشغيل الاختبارات ما يلي:
 
 - pytest >= |PytestMinVersion|
 
@@ -141,55 +151,48 @@
 بناء إصدار محدد من علامة
 --------------------------------------
 
-إذا كنت ترغب في إنشاء إصدار مستقر، يمكنك ``git checkout <VERSION>`` للحصول على الشفرة لهذا الإصدار المحدد، أو تنزيل أرشيف zip للإصدار من github.
+إذا كنت تريد بناء إصدار مستقر، فيمكنك ``git checkout <VERSION>``
+للحصول على رمز لذلك الإصدار المحدد، أو تنزيل أرشيف zip للإصدار من github.
 
 .. _platform_specific_instructions:
 
-تعليمات خاصة بالنظام الأساسي
-
-
-(ملحوظة: في الترجمة العربية، تم الحفاظ على الأسماء الأصلية لبعض الأدوات والتقنيات المذكورة في النص الأصلي، مثل Git و Miniforge3 و conda و pip و OpenMP و NumPy و SciPy و Cython و meson-python و Ninja و pandas و pytest، وذلك بسبب شيوع استخدامها في المجتمع التقني. كما تم الحفاظ على أسماء بعض الأوامر والنصوص البرمجية، مثل git clone و conda create و pip install و python -m venv و python -c، وذلك لضمان الدقة في الترجمة. بالإضافة إلى ذلك، تم الحفاظ على أسماء بعض المتغيرات والعلامات، مثل SKLEARN_FAIL_NO_OPENMP و --config-settings و --verbose و --no-build-isolation و editable-verbose=true، وذلك لضمان الدقة في الترجمة وعدم تغيير معنى النص الأصلي.)
-
-إليك ترجمة النص إلى اللغة العربية، مع مراعاة عدم ترجمة الرموز الخاصة والرياضية والروابط والأكواد البرمجية:
-
-==============================
-
-فيما يلي تعليمات تثبيت مُجمِّع C/C++ يعمل مع دعم OpenMP لبناء إضافات Cython في scikit-learn لكل منصة مدعومة.
+تعليمات خاصة بالمنصة
+فيما يلي تعليمات لتثبيت مترجم C/C++ فعال مع دعم OpenMP لبناء ملحقات Cython لـ scikit-learn لكل منصة مدعومة.
 
 .. _compiler_windows:
 
-ويندوز
-------
+Windows
+-------
 
-أولاً، حمّل أداة تثبيت "Build Tools for Visual Studio 2019" من الرابط التالي:
+أولاً، قم بتنزيل `أداة تثبيت Build Tools لـ Visual Studio 2019
+<https://aka.ms/vs/17/release/vs_buildtools.exe>`_.
 
-<https://aka.ms/vs/17/release/vs_buildtools.exe>
-
-قم بتشغيل ملف "vs_buildtools.exe" الذي حمّلته، وخلال التثبيت، تأكد من تحديد "Desktop development with C++"، كما هو موضح في الصورة التالية:
+قم بتشغيل ملف "vs_buildtools.exe" الذي تم تنزيله، أثناء التثبيت، ستحتاج إلى التأكد من تحديد "تطوير سطح المكتب باستخدام C++"، بشكل مشابه لهذا
+لقطة الشاشة:
 
 .. image:: ../images/visual-studio-build-tools-selection.png
 
-ثانياً، تعرف على ما إذا كنت تستخدم إصدار 64-bit أو 32-bit من Python. عملية البناء تعتمد على بنية مُفسر Python. يمكنك التحقق من البنية عن طريق تشغيل الأمر التالي في نافذة "cmd" أو "powershell":
+ثانيًا، اكتشف ما إذا كنت تشغل Python إصدار 64-بت أو 32-بت. يعتمد أمر البناء على بنية مترجم Python. يمكنك التحقق من البنية عن طريق تشغيل ما يلي في ``cmd`` أو وحدة تحكم ``powershell``:
 
 .. prompt:: bash $
 
     python -c "import struct; print(struct.calcsize('P') * 8)"
 
-بالنسبة لـ 64-bit Python، قم بتكوين بيئة البناء عن طريق تشغيل الأوامر التالية في نافذة "cmd" أو "Anaconda Prompt" (إذا كنت تستخدم Anaconda):
+بالنسبة لـ Python إصدار 64-بت، قم بتكوين بيئة البناء عن طريق تشغيل الأوامر التالية في ``cmd`` أو موجه Anaconda (إذا كنت تستخدم Anaconda):
 
-.. sphinx-prompt 1.3.0 (used in doc-min-dependencies CI task) does not support `batch` prompt type,
-.. so we work around by using a known prompt type and an explicit prompt text.
+.. sphinx-prompt 1.3.0 (المستخدم في مهمة CI doc-min-dependencies) لا يدعم نوع موجه `batch`،
+.. لذلك نعمل على حل المشكلة باستخدام نوع موجه معروف ونص موجه صريح.
 ..
 .. prompt:: bash C:\>
 
     SET DISTUTILS_USE_SDK=1
     "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" x64
 
-استبدل "x64" بـ "x86" للبناء لـ 32-bit Python.
+استبدل ``x64`` بـ ``x86`` لبناء Python إصدار 32-بت.
 
-يرجى ملاحظة أن المسار السابق قد يختلف من مستخدم لآخر. الهدف هو الإشارة إلى ملف "vcvarsall.bat" الذي سيعيّن متغيرات البيئة الضرورية في موجه الأوامر الحالي.
+يرجى ملاحظة أن المسار أعلاه قد يختلف من مستخدم إلى آخر. الهدف هو الإشارة إلى ملف "vcvarsall.bat" الذي سيقوم بتعيين متغيرات البيئة الضرورية في موجه الأوامر الحالي.
 
-أخيراً، قم ببناء scikit-learn باستخدام موجه الأوامر هذا:
+أخيرًا، قم ببناء scikit-learn باستخدام موجه الأوامر هذا:
 
 .. prompt:: bash $
 
@@ -199,37 +202,37 @@
 
 .. _compiler_macos:
 
-ماك أو إس
+macOS
 -----
 
-المُجمِّع الافتراضي لـ C على ماك أو إس، Apple clang (المعروف باسم `/usr/bin/gcc`)، لا يدعم OpenMP مباشرة. نقدم طريقتين لتمكين دعم OpenMP:
+المترجم C الافتراضي على macOS، Apple clang (المعروف باسم ``/usr/bin/gcc``)، لا يدعم OpenMP بشكل مباشر. نقدم بديلين لتمكين دعم OpenMP:
 
-- إما تثبيت `conda-forge::compilers` باستخدام conda؛
+- إما تثبيت ``conda-forge::compilers`` باستخدام conda؛
 
-- أو تثبيت `libomp` باستخدام Homebrew لتوسيع مُجمِّع Apple clang الافتراضي.
+- أو تثبيت ``libomp`` باستخدام Homebrew لتوسيع مترجم Apple clang الافتراضي.
 
-بالنسبة لأجهزة Apple Silicon M1، الطريقة الوحيدة المعروفة أنها تعمل حالياً (يناير 2021) هي طريقة conda-forge. يمكنك تثبيت توزيع `macos/arm64` الخاص بـ conda باستخدام `miniforge installer
+بالنسبة لأجهزة Apple Silicon M1، فإن طريقة conda-forge فقط هي التي تعمل في وقت الكتابة (يناير 2021). يمكنك تثبيت توزيعة ``macos/arm64`` من conda باستخدام `مثبت Miniforge
 <https://github.com/conda-forge/miniforge#miniforge>`_
 
-مُجمِّعات ماك أو إس من conda-forge
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+مترجم macOS من conda-forge
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-إذا كنت تستخدم مدير الحزم conda (الإصدار >= 4.7)، يمكنك تثبيت الحزمة "compilers" من قناة conda-forge، والتي توفر مُجمِّعات C/C++ تدعم OpenMP بناءً على أداة llvm.
+إذا كنت تستخدم مدير الحزم conda (الإصدار >= 4.7)، فيمكنك تثبيت حزمة ``compilers`` meta من قناة conda-forge، والتي توفر مترجمي C/C++ المتوافقين مع OpenMP استنادًا إلى مجموعة أدوات llvm.
 
-قم أولاً بتثبيت أدوات سطر أوامر ماك أو إس:
+قم أولاً بتثبيت أدوات سطر الأوامر الخاصة بـ macOS:
 
 .. prompt:: bash $
 
     xcode-select --install
 
-من المستحسن استخدام `conda environment`_ مخصص لبناء scikit-learn من المصدر:
+من المستحسن استخدام بيئة `conda`_ مخصصة لبناء scikit-learn من المصدر:
 
 .. prompt:: bash $
 
     conda create -n sklearn-dev -c conda-forge python numpy scipy cython \
         joblib threadpoolctl pytest compilers llvm-openmp meson-python ninja
 
-ليس من الضروري دائماً، ولكن من الأفضل فتح موجه أوامر جديد قبل تفعيل بيئة conda التي تم إنشاؤها حديثاً.
+ليس من الضروري دائمًا، ولكن من الأفضل فتح موجه جديد قبل تنشيط بيئة conda التي تم إنشاؤها حديثًا.
 
 .. prompt:: bash $
 
@@ -241,17 +244,17 @@
 
 .. note::
 
-    إذا واجهت أي رسالة خطأ لتعارض في التبعيات، جرب تعليق أي إعدادات مخصصة لـ conda في ملف ``$HOME/.condarc``. على وجه الخصوص، فإن توجيه ``channel_priority: strict`` معروف أنه يسبب مشاكل لهذه العملية.
+    إذا حصلت على أي رسالة خطأ حول تعارض التبعيات، فحاول التعليق على أي تكوين conda مخصص في ملف ``$HOME/.condarc``. على وجه الخصوص، من المعروف أن توجيه ``channel_priority: strict`` يسبب مشكلات لهذا الإعداد.
 
-يمكنك التأكد من تثبيت المُجمِّعات المخصصة بشكل صحيح من conda forge باستخدام الأمر التالي:
+يمكنك التحقق من تثبيت المترجم المخصص بشكل صحيح من conda forge باستخدام الأمر التالي:
 
 .. prompt:: bash $
 
     conda list
 
-والذي يجب أن يتضمن ``compilers`` و ``llvm-openmp``.
+الذي يجب أن يتضمن ``compilers`` و ``llvm-openmp``.
 
-ستقوم حزمة compilers تلقائياً بتعيين متغيرات بيئة مخصصة:
+ستقوم حزمة المترجمين meta تلقائيًا بتعيين متغيرات بيئة مخصصة:
 
 .. prompt:: bash $
 
@@ -261,30 +264,30 @@
     echo $CXXFLAGS
     echo $LDFLAGS
 
-وتشير إلى ملفات ومجلدات من بيئة ``sklearn-dev`` الخاصة بك (على وجه الخصوص في المجلدات الفرعية bin/ و include/ و lib/). على سبيل المثال، يجب أن يظهر ``-L/path/to/conda/envs/sklearn-dev/lib`` في ``LDFLAGS``.
+إنها تشير إلى الملفات والمجلدات من بيئة ``sklearn-dev`` conda الخاصة بك (خاصة في المجلدات الفرعية bin/ و include/ و lib/). على سبيل المثال، يجب أن يظهر ``-L/path/to/conda/envs/sklearn-dev/lib`` في ``LDFLAGS``.
 
-في السجل، يجب أن ترى امتداد المُجمَّع الذي تم بناؤه باستخدام مُجمِّعات clang و clang++ المثبتة بواسطة conda مع علامة سطر الأوامر ``-fopenmp``.
+في السجل، يجب أن ترى ملحقًا مجمعًا يتم بناؤه باستخدام مترجمي clang و clang++ المثبتين بواسطة conda مع علم ``-fopenmp`` سطر الأوامر.
 
-مُجمِّعات ماك أو إس من Homebrew
+مترجم macOS من Homebrew
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-حل آخر هو تمكين دعم OpenMP لمُجمِّع clang الذي يتم شحنه افتراضياً على ماك أو إس.
+الحل الآخر هو تمكين دعم OpenMP لمترجم clang المرفق بشكل افتراضي على macOS.
 
-قم أولاً بتثبيت أدوات سطر أوامر ماك أو إس:
+قم أولاً بتثبيت أدوات سطر الأوامر الخاصة بـ macOS:
 
 .. prompt:: bash $
 
     xcode-select --install
 
-ثبت مدير الحزم Homebrew_ لماك أو إس.
+قم بتثبيت مدير حزم Homebrew_ لنظام macOS.
 
-ثبت مكتبة LLVM OpenMP:
+قم بتثبيت مكتبة LLVM OpenMP:
 
 .. prompt:: bash $
 
     brew install libomp
 
-عيّن متغيرات البيئة التالية:
+قم بتعيين متغيرات البيئة التالية:
 
 .. prompt:: bash $
 
@@ -295,7 +298,7 @@
     export CXXFLAGS="$CXXFLAGS -I/usr/local/opt/libomp/include"
     export LDFLAGS="$LDFLAGS -Wl,-rpath,/usr/local/opt/libomp/lib -L/usr/local/opt/libomp/lib -lomp"
 
-أخيراً، قم ببناء scikit-learn في وضع اللفظي (لفحص وجود علامة ``-fopenmp`` في أوامر المُجمِّع):
+أخيرًا، قم ببناء scikit-learn في وضع التفصيلي (للتحقق من وجود علم ``-fopenmp`` في أوامر المترجم):
 
 .. prompt:: bash $
 
@@ -306,27 +309,22 @@
 
 .. _compiler_linux:
 
-لينكس
-
-    
-    (نهاية الترجمة)
-
-  هذا نص بتنسيق RST أريد ترجمته إلى اللغة العربية، مع الحفاظ على الرموز الخاصة والرموز والمعادلات الرياضية والروابط والتاجات والشفرة البرمجية كما هي:
-
+Linux
 -----
 
-مترجمات لينكس من النظام
-~~~~~~~~~~~~~~~~~~~~~~~~
+مترجم Linux من النظام
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-يتطلب تثبيت scikit-learn من المصدر دون استخدام conda أن يكون لديك تثبيت رؤوس تطوير Python لـ scikit-learn ومترجم C/C++ عامل مع دعم OpenMP (عادةً ما تكون مجموعة أدوات GCC).
+يتطلب تثبيت scikit-learn من المصدر دون استخدام conda أن يكون لديك مثبتًا رؤوس Python التطويرية لـ scikit-learn ومترجم C/C++ فعال مع دعم OpenMP (عادةً ما تكون مجموعة أدوات GCC).
 
-ثبت تبعيات البناء لأنظمة التشغيل المستندة إلى Debian، مثل Ubuntu:
+قم بتثبيت تبعيات البناء لأنظمة التشغيل القائمة على Debian، على سبيل المثال
+Ubuntu:
 
 .. prompt:: bash $
 
     sudo apt-get install build-essential python3-dev python3-pip
 
-ثم استمر كالمعتاد:
+ثم تابع كالمعتاد:
 
 .. prompt:: bash $
 
@@ -335,31 +333,33 @@
         --verbose --no-build-isolation \
         --config-settings editable-verbose=true
 
-يجب تثبيت Cython وعجلات ما قبل الترجمة لتبعيات وقت التشغيل (numpy و scipy و joblib) تلقائيًا في ``$HOME/.local/lib/pythonX.Y/site-packages``. بدلاً من ذلك، يمكنك تشغيل الأوامر المذكورة أعلاه من virtualenv_ أو `بيئة conda`_ للحصول على عزل كامل عن حزم Python المثبتة عبر النظام. عند استخدام بيئة معزولة، يجب استبدال ``pip3`` بـ ``pip`` في الأوامر المذكورة أعلاه.
+يجب أن يتم تثبيت Cython والعجلات المسبقة البناء للتبعيات وقت التشغيل (numpy و scipy
+و joblib) تلقائيًا في
+``$HOME/.local/lib/pythonX.Y/site-packages``. أو يمكنك تشغيل الأوامر أعلاه من virtualenv_ أو `بيئة conda`_ لعزلها تمامًا عن حزم Python المثبتة عبر حزم النظام. عند استخدام بيئة معزولة، يجب استبدال ``pip3`` بـ ``pip`` في الأوامر أعلاه.
 
-عندما لا تتوفر عجلات ما قبل الترجمة لتبعيات وقت التشغيل للهندسة المعمارية الخاصة بك (مثل ARM)، يمكنك تثبيت إصدارات النظام:
+عندما لا تكون العجلات المسبقة البناء للتبعيات وقت التشغيل متوفرة لبنيتك (على سبيل المثال، ARM)، فيمكنك تثبيت الإصدارات الخاصة بالنظام:
 
 .. prompt:: bash $
 
     sudo apt-get install cython3 python3-numpy python3-scipy
 
-على Red Hat والمشتقات (مثل CentOS)، ثبت التبعيات باستخدام:
+على Red Hat وclones (على سبيل المثال CentOS)، قم بتثبيت التبعيات باستخدام:
 
 .. prompt:: bash $
 
     sudo yum -y install gcc gcc-c++ python3-devel numpy scipy
 
-مترجمات لينكس من conda-forge
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+مترجم Linux من conda-forge
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-بدلاً من ذلك، ثبت إصدار حديث من مجموعة أدوات GNU C Compiler (GCC) في مجلد المستخدم باستخدام conda:
+بدلاً من ذلك، قم بتثبيت إصدار حديث من مجموعة أدوات GNU C Compiler (GCC) في مجلد المستخدم باستخدام conda:
 
 .. prompt:: bash $
 
     conda create -n sklearn-dev -c conda-forge python numpy scipy cython \
         joblib threadpoolctl pytest compilers meson-python ninja
 
-ليس من الضروري دائمًا، ولكن من الآمن فتح موجه جديد قبل تنشيط بيئة conda المنشأة حديثًا.
+ليس من الضروري دائمًا، ولكن من الأفضل فتح موجه جديد قبل تنشيط بيئة conda التي تم إنشاؤها حديثًا.
 
 .. prompt:: bash $
 
@@ -373,13 +373,14 @@
 FreeBSD
 -------
 
-لا يتضمن مترجم clang المضمن في أنظمة FreeBSD 12.0 و 11.2 الأساسية دعم OpenMP. تحتاج إلى تثبيت مكتبة `openmp` من الحزم (أو المنافذ):
+لا يتضمن مترجم clang المضمن في أنظمة FreeBSD 12.0 و 11.2 دعم OpenMP. يلزمك تثبيت مكتبة `openmp` من الحزم (أو المنافذ):
 
 .. prompt:: bash $
 
     sudo pkg install openmp
 
-سيؤدي هذا إلى تثبيت ملفات الرأس في ``/usr/local/include`` والمكتبات في ``/usr/local/lib``. نظرًا لأن هذه الدلائل لا يتم البحث عنها افتراضيًا، يمكنك تعيين متغيرات البيئة إلى هذه المواقع:
+سيؤدي هذا إلى تثبيت ملفات الرأس في ``/usr/local/include`` والمكتبات في
+``/usr/local/lib``. نظرًا لأنه لا يتم البحث عن هذه الدلائل بشكل افتراضي، فيمكنك تعيين متغيرات البيئة إلى هذه المواقع:
 
 .. prompt:: bash $
 
@@ -395,15 +396,15 @@ FreeBSD
         --verbose --no-build-isolation \
         --config-settings editable-verbose=true
 
-بالنسبة لإصدارات FreeBSD 12.1 و 11.3 القادمة، سيتم تضمين OpenMP في النظام الأساسي ولن تكون هذه الخطوات ضرورية.
+بالنسبة لإصدارات FreeBSD 12.1 و 11.3 القادمة، ستكون OpenMP مضمنة في النظام الأساسي ولن تكون هذه الخطوات ضرورية.
 
-.. _OpenMP: https://en.wikipedia.org/wiki/OpenMP
-.. _Cython: https://cython.org
-.. _meson-python: https://mesonbuild.com/meson-python
-.. _Ninja: https://ninja-build.org/
-.. _NumPy: https://numpy.org
-.. _SciPy: https://www.scipy.org
-.. _Homebrew: https://brew.sh
-.. _virtualenv: https://docs.python.org/3/tutorial/venv.html
-.. _conda environment: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
-.. _Miniforge3: https://github.com/conda-forge/miniforge#miniforge3
+.. _OpenMP: https://en.wikipedia.org/wiki/OpenMP [OpenMP]
+.. _Cython: https://cython.org [Cython]
+.. _meson-python: https://mesonbuild.com/meson-python [meson-python]
+.. _Ninja: https://ninja-build.org/ [Ninja]
+.. _NumPy: https://numpy.org [NumPy]
+.. _SciPy: https://www.scipy.org [SciPy]
+.. _Homebrew: https://brew.sh [Homebrew]
+.. _virtualenv: https://docs.python.org/3/tutorial/venv.html [virtualenv]
+.. _conda environment: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html [بيئة conda]
+.. _Miniforge3: https://github.com/conda-forge/miniforge#miniforge3 [Miniforge3]
