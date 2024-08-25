@@ -1,0 +1,733 @@
+.. include:: _contributors.rst
+
+.. currentmodule:: sklearn
+
+============
+الإصدار 0.21
+============
+
+.. include:: changelog_legend.inc
+
+.. _changes_0_21_3:
+
+الإصدار 0.21.3
+==============
+
+**30 يوليو 2019**
+
+نماذج معدلة
+--------------
+
+قد ينتج المُقدِّرون والوظائف التالية، عند ملاءمتها بنفس البيانات والبارامترات، نماذج مختلفة عن الإصدار السابق. غالباً ما يحدث هذا بسبب تغييرات في منطق النمذجة (تصحيحات الأخطاء أو التحسينات)، أو في إجراءات أخذ العينات العشوائية.
+
+- فشلت ملاحظات الإصدار 0.20.0 في ذكر عدم توافق مع الإصدارات السابقة في :func:`metrics.make_scorer` عندما تكون `needs_proba=True` و `y_true` ثنائية. الآن، من المفترض أن تقبل دالة التقييم `y_pred` أحادية البعد (أي، احتمال الفئة الإيجابية، الشكل `(n_samples,)`)، بدلاً من `y_pred` ثنائية الأبعاد (أي، الشكل `(n_samples, 2)`).
+
+سجل التغييرات
+---------
+
+:mod:`sklearn.cluster`
+......................
+
+- |Fix| إصلاح خطأ في :class:`cluster.KMeans` حيث كان الحساب مع ``init='random'`` أحادي الخيط لـ ``n_jobs > 1`` أو ``n_jobs = -1``. :pr:`12955` بقلم :user:`Prabakaran Kumaresshan <nixphix>`.
+
+- |Fix| إصلاح خطأ في :class:`cluster.OPTICS` حيث لم يتمكن المستخدمون من تمرير ``min_samples`` و ``min_cluster_size`` العائمة. :pr:`14496` بقلم :user:`Fabian Klopfer <someusername1>` و :user:`Hanmin Qin <qinhanmin2014>`.
+
+- |Fix| إصلاح خطأ في :class:`cluster.KMeans` حيث يمكن أن يؤدي التهيئة الأولية لـ KMeans++ نادرًا إلى حدوث IndexError. :issue:`11756` بقلم `Joel Nothman`_.
+
+:mod:`sklearn.compose`
+......................
+
+- |Fix| إصلاح مشكلة في :class:`compose.ColumnTransformer` حيث يمكن أن يؤدي استخدام DataFrames التي يختلف ترتيب أعمدتها بين :func:``fit`` و :func:``transform`` إلى تمرير أعمدة غير صحيحة بشكل صامت إلى المحول "remainder". :pr:`14237` بقلم `Andreas Schuderer <schuderer>`.
+
+:mod:`sklearn.datasets`
+.......................
+
+- |Fix| :func:`datasets.fetch_california_housing`، :func:`datasets.fetch_covtype`، :func:`datasets.fetch_kddcup99`، :func:`datasets.fetch_olivetti_faces`، :func:`datasets.fetch_rcv1`، و :func:`datasets.fetch_species_distributions` تحاول الاحتفاظ بالذاكرة المؤقتة السابقة باستخدام ``joblib`` الجديد إذا تم الاحتفاظ بالبيانات المؤقتة باستخدام ``sklearn.externals.joblib`` المتقادم. سيتم إيقاف هذا السلوك وإزالته في الإصدار 0.23. :pr:`14197` بقلم `Adrin Jalali`_.
+
+:mod:`sklearn.ensemble`
+.......................
+
+- |Fix| إصلاح خطأ القسمة على صفر في :class:`ensemble.HistGradientBoostingClassifier` و :class:`ensemble.HistGradientBoostingRegressor`. :pr:`14024` بقلم `Nicolas Hug <NicolasHug>`.
+
+:mod:`sklearn.impute`
+.....................
+
+- |Fix| إصلاح خطأ في :class:`impute.SimpleImputer` و :class:`impute.IterativeImputer` بحيث لا يتم إلقاء أخطاء عند وجود قيم مفقودة في بيانات التدريب. :pr:`13974` بقلم `Frank Hoang <fhoang7>`.
+
+:mod:`sklearn.inspection`
+.........................
+
+- |Fix| إصلاح خطأ في `inspection.plot_partial_dependence` حيث لم يتم أخذ معلمة ``target`` في الاعتبار للمشكلات متعددة التصنيفات. :pr:`14393` بقلم :user:`Guillem G. Subies <guillemgsubies>`.
+
+:mod:`sklearn.linear_model`
+...........................
+
+- |Fix| إصلاح خطأ في :class:`linear_model.LogisticRegressionCV` حيث فشل ``refit=False`` اعتمادًا على بارامتري ``'multiclass'`` و ``'penalty'`` (تم تقديم الانحدار في 0.21). :pr:`14087` بقلم `Nicolas Hug`_.
+
+- |Fix| إصلاح التوافق لـ :class:`linear_model.ARDRegression` و Scipy>=1.3.0. التكيف مع التغييرات الصاعدة إلى عتبة قطع ``pinvh`` الافتراضية والتي تؤدي بخلاف ذلك إلى انخفاض الدقة في بعض الحالات. :pr:`14067` بقلم :user:`Tim Staley <timstaley>`.
+
+:mod:`sklearn.neighbors`
+........................
+
+- |Fix| إصلاح خطأ في :class:`neighbors.NeighborhoodComponentsAnalysis` حيث تطلب التحقق من بارامترات ``n_components`` الأولية و ``max_iter`` و ``tol`` أنواعًا صارمة للغاية. :pr:`14092` بقلم :user:`Jérémie du Boisberranger <jeremiedbb>`.
+
+:mod:`sklearn.tree`
+...................
+
+- |Fix| إصلاح خطأ في :func:`tree.export_text` عندما يكون للشجرة ميزة واحدة واسم ميزة واحد يتم تمريره. :pr:`14053` بقلم `Thomas Fan`.
+
+- |Fix| إصلاح مشكلة في :func:`tree.plot_tree` حيث عرضت حسابات الإنتروبيا حتى بالنسبة لمعيار ``gini`` في DecisionTreeClassifiers. :pr:`13947` بقلم :user:`Frank Hoang <fhoang7>`.
+
+.. _changes_0_21_2:
+
+الإصدار 0.21.2
+==============
+
+**24 مايو 2019**
+
+سجل التغييرات
+---------
+
+:mod:`sklearn.decomposition`
+............................
+
+- |Fix| إصلاح خطأ في :class:`cross_decomposition.CCA` لتحسين الاستقرار العددي عندما تكون ``Y`` قريبة من الصفر. :pr:`13903` بقلم `Thomas Fan`_.
+
+:mod:`sklearn.metrics`
+......................
+
+- |Fix| إصلاح خطأ في :func:`metrics.pairwise.euclidean_distances` حيث تُرك جزء من مصفوفة المسافة دون إنشاء لقيم float32 كبيرة بدرجة كافية (تم تقديم الانحدار في 0.21). :pr:`13910` بقلم :user:`Jérémie du Boisberranger <jeremiedbb>`.
+
+:mod:`sklearn.preprocessing`
+............................
+
+- |Fix| إصلاح خطأ في :class:`preprocessing.OneHotEncoder` حيث لم يتم عكس معلمة ``drop`` الجديدة في ``get_feature_names``. :pr:`13894` بقلم :user:`James Myatt <jamesmyatt>`.
+
+
+`sklearn.utils.sparsefuncs`
+...........................
+
+- |Fix| إصلاح خطأ حيث فشل ``min_max_axis`` على الأنظمة 32-بت لبعض المدخلات الكبيرة. يؤثر هذا على :class:`preprocessing.MaxAbsScaler`، :func:`preprocessing.normalize` و :class:`preprocessing.LabelBinarizer`. :pr:`13741` بقلم :user:`Roddy MacSween <rlms>`.
+
+.. _changes_0_21_1:
+
+الإصدار 0.21.1
+==============
+
+**17 مايو 2019**
+
+هذا إصدار إصلاح أخطاء لحل بعض مشكلات التعبئة في الإصدار 0.21.0. كما يتضمن تحسينات وثائقية طفيفة وإصلاحات أخطاء طفيفة.
+
+سجل التغييرات
+---------
+
+:mod:`sklearn.inspection`
+.........................
+
+- |Fix| إصلاح خطأ في :func:`inspection.partial_dependence` للتحقق فقط من المصنف وليس من المُرجع في حالة التصنيف متعدد الفئات ومتعدد المخرجات. :pr:`14309` بقلم :user:`Guillaume Lemaitre <glemaitre>`.
+
+:mod:`sklearn.metrics`
+......................
+
+- |Fix| إصلاح خطأ في :class:`metrics.pairwise_distances` حيث كان يرفع ``AttributeError`` لمقاييس منطقية عندما كان لـ ``X`` نوع منطقي وكان ``Y == None``. :issue:`13864` بقلم :user:`Paresh Mathur <rick2047>`.
+
+- |Fix| إصلاح خطأين في :class:`metrics.pairwise_distances` عندما يكون ``n_jobs > 1``. أولاً، كان يعيد مصفوفة مسافة بنفس نوع البيانات مثل الإدخال، حتى لنوع بيانات صحيح. ثم لم يكن القطر صفراً بالنسبة لمقياس يوكليدي عندما يكون ``Y`` هو ``X``. :issue:`13877` بقلم :user:`Jérémie du Boisberranger <jeremiedbb>`.
+
+:mod:`sklearn.neighbors`
+........................
+
+- |Fix| إصلاح خطأ في :class:`neighbors.KernelDensity` الذي لا يمكن استعادته من ملف pickle إذا تم استخدام ``sample_weight``. :issue:`13772` بقلم :user:`Aditya Vyas <aditya1702>`.
+
+
+.. _changes_0_21:
+
+الإصدار 0.21.0
+**مايو 2019**
+
+نماذج معدلة
+------------
+
+قد تنتج أدوات التقدير والوظائف التالية، عند ملاءمتها مع نفس البيانات والبارامترات، نماذج مختلفة عن الإصدار السابق. غالباً ما يحدث هذا بسبب تغييرات في منطق النمذجة (تصحيحات الأخطاء أو التحسينات)، أو في إجراءات أخذ العينات العشوائية.
+
+- :class: 'discriminant_analysis.LinearDiscriminantAnalysis' للتصنيف متعدد الفئات |Fix|
+- :class: 'discriminant_analysis.LinearDiscriminantAnalysis' مع محدد 'eigen' |Fix|
+- :class: 'linear_model.BayesianRidge' |Fix|
+- أشجار القرار والمجموعات المستمدة عند تعيين كل من 'max_depth' و 'max_leaf_nodes'. |Fix|
+- :class: 'linear_model.LogisticRegression' و :class: 'linear_model.LogisticRegressionCV' مع محدد 'saga' |Fix|
+- :class: 'ensemble.GradientBoostingClassifier' |Fix|
+- :class: 'sklearn.feature_extraction.text.HashingVectorizer'، و :class: 'sklearn.feature_extraction.text.TfidfVectorizer'، و :class: 'sklearn.feature_extraction.text.CountVectorizer' |Fix|
+- :class: 'neural_network.MLPClassifier' |Fix|
+- :func: 'svm.SVC.decision_function' و :func: 'multiclass.OneVsOneClassifier.decision_function'. |Fix|
+- :class: 'linear_model.SGDClassifier' وأي مصنفات مشتقة. |Fix|
+- أي نموذج يستخدم وظيفة 'linear_model._sag.sag_solver' مع بذرة '0'، بما في ذلك :class: 'linear_model.LogisticRegression'، و :class: 'linear_model.LogisticRegressionCV'، و :class: 'linear_model.Ridge'، و :class: 'linear_model.RidgeCV' مع محدد 'sag'. |Fix|
+- :class: 'linear_model.RidgeCV' عند استخدام التحقق من ترك واحد مع إدخالات نادرة. |Fix|
+
+ترد التفاصيل في سجل التغييرات أدناه.
+
+(في حين أننا نحاول إبلاغ المستخدمين بشكل أفضل من خلال توفير هذه المعلومات، لا يمكننا التأكد من اكتمال هذه القائمة.)
+
+الأخطاء الرئيسية المعروفة
+------------------------
+
+* القيمة الافتراضية لـ 'max_iter' في :class: 'linear_model.LogisticRegression' صغيرة جدًا بالنسبة للعديد من المحللين نظرًا للقيمة الافتراضية لـ 'tol'. على وجه الخصوص، قمنا عن طريق الخطأ بتغيير القيمة الافتراضية لـ 'max_iter' لمحدد liblinear من 1000 إلى 100 تكرار في :pr: 3591 الذي تم إصداره في الإصدار 0.16. في إصدار مستقبلي، نأمل في اختيار قيم أفضل افتراضية لـ 'max_iter' و 'tol' بشكل حدسي اعتمادًا على المحلل (راجع :pr: 13317).
+
+سجل التغييرات
+تم التخلي رسميًا عن دعم Python 3.4 والإصدارات الأقدم.
+
+يجب أن تكون الإدخالات مجمعة حسب الوحدة النمطية (بترتيب أبجدي) ومسبوقة بواحدة من التسميات: |MajorFeature|، |Feature|، |Efficiency|، |Enhancement|، |Fix| أو |API| (راجع whats_new.rst للحصول على الأوصاف). يجب ترتيب الإدخالات حسب هذه التسميات (على سبيل المثال، |Fix| بعد |Efficiency|). يجب إدراج التغييرات غير الخاصة بوحدة نمطية معينة ضمن *Multiple Modules* أو *Miscellaneous*. يجب أن تنتهي الإدخالات بـ:
+
+:pr:`123456` by :user:`Joe Bloggs <joeongithub>`.
+
+حيث 123456 هو رقم طلب السحب، وليس رقم المشكلة.
+
+:mod:`sklearn.base`
+
+- |API| سيستخدم مقياس R2 المستخدم عند استدعاء "التقييم" على منشئ نموذج الانحدار "regressor" القيمة "multioutput='uniform_average'" بدءًا من الإصدار 0.23 للحفاظ على الاتساق مع: func:`metrics.r2_score`. سيؤثر هذا على طريقة "التقييم" في جميع منشئي نماذج الانحدار متعددة الإخراج (باستثناء class:`multioutput.MultiOutputRegressor`). :pr:`13157` by :user:`Hanmin Qin <qinhanmin2014>`.
+
+:mod:`sklearn.calibration`
+
+- |Enhancement| تمت إضافة دعم لتصنيف البيانات الممررة إلى class:`calibration.calibration_curve` حسب المئينات بدلاً من التصنيف الموحد بين 0 و1. :pr:`13086` by :user:`Scott Cole <srcole>`.
+
+- |Enhancement| السماح بالمصفوفات متعددة الأبعاد كإدخال لـ `calibration.CalibratedClassifierCV`. :pr:`13485` by :user:`William de Vazelhes <wdevazelhes>`.
+
+:mod:`sklearn.cluster`
+
+- |MajorFeature| خوارزمية تجميع جديدة: class:`cluster.OPTICS`: خوارزمية مرتبطة بـ class:`cluster.DBSCAN`، والتي يسهل ضبط فرط معلماتها وتعمل بشكل أفضل، بواسطة: user:`Shane <espg>`، `Adrin Jalali`_، :user:`Erich Schubert <kno10>`، `Hanmin Qin`_، و: user:`Assia Benbihi <assiaben>`.
+
+- |Fix| تم إصلاح خطأ حيث يمكن لـ class:`cluster.Birch` أن يرفع AttributeError بشكل متقطع. :pr:`13651` by `Joel Nothman`_.
+
+- |Fix| تم إصلاح خطأ في class:`cluster.KMeans` حيث لم يتم نقل المجموعات الفارغة بشكل صحيح عند استخدام أوزان العينات. :pr:`13486` by :user:`Jérémie du Boisberranger <jeremiedbb>`.
+
+- |API| تم تغيير اسم السمة "n_components_" في class:`cluster.AgglomerativeClustering` و class:`cluster.FeatureAgglomeration` إلى "n_connected_components_". :pr:`13427` by :user:`Stephane Couvreur <scouvreur>`.
+
+- |Enhancement| class:`cluster.AgglomerativeClustering` و class:`cluster.FeatureAgglomeration` تقبل الآن معلمة "distance_threshold" والتي يمكن استخدامها للعثور على المجموعات بدلاً من "n_clusters". :issue:`9069` by :user:`Vathsala Achar <VathsalaAchar>` و`Adrin Jalali`_.
+
+:mod:`sklearn.compose`
+
+- |API| class:`compose.ColumnTransformer` لم يعد ميزة تجريبية. :pr:`13835` by :user:`Hanmin Qin <qinhanmin2014>`.
+
+:mod:`sklearn.datasets`
+
+- |Fix| تمت إضافة دعم لمعرفات المجموعات والمؤشرات ذات 64 بت في ملفات SVMLight. :pr:`10727` by :user:`Bryan K Woods <bryan-woods>`.
+
+- |Fix| func:`datasets.load_sample_images` يعيد الصور بترتيب محدد. :pr:`13250` by :user:`Thomas Fan <thomasjpfan>`.
+
+:mod:`sklearn.decomposition`
+
+- |Enhancement| class:`decomposition.KernelPCA` لديه الآن إخراج محدد (تم حل غموض الإشارة في التحلل القيمي المتميز لمصفوفة النواة). :pr:`13241` by :user:`Aurélien Bellet <bellet>`.
+
+- |Fix| تم إصلاح خطأ في class:`decomposition.KernelPCA`، حيث أصبحت الدالة `fit().transform()` تنتج الإخراج الصحيح (نفس `fit_transform()`) في حالة عدم إزالة القيم الذاتية الصفرية (`remove_zero_eig=False`). كما تم تسريع `fit_inverse_transform` باستخدام نفس الحيلة المستخدمة في `fit_transform` لحساب تحويل `X`. :pr:`12143` by :user:`Sylvain Marié <smarie>`
+
+- |Fix| تم إصلاح خطأ في class:`decomposition.NMF` حيث يُسمح بـ `init = 'nndsvd'`، و`init = 'nndsvda'`، و`init = 'nndsvdar'` عندما يكون `n_components < n_features` بدلاً من `n_components <= min(n_samples, n_features)`. :pr:`11650` by :user:`Hossein Pourbozorg <hossein-pourbozorg>` و: user:`Zijie (ZJ) Poh <zjpoh>`.
+
+- |API| ستتغير القيمة الافتراضية لحجة: code:`init` في func:`decomposition.non_negative_factorization` من: code:`random` إلى: code:`None` في الإصدار 0.23 لجعلها متسقة مع class:`decomposition.NMF`. يتم رفع FutureWarning عند استخدام القيمة الافتراضية. :pr:`12988` by :user:`Zijie (ZJ) Poh <zjpoh>`.
+
+:mod:`sklearn.discriminant_analysis`
+
+- |Enhancement| class:`discriminant_analysis.LinearDiscriminantAnalysis` يحافظ الآن على أنواع البيانات "float32" و"float64". :pr:`8769` و:pr:`11000` by :user:`Thibault Sejourne <thibsej>`
+
+- |Fix| يتم الآن رفع تحذير "ChangedBehaviourWarning" عندما يتم تمرير class:`discriminant_analysis.LinearDiscriminantAnalysis` كمعلمة "n_components > min(n_features، n_classes - 1)"، ويتم تغيير "n_components" إلى "min(n_features، n_classes - 1)" إذا كان الأمر كذلك. في السابق، تم إجراء التغيير، ولكن بصمت. :pr:`11526` by :user:`William de Vazelhes<wdevazelhes>`.
+
+- |Fix| تم إصلاح خطأ في class:`discriminant_analysis.LinearDiscriminantAnalysis` حيث يتم حساب الاحتمالات المتوقعة بشكل غير صحيح في حالة التصنيف المتعدد. :pr:`6848`، by :user:`Agamemnon Krasoulis <agamemnonc>` و`Guillaume Lemaitre <glemaitre>`.
+
+- |Fix| تم إصلاح خطأ في class:`discriminant_analysis.LinearDiscriminantAnalysis` حيث يتم حساب الاحتمالات المتوقعة بشكل غير صحيح باستخدام محلل "eigen". :pr:`11727`، by :user:`Agamemnon Krasoulis <agamemnonc>`.
+
+:mod:`sklearn.dummy`
+
+- |Fix| تم إصلاح خطأ في class:`dummy.DummyClassifier` حيث كانت طريقة "predict_proba" تعيد مصفوفة int32 بدلاً من float64 لاستراتيجية "stratified". :pr:`13266` by :user:`Christos Aridas<chkoar>`.
+
+- |Fix| تم إصلاح خطأ في class:`dummy.DummyClassifier` حيث كان يرمي خطأ عدم تطابق الأبعاد في وقت التنبؤ إذا تم تمرير متجه عمودي "y" مع "shape=(n, 1)" في وقت "التدريب". :pr:`13545` by :user:`Nick Sorros <nsorros>` و`Adrin Jalali`_.
+
+:mod:`sklearn.ensemble`
+
+- |MajorFeature| تمت إضافة خوارزميتي تعزيز تدرج تاريخي جديدتين: class:`ensemble.HistGradientBoostingClassifier` و class:`ensemble.HistGradientBoostingRegressor`. يستلهم تنفيذ هذين المنشئين من `LightGBM <https://github.com/Microsoft/LightGBM>`_ ويمكن أن يكون أسرع بعدة أوامر من magnitude من class:`ensemble.GradientBoostingRegressor` و class:`ensemble.GradientBoostingClassifier` عندما يكون عدد العينات أكبر من عشرات الآلاف من العينات. واجهة برمجة التطبيقات API لهذين المنشئين الجديدين مختلفة قليلاً، ولا يتم دعم بعض الميزات من class:`ensemble.GradientBoostingClassifier` و class:`ensemble.GradientBoostingRegressor` بعد.
+
+  هذان المنشئان الجديدان تجريبيان، مما يعني أن نتائجهما أو واجهة برمجة التطبيقات API الخاصة بهما قد تتغير دون أي دورة إهمال. لاستخدامها، يجب عليك استيراد "enable_hist_gradient_boosting" بشكل صريح::
+
+    >>> # تتطلب صراحة هذه الميزة التجريبية
+    >>> from sklearn.experimental import enable_hist_gradient_boosting  # noqa
+    >>> # الآن يمكنك الاستيراد بشكل طبيعي من sklearn.ensemble
+    >>> from sklearn.ensemble import HistGradientBoostingClassifier
+
+  .. note::
+      تحديث: منذ الإصدار 1.0، لم يعد هذان المنشئان تجريبيين، ولا تحتاج إلى استخدام `from sklearn.experimental import enable_hist_gradient_boosting`.
+
+  :pr:`12807` by :user:`Nicolas Hug<NicolasHug>`.
+
+- |Feature| تمت إضافة class:`ensemble.VotingRegressor`، والتي توفر ما يعادل class:`ensemble.VotingClassifier` لمشكلات الانحدار. :pr:`12513` by :user:`Ramil Nugmanov <stsouko>` و: user:`Mohamed Ali Jamaoui <mohamed-ali>`.
+
+- |Efficiency| يجعل class:`ensemble.IsolationForest` يفضل الخيوط على العمليات عندما يعمل مع "n_jobs > 1" لأن مكالمات التثبيت لشجرة القرار الأساسية لا تطلق GIL. يقلل هذا التغيير من استخدام الذاكرة وعبء الاتصال. :pr:`12543` by :user:`Isaac Storch <istorch>` و`Olivier Grisel`_.
+
+- |Efficiency| يجعل class:`ensemble.IsolationForest` أكثر كفاءة في استخدام الذاكرة عن طريق تجنب الاحتفاظ بتنبؤات كل شجرة في الذاكرة. :pr:`13260` by `Nicolas Goix`_.
+
+- |Efficiency| يستخدم class:`ensemble.IsolationForest` الآن قطعًا من البيانات في خطوة التنبؤ، مما يحد من استخدام الذاكرة. :pr:`13283` by `Nicolas Goix`_.
+
+- |Efficiency| يستخدم class:`sklearn.ensemble.GradientBoostingClassifier` و class:`sklearn.ensemble.GradientBoostingRegressor` الآن الإدخال "y" كـ "float64" لتجنب نسخه داخليًا بواسطة الأشجار. :pr:`13524` by `Adrin Jalali`_.
+
+- |Enhancement| تم تقليل التحقق من صحة X في class:`ensemble.AdaBoostClassifier` و class:`ensemble.AdaBoostRegressor` إلى الحد الأدنى. :pr:`13174` by :user:`Christos Aridas <chkoar>`.
+
+- |Enhancement| يتعرض class:`ensemble.IsolationForest` الآن لمعلمة "warm_start"، مما يسمح بإضافة الأشجار بشكل تكراري إلى غابة العزل. :pr:`13496` by :user:`Peter Marko <petibear>`.
+
+- |Fix| أصبحت قيم "feature_importances_" في جميع نماذج الغابة العشوائية (أي class:`ensemble.RandomForestClassifier`، و class:`ensemble.RandomForestRegressor`، و class:`ensemble.ExtraTreesClassifier`، و class:`ensemble.ExtraTreesRegressor`، و class:`ensemble.RandomTreesEmbedding`، و class:`ensemble.GradientBoostingClassifier`، و class:`ensemble.GradientBoostingRegressor`) الآن:
+
+  - مجموعها يساوي 1
+  - يتم تجاهل جميع الأشجار ذات العقدة المفردة في حساب أهمية الميزة
+  - في حالة احتواء جميع الأشجار على عقدة واحدة فقط (أي عقدة جذر)، ستكون أهمية الميزة مصفوفة من الأصفار.
+
+  :pr:`13636` و:pr:`13620` by `Adrin Jalali`_.
+
+- |Fix| تم إصلاح خطأ في class:`ensemble.GradientBoostingClassifier` و class:`ensemble.GradientBoostingRegressor`، والتي لم تدعم منشئي Scikit-learn كمنشئ أولي. تمت أيضًا إضافة دعم لمنشئ أولي لا يدعم أوزان العينات. :pr:`12436` by :user:`Jérémie du Boisberranger <jeremiedbb>` و:pr:`12983` by :user:`Nicolas Hug<NicolasHug>`.
+
+- |Fix| تم إصلاح إخراج متوسط مسار الطول المحسوب في class:`ensemble.IsolationForest` عندما يكون الإدخال إما 0 أو 1 أو 2. :pr:`13251` by :user:`Albert Thomas <albertcthomas>` و: user:`joshuakennethjones <joshuakennethjones>`.
+
+- |Fix| تم إصلاح خطأ في class:`ensemble.GradientBoostingClassifier` حيث يتم حساب التدرجات بشكل غير صحيح في مشكلات التصنيف متعدد التصنيفات. :pr:`12715` by :user:`Nicolas Hug<NicolasHug>`.
+
+- |Fix| تم إصلاح خطأ في class:`ensemble.GradientBoostingClassifier` حيث لم يتم أخذ عينات مجموعات التحقق من صحة التوقف المبكر مع الاستراتيجية. :pr:`13164` by :user:`Nicolas Hug<NicolasHug>`.
+
+- |Fix| تم إصلاح خطأ في class:`ensemble.GradientBoostingClassifier` حيث كان التنبؤ الأولي الافتراضي لتصنيف متعدد الفئات يتنبأ بتكرارات الفئات بدلاً من لوغاريتم التكرارات. :pr:`12983` by :user:`Nicolas Hug<NicolasHug>`.
+
+- |Fix| تم إصلاح خطأ في class:`ensemble.RandomForestClassifier` حيث كانت طريقة "التنبؤ" ترتكب خطأً في نماذج الغابات متعددة الفئات متعددة الإخراج إذا كانت أي من الأهداف عبارة عن سلاسل نصية. :pr:`12834` by :user:`Elizabeth Sander <elsander>`.
+
+- |Fix| تم إصلاح خطأ في `ensemble.gradient_boosting.LossFunction` و `ensemble.gradient_boosting.LeastSquaresError` حيث أن القيمة الافتراضية لـ "learning_rate" في "update_terminal_regions" غير متسقة مع الوثيقة ووظائف الاستدعاء. لاحظ مع ذلك أن استخدام وظائف الخسارة هذه مباشرةً قد تم إهماله. :pr:`6463` by :user:`movelikeriver <movelikeriver>`.
+
+- |Fix| `ensemble.partial_dependence` (وبالتالي الإصدار الجديد: func:`sklearn.inspection.partial_dependence`) يأخذ الآن أوزان العينات في الاعتبار لحساب الاعتماد الجزئي عندما يتم تدريب نموذج التعزيز التدريجي بأوزان العينات. :pr:`13193` by :user:`Samuel O. Ronsin <samronsin>`.
+بالتأكيد! فيما يلي ترجمة النص المحدد إلى اللغة العربية:
+
+- |API| تم الآن إهمال ``ensemble.partial_dependence`` و ``ensemble.plot_partial_dependence`` لصالح ``inspection.partial_dependence`` و ``inspection.plot_partial_dependence``. :pr:`12599` بواسطة :user:`Trevor Stephens<trevorstephens>` و :user:`Nicolas Hug<NicolasHug>`.
+
+- |Fix| فشلت ``ensemble.VotingClassifier`` و ``ensemble.VotingRegressor`` أثناء "fit" عندما تم تعيين أحد المقدرات إلى "None" وكانت "sample_weight" غير "None". :pr:`13779` بواسطة :user:`Guillaume Lemaitre <glemaitre>`.
+
+- |API| تقبل ``ensemble.VotingClassifier`` و ``ensemble.VotingRegressor`` القيمة "drop" لإيقاف تشغيل أحد المقدرات بالإضافة إلى "None" لتكون متسقة مع المقدرات الأخرى (مثل ``pipeline.FeatureUnion`` و ``compose.ColumnTransformer``). :pr:`13780` بواسطة :user:`Guillaume Lemaitre <glemaitre>`.
+
+`sklearn.externals`
+...................
+
+- |API| تم إهمال ``externals.six`` لأننا توقفنا عن دعم Python 2.7. :pr:`12916` بواسطة :user:`Hanmin Qin <qinhanmin2014>`.
+
+:mod:`sklearn.feature_extraction`
+.................................
+
+- |Fix| إذا تم إدخال "input='file'" أو "input='filename'"، وتم إعطاء دالة قابلة للاستدعاء كمحلل، فإن ``sklearn.feature_extraction.text.HashingVectorizer`` و ``sklearn.feature_extraction.text.TfidfVectorizer`` و ``sklearn.feature_extraction.text.CountVectorizer`` تقوم الآن بقراءة البيانات من الملف (الملفات) ثم تمريرها إلى المحلل المعطى، بدلاً من تمرير اسم الملف (أسماء الملفات) أو كائن الملف (كائنات الملف) إلى المحلل. :pr:`13641` بواسطة `Adrin Jalali`_.
+
+:mod:`sklearn.impute`
+.....................
+
+- |MajorFeature| تمت إضافة ``impute.IterativeImputer``، والتي هي استراتيجية لملء القيم المفقودة عن طريق نمذجة كل ميزة ذات قيم مفقودة كدالة لميزات أخرى بطريقة دائرية. :pr:`8478` و :pr:`12177` بواسطة :user:`Sergey Feldman <sergeyf>` و :user:`Ben Lawson <benlawson>`.
+
+  واجهة برمجة التطبيقات الخاصة بـ IterativeImputer تجريبية وقد تتغير دون أي دورة إهمال. لاستخدامها، تحتاج إلى استيراد "enable_iterative_imputer" بشكل صريح::
+
+    >>> from sklearn.experimental import enable_iterative_imputer  # noqa
+    >>> # الآن يمكنك الاستيراد بشكل طبيعي من sklearn.impute
+    >>> from sklearn.impute import IterativeImputer
+
+- |Feature| تمتلك ``impute.SimpleImputer`` و ``impute.IterativeImputer`` معلمة جديدة "add_indicator"، والتي تقوم ببساطة بتراصف تحويل ``impute.MissingIndicator`` في إخراج تحويل المملئ. يسمح ذلك لمقدّر تنبئي بمراعاة القيم المفقودة. :pr:`12583`، :pr:`13601` بواسطة :user:`Danylo Baibak <DanilBaibak>`.
+
+- |Fix| في ``impute.MissingIndicator``، تجنب التكثيف الضمني عن طريق إثارة استثناء إذا كان الإدخال متفرقًا وتم تعيين خاصية ``missing_values`` إلى 0. :pr:`13240` بواسطة :user:`Bartosz Telenczuk <btel>`.
+
+- |Fix| تم إصلاح خللين في ``impute.MissingIndicator``. أولاً، عندما يكون "X" متفرقًا، تصبح جميع القيم غير الصفرية وغير المفقودة خاطئة بشكل صريح في البيانات المحولة. بعد ذلك، عندما تكون "features='missing-only'"، يتم الاحتفاظ بجميع الميزات إذا لم تكن هناك قيم مفقودة على الإطلاق. :pr:`13562` بواسطة :user:`Jérémie du Boisberranger <jeremiedbb>`.
+
+:mod:`sklearn.inspection`
+.........................
+
+(حزمة فرعية جديدة)
+
+- |Feature| مخططات الاعتماد الجزئي (``inspection.plot_partial_dependence``) مدعومة الآن لأي مُصنِّف أو مُنَقِّب (شريطة أن يكون لديهم طريقة "predict_proba"). :pr:`12599` بواسطة :user:`Trevor Stephens <trevorstephens>` و :user:`Nicolas Hug <NicolasHug>`.
+
+:mod:`sklearn.isotonic`
+.......................
+
+- |Feature| السماح بأنواع بيانات مختلفة (مثل float32) في ``isotonic.IsotonicRegression``. :pr:`8769` بواسطة :user:`Vlad Niculae <vene>`.
+
+:mod:`sklearn.linear_model`
+...........................
+
+- |Enhancement| يحافظ ``linear_model.Ridge`` الآن على أنواع بيانات "float32" و "float64". :issue:`8769` و :issue:`11000` بواسطة :user:`Guillaume Lemaitre <glemaitre>`، و :user:`Joan Massich <massich>`.
+
+- |Feature| تدعم ``linear_model.LogisticRegression`` و ``linear_model.LogisticRegressionCV`` الآن عقوبة Elastic-Net، مع محسن "saga". :pr:`11646` بواسطة :user:`Nicolas Hug <NicolasHug>`.
+
+- |Feature| تمت إضافة ``linear_model.lars_path_gram``، والتي هي ``linear_model.lars_path`` في وضع الإحصائيات الكافية، مما يسمح للمستخدمين بحساب ``linear_model.lars_path`` دون توفير "X" و "y". :pr:`11699` بواسطة :user:`Kuai Yu <yukuairoy>`.
+
+- |Efficiency| يحافظ ``linear_model.make_dataset`` الآن على أنواع بيانات "float32" و "float64"، مما يقلل من استهلاك الذاكرة في محسنات التدرج العشوائي، وSAG، وSAGA. :pr:`8769` و :pr:`11000` بواسطة :user:`Nelle Varoquaux <NelleV>`، و :user:`Arthur Imbert <Henley13>`، و :user:`Guillaume Lemaitre <glemaitre>`، و :user:`Joan Massich <massich>`.
+
+- |Enhancement| تدعم ``linear_model.LogisticRegression`` الآن هدفًا غير منتظم عندما يتم تمرير "penalty='none'". هذا يعادل تعيين "C=np.inf" مع الانتظام L2. غير مدعوم من قبل محسن liblinear. :pr:`12860` بواسطة :user:`Nicolas Hug <NicolasHug>`.
+
+- |Enhancement| يدعم محسن "sparse_cg" في ``linear_model.Ridge`` الآن ملاءمة المقاطعة (أي ``fit_intercept=True``) عندما تكون المدخلات متفرقة. :pr:`13336` بواسطة :user:`Bartosz Telenczuk <btel>`.
+
+- |Enhancement| يصدر محسن الانحدار المنسق المستخدم في "Lasso"، و"ElasticNet"، وما إلى ذلك الآن تحذير "ConvergenceWarning" عندما ينتهي دون تحقيق التسامح المطلوب. :pr:`11754` و :pr:`13397` بواسطة :user:`Brent Fagan <brentfagan>` و :user:`Adrin Jalali <adrinjalali>`.
+
+- |Fix| تم إصلاح خلل في ``linear_model.LogisticRegression`` و ``linear_model.LogisticRegressionCV`` مع محسن "saga"، حيث لن يتم تحديث الأوزان بشكل صحيح في بعض الحالات. :pr:`11646` بواسطة `Tom Dupre la Tour`_.
+
+- |Fix| تم إصلاح القيمة المتوسطة اللاحقة، ومصفوفة التغاير اللاحقة ومعلمات الانتظام المعادة في ``linear_model.BayesianRidge``. لم تكن القيمة المتوسطة اللاحقة ومصفوفة التغاير اللاحقة هما المحسوبتان مع آخر تحديث لمعلمات الانتظام، ولم تكن معلمات الانتظام المعادة هي النهائية. تم أيضًا إصلاح صيغة سجل الاحتمالية الهامشية المستخدم لحساب النتيجة عند تعيين ``compute_score=True``. :pr:`12174` بواسطة :user:`Albert Thomas <albertcthomas>`.
+
+- |Fix| تم إصلاح خلل في ``linear_model.LassoLarsIC``، حيث يتم تجاوز قيمة المستخدم "copy_X=False" عند إنشاء مثيل بواسطة قيمة المعلمة الافتراضية "copy_X=True" في "fit". :pr:`12972` بواسطة :user:`Lucio Fernandez-Arjona <luk-f-a>`.
+
+- |Fix| تم إصلاح خلل في ``linear_model.LinearRegression`` الذي لم يكن يعيد نفس المعاملات والمقاطعات في الحالات المتفرقة والمكثفة عند تعيين ``fit_intercept=True``. :pr:`13279` بواسطة `Alexandre Gramfort`_.
+
+- |Fix| تم إصلاح خلل في ``linear_model.HuberRegressor`` الذي كان معطلاً عندما كان "X" من النوع bool. :pr:`13328` بواسطة `Alexandre Gramfort`_.
+
+- |Fix| تم إصلاح مشكلة أداء محسن "saga" و"sag" عند استدعائهما في إعداد ``joblib.Parallel`` مع "n_jobs > 1" و``backend="threading"``، مما يتسبب في أدائهما بشكل أسوأ من الحالة التسلسلية. :pr:`13389` بواسطة :user:`Pierre Glaser <pierreglaser>`.
+
+- |Fix| تم إصلاح خلل في ``linear_model.stochastic_gradient.BaseSGDClassifier`` الذي لم يكن محددًا عند التدريب في إعداد متعدد الفئات على عدة خيوط. :pr:`13422` بواسطة :user:`Clément Doumouro <ClemDoum>`.
+
+- |Fix| تم إصلاح خلل في ``linear_model.ridge_regression``، و``linear_model.Ridge`` و ``linear_model.RidgeClassifier`` الذي تسبب في استثناء غير معالج للحجج "return_intercept=True" و "solver=auto" (افتراضي) أو أي محسن آخر مختلف عن "sag". :pr:`13363` بواسطة :user:`Bartosz Telenczuk <btel>`.
+
+- |Fix| سيرفع ``linear_model.ridge_regression`` الآن استثناءً إذا كان ``return_intercept=True`` والمحسن مختلفًا عن "sag". في السابق، تم إصدار تحذير فقط. :pr:`13363` بواسطة :user:`Bartosz Telenczuk <btel>`.
+
+- |Fix| سيختار ``linear_model.ridge_regression`` الآن محسن "sparse_cg" للإدخالات المتفرقة عندما يكون "solver=auto" و "sample_weight" متوفرًا (تم سابقًا اختيار محسن "cholesky"). :pr:`13363` بواسطة :user:`Bartosz Telenczuk <btel>`.
+
+- |API| استخدام ``linear_model.lars_path`` مع "X=None" أثناء تمرير "Gram" مهمل في الإصدار 0.21 وسيتم إزالته في الإصدار 0.23. استخدم ``linear_model.lars_path_gram`` بدلاً من ذلك. :pr:`11699` بواسطة :user:`Kuai Yu <yukuairoy>`.
+
+- |API| تم إهمال ``linear_model.logistic_regression_path`` في الإصدار 0.21 وسيتم إزالته في الإصدار 0.23. :pr:`12821` بواسطة :user:`Nicolas Hug <NicolasHug>`.
+
+- |Fix| يقوم ``linear_model.RidgeCV`` مع التحقق من ترك واحد الآن بملاءمة مقاطعة بشكل صحيح عندما يكون ``fit_intercept=True`` ومصفوفة التصميم متفرقة. :issue:`13350` بواسطة :user:`Jérôme Dockès <jeromedockes>`.
+
+:mod:`sklearn.manifold`
+.......................
+
+- |Efficiency| قم بجعل ``manifold.trustworthiness`` يستخدم فهرسًا مقلوبًا بدلاً من البحث عن "np.where" للعثور على ترتيب الجيران في مساحة الإدخال. يحسن ذلك الكفاءة خاصة عند الحساب باستخدام العديد من الجيران و/أو مجموعات البيانات الصغيرة. :pr:`9907` بواسطة :user:`William de Vazelhes <wdevazelhes>`.
+
+:mod:`sklearn.metrics`
+......................
+
+- |Feature| تمت إضافة المقياس ``metrics.max_error`` ومقيِّم "max_error" المقابل للانحدار أحادي الإخراج. :pr:`12232` بواسطة :user:`Krishna Sangeeth <whiletruelearn>`.
+
+- |Feature| إضافة ``metrics.multilabel_confusion_matrix``، والذي يحسب مصفوفة ارتباك مع عدد صحيح إيجابي حقيقي، وسلبي كاذب، وسلبي صحيح، وإيجابي كاذب لكل فئة. يسهل ذلك حساب مقاييس المجموعة مثل الاستدعاء، والخصوصية، والانخفاض، ومعدل الإغفال. :pr:`11179` بواسطة :user:`Shangwu Yao <ShangwuYao>` و `Joel Nothman`_.
+
+- |Feature| تمت إضافة ``metrics.jaccard_score`` لحساب معامل جاكارد كمقياس تقييم للمهام الثنائية، ومتعددة التصنيفات، ومتعددة الفئات، مع واجهة مماثلة لـ ``metrics.f1_score``. :pr:`13151` بواسطة :user:`Gaurav Dhingra <gxyd>` و `Joel Nothman`_.
+
+- |Feature| تمت إضافة ``metrics.pairwise.haversine_distances`` والتي يمكن الوصول إليها باستخدام ``metric='pairwise'`` من خلال ``metrics.pairwise_distances`` والمقدرين. (كان Haversine distance متاحًا سابقًا لحساب أقرب جيران). :pr:`12568` بواسطة :user:`Wei Xue <xuewei4d>`، و :user:`Emmanuel Arias <eamanu>` و `Joel Nothman`_.
+
+- |Efficiency| جعل ``metrics.pairwise_distances`` مع ``n_jobs`` > 1 أسرع باستخدام backend خيطي، بدلاً من backends العملية. :pr:`8216` بواسطة :user:`Pierre Glaser <pierreglaser>` و :user:`Romuald Menuet <zanospi>`.
+
+- |Efficiency| تستخدم المسافات المانحة ذات الإدخال المتفرق الآن BLAS المضمنة مع scipy بدلاً من BLAS المضمنة. :pr:`12732` بواسطة :user:`Jérémie du Boisberranger <jeremiedbb>`.
+
+- |Enhancement| استخدام التسمية "accuracy" بدلاً من "micro-average" في ``metrics.classification_report`` لتجنب الالتباس. يتم عرض "micro-average" فقط للتصنيف متعدد التصنيفات أو متعدد الفئات مع مجموعة فرعية من الفئات لأنه مطابق للدقة في ما عدا ذلك. :pr:`12334` بواسطة :user:`Emmanuel Arias <eamanu@eamanu.com>`، و `Joel Nothman`_ و `Andreas Müller`_.
+
+- |Enhancement| تمت إضافة معلمة "beta" إلى ``metrics.homogeneity_completeness_v_measure`` و ``metrics.v_measure_score`` لتكوين المقايضة بين التجانس والاكتمال. :pr:`13607` بواسطة :user:`Stephane Couvreur <scouvreur>` و :user:`Ivan Sanchez <ivsanro1>`.
+
+- |Fix| المقياس ``metrics.r2_score`` غير محدد مع عينة واحدة والآن يعيد NaN ويرفع ``exceptions.UndefinedMetricWarning``. :pr:`12855` بواسطة :user:`Pawel Sendyk <psendyk>`.
+
+- |Fix| تم إصلاح خلل حيث سيعيد ``metrics.brier_score_loss`` في بعض الأحيان نتيجة غير صحيحة عندما يكون هناك فئة واحدة فقط في "y_true". :pr:`13628` بواسطة :user:`Hanmin Qin <qinhanmin2014>`.
+هذا هو النص المترجم:
+
+- |Fix| تم إصلاح خطأ في :func:`metrics.label_ranking_average_precision_score`
+  حيث لم يتم أخذ sample_weight في الاعتبار للعينات ذات العلامات المتدهورة.
+  :pr:`13447` بواسطة :user:`Dan Ellis <dpwe>`.
+
+- |API| تم إيقاف استخدام معلمة ``labels`` في :func:`metrics.hamming_loss`
+  في الإصدار 0.21 وسيتم إزالتها في الإصدار 0.23. :pr:`10580` بواسطة
+  :user:`Reshama Shaikh <reshamas>` و :user:`Sandra Mitrovic <SandraMNE>`.
+
+- |Fix| عانت دالة :func:`metrics.pairwise.euclidean_distances`، وبالتالي
+  العديد من الخوارزميات التقديرية مع ``metric='euclidean'``، من مشكلات
+  في الدقة العددية مع ميزات ``float32``. وقد تم زيادة الدقة على حساب
+  انخفاض صغير في الأداء. :pr:`13554` بواسطة :user:`Celelibi` و
+  :user:`Jérémie du Boisberranger <jeremiedbb>`.
+
+- |API| تم إيقاف استخدام `metrics.jaccard_similarity_score` لصالح
+  :func:`metrics.jaccard_score` الأكثر اتساقًا. وقد تم كسر السلوك السابق
+  للأهداف الثنائية والمتعددة الفئات.
+  :pr:`13151` بواسطة `Joel Nothman`_.
+
+:mod:`sklearn.mixture`
+......................
+
+- |Fix| تم إصلاح خطأ في `mixture.BaseMixture` وبالتالي في الخوارزميات التقديرية
+  المبنية عليها، أي :class:`mixture.GaussianMixture` و
+  :class:`mixture.BayesianGaussianMixture`، حيث لم يكن ``fit_predict`` و
+  ``fit.predict`` متكافئين. :pr:`13142` بواسطة
+  :user:`Jérémie du Boisberranger <jeremiedbb>`.
+
+
+:mod:`sklearn.model_selection`
+..............................
+
+- |Feature| أصبحت الفئتان :class:`~model_selection.GridSearchCV` و
+  :class:`~model_selection.RandomizedSearchCV` تسمحان الآن بخيار ``refit=callable``
+  لإضافة المرونة في تحديد أفضل خوارزمية تقديرية.
+  راجع :ref:`sphx_glr_auto_examples_model_selection_plot_grid_search_refit_callable.py`.
+  :pr:`11354` بواسطة :user:`Wenhao Zhang <wenhaoz@ucla.edu>`،
+  `Joel Nothman`_ و :user:`Adrin Jalali <adrinjalali>`.
+
+- |Enhancement| أصبحت الفئات :class:`~model_selection.GridSearchCV`،
+  :class:`~model_selection.RandomizedSearchCV`، والدوال
+  :func:`~model_selection.cross_val_score`،
+  :func:`~model_selection.cross_val_predict`،
+  :func:`~model_selection.cross_validate`، تطبع الآن درجات التدريب عندما
+  تكون ``return_train_scores`` بالقيمة True و ``verbose`` أكبر من 2. وبالنسبة
+  لـ :func:`~model_selection.learning_curve`، و
+  :func:`~model_selection.validation_curve`، فإن الشرط الوحيد المطلوب هو أن تكون
+  ``verbose`` أكبر من 2.
+  :pr:`12613` و :pr:`12669` بواسطة :user:`Marc Torrellas <marctorrellas>`.
+
+- |Enhancement| أصبحت بعض فئات :term:`CV splitter` و
+  `model_selection.train_test_split` تثير الآن خطأ ``ValueError`` عندما تكون
+  مجموعة التدريب الناتجة فارغة.
+  :pr:`12861` بواسطة :user:`Nicolas Hug <NicolasHug>`.
+
+- |Fix| تم إصلاح خطأ حيث كانت :class:`model_selection.StratifiedKFold`
+  تقوم بخلط عينات كل فئة باستخدام نفس القيمة ``random_state``،
+  مما يجعل ``shuffle=True`` غير فعال.
+  :pr:`13124` بواسطة :user:`Hanmin Qin <qinhanmin2014>`.
+
+- |Fix| تمت إضافة القدرة لـ :func:`model_selection.cross_val_predict` للتعامل
+  مع الأهداف متعددة التصنيفات (ومتعددة الإخراج-متعددة الفئات) مع أساليب من نوع
+  ``predict_proba``. :pr:`8773` بواسطة :user:`Stephen Hoover <stephen-hoover>`.
+
+- |Fix| تم إصلاح مشكلة في :func:`~model_selection.cross_val_predict` حيث
+  كانت `method="predict_proba"` تعيد دائماً القيمة `0.0` عندما يتم استبعاد
+  إحدى الفئات في طية التحقق من التداخل.
+  :pr:`13366` بواسطة :user:`Guillaume Fournier <gfournier>`
+
+:mod:`sklearn.multiclass`
+.........................
+
+- |Fix| تم إصلاح مشكلة في :func:`multiclass.OneVsOneClassifier.decision_function`
+  حيث كانت قيمة decision_function لعينة معينة مختلفة اعتمادًا على ما إذا
+  كانت دالة decision_function يتم تقييمها على العينة بمفردها أو على دفعة
+  تحتوي على نفس العينة بسبب المقياس المستخدم في دالة decision_function.
+  :pr:`10440` بواسطة :user:`Jonathan Ohayon <Johayon>`.
+
+:mod:`sklearn.multioutput`
+..........................
+
+- |Fix| تم إصلاح خطأ في :class:`multioutput.MultiOutputClassifier` حيث كانت
+  طريقة `predict_proba` تفحص بشكل غير صحيح وجود خاصية `predict_proba` في
+  كائن الخوارزمية التقديرية.
+  :pr:`12222` بواسطة :user:`Rebekah Kim <rebekahkim>`
+
+:mod:`sklearn.neighbors`
+........................
+
+- |MajorFeature| تمت إضافة :class:`neighbors.NeighborhoodComponentsAnalysis`
+  من أجل التعلم المتري، والتي تنفذ خوارزمية تحليل مكونات الجوار.
+  :pr:`10058` بواسطة :user:`William de Vazelhes <wdevazelhes>` و
+  :user:`John Chiotellis <johny-c>`.
+
+- |API| أصبحت الطرق في :class:`neighbors.NearestNeighbors` :
+  :func:`~neighbors.NearestNeighbors.kneighbors`،
+  :func:`~neighbors.NearestNeighbors.radius_neighbors`،
+  :func:`~neighbors.NearestNeighbors.kneighbors_graph`،
+  :func:`~neighbors.NearestNeighbors.radius_neighbors_graph`
+  تثير الآن خطأ ``NotFittedError``، بدلاً من ``AttributeError``،
+  عند استدعائها قبل ``fit`` :pr:`12279` بواسطة :user:`Krishna Sangeeth
+  <whiletruelearn>`.
+
+:mod:`sklearn.neural_network`
+.............................
+
+- |Fix| تم إصلاح خطأ في :class:`neural_network.MLPClassifier` و
+  :class:`neural_network.MLPRegressor` حيث كان يتم تجاهل الخيار :code:`shuffle=False`.
+  :pr:`12582` بواسطة :user:`Sam Waterbury <samwaterbury>`.
+
+- |Fix| تم إصلاح خطأ في :class:`neural_network.MLPClassifier` حيث
+  لم تكن مجموعات التحقق من الصحة للإيقاف المبكر يتم أخذ العينات منها
+  مع الاسترات. ومع ذلك، في حالة التصنيف المتعدد، لا تزال التقسيمات
+  غير إستراتيجية.
+  :pr:`13164` بواسطة :user:`Nicolas Hug<NicolasHug>`.
+
+:mod:`sklearn.pipeline`
+.......................
+
+- |Feature| يمكن الآن لفئة :class:`pipeline.Pipeline` استخدام ترميز الفهرسة (مثل
+  ``my_pipeline[0:-1]``) لاستخراج تتابع فرعي من الخطوات ككائن Pipeline آخر.
+  ويمكن أيضًا فهرسة Pipeline مباشرة لاستخراج خطوة معينة (مثل
+  ``my_pipeline['svc']``)، بدلاً من الوصول إلى ``named_steps``.
+  :pr:`2568` بواسطة `Joel Nothman`_.
+
+- |Feature| تمت إضافة معلمة اختيارية ``verbose`` في :class:`pipeline.Pipeline`،
+  :class:`compose.ColumnTransformer` و :class:`pipeline.FeatureUnion`
+  ومساعدات ``make_`` المقابلة لعرض تقدم وتوقيت
+  كل خطوة. :pr:`11364` بواسطة :user:`Baze Petrushev <petrushev>`،
+  :user:`Karan Desai <karandesai-96>`، `Joel Nothman`_، و
+  :user:`Thomas Fan <thomasjpfan>`.
+
+- |Enhancement| تدعم فئة :class:`pipeline.Pipeline` الآن استخدام ``'passthrough'``
+  كمحول، بنفس تأثير ``None``.
+  :pr:`11144` بواسطة :user:`Thomas Fan <thomasjpfan>`.
+
+- |Enhancement| تنفذ فئة :class:`pipeline.Pipeline` الآن دالة ``__len__``
+  وبالتالي فإن ``len(pipeline)`` تعيد عدد الخطوات في خط الأنابيب.
+  :pr:`13439` بواسطة :user:`Lakshya KD <LakshKD>`.
+
+:mod:`sklearn.preprocessing`
+............................
+
+- |Feature| تدعم فئة :class:`preprocessing.OneHotEncoder` الآن إسقاط ميزة واحدة
+  لكل فئة بخيار جديد يسمى drop. :pr:`12908` بواسطة
+  :user:`Drew Johnston <drewmjohnston>`.
+
+- |Efficiency| تتعامل فئتا :class:`preprocessing.OneHotEncoder` و
+  :class:`preprocessing.OrdinalEncoder` الآن مع أطر بيانات Pandas بشكل أكثر
+  كفاءة. :pr:`13253` بواسطة :user:`maikia`.
+
+- |Efficiency| تجعل فئة :class:`preprocessing.MultiLabelBinarizer` تخزن
+  الخرائط الطبقية في الذاكرة المؤقتة بدلاً من حسابها في كل مرة أثناء التنفيذ.
+  :pr:`12116` بواسطة :user:`Ekaterina Krivich <kiote>` و `Joel Nothman`_.
+
+- |Efficiency| تدعم فئة :class:`preprocessing.PolynomialFeatures` الآن
+  المصفوفات المتناثرة بصفوف مضغوطة (CSR) كإدخال للدرجات 2 و 3. وهذا عادة ما
+  يكون أسرع بكثير من الحالة الكثيفة لأنه يتدرج مع كثافة المصفوفة ودرجة
+  التوسع، وهو أسرع بكثير من حالة المصفوفات المتناثرة بأعمدة مضغوطة (CSC).
+  :pr:`12197` بواسطة :user:`Andrew Nystrom <awnystrom>`.
+
+- |Efficiency| تحسين السرعة في :class:`preprocessing.PolynomialFeatures`،
+  في الحالة الكثيفة. تمت إضافة معلمة جديدة ``order`` تتحكم في ترتيب الإخراج
+  من أجل مزيد من تحسين الأداء. :pr:`12251` بواسطة `Tom Dupre la Tour`_.
+
+- |Fix| تم إصلاح مشكلة في الفيض الحسابي عند استخدام النوع float16 مع
+  فئة :class:`preprocessing.StandardScaler`.
+  :pr:`13007` بواسطة :user:`Raffaello Baluyot <baluyotraf>`
+
+- |Fix| تم إصلاح خطأ في :class:`preprocessing.QuantileTransformer` و
+  :func:`preprocessing.quantile_transform` لإجبار n_quantiles على أن تكون
+  مساوية على الأكثر لعدد العينات. كانت قيم n_quantiles الأكبر من عدد العينات
+  إما عديمة الفائدة أو تؤدي إلى تقريب خاطئ لدالة التوزيع التراكمي المقدرة.
+  :pr:`13333` بواسطة :user:`Albert Thomas <albertcthomas>`.
+
+- |API| ستتغير القيمة الافتراضية لـ ``copy`` في :func:`preprocessing.quantile_transform`
+  من False إلى True في الإصدار 0.23 لجعلها أكثر اتساقًا مع القيم الافتراضية
+  لـ ``copy`` في الدوال الأخرى في :mod:`sklearn.preprocessing` ولمنع التأثيرات
+  الجانبية غير المتوقعة عن طريق تعديل قيمة `X` في الذاكرة.
+  :pr:`13459` بواسطة :user:`Hunter McGushion <HunterMcGushion>`.
+
+:mod:`sklearn.svm`
+..................
+
+- |Fix| تم إصلاح مشكلة في :func:`svm.SVC.decision_function` عندما
+  تكون ``decision_function_shape='ovr'``. كانت قيمة decision_function لعينة
+  معينة مختلفة اعتمادًا على ما إذا كانت دالة decision_function يتم تقييمها
+  على العينة بمفردها أو على دفعة تحتوي على نفس العينة بسبب المقياس المستخدم
+  في دالة decision_function.
+  :pr:`10440` بواسطة :user:`Jonathan Ohayon <Johayon>`.
+
+:mod:`sklearn.tree`
+...................
+
+- |Feature| يمكن الآن رسم أشجار القرار باستخدام matplotlib باستخدام
+  `tree.plot_tree` دون الاعتماد على مكتبة ``dot``،
+  مما يزيل اعتمادًا يصعب تثبيته. :pr:`8508` بواسطة `Andreas Müller`_.
+
+- |Feature| يمكن الآن تصدير أشجار القرار بتنسيق نصي سهل القراءة
+  باستخدام :func:`tree.export_text`.
+  :pr:`6261` بواسطة `Giuseppe Vettigli <JustGlowing>`.
+
+- |Feature| تمت إضافة ``get_n_leaves()`` و ``get_depth()`` إلى
+  `tree.BaseDecisionTree` وبالتالي إلى جميع الخوارزميات التقديرية المبنية
+  عليها، بما في ذلك :class:`tree.DecisionTreeClassifier`،
+  :class:`tree.DecisionTreeRegressor`، :class:`tree.ExtraTreeClassifier`،
+  و :class:`tree.ExtraTreeRegressor`.
+  :pr:`12300` بواسطة :user:`Adrin Jalali <adrinjalali>`.
+
+- |Fix| لم تكن أشجار القرار والغابات تقبل سابقاً أهداف التصنيف متعددة الإخراج
+  ذات العلامات النصية، على الرغم من قبولها في ``fit``.
+  :pr:`11458` بواسطة :user:`Mitar Milutinovic <mitar>`.
+
+- |Fix| تم إصلاح مشكلة في `tree.BaseDecisionTree`
+  وبالتالي في جميع الخوارزميات التقديرية المبنية عليها، بما في ذلك
+  :class:`tree.DecisionTreeClassifier`،
+  :class:`tree.DecisionTreeRegressor`، :class:`tree.ExtraTreeClassifier`،
+  و :class:`tree.ExtraTreeRegressor`، حيث كانت تتجاوز العمق المحدد
+  بـ ``max_depth`` بمقدار 1 أثناء توسيع الشجرة إذا تم تحديد كل من
+  ``max_leaf_nodes`` و ``max_depth`` من قبل المستخدم. يرجى ملاحظة أن هذا
+  يؤثر أيضًا على جميع طرق الجمع التي تستخدم أشجار القرار.
+  :pr:`12344` بواسطة :user:`Adrin Jalali <adrinjalali>`.
+
+:mod:`sklearn.utils`
+....................
+
+- |Feature| تقبل دالة :func:`utils.resample` الآن معلمة ``stratify`` لأخذ
+  العينات وفقًا لتوزيعات الفئات. :pr:`13549` بواسطة :user:`Nicolas
+  Hug <NicolasHug>`.
+
+- |API| تم إيقاف استخدام معلمة ``warn_on_dtype`` من :func:`utils.check_array`
+  و :func:`utils.check_X_y`. تمت إضافة تحذير صريح لتحويل النوع في
+  `check_pairwise_arrays` إذا كانت ``metric`` التي يتم تمريرها هي
+  مقياس زوجي منطقي.
+  :pr:`13382` بواسطة :user:`Prathmesh Savale <praths007>`.
+
+Multiple modules
+................
+
+- |MajorFeature| تمت إعادة كتابة طريقة ``__repr__()`` لجميع الخوارزميات التقديرية
+  (التي يتم استخدامها عند استدعاء ``print(estimator)``) بشكل كامل، بناءً على
+  مكتبة التنسيق الجميل القياسية في بايثون. يتم طباعة جميع المعلمات بشكل افتراضي،
+  ولكن يمكن تغيير ذلك باستخدام خيار ``print_changed_only`` في
+  :func:`sklearn.set_config`. :pr:`11705` بواسطة :user:`Nicolas Hug
+  <NicolasHug>`.
+
+- |MajorFeature| إضافة علامات الخوارزميات التقديرية: هذه هي علامات للخوارزميات
+  التقديرية تسمح بالتفتيش البرمجي لقدراتها، مثل دعم المصفوفات المتناثرة،
+  وأنواع الإخراج المدعومة والطرق المدعومة. تحدد علامات الخوارزميات التقديرية
+  أيضًا الاختبارات التي يتم تشغيلها على خوارزمية تقديرية عند استدعاء
+  ``check_estimator``. اقرأ المزيد في :ref:`دليل المستخدم <estimator_tags>`.
+  :pr:`8022` بواسطة :user:`Andreas Müller <amueller>`.
+
+- |Efficiency| يتم تجنب نسخ الذاكرة عند تحويل المصفوفات إلى نوع بيانات مختلف
+  في العديد من الخوارزميات التقديرية. :pr:`11973` بواسطة :user:`Roman Yurchak
+  <rth>`.
+تم إصلاح خطأ في تنفيذ دالة المساعدة "our_rand_r" التي لم تكن تعمل بشكل متسق عبر المنصات المختلفة. :pr: '13422' بواسطة :user: 'Madhura Parikh <jdnc>' و :user: 'Clément Doumouro <ClemDoum>'.
+
+متفرقات
+.............
+
+- |تحسين| لم يعد Joblib مضمنًا في scikit-learn، وأصبح تبعية. الإصدار الأدنى المدعوم هو joblib 0.11، ولكن يوصى بشدة باستخدام الإصدار >= 0.13. :pr: '13531' بواسطة :user: 'Roman Yurchak <rth>'.
+
+التغييرات على فحوصات المُقدِّر
+هذه التغييرات تؤثر بشكل أساسي على مطوري المكتبات.
+
+- أضف ``check_fit_idempotent`` إلى
+  :func:`~utils.estimator_checks.check_estimator`، والذي يتحقق من
+  أن إخراج وظائف 'predict` و`predict_proba` و`transform` و`decision_function` لا
+  يتغير عندما يتم استدعاء الدالة 'fit` مرتين بنفس البيانات. :pr:`12328` بواسطة
+  :user:`Nicolas Hug <NicolasHug>`.
+
+- يمكن الآن تعطيل العديد من الفحوصات أو تكوينها باستخدام :ref:`estimator_tags`.
+  :pr:`8022` بواسطة :user:`Andreas Müller <amueller>`.
+
+.. rubric:: المساهمون في الشيفرة والتوثيق
+
+شكرًا لكل من ساهم في صيانة وتحسين المشروع منذ الإصدار 0.20، بما في ذلك:
+
+adanhawth، Aditya Vyas، Adrin Jalali، Agamemnon Krasoulis، Albert Thomas،
+Alberto Torres، Alexandre Gramfort، amourav، Andrea Navarrete، Andreas Mueller،
+Andrew Nystrom، assiaben، Aurélien Bellet، Bartosz Michałowski، Bartosz
+Telenczuk، bauks، BenjaStudio، bertrandhaut، Bharat Raghunathan، brentfagan،
+Bryan Woods، Cat Chenal، Cheuk Ting Ho، Chris Choe، Christos Aridas، Clément
+Doumouro، Cole Smith، Connossor، Corey Levinson، Dan Ellis، Dan Stine، Danylo
+Baibak، daten-kieker، Denis Kataev، Didi Bar-Zev، Dillon Gardner، Dmitry Mottl،
+Dmitry Vukolov، Dougal J. Sutherland، Dowon، drewmjohnston، Dror Atariah،
+Edward J Brown، Ekaterina Krivich، Elizabeth Sander، Emmanuel Arias، Eric
+Chang، Eric Larson، Erich Schubert، esvhd، Falak، Feda Curic، Federico Caselli،
+Frank Hoang، Fibinse Xavier، Finn O'Shea، Gabriel Marzinotta، Gabriel Vacaliuc،
+Gabriele Calvo، Gael Varoquaux، GauravAhlawat، Giuseppe Vettigli، Greg Gandenberger،
+Guillaume Fournier، Guillaume Lemaitre، Gustavo De Mari Pereira، Hanmin Qin،
+haroldfox، hhu-luqi، Hunter McGushion، Ian Sanders، JackLangerman، Jacopo
+Notarstefano، jakirkham، James Bourbeau، Jan Koch، Jan S، janvanrijn، Jarrod
+Millman، jdethurens، jeremiedbb، JF، joaak، Joan Massich، Joel Nothman،
+Jonathan Ohayon، Joris Van den Bossche، josephsalmon، Jérémie Méhault، Katrin
+Leinweber، ken، kms15، Koen، Kossori Aruku، Krishna Sangeeth، Kuai Yu، Kulbear،
+Kushal Chauhan، Kyle Jackson، Lakshya KD، Leandro Hermida، Lee Yi Jie Joel،
+Lily Xiong، Lisa Sarah Thomas، Loic Esteve، louib، luk-f-a، maikia، mail-liam،
+Manimaran، Manuel López-Ibáñez، Marc Torrellas، Marco Gaido، Marco Gorelli،
+MarcoGorelli، marineLM، Mark Hannel، Martin Gubri، Masstran، mathurinm، Matthew
+Roeschke، Max Copeland، melsyt، mferrari3، Mickaël Schoenthel، Ming Li، Mitar،
+Mohammad Aftab، Mohammed AbdelAal، Mohammed Ibraheem، Muhammad Hassaan Rafique،
+mwestt، Naoya Iijima، Nicholas Smith، Nicolas Goix، Nicolas Hug، Nikolay
+Shebanov، Oleksandr Pavlyk، Oliver Rausch، Olivier Grisel، Orestis، Osman، Owen
+Flanagan، Paul Paczuski، Pavel Soriano، pavlos kallis، Pawel Sendyk، peay،
+Peter، Peter Cock، Peter Hausamann، Peter Marko، Pierre Glaser، pierretallotte،
+Pim de Haan، Piotr Szymański، Prabakaran Kumaresshan، Pradeep Reddy Raamana،
+Prathmesh Savale، Pulkit Maloo، Quentin Batista، Radostin Stoyanov، Raf
+Baluyot، Rajdeep Dua، Ramil Nugmanov، Raúl García Calvo، Rebekah Kim، Reshama
+Shaikh، Rohan Lekhwani، Rohan Singh، Rohan Varma، Rohit Kapoor، Roman
+Feldbauer، Roman Yurchak، Romuald M، Roopam Sharma، Ryan، Rüdiger Busche، Sam
+Waterbury، Samuel O. Ronsin، SandroCasagrande، Scott Cole، Scott Lowe،
+Sebastian Raschka، Shangwu Yao، Shivam Kotwala، Shiyu Duan، smarie، Sriharsha
+Hatwar، Stephen Hoover، Stephen Tierney، Stéphane Couvreux، surgan12،
+SylvainLan، TakingItCasual، Tashay Green، thibsej، Thomas Fan، Thomas J Fan،
+Thomas Moreau، Tom Dupré la Tour، Tommy، Tulio Casagrande، Umar Farouk Umar،
+Utkarsh Upadhyay، Vinayak Mehta، Vishaal Kapoor، Vivek Kumar، Vlad Niculae،
+vqean3، Wenhao Zhang، William de Vazelhes، xhan، Xing Han Lu، xinyuliu12،
+Yaroslav Halchenko، Zach Griffith، Zach Miller، Zayd Hammoudeh، Zhuyi Xue،
+Zijie (ZJ) Poh، ^__^
