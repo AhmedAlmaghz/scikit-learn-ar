@@ -1,0 +1,1203 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="مرجع المستخدم" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/user_guide.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="التعلم الخَلفي-., التعلم غير الخاضع للإشراف- نماذج المزيج الغاوسي, المزيج الغاوسي- العملية الاحتمالية., تعلم المنوال, مقدمة- أمثلة عملية., Isomap- تعقيد, مراجع., التضمين الخطي المحلي- تعقيد, مراجع...." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="التعلم الخَلفي-., التعلم غير الخاضع للإشراف- نماذج المزيج الغاوسي, المزيج الغاوسي- العملية الاحتمالية., تعلم المنوال, مقدمة- أمثلة عملية., Isomap- تعقيد, مراجع., التضمين الخطي المحلي- تعقيد, مراجع...." />
+
+    <title>مرجع المستخدم &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=97f0b27d"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. التعلم الخَلفي" href="supervised_learning.html" />
+    <link rel="prev" title="تثبيت سكايت-ليرن" href="install.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="supervised_learning.html">1. التعلم الخَلفي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="unsupervised_learning.html">2. التعلم غير الخاضع للإشراف</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/mixture.html">2.1. نماذج المزيج الغاوسي</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="modules/manifold.html">2.3. تعلم المنوال</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/clustering.html">2.9. التجميع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/decomposition.html">2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/covariance.html">2.13. التغاير التجريبي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html">2.16. تناسب غلاف إهليلجي</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/density.html">2.27. تقدير الكثافة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_unsupervised.html">2.30. نماذج الشبكات العصبية (غير الخاضعة للإشراف)</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="model_selection.html">3. اختيار النموذج وتقييمه</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/cross_validation.html">3.1. التدقيق المتقاطع: تقييم أداء أداة التقدير</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/grid_search.html">3.4. البحث الشامل عن الشبكة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/classification_threshold.html">3.7. تعديل عتبة القرار للتنبؤ بالصنف</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="modules/model_evaluation.html">3.9. مقاييس الأداء وتقييمها: تقييم جودة التنبؤات كميًا</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/learning_curve.html">3.10. منحنيات التحقق: رسم الدرجات لتقييم النماذج</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="inspection.html">4. التفتيش</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualizations.html">5. التمثيل المرئي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="data_transforms.html">6. تحويلات مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/compose.html">6.1. خطوط الأنابيب ومقدّرات المُركّبات</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html">6.4. استخراج الخصائص</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html">6.7. معالجة البيانات الأولية</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/impute.html">6.12. إكمال القيم المفقودة</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/unsupervised_reduction.html">6.19. PCA: التحليل التكويني الرئيسي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/random_projection.html">6.22. الإسقاط العشوائي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html">6.23. طريقة Nystroem لتقريب النواة</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/metrics.html">6.28. مقاييس الاقتران، الألفة والنواة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing_targets.html">6.29. تحويل هدف التنبؤ (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="datasets.html">7. مرافق تحميل مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="datasets/toy_dataset.html">7.1. مجموعات البيانات التجريبية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/real_world.html">7.2. مجموعات البيانات من العالم الحقيقي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/sample_generators.html">7.3. المجموعات البيانات المولدة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/loading_other_datasets.html">7.4. أمثلة</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="computing.html">8. الحوسبة باستخدام scikit-learn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_persistence.html">9. نظرة عامة على سير العمل</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="common_pitfalls.html">14. المعالجة المسبقة غير المتسقة</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="dispatching.html">16. التشغيل التلقائي</a></li>
+<li class="toctree-l1"><a class="reference internal" href="machine_learning_map.html">17. اختيار المحلل المناسب</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentations.html">18. الموارد الخارجية، الفيديوهات، والمحاضرات</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">مرجع المستخدم</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>مرجع المستخدم<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="supervised_learning.html">1. التعلم الخَلفي</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unsupervised_learning.html">2. التعلم غير الخاضع للإشراف</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/mixture.html">2.1. نماذج المزيج الغاوسي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/mixture.html#id2">2.2. المزيج الغاوسي</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/mixture.html#id3">2.2.1. العملية الاحتمالية</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/manifold.html">2.3. تعلم المنوال</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/manifold.html#id2">2.4. مقدمة</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/manifold.html#id3">2.4.1. أمثلة عملية</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/manifold.html#isomap">2.5. Isomap</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/manifold.html#id4">2.5.1. تعقيد</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/manifold.html#id5">2.5.2. مراجع</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/manifold.html#id6">2.6. التضمين الخطي المحلي</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/manifold.html#id7">2.6.1. تعقيد</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/manifold.html#id8">2.6.2. مراجع</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/manifold.html#id9">2.7. التضمين الخطي المحلي المعدل</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/manifold.html#id10">2.7.1. تعقيد</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/manifold.html#id11">2.7.2. مراجع</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/manifold.html#id14">2.8. نصائح للاستخدام العملي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/clustering.html">2.9. التجميع</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/clustering.html#id2">2.9.1. نظرة عامة على طرق التجميع</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/clustering.html#mean-shift">2.9.2. Mean Shift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/clustering.html#hdbscan">2.9.3. HDBSCAN</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/decomposition.html">2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/decomposition.html#pca-svd">2.10.1. PCA باستخدام SVD العشوائي</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/decomposition.html#id2">2.10.2. مراجع</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/decomposition.html#pca-sparsepca-minibatchsparsepca">2.10.3. PCA غير المتناظرة (SparsePCA وMiniBatchSparsePCA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/decomposition.html#kernel-pca">2.10.4. خيار المحلل لـ Kernel PCA</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/decomposition.html#lsa">2.11. تحليل القيمة المفردة المبتورة وتحليل المعنى الكامن</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/decomposition.html#id5">2.11.1. تعلم القاموس العام</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/decomposition.html#minibatchdictionarylearning">2.11.2. تعلم القاموس بالدفعات الصغرى</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/decomposition.html#fa">2.12. التحليل العاملي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/covariance.html">2.13. التغاير التجريبي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/covariance.html#id2">2.14. التغاير المنكمش</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/covariance.html#id3">2.14.1. الانكماش الأساسي</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/covariance.html#id4">2.14.2. انكماش ليدويت-وولف</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/covariance.html#oracle-approximating-shrinkage">2.14.3. انكماش التقريب الأمثل</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/covariance.html#sparse-inverse-covariance">2.15. مصفوفة الدقة المتناثرة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html">2.16. تناسب غلاف إهليلجي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html#id2">2.17. مثال</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html#id3">2.18. المراجع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html#id4">2.19. غابة العزل</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html#id5">2.20. مثال</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html#id6">2.21. المراجع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html#id7">2.22. عامل الشذوذ المحلي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html#id8">2.23. مثال</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html#id9">2.24. المراجع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html#id10">2.25. كشف الأنماط باستخدام عامل الشذوذ المحلي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html#id11">2.26. تنبيه</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/density.html">2.27. تقدير الكثافة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/density.html#id2">2.28. تقدير الكثافة: مخططات توزيع التكرارات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/density.html#id3">2.29. تقدير الكثافة النووية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_unsupervised.html">2.30. نماذج الشبكات العصبية (غير الخاضعة للإشراف)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_unsupervised.html#id2">2.31. وحدات بولتزمان المقيدة</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/neural_networks_unsupervised.html#id3">2.31.1. نمذجة رسومية والبرامترية</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/neural_networks_unsupervised.html#id4">2.31.2. وحدات بولتزمان المقيدة ذات القيمة الثابتة</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/neural_networks_unsupervised.html#id5">2.31.3. التعلم الاحتمالي الأقصى العشوائي</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_selection.html">3. اختيار النموذج وتقييمه</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/cross_validation.html">3.1. التدقيق المتقاطع: تقييم أداء أداة التقدير</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/cross_validation.html#cross-validate">3.1.1. دالة cross_validate وتقييم المتري المتعدد</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/cross_validation.html#id3">3.1.2. الحصول على تنبؤات عن طريق التحقق من صحة متقاطعة</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/cross_validation.html#id4">3.1.3. استخدام برامج التحقق من الصحة عبر الدورات لتقسيم التدريب والاختبار</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/cross_validation.html#cross-validation-of-time-series-data">3.1.4. Cross validation of time series data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/cross_validation.html#id5">3.2. التحقق من صحة المتقاطع واختيار النموذج</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/cross_validation.html#permutation-test-score">3.3. نتيجة اختبار التبديل</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/grid_search.html">3.4. البحث الشامل عن الشبكة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/grid_search.html#randomized-parameter-search">3.5. تحسين المعلمة العشوائي</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#min-resources">3.5.1. اختيار “min_resources” وعدد المرشحين</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#amount-of-resource-and-number-of-candidates">3.5.2. كمية الموارد وعدد المرشحين في كل تكرار</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#id4">3.5.3. اختيار مورد</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#id5">3.5.4. تحديد مقياس موضوعي</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#multimetric-grid-search">3.5.5. تحديد مقاييس متعددة للتقييم</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#composite-grid-search">3.5.6. المثمنات المركبة ومساحات المعلمات</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#id8">3.5.7. اختيار النموذج: التطوير والتقييم</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#id9">3.5.8. التوازي</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#id10">3.5.9. الصلابة ضد الفشل</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/grid_search.html#alternative-cv">3.6. بدائل للبحث المعلمي بالقوة الغاشمة</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#id12">3.6.1. التصنيف المتقاطع المحدد للنموذج</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#id13">3.6.2. معيار المعلومات</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/grid_search.html#out-of-bag">3.6.3. تقديرات خارج الحقيبة</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/classification_threshold.html">3.7. تعديل عتبة القرار للتنبؤ بالصنف</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/classification_threshold.html#id2">3.8. ضبط عتبة القرار بعد التدريب</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/classification_threshold.html#id3">3.8.1. خيارات لضبط عتبة القرار</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/classification_threshold.html#id4">3.8.2. ملاحظات مهمة حول التحقق من الصليب الداخلي</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/classification_threshold.html#id5">3.8.3. تعيين عتبة القرار يدويًا</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/classification_threshold.html#id6">3.8.4. أمثلة</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/model_evaluation.html">3.9. مقاييس الأداء وتقييمها: تقييم جودة التنبؤات كميًا</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#id2">3.9.1. الحالات الشائعة: القيم المحددة مسبقًا</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#scoring">3.9.2. تحديد استراتيجية تسجيل النقاط من وظائف القياس</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#diy-scoring">3.9.3. تنفيذ كائن تسجيل النقاط الخاص بك</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#classification-report">3.9.4. تقرير التصنيف</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#hamming-loss">3.9.5. خسارة هامنج</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#hinge-loss">3.9.6. خسارة المفصل</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#log-loss">3.9.7. خسارة السجل</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#matthews-corrcoef">3.9.8. معامل ارتباط ماثيوز</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#zero-one-loss">3.9.9. خسارة الصفر واحد</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#brier-score-loss">3.9.10. خسارة نتيجة برير</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#d2">3.9.11. درجة D² للتصنيف</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#id43">3.9.12. خطأ التغطية</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#id44">3.9.13. متوسط دقة التصنيف بالعلامات</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#id45">3.9.14. خسارة الترتيب</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#id46">3.9.15. المكسب التراكمي المخفض</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#explained-variance-score">3.9.16. درجة التباين الموضحة</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#mean-tweedie-deviance">3.9.17. متوسط ​​انحرافات بويسون وغاما وتويد</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#pinball-loss">3.9.18. خسارة بينبول</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/model_evaluation.html#d2-score">3.9.19. درجة D²</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/learning_curve.html">3.10. منحنيات التحقق: رسم الدرجات لتقييم النماذج</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/learning_curve.html#validation-curve">3.10.1. منحنى التحقق</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/learning_curve.html#learning-curve">3.10.2. منحنى التعلم</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inspection.html">4. التفتيش</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualizations.html">5. التمثيل المرئي</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualizations.html#id2">5.1. أدوات الرسوم البيانية المتاحة</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="visualizations.html#id3">5.1.1. كائنات العرض</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_transforms.html">6. تحويلات مجموعة البيانات</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/compose.html">6.1. خطوط الأنابيب ومقدّرات المُركّبات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/compose.html#id2">6.2. خط الأنابيب: تسلسل المُقدّرات</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/compose.html#id3">6.2.1. الاستخدام</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/compose.html#id9">6.2.2. ذاكرة التخزين المؤقت للمُحوّلات: تجنّب الحساب المُتكرّر</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/compose.html#featureunion">6.3. FeatureUnion: مساحات الميزات المركبة</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/compose.html#id11">6.3.1. الاستخدام</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html">6.4. استخراج الخصائص</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#id2">6.5. تحميل الميزات من القواميس</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html#id3">6.6. تجزئة الميزات</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id5">6.6.1. نسبة التخلخل</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id6">6.6.2. الاستخدام الشائع للتمثيل الرقمي</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#stop-words">6.6.3. استخدام كلمات التوقف</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id9">6.6.4. فك تشفير ملفات النص</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id10">6.6.5. التطبيقات والأمثلة</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id11">6.6.6. ناقلات تحويل نص كبير باستخدام خدعة التجزئة</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id12">6.6.7. تخصيص فئات المحول</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/feature_extraction.html#id13">6.6.8. مخطط الاتصال بصورة</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html">6.7. معالجة البيانات الأولية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#id2">6.8. توحيد البيانات، أو إزالة المتوسط وتقييم التباين</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#id3">6.8.1. تقييم الميزات إلى نطاق</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#id4">6.8.2. تقييم البيانات المتناثرة</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#id5">6.8.3. تقييم البيانات بالقيم الشاذة</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#kernel-centering">6.8.4. مركز مصفوفات النواة</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#id9">6.8.5. رسم الخرائط إلى توزيع منتظم</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#id10">6.8.6. رسم الخرائط إلى توزيع غاوسي</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#preprocessing-normalization">6.9. التطبيع</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#target-encoder">6.9.1. مشفّر الهدف</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#id15">6.9.2. تجزئة ك-بينز</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#preprocessing-binarization">6.9.3. تجزئة السمات الثنائية</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#imputation">6.10. تقدير القيم المفقودة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html#generating-polynomial-features">6.11. توليد ميزات متعددة الحدود</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#polynomial-features">6.11.1. ميزات متعددة الحدود</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing.html#spline-transformer">6.11.2. محول المنحنى</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/impute.html">6.12. إكمال القيم المفقودة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/impute.html#id2">6.13. إكمال أحادي المتغير مقابل متعدد المتغيرات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/impute.html#single-imputer">6.14. إكمال ميزة أحادية المتغير</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/impute.html#iterative-imputer">6.15. إكمال ميزة متعددة المتغيرات</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/impute.html#iterativeimputer">6.15.1. مرونة IterativeImputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/impute.html#multiple-imputation">6.15.2. الإكمال المتعدد مقابل الإكمال الفردي</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/impute.html#id8">6.15.3. مراجع</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/impute.html#knnimpute">6.16. إكمال أقرب جيران</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/impute.html#id13">6.17. الحفاظ على عدد الميزات ثابتًا</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/impute.html#nan">6.18. المقدرات التي تتعامل مع قيم NaN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/unsupervised_reduction.html">6.19. PCA: التحليل التكويني الرئيسي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/unsupervised_reduction.html#id1">6.20. الإسقاطات العشوائية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/unsupervised_reduction.html#id2">6.21. تجمع الميزات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/random_projection.html">6.22. الإسقاط العشوائي</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/random_projection.html#johnson-lindenstrauss">6.22.1. مُبرهنَة جونسون-ليندينستراوس</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/random_projection.html#gaussian-random-matrix">6.22.2. الإسقاط العشوائي الغاوسي</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/random_projection.html#sparse-random-matrix">6.22.3. الإسقاط العشوائي المبعثر</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/random_projection.html#random-projection-inverse-transform">6.22.4. التحويل العكسي</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html">6.23. طريقة Nystroem لتقريب النواة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html#id1">6.24. دالة الأساس الشعاعي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html#id2">6.25. دالة النواة التربيعية الإضافية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html#id3">6.26. دالة النواة التربيعية المنحرفة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html#id4">6.27. تقريب دالة النواة متعددة الحدود عبر رسم تخطيطي للمخطط</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/metrics.html">6.28. مقاييس الاقتران، الألفة والنواة</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/metrics.html#cosine-similarity">6.28.1. تشابه جيب التمام</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/metrics.html#linear-kernel">6.28.2. النواة الخطية</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/metrics.html#polynomial-kernel">6.28.3. النواة متعددة الحدود</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/metrics.html#sigmoid-kernel">6.28.4. النواة اللوغاريتمية</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/metrics.html#rbf">6.28.5. النواة RBF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/metrics.html#laplacian-kernel">6.28.6. نواة لابلاسيان</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/metrics.html#chi2-kernel">6.28.7. نواة كاي تربيع</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing_targets.html">6.29. تحويل هدف التنبؤ (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing_targets.html#id1">6.29.1. تثبيت التسمية</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/preprocessing_targets.html#id2">6.29.2. الترميز التصنيفي</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">7. مرافق تحميل مجموعة البيانات</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="datasets/toy_dataset.html">7.1. مجموعات البيانات التجريبية</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#iris-plants-dataset">7.1.1. Iris plants dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#diabetes-dataset">7.1.2. Diabetes dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#optical-recognition-of-handwritten-digits-dataset">7.1.3. Optical recognition of handwritten digits dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#linnerrud-dataset">7.1.4. Linnerrud dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#wine-recognition-dataset">7.1.5. Wine recognition dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#breast-cancer-wisconsin-diagnostic-dataset">7.1.6. Breast cancer wisconsin (diagnostic) dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#iris">7.1.7. مجموعة بيانات Iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#diabetes">7.1.8. مجموعة بيانات Diabetes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#digits">7.1.9. مجموعة بيانات Digits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#linnerud">7.1.10. مجموعة بيانات Linnerud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#wine">7.1.11. مجموعة بيانات Wine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/toy_dataset.html#breast-cancer">7.1.12. مجموعة بيانات Breast Cancer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/real_world.html">7.2. مجموعات البيانات من العالم الحقيقي</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#the-olivetti-faces-dataset">7.2.1. The Olivetti faces dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#id2">7.2.2. مجموعة بيانات وجوه أوليفيتي</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#the-20-newsgroups-text-dataset">7.2.3. The 20 newsgroups text dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#id5">7.2.4. مجموعة بيانات مجموعات الأخبار العشرين</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#the-labeled-faces-in-the-wild-face-recognition-dataset">7.2.5. The Labeled Faces in the Wild face recognition dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#lfw">7.2.6. مجموعة بيانات وجوه LFW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#forest-covertypes">7.2.7. Forest covertypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#covtype">7.2.8. مجموعة بيانات CovType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#rcv1-dataset">7.2.9. RCV1 dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#rcv1">7.2.10. مجموعة بيانات RCV1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#kddcup-99-dataset">7.2.11. Kddcup 99 dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#kddcup99">7.2.12. مجموعة بيانات KDDCup99</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#california-housing-dataset">7.2.13. California Housing dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#id25">7.2.14. مجموعة بيانات الإسكان في كاليفورنيا</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#species-distribution-dataset">7.2.15. Species distribution dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/real_world.html#id29">7.2.16. مجموعة بيانات توزيعات الأنواع</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/sample_generators.html">7.3. المجموعات البيانات المولدة</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="datasets/sample_generators.html#id2">7.3.1. مولدات التصنيف والتجميع</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/sample_generators.html#id6">7.3.2. مولدات الانحدار</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/sample_generators.html#id7">7.3.3. مولدات التعلم المنفصل</a></li>
+<li class="toctree-l3"><a class="reference internal" href="datasets/sample_generators.html#id8">7.3.4. مولدات التحليل</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/loading_other_datasets.html">7.4. أمثلة</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="datasets/loading_other_datasets.html#svmlight-libsvm">7.4.1. مجموعات البيانات بتنسيق svmlight / libsvm</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/loading_other_datasets.html#id2">7.5. روابط ذات صلة</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="datasets/loading_other_datasets.html#openml-org">7.5.1. تحميل مجموعات البيانات من مستودع openml.org</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/loading_other_datasets.html#id4">7.6. إصدارات مجموعة البيانات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/loading_other_datasets.html#id5">7.7. المراجع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/loading_other_datasets.html#arff">7.8. محلل تنسيق ملف ARFF</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="computing.html">8. الحوسبة باستخدام scikit-learn</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_persistence.html">9. نظرة عامة على سير العمل</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model_persistence.html#id2">9.1. تدريب النموذج وحفظه</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_persistence.html#onnx">10. ONNX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_persistence.html#skops-io">11. <code class="docutils literal notranslate"><span class="pre">skops.io</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_persistence.html#pickle-joblib-cloudpickle">12. <code class="docutils literal notranslate"><span class="pre">pickle</span></code>، <code class="docutils literal notranslate"><span class="pre">joblib</span></code>، و`cloudpickle`</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="model_persistence.html#serving-environment">12.1. تكرار بيئة التدريب في الإنتاج</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_persistence.html#id4">12.2. تقديم أثر النموذج</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_persistence.html#id5">13. تلخيص النقاط الرئيسية</a></li>
+<li class="toctree-l1"><a class="reference internal" href="common_pitfalls.html">14. المعالجة المسبقة غير المتسقة</a></li>
+<li class="toctree-l1"><a class="reference internal" href="common_pitfalls.html#data-leakage">15. تسرب البيانات</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="common_pitfalls.html#id3">15.1. كيفية تجنب تسرب البيانات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common_pitfalls.html#id4">15.2. تسرب البيانات أثناء المعالجة المسبقة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common_pitfalls.html#none-randomstate-fit-split">15.3. استخدام ‘None’ أو حالات ‘RandomState’، والمكالمات المتكررة إلى ‘fit’ و’split’</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="common_pitfalls.html#id5">15.3.1. أدوات التقدير</a></li>
+<li class="toctree-l3"><a class="reference internal" href="common_pitfalls.html#cv-splitters">15.3.2. CV splitters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="common_pitfalls.html#id6">15.4. المزالق الدقيقة والتعقيدات</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="common_pitfalls.html#id7">15.4.1. أدوات التقدير</a></li>
+<li class="toctree-l3"><a class="reference internal" href="common_pitfalls.html#id8">15.4.2. CV splitters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="common_pitfalls.html#id16">15.4.3. متانة نتائج التحقق من صحة التعبر</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dispatching.html">16. التشغيل التلقائي</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="machine_learning_map.html">17. اختيار المحلل المناسب</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentations.html">18. الموارد الخارجية، الفيديوهات، والمحاضرات</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#id2">18.1. جديد في بايثون العلمية؟</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#id4">18.2. الدروس الخارجية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#videos">18.3. الفيديوهات</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="id2">
+<h2>قيد التطوير<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="metadata_routing.html">1. أمثلة الاستخدام</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata_routing.html#api-interface">2. واجهة برمجة التطبيقات API Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata_routing.html#metadata-routing-models">3. حالة دعم توجيه البيانات الوصفية</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="install.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">تثبيت سكايت-ليرن</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="supervised_learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>التعلم الخَلفي</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">قيد التطوير</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/user_guide.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
