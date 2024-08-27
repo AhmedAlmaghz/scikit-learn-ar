@@ -1,0 +1,875 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="بدء الاستخدام" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/getting_started.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="الغرض من هذا الدليل هو توضيح بعض الميزات الرئيسية التي يوفرها scikit-learn. يفترض وجود معرفة أساسية جدًا بممارسات التعلم الآلي (مثل تكييف النموذج، والتنبؤ، والتحقق من الصلاحية المتقاطعة، وما إلى ذل..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="الغرض من هذا الدليل هو توضيح بعض الميزات الرئيسية التي يوفرها scikit-learn. يفترض وجود معرفة أساسية جدًا بممارسات التعلم الآلي (مثل تكييف النموذج، والتنبؤ، والتحقق من الصلاحية المتقاطعة، وما إلى ذل..." />
+
+    <title>بدء الاستخدام &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=97f0b27d"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="تاريخ الإصدارات" href="whats_new.html" />
+    <link rel="prev" title="FeatureHasher and DictVectorizer Comparison" href="auto_examples/text/plot_hashing_vs_dict_vectorizer.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">بدء الاستخدام</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>بدء الاستخدام<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>الغرض من هذا الدليل هو توضيح بعض الميزات الرئيسية التي يوفرها <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. يفترض وجود معرفة أساسية جدًا بممارسات التعلم الآلي (مثل تكييف النموذج، والتنبؤ، والتحقق من الصلاحية المتقاطعة، وما إلى ذلك). يرجى الرجوع إلى تعليمات التثبيت الخاصة بنا &lt;installation-instructions&gt; لتثبيت <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Scikit-learn</span></code> هي مكتبة تعلم آلي مفتوحة المصدر تدعم التعلم المُراقَب وغير المُراقَب. كما يوفر أدوات مختلفة لضبط النماذج، ومعالجة البيانات مسبقًا، واختيار النماذج، وتقييم النماذج، والعديد من المرافق الأخرى.</p>
+<section id="id2">
+<h2>الضبط والتنبؤ: أساسيات المُقدِّر<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>يوفر <code class="docutils literal notranslate"><span class="pre">Scikit-learn</span></code> عشرات خوارزميات ونماذج التعلم الآلي المدمجة، والتي يُطلق عليها اسم :term: <code class="docutils literal notranslate"><span class="pre">المُقدِّرات</span></code>. يمكن ضبط كل مُقدِّر على بعض البيانات باستخدام طريقة :term: <code class="docutils literal notranslate"><span class="pre">الضبط</span></code> الخاصة به.</p>
+<p>فيما يلي مثال بسيط نقوم فيه بضبط :class: <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code> على بعض البيانات الأساسية جدًا:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],</span>  <span class="c1"># 2 samples, 3 features</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># classes of each sample</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">RandomForestClassifier(random_state=0)</span>
+</pre></div>
+</div>
+<p>تقبل طريقة :term: <code class="docutils literal notranslate"><span class="pre">الضبط</span></code> عمومًا مدخلين:</p>
+<ul class="simple">
+<li><p>مصفوفة العينات (أو مصفوفة التصميم) :term: <code class="docutils literal notranslate"><span class="pre">X</span></code>. حجم <code class="docutils literal notranslate"><span class="pre">X</span></code> هو عادة <code class="docutils literal notranslate"><span class="pre">(n_samples،</span> <span class="pre">n_features)</span></code>، مما يعني أن العينات مُمَثَلة كصفوف والميزات مُمَثَلة كأعمدة.</p></li>
+<li><p>قيم الهدف :term: <code class="docutils literal notranslate"><span class="pre">y</span></code> التي هي أعداد حقيقية لمهام الانحدار، أو أعداد صحيحة للتصنيف (أو أي مجموعة منفصلة أخرى من القيم). بالنسبة لمهام التعلم غير المُراقَب، لا يلزم تحديد <code class="docutils literal notranslate"><span class="pre">y</span></code>. عادةً ما يكون <code class="docutils literal notranslate"><span class="pre">y</span></code> مصفوفة أحادية البعد حيث يتوافق الإدخال <code class="docutils literal notranslate"><span class="pre">i</span></code> مع هدف العينة <code class="docutils literal notranslate"><span class="pre">i</span></code> (الصف) من <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p></li>
+</ul>
+<p>يُتوقع أن يكون كل من <code class="docutils literal notranslate"><span class="pre">X</span></code> و <code class="docutils literal notranslate"><span class="pre">y</span></code> مصفوفتين Numpy أو أنواع بيانات مماثلة :term: <code class="docutils literal notranslate"><span class="pre">array-like</span></code>، على الرغم من أن بعض المُقدِّرات تعمل بتنسيقات أخرى مثل المصفوفات المُنَضَّدة.</p>
+<p>بمجرد ضبط المُقدِّر، يمكن استخدامه للتنبؤ بقيم الهدف لبيانات جديدة. لا تحتاج إلى إعادة تدريب المُقدِّر:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># predict classes of the training data</span>
+<span class="go">array([0, 1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">]])</span>  <span class="c1"># predict classes of new data</span>
+<span class="go">array([0, 1])</span>
+</pre></div>
+</div>
+<p>يمكنك التحقق من :ref: <code class="docutils literal notranslate"><span class="pre">ml_map</span></code> لمعرفة كيفية اختيار النموذج المناسب لحالتك الاستخدام.</p>
+</section>
+<section id="id3">
+<h2>المحوِّلات والمعالجات المُسبَقة<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>غالبًا ما تتكون تدفقات عمل التعلم الآلي من أجزاء مختلفة. يتكون الأنبوب النموذجي من خطوة معالجة مُسبَقة تقوم بتحويل البيانات أو استكمالها، ومُتنبئ نهائي يتنبأ بقيم الهدف.</p>
+<p>في <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>، تتبع المعالجات المُسبَقة والمحوِّلات نفس واجهة برمجة التطبيقات مثل كائنات المُقدِّر (في الواقع، جميعها ترث من فئة <code class="docutils literal notranslate"><span class="pre">BaseEstimator</span></code> نفسها). لا تحتوي كائنات المحوِّل على طريقة :term: <code class="docutils literal notranslate"><span class="pre">predict</span></code> ولكن بدلاً من ذلك تحتوي على طريقة :term: <code class="docutils literal notranslate"><span class="pre">transform</span></code> التي تُخرج مصفوفة عينات مُحوَّلة حديثًا <code class="docutils literal notranslate"><span class="pre">X</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># scale data according to computed scaling values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[-1.,  1.],</span>
+<span class="go">       [ 1., -1.]])</span>
+</pre></div>
+</div>
+<p>في بعض الأحيان، تريد تطبيق تحويلات مختلفة على ميزات مختلفة: تم تصميم :ref: <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> لهذه الحالات الاستخدام.</p>
+</section>
+<section id="id4">
+<h2>الأنابيب: ربط المعالجات المُسبَقة والمُقدِّرات<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>يمكن دمج المحوِّلات والمُقدِّرات (المُتنبئين) معًا في كائن موحد: :class: <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>. يوفر الأنبوب نفس واجهة برمجة التطبيقات مثل المُقدِّر العادي: يمكن ضبطه واستخدامه للتنبؤ باستخدام <code class="docutils literal notranslate"><span class="pre">fit</span></code> و <code class="docutils literal notranslate"><span class="pre">predict</span></code>. كما سنرى لاحقًا، فإن استخدام الأنبوب سيحميك أيضًا من تسرب البيانات، أي الكشف عن بعض بيانات الاختبار في بيانات التدريب الخاصة بك.</p>
+<p>في المثال التالي، نقوم بتحميل مجموعة بيانات Iris :ref: <code class="docutils literal notranslate"><span class="pre">datasets</span></code>، وتقسيمها إلى مجموعات تدريب واختبار، وحساب درجة الدقة لأنبوب على بيانات الاختبار:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># create a pipeline object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">StandardScaler</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># load the iris dataset and split it into train and test sets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># ضبط الأنبوب بالكامل</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="go">Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),</span>
+<span class="go">                (&#39;logisticregression&#39;, LogisticRegression())])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># يمكننا الآن استخدامه مثل أي مُقدِّر آخر</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">pipe</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="go">0.97...</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2>تقييم النموذج<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>لا يعني ضبط نموذج على بعض البيانات أنه سيتنبأ جيدًا بالبيانات غير المرئية. يجب تقييم ذلك مباشرةً. لقد رأينا للتو المساعد :func: <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> الذي يقسم مجموعة بيانات إلى مجموعات تدريب واختبار، ولكن يوفر <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> العديد من الأدوات الأخرى لتقييم النماذج، خاصةً للتحقق من الصلاحية المتقاطعة :ref: <code class="docutils literal notranslate"><span class="pre">cross_validation</span></code>.</p>
+<p>نُظهِر هنا بإيجاز كيفية إجراء عملية تحقق من الصلاحية متقاطعة بخمسة أضعاف، باستخدام المساعد :func: <code class="docutils literal notranslate"><span class="pre">cross_validate</span></code>. لاحظ أنه من الممكن أيضًا التكرار يدويًا عبر الطيات، واستخدام استراتيجيات تقسيم البيانات المختلفة، واستخدام دالات التسجيل المخصصة. يرجى الرجوع إلى دليل المستخدم الخاص بنا :ref: <code class="docutils literal notranslate"><span class="pre">cross_validation</span></code> لمزيد من التفاصيل:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_validate</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># defaults to 5-fold CV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;test_score&#39;</span><span class="p">]</span>  <span class="c1"># r_squared score is high because dataset is easy</span>
+<span class="go">array([1., 1., 1., 1., 1.])</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2>عمليات البحث التلقائي عن المعلمات<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>لجميع المُقدِّرات معلمات (تُسمى غالبًا معلمات فائقة في الأدبيات) يمكن ضبطها. غالبًا ما تعتمد قوة تعميم المُقدِّر بشكل حاسم على بعض المعلمات. على سبيل المثال، لدى :class: <code class="docutils literal notranslate"><span class="pre">RandomForestRegressor</span></code> معلمة <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code> تحدد عدد الأشجار في الغابة، ومعلمة <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> تحدد العمق الأقصى لكل شجرة. غالبًا ما يكون من غير الواضح ما هي القيم الدقيقة لهذه المعلمات لأنها تعتمد على البيانات المتاحة.</p>
+<p>يوفر <code class="docutils literal notranslate"><span class="pre">Scikit-learn</span></code> أدوات للعثور تلقائيًا على أفضل مجموعات المعلمات (عبر التحقق من الصلاحية المتقاطعة). في المثال التالي، نقوم بالبحث عشوائيًا في مساحة المعلمات لنموذج غابة عشوائي باستخدام كائن :class: <code class="docutils literal notranslate"><span class="pre">RandomizedSearchCV</span></code>. عندما ينتهي البحث، يتصرف :class: <code class="docutils literal notranslate"><span class="pre">RandomizedSearchCV</span></code> مثل :class: <code class="docutils literal notranslate"><span class="pre">RandomForestRegressor</span></code> الذي تم ضبطه بأفضل مجموعة من المعلمات. اقرأ المزيد في دليل المستخدم :ref: <code class="docutils literal notranslate"><span class="pre">grid_search</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_california_housing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RandomizedSearchCV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># define the parameter space that will be searched over</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">param_distributions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+<span class="gp">... </span>                       <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)}</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># now create a searchCV object and fit it to the data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+<span class="gp">... </span>                            <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">param_distributions</span><span class="o">=</span><span class="n">param_distributions</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="go">RandomizedSearchCV(estimator=RandomForestRegressor(random_state=0), n_iter=5,</span>
+<span class="go">                   param_distributions={&#39;max_depth&#39;: ...,</span>
+<span class="go">                                        &#39;n_estimators&#39;: ...},</span>
+<span class="go">                   random_state=0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="o">.</span><span class="n">best_params_</span>
+<span class="go">{&#39;max_depth&#39;: 9, &#39;n_estimators&#39;: 4}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># the search object now acts like a normal random forest estimator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># with max_depth=9 and n_estimators=4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="go">0.73...</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>في الممارسة العملية، تريد دائمًا :ref: <code class="docutils literal notranslate"><span class="pre">البحث</span> <span class="pre">في</span> <span class="pre">الأنبوب</span>
+<span class="pre">&lt;composite_grid_search&gt;</span></code>، بدلاً من مُقدِّر واحد. أحد الأسباب الرئيسية هو أنه إذا قمت بتطبيق خطوة معالجة مُسبَقة على مجموعة البيانات بأكملها دون استخدام الأنبوب، ثم قمت بأي نوع من التحقق من الصلاحية المتقاطعة، فستكون قد كسرت الافتراض الأساسي لاستقلال البيانات التدريبية وبيانات الاختبار. في الواقع، نظرًا لأنك عالجت البيانات مُسبَقًا باستخدام مجموعة البيانات بأكملها، فإن بعض المعلومات حول مجموعات الاختبار متاحة لمجموعات التدريب. سيؤدي هذا إلى المبالغة في تقدير قوة تعميم المُقدِّر (يمكنك قراءة المزيد في هذا المنشور على Kaggle &lt;<a class="reference external" href="https://www.kaggle.com/alexisbcook/data-leakage">https://www.kaggle.com/alexisbcook/data-leakage</a>&gt;`_).</p>
+<p>سيحميك استخدام الأنبوب للتحقق من الصلاحية المتقاطعة والبحث إلى حد كبير من هذا الفخ الشائع.</p>
+</div>
+</section>
+<section id="id7">
+<h2>الخطوات التالية<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p>لقد غطينا بإيجاز ضبط المُقدِّر والتنبؤ، وخطوات المعالجة المُسبَقة، والأنابيب، وأدوات التحقق من الصلاحية المتقاطعة، وعمليات البحث التلقائي عن المعلمات الفائقة. يجب أن يمنحك هذا الدليل نظرة عامة على بعض الميزات الرئيسية للمكتبة، ولكن هناك الكثير في <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>!</p>
+<p>يرجى الرجوع إلى دليل المستخدم الخاص بنا :ref: <code class="docutils literal notranslate"><span class="pre">user_guide</span></code> للحصول على تفاصيل حول جميع الأدوات التي نوفرها. يمكنك أيضًا العثور على قائمة شاملة بواجهة برمجة التطبيقات العامة في :ref: <code class="docutils literal notranslate"><span class="pre">api_ref</span></code>.</p>
+<p>يمكنك أيضًا الاطلاع على العديد من الأمثلة لدينا :ref: <code class="docutils literal notranslate"><span class="pre">general_examples</span></code> التي توضح استخدام <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> في العديد من السياقات المختلفة.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="auto_examples/text/plot_hashing_vs_dict_vectorizer.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">FeatureHasher and DictVectorizer Comparison</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="whats_new.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">تاريخ الإصدارات</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">الضبط والتنبؤ: أساسيات المُقدِّر</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">المحوِّلات والمعالجات المُسبَقة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">الأنابيب: ربط المعالجات المُسبَقة والمُقدِّرات</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">تقييم النموذج</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">عمليات البحث التلقائي عن المعلمات</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">الخطوات التالية</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/getting_started.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
