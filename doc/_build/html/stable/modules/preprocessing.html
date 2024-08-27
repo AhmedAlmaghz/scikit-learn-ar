@@ -1,0 +1,1831 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="6.7. معالجة البيانات الأولية" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/preprocessing.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="توفر حزمة sklearn.preprocessing العديد من وظائف المنفعة الشائعة وفئات المحول لتغيير متجهات الميزات الأولية إلى تمثيل أكثر ملاءمة للمقدّرات النهائية. بشكل عام، يستفيد العديد من خوارزميات التعلم، مثل..." />
+<meta property="og:image" content="https://scikit-learn/stable/_images/sphx_glr_plot_map_data_to_normal_001.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="توفر حزمة sklearn.preprocessing العديد من وظائف المنفعة الشائعة وفئات المحول لتغيير متجهات الميزات الأولية إلى تمثيل أكثر ملاءمة للمقدّرات النهائية. بشكل عام، يستفيد العديد من خوارزميات التعلم، مثل..." />
+
+    <title>6.7. معالجة البيانات الأولية &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/preprocessing';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.12. إكمال القيم المفقودة" href="impute.html" />
+    <link rel="prev" title="6.4. استخراج الخصائص" href="feature_extraction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../supervised_learning.html">1. التعلم الخَلفي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unsupervised_learning.html">2. التعلم غير الخاضع للإشراف</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixture.html">2.1. نماذج المزيج الغاوسي</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="manifold.html">2.3. تعلم المنوال</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="clustering.html">2.9. التجميع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decomposition.html">2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="covariance.html">2.13. التغاير التجريبي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="outlier_detection.html">2.16. تناسب غلاف إهليلجي</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="density.html">2.27. تقدير الكثافة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="neural_networks_unsupervised.html">2.30. نماذج الشبكات العصبية (غير الخاضعة للإشراف)</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../model_selection.html">3. اختيار النموذج وتقييمه</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation.html">3.1. التدقيق المتقاطع: تقييم أداء أداة التقدير</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="grid_search.html">3.4. البحث الشامل عن الشبكة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="classification_threshold.html">3.7. تعديل عتبة القرار للتنبؤ بالصنف</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="model_evaluation.html">3.9. مقاييس الأداء وتقييمها: تقييم جودة التنبؤات كميًا</a></li>
+<li class="toctree-l2"><a class="reference internal" href="learning_curve.html">3.10. منحنيات التحقق: رسم الدرجات لتقييم النماذج</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../inspection.html">4. التفتيش</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualizations.html">5. التمثيل المرئي</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_transforms.html">6. تحويلات مجموعة البيانات</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="compose.html">6.1. خطوط الأنابيب ومقدّرات المُركّبات</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="feature_extraction.html">6.4. استخراج الخصائص</a></li>
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">6.7. معالجة البيانات الأولية</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="impute.html">6.12. إكمال القيم المفقودة</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="unsupervised_reduction.html">6.19. PCA: التحليل التكويني الرئيسي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="random_projection.html">6.22. الإسقاط العشوائي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_approximation.html">6.23. طريقة Nystroem لتقريب النواة</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">6.28. مقاييس الاقتران، الألفة والنواة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_targets.html">6.29. تحويل هدف التنبؤ (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../datasets.html">7. مرافق تحميل مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/toy_dataset.html">7.1. مجموعات البيانات التجريبية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/real_world.html">7.2. مجموعات البيانات من العالم الحقيقي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/sample_generators.html">7.3. المجموعات البيانات المولدة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/loading_other_datasets.html">7.4. أمثلة</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing.html">8. الحوسبة باستخدام scikit-learn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_persistence.html">9. نظرة عامة على سير العمل</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../common_pitfalls.html">14. المعالجة المسبقة غير المتسقة</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../dispatching.html">16. التشغيل التلقائي</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../machine_learning_map.html">17. اختيار المحلل المناسب</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentations.html">18. الموارد الخارجية، الفيديوهات، والمحاضرات</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">مرجع المستخدم</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../data_transforms.html" class="nav-link"><span class="section-number">6. </span>تحويلات مجموعة البيانات</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1><span class="section-number">6.7. </span>معالجة البيانات الأولية<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>توفر حزمة <code class="docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code> العديد من وظائف المنفعة الشائعة وفئات المحول لتغيير متجهات الميزات الأولية إلى تمثيل أكثر ملاءمة للمقدّرات النهائية.</p>
+<p>بشكل عام، يستفيد العديد من خوارزميات التعلم، مثل النماذج الخطية، من توحيد مجموعة البيانات
+(راجع: ref:<code class="docutils literal notranslate"><span class="pre">sphx_glr_auto_examples_preprocessing_plot_scaling_importance.py</span></code>).
+إذا كانت هناك بعض القيم الشاذة في المجموعة، فقد يكون استخدام المقيّمين المتينين أو محولات أخرى أكثر ملاءمة. يتم تسليط الضوء على سلوك المقاييس والمحولات والمطبعين المختلفين على مجموعة بيانات تحتوي على قيم شاذة هامشية في
+<a class="reference internal" href="../auto_examples/preprocessing/plot_all_scaling.html#sphx-glr-auto-examples-preprocessing-plot-all-scaling-py"><span class="std std-ref">Compare the effect of different scalers on data with outliers</span></a>.</p>
+</section>
+<section id="id2">
+<h1><span class="section-number">6.8. </span>توحيد البيانات، أو إزالة المتوسط وتقييم التباين<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p><strong>توحيد</strong> مجموعات البيانات هو <strong>متطلب شائع للعديد من
+مقدرات التعلم الآلي</strong> المطبقة في scikit-learn؛ فقد لا تعمل بشكل جيد إذا لم تكن الميزات الفردية أكثر أو أقل تشابهاً مع البيانات العادية الموزعة بشكل طبيعي: غاوسي مع <strong>صفر متوسط وانحراف معياري واحد</strong>.</p>
+<p>في الممارسة العملية، غالبًا ما نتجاهل شكل التوزيع ونحول البيانات فقط لمركزها عن طريق إزالة القيمة المتوسطة لكل ميزة، ثم قياسها عن طريق قسمة الميزات غير الثابتة على انحرافها المعياري.</p>
+<p>على سبيل المثال، قد تفترض العديد من العناصر المستخدمة في الدالة الهدف
+لخوارزمية التعلم (مثل نواة RBF لآلات المتجهات الداعمة أو المنظمين l1 وl2 للنماذج الخطية) أن جميع الميزات تتمحور حول الصفر أو لها تباين بنفس الترتيب. إذا كان لميزة ما تباين أكبر بعدة أوامر من الحجم من الآخرين، فقد تهيمن على الدالة الهدف وتجعل المقدر غير قادر على التعلم بشكل صحيح من الميزات الأخرى كما هو متوقع.</p>
+<p>توفر الوحدة النمطية <a class="reference internal" href="../api/sklearn.preprocessing.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal notranslate"><span class="pre">preprocessing</span></code></a> فئة
+<code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code> ، والتي تعد طريقة سريعة وسهلة لأداء العملية التالية على مجموعة بيانات تشبه المصفوفة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span>
+<span class="go">StandardScaler()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">mean_</span>
+<span class="go">array([1. ..., 0. ..., 0.33...])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span><span class="o">.</span><span class="n">scale_</span>
+<span class="go">array([0.81..., 0.81..., 1.24...])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_scaled</span>
+<span class="go">array([[ 0.  ..., -1.22...,  1.33...],</span>
+<span class="go">       [ 1.22...,  0.  ..., -0.26...],</span>
+<span class="go">       [-1.22...,  1.22..., -1.06...]])</span>
+</pre></div>
+</div>
+<p>تكون للبيانات المُدرجة صفر متوسط وانحراف معياري واحد:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_scaled</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([0., 0., 0.])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_scaled</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([1., 1., 1.])</span>
+</pre></div>
+</div>
+<p>تنفذ هذه الفئة واجهة برمجة التطبيقات “المحول” (Transformer API) لحساب المتوسط والانحراف المعياري لمجموعة تدريب بحيث يمكن إعادة تطبيق نفس التحويل لاحقًا على مجموعة الاختبار. وبالتالي، فإن هذه الفئة مناسبة
+للاستخدام في الخطوات الأولى من <code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">LogisticRegression</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>  <span class="c1"># تطبيق التوحيد على بيانات التدريب</span>
+<span class="go">Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),</span>
+<span class="go">                (&#39;logisticregression&#39;, LogisticRegression())])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>  <span class="c1"># تطبيق التوحيد على بيانات الاختبار، دون تسريب بيانات التدريب.</span>
+<span class="go">0.96</span>
+</pre></div>
+</div>
+<p>من الممكن تعطيل التمركيز أو التقييم عن طريق تمرير إما
+<code class="docutils literal notranslate"><span class="pre">with_mean=False</span></code> أو <code class="docutils literal notranslate"><span class="pre">with_std=False</span></code> إلى منشئ
+<code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code>.</p>
+<section id="id3">
+<h2><span class="section-number">6.8.1. </span>تقييم الميزات إلى نطاق<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>يتمثل التوحيد البديل في تقييم الميزات بحيث
+تقع ضمن نطاق قيمة دنيا وقصوى معين، وغالبًا ما يكون بين الصفر والواحد،
+أو بحيث يتم تقييم القيمة المطلقة القصوى لكل ميزة إلى الحجم الوحيد.
+يمكن تحقيق ذلك باستخدام <code class="xref py py-class docutils literal notranslate"><span class="pre">MinMaxScaler</span></code> أو <code class="xref py py-class docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code>،
+على التوالي.</p>
+<p>ويشمل الدافع لاستخدام هذا التقييم المرونة تجاه الانحرافات المعيارية الصغيرة جدًا للميزات والحفاظ على الإدخالات الصفرية في البيانات المتناثرة.</p>
+<p>فيما يلي مثال على تقييم مصفوفة بيانات تجريبية إلى النطاق <code class="docutils literal notranslate"><span class="pre">[0،</span> <span class="pre">1]</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">min_max_scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_minmax</span> <span class="o">=</span> <span class="n">min_max_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_minmax</span>
+<span class="go">array([[0.5       , 0.        , 1.        ],</span>
+<span class="go">       [1.        , 0.5       , 0.33333333],</span>
+<span class="go">       [0.        , 1.        , 0.        ]])</span>
+</pre></div>
+</div>
+<p>يمكن بعد ذلك تطبيق نفس مثيل المحول على بعض بيانات الاختبار الجديدة
+غير المرئية أثناء مكالمة التثبيت: سيتم تطبيق نفس عمليات التقييم والتحويل
+للحفاظ على الاتساق مع التحويل الذي تم إجراؤه على بيانات التدريب:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">4.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_minmax</span> <span class="o">=</span> <span class="n">min_max_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_minmax</span>
+<span class="go">array([[-1.5       ,  0.        ,  1.66666667]])</span>
+</pre></div>
+</div>
+<p>من الممكن فحص سمات المقيّم لمعرفة الطبيعة الدقيقة
+للتحويل الذي تم تعلمه على بيانات التدريب:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">min_max_scaler</span><span class="o">.</span><span class="n">scale_</span>
+<span class="go">array([0.5       , 0.5       , 0.33...])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">min_max_scaler</span><span class="o">.</span><span class="n">min_</span>
+<span class="go">array([0.        , 0.5       , 0.33...])</span>
+</pre></div>
+</div>
+<p>إذا تم إعطاء <code class="xref py py-class docutils literal notranslate"><span class="pre">MinMaxScaler</span></code> نطاق ميزة صريح <code class="docutils literal notranslate"><span class="pre">(min،</span> <span class="pre">max)</span></code> فإن
+الصيغة الكاملة هي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X_std</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">X_std</span> <span class="o">*</span> <span class="p">(</span><span class="nb">max</span> <span class="o">-</span> <span class="nb">min</span><span class="p">)</span> <span class="o">+</span> <span class="nb">min</span>
+</pre></div>
+</div>
+<p>يعمل <code class="xref py py-class docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code> بطريقة مشابهة جدًا، ولكنه يقيّم بحيث تقع بيانات التدريب ضمن النطاق <code class="docutils literal notranslate"><span class="pre">[-1،</span> <span class="pre">1]</span></code> عن طريق القسمة على القيمة القصوى القصوى في كل ميزة. القصد منه هو للبيانات
+التي تتمحور بالفعل حول الصفر أو البيانات المتناثرة.</p>
+<p>فيما يلي كيفية استخدام بيانات اللعب من المثال السابق مع هذا المقيّم:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">max_abs_scaler</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">MaxAbsScaler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_maxabs</span> <span class="o">=</span> <span class="n">max_abs_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_maxabs</span>
+<span class="go">array([[ 0.5, -1. ,  1. ],</span>
+<span class="go">       [ 1. ,  0. ,  0. ],</span>
+<span class="go">       [ 0. ,  1. , -0.5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="o">-</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">4.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_maxabs</span> <span class="o">=</span> <span class="n">max_abs_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_maxabs</span>
+<span class="go">array([[-1.5, -1. ,  2. ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">max_abs_scaler</span><span class="o">.</span><span class="n">scale_</span>
+<span class="go">array([2.,  1.,  2.])</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">6.8.2. </span>تقييم البيانات المتناثرة<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>قد يؤدي تركز البيانات المتناثرة إلى تدمير بنية التبعثر في البيانات، وبالتالي نادرًا ما يكون إجراءً منطقيًا. ومع ذلك، قد يكون من المنطقي تقييم الإدخالات المتناثرة، خاصة إذا كانت الميزات على مقاييس مختلفة.</p>
+<p>تم تصميم <code class="xref py py-class docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code> خصيصًا لتقييم
+البيانات المتناثرة، وهي الطريقة الموصى بها للقيام بذلك.
+ومع ذلك، يمكن لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">StandardScaler</span></code> قبول المصفوفات “scipy.sparse”
+كإدخال، طالما يتم تمرير <code class="docutils literal notranslate"><span class="pre">with_mean=False</span></code> بشكل صريح
+إلى المنشئ. وإلا، فسيتم إلقاء <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> لأن التمركيز الصامت سيكسر التبعثر وقد يؤدي إلى تعطل التنفيذ عن طريق تخصيص كميات مفرطة من الذاكرة عن غير قصد. لا يمكن لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">RobustScaler</span></code> التلاؤم مع الإدخالات المتناثرة، ولكن يمكنك استخدام
+طريقة “التحويل” على الإدخالات المتناثرة.</p>
+<p>لاحظ أن المقاييس تقبل تنسيقات الصفوف المتناثرة والعمود المتناثر (راجع <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csr_matrix</span></code> و
+<code class="docutils literal notranslate"><span class="pre">scipy.sparse.csc_matrix</span></code>). سيتم <strong>تحويل أي إدخال متناثر آخر إلى
+تمثيل الصفوف المتناثرة</strong>. لتجنب عمليات نسخ الذاكرة غير الضرورية، يوصى باختيار تمثيل CSR أو CSC أعلى.</p>
+<p>أخيرًا، إذا كان من المتوقع أن تكون البيانات المركزة صغيرة بما يكفي، فإن التحويل الصريح للإدخال إلى مصفوفة باستخدام طريقة “toarray” للمصفوفات المتناثرة هو خيار آخر.</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">6.8.3. </span>تقييم البيانات بالقيم الشاذة<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>إذا كانت بياناتك تحتوي على العديد من القيم الشاذة، فمن المحتمل ألا يعمل التقييم باستخدام المتوسط والانحراف المعياري للبيانات بشكل جيد. في هذه الحالات، يمكنك استخدام
+<code class="xref py py-class docutils literal notranslate"><span class="pre">RobustScaler</span></code> كبديل جاهز للاستخدام بدلاً من ذلك. فهو يستخدم
+تقديرات أكثر متانة لمركز ونطاق بياناتك.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المراجع">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المراجع<a class="headerlink" href="#المراجع" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">تتوفر مناقشة أخرى حول أهمية مركز البيانات وتقييمها في هذا الدليل: <a class="reference external" href="http://www.faqs.org/faqs/ai-faq/neural-nets/part2/section-16.html">هل يجب أن أطبّع/أوحّد/أعيد تصعيد البيانات؟</a></p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="التقييم-مقابل-التبييض">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">التقييم مقابل التبييض<a class="headerlink" href="#التقييم-مقابل-التبييض" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">في بعض الأحيان، لا يكفي مركز الميزات وتقييمها بشكل مستقل، حيث يمكن أن يفترض نموذج أسفل البئر أيضًا بعض الافتراضات</p>
+</div>
+</details><p>حول الاستقلال الخطي للميزات.</p>
+<blockquote>
+<div><p>لمعالجة هذه المشكلة، يمكنك استخدام <code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code> مع</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">whiten=True</span></code> لإزالة الارتباط الخطي عبر الميزات بشكل أكبر.</p>
+</section>
+<section id="kernel-centering">
+<span id="id7"></span><h2><span class="section-number">6.8.4. </span>مركز مصفوفات النواة<a class="headerlink" href="#kernel-centering" title="Link to this heading">#</a></h2>
+<p>إذا كان لديك مصفوفة نواة لنواة <span class="math notranslate nohighlight">\(K\)</span> تقوم بحساب ناتج القسمة
+في مساحة الميزة (محددة ضمنيًا) بواسطة دالة
+<span class="math notranslate nohighlight">\(\phi(\cdot)\)</span>، فيمكن لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">KernelCenterer</span></code> تحويل مصفوفة النواة
+بحيث تحتوي على نواتج القسمة في مساحة الميزة المحددة بواسطة <span class="math notranslate nohighlight">\(\phi\)</span>
+تليها إزالة المتوسط في تلك المساحة. وبعبارة أخرى،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">KernelCenterer</span></code> يحسب مصفوفة غرام المركزية المرتبطة بنواة إيجابية شبه محددة <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="الصيغة-الرياضية">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">الصيغة الرياضية<a class="headerlink" href="#الصيغة-الرياضية" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">يمكننا إلقاء نظرة على الصيغة الرياضية الآن بعد أن حصلنا على الحدس. دع <span class="math notranslate nohighlight">\(K\)</span> تكون مصفوفة نواة الشكل <code class="docutils literal notranslate"><span class="pre">(n_samples،</span> <span class="pre">n_samples)</span></code></p>
+</div>
+</details><p>محسوب من <span class="math notranslate nohighlight">\(X\)</span>، مصفوفة بيانات الشكل <code class="docutils literal notranslate"><span class="pre">(n_samples،</span> <span class="pre">n_features)</span></code>،
+خلال الخطوة <code class="docutils literal notranslate"><span class="pre">fit</span></code>. يتم تعريف <span class="math notranslate nohighlight">\(K\)</span> بواسطة</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[K(X، X) = \phi(X) . \phi(X)^{T}\]</div>
+<p><span class="math notranslate nohighlight">\(\phi(X)\)</span> عبارة عن رسم خريطة لـ <span class="math notranslate nohighlight">\(X\)</span> إلى فضاء هيلبرت. يتم تعريف النواة المركزية <span class="math notranslate nohighlight">\(\tilde{K}\)</span> على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{K}(X، X) = \tilde{\phi}(X) . \tilde{\phi}(X)^{T}\]</div>
+<p>حيث <span class="math notranslate nohighlight">\(\tilde{\phi}(X)\)</span> ينتج عن مركز <span class="math notranslate nohighlight">\(\phi(X)\)</span> في</p>
+</div></blockquote>
+<p>فضاء هيلبرت.</p>
+<blockquote>
+<div><p>وبالتالي، يمكن حساب <span class="math notranslate nohighlight">\(\tilde{K}\)</span> عن طريق رسم خريطة لـ <span class="math notranslate nohighlight">\(X\)</span> باستخدام</p>
+</div></blockquote>
+<p>الدالة <span class="math notranslate nohighlight">\(\phi(\cdot)\)</span> ومركز البيانات في هذا الفضاء الجديد. ومع ذلك،
+غالبًا ما يتم استخدام النواة لأنها تسمح ببعض الحسابات الجبرية التي
+تتجنب حساب هذا التخطيط بشكل صريح باستخدام <span class="math notranslate nohighlight">\(\phi(\cdot)\)</span>. في الواقع، يمكن إجراء التركيز بشكل ضمني كما هو موضح في الملحق ب في <a class="reference internal" href="#scholkopf1998" id="id8"><span>[Scholkopf1998]</span></a>:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\tilde{K} = K - 1_{\text{n}_{samples}} K - K 1_{\text{n}_{samples}} + 1_{\text{n}_{samples}} K 1_{\text{n}_{samples}}\]</div>
+<p><span class="math notranslate nohighlight">\(1_{\text{n}_{samples}}\)</span> عبارة عن مصفوفة من الشكل <code class="docutils literal notranslate"><span class="pre">(n_samples،</span> <span class="pre">n_samples)</span></code> حيث</p>
+</div></blockquote>
+<p>تكون جميع الإدخالات مساوية لـ <span class="math notranslate nohighlight">\(\frac{1}{\text{n}_{samples}}\)</span>. في
+خطوة <code class="docutils literal notranslate"><span class="pre">التحويل</span></code>، تصبح النواة <span class="math notranslate nohighlight">\(K_{test}(X، Y)\)</span> المحددة على النحو التالي:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[K_{test}(X، Y) = \phi(Y) . \phi(X)^{T}\]</div>
+<p><span class="math notranslate nohighlight">\(Y\)</span> هي مجموعة بيانات الاختبار الشكل <code class="docutils literal notranslate"><span class="pre">(n_samples_test،</span> <span class="pre">n_features)</span></code> وبالتالي</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(K_{test}\)</span> من الشكل <code class="docutils literal notranslate"><span class="pre">(n_samples_test،</span> <span class="pre">n_samples)</span></code>. في هذه الحالة،
+يتم إجراء التركيز <span class="math notranslate nohighlight">\(K_{test}\)</span> على النحو التالي:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\tilde{K}_{test}(X، Y) = K_{test} - 1'_{\text{n}_{samples}} K - K_{test} 1_{\text{n}_{samples}} + 1'_{\text{n}_{samples}} K 1_{\text{n}_{samples}}\]</div>
+<p><span class="math notranslate nohighlight">\(1'_{\text{n}_{samples}}\)</span> عبارة عن مصفوفة الشكل</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">(n_samples_test،</span> <span class="pre">n_samples)</span></code> حيث تكون جميع الإدخالات مساوية لـ
+<span class="math notranslate nohighlight">\(\frac{1}{\text{n}_{samples}}\)</span>.</p>
+<blockquote>
+<div><p class="rubric">المراجع</p>
+<div role="list" class="citation-list">
+<div class="citation" id="scholkopf1998" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">Scholkopf1998</a><span class="fn-bracket">]</span></span>
+<p>B. Schölkopf، A. Smola، and K.R. Müller،
+<a class="reference external" href="https://www.mlpack.org/papers/kpca.pdf">“Nonlinear component analysis as a kernel eigenvalue problem.”</a>
+الحساب العصبي 10.5 (1998): 1299-1319.</p>
+</div>
+</div>
+</div></blockquote>
+<p id="preprocessing-transformer">التحويل غير الخطي
+يوجد نوعان من التحولات المتاحة: تحويلات الكميات وتحويلات القوة. يعتمد كل من تحويلات الكميات وتحويلات القوة على التحولات الأحادية الاتجاه للخصائص، وبالتالي الحفاظ على ترتيب القيم على طول كل خاصية.</p>
+<p>تضع تحويلات الكميات جميع الخصائص في نفس التوزيع المرغوب بناءً على الصيغة: G^{-1}(F(X)) حيث F هي دالة التوزيع التراكمي للخاصية وG^{-1} هي دالة الكمية &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Quantile_function">https://en.wikipedia.org/wiki/Quantile_function</a>&gt; للتوزيع المخرج المرغوب G. تستخدم هذه الصيغة الحقيقتين التاليتين: (1) إذا كانت X متغيرًا عشوائيًا له دالة توزيع تراكمية مستمرة F، فإن F(X) لها توزيع منتظم على [0،1]؛ (2) إذا كان U متغيرًا عشوائيًا بتوزيع منتظم على [0،1]، فإن G^{-1}(U) له توزيع G. من خلال إجراء تحويل مرتبي، يقوم تحويل الكمية بتنعيم التوزيعات غير المعتادة والتأثر بقيم الشواذ بدرجة أقل من طرق التدرج. ومع ذلك، فإنه يشوه الارتباطات والمسافات داخل الخصائص وفيما بينها.</p>
+<p>تحويلات القوة هي عائلة من التحولات المعلمية التي تهدف إلى رسم خريطة للبيانات من أي توزيع إلى أقرب توزيع غاوسي ممكن.</p>
+</section>
+<section id="id9">
+<h2><span class="section-number">6.8.5. </span>رسم الخرائط إلى توزيع منتظم<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>توفر QuantileTransformer تحويلًا غير معلمي لرسم خريطة للبيانات إلى توزيع منتظم مع قيم بين 0 و1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quantile_transformer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">QuantileTransformer</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train_trans</span> <span class="o">=</span> <span class="n">quantile_transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test_trans</span> <span class="o">=</span> <span class="n">quantile_transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span> 
+<span class="go">array([ 4.3,  5.1,  5.8,  6.5,  7.9])</span>
+</pre></div>
+</div>
+<p>تتوافق هذه الميزة مع طول الكأس بالسم. بمجرد تطبيق تحويل الكمية، تقترب هذه المعالم بشكل وثيق من النسب المئوية المحددة مسبقًا:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X_train_trans</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">array([ 0.00... ,  0.24...,  0.49...,  0.73...,  0.99... ])</span>
+</pre></div>
+</div>
+<p>يمكن التأكد من ذلك على مجموعة اختبار مستقلة مع ملاحظات مماثلة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">array([ 4.4  ,  5.125,  5.75 ,  6.175,  7.3  ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">X_test_trans</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">array([ 0.01...,  0.25...,  0.46...,  0.60... ,  0.94...])</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h2><span class="section-number">6.8.6. </span>رسم الخرائط إلى توزيع غاوسي<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<p>في العديد من سيناريوهات النمذجة، يكون التوزيع الطبيعي للخصائص في مجموعة بيانات أمرًا مرغوبًا. تحويلات القوة هي عائلة من التحولات الأحادية الاتجاه المعلمية التي تهدف إلى رسم خريطة للبيانات من أي توزيع إلى أقرب توزيع غاوسي ممكن من أجل تثبيت التباين وتقليل اللاتناظر.</p>
+<p>يوفر PowerTransformer حاليًا تحويلين من هذا القبيل للقوة، وهما تحويل ييو-جونسون وتحويل بوكس-كوكس.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="تحويل-ييو-جونسون">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">تحويل ييو-جونسون<a class="headerlink" href="#تحويل-ييو-جونسون" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="math notranslate nohighlight">
+\[\begin{split}x_i^{(\lambda)} =
+\begin{cases}
+[(x_i + 1)^\lambda - 1] / \lambda &amp; \text{if } \lambda \neq 0, x_i \geq 0, \\[8pt]
+\ln{(x_i + 1)} &amp; \text{if } \lambda = 0, x_i \geq 0 \\[8pt]
+-[(-x_i + 1)^{2 - \lambda} - 1] / (2 - \lambda) &amp; \text{if } \lambda \neq 2, x_i &lt; 0, \\[8pt]
+- \ln (- x_i + 1) &amp; \text{if } \lambda = 2, x_i &lt; 0
+\end{cases}\end{split}\]</div>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="تحويل-بوكس-كوكس">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">تحويل بوكس-كوكس<a class="headerlink" href="#تحويل-بوكس-كوكس" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="math notranslate nohighlight">
+\[\begin{split}x_i^{(\lambda)} =
+\begin{cases}
+\dfrac{x_i^\lambda - 1}{\lambda} &amp; \text{if } \lambda \neq 0, \\[8pt]
+\ln{(x_i)} &amp; \text{if } \lambda = 0,
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">يمكن تطبيق Box-Cox فقط على البيانات الموجبة الصارمة. في كلتا الطريقتين، يتم تحديد التحول بواسطة المعلمة λ، والتي يتم تحديدها من خلال تقدير الإمكان الأقصى. فيما يلي مثال على استخدام Box-Cox لرسم خريطة لعينات تم رسمها من توزيع لوجاريتمي إلى توزيع طبيعي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">PowerTransformer</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;box-cox&#39;</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_lognormal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">616</span><span class="p">)</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_lognormal</span>
+<span class="go">array([[1.28..., 1.18..., 0.84...],</span>
+<span class="go">      [0.94..., 1.60..., 0.38...],</span>
+<span class="go">      [1.35..., 0.21..., 1.09...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_lognormal</span><span class="p">)</span>
+<span class="go">array([[ 0.49...,  0.17..., -0.15...],</span>
+<span class="go">      [-0.05...,  0.58..., -0.57...],</span>
+<span class="go">      [ 0.69..., -0.84...,  0.10...]])</span>
+</pre></div>
+</div>
+<p class="sd-card-text">في حين أن المثال أعلاه يحدد خيار “standardize” إلى “False”، سيقوم PowerTransformer بتطبيع التباين المتوسط والصفر على الإخراج المحول بشكل افتراضي.</p>
+</div>
+</details><p>فيما يلي أمثلة على Box-Cox وYeo-Johnson المطبقة على توزيعات احتمالية مختلفة. لاحظ أنه عند تطبيقها على توزيعات معينة، تحقق تحويلات القوة نتائج شبيهة بالتوزيع الغاوسي جدًا، ولكنها غير فعالة مع توزيعات أخرى. وهذا يسلط الضوء على أهمية تصور البيانات قبل وبعد التحول.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/preprocessing/plot_map_data_to_normal.html"><img alt="../_images/sphx_glr_plot_map_data_to_normal_001.png" src="../_images/sphx_glr_plot_map_data_to_normal_001.png" style="width: 400.0px; height: 800.0px;" />
+</a>
+</figure>
+<p>من الممكن أيضًا رسم خريطة للبيانات إلى توزيع طبيعي باستخدام QuantileTransformer عن طريق تعيين “output_distribution=’normal’”. باستخدام المثال السابق مع مجموعة بيانات Iris:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quantile_transformer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">QuantileTransformer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">output_distribution</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_trans</span> <span class="o">=</span> <span class="n">quantile_transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quantile_transformer</span><span class="o">.</span><span class="n">quantiles_</span>
+<span class="go">array([[4.3, 2. , 1. , 0.1],</span>
+<span class="go">       [4.4, 2.2, 1.1, 0.1],</span>
+<span class="go">       [4.4, 2.2, 1.2, 0.1],</span>
+<span class="go">       ...,</span>
+<span class="go">       [7.7, 4.1, 6.7, 2.5],</span>
+<span class="go">       [7.7, 4.2, 6.7, 2.5],</span>
+<span class="go">       [7.9, 4.4, 6.9, 2.5]])</span>
+</pre></div>
+</div>
+<p>وهكذا، يصبح الوسيط للإدخال متوسط الإخراج، الذي يتم مركزه عند 0. يتم قص التوزيع الطبيعي بحيث لا تصبح القيمة الدنيا والقصوى للإدخال - والتي تتوافق مع الكميات 1e-7 و1 - 1e-7 على التوالي - لانهائية في ظل التحول.</p>
+</section>
+</section>
+<section id="preprocessing-normalization">
+<span id="id11"></span><h1><span class="section-number">6.9. </span>التطبيع<a class="headerlink" href="#preprocessing-normalization" title="Link to this heading">#</a></h1>
+<p><strong>التطبيع</strong> هي عملية <strong>تحجيم العينات الفردية بحيث يكون لها معيار الوحدة</strong>. يمكن أن تكون هذه العملية مفيدة إذا كنت تخطط لاستخدام نموذج رباعي مثل المنتج النقطي أو أي نواة أخرى لقياس تشابه أي زوج من العينات.</p>
+<p>يعد هذا الافتراض هو الأساس لنموذج مساحة المتجه &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Vector_Space_Model">https://en.wikipedia.org/wiki/Vector_Space_Model</a>&gt; المستخدم غالبًا في سياقات تصنيف النصوص وتجميعها.</p>
+<p>توفر الدالة normalize طريقة سريعة وسهلة لأداء هذه العملية على مجموعة بيانات واحدة تشبه المصفوفة، باستخدام معايير “l1” أو “l2” أو “max”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">2.</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span> <span class="mf">2.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_normalized</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_normalized</span>
+<span class="go">array([[ 0.40..., -0.40...,  0.81...],</span>
+<span class="go">       [ 1.  ...,  0.  ...,  0.  ...],</span>
+<span class="go">       [ 0.  ...,  0.70..., -0.70...]])</span>
+</pre></div>
+</div>
+<p>يوفر وحدة “preprocessing” أيضًا فئة فائدة Normalizer التي تنفذ نفس العملية باستخدام واجهة برمجة تطبيقات المحول (على الرغم من أن طريقة “fit” عديمة الفائدة في هذه الحالة: تكون الفئة عديمة الحالة نظرًا لأن هذه العملية تعامل العينات بشكل مستقل).</p>
+<p>لذلك، فإن هذه الفئة مناسبة للاستخدام في الخطوات الأولى من خط أنابيب: class: ~sklearn.pipeline.Pipeline:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">normalizer</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">Normalizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># fit does nothing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalizer</span>
+<span class="go">Normalizer()</span>
+</pre></div>
+</div>
+<p>يمكن بعد ذلك استخدام مثيل المحول على متجهات العينة كما هو الحال مع أي محول:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">normalizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[ 0.40..., -0.40...,  0.81...],</span>
+<span class="go">       [ 1.  ...,  0.  ...,  0.  ...],</span>
+<span class="go">       [ 0.  ...,  0.70..., -0.70...]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+<span class="go">array([[-0.70...,  0.70...,  0.  ...]])</span>
+</pre></div>
+</div>
+<p>ملاحظة: التطبيع L2 معروف أيضًا باسم المعالجة المسبقة للإشارة المكانية.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="الإدخال-المتناثر">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">الإدخال المتناثر<a class="headerlink" href="#الإدخال-المتناثر" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">يقبل normalize وNormalizer <strong>كل من المصفوفات الكثيفة المتشابهة والمصفوفات المتناثرة من scipy.sparse كإدخال</strong>.</p>
+<p class="sd-card-text">بالنسبة للإدخال المتناثر، يتم <strong>تحويل البيانات إلى تمثيل الصفوف المتناثرة المضغوطة</strong> (راجع scipy.sparse.csr_matrix) قبل إدخالها إلى روتين Cython فعال. لتجنب عمليات نسخ الذاكرة غير الضرورية، يُنصح باختيار تمثيل CSR أعلى.</p>
+</div>
+</details><p id="preprocessing-categorical-features">ترميز الميزات الفئوية
+غالباً ما تكون الخصائص غير معطاة على شكل قيم مستمرة ولكنها تصنيفية. على سبيل المثال، يمكن أن تكون لشخص خصائص مثل [“ذكر”، “أنثى”]، أو [“من أوروبا”، “من الولايات المتحدة”، “من آسيا”]، أو [“يستخدم فايرفوكس”، “يستخدم كروم”، “يستخدم سفاري”، “يستخدم إنترنت إكسبلورر”]. يمكن ترميز مثل هذه الخصائص بكفاءة على شكل أعداد صحيحة، على سبيل المثال، يمكن التعبير عن [“ذكر”، “من الولايات المتحدة”، “يستخدم إنترنت إكسبلورر”] على شكل [0, 1, 3] في حين يمكن التعبير عن [“أنثى”، “من آسيا”، “يستخدم كروم”] على شكل [1, 2, 1].</p>
+<p>لتحويل الخصائص التصنيفية إلى رموز أعداد صحيحة، يمكننا استخدام التصنيف OrdinalEncoder. يحول هذا التقدير كل خاصية تصنيفية إلى خاصية جديدة واحدة من الأعداد الصحيحة (من 0 إلى n_categories - 1).</p>
+<p>على سبيل المثال:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OrdinalEncoder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">OrdinalEncoder()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">]])</span>
+<span class="go">array([[0., 1., 1.]])</span>
+</pre></div>
+</div>
+<p>ومع ذلك، لا يمكن استخدام تمثيل الأعداد الصحيحة هذا مباشرة مع جميع تقديرات scikit-learn، لأنها تتوقع إدخال قيم مستمرة، وستفسر الفئات على أنها مرتبة، وهو ما لا يكون مرغوباً في كثير من الأحيان (أي أن مجموعة المتصفحات تم ترتيبها بشكل تعسفي).</p>
+<p>بشكل افتراضي، سوف يقوم التصنيف OrdinalEncoder أيضًا بنقل القيم المفقودة التي يتم الإشارة إليها بـ np.nan.</p>
+<p>على سبيل المثال:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OrdinalEncoder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[ 1.],</span>
+<span class="go">       [ 0.],</span>
+<span class="go">       [nan],</span>
+<span class="go">       [ 0.]])</span>
+</pre></div>
+</div>
+<p>يوفر التصنيف OrdinalEncoder معامل encoded_missing_value لترميز القيم المفقودة دون الحاجة إلى إنشاء خط أنابيب واستخدام التصنيف sklearn.impute.SimpleImputer.</p>
+<p>على سبيل المثال:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OrdinalEncoder</span><span class="p">(</span><span class="n">encoded_missing_value</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[ 1.],</span>
+<span class="go">       [ 0.],</span>
+<span class="go">       [-1.],</span>
+<span class="go">       [ 0.]])</span>
+</pre></div>
+</div>
+<p>تعادل المعالجة المذكورة أعلاه خط الأنابيب التالي:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s2">&quot;encoder&quot;</span><span class="p">,</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OrdinalEncoder</span><span class="p">()),</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=-</span><span class="mi">1</span><span class="p">)),</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[ 1.],</span>
+<span class="go">       [ 0.],</span>
+<span class="go">       [-1.],</span>
+<span class="go">       [ 0.]])</span>
+</pre></div>
+</div>
+<p>هناك إمكانية أخرى لتحويل الخصائص التصنيفية إلى خصائص يمكن استخدامها مع تقديرات scikit-learn وهي استخدام ترميز one-of-K، المعروف أيضًا باسم one-hot أو dummy encoding.</p>
+<p>يمكن الحصول على هذا النوع من الترميز باستخدام التصنيف OneHotEncoder، والذي يحول كل خاصية تصنيفية تحتوي على n_categories من القيم المحتملة إلى n_categories من الخصائص الثنائية، حيث تكون إحدى هذه الخصائص تساوي 1، وكل الخصائص الأخرى تساوي 0.</p>
+<p>استمرارًا للمثال المذكور أعلاه:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">OneHotEncoder()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="p">[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[1., 0., 0., 1., 0., 1.],</span>
+<span class="go">       [0., 1., 1., 0., 0., 1.]])</span>
+</pre></div>
+</div>
+<p>بشكل افتراضي، يتم استنتاج القيم التي يمكن أن تأخذها كل خاصية تلقائيًا من مجموعة البيانات ويمكن العثور عليها في خاصية <a href="#id22"><span class="problematic" id="id23">categories_</span></a>.</p>
+<p>على سبيل المثال:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">categories_</span>
+<span class="go">[array([&#39;female&#39;, &#39;male&#39;], dtype=object), array([&#39;from Europe&#39;, &#39;from US&#39;], dtype=object), array([&#39;uses Firefox&#39;, &#39;uses Safari&#39;], dtype=object)]</span>
+</pre></div>
+</div>
+<p>من الممكن تحديد هذا بشكل صريح باستخدام معامل categories. هناك نوعان اجتماعيان، وأربع قارات محتملة، وأربعة متصفحات ويب في مجموعة البيانات الخاصة بنا:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">genders</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">locations</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;from Africa&#39;</span><span class="p">,</span> <span class="s1">&#39;from Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">browsers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uses Chrome&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;uses IE&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="n">genders</span><span class="p">,</span> <span class="n">locations</span><span class="p">,</span> <span class="n">browsers</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># لاحظ أنه توجد قيم تصنيفية مفقودة للخاصية الثانية والثالثة</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">OneHotEncoder(categories=[[&#39;female&#39;, &#39;male&#39;],</span>
+<span class="go">                          [&#39;from Africa&#39;, &#39;from Asia&#39;, &#39;from Europe&#39;,</span>
+<span class="go">                           &#39;from US&#39;],</span>
+<span class="go">                          [&#39;uses Chrome&#39;, &#39;uses Firefox&#39;, &#39;uses IE&#39;,</span>
+<span class="go">                           &#39;uses Safari&#39;]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Chrome&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[1., 0., 0., 1., 0., 0., 1., 0., 0., 0.]])</span>
+</pre></div>
+</div>
+<p>إذا كان هناك احتمال أن تحتوي بيانات التدريب على خصائص تصنيفية مفقودة، فقد يكون من الأفضل تحديد handle_unknown=’infrequent_if_exist’ بدلاً من تعيين categories يدويًا كما هو موضح أعلاه. عندما يتم تحديد handle_unknown=’infrequent_if_exist’ ويتم مواجهة فئات غير معروفة أثناء التحويل، فلن يتم رفع أي خطأ ولكن سيتم اعتبار الأعمدة المشفرة one-hot الناتجة عن هذه الخاصية كلها أصفار أو فئة نادرة إذا تم تمكينها. (يتم دعم handle_unknown=’infrequent_if_exist’ فقط لترميز one-hot).</p>
+<p>على سبيل المثال:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;infrequent_if_exist&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">OneHotEncoder(handle_unknown=&#39;infrequent_if_exist&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Chrome&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[1., 0., 0., 0., 0., 0.]])</span>
+</pre></div>
+</div>
+<p>من الممكن أيضًا ترميز كل عمود إلى n_categories - 1 من الأعمدة بدلاً من n_categories من الأعمدة باستخدام معامل drop. يسمح هذا المعامل للمستخدم بتحديد فئة لكل خاصية ليتم إسقاطها. وهذا مفيد لتجنب التلازم في مصفوفة الإدخال في بعض التصنيفات. تعد هذه الوظيفة مفيدة، على سبيل المثال، عند استخدام الانحدار غير المنتظم (LinearRegression)، حيث قد يتسبب التلازم في عدم إمكانية عكس مصفوفة القيم الذاتية.</p>
+<p>على سبيل المثال:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;from US&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Safari&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;from Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;uses Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drop_enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drop_enc</span><span class="o">.</span><span class="n">categories_</span>
+<span class="go">[array([&#39;female&#39;, &#39;male&#39;], dtype=object), array([&#39;from Europe&#39;, &#39;from US&#39;], dtype=object),</span>
+<span class="go"> array([&#39;uses Firefox&#39;, &#39;uses Safari&#39;], dtype=object)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drop_enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[1., 1., 1.],</span>
+<span class="go">       [0., 0., 0.]])</span>
+</pre></div>
+</div>
+<p>قد يرغب المرء في إسقاط أحد العمودين فقط للخصائص التي تحتوي على فئتين. في هذه الحالة، يمكنك تعيين معامل drop=’if_binary’.</p>
+<p>على سبيل المثال:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="s1">&#39;Safari&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;Europe&#39;</span><span class="p">,</span> <span class="s1">&#39;Firefox&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="s1">&#39;Asia&#39;</span><span class="p">,</span> <span class="s1">&#39;Chrome&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drop_enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="s1">&#39;if_binary&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drop_enc</span><span class="o">.</span><span class="n">categories_</span>
+<span class="go">[array([&#39;female&#39;, &#39;male&#39;], dtype=object), array([&#39;Asia&#39;, &#39;Europe&#39;, &#39;US&#39;], dtype=object),</span>
+<span class="go"> array([&#39;Chrome&#39;, &#39;Firefox&#39;, &#39;Safari&#39;], dtype=object)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drop_enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[1., 0., 0., 1., 0., 0., 1.],</span>
+<span class="go">       [0., 0., 1., 0., 0., 1., 0.],</span>
+<span class="go">       [0., 1., 0., 0., 1., 0., 0.]])</span>
+</pre></div>
+</div>
+<p>في مصفوفة X المحولة، العمود الأول هو ترميز الخاصية بالفئات “ذكر”/”أنثى”، في حين أن الأعمدة الستة المتبقية هي ترميز الخاصيتين اللتين تحتوي كل منهما على 3 فئات.</p>
+<p>عندما يكون handle_unknown=’ignore’ و drop ليس None، يتم ترميز الفئات غير المعروفة على أنها كلها أصفار:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">drop_enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                       <span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;America&#39;</span><span class="p">,</span> <span class="s1">&#39;IE&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drop_enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[0., 0., 0., 0., 0.]])</span>
+</pre></div>
+</div>
+<p>جميع الفئات في X_test غير معروفة أثناء التحويل وسيتم تعيينها إلى كلها أصفار. وهذا يعني أن الفئات غير المعروفة سيكون لها نفس الترميز مثل الفئة التي تم إسقاطها. سيقوم الأسلوب OneHotEncoder.inverse_transform بتعيين كل الأصفار إلى الفئة التي تم إسقاطها إذا تم إسقاط فئة، وإلى None إذا لم يتم إسقاط فئة:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">drop_enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="s1">&#39;if_binary&#39;</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                                       <span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;America&#39;</span><span class="p">,</span> <span class="s1">&#39;IE&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_trans</span> <span class="o">=</span> <span class="n">drop_enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_trans</span>
+<span class="go">array([[0., 0., 0., 0., 0., 0., 0.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drop_enc</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">X_trans</span><span class="p">)</span>
+<span class="go">array([[&#39;female&#39;, None, None]], dtype=object)</span>
+</pre></div>
+</div>
+<p>يدعم التصنيف OneHotEncoder الخصائص التصنيفية بالقيم المفقودة من خلال اعتبار القيم المفقودة فئة إضافية:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;Safari&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="s1">&#39;female&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;error&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">categories_</span>
+<span class="go">[array([&#39;female&#39;, &#39;male&#39;, nan], dtype=object),</span>
+<span class="go"> array([&#39;Firefox&#39;, &#39;Safari&#39;, None], dtype=object)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[0., 1., 0., 0., 1., 0.],</span>
+<span class="go">       [1., 0., 0., 0., 0., 1.],</span>
+<span class="go">       [0., 0., 1., 1., 0., 0.]])</span>
+</pre></div>
+</div>
+<p>إذا كانت الخاصية تحتوي على كل من np.nan و None، فسيتم اعتبارهما فئتين منفصلتين:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Safari&#39;</span><span class="p">],</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Firefox&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;error&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">categories_</span>
+<span class="go">[array([&#39;Firefox&#39;, &#39;Safari&#39;, None, nan], dtype=object)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[0., 1., 0., 0.],</span>
+<span class="go">       [0., 0., 1., 0.],</span>
+<span class="go">       [0., 0., 0., 1.],</span>
+<span class="go">       [1., 0., 0., 0.]])</span>
+</pre></div>
+</div>
+<p>راجع قسم dict_feature_extraction للاطلاع على الخصائص التصنيفية الممثلة على شكل قاموس، وليس على شكل قيم فردية.</p>
+<p>الفئات النادرة
+يدعم كل من <code class="xref py py-class docutils literal notranslate"><span class="pre">OneHotEncoder</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">OrdinalEncoder</span></code> تجميع الفئات غير المتكررة في مخرج واحد لكل خاصية. والمعياران اللذان يمكنان من جمع الفئات غير المتكررة هما <code class="docutils literal notranslate"><span class="pre">min_frequency</span></code> و <code class="docutils literal notranslate"><span class="pre">max_categories</span></code>.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">min_frequency</span></code> إما أن يكون عددًا صحيحًا أكبر من أو يساوي 1، أو عددًا عشريًا في الفترة <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">1.0)</span></code>. إذا كان <code class="docutils literal notranslate"><span class="pre">min_frequency</span></code> عددًا صحيحًا، فسيتم اعتبار الفئات التي لها عدد حالات أقل من <code class="docutils literal notranslate"><span class="pre">min_frequency</span></code> غير متكررة. إذا كان <code class="docutils literal notranslate"><span class="pre">min_frequency</span></code> عددًا عشريًا، فسيتم اعتبار الفئات التي لها عدد حالات أقل من هذا الجزء من العدد الإجمالي للعينات غير متكررة. والقيمة الافتراضية هي 1، مما يعني أن كل فئة يتم ترميزها بشكل منفصل.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_categories</span></code> إما أن تكون <code class="docutils literal notranslate"><span class="pre">None</span></code> أو أي عدد صحيح أكبر من 1. يحدد هذا المعيار حدًا أعلى لعدد الميزات الإخراجية لكل ميزة إدخال. يشمل <code class="docutils literal notranslate"><span class="pre">max_categories</span></code> الميزة التي تجمع الفئات غير المتكررة.</p></li>
+</ol>
+<p>في المثال التالي باستخدام <code class="xref py py-class docutils literal notranslate"><span class="pre">OrdinalEncoder</span></code>، تعتبر الفئتان <code class="docutils literal notranslate"><span class="pre">'dog'</span></code> و <code class="docutils literal notranslate"><span class="pre">'snake'</span></code> غير متكررتين:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="s1">&#39;dog&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;rabbit&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="s1">&#39;snake&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OrdinalEncoder</span><span class="p">(</span><span class="n">min_frequency</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">infrequent_categories_</span>
+<span class="go">[array([&#39;dog&#39;, &#39;snake&#39;], dtype=object)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;rabbit&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;snake&#39;</span><span class="p">]]))</span>
+<span class="go">array([[2.],</span>
+<span class="go">       [0.],</span>
+<span class="go">       [1.],</span>
+<span class="go">       [2.]])</span>
+</pre></div>
+</div>
+<p>لا يأخذ <code class="docutils literal notranslate"><span class="pre">max_categories</span></code> في <code class="xref py py-class docutils literal notranslate"><span class="pre">OrdinalEncoder</span></code> في الاعتبار الفئات المفقودة أو غير المعروفة. يؤدي تعيين <code class="docutils literal notranslate"><span class="pre">unknown_value</span></code> أو <code class="docutils literal notranslate"><span class="pre">encoded_missing_value</span></code> إلى عدد صحيح إلى زيادة عدد الرموز العددية الفريدة بواحد لكل منهما. يمكن أن يؤدي ذلك إلى ما يصل إلى <code class="docutils literal notranslate"><span class="pre">max_categories</span> <span class="pre">+</span> <span class="pre">2</span></code> رموز عددية. في المثال التالي، تعتبر “a” و “d” غير متكررتين ويتم تجميعهما معًا في فئة واحدة، و”b” و “c” هما فئتان منفصلتان، ويتم ترميز القيم غير المعروفة على أنها 3 والقيم المفقودة على أنها 4.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OrdinalEncoder</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;use_encoded_value&quot;</span><span class="p">,</span> <span class="n">unknown_value</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">max_categories</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">encoded_missing_value</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;e&quot;</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="go">array([[2.],</span>
+<span class="go">       [0.],</span>
+<span class="go">       [1.],</span>
+<span class="go">       [2.],</span>
+<span class="go">       [3.],</span>
+<span class="go">       [4.]])</span>
+</pre></div>
+</div>
+<p>وبالمثل، يمكن تكوين <code class="xref py py-class docutils literal notranslate"><span class="pre">OneHotEncoder</span></code> ليقوم بتجميع الفئات غير المتكررة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">min_frequency</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">infrequent_categories_</span>
+<span class="go">[array([&#39;dog&#39;, &#39;snake&#39;], dtype=object)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;rabbit&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;snake&#39;</span><span class="p">]]))</span>
+<span class="go">array([[0., 0., 1.],</span>
+<span class="go">       [1., 0., 0.],</span>
+<span class="go">       [0., 1., 0.],</span>
+<span class="go">       [0., 0., 1.]])</span>
+</pre></div>
+</div>
+<p>عن طريق تعيين handle_unknown إلى <code class="docutils literal notranslate"><span class="pre">'infrequent_if_exist'</span></code>، سيتم اعتبار الفئات غير المعروفة غير متكررة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;infrequent_if_exist&#39;</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">min_frequency</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="s1">&#39;dragon&#39;</span><span class="p">]]))</span>
+<span class="go">array([[0., 0., 1.]])</span>
+</pre></div>
+</div>
+<p>يستخدم <code class="xref py py-meth docutils literal notranslate"><span class="pre">OneHotEncoder.get_feature_names_out</span></code> كلمة ‘infrequent’ كاسم للفئة غير المتكررة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="go">array([&#39;x0_cat&#39;, &#39;x0_rabbit&#39;, &#39;x0_infrequent_sklearn&#39;], dtype=object)</span>
+</pre></div>
+</div>
+<p>عندما يتم تعيين <code class="docutils literal notranslate"><span class="pre">'handle_unknown'</span></code> إلى <code class="docutils literal notranslate"><span class="pre">'infrequent_if_exist'</span></code> وتتم مواجهة فئة غير معروفة في التحول:</p>
+<ol class="arabic simple">
+<li><p>إذا لم يتم تكوين دعم الفئة غير المتكررة أو لم تكن هناك فئة غير متكررة أثناء التدريب، فستكون الأعمدة المشفرة بنظام one-hot الناتجة عن هذه الميزة جميعها أصفار. في التحول العكسي، سيتم تمثيل الفئة غير المعروفة بـ <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p>إذا كانت هناك فئة غير متكررة أثناء التدريب، فسيتم اعتبار الفئة غير المعروفة غير متكررة. في التحول العكسي، سيتم استخدام ‘infrequent_sklearn’ لتمثيل الفئة غير المتكررة.</p></li>
+</ol>
+<p>يمكن أيضًا تكوين الفئات غير المتكررة باستخدام <code class="docutils literal notranslate"><span class="pre">max_categories</span></code>. في المثال التالي، نقوم بتعيين <code class="docutils literal notranslate"><span class="pre">max_categories=2</span></code> للحد من عدد الميزات في الإخراج. سيؤدي هذا إلى اعتبار جميع الفئات باستثناء فئة <code class="docutils literal notranslate"><span class="pre">'cat'</span></code> على أنها غير متكررة، مما يؤدي إلى ميزتين، واحدة لـ <code class="docutils literal notranslate"><span class="pre">'cat'</span></code> والأخرى للفئات غير المتكررة - والتي هي جميع الفئات الأخرى:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">max_categories</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;rabbit&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;snake&#39;</span><span class="p">]])</span>
+<span class="go">array([[0., 1.],</span>
+<span class="go">       [1., 0.],</span>
+<span class="go">       [0., 1.],</span>
+<span class="go">       [0., 1.]])</span>
+</pre></div>
+</div>
+<p>إذا كانت لكل من <code class="docutils literal notranslate"><span class="pre">max_categories</span></code> و <code class="docutils literal notranslate"><span class="pre">min_frequency</span></code> قيم غير افتراضية، فسيتم اختيار الفئات بناءً على <code class="docutils literal notranslate"><span class="pre">min_frequency</span></code> أولاً ويتم الاحتفاظ بـ <code class="docutils literal notranslate"><span class="pre">max_categories</span></code> من الفئات. في المثال التالي، يعتبر <code class="docutils literal notranslate"><span class="pre">min_frequency=4</span></code> أن <code class="docutils literal notranslate"><span class="pre">snake</span></code> فقط غير متكرر، ولكن <code class="docutils literal notranslate"><span class="pre">max_categories=3</span></code>، يجبر <code class="docutils literal notranslate"><span class="pre">dog</span></code> أيضًا على أن يكون غير متكرر:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">min_frequency</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_categories</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">enc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="s1">&#39;dog&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;rabbit&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;snake&#39;</span><span class="p">]])</span>
+<span class="go">array([[0., 0., 1.],</span>
+<span class="go">       [1., 0., 0.],</span>
+<span class="go">       [0., 1., 0.],</span>
+<span class="go">       [0., 0., 1.]])</span>
+</pre></div>
+</div>
+<p>إذا كانت هناك فئات غير متكررة لها نفس عدد الحالات عند حد <code class="docutils literal notranslate"><span class="pre">max_categories</span></code>، فسيتم أخذ أول <code class="docutils literal notranslate"><span class="pre">max_categories</span></code> بناءً على الترتيب المعجمي. في المثال التالي، تحتوي “b” و “c” و “d” على نفس عدد الحالات، ومع <code class="docutils literal notranslate"><span class="pre">max_categories=2</span></code>، تعتبر “b” و “c” غير متكررتين لأنهما لهما ترتيب معجمي أعلى.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">max_categories</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">enc</span><span class="o">.</span><span class="n">infrequent_categories_</span>
+<span class="go">[array([&#39;b&#39;, &#39;c&#39;], dtype=object)]</span>
+</pre></div>
+</div>
+<section id="target-encoder">
+<span id="id12"></span><h2><span class="section-number">6.9.1. </span>مشفّر الهدف<a class="headerlink" href="#target-encoder" title="Link to this heading">#</a></h2>
+<p>يستخدم <code class="xref py py-class docutils literal notranslate"><span class="pre">TargetEncoder</span></code> متوسط الهدف المشروط على الميزة الفئوية لتشفير الفئات غير المرتبة، أي الفئات الاسمية <a class="reference internal" href="#par" id="id13"><span>[PAR]</span></a> <a class="reference internal" href="#mic" id="id14"><span>[MIC]</span></a>. يعتبر نظام الترميز هذا مفيدًا مع الميزات الفئوية ذات التكرار العالي، حيث يؤدي الترميز one-hot إلى تضخيم مساحة الميزة، مما يجعلها أكثر تكلفة لنموذج المصب لمعالجتها. ومن الأمثلة الكلاسيكية على الفئات ذات التكرار العالي الفئات المستندة إلى الموقع مثل الرمز البريدي أو المنطقة.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="أهداف-التصنيف-الثنائي">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">أهداف التصنيف الثنائي<a class="headerlink" href="#أهداف-التصنيف-الثنائي" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">بالنسبة لهدف التصنيف الثنائي، يكون الترميز الهدف على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[S_i = \lambda_i\frac{n_{iY}}{n_i} + (1 - \lambda_i)\frac{n_Y}{n}\]</div>
+<p class="sd-card-text">حيث <span class="math notranslate nohighlight">\(S_i\)</span> هو الترميز للفئة <span class="math notranslate nohighlight">\(i\)</span>، <span class="math notranslate nohighlight">\(n_{iY}\)</span> هو
+عدد الملاحظات مع <span class="math notranslate nohighlight">\(Y=1\)</span> والفئة <span class="math notranslate nohighlight">\(i\)</span>، <span class="math notranslate nohighlight">\(n_i\)</span> هو
+عدد الملاحظات مع الفئة <span class="math notranslate nohighlight">\(i\)</span>، <span class="math notranslate nohighlight">\(n_Y\)</span> هو
+عدد الملاحظات مع <span class="math notranslate nohighlight">\(Y=1\)</span>، <span class="math notranslate nohighlight">\(n\)</span> هو
+عدد الملاحظات، و:math:<code class="docutils literal notranslate"><span class="pre">lambda_i</span></code> هو عامل انكماش للفئة <span class="math notranslate nohighlight">\(i\)</span>. يتم إعطاء عامل الانكماش على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[\lambda_i = \frac{n_i}{m + n_i}\]</div>
+<p class="sd-card-text">حيث <span class="math notranslate nohighlight">\(m\)</span> هو عامل التمهيد، والذي يتحكم فيه معلمة <code class="docutils literal notranslate"><span class="pre">smooth</span></code>
+في <code class="xref py py-class docutils literal notranslate"><span class="pre">TargetEncoder</span></code>. ستعطي عوامل التمهيد الكبيرة وزنًا أكبر للمتوسط العالمي. عندما يكون <code class="docutils literal notranslate"><span class="pre">smooth=&quot;auto&quot;</span></code>، يتم حساب عامل التمهيد كتقدير Bayes إحصائي: <span class="math notranslate nohighlight">\(m=\sigma_i^2/\tau^2\)</span>، حيث
+<span class="math notranslate nohighlight">\(\sigma_i^2\)</span> هو تباين <code class="docutils literal notranslate"><span class="pre">y</span></code> مع الفئة <span class="math notranslate nohighlight">\(i\)</span> و
+<span class="math notranslate nohighlight">\(\tau^2\)</span> هو التباين العالمي لـ <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="أهداف-التصنيف-متعدد-الفئات">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">أهداف التصنيف متعدد الفئات<a class="headerlink" href="#أهداف-التصنيف-متعدد-الفئات" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">بالنسبة لأهداف التصنيف متعدد الفئات، فإن الصيغة مماثلة للتصنيف الثنائي:</p>
+<div class="math notranslate nohighlight">
+\[S_{ij} = \lambda_i\frac{n_{iY_j}}{n_i} + (1 - \lambda_i)\frac{n_{Y_j}}{n}\]</div>
+<p class="sd-card-text">حيث <span class="math notranslate nohighlight">\(S_{ij}\)</span> هو الترميز للفئة <span class="math notranslate nohighlight">\(i\)</span> والصنف <span class="math notranslate nohighlight">\(j\)</span>،
+<span class="math notranslate nohighlight">\(n_{iY_j}\)</span> هو عدد الملاحظات مع <span class="math notranslate nohighlight">\(Y=j\)</span> والفئة
+<span class="math notranslate nohighlight">\(i\)</span>، <span class="math notranslate nohighlight">\(n_i\)</span> هو عدد الملاحظات مع الفئة <span class="math notranslate nohighlight">\(i\)</span>،
+<span class="math notranslate nohighlight">\(n_{Y_j}\)</span> هو عدد الملاحظات مع <span class="math notranslate nohighlight">\(Y=j\)</span>، <span class="math notranslate nohighlight">\(n\)</span> هو
+عدد الملاحظات، و:math:<code class="docutils literal notranslate"><span class="pre">lambda_i</span></code> هو عامل انكماش للفئة <span class="math notranslate nohighlight">\(i\)</span>.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="الأهداف-المستمرة">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">الأهداف المستمرة<a class="headerlink" href="#الأهداف-المستمرة" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">بالنسبة للأهداف المستمرة، فإن الصيغة مماثلة للتصنيف الثنائي:</p>
+<div class="math notranslate nohighlight">
+\[S_i = \lambda_i\frac{\sum_{k\in L_i}Y_k}{n_i} + (1 - \lambda_i)\frac{\sum_{k=1}^{n}Y_k}{n}\]</div>
+<p class="sd-card-text">حيث <span class="math notranslate nohighlight">\(L_i\)</span> هي مجموعة الملاحظات مع الفئة <span class="math notranslate nohighlight">\(i\)</span> و
+<span class="math notranslate nohighlight">\(n_i\)</span> هو عدد الملاحظات مع الفئة <span class="math notranslate nohighlight">\(i\)</span>.</p>
+</div>
+</details><p>يعتمد <code class="xref py py-meth docutils literal notranslate"><span class="pre">fit_transform</span></code> داخليًا على مخطط <a class="reference internal" href="../glossary.html#term-0"><span class="xref std std-term">cross fitting</span></a>
+لمنع تسرب معلومات الهدف إلى تمثيل وقت التدريب، خاصة بالنسبة للمتغيرات الفئوية عالية التكرار غير المعلوماتية، والمساعدة في منع النموذج المصب من الإفراط في ملاءمة الارتباطات الزائفة. لاحظ أنه نتيجة لذلك، فإن <code class="docutils literal notranslate"><span class="pre">fit(X,</span> <span class="pre">y).transform(X)</span></code> لا يساوي
+<code class="docutils literal notranslate"><span class="pre">fit_transform(X,</span> <span class="pre">y)</span></code>. في <code class="xref py py-meth docutils literal notranslate"><span class="pre">fit_transform</span></code>، يتم تقسيم بيانات التدريب إلى <em>k</em> طيات (يحددها معلمة <code class="docutils literal notranslate"><span class="pre">cv</span></code>) ويتم ترميز كل طية باستخدام الترميزات التي تم تعلمها باستخدام الطيات الأخرى <em>k-1</em>. يوضح الرسم البياني التالي مخطط <a class="reference internal" href="../glossary.html#term-0"><span class="xref std std-term">cross fitting</span></a> في
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">fit_transform</span></code> مع <code class="docutils literal notranslate"><span class="pre">cv=5</span></code> الافتراضي:</p>
+<a class="reference internal image-reference" href="../_images/target_encoder_cross_validation.svg"><img alt="../_images/target_encoder_cross_validation.svg" class="align-center" src="../_images/target_encoder_cross_validation.svg" style="width: 600px;" />
+</a>
+<p>يتعلم <code class="xref py py-meth docutils literal notranslate"><span class="pre">fit_transform</span></code> أيضًا ترميز “البيانات الكاملة” باستخدام
+مجموعة التدريب بأكملها. لا يتم استخدام هذا أبدًا في
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">fit_transform</span></code> ولكنه يتم حفظه في السمة <code class="docutils literal notranslate"><span class="pre">encodings_</span></code>،
+للاستخدام عند استدعاء <code class="xref py py-meth docutils literal notranslate"><span class="pre">transform</span></code>. لاحظ أن الترميزات التي تم تعلمها لكل طية أثناء مخطط <a class="reference internal" href="../glossary.html#term-0"><span class="xref std std-term">cross fitting</span></a> لا يتم حفظها في سمة.</p>
+<p>لا تستخدم طريقة <code class="xref py py-meth docutils literal notranslate"><span class="pre">fit</span></code> أي مخططات <a class="reference internal" href="../glossary.html#term-0"><span class="xref std std-term">cross fitting</span></a> ويتعلم ترميزًا واحدًا على مجموعة التدريب بأكملها، والذي يتم استخدامه لترميز الفئات في <code class="xref py py-meth docutils literal notranslate"><span class="pre">transform</span></code>.
+هذا الترميز هو نفسه ترميز “البيانات الكاملة” الذي تم تعلمه في <code class="xref py py-meth docutils literal notranslate"><span class="pre">fit_transform</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>يعتبر <code class="xref py py-class docutils literal notranslate"><span class="pre">TargetEncoder</span></code> القيم المفقودة، مثل <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> أو <code class="docutils literal notranslate"><span class="pre">None</span></code>،
+كفئة أخرى ويقوم بترميزها مثل أي فئة أخرى. يتم ترميز الفئات
+التي لم يتم رؤيتها أثناء <code class="docutils literal notranslate"><span class="pre">fit</span></code> بمتوسط الهدف، أي
+<code class="docutils literal notranslate"><span class="pre">target_mean_</span></code>.</p>
+</div>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/preprocessing/plot_target_encoder.html#sphx-glr-auto-examples-preprocessing-plot-target-encoder-py"><span class="std std-ref">Comparing Target Encoder with Other Encoders</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/preprocessing/plot_target_encoder_cross_val.html#sphx-glr-auto-examples-preprocessing-plot-target-encoder-cross-val-py"><span class="std std-ref">Target Encoder’s Internal Cross fitting</span></a></p></li>
+</ul>
+<p class="rubric">مراجع</p>
+<div role="list" class="citation-list">
+<div class="citation" id="mic" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">MIC</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.1145/507533.507538">Micci-Barreca, Daniele. “A preprocessing scheme for high-cardinality
+categorical attributes in classification and prediction problems”
+SIGKDD Explor. Newsl. 3, 1 (July 2001), 27-32.</a></p>
+</div>
+<div class="citation" id="par" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">PAR</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.1007/s00180-022-01207-6">Pargent, F., Pfisterer, F., Thomas, J. et al. “Regularized target
+encoding outperforms traditional methods in supervised machine learning with
+high cardinality features” Comput Stat 37, 2671-2692 (2022)</a></p>
+</div>
+</div>
+<p id="preprocessing-discretization">التقسيم
+التجزئة (المعروفة أيضًا باسم التكميم أو التصنيف) هي طريقة لتقسيم الخصائص المستمرة إلى قيم منفصلة. قد تستفيد بعض مجموعات البيانات ذات الخصائص المستمرة من التجزئة، لأن التجزئة يمكن أن تحول مجموعة البيانات ذات السمات المستمرة إلى مجموعة بيانات ذات سمات اسمية فقط.</p>
+<p>يمكن أن تجعل الميزات المنفصلة المشفرة بنظام one-hot النموذج أكثر تعبيرًا، مع الحفاظ على إمكانية تفسيره. على سبيل المثال، يمكن أن يؤدي المعالجة المسبقة باستخدام أداة تجزئة إلى تقديم عدم خطية إلى النماذج الخطية. للحصول على إمكانيات أكثر تقدمًا، خاصة تلك الملساء، راجع: ref: generating_polynomial_features أدناه.</p>
+</section>
+<section id="id15">
+<h2><span class="section-number">6.9.2. </span>تجزئة ك-بينز<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
+<p>يقسم: class: KBinsDiscretizer الميزات إلى “ك” حاويات:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; X = np.array([[-3، 5، 15]،
+...               [0، 6، 14]،
+...               [6، 3، 11]])
+&gt;&gt;&gt; est = preprocessing.KBinsDiscretizer(n_bins = [3، 2، 2]، encode = &#39;ordinal&#39;).fit (X)
+</pre></div>
+</div>
+<p>بشكل افتراضي، يكون الإخراج مشفرًا بنظام one-hot في مصفوفة متفرقة
+(راجع: ref: preprocessing_categorical_features)
+ويمكن تكوينه باستخدام معلمة “الترميز”.
+بالنسبة لكل ميزة، يتم حساب حواف الحاوية أثناء “التناسب” ومع عدد الحاويات، فهي تحدد الفترات. وبالتالي، بالنسبة للمثال الحالي، يتم تحديد هذه الفترات على النحو التالي:</p>
+<ul class="simple">
+<li><p>الميزة 1: <span class="math notranslate nohighlight">\({[-\infty، -1)، [-1، 2)، [2، \ infty)}\)</span></p></li>
+<li><p>الميزة 2: <span class="math notranslate nohighlight">\({[-\infty، 5)، [5، \ infty)}\)</span></p></li>
+<li><p>الميزة 3: <span class="math notranslate nohighlight">\({[-\infty، 14)، [14، \ infty)}\)</span></p></li>
+</ul>
+<p>بناءً على فترات الحاوية هذه، يتم تحويل “س” على النحو التالي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">est</span><span class="o">.</span><span class="n">transform</span> <span class="p">(</span><span class="n">X</span><span class="p">)</span>                      
+<span class="go">array([[ 0.، 1.، 1.،]</span>
+<span class="go">       [ 1.، 1.، 1.]</span>
+<span class="go">       [ 2.، 0.، 0.]])</span>
+</pre></div>
+</div>
+<p>تحتوي مجموعة البيانات الناتجة على سمات ترتيبية يمكن استخدامها بشكل أكبر
+في: class: sklearn.pipeline.Pipeline.</p>
+<p>التجزئة مشابهة لبناء مخططات توزيع التواتر للبيانات المستمرة.
+ومع ذلك، تركز مخططات توزيع التواتر على عد الميزات التي تقع في حاويات معينة، في حين تركز التجزئة على تعيين قيم الميزات لهذه الحاويات.</p>
+<p>ينفذ: class: KBinsDiscretizer استراتيجيات التصنيف المختلفة، والتي يمكن
+تحديدها باستخدام معلمة “الإستراتيجية”. تستخدم إستراتيجية “الموحدة”
+حاويات ذات عرض ثابت. تستخدم إستراتيجية “الكميات” قيم الكميات للحصول على
+حاويات مأهولة بالتساوي في كل ميزة. تحدد إستراتيجية “kmeans” الحاويات بناءً
+على إجراء التجميع k-means الذي يتم إجراؤه على كل ميزة بشكل مستقل.</p>
+<p>كن على علم بأنه يمكنك تحديد حاويات مخصصة عن طريق تمرير دالة قابلة للاستدعاء تحدد
+إستراتيجية التجزئة إلى: class: sklearn.preprocessing.FunctionTransformer.
+على سبيل المثال، يمكننا استخدام دالة Pandas: func: pandas.cut:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; import pandas as pd
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from sklearn import preprocessing
+&gt;&gt;&gt;
+&gt;&gt;&gt; bins = [0، 1، 13، 20، 60، np.inf]
+&gt;&gt;&gt; labels = [&#39;infant&#39;، &#39;kid&#39;، &#39;teen&#39;، &#39;adult&#39;، &#39;senior citizen&#39;]
+&gt;&gt;&gt; المحول = preprocessing.FunctionTransformer (
+...     pd.cut، kw_args = {&#39;bins&#39;: bins، &#39;labels&#39;: labels، &#39;retbins&#39;: False}
+... )
+&gt;&gt;&gt; X = np.array ([0.2، 2، 15، 25، 97])
+&gt;&gt;&gt; المحول. fit_transform (X)
+[&#39;infant&#39;، &#39;kid&#39;، &#39;teen&#39;، &#39;adult&#39;، &#39;senior citizen&#39;]
+الفئات (5، كائن): [&#39;infant&#39; &lt;&#39;kid&#39; &lt;&#39;teen&#39; &lt;&#39;adult&#39; &lt;&#39;senior citizen&#39;]
+</pre></div>
+</div>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p>: ref: sphx_glr_auto_examples_preprocessing_plot_discretization.py`</p></li>
+<li><p>: ref: sphx_glr_auto_examples_preprocessing_plot_discretization_classification.py`</p></li>
+<li><p>: ref: sphx_glr_auto_examples_preprocessing_plot_discretization_strategies.py`</p></li>
+</ul>
+</section>
+<section id="preprocessing-binarization">
+<span id="id16"></span><h2><span class="section-number">6.9.3. </span>تجزئة السمات الثنائية<a class="headerlink" href="#preprocessing-binarization" title="Link to this heading">#</a></h2>
+<p><strong>تجزئة السمات الثنائية</strong> هي عملية <strong>عتبات الميزات الرقمية للحصول على قيم منطقية</strong>. يمكن أن يكون هذا مفيدًا لمقدرات الاحتمالية التنازلية التي تفترض أن البيانات المدخلة
+توزع وفقًا لتوزيع برنولي متعدد المتغيرات
+&lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Bernoulli_distribution">https://en.wikipedia.org/wiki/Bernoulli_distribution</a>&gt;. على سبيل المثال،
+هذه هي الحالة بالنسبة إلى: class: sklearn.neural_network.BernoulliRBM.</p>
+<p>ومن الشائع أيضًا في مجتمع معالجة النصوص استخدام قيم السمات الثنائية (ربما لتبسيط الاستدلال الاحتمالي) حتى إذا كانت القيم المحددة (المعروفة باسم تواتر المصطلحات) أو ميزات TF-IDF تؤدي غالبًا بشكل أفضل في الممارسة العملية.</p>
+<p>كما هو الحال مع: class: Normalizer، فإن فئة المنفعة
+: class: Binarizer يقصد استخدامها في المراحل الأولى من
+: class: sklearn.pipeline.Pipeline. لا تفعل طريقة “التناسب” شيئًا حيث تتم معاملة كل عينة بشكل مستقل عن الآخرين:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; X = [[1.، -1.، 2.]،
+...      [2.، 0.، 0.]،
+...      [0.، 1.، -1.]]
+
+&gt;&gt;&gt; المحول الثنائي = preprocessing.Binarizer (). fit (X) # لا يفعل التثبيت شيئًا
+&gt;&gt;&gt; المحول الثنائي
+المحول الثنائي ()
+
+&gt;&gt;&gt; المحول الثنائي. transform (X)
+array([[1.، 0.، 1.]،
+       [1.، 0.، 0.]،
+       [0.، 1.، 0.]])
+</pre></div>
+</div>
+<p>من الممكن ضبط عتبة المحول الثنائي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">المحول</span> <span class="n">الثنائي</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">Binarizer</span> <span class="p">(</span><span class="n">عتبة</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">المحول</span> <span class="n">الثنائي</span><span class="o">.</span> <span class="n">transform</span> <span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[0.، 0.، 1.]،</span>
+<span class="go">       [1.، 0.، 0.]،</span>
+<span class="go">       [0.، 0.، 0.]])</span>
+</pre></div>
+</div>
+<p>كما هو الحال مع فئة: class: Normalizer، توفر وحدة المعالجة ميزة مصاحبة
+: func: binarize
+يتم استخدامه عندما لا تكون واجهة المحول ضرورية.</p>
+<p>لاحظ أن: class: Binarizer يشبه: class: KBinsDiscretizer
+عندما “k = 2”، وعندما يكون حافة الحاوية عند القيمة “عتبة”.</p>
+<aside class="topic">
+<p class="topic-title">الإدخال المتناثر</p>
+<p>: func: binarize و: class: Binarizer قبول <strong>كلا من المصفوفات الكثيفة المتشابهة
+والمصفوفات المتناثرة من scipy.sparse كإدخال</strong>.</p>
+<p>بالنسبة للإدخال المتناثر، يتم <strong>تحويل البيانات إلى تمثيل الصفوف المتناثرة المضغوطة</strong>
+(راجع “scipy.sparse.csr_matrix”).
+لتجنب عمليات نسخ الذاكرة غير الضرورية، يُنصح باختيار تمثيل CSR
+أعلى النهر.</p>
+</aside>
+</section>
+</section>
+<section id="imputation">
+<span id="id17"></span><h1><span class="section-number">6.10. </span>تقدير القيم المفقودة<a class="headerlink" href="#imputation" title="Link to this heading">#</a></h1>
+<p>يتم مناقشة أدوات تقدير القيم المفقودة في: ref: impute.</p>
+</section>
+<section id="generating-polynomial-features">
+<span id="id18"></span><h1><span class="section-number">6.11. </span>توليد ميزات متعددة الحدود<a class="headerlink" href="#generating-polynomial-features" title="Link to this heading">#</a></h1>
+<p>غالبًا ما يكون من المفيد إضافة التعقيد إلى نموذج بالنظر إلى الميزات غير الخطية لبيانات الإدخال. نعرض إمكانيتين تعتمدان على متعددات الحدود: الأولى تستخدم متعددات الحدود البحتة، والثانية تستخدم المنحنيات،
+أي متعددات الحدود القطعية.</p>
+<section id="polynomial-features">
+<span id="id19"></span><h2><span class="section-number">6.11.1. </span>ميزات متعددة الحدود<a class="headerlink" href="#polynomial-features" title="Link to this heading">#</a></h2>
+<p>تتمثل إحدى الطرق البسيطة والشائعة في استخدام ميزات متعددة الحدود، والتي يمكن أن تحصل على شروط تفاعل وميزات عالية الترتيب. يتم تنفيذه في
+: class: PolynomialFeatures:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from sklearn.preprocessing import PolynomialFeatures
+&gt;&gt;&gt; X = np.arange (6). reshape (3، 2)
+&gt;&gt;&gt; X
+array([[0، 1]،
+       [2، 3]،
+       [4، 5]])
+&gt;&gt;&gt; poly = PolynomialFeatures (2)
+&gt;&gt;&gt; poly.fit_transform (X)
+array([[ 1.، 0.، 1.، 0.، 0.، 1.]،
+       [ 1.، 2.، 3.، 4.، 6.، 9.]،
+       [ 1.، 4.، 5.، 16.، 20.، 25.]])
+</pre></div>
+</div>
+<p>تم تحويل ميزات “س” من: math: <code class="docutils literal notranslate"><span class="pre">(X_1،</span> <span class="pre">X_2)</span></code> إلى: math: <code class="docutils literal notranslate"><span class="pre">(1،</span> <span class="pre">X_1،</span> <span class="pre">X_2،</span> <span class="pre">X_1</span> <span class="pre">^</span> <span class="pre">2،</span> <span class="pre">X_1X_2،</span> <span class="pre">X_2</span> <span class="pre">^</span> <span class="pre">2)</span></code>.</p>
+<p>في بعض الحالات، تكون شروط التفاعل بين الميزات مطلوبة فقط، ويمكن الحصول عليها باستخدام الإعداد “interaction_only = True”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; X = np.arange (9). reshape (3، 3)
+&gt;&gt;&gt; X
+array([[0، 1، 2]،
+       [3، 4، 5]،
+       [6، 7، 8]])
+&gt;&gt;&gt; poly = PolynomialFeatures (degree = 3، interaction_only = True)
+&gt;&gt;&gt; poly.fit_transform (X)
+array([[ 1.، 0.، 1.، 2.، 0.، 0.، 2.، 0.]،
+       [ 1.، 3.، 4.، 5.، 12.، 15.، 20.، 60.]،
+       [ 1.، 6.، 7.، 8.، 42.، 48.، 56.، 336.]])
+</pre></div>
+</div>
+<p>تم تحويل ميزات “س” من: math: <code class="docutils literal notranslate"><span class="pre">(X_1،</span> <span class="pre">X_2،</span> <span class="pre">X_3)</span></code> إلى: math: <code class="docutils literal notranslate"><span class="pre">(1،</span> <span class="pre">X_1،</span> <span class="pre">X_2،</span> <span class="pre">X_3،</span> <span class="pre">X_1X_2،</span> <span class="pre">X_1X_3،</span> <span class="pre">X_2X_3،</span> <span class="pre">X_1X_2X_3)</span></code>.</p>
+<p>لاحظ أن ميزات متعددة الحدود تستخدم ضمنيًا في <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_method">أساليب النواة</a> (على سبيل المثال،: class: sklearn.svm.SVC،
+: class: sklearn.decomposition.KernelPCA) عند استخدام متعددة الحدود: ref: svm_kernels.</p>
+<p>راجع: ref: sphx_glr_auto_examples_linear_model_plot_polynomial_interpolation.py
+للتقريب باستخدام ريدج ريجريشن باستخدام ميزات متعددة الحدود التي تم إنشاؤها.</p>
+</section>
+<section id="spline-transformer">
+<span id="id21"></span><h2><span class="section-number">6.11.2. </span>محول المنحنى<a class="headerlink" href="#spline-transformer" title="Link to this heading">#</a></h2>
+<p>طريقة أخرى لإضافة شروط غير خطية بدلاً من متعددات الحدود البحتة للميزات هي
+توليد دالات أساس المنحنى لكل ميزة مع
+: class: SplineTransformer. المنحنيات هي متعددات حدود قطعية، يتم معلماتها بواسطة
+درجة متعددة الحدود الخاصة بها ومواضع العقد. ينفذ: class: SplineTransformer
+أساس B-spline، راجع المراجع أدناه.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>يتعامل: class: SplineTransformer مع كل ميزة بشكل منفصل، أي أنه
+لن يعطيك شروط التفاعل.</p>
+</div>
+<p>بعض مزايا المنحنيات على متعددات الحدود هي:</p>
+<ul class="simple">
+<li><p>المنحنيات B مرنة للغاية ومتينة إذا كنت تحتفظ بدرجة منخفضة ثابتة،
+عادة 3، وتكيف عدد العقد بشكل مقتصد. سوف تحتاج متعددات الحدود
+إلى درجة أعلى، مما يؤدي إلى النقطة التالية.</p></li>
+<li><p>لا تُظهر المنحنيات B سلوكًا متذبذبًا عند الحدود كما تفعل متعددات الحدود (كلما ارتفعت الدرجة، كلما كان الأمر أسوأ). يُعرف هذا باسم “ظاهرة رونج” &lt;<a class="reference external" href="https://en.wikipedia.org/wiki">https://en.wikipedia.org/wiki</a>/Runge% 27s_phenomenon&gt;.</p></li>
+<li><p>توفر المنحنيات B خيارات جيدة للاستقراء خارج النطاق،
+أي خارج نطاق القيم المناسب. الق نظرة على الخيار
+“الاستقراء”.</p></li>
+<li><p>تنتج المنحنيات B مصفوفة ميزات ذات بنية محزمة. بالنسبة لميزة واحدة، يحتوي كل صف على “درجة + 1” فقط
+العناصر غير الصفرية، والتي تحدث بشكل متتابع وحتى إيجابية. يؤدي هذا إلى مصفوفة ذات خصائص عددية جيدة،
+على سبيل المثال، عدد شرطي منخفض، على النقيض الشديد من مصفوفة متعددة الحدود، والتي يطلق عليها اسم
+“مصفوفة فانديرموند” &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Vandermonde_matrix">https://en.wikipedia.org/wiki/Vandermonde_matrix</a>&gt;.
+يعد العدد الشرطي المنخفض مهمًا لخوارزميات مستقرة للنماذج الخطية.</p></li>
+</ul>
+<p>توضح مقتطفات التعليمات البرمجية التالية المنحنيات في العمل:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from sklearn.preprocessing import SplineTransformer
+&gt;&gt;&gt; X = np.arange (5). reshape (5، 1)
+&gt;&gt;&gt; X
+array([[0]،
+       [1]،
+       [2]،
+       [3]،
+       [4]])
+&gt;&gt;&gt; spline = SplineTransformer (degree = 2، n_knots = 3)
+&gt;&gt;&gt; spline.fit_transform (X)
+array([[0.5، 0.5، 0.، 0.]،
+       [0.125، 0.75، 0.125، 0.]،
+       [0.، 0.5، 0.5، 0.]،
+       [0.، 0.125، 0.75، 0.125]،
+       [0.، 0.، 0.5، 0.5]])
+</pre></div>
+</div>
+<p>نظرًا لفرز “س”، يمكنك بسهولة رؤية المصفوفة المحزمة للإخراج. بالنسبة إلى “درجة = 2”، فإن المصفوفات الثلاثة الوسطى فقط غير صفرية. وكلما ارتفعت الدرجة، زاد تداخل المنحنيات.</p>
+<p>من المثير للاهتمام أن: class: SplineTransformer من “درجة = 0” هو نفسه
+: class: sklearn.preprocessing.KBinsDiscretizer
+مع “encode = ‘onehot-dense’” و “n_bins = n_knots - 1” إذا
+“العقد = الإستراتيجية”.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p>: ref: sphx_glr_auto_examples_linear_model_plot_polynomial_interpolation.py`</p></li>
+<li><p>: ref: sphx_glr_auto_examples_applications_plot_cyclical_feature_engineering.py`</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المراجع-2">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المراجع<a class="headerlink" href="#المراجع-2" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text">Eilers، P.، وMarx، B. (1996). :doi: ‘طرق التنعيم المرنة باستخدام B-splines والعقوبات
+&lt;10.1214/ss/1038425655&gt;. Statist. Sci. 11 (1996)، رقم 2، 89-121.</p></li>
+<li><p class="sd-card-text">Perperoglou، A.، Sauerbrei، W.، Abrahamowicz، M. et al. :doi: ‘مراجعة لإجراءات دالة المنحنى في R
+&lt;10.1186/s12874-019-0666-3&gt;.
+BMC Med Res Methodol 19، 46 (2019).</p></li>
+</ul>
+</div>
+</details><p id="function-transformer">المحولات المخصصة
+في كثير من الأحيان، قد ترغب في تحويل دالة Python موجودة مسبقًا إلى محول للبيانات للمساعدة في تنظيف البيانات أو معالجتها. يمكنك تنفيذ محول من دالة عشوائية باستخدام class: ‘FunctionTransformer’. على سبيل المثال، لبناء محول يطبق تحويل اللوغاريتم في خط أنابيب، قم بما يلي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">FunctionTransformer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">FunctionTransformer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># بما أن FunctionTransformer لا يفعل أي شيء أثناء التهيئة، يمكننا استدعاء transform مباشرة</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[0.        , 0.69314718],</span>
+<span class="go">       [1.09861229, 1.38629436]])</span>
+</pre></div>
+</div>
+<p>يمكنك التأكد من أن “func” و “inverse_func” هما العكس لبعضهما البعض من خلال تعيين “check_inverse=True” واستدعاء “fit” قبل “transform”. يرجى ملاحظة أنه يتم رفع تحذير ويمكن تحويله إلى خطأ باستخدام “filterwarnings”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;.*check_inverse*.&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>للحصول على مثال كامل للرمز يوضح استخدام “FunctionTransformer” لاستخراج الميزات من بيانات النص، راجع:
+ref: ‘sphx_glr_auto_examples_compose_plot_column_transformer.py’ و
+ref: ‘sphx_glr_auto_examples_applications_plot_cyclical_feature_engineering.py’.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="feature_extraction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6.4. </span>استخراج الخصائص</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="impute.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.12. </span>إكمال القيم المفقودة</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">6.7. معالجة البيانات الأولية</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.8. توحيد البيانات، أو إزالة المتوسط وتقييم التباين</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.8.1. تقييم الميزات إلى نطاق</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.8.2. تقييم البيانات المتناثرة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.8.3. تقييم البيانات بالقيم الشاذة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-centering">6.8.4. مركز مصفوفات النواة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">6.8.5. رسم الخرائط إلى توزيع منتظم</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">6.8.6. رسم الخرائط إلى توزيع غاوسي</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-normalization">6.9. التطبيع</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#target-encoder">6.9.1. مشفّر الهدف</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">6.9.2. تجزئة ك-بينز</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-binarization">6.9.3. تجزئة السمات الثنائية</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#imputation">6.10. تقدير القيم المفقودة</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-polynomial-features">6.11. توليد ميزات متعددة الحدود</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-features">6.11.1. ميزات متعددة الحدود</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spline-transformer">6.11.2. محول المنحنى</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/preprocessing.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
