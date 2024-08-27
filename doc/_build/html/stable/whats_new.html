@@ -1,0 +1,988 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="تاريخ الإصدارات" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/whats_new.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="يتم في هذا الملف تعيين أسماء المساهمين إلى عناوين URL الخاصة بهم. وينبغي أن يستخدم في الغالب للمساهمين الأساسيين، وفي بعض الأحيان للمساهمين الذين لا يرغبون في أن تكون صفحتهم على GitHub هي عنوان URL..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="يتم في هذا الملف تعيين أسماء المساهمين إلى عناوين URL الخاصة بهم. وينبغي أن يستخدم في الغالب للمساهمين الأساسيين، وفي بعض الأحيان للمساهمين الذين لا يرغبون في أن تكون صفحتهم على GitHub هي عنوان URL..." />
+
+    <title>تاريخ الإصدارات &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=97f0b27d"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'whats_new';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Version 1.6" href="whats_new/v1.6.html" />
+    <link rel="prev" title="بدء الاستخدام" href="getting_started.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.6.html">Version 1.6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.5.html">Version 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.4.html">Version 1.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.3.html">Version 1.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.2.html">Version 1.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.1.html">Version 1.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.0.html">الإصدار 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.24.html">الإصدار 0.24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.23.html">نماذج معدلة</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.22.html">الإصدار 0.22</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.21.html">الإصدار 0.21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.20.html">المساهمون</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.19.html">أبرز المميزات</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.18.html">سجل التغييرات</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.17.html">الميزات الجديدة</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.16.html">الإصدار 0.16</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.15.html">الأشخاص</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.14.html">الإصدار 0.14</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.13.html">الإصدار 0.13.1</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="whats_new/older_versions.html">الإصدارات القديمة</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">تاريخ الإصدارات</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>يتم في هذا الملف تعيين أسماء المساهمين إلى عناوين URL الخاصة بهم. وينبغي أن يستخدم في الغالب للمساهمين الأساسيين، وفي بعض الأحيان للمساهمين الذين لا يرغبون في أن تكون صفحتهم على GitHub هي عنوان URL المستهدف الخاص بهم. وقد تم استخدامه تاريخياً لربط جميع أسماء المساهمين، ويجب الآن تفضيل “:user:”. كما أنه يحدد استبدالات ReST الأخرى.</p>
+<section id="id1">
+<h1>تاريخ الإصدارات<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>سجلات التغيير ومذكرات الإصدار لجميع إصدارات سكيت-ليرن مرتبطة في هذه الصفحة.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><a class="reference external" href="https://libraries.io/pypi/scikit-learn">اشترك في إصدارات سكيت-ليرن</a>
+على libraries.io لتصلك إشعارات عند إصدار نسخ جديدة.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.6.html">Version 1.6</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.6.html#version-1-6-0">Version 1.6.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.5.html">Version 1.5</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.5.html#version-1-5-2">Version 1.5.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.5.html#version-1-5-1">Version 1.5.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.5.html#version-1-5-0">Version 1.5.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.4.html">Version 1.4</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.4.html#version-1-4-2">Version 1.4.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.4.html#version-1-4-1">Version 1.4.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.4.html#version-1-4-0">Version 1.4.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.3.html">Version 1.3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.3.html#version-1-3-2">Version 1.3.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.3.html#version-1-3-1">Version 1.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.3.html#version-1-3-0">Version 1.3.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.2.html">Version 1.2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.2.html#version-1-2-2">Version 1.2.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.2.html#version-1-2-1">Version 1.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.2.html#version-1-2-0">Version 1.2.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.1.html">Version 1.1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.1.html#version-1-1-3">Version 1.1.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.1.html#version-1-1-2">Version 1.1.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.1.html#version-1-1-1">Version 1.1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.1.html#version-1-1-0">Version 1.1.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v1.0.html">الإصدار 1.0</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.0.html#changes-1-0-2">الإصدار 1.0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v1.0.html#changes-1-0-1">الإصدار 1.0.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.24.html">الإصدار 0.24</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.24.html#changes-0-24-2">الإصدار 0.24.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.24.html#changes-0-24-1">الإصدار 0.24.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.23.html">نماذج معدلة</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.23.html#id2">سجل التغييرات</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-cluster"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-decomposition"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.decomposition</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-feature-extraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-linear-model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-manifold"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.manifold</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-metrics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-pipeline"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.pipeline</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.utils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.23.html#id3">سجل التغييرات</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#id4"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#id5">متنوعات</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.23.html#id6">فرض استخدام وسائط الكلمات المفتاحية فقط</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.23.html#id7">نماذج تم تغييرها</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#id8"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-compose"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.compose</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-datasets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.datasets</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#id9"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.decomposition</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#id10"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#id11"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-feature-selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_selection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-gaussian-process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.gaussian_process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-impute"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.impute</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#sklearn-inspection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.inspection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#id12"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.23.html#id13">متفرقات</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.22.html">الإصدار 0.22</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.22.html#post1">الإصدار 0.22.2.post1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.22.html#changes-0-22-1">الإصدار 0.22.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.21.html">الإصدار 0.21</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.21.html#changes-0-21-3">الإصدار 0.21.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.21.html#changes-0-21-2">الإصدار 0.21.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.21.html#changes-0-21-1">الإصدار 0.21.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.20.html">المساهمون</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.20.html#id2">المميزات الجديدة</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-cluster"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-compose"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.compose</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-decomposition"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.decomposition</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-feature-extraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-feature-selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_selection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-gaussian-process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.gaussian_process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-linear-model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-manifold"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.manifold</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-mixture"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.mixture</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-naive-bayes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.naive_bayes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-neighbors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neighbors</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-neural-network"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neural_network</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-preprocessing"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-semi-supervised"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.semi_supervised</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-svm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-tree"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.tree</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.20.html#id3">إصلاحات الأخطاء</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id4"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id5"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.compose</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id6"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.decomposition</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id7"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id8"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id9"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_selection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id10"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.gaussian_process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id11"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-metrics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-model-selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.model_selection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id12"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neighbors</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id13"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id14"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-cluster">:mod:’sklearn.cluster’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-compose">:mod:’sklearn.compose’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-datasets">:mod:’sklearn.datasets’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-decomposition">:mod:’sklearn.decomposition’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-ensemble">:mod:’sklearn.ensemble’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-feature-extraction">:mod:’sklearn.feature_extraction’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-linear-model">:mod:’sklearn.linear_model’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-metrics">:mod:’sklearn.metrics’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-mixture">:mod:’sklearn.mixture’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-neighbors">:mod:’sklearn.neighbors’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-preprocessing">:mod:’sklearn.preprocessing’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#mod-sklearn-utils">:mod:’sklearn.utils’</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id19">متفرقات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id25">sklearn.cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id26">sklearn.compose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-covariance">sklearn.covariance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-datasets">sklearn.datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id27">sklearn.decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-discriminant-analysis">sklearn.discriminant_analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-dummy">sklearn.dummy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id28">sklearn.ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id29">sklearn.feature_extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id30"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_selection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id31"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.gaussian_process</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-impute"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.impute</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-isotonic"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.isotonic</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id32"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id33"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.manifold</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id34"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id35"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#id36"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.tree</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#sklearn-utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.utils</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#multiple-modules">Multiple modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.20.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.19.html">أبرز المميزات</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.19.html#id2">نماذج معدلة</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.19.html#id3">الميزات الجديدة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.19.html#id4">التحسينات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.19.html#id5">تصحيح الأخطاء</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.18.html">سجل التغييرات</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.18.html#id2">المساهمون في الكود</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.18.html#id3">سجل التغييرات</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.18.html#id4">التحسينات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.18.html#id5">إصلاح الأخطاء</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.18.html#id6">ملخص التغييرات في واجهة برمجة التطبيقات</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.18.html#model-selection-changes">تحسينات اختيار النموذج وتغييرات واجهة برمجة التطبيقات</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.18.html#id8">الميزات الجديدة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.18.html#id9">التحسينات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.18.html#id10">تصحيح الأخطاء</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.18.html#id11">المساهمون في الشفرة</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.17.html">الميزات الجديدة</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.17.html#id2">التحسينات</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.17.html#id3">تصحيحات الأخطاء</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.17.html#id4">المساهمون في الكود</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.16.html">الإصدار 0.16</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.16.html#changes-0-16-1">الإصدار 0.16.1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.15.html">الأشخاص</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.14.html">الإصدار 0.14</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.14.html#id2">الأشخاص</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.13.html">الإصدار 0.13.1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.13.html#id2">سجل التغييرات</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/v0.13.html#id3">الأشخاص</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/v0.13.html#id4">الإصدار 0.13</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whats_new/older_versions.html">الإصدارات القديمة</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/older_versions.html#changes-0-12-1">الإصدار 0.12.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/older_versions.html#changes-0-12">الإصدار 0.12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/older_versions.html#changes-0-8">الإصدار 0.8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/older_versions.html#changes-0-6">الإصدار 0.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/older_versions.html#changes-0-5">الإصدار 0.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/older_versions.html#id39">الإصدار 0.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whats_new/older_versions.html#id42">الإصدارات السابقة</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="getting_started.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">بدء الاستخدام</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="whats_new/v1.6.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Version 1.6</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/whats_new.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
