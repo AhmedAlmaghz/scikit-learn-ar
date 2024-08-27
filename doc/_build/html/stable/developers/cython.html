@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="أفضل الممارسات والتوجيهات والمعرفة في Cython" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/developers/cython.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="توفر هذه الوثيقة نصائح لتطوير تعليمات برمجية بلغة Cython في scikit-learn. نصائح لتطوير التعليمات البرمجية بلغة Cython في scikit-learn: نصائح لتسهيل التطوير: الوقت الذي تقضيه في قراءة وثائق Cython ل..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="توفر هذه الوثيقة نصائح لتطوير تعليمات برمجية بلغة Cython في scikit-learn. نصائح لتطوير التعليمات البرمجية بلغة Cython في scikit-learn: نصائح لتسهيل التطوير: الوقت الذي تقضيه في قراءة وثائق Cython ل..." />
+
+    <title>أفضل الممارسات والتوجيهات والمعرفة في Cython &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'developers/cython';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">أفضل...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="cython">
+<span id="id1"></span><h1>أفضل الممارسات والتوجيهات والمعرفة في Cython<a class="headerlink" href="#cython" title="Link to this heading">#</a></h1>
+<p>توفر هذه الوثيقة نصائح لتطوير تعليمات برمجية بلغة Cython في scikit-learn.</p>
+<section id="cython-scikit-learn">
+<h2>نصائح لتطوير التعليمات البرمجية بلغة Cython في scikit-learn<a class="headerlink" href="#cython-scikit-learn" title="Link to this heading">#</a></h2>
+<section id="id2">
+<h3>نصائح لتسهيل التطوير<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>الوقت الذي تقضيه في قراءة <a class="reference external" href="https://cython.readthedocs.io/en/latest/">وثائق Cython</a> ليس وقتاً ضائعاً.</p></li>
+<li><p>إذا كنت تنوي استخدام OpenMP: على نظام MacOS، لا يوفر توزيع النظام لـ <code class="docutils literal notranslate"><span class="pre">clang</span></code> OpenMP.
+يمكنك تثبيت حزمة “المترجمين” المتوفرة في <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> والتي تأتي مع تنفيذ OpenMP.</p></li>
+<li><p>قد يساعد تفعيل <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/62a017efa047e9581ae7df8bbaa62cf4c0544ee4/sklearn/_build_utils/__init__.py#L68-L87">التحققات</a>. على سبيل المثال، لتفعيل التحقق من الحدود، استخدم ما يلي:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SKLEARN_ENABLE_DEBUG_CYTHON_DIRECTIVES</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+</li>
+<li><p><a class="reference external" href="https://cython.readthedocs.io/en/latest/src/quickstart/build.html#using-the-jupyter-notebook">ابدأ من الصفر في دفتر ملاحظات</a> لفهم كيفية استخدام Cython والحصول على تعليقات حول عملك بسرعة.
+إذا كنت تخطط لاستخدام OpenMP لتنفيذك في دفتر ملاحظات Jupyter، قم بإضافة حجج مترجم وارتباطات إضافية في التعويذة السحرية لـ Cython.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For GCC and for clang</span>
+<span class="o">%%</span><span class="n">cython</span> <span class="o">--</span><span class="nb">compile</span><span class="o">-</span><span class="n">args</span><span class="o">=-</span><span class="n">fopenmp</span> <span class="o">--</span><span class="n">link</span><span class="o">-</span><span class="n">args</span><span class="o">=-</span><span class="n">fopenmp</span>
+<span class="c1"># For Microsoft&#39;s compilers</span>
+<span class="o">%%</span><span class="n">cython</span> <span class="o">--</span><span class="nb">compile</span><span class="o">-</span><span class="n">args</span><span class="o">=/</span><span class="n">openmp</span> <span class="o">--</span><span class="n">link</span><span class="o">-</span><span class="n">args</span><span class="o">=/</span><span class="n">openmp</span>
+</pre></div>
+</div>
+</li>
+<li><p>لاستكشاف أخطاء التعليمات البرمجية C وإصلاحها (على سبيل المثال، حدوث خطأ في الإشارة)، استخدم <code class="docutils literal notranslate"><span class="pre">gdb</span></code> مع:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gdb<span class="w"> </span>--ex<span class="w"> </span>r<span class="w"> </span>--args<span class="w"> </span>python<span class="w"> </span>./entrypoint_to_bug_reproducer.py
+</pre></div>
+</div>
+</li>
+<li><p>للوصول إلى قيمة معينة في المكان لتصحيح الأخطاء في سياق <code class="docutils literal notranslate"><span class="pre">cdef</span> <span class="pre">(nogil)</span></code>، استخدم:</p>
+<div class="highlight-cython notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="k">gil</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">state_to_print</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>لاحظ أن Cython لا يمكنه تحليل السلاسل النصية f مع تعبيرات <code class="docutils literal notranslate"><span class="pre">{var=}</span></code>، على سبيل المثال:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>print<span class="o">(</span>f<span class="s2">&quot;{test_val=}&quot;</span><span class="o">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>يحتوي شيفرة scikit-learn على العديد من تعريفات الأنواع غير الموحدة (المدمجة).
+هناك حاليًا <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/25572">عمل جارٍ لتبسيط وتوحيد ذلك عبر الشيفرة البرمجية</a>.
+في الوقت الحالي، تأكد من فهمك للأنواع الملموسة المستخدمة في النهاية.</p></li>
+<li><p>قد تجد هذا الاسم المستعار لتجميع ملحقات Cython الفردية مفيدًا:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># قد ترغب في إضافة هذا الاسم المستعار إلى تكوين ملف البرنامج النصي الخاص بك.</span>
+<span class="n">alias</span> <span class="n">cythonX</span><span class="o">=</span><span class="s2">&quot;cython -X language_level=3 -X boundscheck=False -X wraparound=False -X initializedcheck=False -X nonecheck=False -X cdivision=True&quot;</span>
+
+<span class="c1"># هذا يولد `source.c` كما لو كنت قد أعدت تجميع scikit-learn بالكامل.</span>
+<span class="n">cythonX</span> <span class="o">--</span><span class="n">annotate</span> <span class="n">source</span><span class="o">.</span><span class="n">pyx</span>
+</pre></div>
+</div>
+</li>
+<li><p>يسمح استخدام خيار <code class="docutils literal notranslate"><span class="pre">--annotate</span></code> مع هذا العلم بتوليد تقرير HTML لتعليمات الشيفرة.
+يشير هذا التقرير إلى التفاعلات مع مفسر CPython على أساس كل سطر على حدة.
+يجب تجنب التفاعلات مع مفسر CPython قدر الإمكان في الأقسام كثيرة الاستخدام من الخوارزميات.
+لمزيد من المعلومات، يرجى الرجوع إلى <a class="reference external" href="https://cython.readthedocs.io/en/latest/src/tutorial/cython_tutorial.html#primes">هذا القسم من تعليمي Cython</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># هذا يولد تقرير HTML (`source.html`) لـ `source.c`.</span>
+<span class="n">cythonX</span> <span class="o">--</span><span class="n">annotate</span> <span class="n">source</span><span class="o">.</span><span class="n">pyx</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id8">
+<h3>نصائح للأداء<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>افهم GIL في سياق CPython (ما هي المشكلات التي يحلها، وما هي قيودها)
+واحصل على فهم جيد للوقت الذي سيتم فيه رسم خريطة Cython إلى شيفرة C خالية من التفاعلات مع
+CPython، وعندما لا يحدث ذلك، وعندما لا يمكن ذلك (على سبيل المثال، وجود تفاعلات مع كائنات Python، والتي تشمل الدوال). وفي هذا الصدد، <a class="reference external" href="https://peps.python.org/pep-0703/">PEP073</a>
+يوفر نظرة عامة جيدة وسياقًا ومسارات للإزالة.</p></li>
+<li><p>تأكد من تعطيل <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/62a017efa047e9581ae7df8bbaa62cf4c0544ee4/sklearn/_build_utils/__init__.py#L68-L87">التحققات</a>.</p></li>
+<li><p>يفضل دائمًا استخدام memoryviews بدلاً من <code class="docutils literal notranslate"><span class="pre">cnp.ndarray</span></code> عند الإمكان: memoryviews خفيفة الوزن.</p></li>
+<li><p>تجنب تقطيع memoryview: قد يكون تقطيع memoryview مكلفًا أو مضللًا في بعض الحالات
+ومن الأفضل عدم استخدامه، حتى إذا كان التعامل مع أبعاد أقل في بعض السياقات مفضلًا.</p></li>
+<li><p>قم بتزيين الفصول أو الطرق النهائية باستخدام <code class="docutils literal notranslate"><span class="pre">&#64;final</span></code> (يسمح هذا بإزالة الجداول الافتراضية عند الحاجة)</p></li>
+<li><p>قم بتضمين الطرق والدوال عندما يكون ذلك منطقيًا</p></li>
+<li><p>عند الشك، اقرأ الشيفرة C أو C++ المولدة إذا استطعت: “كلما قل عدد تعليمات C والإشارات
+لخط من شيفرة Cython، كان ذلك أفضل” هي قاعدة جيدة للإبهام.</p></li>
+<li><p>تعتبر إعلانات <code class="docutils literal notranslate"><span class="pre">nogil</span></code> مجرد تلميحات: عند إعلان دالة <code class="docutils literal notranslate"><span class="pre">cdef</span></code>
+على أنها nogil، يعني ذلك أنه يمكن استدعاؤها دون الاحتفاظ بـ GIL، ولكنها لا تطلق
+GIL عند الدخول إليها. يجب عليك القيام بذلك بنفسك إما عن طريق تمرير <code class="docutils literal notranslate"><span class="pre">nogil=True</span></code> إلى
+<code class="docutils literal notranslate"><span class="pre">cython.parallel.prange</span></code> بشكل صريح، أو باستخدام مدير سياق صريح:</p>
+<div class="highlight-cython notranslate"><div class="highlight"><pre><span></span><span class="k">cdef</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">my_func</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">nogil</span><span class="p">:</span>
+
+    <span class="c"># بعض المنطق الذي يتفاعل مع CPython، على سبيل المثال، تخصيص المصفوفات عبر NumPy.</span>
+
+    <span class="k">with</span> <span class="k">nogil</span><span class="p">:</span>
+        <span class="c"># يتم تشغيل الشيفرة هنا كما لو كانت مكتوبة في C.</span>
+
+    <span class="k">return</span> <span class="mf">0</span>
+</pre></div>
+</div>
+<p>يعتمد هذا البند على <a class="reference external" href="https://github.com/cython/cython/issues/2798#issuecomment-459971828">هذا التعليق من Stéfan’s Benhel</a></p>
+</li>
+<li><p>من الممكن إجراء مكالمات مباشرة إلى روتينات BLAS عبر الواجهات المحددة في <code class="docutils literal notranslate"><span class="pre">sklearn.utils._cython_blas</span></code>.</p></li>
+</ul>
+</section>
+<section id="openmp">
+<h3>استخدام OpenMP<a class="headerlink" href="#openmp" title="Link to this heading">#</a></h3>
+<p>نظرًا لأنه يمكن بناء scikit-learn بدون OpenMP، فمن الضروري حماية كل
+مكالمة مباشرة إلى OpenMP.</p>
+<p>تقدم وحدة نمطية <code class="docutils literal notranslate"><span class="pre">_openmp_helpers</span></code>، المتوفرة في
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/utils/_openmp_helpers.pyx">sklearn/utils/_openmp_helpers.pyx</a>
+إصدارات محمية من روتينات OpenMP. لاستخدام روتينات OpenMP، يجب
+استيرادها من هذه الوحدة النمطية وليس من مكتبة OpenMP مباشرة:</p>
+<div class="highlight-cython notranslate"><div class="highlight"><pre><span></span><span class="k">from</span> <span class="nn">sklearn.utils._openmp_helpers</span> <span class="k">cimport</span> <span class="n">omp_get_max_threads</span>
+<span class="n">max_threads</span> <span class="o">=</span> <span class="n">omp_get_max_threads</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>تم بالفعل حماية حلقة التكرار المتوازية، <code class="docutils literal notranslate"><span class="pre">prange</span></code>، بواسطة cython ويمكن استخدامها مباشرة
+من <code class="docutils literal notranslate"><span class="pre">cython.parallel</span></code>.</p>
+<section id="id10">
+<h4>الأنواع<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<p>يتطلب شيفرة Cython استخدام أنواع صريحة. هذا هو أحد الأسباب التي تحصل عليها
+تعزيز الأداء. لتجنب ازدواجية الشيفرة، لدينا مكان مركزي
+لأنواع الأكثر استخدامًا في
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/main/sklearn/utils/_typedefs.pyd">sklearn/utils/_typedefs.pyd</a>.
+من الناحية المثالية، تبدأ بالنظر هناك و <code class="docutils literal notranslate"><span class="pre">cimport</span></code> الأنواع التي تحتاجها، على سبيل المثال</p>
+<div class="highlight-cython notranslate"><div class="highlight"><pre><span></span><span class="k">from</span> <span class="nn">sklear.utils._typedefs</span> <span class="k">cimport</span> <span class="n">float32</span><span class="p">,</span> <span class="n">float64</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cython-scikit-learn">نصائح لتطوير التعليمات البرمجية بلغة Cython في scikit-learn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">نصائح لتسهيل التطوير</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">نصائح للأداء</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openmp">استخدام OpenMP</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">الأنواع</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/developers/cython.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
