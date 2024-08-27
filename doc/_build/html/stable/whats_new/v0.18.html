@@ -1,0 +1,1398 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="سجل التغييرات" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/whats_new/v0.18.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="الإصدار 0.18 الإصدار 0.18.2 20 يونيو 2017 إصلاحات التوافق مع NumPy 1.13.0:#7946#8355 بواسطة`Loïc Estève`_., تغييرات توافق طفيفة في الأمثلة#9010#8040#9149.. المساهمون في الكود: Aman Dalmia، Loïc Est..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="الإصدار 0.18 الإصدار 0.18.2 20 يونيو 2017 إصلاحات التوافق مع NumPy 1.13.0:#7946#8355 بواسطة`Loïc Estève`_., تغييرات توافق طفيفة في الأمثلة#9010#8040#9149.. المساهمون في الكود: Aman Dalmia، Loïc Est..." />
+
+    <title>سجل التغييرات &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'whats_new/v0.18';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="الميزات الجديدة" href="v0.17.html" />
+    <link rel="prev" title="أبرز المميزات" href="v0.19.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.6.html">Version 1.6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.html">Version 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.html">Version 1.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.html">Version 1.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.html">Version 1.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.html">Version 1.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.html">الإصدار 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.html">الإصدار 0.24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.html">نماذج معدلة</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.22.html">الإصدار 0.22</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.21.html">الإصدار 0.21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.html">المساهمون</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.19.html">أبرز المميزات</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">سجل التغييرات</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.17.html">الميزات الجديدة</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.16.html">الإصدار 0.16</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.html">الأشخاص</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.14.html">الإصدار 0.14</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.13.html">الإصدار 0.13.1</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="older_versions.html">الإصدارات القديمة</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../whats_new.html" class="nav-link">تاريخ الإصدارات</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">سجل التغييرات</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><strong>الإصدار 0.18</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>الإصدار 0.18 من Scikit-learn هو آخر إصدار رئيسي يدعم بايثون 2.6.
+سيتطلب الإصدارات اللاحقة من Scikit-learn بايثون 2.7 أو أعلى.</p>
+</div>
+<p><strong>الإصدار 0.18.2</strong></p>
+<p><strong>20 يونيو 2017</strong></p>
+<section id="id1">
+<h1>سجل التغييرات<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>إصلاحات التوافق مع NumPy 1.13.0: <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7946">#7946</a> <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8355">#8355</a> بواسطة
+<a href="#id12"><span class="problematic" id="id13">`Loïc Estève`_</span></a>.</p></li>
+<li><p>تغييرات توافق طفيفة في الأمثلة <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9010">#9010</a> <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/8040">#8040</a>
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/9149">#9149</a>.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h1>المساهمون في الكود<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p>Aman Dalmia، Loïc Estève، Nate Guerin، Sergei Lebedev</p>
+<p><strong>الإصدار 0.18.1</strong></p>
+<p><strong>11 نوفمبر 2016</strong></p>
+</section>
+<section id="id3">
+<h1>سجل التغييرات<a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<section id="id4">
+<h2>التحسينات<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>تحسين سرعة <code class="docutils literal notranslate"><span class="pre">sample_without_replacement</span></code> باستخدام
+numpy.random.permutation لمعظم الحالات. وكنتيجة لذلك،
+قد تختلف العينات في هذا الإصدار لإعداد عشوائي ثابت.
+تم التأثير على الخوارزميات التالية:</p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.BaggingClassifier</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.BaggingRegressor</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.RANSACRegressor</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">model_selection.RandomizedSearchCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">random_projection.SparseRandomProjection</span></code></p></li>
+</ul>
+<p>كما يؤثر هذا على طريقة <code class="xref py py-meth docutils literal notranslate"><span class="pre">datasets.make_classification</span></code>.</p>
+</li>
+</ul>
+</section>
+<section id="id5">
+<h2>إصلاح الأخطاء<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>إصلاح مشكلة حيث لم يتم استخدام معلمات <code class="docutils literal notranslate"><span class="pre">min_grad_norm</span></code> و <code class="docutils literal notranslate"><span class="pre">n_iter_without_progress</span></code>
+بواسطة <code class="xref py py-class docutils literal notranslate"><span class="pre">manifold.TSNE</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6497">#6497</a> بواسطة <a class="reference external" href="https://github.com/ssaeger">Sebastian Säger</a></p></li>
+<li><p>إصلاح خطأ في قيم القرار لخوارزمية SVM عندما تكون <code class="docutils literal notranslate"><span class="pre">decision_function_shape</span></code>
+هي <code class="docutils literal notranslate"><span class="pre">ovr</span></code> في <code class="xref py py-class docutils literal notranslate"><span class="pre">svm.SVC</span></code>.
+كانت دالة القرار في <code class="xref py py-class docutils literal notranslate"><span class="pre">svm.SVC</span></code> غير صحيحة من الإصدارات
+0.17.0 حتى 0.18.0.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7724">#7724</a> بواسطة <a href="#id14"><span class="problematic" id="id15">`Bing Tian Dai`_</span></a></p></li>
+<li><p>أصبح طول الخاصية <code class="docutils literal notranslate"><span class="pre">explained_variance_ratio</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis</span></code>
+المحسوبة باستخدام SVD وEigen solver متساوية الآن. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7632">#7632</a>
+بواسطة <a class="reference external" href="https://github.com/JPFrancoia">JPFrancoia</a></p></li>
+<li><p>إصلاح مشكلة في <a class="reference internal" href="../modules/feature_selection.html#univariate-feature-selection"><span class="std std-ref">اختيار ميزة أحادي المتغير</span></a> حيث لم تكن دالات التقييم
+تقبل الأهداف متعددة التصنيفات. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7676">#7676</a>
+بواسطة <a class="reference external" href="https://github.com/affanv14">Mohammed Affan</a></p></li>
+<li><p>إصلاح مشكلة في تعيين المعلمات عند استدعاء <code class="docutils literal notranslate"><span class="pre">fit</span></code> عدة مرات على
+<code class="xref py py-class docutils literal notranslate"><span class="pre">feature_selection.SelectFromModel</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7756">#7756</a> بواسطة <a href="#id16"><span class="problematic" id="id17">`Andreas Müller`_</span></a></p></li>
+<li><p>إصلاح مشكلة في طريقة <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">multiclass.OneVsRestClassifier</span></code> عندما يكون عدد الفئات المستخدمة في
+<code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> أقل من العدد الإجمالي للفئات في
+البيانات. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7786">#7786</a> بواسطة <a href="#id18"><span class="problematic" id="id19">`Srivatsan Ramesh`_</span></a></p></li>
+<li><p>إصلاح مشكلة في <code class="xref py py-class docutils literal notranslate"><span class="pre">calibration.CalibratedClassifierCV</span></code> حيث
+لم يكن مجموع احتمالات كل فئة للبيانات يساوي 1،
+وأصبح <code class="docutils literal notranslate"><span class="pre">CalibratedClassifierCV</span></code> الآن يتعامل مع الحالة التي يكون فيها عدد الفئات في مجموعة التدريب
+أقل من العدد الإجمالي للفئات في البيانات. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7799">#7799</a> بواسطة
+<a href="#id20"><span class="problematic" id="id21">`Srivatsan Ramesh`_</span></a></p></li>
+<li><p>إصلاح خطأ حيث لم ينفذ <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection.SelectFdr</span></code>
+بشكل صحيح إجراء Benjamini-Hochberg. وقد كان من الممكن أن
+يختار ميزات أقل مما ينبغي.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7490">#7490</a> بواسطة <a class="reference external" href="https://github.com/mpjlu">Peng Meng</a>.</p></li>
+<li><p>أصبح <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.manifold.LocallyLinearEmbedding</span></code> يتعامل بشكل صحيح
+مع المدخلات الصحيحة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6282">#6282</a> بواسطة <a href="#id22"><span class="problematic" id="id23">`Jake Vanderplas`_</span></a>.</p></li>
+<li><p>يفترض معامل <code class="docutils literal notranslate"><span class="pre">min_weight_fraction_leaf</span></code> في الخوارزميات الشجرية للتصنيف والتراجع
+الآن توزيعاً موحداً لأوزان العينات بشكل افتراضي إذا لم يتم تمرير
+وسيط <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> إلى دالة <code class="docutils literal notranslate"><span class="pre">fit</span></code>.
+سابقاً، كان يتم تجاهل المعامل بشكل صامت. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7301">#7301</a>
+بواسطة <a class="reference external" href="https://github.com/nelson-liu">Nelson Liu</a>.</p></li>
+<li><p>مشكلة عددية مع <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.RidgeCV</span></code> على بيانات مركزة عندما
+<code class="docutils literal notranslate"><span class="pre">n_features</span> <span class="pre">&gt;</span> <span class="pre">n_samples</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6178">#6178</a> بواسطة <a href="#id24"><span class="problematic" id="id25">`Bertrand Thirion`_</span></a></p></li>
+<li><p>أصبحت معايير التقسيم في الخوارزميات الشجرية آمنة الآن من ناحية الذاكرة عند الاستنساخ/الحفظ.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7680">#7680</a> بواسطة <a class="reference external" href="https://github.com/olologin">Ibraim Ganiev</a>.</p></li>
+<li><p>إصلاح خطأ حيث تقوم <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.NMF</span></code> بتعيين صفة <code class="docutils literal notranslate"><span class="pre">n_iters_</span></code>
+في دالة <code class="docutils literal notranslate"><span class="pre">transform()</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7553">#7553</a> بواسطة <a class="reference external" href="https://github.com/kiote">Ekaterina
+Krivich</a>.</p></li>
+<li><p>أصبح <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.LogisticRegressionCV</span></code> يتعامل الآن بشكل صحيح
+مع التسميات النصية. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/5874">#5874</a> بواسطة <a href="#id26"><span class="problematic" id="id27">`Raghav RV`_</span></a>.</p></li>
+<li><p>إصلاح خطأ حيث ترفع دالة <code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.model_selection.train_test_split</span></code>
+خطأ عندما تكون <code class="docutils literal notranslate"><span class="pre">stratify</span></code> قائمة من التسميات النصية. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7593">#7593</a> بواسطة
+<a href="#id28"><span class="problematic" id="id29">`Raghav RV`_</span></a>.</p></li>
+<li><p>إصلاح خطأ حيث لم يكن بالإمكان حفظ <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.GridSearchCV</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.RandomizedSearchCV</span></code> بسبب خطأ في حفظ
+<code class="docutils literal notranslate"><span class="pre">np.ma.MaskedArray</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7594">#7594</a> بواسطة
+<a href="#id30"><span class="problematic" id="id31">`Raghav RV`_</span></a>.</p></li>
+<li><p>تسمح جميع دالات التقسيم المتقاطع في <a class="reference internal" href="../api/sklearn.model_selection.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.model_selection</span></code></a> الآن
+باستخدام دالات التقسيم المتقاطع لمرة واحدة كوسيط <code class="docutils literal notranslate"><span class="pre">cv</span></code>. كما يمكن استخدام
+دالات التقسيم المتقاطع غير الحتمية (حيث تنتج استدعاءات متعددة لـ <code class="docutils literal notranslate"><span class="pre">split</span></code> تقسيمات مختلفة)
+كوسيط <code class="docutils literal notranslate"><span class="pre">cv</span></code>.
+سيقوم <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.GridSearchCV</span></code> بإجراء التقسيم المتقاطع لكل
+إعداد معلمات على التقسيم الناتج عن أول استدعاء لـ <code class="docutils literal notranslate"><span class="pre">split</span></code>
+على دالة التقسيم المتقاطع.  <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7660">#7660</a> بواسطة <a href="#id32"><span class="problematic" id="id33">`Raghav RV`_</span></a>.</p></li>
+<li><p>إصلاح خطأ حيث تعيد دالة <code class="xref py py-meth docutils literal notranslate"><span class="pre">preprocessing.MultiLabelBinarizer.fit_transform</span></code>
+مصفوفة CSR غير صالحة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7750">#7750</a> بواسطة <a class="reference external" href="https://github.com/perimosocordiae">CJ Carey</a>.</p></li>
+<li><p>إصلاح خطأ حيث يمكن لدالة <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.pairwise.cosine_distances</span></code> أن تعيد مسافة سالبة صغيرة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7732">#7732</a> بواسطة <a class="reference external" href="https://github.com/asanakoy">Artsion</a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h1>ملخص التغييرات في واجهة برمجة التطبيقات<a class="headerlink" href="#id6" title="Link to this heading">#</a></h1>
+<p>الخوارزميات الشجرية</p>
+<ul class="simple">
+<li><p>يفترض معامل <code class="docutils literal notranslate"><span class="pre">min_weight_fraction_leaf</span></code> في الخوارزميات الشجرية للتصنيف والتراجع
+الآن توزيعاً موحداً لأوزان العينات بشكل افتراضي إذا لم يتم تمرير
+وسيط <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> إلى دالة <code class="docutils literal notranslate"><span class="pre">fit</span></code>.
+سابقاً، كان يتم تجاهل المعامل بشكل صامت. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7301">#7301</a> بواسطة <a class="reference external" href="https://github.com/nelson-liu">Nelson Liu</a>.</p></li>
+<li><p>أصبحت معايير التقسيم في الخوارزميات الشجرية آمنة الآن من ناحية الذاكرة عند الاستنساخ/الحفظ.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7680">#7680</a> بواسطة <a class="reference external" href="https://github.com/olologin">Ibraim Ganiev</a>.</p></li>
+</ul>
+<p>النماذج الخطية والنماذج المعتمدة على النواة والنماذج ذات الصلة</p>
+<ul class="simple">
+<li><p>تم تغيير طول <code class="docutils literal notranslate"><span class="pre">explained_variance_ratio</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis</span></code>
+لكل من محلي Eigen وSVD. أصبح طول الصفة الآن
+يساوي min(n_components, n_classes - 1). <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7632">#7632</a>
+بواسطة <a class="reference external" href="https://github.com/JPFrancoia">JPFrancoia</a></p></li>
+<li><p>مشكلة عددية مع <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.RidgeCV</span></code> على بيانات مركزة عندما
+<code class="docutils literal notranslate"><span class="pre">n_features</span> <span class="pre">&gt;</span> <span class="pre">n_samples</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6178">#6178</a> بواسطة <a href="#id34"><span class="problematic" id="id35">`Bertrand Thirion`_</span></a></p></li>
+</ul>
+<p id="changes-0-18">الإصدار 0.18
+<strong>28 سبتمبر 2016</strong></p>
+</section>
+<section id="model-selection-changes">
+<span id="id7"></span><h1>تحسينات اختيار النموذج وتغييرات واجهة برمجة التطبيقات<a class="headerlink" href="#model-selection-changes" title="Link to this heading">#</a></h1>
+<ul>
+<li><p><strong>نموذج module_selection</strong></p>
+<p>تقدم وحدة البرمجة الجديدة: mod:<code class="docutils literal notranslate"><span class="pre">sklearn.model_selection</span></code>، التي تجمع بين وظائف <code class="docutils literal notranslate"><span class="pre">sklearn.cross_validation</span></code>، و`sklearn.grid_search`، و`sklearn.learning_curve` سابقاً، إمكانيات جديدة مثل التصديق المتقاطع المتداخل وتحسين التعامل مع عمليات البحث عن المعلمات باستخدام Pandas.</p>
+<p>ستبقى العديد من الأمور على حالها، ولكن هناك بعض الاختلافات الرئيسية. اقرأ أدناه لمعرفة المزيد حول التغييرات.</p>
+</li>
+<li><p><strong>محددات نطاق التصديق المتقاطع المستقلة عن البيانات والتي تمكن التصديق المتقاطع المتداخل</strong></p>
+<p>لم تعد محددات نطاق التصديق المتقاطع الجديدة، المحددة في: mod:<code class="docutils literal notranslate"><span class="pre">sklearn.model_selection</span></code>، تُنشأ مع أي معلمات تعتمد على البيانات مثل “y”. بدلاً من ذلك، تعرض طريقة “split” التي تأخذ البيانات وتعطي مولدًا للتقسيمات المختلفة.</p>
+<p>يجعل هذا التغيير من الممكن استخدام محددات نطاق التصديق المتقاطع لأداء التصديق المتقاطع المتداخل، الذي تيسره فئات: class:<code class="docutils literal notranslate"><span class="pre">model_selection.GridSearchCV</span></code> و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.RandomizedSearchCV</span></code>.</p>
+</li>
+<li><p><strong>صفة cv_results_ المحسنة</strong></p>
+<p>إن الخاصية الجديدة “<a href="#id36"><span class="problematic" id="id37">cv_results_</span></a>” (من فئتي: class:<code class="docutils literal notranslate"><span class="pre">model_selection.GridSearchCV</span></code> و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.RandomizedSearchCV</span></code>)، التي تم تقديمها بدلاً من خاصية “<a href="#id38"><span class="problematic" id="id39">grid_scores_</span></a>”، هي عبارة عن قاموس من المصفوفات أحادية البعد مع عناصر في كل مصفوفة مطابقة لمعلمات الإعداد (أي مرشحي البحث).</p>
+<p>يمكن استيراد قاموس “<a href="#id40"><span class="problematic" id="id41">cv_results_</span></a>” بسهولة إلى “pandas” كـ “DataFrame” لاستكشاف نتائج البحث.</p>
+<p>تتضمن مصفوفات “<a href="#id42"><span class="problematic" id="id43">cv_results_</span></a>” الدرجات لكل تقسيم تصديق متقاطع (مع مفاتيح مثل “split0_test_score”)، بالإضافة إلى متوسطها (“mean_test_score”) وانحرافاتها المعيارية (“std_test_score”).</p>
+<p>تتوفر ترتيبات مرشحي البحث (بناءً على متوسط درجات التصديق المتقاطع) في “cv_results_[‘rank_test_score’]”.</p>
+<p>يتم تخزين قيم المعلمات لكل معلمة بشكل منفصل كمصفوفات كائنات numpy المقنعة. يتم إخفاء القيمة، لمرشح البحث هذا، إذا كانت المعلمة المقابلة غير قابلة للتطبيق. بالإضافة إلى ذلك، يتم تخزين قائمة بجميع القواميس المعلمات في “cv_results_[‘params’]”.</p>
+</li>
+<li><p><strong>تمت إعادة تسمية معلمات n_folds وn_iter إلى n_splits</strong></p>
+<p>تم تغيير بعض أسماء المعلمات: تمت إعادة تسمية معلمة “n_folds” في الفئات الجديدة: class:<code class="docutils literal notranslate"><span class="pre">model_selection.KFold</span></code>، و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.GroupKFold</span></code> (راجع أدناه لتغيير الاسم)، و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.StratifiedKFold</span></code> إلى “n_splits”. تمت إعادة تسمية معلمة “n_iter” في الفئات: class:<code class="docutils literal notranslate"><span class="pre">model_selection.ShuffleSplit</span></code>، وفئة: class:<code class="docutils literal notranslate"><span class="pre">model_selection.GroupShuffleSplit</span></code> الجديدة، و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.StratifiedShuffleSplit</span></code> إلى “n_splits”.</p>
+</li>
+<li><p><strong>إعادة تسمية فئات محددات النطاق التي تقبل تسميات المجموعات إلى جانب البيانات</strong></p>
+<p>تمت إعادة تسمية محددات نطاق التصديق المتقاطع “LabelKFold”، و”LabelShuffleSplit”، و”LeaveOneLabelOut”، و”LeavePLabelOut” إلى: class:<code class="docutils literal notranslate"><span class="pre">model_selection.GroupKFold</span></code>، و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.GroupShuffleSplit</span></code>، و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.LeaveOneGroupOut</span></code>، و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.LeavePGroupsOut</span></code> على التوالي.</p>
+<p>لاحظ التغيير من صيغة المفرد إلى الجمع في: class:<code class="docutils literal notranslate"><span class="pre">model_selection.LeavePGroupsOut</span></code>.</p>
+</li>
+<li><p><strong>تمت إعادة تسمية معلمة fit labels إلى groups</strong></p>
+<p>تمت إعادة تسمية معلمة “labels” في طريقة “split” لمحددات النطاق التي تمت إعادة تسميتها حديثًا: class:<code class="docutils literal notranslate"><span class="pre">model_selection.GroupKFold</span></code>، و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.LeaveOneGroupOut</span></code>، و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.LeavePGroupsOut</span></code>، و: class:<code class="docutils literal notranslate"><span class="pre">model_selection.GroupShuffleSplit</span></code> إلى “groups” اتباعًا للمصطلحات الجديدة لأسماء فئاتها.</p>
+</li>
+<li><p><strong>تمت إعادة تسمية معلمة n_labels إلى n_groups</strong></p>
+<p>تمت إعادة تسمية معلمة “n_labels” في فئة: class:<code class="docutils literal notranslate"><span class="pre">model_selection.LeavePGroupsOut</span></code> التي تمت إعادة تسميتها حديثًا إلى “n_groups”.</p>
+</li>
+<li><p>درجات التدريب ومعلومات التوقيت</p>
+<p>يتضمن “<a href="#id44"><span class="problematic" id="id45">cv_results_</span></a>” أيضًا درجات التدريب لكل تقسيم تصديق متقاطع (مع مفاتيح مثل “split0_train_score”)، بالإضافة إلى متوسطها (“mean_train_score”) وانحرافاتها المعيارية (“std_train_score”). لتجنب تكلفة تقييم درجة التدريب، قم بتعيين “return_train_score=False”.</p>
+<p>بالإضافة إلى ذلك، فإن متوسط وانحراف الوقت المستغرق لتقسيم النموذج وتدريبه وتسجيله عبر جميع تقسيمات التصديق المتقاطع متاحان في المفتاح “mean_time” و”std_time” على التوالي.</p>
+</li>
+</ul>
+<p>سجل التغييرات
+فيما يلي ترجمة للنص الموجود بتنسيق ReStructuredText إلى اللغة العربية:</p>
+<section id="id8">
+<h2>الميزات الجديدة<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>التصنيفات والمرجحات</p>
+<ul class="simple">
+<li><p>تمت إعادة تنفيذ وحدة المعالجة Gauss وتم تقديم أداة تقدير التصنيف والتراجع من خلال
+:class: ‘gaussian_process.GaussianProcessClassifier’ و: class: ‘gaussian_process.GaussianProcessRegressor’. ومن بين أمور أخرى، يدعم التنفيذ الجديد هندسة النواة، ومواءمة فرط المعلمات المستندة إلى التدرج أو أخذ عينات من وظائف من توزيع Gauss السابق والتالي. يتم توفير وثائق وأمثلة شاملة. بواسطة <a href="#id46"><span class="problematic" id="id47">`Jan Hendrik Metzen`_</span></a>.</p></li>
+<li><p>تمت إضافة خوارزمية تعلم إشرافية جديدة: :ref: ‘multilayer_perceptron’
+:issue: ‘3204’ بواسطة: user: ‘Issam H. Laradji &lt;IssamLaradji&gt;`</p></li>
+<li><p>تمت إضافة: class: ‘linear_model.HuberRegressor’، وهو نموذج خطي مقاوم للقيم الشاذة.
+:issue: ‘5291’ بواسطة ‘Manoj Kumar’_.</p></li>
+<li><p>تمت إضافة أداة التقدير meta-estimator: class: ‘multioutput.MultiOutputRegressor’. حيث
+يحول المرجعات ذات الإخراج الفردي إلى مرجعات متعددة الإخراج عن طريق ملاءمة
+مرجع واحد لكل إخراج. بواسطة: user: ‘Tim Head &lt;betatim&gt;`.</p></li>
+</ul>
+<p>أدوات تقدير أخرى</p>
+<ul class="simple">
+<li><p>جديد: class: ‘mixture.GaussianMixture’ و: class: ‘mixture.BayesianGaussianMixture’
+استبدل نماذج المزج السابقة، باستخدام الاستدلال الأسرع
+للحصول على نتائج أكثر دقة. :issue: ‘7295’ بواسطة: user: ‘Wei Xue &lt;xuewei4d&gt;’ و
+:user: ‘Thierry Guillemot &lt;tguillemot&gt;’.</p></li>
+<li><p>تم الآن تفكيك فئة ‘decomposition.RandomizedPCA’ إلى: class: ‘decomposition.PCA’
+وهو متاح عند الاستدعاء مع معلمة “svd_solver=’randomized’”.
+تم تغيير العدد الافتراضي لـ “n_iter” لـ “randomized” إلى 4. ويمكن استرداد السلوك القديم لـ PCA باستخدام “svd_solver=’full’”. وتدعو محولة إضافية إلى “arpack” وتؤدي SVD مقصوصة (غير عشوائية). بشكل افتراضي، يتم اختيار أفضل محول اعتمادًا على حجم الإدخال وعدد المكونات المطلوبة. :issue: ‘5299’ بواسطة: user: ‘Giorgio Patrini &lt;giorgiop&gt;’.</p></li>
+<li><p>تمت إضافة دالتين لتقدير المعلومات المتبادلة:
+:func: ‘feature_selection.mutual_info_classif’ و
+:func: ‘feature_selection.mutual_info_regression’. يمكن
+استخدام هذه الدوال في: class: ‘feature_selection.SelectKBest’ و
+:class: ‘feature_selection.SelectPercentile’ كدالات تسجيل.
+بواسطة: user: ‘Andrea Bravi &lt;AndreaBravi&gt;’ و: user: ‘Nikolay Mayorov &lt;nmayorov&gt;’.</p></li>
+<li><p>تمت إضافة فئة: class: ‘ensemble.IsolationForest’ للكشف عن الانحرافات بناءً على
+الغابات العشوائية. بواسطة ‘Nicolas Goix’_.</p></li>
+<li><p>تمت إضافة “algorithm=’elkan’” إلى: class: ‘cluster.KMeans’ لتنفيذ
+خوارزمية K-Means السريعة الخاصة بـ Elkan. بواسطة ‘Andreas Müller’_.</p></li>
+</ul>
+<p>اختيار النموذج والتقييم</p>
+<ul class="simple">
+<li><p>تمت إضافة: func: ‘metrics.fowlkes_mallows_score’، وهو مؤشر Fowlkes Mallows
+الذي يقيس تشابه مجموعتين من النقاط
+بواسطة: user: ‘Arnaud Fouchet &lt;afouchet&gt;’ و: user: ‘Thierry Guillemot &lt;tguillemot&gt;’.</p></li>
+<li><p>تمت إضافة ‘metrics.calinski_harabaz_score’، والتي تحسب درجة Calinski
+وHarabaz لتقييم التجميع الناتج لمجموعة من النقاط.
+بواسطة: user: ‘Arnaud Fouchet &lt;afouchet&gt;’ و: user: ‘Thierry Guillemot &lt;tguillemot&gt;’.</p></li>
+<li><p>تمت إضافة أداة تقسيم جديدة للتحقق من صحة البيانات المتسلسلة زمنياً
+:class: ‘model_selection.TimeSeriesSplit’.
+:issue: ‘6586’ بواسطة: user: ‘YenChen Lin &lt;yenchenlin&gt;’</p></li>
+<li><p>تم استبدال مكررات التحقق من صحة التعابر بمقسّمات التحقق من الصحة المتقاطعة
+المتوفرة من: mod: ‘sklearn.model_selection’، مما يسمح بالتحقق من الصحة المتقاطعة المتداخلة. راجع: ref: ‘model_selection_changes’ لمزيد من المعلومات.
+:issue: ‘4294’ بواسطة ‘Raghav RV’_.</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>التحسينات<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>الأشجار والمجموعات</p>
+<ul class="simple">
+<li><p>تمت إضافة معيار تقسيم جديد لـ: class: ‘tree.DecisionTreeRegressor’،
+متوسط الخطأ المطلق. يمكن أيضًا استخدام هذا المعيار في
+:class: ‘ensemble.ExtraTreesRegressor’،
+:class: ‘ensemble.RandomForestRegressor’، ومرجحات التدرج. :issue: ‘6667’ بواسطة: user: ‘Nelson Liu &lt;nelson-liu&gt;’.</p></li>
+<li><p>تمت إضافة معيار إيقاف مبكر قائم على النقاء المرجح لنمو شجرة القرار.
+:issue: ‘6954’ بواسطة: user: ‘Nelson Liu &lt;nelson-liu&gt;’</p></li>
+<li><p>تحتوي أدوات تقدير الغابات العشوائية والأشجار الإضافية وشجرة القرار الآن على
+طريقة “decision_path” التي تعيد مسار القرار للعينات في
+الشجرة. بواسطة ‘Arnaud Joly’_.</p></li>
+<li><p>تمت إضافة مثال جديد يكشف عن بنية شجرة القرار.
+بواسطة ‘Arnaud Joly’_.</p></li>
+<li><p>تقبل أدوات تقدير الغابات العشوائية والأشجار الإضافية وشجرة القرار والتدرج
+المعلم “min_samples_split” و “min_samples_leaf”
+المقدمة كنسبة مئوية من عينات التدريب. بواسطة: user: ‘yelite &lt;yelite&gt;’ و ‘Arnaud Joly’_.</p></li>
+<li><p>تقبل مرجحات التدرج معلمة “criterion” لتحديد
+معيار التقسيم المستخدم في أشجار القرار المبنية.
+:issue: ‘6667’ بواسطة: user: ‘Nelson Liu &lt;nelson-liu&gt;’.</p></li>
+<li><p>تم تقليل البصمة التخزينية (أحيانًا بشكل كبير) لـ
+‘ensemble.bagging.BaseBagging’ والفئات التي ترث منها،
+أي: class: ‘ensemble.BaggingClassifier’،
+:class: ‘ensemble.BaggingRegressor’، و: class: ‘ensemble.IsolationForest’،
+من خلال إنشاء سمة “<a href="#id48"><span class="problematic" id="id49">estimators_samples_</span></a>” ديناميكيًا فقط عند الحاجة إليها. بواسطة: user: ‘David Staub &lt;staubda&gt;’.</p></li>
+<li><p>تمت إضافة معلمات “n_jobs” و “sample_weight” لـ
+:class: ‘ensemble.VotingClassifier’ لتناسب المقدرات الأساسية بالتوازي.
+:issue: ‘5805’ بواسطة: user: ‘Ibraim Ganiev &lt;olologin&gt;’.</p></li>
+</ul>
+<p>نماذج خطية ومؤطرة وذات صلة</p>
+<ul>
+<li><p>في: class: ‘linear_model.LogisticRegression’، أصبحت محولة SAG متاحة الآن
+في حالة متعددة الحدود. :issue: ‘5251’ بواسطة ‘Tom Dupre la Tour’_.</p></li>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘linear_model.RANSACRegressor’، :class: ‘svm.LinearSVC’ و</p>
+</dd>
+<dt class="field-even">class<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘svm.LinearSVR’ تدعم الآن “sample_weight”.</p>
+</dd>
+</dl>
+<p>بواسطة: user: ‘Imaculate &lt;Imaculate&gt;’.</p>
+</li>
+<li><p>أضف معلمة “loss” إلى: class: ‘linear_model.RANSACRegressor’ لقياس
+الخطأ في العينات لكل محاكمة. بواسطة ‘Manoj Kumar’_.</p></li>
+<li><p>أصبح التنبؤ بالأحداث خارج العينة باستخدام الانحدار الأيزوتوني
+(:class: ‘isotonic.IsotonicRegression’) أسرع بكثير الآن (أكثر من 1000x في الاختبارات باستخدام بيانات اصطناعية). بواسطة: user: ‘Jonathan Arfa &lt;jarfa&gt;’.</p></li>
+<li><p>يستخدم الانحدار الأيزوتوني (:class: ‘isotonic.IsotonicRegression’) الآن خوارزمية أفضل لتجنب
+سلوك O(n^2) في الحالات المرضية، وهو أيضًا أسرع بشكل عام
+(:issue: ‘#6691’). بواسطة ‘Antony Lee’_.</p></li>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘naive_bayes.GaussianNB’ تقبل الآن القيم السابقة للفصل بين البيانات من خلال</p>
+</dd>
+</dl>
+<p>معلمة “priors”. بواسطة: user: ‘Guillaume Lemaitre &lt;glemaitre&gt;’.</p>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘linear_model.ElasticNet’ و: class: ‘linear_model.Lasso’</p>
+</dd>
+</dl>
+<p>يعمل الآن مع بيانات “np.float32” دون تحويلها
+إلى “np.float64”. يسمح ذلك بتقليل استهلاك الذاكرة. :issue: ‘6913’ بواسطة: user: ‘YenChen Lin &lt;yenchenlin&gt;’.</p>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘semi_supervised.LabelPropagation’ و: class: ‘semi_supervised.LabelSpreading’</p>
+</dd>
+</dl>
+<p>تقبل الآن دالات النواة التعسفية بالإضافة إلى سلاسل “knn” و “rbf”.
+:issue: ‘5762’ بواسطة: user: ‘Utkarsh Upadhyay &lt;musically-ut&gt;’.</p>
+</li>
+</ul>
+<p>التحليل إلى عوامل، والتعلم على المنحنى، والتجميع</p>
+<ul>
+<li><p>تمت إضافة وظيفة “inverse_transform” إلى: class: ‘decomposition.NMF’ لحساب
+مصفوفة البيانات ذات الشكل الأصلي. بواسطة: user: ‘Anish Shah &lt;AnishShah&gt;’.</p></li>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘cluster.KMeans’ و: class: ‘cluster.MiniBatchKMeans’ يعملان الآن</p>
+</dd>
+</dl>
+<p>مع بيانات “np.float32” و “np.float64” دون تحويلها.
+يسمح ذلك بتقليل استهلاك الذاكرة عن طريق استخدام “np.float32”.
+:issue: ‘6846’ بواسطة: user: ‘Sebastian Säger &lt;ssaeger&gt;’ و
+:user: ‘YenChen Lin &lt;yenchenlin&gt;’.</p>
+</li>
+</ul>
+<p>ما قبل المعالجة واختيار الميزة</p>
+<ul>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘preprocessing.RobustScaler’ تقبل الآن معلمة “quantile_range”.</p>
+</dd>
+<dt class="field-even">issue<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘5929’ بواسطة: user: ‘Konstantin Podshumok &lt;podshumok&gt;’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘feature_extraction.FeatureHasher’ تقبل الآن القيم النصية.</p>
+</dd>
+<dt class="field-even">issue<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘6173’ بواسطة: user: ‘Ryad Zenine &lt;ryadzenine&gt;’ و</p>
+</dd>
+<dt class="field-odd">user<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘Devashish Deshpande &lt;dsquareindia&gt;’.</p>
+</dd>
+</dl>
+</li>
+<li><p>يمكن الآن توفير وسيطات الكلمات الرئيسية إلى “func” في
+:class: ‘preprocessing.FunctionTransformer’ من خلال معلمة “kw_args”. بواسطة ‘Brian McFee’_.</p></li>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘feature_selection.SelectKBest’ و: class: ‘feature_selection.SelectPercentile’</p>
+</dd>
+</dl>
+<p>تقبل الآن دالات التسجيل التي تأخذ X، y كإدخال وتعيد فقط الدرجات.
+بواسطة: user: ‘Nikolay Mayorov &lt;nmayorov&gt;’.</p>
+</li>
+</ul>
+<p>تقييم النموذج والمقدرات الفوقية</p>
+<ul>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘multiclass.OneVsOneClassifier’ و: class: ‘multiclass.OneVsRestClassifier’</p>
+</dd>
+</dl>
+<p>تدعم الآن “partial_fit”. بواسطة: user: ‘Asish Panda &lt;kaichogami&gt;’ و
+:user: ‘Philipp Dowling &lt;phdowling&gt;’.</p>
+</li>
+<li><p>تمت إضافة دعم لاستبدال أو تعطيل مكونات: class: ‘pipeline.Pipeline’
+و: class: ‘pipeline.FeatureUnion’ باستخدام واجهة “set_params”
+التي تعمل على تشغيل ‘sklearn.grid_search’.
+راجع: ref: ‘sphx_glr_auto_examples_compose_plot_compare_reduction.py’
+بواسطة ‘Joel Nothman’_ و: user: ‘Robert McGibbon &lt;rmcgibbo&gt;’.</p></li>
+<li><p>يمكن استيراد سمة “<a href="#id50"><span class="problematic" id="id51">cv_results_</span></a>” الجديدة لـ: class: ‘model_selection.GridSearchCV’
+(:class: ‘model_selection.RandomizedSearchCV’) بسهولة إلى pandas كـ “DataFrame”. راجع: ref: ‘model_selection_changes’ لمزيد من المعلومات.
+:issue: ‘6697’ بواسطة ‘Raghav RV’_.</p></li>
+<li><p>تعميم: func: ‘model_selection.cross_val_predict’.
+يمكن تمرير أسماء الطرق مثل ‘predict_proba’ لاستخدامها في إطار التحقق من الصحة المتقاطعة بدلاً من ‘predict’ الافتراضي.
+بواسطة: user: ‘Ori Ziv &lt;zivori&gt;’ و: user: ‘Sears Merritt &lt;merritts&gt;’.</p></li>
+<li><p>درجات التدريب والوقت المستغرق للتدريب متبوعًا بالتسجيل لكل مرشح بحث
+متاح الآن في قاموس “<a href="#id52"><span class="problematic" id="id53">cv_results_</span></a>”.
+راجع: ref: ‘model_selection_changes’ لمزيد من المعلومات.
+:issue: ‘7325’ بواسطة: user: ‘Eugene Chen &lt;eyc88&gt;’ و ‘Raghav RV’_.</p></li>
+</ul>
+<p>المقاييس</p>
+<ul class="simple">
+<li><p>تمت إضافة علم “labels” إلى: class: ‘metrics.log_loss’ لتوفير
+العلامات بشكل صريح عندما يختلف عدد الفصول في “y_true” و “y_pred”.
+:issue: ‘7239’ بواسطة: user: ‘Hong Guangguo &lt;hongguangguo&gt;’ بمساعدة
+:user: ‘Mads Jensen &lt;indianajensen&gt;’ و: user: ‘Nelson Liu &lt;nelson-liu&gt;’.</p></li>
+<li><p>دعم مصفوفات الاحتمال المتناثرة في تقييم التجميع
+(‘metrics.cluster.supervised’) للوصول إلى عدد كبير من
+المجموعات.
+:issue: ‘7419’ بواسطة: user: ‘Gregory Stupp &lt;stuppie&gt;’ و ‘Joel Nothman’_.</p></li>
+<li><p>أضف معلمة “sample_weight” إلى: func: ‘metrics.matthews_corrcoef’.
+بواسطة: user: ‘Jatin Shah &lt;jatinshah&gt;’ و ‘Raghav RV’_.</p></li>
+<li><p>تسريع: func: ‘metrics.silhouette_score’ باستخدام العمليات المتجهة.
+بواسطة ‘Manoj Kumar’_.</p></li>
+<li><p>أضف معلمة “sample_weight” إلى: func: ‘metrics.confusion_matrix’.
+بواسطة: user: ‘Bernardo Stein &lt;DanielSidhion&gt;’.</p></li>
+</ul>
+<p>متفرقات</p>
+<ul class="simple">
+<li><p>تمت إضافة معلمة “n_jobs” إلى: class: ‘feature_selection.RFECV’ لحساب
+النتيجة على طيات الاختبار بالتوازي. بواسطة ‘Manoj Kumar’_</p></li>
+<li><p>لا يحتوي كود المصدر على ملفات C/C++ التي تم إنشاؤها بواسطة cython: يتم
+إنشاؤها أثناء البناء. ستظل حزم التوزيع تحتوي على ملفات C/C++ المولدة. بواسطة: user: ‘Arthur Mensch &lt;arthurmensch&gt;’.</p></li>
+<li><p>تقليل استخدام الذاكرة لمصفوفات الإدخال ذات النقطة العائمة 32 بت من
+‘utils.sparse_func.mean_variance_axis’ و
+‘utils.sparse_func.incr_mean_variance_axis’ من خلال دعم أنواع cython
+المندمجة. بواسطة: user: ‘YenChen Lin &lt;yenchenlin&gt;’.</p></li>
+<li><p>الآن، تقبل ‘ignore_warnings’ حجة الفئة لتجاهل
+التحذيرات من نوع محدد فقط. بواسطة: user: ‘Thierry Guillemot &lt;tguillemot&gt;’.</p></li>
+<li><p>تمت إضافة معلمة “return_X_y” وخيار نوع الإرجاع “data, target) : tuple” إلى
+:func: ‘datasets.load_iris’ dataset
+:issue: ‘7049’،
+:func: ‘datasets.load_breast_cancer’ dataset
+:issue: ‘7152’،
+:func: ‘datasets.load_digits’ dataset،
+:func: ‘datasets.load_diabetes’ dataset،
+:func: ‘datasets.load_linnerud’ dataset،
+‘datasets.load_boston’ dataset
+:issue: ‘7154’ بواسطة
+:user: ‘Manvendra Singh&lt;manu-chroma&gt;’.</p></li>
+<li><p>تبسيط وظيفة “clone”، وإيقاف دعم المقدرات
+التي تعدل المعلمات في “__init__”. :issue: ‘5540’ بواسطة ‘Andreas Müller’_.</p></li>
+<li><p>عند إلغاء تمثيل نموذج scikit-learn في إصدار مختلف عن الإصدار الذي
+تم تدريب النموذج عليه، يتم رفع “UserWarning”، راجع: ref: ‘the documentation
+on model persistence &lt;persistence_limitations&gt;’ لمزيد من التفاصيل. (:issue: ‘7248’)
+بواسطة ‘Andreas Müller’_.</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>تصحيح الأخطاء<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<p>الأشجار والمجموعات</p>
+<ul>
+<li><p>لن تقبل الغابات العشوائية والأشجار الإضافية وأشجار القرار ومرجحات التدرج
+بعد الآن “min_samples_split=1” حيث يلزم عيناتان على الأقل
+لتقسيم عقدة شجرة القرار. بواسطة ‘Arnaud Joly’_</p></li>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘ensemble.VotingClassifier’ تثير الآن “NotFittedError” إذا تم استدعاء “predict” أو</p>
+</dd>
+</dl>
+<p>“transform” أو “predict_proba” على أداة التقدير غير المناسبة.
+بواسطة ‘Sebastian Raschka’_.</p>
+</li>
+</ul>
+<p>فيما يلي ترجمة للنص المكتوب بتنسيق ReStructuredText إلى اللغة العربية:</p>
+<ul class="simple">
+<li><p>إصلاح خطأ حيث كانت class:<code class="docutils literal notranslate"><span class="pre">ensemble.AdaBoostClassifier</span></code> و class:<code class="docutils literal notranslate"><span class="pre">ensemble.AdaBoostRegressor</span></code> تؤديان بشكل سيئ إذا تم تثبيت “random_state”. (issue:<code class="docutils literal notranslate"><span class="pre">7411</span></code>). بواسطة “Joel Nothman”.</p></li>
+<li><p>إصلاح خطأ في المجموعات مع التعشيش العشوائي حيث لم يتم تعيين “random_state” على المُقدِّرات الأساسية في خط أنابيب أو تعشيش مماثل. (issue:<code class="docutils literal notranslate"><span class="pre">7411</span></code>). لاحظ أن النتائج لـ class:<code class="docutils literal notranslate"><span class="pre">ensemble.BaggingClassifier</span></code> و class:<code class="docutils literal notranslate"><span class="pre">ensemble.BaggingRegressor</span></code> و class:<code class="docutils literal notranslate"><span class="pre">ensemble.AdaBoostClassifier</span></code> و class:<code class="docutils literal notranslate"><span class="pre">ensemble.AdaBoostRegressor</span></code> ستختلف الآن عن الإصدارات السابقة. بواسطة “Joel Nothman”.</p></li>
+</ul>
+<p>النماذج الخطية والنماذج المعتمدة على النواة والنماذج ذات الصلة</p>
+<ul class="simple">
+<li><p>إصلاح حساب المشتق غير الصحيح لـ “loss=’squared_epsilon_insensitive’” في class:<code class="docutils literal notranslate"><span class="pre">linear_model.SGDClassifier</span></code> و class:<code class="docutils literal notranslate"><span class="pre">linear_model.SGDRegressor</span></code> (issue:<code class="docutils literal notranslate"><span class="pre">6764</span></code>). بواسطة “Wenhua Yang”.</p></li>
+<li><p>إصلاح خطأ في class:<code class="docutils literal notranslate"><span class="pre">linear_model.LogisticRegressionCV</span></code> حيث لم يقبل “solver=’liblinear’” القيمة “class_weights=’balanced’”. (issue:<code class="docutils literal notranslate"><span class="pre">6817</span></code>). بواسطة “Tom Dupre la Tour”.</p></li>
+<li><p>إصلاح خطأ في class:<code class="docutils literal notranslate"><span class="pre">neighbors.RadiusNeighborsClassifier</span></code> حيث حدث خطأ عند وجود نقاط شاذة يتم وضع علامات عليها ووظيفة وزن محددة (issue:<code class="docutils literal notranslate"><span class="pre">6902</span></code>). بواسطة “LeonieBorne”.</p></li>
+<li><p>إصلاح وظيفة القرار المتناثرة لـ class:<code class="docutils literal notranslate"><span class="pre">linear_model.ElasticNet</span></code> لمطابقة الإخراج مع الكثيف في حالة الإخراج المتعدد.</p></li>
+</ul>
+<p>التحليل إلى مكونات والتعلم على المنحنى والتجمع</p>
+<ul class="simple">
+<li><p>القيمة الافتراضية لعدد “iterated_power” في “decomposition.RandomizedPCA” هي 4 بدلاً من 3. (issue:<code class="docutils literal notranslate"><span class="pre">5141</span></code>) بواسطة “Giorgio Patrini”.</p></li>
+<li><p>يقوم func:<code class="docutils literal notranslate"><span class="pre">utils.extmath.randomized_svd</span></code> بأربع عمليات تكرار للقوة بشكل افتراضي، بدلاً من 0. في الممارسة العملية، هذا يكفي للحصول على تقريب جيد للقيم الذاتية/الخاصة الحقيقية في وجود الضوضاء. عندما تكون “n_components” صغيرة (أقل من 0.1 * min(X.shape))، يتم تعيين “n_iter” إلى 7، ما لم يحدد المستخدم عددًا أكبر. هذا يحسن الدقة مع عدد قليل من المكونات. (issue:<code class="docutils literal notranslate"><span class="pre">5299</span></code>) بواسطة “Giorgio Patrini”.</p></li>
+<li><p>تم إصلاح عدم الاتساق بين التبييض/عدم التبييض بين مكونات class:<code class="docutils literal notranslate"><span class="pre">decomposition.PCA</span></code> و “decomposition.RandomizedPCA” (تمت معاملته الآن في PCA، راجع الميزات الجديدة) يتم تخزين “<a href="#id54"><span class="problematic" id="id55">components_</span></a>” بدون تبييض. (issue:<code class="docutils literal notranslate"><span class="pre">5299</span></code>) بواسطة “Giorgio Patrini”.</p></li>
+<li><p>إصلاح خطأ في func:<code class="docutils literal notranslate"><span class="pre">manifold.spectral_embedding</span></code> حيث تم تعيين القطرية لمصفوفة Laplacian غير الموحدة بشكل غير صحيح إلى 1. (issue:<code class="docutils literal notranslate"><span class="pre">4995</span></code>) بواسطة “Peter Fischer”.</p></li>
+<li><p>تم إصلاح التهيئة غير الصحيحة لـ “utils.arpack.eigsh” في جميع المواقع. يؤثر هذا على “cluster.bicluster.SpectralBiclustering” و class:<code class="docutils literal notranslate"><span class="pre">decomposition.KernelPCA</span></code> و class:<code class="docutils literal notranslate"><span class="pre">manifold.LocallyLinearEmbedding</span></code> و class:<code class="docutils literal notranslate"><span class="pre">manifold.SpectralEmbedding</span></code> (issue:<code class="docutils literal notranslate"><span class="pre">5012</span></code>). بواسطة “Peter Fischer”.</p></li>
+<li><p>يتم الآن حساب الخاصية “<a href="#id56"><span class="problematic" id="id57">explained_variance_ratio_</span></a>” باستخدام محلل المميز الخطي لـ class:<code class="docutils literal notranslate"><span class="pre">discriminant_analysis.LinearDiscriminantAnalysis</span></code> وإرجاع النتائج الصحيحة. بواسطة “JPFrancoia”.</p></li>
+</ul>
+<p>ما قبل المعالجة واختيار الميزة</p>
+<ul class="simple">
+<li><p>الآن، يقوم “preprocessing.data._transform_selected” دائمًا بتمرير نسخة من “X” إلى دالة التحويل عندما تكون “copy=True” (issue:<code class="docutils literal notranslate"><span class="pre">7194</span></code>). بواسطة “Caio Oliveira”.</p></li>
+</ul>
+<p>تقييم النموذج والمُقدِّرات الفوقية</p>
+<ul class="simple">
+<li><p>الآن، يقوم class:<code class="docutils literal notranslate"><span class="pre">model_selection.StratifiedKFold</span></code> بإصدار خطأ إذا كانت جميع القيم “n_labels” للفئات الفردية أقل من “n_folds”. (issue:<code class="docutils literal notranslate"><span class="pre">6182</span></code>) بواسطة “Devashish Deshpande”.</p></li>
+<li><p>إصلاح خطأ في class:<code class="docutils literal notranslate"><span class="pre">model_selection.StratifiedShuffleSplit</span></code> حيث يمكن أن تتداخل عينة التدريب والاختبار في بعض الحالات الحدية، راجع (issue:<code class="docutils literal notranslate"><span class="pre">6121</span></code>) لمزيد من التفاصيل. بواسطة “Loic Esteve”.</p></li>
+<li><p>إصلاح في class:<code class="docutils literal notranslate"><span class="pre">sklearn.model_selection.StratifiedShuffleSplit</span></code> لإرجاع الانقسامات بحجم “train_size” و”test_size” في جميع الحالات (issue:<code class="docutils literal notranslate"><span class="pre">6472</span></code>). بواسطة “Andreas Müller”.</p></li>
+<li><p>يعمل التحقق من صحة التداخل لـ class:<code class="docutils literal notranslate"><span class="pre">multiclass.OneVsOneClassifier</span></code> و class:<code class="docutils literal notranslate"><span class="pre">multiclass.OneVsRestClassifier</span></code> الآن مع النواة المحسوبة مسبقًا. (issue:<code class="docutils literal notranslate"><span class="pre">7350</span></code>) بواسطة “Russell Smith”.</p></li>
+<li><p>إصلاح تفويض طريقة “predict_proba” غير المكتملة من class:<code class="docutils literal notranslate"><span class="pre">model_selection.GridSearchCV</span></code> إلى class:<code class="docutils literal notranslate"><span class="pre">linear_model.SGDClassifier</span></code> (issue:<code class="docutils literal notranslate"><span class="pre">7159</span></code>) بواسطة “Yichuan Liu”.</p></li>
+</ul>
+<p>المقاييس</p>
+<ul class="simple">
+<li><p>إصلاح خطأ في func:<code class="docutils literal notranslate"><span class="pre">metrics.silhouette_score</span></code> حيث تم تسجيل المجموعات بحجم 1 بشكل غير صحيح. يجب أن تحصل على نتيجة 0. بواسطة “Joel Nothman”.</p></li>
+<li><p>إصلاح خطأ في func:<code class="docutils literal notranslate"><span class="pre">metrics.silhouette_samples</span></code> بحيث يعمل الآن مع العلامات التعريفية التعسفية، وليس فقط تلك التي تتراوح من 0 إلى n_clusters - 1.</p></li>
+<li><p>إصلاح خطأ حيث كانت المعلومات المتبادلة المتوقعة والمعدلة غير صحيحة إذا تجاوزت خلايا التبعية العنقودية “2**16”. بواسطة “Joel Nothman”.</p></li>
+<li><p>يقوم func:<code class="docutils literal notranslate"><span class="pre">metrics.pairwise_distances</span></code> الآن بتحويل المصفوفات إلى مصفوفات بوليانية عند الحاجة في “scipy.spatial.distance”. (issue:<code class="docutils literal notranslate"><span class="pre">5460</span></code>) بواسطة “Tom Dupre la Tour”.</p></li>
+<li><p>إصلاح دعم الإدخال المتناثر في func:<code class="docutils literal notranslate"><span class="pre">metrics.silhouette_score</span></code> وكذلك الأمثلة/النصوص/document_clustering.py. بواسطة “YenChen Lin”.</p></li>
+<li><p>لم يعد func:<code class="docutils literal notranslate"><span class="pre">metrics.roc_curve</span></code> و func:<code class="docutils literal notranslate"><span class="pre">metrics.precision_recall_curve</span></code> يقومان بتقريب قيم “y_score” عند إنشاء منحنيات ROC؛ كان هذا يسبب مشاكل للمستخدمين الذين لديهم اختلافات صغيرة جدًا في النتائج (issue:<code class="docutils literal notranslate"><span class="pre">7353</span></code>).</p></li>
+</ul>
+<p>متفرقات</p>
+<ul class="simple">
+<li><p>يعمل model_selection.tests._search._check_param_grid الآن بشكل صحيح مع جميع الأنواع التي تمتد/تنفذ “Sequence” (باستثناء السلسلة)، بما في ذلك النطاق (Python 3.x) و xrange (Python 2.x). (issue:<code class="docutils literal notranslate"><span class="pre">7323</span></code>) بواسطة “Viacheslav Kovalevskyi”.</p></li>
+<li><p>func:<code class="docutils literal notranslate"><span class="pre">utils.extmath.randomized_range_finder</span></code> أكثر استقرارًا من الناحية العددية عندما يتم طلب العديد من تكرارات القوة، حيث يقوم بتطبيع LU بشكل افتراضي. إذا كان “n_iter&lt;2”، فمن غير المرجح حدوث مشكلات عددية، وبالتالي لا يتم تطبيق أي تطبيع. تتوفر خيارات تطبيع أخرى: “none” و”LU” و”QR”. (issue:<code class="docutils literal notranslate"><span class="pre">5141</span></code>) بواسطة “Giorgio Patrini”.</p></li>
+<li><p>إصلاح خطأ حيث لا يمكن تمرير بعض تنسيقات مصفوفة “scipy.sparse” والمُقدِّرات التي تحتوي عليها كوسيط إلى func:<code class="docutils literal notranslate"><span class="pre">base.clone</span></code>. بواسطة “Loic Esteve”.</p></li>
+<li><p>يمكن الآن لـ func:<code class="docutils literal notranslate"><span class="pre">datasets.load_svmlight_file</span></code> قراءة قيم QID long int. (issue:<code class="docutils literal notranslate"><span class="pre">7101</span></code>) بواسطة “Ibraim Ganiev”.</p></li>
+</ul>
+<p>ملخص التغييرات في واجهة برمجة التطبيقات
+فيما يلي ترجمة النص إلى اللغة العربية:</p>
+<hr class="docutils" />
+<p>نماذج خطية ومؤطرة وذات صلة</p>
+<ul class="simple">
+<li><p>تم إيقاف استخدام “residual_metric” في <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.RANSACRegressor</span></code>.
+استخدم “loss” بدلاً من ذلك. بواسطة <a href="#id58"><span class="problematic" id="id59">`مانوج كومار`_</span></a>.</p></li>
+<li><p>تم إيقاف الوصول إلى السمات العامة <code class="docutils literal notranslate"><span class="pre">.X_</span></code> و <code class="docutils literal notranslate"><span class="pre">.y_</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">isotonic.IsotonicRegression</span></code>. بواسطة <a class="reference external" href="https://github.com/jarfa">جوناثان أرفا</a>.</p></li>
+</ul>
+<p>التحليل إلى عوامل، والتعلم على المنحنيات، وتصنيف البيانات</p>
+<ul class="simple">
+<li><p>تم إيقاف استخدام “mixture.DPGMM” القديمة لصالح الفئة الجديدة
+<code class="xref py py-class docutils literal notranslate"><span class="pre">mixture.BayesianGaussianMixture</span></code> (مع معلمة
+<code class="docutils literal notranslate"><span class="pre">weight_concentration_prior_type='dirichlet_process'</span></code>).
+تقوم الفئة الجديدة بحل المشكلات الحسابية للفئة القديمة وتحسب مزيج غاوسي مع
+توزيع ديريتشليت قبل المعالجة بشكل أسرع من ذي قبل.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7295">#7295</a> بواسطة <a class="reference external" href="https://github.com/xuewei4d">وي شيوي</a> و <a class="reference external" href="https://github.com/tguillemot">تييري غيوموت</a>.</p></li>
+<li><p>تم إيقاف استخدام “mixture.VBGMM” القديمة لصالح الفئة الجديدة
+<code class="xref py py-class docutils literal notranslate"><span class="pre">mixture.BayesianGaussianMixture</span></code> (مع معلمة
+<code class="docutils literal notranslate"><span class="pre">weight_concentration_prior_type='dirichlet_distribution'</span></code>).
+تقوم الفئة الجديدة بحل المشكلات الحسابية للفئة القديمة وتحسب مزيج غاوسي الخوارزمي
+البايزي المتغير بشكل أسرع من ذي قبل.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6651">#6651</a> بواسطة <a class="reference external" href="https://github.com/xuewei4d">وي شيوي</a> و <a class="reference external" href="https://github.com/tguillemot">تييري غيوموت</a>.</p></li>
+<li><p>تم إيقاف استخدام “mixture.GMM” القديمة لصالح الفئة الجديدة
+<code class="xref py py-class docutils literal notranslate"><span class="pre">mixture.GaussianMixture</span></code>. تقوم الفئة الجديدة بحساب المزيج الغاوسي
+بشكل أسرع من ذي قبل وتم حل بعض المشكلات الحسابية.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6666">#6666</a> بواسطة <a class="reference external" href="https://github.com/xuewei4d">وي شيوي</a> و <a class="reference external" href="https://github.com/tguillemot">تييري غيوموت</a>.</p></li>
+</ul>
+<p>تقييم النماذج والميتا-خوارزميات</p>
+<ul class="simple">
+<li><p>تم إيقاف استخدام <code class="docutils literal notranslate"><span class="pre">sklearn.cross_validation</span></code>، و`sklearn.grid_search`،
+و`sklearn.learning_curve`، وتم إعادة تنظيم الفئات والوظائف في وحدة
+<a class="reference internal" href="../api/sklearn.model_selection.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.model_selection</span></code></a>. راجع <a class="reference internal" href="#model-selection-changes"><span class="std std-ref">تحسينات اختيار النموذج وتغييرات واجهة برمجة التطبيقات</span></a> لمزيد من
+المعلومات.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/4294">#4294</a> بواسطة <a href="#id60"><span class="problematic" id="id61">`راغاف آر في`_</span></a>.</p></li>
+<li><p>تم إيقاف استخدام السمة “<a href="#id62"><span class="problematic" id="id63">grid_scores_</span></a>” في <code class="xref py py-class docutils literal notranslate"><span class="pre">model_selection.GridSearchCV</span></code>
+و <code class="xref py py-class docutils literal notranslate"><span class="pre">model_partum.RandomizedSearchCV</span></code> لصالح السمة “<a href="#id64"><span class="problematic" id="id65">cv_results_</span></a>”.
+راجع <a class="reference internal" href="#model-selection-changes"><span class="std std-ref">تحسينات اختيار النموذج وتغييرات واجهة برمجة التطبيقات</span></a> لمزيد من المعلومات.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6697">#6697</a> بواسطة <a href="#id66"><span class="problematic" id="id67">`راغاف آر في`_</span></a>.</p></li>
+<li><p>تم استبدال معلمتي “n_iter” أو “n_folds” في برامج التقسيم CV القديمة
+بالمعلمة الجديدة “n_splits” حيث يمكنها توفير واجهة متسقة وغير مبهمة لتمثيل
+عدد الانقسامات بين مجموعات التدريب والاختبار.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7187">#7187</a> بواسطة <a class="reference external" href="https://github.com/yenchenlin">يين تشين لين</a>.</p></li>
+<li><p>تم تغيير اسم معلمة “classes” إلى “labels” في
+<code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.hamming_loss</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7260">#7260</a> بواسطة <a class="reference external" href="https://github.com/srvanrell">سيباستيان فانريل</a>.</p></li>
+<li><p>تم تغيير أسماء فئات التقسيم “LabelKFold”، و”LabelShuffleSplit”،
+و”LeaveOneLabelOut”، و”LeavePLabelsOut” إلى
+<code class="xref py py-class docutils literal notranslate"><span class="pre">model_selection.GroupKFold</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">model_selection.GroupShuffleSplit</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">model_selection.LeaveOneGroupOut</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">model_selection.LeavePGroupsOut</span></code> على التوالي.
+كما تم تغيير اسم المعلمة “labels” في طريقة “split” لفئات التقسيم المعاد تسميتها
+<code class="xref py py-class docutils literal notranslate"><span class="pre">model_selection.LeaveOneGroupOut</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">model_selection.LeavePGroupsOut</span></code> إلى “groups”. بالإضافة إلى ذلك، في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">model_selection.LeavePGroupsOut</span></code>، تم تغيير اسم المعلمة “n_labels” إلى
+“n_groups”.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/6660">#6660</a> بواسطة <a href="#id68"><span class="problematic" id="id69">`راغاف آر في`_</span></a>.</p></li>
+<li><p>تم إضافة بادئة “<a href="#id70"><span class="problematic" id="id71">neg_</span></a>” إلى أسماء الأخطاء والخسائر لمعلمة “scoring”، مثل
+“neg_mean_squared_error”. وتم إيقاف استخدام الإصدارات غير المسبوقة وسيتم
+إزالتها في الإصدار 0.20.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/7261">#7261</a> بواسطة <a class="reference external" href="https://github.com/betatim">تيم هيد</a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="id11">
+<h1>المساهمون في الشفرة<a class="headerlink" href="#id11" title="Link to this heading">#</a></h1>
+<p>أديتيا جوشي، أليخاندرو، ألكسندر فابيش، ألكسندر لوجينوف، ألكسندر
+مينيوشكين، ألكسندر رودي، ألكسندر أباديا، ألكسندر أبراهام، ألكسندر
+غرامفورت، ألكسندر سانت، أليكسفيلدز، ألفارو أولوا، أليسا، أملان كار،
+أندرياس مولر، أندرو جييسيل، أندرو جاكسون، أندرو مكلوه، أندرو
+موراي، أنيش شاه، عرفات، أرشيت شارما، أرييل روكيم، أرنو جولي، أرنو
+راشيه، آرثر مينش، آش هوفر، asnt، b0noI، بهزاد تابيبيان، برناردو،
+بيرنهارد كراتزوالد، بهارجاف مانجيبودي، بليك فلاي، بويوان دينغ، براندون كارتر،
+بريت نول، بريان موفي، كايو أوليفيرا، كاميلو لاموس، كارول ويلينغ، كاس،
+سيشاين لي، تشارلز تروونغ، تشي-كوي ياو، سي جي كاري، كودفيج، كولين ني، دان
+شيبلر، دانيال، دانيال هينيك، ديفيد إليس، ديفيد نيكولسون، ديفيد شتاوب، ديفيد
+ثيلر، ديفيد وارشو، دافيدي لاساغنا، ديبورا، ديفينيتليانسرتاين، ديدي
+بار-زيف، djipey، dsquareindia، إدوينينسا، إلياس كوتي، إلفيس دوهماتوب، إيثان
+وايت، فابيان بيدريجوسا، فابيو تيكون، فيساشي، فلوريان فيلهلم، فرانسيس،
+فرانسيس أو’دونوفان، غاييل فارو، جانيف إبرايم، غيه جي، جيلز لوب، جيورجيو
+باتريني، جيوفاني شيروبين، جيوفاني لانزاني، غلين كيان، غوردون
+موهر، govin-vatsan، غراهام كليناجان، غريغ ريدا، غريغ ستوب، غيوم
+ليميتر، غوستاف مورتبرغ، halwai، هاريزو راجاونا، هاري مافروفوراكيس،
+هاشكود55، hdmetor، هنري لين، هوبسون لين، هوغو بوين-أندرسون،
+إيجور أندريوشينكو، إيمكوليت، إينكي هوانج، إسحاق سيجارانامو،
+إيشانك غولاتي، عصام لارادجي، إيفر جوردال، jackmartin، جاكوب شريبر، جيك
+فاندربلاس، جيمس فيدلر، جيمس روتلي، جان زيكس، جانا بريتينجين، جارفا، جيسون
+لاسكا، jblackburne، جيف ليفيسك، جيفري بلاكبيرن، جيفري04، جيريمي هينتز،
+جيرمينيكسون، جيروين، جيسيكا يونغ، جيل-جين في، جيمي جيا، جييوان كيان، جويل
+نوتمان، johannah، جون، جون بويرسما، جون كيركهام، جون مولر،
+جوناثان.سترايبيل، جونكرال، جوردي، جوزيف مونوز، جوشوا كوك، JPFrancoia،
+jrfiedler، JulianKahnert، juliathebrave، kaichogami، KamalakerDadi، كينيث
+لايونز، كيفن وانغ، kingjr، kjell، كونستانتين بودشوموك، كورنيل كيلكزيفسكي،
+كريشنا كاليان، krishnakalyan3، Kvle بوتنام، كايل جاكسون، لارس بويتينك،
+ldavid، LeiG، LeightonZhang، ليلاند ماكنيس، ليانغ-تشي هسيه، ليليان بيسون،
+lizsz، لويك إستيف، لويس تياو، ليوني بورن، مادس جنسن، مانيتيجا ناندانا،
+مانوج كومار، مانفندرا سينغ، ماركو، ماريو كريل، مارك باو، مارك سزيبيينيك،
+مارتن مادسن، MartinBpr، ماريان موريل، ماسيل، ماتيوس، ماثيو بلونديل،
+ماثيو دوبوا، ماتيو، ماتياس إيكمان، ماكس موروز، مايكل شيرير، ميشياكي
+أريجا، ميخائيل كوروبوف، موسى طايفي، mrandrewandrade، مريدول سيث، nadya-p،
+ناويا كاناي، نيت جورج، نيل فياروكونو، نيلسون ليو، نيك جيمس،
+NickleDave، نيكو، نيكولاس غويكس، نيكولاي مايوروف، نينغشي، nlathia،
+okbalefthanded، أوخلبكوف، أوليفييه جريسل، بانوس لورينداس، بول ستريكلاند،
+بيرين ليتيل، pestrickland، بيتر فيشر، بيتر، بينج-ياو، تشانغ،
+براكتيكالسويفت، بريستون باري، كيميو زينغ، راشيت كانسال، راغاف آر في،
+رالف غوميرز، رامانا. إس، رامميغ، راندي أولسون، روب ألكسندر، روبرت لوتز،
+روبن شاكر، روهان جين، رويفينغ زينغ، ريان يو، ريمي ليون، saihttam،
+Saiwing يونج، سام شليفر، صموئيل سانت-جان، سارتاج سينغ، ساسانك شيلامكور،
+saurabh.bansod، سكوت أندروز، سكوت لوي، seales، سيباستيان راشكا، سيباستيان
+سيغر، سيباستيان فانريل، سيرجي ليبيديف، شاغون سوداني، شانموجا سي في،
+شاشانك شيكار، shawpan، shengxiduan، شوتا، shuckle16، سكيبير سيبولد،
+sklearn-ci، SmedbergM، srvanrell، سيباستيان ليريك، تارانجيت، themrmax،
+تييري، تييري غيوموت، توماس، توماس هالوك، توماس مورو، تيم هيد،
+tKammy، toastedcornflakes، توم، TomDLT، توشيهيرو كاميشيما، tracer0tong، تريينت
+هاوك، تريفور ستيفنز، تو فو، فارون، فارون جيواليكار، فياشيسلاف، فيغنيش
+بيرودكار، فيكرام، فيلو رووسمان، فيناياك ميهتا، والتر، waterponey، وينهوا
+يانغ، وينجيان هوانج، ويل ويلش، wyseguy7، xyguo، yanlend، ياروسلاف هالشينكو،
+yelite، ين، YenChenLin، ييتشوان ليو، يواف رام، يوشيكي، زينغ رويفينغ، zivori، أوسكار ناخيرا</p>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="v0.19.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">أبرز المميزات</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="v0.17.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">الميزات الجديدة</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">سجل التغييرات</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">المساهمون في الكود</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">سجل التغييرات</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">التحسينات</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">إصلاح الأخطاء</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ملخص التغييرات في واجهة برمجة التطبيقات</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection-changes">تحسينات اختيار النموذج وتغييرات واجهة برمجة التطبيقات</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">الميزات الجديدة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">التحسينات</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">تصحيح الأخطاء</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">المساهمون في الشفرة</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/whats_new/v0.18.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
