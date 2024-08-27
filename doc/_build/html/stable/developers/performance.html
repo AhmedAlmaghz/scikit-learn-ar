@@ -1,0 +1,959 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="كيفية التحسين من أجل السرعة" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/developers/performance.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="ما يلي يعطي بعض الإرشادات العملية لمساعدتك في كتابة كود فعال لمشروع سكايت-ليرن. بايثون، سي بايثون أو سي/سي++؟: بشكل عام، يؤكد مشروع سكايت-ليرن على قابلية القراءة لرمز المصدر لتسهيل الأمر على مستخدم..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="ما يلي يعطي بعض الإرشادات العملية لمساعدتك في كتابة كود فعال لمشروع سكايت-ليرن. بايثون، سي بايثون أو سي/سي++؟: بشكل عام، يؤكد مشروع سكايت-ليرن على قابلية القراءة لرمز المصدر لتسهيل الأمر على مستخدم..." />
+
+    <title>كيفية التحسين من أجل السرعة &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'developers/performance';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">كيفية...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="performance-howto">
+<span id="id1"></span><h1>كيفية التحسين من أجل السرعة<a class="headerlink" href="#performance-howto" title="Link to this heading">#</a></h1>
+<p>ما يلي يعطي بعض الإرشادات العملية لمساعدتك في كتابة كود فعال لمشروع سكايت-ليرن.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>في حين أنه من المفيد دائمًا إنشاء ملف تعريف لرمزك حتى تتمكن من <strong>التحقق من افتراضات الأداء</strong>، فمن المستحسن بشدة أيضًا <strong>مراجعة الأدبيات</strong> للتأكد من أن الخوارزمية المطبقة هي الأفضل في فئتها للمهمة قبل الاستثمار في تحسين التنفيذ المكلف.</p>
+<p>مرارًا وتكرارًا، تم استنفاد ساعات من الجهد المستثمر في تحسين تفاصيل التنفيذ المعقدة بسبب الاكتشاف اللاحق لـ <strong>الحيل الخوارزمية</strong> البسيطة، أو باستخدام خوارزمية مختلفة تمامًا تكون أكثر ملاءمة للمشكلة.</p>
+<p>يعطي القسم <a class="reference internal" href="#warm-restarts"><span class="std std-ref">خدعة خوارزمية بسيطة: إعادة التشغيل الدافئ</span></a> مثالًا على مثل هذه الحيلة.</p>
+</div>
+<section id="id2">
+<h2>بايثون، سي بايثون أو سي/سي++؟<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>بشكل عام، يؤكد مشروع سكايت-ليرن على <strong>قابلية القراءة</strong> لرمز المصدر لتسهيل الأمر على مستخدمي المشروع للغوص في رمز المصدر حتى يتمكنوا من فهم كيفية تصرف الخوارزمية على بياناتهم، ولكن أيضًا من أجل سهولة الصيانة (من قبل المطورين).</p>
+<p>عند تنفيذ خوارزمية جديدة، يوصى ببدء <strong>التنفيذ في بايثون باستخدام نومبي وسايباي</strong> مع الحرص على تجنب كود الحلقات باستخدام التعابير النمطية لتلك المكتبات. في الممارسة العملية، هذا يعني محاولة <strong>استبدال أي حلقات متداخلة بمكالمات لطرق مصفوفة نومبي المكافئة</strong>. الهدف هو تجنب إضاعة وحدة المعالجة المركزية في مفسر بايثون بدلاً من معالجة الأرقام لتناسب نموذجك الإحصائي. من الجيد عمومًا مراعاة نصائح الأداء في نومبي وسايباي:
+<a class="reference external" href="https://scipy.github.io/old-wiki/pages/PerformanceTips">https://scipy.github.io/old-wiki/pages/PerformanceTips</a></p>
+<p>ومع ذلك، في بعض الأحيان، لا يمكن التعبير عن خوارزمية بكفاءة في كود نومبي المتجه البسيط. في هذه الحالة، تكون الاستراتيجية الموصى بها كما يلي:</p>
+<ol class="arabic simple">
+<li><p><strong>إنشاء ملف تعريف</strong> للتنفيذ بايثون للعثور على عنق الزجاجة الرئيسي وعزله في <strong>دالة على مستوى الوحدة النمطية مخصصة</strong>. سيتم إعادة تنفيذ هذه الدالة كمكون إضافي مجمع.</p></li>
+<li><p>إذا كان هناك تنفيذ <strong>سي/سي++</strong> جيد الصيانة ومرخص بموجب بي إس دي أو إم آي تي لنفس الخوارزمية التي ليست كبيرة جدًا، فيمكنك كتابة <strong>غلاف سي بايثون</strong> لها وإدراج نسخة من رمز مصدر المكتبة في شجرة مصدر سكايت-ليرن: تُستخدم هذه الاستراتيجية لفئات <code class="xref py py-class docutils literal notranslate"><span class="pre">svm.LinearSVC</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">svm.SVC</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">linear_model.LogisticRegression</span></code> (غلافات لـ ليبلينير وليبس في إم).</p></li>
+<li><p>خلاف ذلك، اكتب إصدارًا محسنًا من دالة بايثون الخاصة بك باستخدام <strong>سي بايثون</strong> مباشرةً. تُستخدم هذه الاستراتيجية لفئات <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.ElasticNet</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">linear_model.SGDClassifier</span></code>، على سبيل المثال.</p></li>
+<li><p><strong>نقل إصدار بايثون من الدالة إلى الاختبارات</strong> واستخدمه للتحقق من أن نتائج المكون الإضافي المجمع متسقة مع الإصدار بايثون، والذي يسهل تصحيحه.</p></li>
+<li><p>بمجرد تحسين الكود (ليس عنق الزجاجة البسيط الذي يمكن اكتشافه عن طريق إنشاء ملف تعريف)، تحقق مما إذا كان من الممكن وجود <strong>توازي خشن</strong> يمكن أن يكون قابلاً لـ <strong>تعدد المعالجة</strong> باستخدام فئة <code class="docutils literal notranslate"><span class="pre">joblib.Parallel</span></code>.</p></li>
+</ol>
+</section>
+<section id="profiling-python-code">
+<span id="id3"></span><h2>إنشاء ملف تعريف لرمز بايثون<a class="headerlink" href="#profiling-python-code" title="Link to this heading">#</a></h2>
+<p>لإنشاء ملف تعريف لرمز بايثون، نوصي بكتابة نص برمجي يقوم بتحميل بياناتك وإعدادها، ثم استخدام ملف التعريف المدمج في آي بايثون لاستكشاف الجزء ذي الصلة من الكود بشكل تفاعلي.</p>
+<p>لنفترض أننا نريد إنشاء ملف تعريف لوحدة نمطية لتحليل المصفوفة غير السالبة في سكايت-ليرن. دعنا نقوم بإعداد جلسة آي بايثون جديدة وتحميل مجموعة بيانات الأرقام كما هو الحال في مثال <a class="reference internal" href="../auto_examples/classification/plot_digits_classification.html#sphx-glr-auto-examples-classification-plot-digits-classification-py"><span class="std std-ref">Recognizing hand-written digits</span></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">NMF</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>قبل بدء جلسة إنشاء الملف التعريفي والانخراط في دورات التحسين، من المهم قياس وقت التنفيذ الإجمالي للدالة التي نريد تحسينها دون أي نوع من النفقات العامة لملف التعريف وحفظها في مكان ما للرجوع إليها لاحقًا:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="o">%</span><span class="n">timeit</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="mi">1</span> <span class="n">loops</span><span class="p">,</span> <span class="n">best</span> <span class="n">of</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">1.7</span> <span class="n">s</span> <span class="n">per</span> <span class="n">loop</span>
+</pre></div>
+</div>
+<p>للاطلاع على ملف التعريف العام للأداء باستخدام أمر السحر <code class="docutils literal notranslate"><span class="pre">%prun</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="o">%</span><span class="n">prun</span> <span class="o">-</span><span class="n">l</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+         <span class="mi">14496</span> <span class="n">function</span> <span class="n">calls</span> <span class="ow">in</span> <span class="mf">1.682</span> <span class="n">CPU</span> <span class="n">seconds</span>
+
+   <span class="n">Ordered</span> <span class="n">by</span><span class="p">:</span> <span class="n">internal</span> <span class="n">time</span>
+   <span class="n">List</span> <span class="n">reduced</span> <span class="kn">from</span> <span class="mi">90</span> <span class="n">to</span> <span class="mi">9</span> <span class="n">due</span> <span class="n">to</span> <span class="n">restriction</span> <span class="o">&lt;</span><span class="s1">&#39;nmf.py&#39;</span><span class="o">&gt;</span>
+
+   <span class="n">ncalls</span>  <span class="n">tottime</span>  <span class="n">percall</span>  <span class="n">cumtime</span>  <span class="n">percall</span> <span class="n">filename</span><span class="p">:</span><span class="n">lineno</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+       <span class="mi">36</span>    <span class="mf">0.609</span>    <span class="mf">0.017</span>    <span class="mf">1.499</span>    <span class="mf">0.042</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">151</span><span class="p">(</span><span class="n">_nls_subproblem</span><span class="p">)</span>
+     <span class="mi">1263</span>    <span class="mf">0.157</span>    <span class="mf">0.000</span>    <span class="mf">0.157</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">18</span><span class="p">(</span><span class="n">_pos</span><span class="p">)</span>
+        <span class="mi">1</span>    <span class="mf">0.053</span>    <span class="mf">0.053</span>    <span class="mf">1.681</span>    <span class="mf">1.681</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">352</span><span class="p">(</span><span class="n">fit_transform</span><span class="p">)</span>
+      <span class="mi">673</span>    <span class="mf">0.008</span>    <span class="mf">0.000</span>    <span class="mf">0.057</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">28</span><span class="p">(</span><span class="n">norm</span><span class="p">)</span>
+        <span class="mi">1</span>    <span class="mf">0.006</span>    <span class="mf">0.006</span>    <span class="mf">0.047</span>    <span class="mf">0.047</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">42</span><span class="p">(</span><span class="n">_initialize_nmf</span><span class="p">)</span>
+       <span class="mi">36</span>    <span class="mf">0.001</span>    <span class="mf">0.000</span>    <span class="mf">0.010</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">36</span><span class="p">(</span><span class="n">_sparseness</span><span class="p">)</span>
+       <span class="mi">30</span>    <span class="mf">0.001</span>    <span class="mf">0.000</span>    <span class="mf">0.001</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">23</span><span class="p">(</span><span class="n">_neg</span><span class="p">)</span>
+        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">337</span><span class="p">(</span><span class="fm">__init__</span><span class="p">)</span>
+        <span class="mi">1</span>    <span class="mf">0.000</span>    <span class="mf">0.000</span>    <span class="mf">1.681</span>    <span class="mf">1.681</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">461</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>عمود <code class="docutils literal notranslate"><span class="pre">tottime</span></code> هو الأكثر أهمية: فهو يعطي الوقت الإجمالي الذي يتم إنفاقه على تنفيذ كود دالة معينة، متجاهلاً الوقت المستغرق في تنفيذ الدوال الفرعية. يتم إعطاء الوقت الإجمالي الفعلي (كود محلي + مكالمات الدالة الفرعية) بواسطة عمود <code class="docutils literal notranslate"><span class="pre">cumtime</span></code>.</p>
+<p>لاحظ استخدام <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">nmf.py</span></code> الذي يقيد الإخراج إلى الأسطر التي تحتوي على سلسلة “nmf.py”. هذا مفيد لإلقاء نظرة سريعة على البقعة الساخنة لوحدة نمطية بايثون نيمف نفسها، متجاهلاً أي شيء آخر.</p>
+<p>فيما يلي بداية إخراج نفس الأمر دون تصفية <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">nmf.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">%</span><span class="n">prun</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+         <span class="mi">16159</span> <span class="n">function</span> <span class="n">calls</span> <span class="ow">in</span> <span class="mf">1.840</span> <span class="n">CPU</span> <span class="n">seconds</span>
+
+   <span class="n">Ordered</span> <span class="n">by</span><span class="p">:</span> <span class="n">internal</span> <span class="n">time</span>
+
+   <span class="n">ncalls</span>  <span class="n">tottime</span>  <span class="n">percall</span>  <span class="n">cumtime</span>  <span class="n">percall</span> <span class="n">filename</span><span class="p">:</span><span class="n">lineno</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+     <span class="mi">2833</span>    <span class="mf">0.653</span>    <span class="mf">0.000</span>    <span class="mf">0.653</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">numpy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">_dotblas</span><span class="o">.</span><span class="n">dot</span><span class="p">}</span>
+       <span class="mi">46</span>    <span class="mf">0.651</span>    <span class="mf">0.014</span>    <span class="mf">1.636</span>    <span class="mf">0.036</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">151</span><span class="p">(</span><span class="n">_nls_subproblem</span><span class="p">)</span>
+     <span class="mi">1397</span>    <span class="mf">0.171</span>    <span class="mf">0.000</span>    <span class="mf">0.171</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">18</span><span class="p">(</span><span class="n">_pos</span><span class="p">)</span>
+     <span class="mi">2780</span>    <span class="mf">0.167</span>    <span class="mf">0.000</span>    <span class="mf">0.167</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s1">&#39;sum&#39;</span> <span class="n">of</span> <span class="s1">&#39;numpy.ndarray&#39;</span> <span class="n">objects</span><span class="p">}</span>
+        <span class="mi">1</span>    <span class="mf">0.064</span>    <span class="mf">0.064</span>    <span class="mf">1.840</span>    <span class="mf">1.840</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">352</span><span class="p">(</span><span class="n">fit_transform</span><span class="p">)</span>
+     <span class="mi">1542</span>    <span class="mf">0.043</span>    <span class="mf">0.000</span>    <span class="mf">0.043</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s1">&#39;flatten&#39;</span> <span class="n">of</span> <span class="s1">&#39;numpy.ndarray&#39;</span> <span class="n">objects</span><span class="p">}</span>
+      <span class="mi">337</span>    <span class="mf">0.019</span>    <span class="mf">0.000</span>    <span class="mf">0.019</span>    <span class="mf">0.000</span> <span class="p">{</span><span class="n">method</span> <span class="s1">&#39;all&#39;</span> <span class="n">of</span> <span class="s1">&#39;numpy.ndarray&#39;</span> <span class="n">objects</span><span class="p">}</span>
+     <span class="mi">2734</span>    <span class="mf">0.011</span>    <span class="mf">0.000</span>    <span class="mf">0.181</span>    <span class="mf">0.000</span> <span class="n">fromnumeric</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1185</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+        <span class="mi">2</span>    <span class="mf">0.010</span>    <span class="mf">0.005</span>    <span class="mf">0.010</span>    <span class="mf">0.005</span> <span class="p">{</span><span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lapack_lite</span><span class="o">.</span><span class="n">dgesdd</span><span class="p">}</span>
+      <span class="mi">748</span>    <span class="mf">0.009</span>    <span class="mf">0.000</span>    <span class="mf">0.065</span>    <span class="mf">0.000</span> <span class="n">nmf</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">28</span><span class="p">(</span><span class="n">norm</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>توضح النتائج أعلاه أن التنفيذ تهيمن عليه إلى حد كبير عمليات ضرب النقاط (تفويضها إلى بلاس). لذلك، من المحتمل ألا يكون هناك مكسب كبير متوقع من إعادة كتابة هذا الكود في سي بايثون أو سي/سي++: في هذه الحالة، من بين 1.7 ثانية من وقت التنفيذ الإجمالي، يتم إنفاق ما يقرب من 0.7 ثانية في الكود المجمع الذي يمكننا اعتباره الأمثل. من خلال إعادة كتابة بقية كود بايثون وافتراض أننا يمكن أن نحقق زيادة بنسبة 1000% في هذا الجزء (وهو أمر غير مرجح نظرًا لضحلة حلقات بايثون)، فلن نكسب أكثر من 2.4 مرة زيادة في السرعة بشكل عام.</p>
+<p>لذلك، لا يمكن تحقيق تحسينات كبيرة إلا من خلال <strong>التحسينات الخوارزمية</strong> في هذا المثال (على سبيل المثال، محاولة العثور على عملية تكون مكلفة وغير مفيدة في نفس الوقت لتجنب حسابها بدلاً من محاولة تحسين تنفيذها).</p>
+<p>ومع ذلك، لا يزال من المثير للاهتمام التحقق مما يحدث داخل دالة <code class="docutils literal notranslate"><span class="pre">_nls_subproblem</span></code> التي تعد البقعة الساخنة إذا كنا نعتبر كود بايثون فقط: فهي تستغرق حوالي 100% من الوقت التراكمي للوحدة النمطية. من أجل فهم أفضل لملف تعريف هذه الدالة المحددة، دعنا نقوم بتثبيت <code class="docutils literal notranslate"><span class="pre">line_profiler</span></code> وربطه بـ آي بايثون:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><style type="text/css">
+span.prompt1:before {
+  content: "$ ";
+}
+</style><span class="prompt1">pip<span class="w"> </span>install<span class="w"> </span>line_profiler</span>
+</pre></div></div><p><strong>في آي بايثون 0.13+</strong>، قم أولاً بإنشاء ملف تعريف تكوين:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">ipython<span class="w"> </span>profile<span class="w"> </span>create</span>
+</pre></div></div><p>بعد ذلك، قم بتسجيل ملحق line_profiler في <code class="docutils literal notranslate"><span class="pre">~/.ipython/profile_default/ipython_config.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;line_profiler&#39;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">InteractiveShellApp</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;line_profiler&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>سيقوم هذا بتسجيل أمر السحر <code class="docutils literal notranslate"><span class="pre">%lprun</span></code> في تطبيق آي بايثون الطرفي والمكونات الإضافية الأخرى مثل كونسول كواتنوت.</p>
+<p>الآن، أعد تشغيل آي بايثون ودعنا نستخدم هذه اللعبة الجديدة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">NMF</span>
+  <span class="o">...</span> <span class="p">:</span> <span class="kn">from</span> <span class="nn">sklearn.decomposition._nmf</span> <span class="kn">import</span> <span class="n">_nls_subproblem</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="o">%</span><span class="n">lprun</span> <span class="o">-</span><span class="n">f</span> <span class="n">_nls_subproblem</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">Timer</span> <span class="n">unit</span><span class="p">:</span> <span class="mf">1e-06</span> <span class="n">s</span>
+
+<span class="n">File</span><span class="p">:</span> <span class="n">sklearn</span><span class="o">/</span><span class="n">decomposition</span><span class="o">/</span><span class="n">nmf</span><span class="o">.</span><span class="n">py</span>
+<span class="n">Function</span><span class="p">:</span> <span class="n">_nls_subproblem</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">137</span>
+<span class="n">Total</span> <span class="n">time</span><span class="p">:</span> <span class="mf">1.73153</span> <span class="n">s</span>
+
+<span class="n">Line</span> <span class="c1">#      Hits         Time  Per Hit   % Time  Line Contents</span>
+<span class="o">==============================================================</span>
+   <span class="mi">137</span>                                           <span class="k">def</span> <span class="nf">_nls_subproblem</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">H_init</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">max_iter</span><span class="p">):</span>
+   <span class="mi">138</span>                                               <span class="s2">&quot;&quot;&quot;Non-negative least square solver</span>
+<span class="s2">   ...</span>
+<span class="s2">   170                                               &quot;&quot;&quot;</span>
+   <span class="mi">171</span>        <span class="mi">48</span>         <span class="mi">5863</span>    <span class="mf">122.1</span>      <span class="mf">0.3</span>      <span class="k">if</span> <span class="p">(</span><span class="n">H_init</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+   <span class="mi">172</span>                                                   <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Negative values in H_init passed to NLS solver.&quot;</span><span class="p">)</span>
+   <span class="mi">173</span>
+   <span class="mi">174</span>        <span class="mi">48</span>          <span class="mi">139</span>      <span class="mf">2.9</span>      <span class="mf">0.0</span>      <span class="n">H</span> <span class="o">=</span> <span class="n">H_init</span>
+   <span class="mi">175</span>        <span class="mi">48</span>       <span class="mi">112141</span>   <span class="mf">2336.3</span>      <span class="mf">5.8</span>      <span class="n">WtV</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+   <span class="mi">176</span>        <span class="mi">48</span>        <span class="mi">16144</span>    <span class="mf">336.3</span>      <span class="mf">0.8</span>      <span class="n">WtW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+   <span class="mi">177</span>
+   <span class="mi">178</span>                                               <span class="c1"># values justified in the paper</span>
+   <span class="mi">179</span>        <span class="mi">48</span>          <span class="mi">144</span>      <span class="mf">3.0</span>      <span class="mf">0.0</span>      <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>
+   <span class="mi">180</span>        <span class="mi">48</span>          <span class="mi">113</span>      <span class="mf">2.4</span>      <span class="mf">0.0</span>      <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.1</span>
+   <span class="mi">181</span>       <span class="mi">638</span>         <span class="mi">1880</span>      <span class="mf">2.9</span>      <span class="mf">0.1</span>      <span class="k">for</span> <span class="n">n_iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+   <span class="mi">182</span>       <span class="mi">638</span>       <span class="mi">195133</span>    <span class="mf">305.9</span>     <span class="mf">10.2</span>          <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">WtW</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span> <span class="o">-</span> <span class="n">WtV</span>
+   <span class="mi">183</span>       <span class="mi">638</span>       <span class="mi">495761</span>    <span class="mf">777.1</span>     <span class="mf">25.9</span>          <span class="n">proj_gradient</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">grad</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">grad</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">H</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)])</span>
+   <span class="mi">184</span>       <span class="mi">638</span>         <span class="mi">2449</span>      <span class="mf">3.8</span>      <span class="mf">0.1</span>          <span class="k">if</span> <span class="n">proj_zpaosition</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+   <span class="mi">185</span>        <span class="mi">48</span>          <span class="mi">130</span>      <span class="mf">2.7</span>      <span class="mf">0.0</span>              <span class="k">break</span>
+   <span class="mi">186</span>
+   <span class="mi">187</span>      <span class="mi">1474</span>         <span class="mi">4474</span>      <span class="mf">3.0</span>      <span class="mf">0.2</span>          <span class="k">for</span> <span class="n">inner_iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+   <span class="mi">188</span>      <span class="mi">1474</span>        <span class="mi">83833</span>     <span class="mf">56.9</span>      <span class="mf">4.4</span>              <span class="n">Hn</span> <span class="o">=</span> <span class="n">H</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">grad</span>
+   <span class="mi">189</span>                                                       <span class="c1"># Hn = np.where(Hn &gt; 0, Hn, 0)</span>
+   <span class="mi">190</span>      <span class="mi">1474</span>       <span class="mi">194239</span>    <span class="mf">131.8</span>     <span class="mf">10.1</span>              <span class="n">Hn</span> <span class="o">=</span> <span class="n">_pos</span><span class="p">(</span><span class="n">Hn</span><span class="p">)</span>
+   <span class="mi">191</span>      <span class="mi">1474</span>        <span class="mi">48858</span>     <span class="mf">33.1</span>      <span class="mf">2.5</span>              <span class="n">d</span> <span class="o">=</span> <span class="n">Hn</span> <span class="o">-</span> <span class="n">H</span>
+   <span class="mi">192</span>      <span class="mi">1474</span>       <span class="mi">150407</span>    <span class="mf">102.0</span>      <span class="mf">7.8</span>              <span class="n">gradd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">grad</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span>
+   <span class="mi">193</span>      <span class="mi">1474</span>       <span class="mi">515390</span>    <span class="mf">349.7</span>     <span class="mf">26.9</span>              <span class="n">dQd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">WtW</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span>
+   <span class="o">...</span>
+</pre></div>
+</div>
+<p>من خلال النظر إلى القيم العليا في عمود “% Time”، يمكنك بسهولة تحديد التعبيرات الأكثر تكلفة التي تستحق عناية إضافية.</p>
+<p>تحليل استخدام الذاكرة
+بالتأكيد! فيما يلي ترجمة للنص المحدد من ReStructuredText إلى اللغة العربية:</p>
+<p>يمكنك تحليل استخدام الذاكرة لأي كود Python بالتفصيل بمساعدة “memory_profiler”. أولاً، قم بتثبيت أحدث إصدار:</p>
+<p>pip install -U memory_profiler</p>
+<p>بعد ذلك، قم بإعداد التعويذات بطريقة مشابهة لـ “line_profiler”.</p>
+<p><strong>في IPython 0.11 أو أحدث</strong>، قم أولاً بإنشاء ملف تعريف تكوين:</p>
+<p>ipython profile create</p>
+<p>ثم قم بتسجيل الامتداد في “~/.ipython/profile_default/ipython_config.py” إلى جانب محلل الخط:</p>
+<p>c.TerminalIPythonApp.extensions.append(‘memory_profiler’)
+c.InteractiveShellApp.extensions.append(‘memory_profiler’)</p>
+<p>سيقوم هذا بتسجيل أوامر التعويذات “%memit” و”%mprun” في تطبيق IPython terminal وواجهات المستخدم الرسومية الأخرى مثل qtconsole وnotebook.</p>
+<p>مفيد لفحص استخدام الذاكرة، سطرًا بسطر، لوظائف رئيسية في برنامجك. وهو مشابه جدًا لـ “%lprun”، الذي تمت مناقشته في القسم السابق. على سبيل المثال، من دليل “أمثلة” في “memory_profiler”:</p>
+<p>In [1] from example import my_func</p>
+<p>In [2] %mprun -f my_func my_func()
+Filename: example.py</p>
+</section>
+<section id="line-mem-usage-increment-line-contents">
+<h2>Line # Mem usage Increment Line Contents<a class="headerlink" href="#line-mem-usage-increment-line-contents" title="Link to this heading">#</a></h2>
+<p>3
+4      5.97 MB    0.00 MB   def my_func():
+5     13.61 MB    7.64 MB       a = [1] * (10 ** 6)
+6    166.20 MB  152.59 MB       b = [2] * (2 * 10 ** 7)
+7     13.61 MB -152.59 MB       del b
+8     13.61 MB    0.00 MB       return a</p>
+<p>تعويذة مفيدة أخرى يحددها “memory_profiler” هي “%memit”، والتي تشبه “%timeit”. يمكن استخدامه كما يلي:</p>
+<p>In [1]: import numpy as np</p>
+<p>In [2]: %memit np.zeros(1e7)
+maximum of 3: 76.402344 MB per loop</p>
+<p>لمزيد من التفاصيل، راجع وثائق التعويذات باستخدام “%memit؟” و”%mprun؟”.</p>
+</section>
+<section id="cython">
+<h2>استخدام Cython<a class="headerlink" href="#cython" title="Link to this heading">#</a></h2>
+<p>إذا كشف ملف تعريف الكود Python أن Overhead لمفسر Python أكبر بمقدار درجة واحدة أو أكثر من تكلفة الحساب العددي الفعلي (على سبيل المثال، حلقات “for” عبر مكونات المتجه، والتقييم المُدَجَّل للتعبير الشرطي، والحسابيات القياسية…)، فمن المحتمل أن يكون من المناسب استخراج الجزء الساخن من الكود كوظيفة مستقلة في ملف “.pyx”، وإضافة إعلانات النوع الثابت، ثم استخدام Cython لإنشاء برنامج C مناسب لتجميعها كنمودج امتداد Python.</p>
+<p>تحتوي وثائق Cython على دليل تعليمي ودليل مرجعي لتطوير مثل هذا النموذج.
+لمزيد من المعلومات حول التطوير باستخدام Cython لـ scikit-learn، راجع: ref: cython.</p>
+</section>
+<section id="profiling-compiled-extension">
+<span id="id4"></span><h2>إنشاء ملفات تعريف الامتدادات المجمعة<a class="headerlink" href="#profiling-compiled-extension" title="Link to this heading">#</a></h2>
+<p>عند العمل مع الامتدادات المجمعة (المكتوبة في C/C++ مع غلاف أو مباشرة كتوسيع Cython)، يكون ملف تعريف Python الافتراضي عديم الفائدة: نحتاج إلى أداة مخصصة للتعرف على ما يحدث داخل الامتداد المجمع نفسه.</p>
+<section id="yep-gperftools">
+<h3>استخدام yep وgperftools<a class="headerlink" href="#yep-gperftools" title="Link to this heading">#</a></h3>
+<p>من السهل إنشاء ملفات تعريف دون خيارات تجميع خاصة باستخدام yep:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypi.org/project/yep/">https://pypi.org/project/yep/</a></p></li>
+<li><p><a class="reference external" href="https://fa.bianp.net/blog/2011/a-profiler-for-python-extensions">https://fa.bianp.net/blog/2011/a-profiler-for-python-extensions</a></p></li>
+</ul>
+</section>
+<section id="debugger-gdb">
+<h3>استخدام debugger، gdb<a class="headerlink" href="#debugger-gdb" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>من المفيد استخدام “gdb” للتصحيح. للقيام بذلك، يجب استخدام مترجم Python الذي تم بناؤه مع دعم التصحيح (رموز التصحيح والتحسين المناسب). لإنشاء بيئة conda جديدة (قد تحتاج إلى إلغاء تنشيطها وإعادة تنشيطها بعد البناء/التثبيت) مع مترجم CPython الذي تم بناؤه من المصدر:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>git clone <a class="github reference external" href="https://github.com/python/cpython.git">python/cpython.git</a>
+conda create -n debug-scikit-dev
+conda activate debug-scikit-dev
+cd cpython
+mkdir debug
+cd debug
+../configure –prefix=$CONDA_PREFIX –with-pydebug
+make EXTRA_CFLAGS=’-DPy_DEBUG’ -j&lt;num_cores&gt;
+make install</p>
+</section>
+<section id="gprof">
+<h3>استخدام gprof<a class="headerlink" href="#gprof" title="Link to this heading">#</a></h3>
+<p>من أجل إنشاء ملفات تعريف الامتدادات Python المجمعة، يمكن استخدام “gprof” بعد إعادة تجميع المشروع باستخدام “gcc -pg” واستخدام متغير “python-dbg” من المفسر على Debian / Ubuntu: ومع ذلك، يتطلب هذا النهج أيضًا إعادة تجميع “numpy” و”scipy” مع “-pg” وهو أمر معقد للغاية.</p>
+<p>لحسن الحظ، هناك أداتان بديلتان لإنشاء ملفات التعريف لا تتطلبان إعادة تجميع كل شيء.</p>
+</section>
+<section id="valgrind-callgrind-kcachegrind">
+<h3>استخدام valgrind / callgrind / kcachegrind<a class="headerlink" href="#valgrind-callgrind-kcachegrind" title="Link to this heading">#</a></h3>
+<section id="kcachegrind">
+<h4>kcachegrind<a class="headerlink" href="#kcachegrind" title="Link to this heading">#</a></h4>
+<p>يمكن استخدام “yep” لإنشاء تقرير ملف التعريف.
+يوفر “kcachegrind” بيئة رسومية لعرض هذا التقرير:</p>
+<p># تشغيل yep لإنشاء ملف تعريف بعض النصوص البرمجية Python
+python -m yep -c my_file.py</p>
+<p># افتح my_file.py.callgrin مع kcachegrind
+kcachegrind my_file.py.prof</p>
+<p>يمكن تشغيل “yep” باستخدام الحجة “–lines” أو “-l” لتجميع تقرير ملف التعريف “سطرًا بسطر”.</p>
+</section>
+</section>
+</section>
+<section id="joblib-parallel">
+<h2>تعددية المعالجة باستخدام “joblib.Parallel”<a class="headerlink" href="#joblib-parallel" title="Link to this heading">#</a></h2>
+<p>راجع وثائق joblib: <a class="reference external" href="https://joblib.readthedocs.io">https://joblib.readthedocs.io</a></p>
+</section>
+<section id="warm-restarts">
+<span id="id5"></span><h2>خدعة خوارزمية بسيطة: إعادة التشغيل الدافئ<a class="headerlink" href="#warm-restarts" title="Link to this heading">#</a></h2>
+<p>راجع مدخل مسرد المصطلحات لـ: term: warm_start</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">بايثون، سي بايثون أو سي/سي++؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-python-code">إنشاء ملف تعريف لرمز بايثون</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#line-mem-usage-increment-line-contents">Line # Mem usage Increment Line Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cython">استخدام Cython</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-compiled-extension">إنشاء ملفات تعريف الامتدادات المجمعة</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yep-gperftools">استخدام yep وgperftools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugger-gdb">استخدام debugger، gdb</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">استخدام gprof</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valgrind-callgrind-kcachegrind">استخدام valgrind / callgrind / kcachegrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kcachegrind">kcachegrind</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joblib-parallel">تعددية المعالجة باستخدام “joblib.Parallel”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-restarts">خدعة خوارزمية بسيطة: إعادة التشغيل الدافئ</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/developers/performance.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
