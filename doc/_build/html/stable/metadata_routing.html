@@ -1,0 +1,1080 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="1. أمثلة الاستخدام" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/metadata_routing.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="هذا النص هو جزء من توثيق مكتبة “سكيكيت-ليرن” (scikit-learn) في بايثون، ويتم وصف وظيفة توجيه البيانات اعتمادا على البيانات الوصفية. توجيه البيانات الوصفية بعد تحميل البيانات، قد تحتاج إلى توجيه المل..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="هذا النص هو جزء من توثيق مكتبة “سكيكيت-ليرن” (scikit-learn) في بايثون، ويتم وصف وظيفة توجيه البيانات اعتمادا على البيانات الوصفية. توجيه البيانات الوصفية بعد تحميل البيانات، قد تحتاج إلى توجيه المل..." />
+
+    <title>1. أمثلة الاستخدام &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=97f0b27d"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'metadata_routing';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api/index.html" />
+    <link rel="prev" title="18. الموارد الخارجية، الفيديوهات، والمحاضرات" href="presentations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="supervised_learning.html">1. التعلم الخَلفي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="unsupervised_learning.html">2. التعلم غير الخاضع للإشراف</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/mixture.html">2.1. نماذج المزيج الغاوسي</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="modules/manifold.html">2.3. تعلم المنوال</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/clustering.html">2.9. التجميع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/decomposition.html">2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/covariance.html">2.13. التغاير التجريبي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/outlier_detection.html">2.16. تناسب غلاف إهليلجي</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/density.html">2.27. تقدير الكثافة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/neural_networks_unsupervised.html">2.30. نماذج الشبكات العصبية (غير الخاضعة للإشراف)</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="model_selection.html">3. اختيار النموذج وتقييمه</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/cross_validation.html">3.1. التدقيق المتقاطع: تقييم أداء أداة التقدير</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/grid_search.html">3.4. البحث الشامل عن الشبكة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/classification_threshold.html">3.7. تعديل عتبة القرار للتنبؤ بالصنف</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="modules/model_evaluation.html">3.9. مقاييس الأداء وتقييمها: تقييم جودة التنبؤات كميًا</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/learning_curve.html">3.10. منحنيات التحقق: رسم الدرجات لتقييم النماذج</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="inspection.html">4. التفتيش</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualizations.html">5. التمثيل المرئي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="data_transforms.html">6. تحويلات مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/compose.html">6.1. خطوط الأنابيب ومقدّرات المُركّبات</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/feature_extraction.html">6.4. استخراج الخصائص</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing.html">6.7. معالجة البيانات الأولية</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/impute.html">6.12. إكمال القيم المفقودة</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/unsupervised_reduction.html">6.19. PCA: التحليل التكويني الرئيسي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/random_projection.html">6.22. الإسقاط العشوائي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/kernel_approximation.html">6.23. طريقة Nystroem لتقريب النواة</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="modules/metrics.html">6.28. مقاييس الاقتران، الألفة والنواة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/preprocessing_targets.html">6.29. تحويل هدف التنبؤ (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="datasets.html">7. مرافق تحميل مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="datasets/toy_dataset.html">7.1. مجموعات البيانات التجريبية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/real_world.html">7.2. مجموعات البيانات من العالم الحقيقي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/sample_generators.html">7.3. المجموعات البيانات المولدة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets/loading_other_datasets.html">7.4. أمثلة</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="computing.html">8. الحوسبة باستخدام scikit-learn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_persistence.html">9. نظرة عامة على سير العمل</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="common_pitfalls.html">14. المعالجة المسبقة غير المتسقة</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="dispatching.html">16. التشغيل التلقائي</a></li>
+<li class="toctree-l1"><a class="reference internal" href="machine_learning_map.html">17. اختيار المحلل المناسب</a></li>
+<li class="toctree-l1"><a class="reference internal" href="presentations.html">18. الموارد الخارجية، الفيديوهات، والمحاضرات</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="user_guide.html" class="nav-link">مرجع المستخدم</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>هذا النص هو جزء من توثيق مكتبة “سكيكيت-ليرن” (scikit-learn) في بايثون، ويتم وصف وظيفة توجيه البيانات اعتمادا على البيانات الوصفية.</p>
+<p><strong>توجيه البيانات الوصفية</strong></p>
+<p>بعد تحميل البيانات، قد تحتاج إلى توجيه الملاحظات إلى مجموعات مختلفة بناءً على بعض البيانات الوصفية. على سبيل المثال، قد ترغب في معاملة الملاحظات التي تم جمعها في ظروف مختلفة بشكل مختلف، أو قد يكون لديك بيانات من مصادر متعددة وترغب في معاملتها بشكل منفصل. يوفر scikit-learn طريقة ملائمة للقيام بذلك باستخدام طرق التحويل.</p>
+<p>على سبيل المثال، لنفترض أنك تريد تصنيف الصور اعتمادًا على محتواها، ولديك بيانات وصفية لكل صورة تحدد ما إذا كانت الصورة تم التقاطها في الداخل أو في الهواء الطلق. يمكنك توجيه الملاحظات إلى مجموعات منفصلة بناءً على هذه البيانات الوصفية باستخدام طريقة التحويل <code class="docutils literal notranslate"><span class="pre">`MetadataRouter`</span></code>.</p>
+<p>هنا مثال يوضح كيفية استخدام <code class="docutils literal notranslate"><span class="pre">`MetadataRouter`</span></code> لتوجيه الملاحظات بناءً على بياناتها الوصفية:</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>بايثون</p>
+<p>من sklearn.compose import MetadataRouter
+من sklearn.svm import SVC</p>
+<p># افترض أن X وy هي مصفوفات بياناتك والملاحظات الخاصة بك
+# و’metadata’ هي مصفوفة أو سلسلة تحتوي على البيانات الوصفية لكل ملاحظة</p>
+<p>router = MetadataRouter(metadata=’indoor’)
+مجموعة = router.fit_transform(X, y, metadata=metadata)</p>
+<p># يمكنك الآن الوصول إلى الملاحظات المنفصلة باستخدام مجموعة الدليل
+indoor_X, indoor_y = dataset[‘indoor’]</p>
+<p># يمكنك بعد ذلك تدريب نموذج منفصل على كل مجموعة
+indoor_model = SVC()
+indoor_model.fit(indoor_X, indoor_y)</p>
+<p># يمكنك القيام بعملية مماثلة للملاحظات في الهواء الطلق
+outdoor_model = SVC()
+outdoor_model.fit(outdoor_X, outdoor_y)
+<a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+<p>في هذا المثال، نقوم بإنشاء <code class="docutils literal notranslate"><span class="pre">`MetadataRouter`</span></code> وتعيين البيانات الوصفية المستهدفة إلى “indoor”. ثم نقوم بتمرير مصفوفات بياناتنا والملاحظات والبيانات الوصفية إلى طريقة <code class="docutils literal notranslate"><span class="pre">`fit_transform`</span></code>. وسوف تقوم الطريقة بتقسيم البيانات إلى مجموعتين، واحدة للملاحظات التي تحتوي على بيانات وصفية “indoor” والأخرى للملاحظات المتبقية.</p>
+<p>يمكنك بعد ذلك الوصول إلى هذه المجموعات المنفصلة باستخدام الدليل <code class="docutils literal notranslate"><span class="pre">`'indoor'`</span></code> على المتغير <code class="docutils literal notranslate"><span class="pre">`dataset`</span></code> الذي تم إرجاعه بواسطة <code class="docutils literal notranslate"><span class="pre">`fit_transform`</span></code>. وهذا يسمح لك بتدريب نماذج منفصلة على كل مجموعة من الملاحظات.</p>
+<p>تعد <code class="docutils literal notranslate"><span class="pre">`MetadataRouter`</span></code> أداة قوية لتخصيص معالجة البيانات والنمذجة بناءً على البيانات الوصفية. يمكن استخدامه في مجموعة متنوعة من السيناريوهات، مثل تجميع الملاحظات حسب المصدر أو التاريخ أو أي معلومات وصفية أخرى ذات صلة.
+API توجيه البيانات الوصفية هو ميزة تجريبية في سكيت-ليرن، ولا يتم تنفيذها بعد لجميع التقديرات. لمزيد من المعلومات، يرجى الرجوع إلى قائمة النماذج المدعومة وغير المدعومة. قد تتغير هذه الميزة دون دورة الإهمال المعتادة. بشكل افتراضي، هذه الميزة غير مفعلة. يمكنك تفعيلها عن طريق ضبط علم “تمكين توجيه البيانات الوصفية” على “صحيح”:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`بيثون</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">استيراد</span> <span class="pre">سكيتليرن</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">سكيتليرن.set_config(enable_metadata_routing=True)</span>
+<span class="pre">`</span></code></p>
+<p>لاحظ أن الطرق والمتطلبات المقدمة في هذه الوثيقة ذات صلة فقط إذا كنت ترغب في تمرير البيانات الوصفية (على سبيل المثال، “sample_weight”) إلى طريقة. إذا كنت تمرر فقط “X” و “y” ولا توجد معلمات/بيانات وصفية أخرى إلى طرق مثل “fit” أو “transform”، فلست بحاجة إلى ضبط أي شيء.</p>
+<p>يُظهر هذا الدليل كيف يمكن توجيه البيانات الوصفية ونقلها بين الكائنات في سكيت-ليرن. إذا كنت تقوم بتطوير تقدير متوافق مع سكيت-ليرن أو ميتا-تقدير، فيمكنك مراجعة دليل المطورين ذي الصلة الخاص بنا.</p>
+<p>البيانات الوصفية هي بيانات يأخذها التقدير أو المسجل أو أداة تقسيم CV في الاعتبار إذا قام المستخدم بتمريرها صراحةً كمعلمة. على سبيل المثال، تقبل “KMeans” “sample_weight” في طريقة “fit()” الخاصة بها وتأخذها في الاعتبار عند حساب النوى المركزية الخاصة بها. يتم استهلاك “classes” بواسطة بعض المصنفات ويتم استخدام “groups” في بعض أدوات التقسيم، ولكن يمكن اعتبار أي بيانات يتم تمريرها إلى طرق كائن ما بخلاف “X” و “y” كبيانات وصفية. قبل إصدار سكيت-ليرن 1.3، لم يكن هناك API واحد لتمرير البيانات الوصفية مثل تلك إذا تم استخدام هذه الكائنات بالاقتران مع كائنات أخرى، على سبيل المثال، مسجل يقبل “sample_weight” داخل “GridSearchCV”.</p>
+<p>مع API توجيه البيانات الوصفية، يمكننا نقل البيانات الوصفية إلى التقديرات والمسجلات وأدوات تقسيم CV باستخدام الميتا-تقديرات (مثل “Pipeline” أو “GridSearchCV”) أو الوظائف مثل “cross_validate” التي تقوم بتوجيه البيانات إلى كائنات أخرى. من أجل تمرير البيانات الوصفية إلى طريقة مثل “fit” أو “score”، يجب على الكائن الذي يستهلك البيانات الوصفية <em>طلبها</em>. يتم ذلك عبر طرق “set_method_request()”، حيث يتم استبدال “{method}” باسم الطريقة التي تطلب البيانات الوصفية. على سبيل المثال، تستخدم التقديرات التي تستخدم البيانات الوصفية في طريقة “fit()” الخاصة بها “set_fit_request()”، ويستخدم المسجلات “set_score_request()”. تسمح لنا هذه الطرق بتحديد البيانات الوصفية التي سيتم طلبها، على سبيل المثال “set_fit_request(sample_weight=True)”.</p>
+<p>بالنسبة إلى أدوات التقسيم المجمعة مثل “GroupKFold”، يتم طلب معلمة “groups” بشكل افتراضي. يتم توضيح ذلك بشكل أفضل من خلال الأمثلة التالية.</p>
+<section id="id9">
+<h1><span class="section-number">1. </span>أمثلة الاستخدام<a class="headerlink" href="#id9" title="Link to this heading">#</a></h1>
+<p>نقدم هنا بعض الأمثلة لإظهار بعض حالات الاستخدام الشائعة. هدفنا هو تمرير “sample_weight” و “groups” من خلال “cross_validate”، والتي تقوم بتوجيه البيانات الوصفية إلى “LogisticRegressionCV” وإلى مسجل مخصص مصنوع باستخدام “make_scorer”، وكلاهما <em>يمكن</em> استخدام البيانات الوصفية في طرقهما. في هذه الأمثلة، نريد تعيين ما إذا كنا سنستخدم البيانات الوصفية داخل المستهلكين المختلفين بشكل فردي.</p>
+<p>تتطلب الأمثلة في هذا القسم الواردات والبيانات التالية:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; استيراد نومبي كما np
+&gt;&gt;&gt; من sklearn.metrics استيراد make_scorer، accuracy_score
+&gt;&gt;&gt; من sklearn.linear_model استيراد LogisticRegressionCV، LogisticRegression
+&gt;&gt;&gt; من sklearn.model_selection استيراد cross_validate، GridSearchCV، GroupKFold
+&gt;&gt;&gt; من sklearn.feature_selection استيراد SelectKBest
+&gt;&gt;&gt; من sklearn.pipeline استيراد make_pipeline
+&gt;&gt;&gt; n_samples، n_features = 100، 4
+&gt;&gt;&gt; rng = np.random.RandomState(42)
+&gt;&gt;&gt; X = rng.rand(n_samples، n_features)
+&gt;&gt;&gt; y = rng.randint(0، 2، size=n_samples)
+&gt;&gt;&gt; my_groups = rng.randint(0، 10، size=n_samples)
+&gt;&gt;&gt; my_weights = rng.rand(n_samples)
+&gt;&gt;&gt; my_other_weights = rng.rand(n_samples)
+</pre></div>
+</div>
+<section id="id10">
+<h2><span class="section-number">1.1. </span>التسجيل والتناسب المرجح<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<p>تطلب أداة التقسيم المستخدمة داخليًا في “LogisticRegressionCV”، “GroupKFold”، معلمة “groups” بشكل افتراضي. ومع ذلك، نحتاج إلى طلب “sample_weight” لها وللمسجل المخصص لدينا عن طريق تحديد “sample_weight=True” في طريقة “set_fit_request()” الخاصة بـ “LogisticRegressionCV” وفي طريقة “set_score_request()” الخاصة بـ “make_scorer”. يعرف كلا المستهلكين كيفية استخدام “sample_weight” في طرقهما “fit()” أو “score()”. بعد ذلك، يمكننا تمرير البيانات الوصفية في “cross_validate” والتي ستقوم بتوجيهها إلى أي مستهلكين نشطين:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">weighted_acc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">)</span><span class="o">.</span><span class="n">set_score_request</span><span class="p">(</span><span class="n">sample_weight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span>
+</pre></div>
+</div>
+<p>… cv=GroupKFold()،
+… scoring=weighted_acc
+…).set_fit_request(sample_weight=True)
+&gt;&gt;&gt; cv_results = cross_validate(
+… lr،
+… X،
+… y،
+… params={“sample_weight”: my_weights، “groups”: my_groups”}،
+… cv=GroupKFold()،
+… scoring=weighted_acc،
+…)</p>
+<p>لاحظ أنه في هذا المثال، يقوم “cross_validate” بتوجيه “my_weights” إلى كل من المسجل و”LogisticRegressionCV”.</p>
+<p>إذا قمنا بتمرير “sample_weight” في معلمات “cross_validate”، ولكن لم نقم بتعيين أي كائن لطلبها، فسيتم إثارة خطأ “UnsetMetadataPassedError”، مما يشير إلى أننا بحاجة إلى تعيين مكان توجيهها بشكل صريح. ينطبق الشيء نفسه إذا تم تمرير “params={“sample_weights”: my_weights، …}” (لاحظ الخطأ الإملائي، أي “weights” بدلاً من “weight”)، نظرًا لأن “sample_weights” لم يتم طلبها بواسطة أي من كائناتها الأساسية.</p>
+</section>
+<section id="id11">
+<h2><span class="section-number">1.2. </span>التسجيل المرجح والتناسب غير المرجح<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<p>عند تمرير البيانات الوصفية مثل “sample_weight” إلى جهاز توجيه (ميتا-تقديرات أو وظيفة توجيه)، يجب على جميع مستهلكي “sample_weight” طلب الأوزان بشكل صريح أو عدم طلبها بشكل صريح (أي “True” أو “False”). لذلك، لأداء تناسب غير مرجح، نحتاج إلى تكوين “LogisticRegressionCV” لعدم طلب أوزان العينة، بحيث لا يقوم “cross_validate” بتمرير الأوزان:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">weighted_acc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">)</span><span class="o">.</span><span class="n">set_score_request</span><span class="p">(</span><span class="n">sample_weight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span>
+</pre></div>
+</div>
+<p>… cv=GroupKFold()، scoring=weighted_acc،
+…).set_fit_request(sample_weight=False)
+&gt;&gt;&gt; cv_results = cross_validate(
+… lr،
+… X،
+… y،
+… cv=GroupKFold()،
+… params={“sample_weight”: my_weights، “groups”: my_groups”}،
+… scoring=weighted_acc،
+…)</p>
+<p>إذا لم يتم استدعاء “LogisticRegressionCV.set_fit_request”، فسيؤدي “cross_validate” إلى حدوث خطأ لأن “sample_weight” يتم تمريره ولكن “LogisticRegressionCV” لن يتم تكوينه بشكل صريح للتعرف على الأوزان.</p>
+</section>
+<section id="id12">
+<h2><span class="section-number">1.3. </span>اختيار الميزة غير المرجحة<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p>توجيه البيانات الوصفية ممكن فقط إذا كانت طريقة الكائن تعرف كيفية استخدام البيانات الوصفية، والتي في معظم الحالات تعني أنها تحتوي على معلمة صريحة لها. فقط عندئذٍ يمكننا تعيين قيم الطلب للبيانات الوصفية باستخدام “set_fit_request(sample_weight=True)”، على سبيل المثال. يجعل هذا الكائن مستهلكًا.</p>
+<p>على عكس “LogisticRegressionCV”، لا يمكن لـ “SelectKBest” استهلاك الأوزان، لذلك لا يتم تعيين أي قيمة طلب لـ “sample_weight” على مثيله ولا يتم توجيه “sample_weight” إليه:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">weighted_acc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">)</span><span class="o">.</span><span class="n">set_score_request</span><span class="p">(</span><span class="n">sample_weight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span>
+</pre></div>
+</div>
+<p>… cv=GroupKFold()، scoring=weighted_acc،
+…).set_fit_request(sample_weight=True)
+&gt;&gt;&gt; sel = SelectKBest(k=2)
+&gt;&gt;&gt; pipe = make_pipeline(sel، lr)
+&gt;&gt;&gt; cv_results = cross_validate(
+… pipe،
+… X،
+… y،
+… cv=GroupKFold()،
+… params={“sample_weight”: my_weights، “groups”: my_groups”}،
+… scoring=weighted_acc،
+…)</p>
+<p>أوزان تسجيل وتناسب مختلفة
+على الرغم من أن كلاً من <code class="xref py py-func docutils literal notranslate"><span class="pre">make_scorer</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegressionCV</span></code> يتوقعان المفتاح “sample_weight”، إلا أنه يمكننا استخدام الأسماء المستعارة لتمرير أوزان مختلفة إلى مستهلكين مختلفين. في هذا المثال، نمرر “scoring_weight” إلى المقيّم، و “fitting_weight” إلى :class:<a href="#id13"><span class="problematic" id="id14">`</span></a>~linear_model.LogisticRegressionCV”:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">weighted_acc</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">)</span><span class="o">.</span><span class="n">set_score_request</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="n">sample_weight</span><span class="o">=</span><span class="s2">&quot;scoring_weight&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">cv</span><span class="o">=</span><span class="n">GroupKFold</span><span class="p">(),</span> <span class="n">scoring</span><span class="o">=</span><span class="n">weighted_acc</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span><span class="o">.</span><span class="n">set_fit_request</span><span class="p">(</span><span class="n">sample_weight</span><span class="o">=</span><span class="s2">&quot;fitting_weight&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">lr</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">X</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">y</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">cv</span><span class="o">=</span><span class="n">GroupKFold</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;scoring_weight&quot;</span><span class="p">:</span> <span class="n">my_weights</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;fitting_weight&quot;</span><span class="p">:</span> <span class="n">my_other_weights</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="n">my_groups</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="n">scoring</span><span class="o">=</span><span class="n">weighted_acc</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="api-interface">
+<h1><span class="section-number">2. </span>واجهة برمجة التطبيقات API Interface<a class="headerlink" href="#api-interface" title="Link to this heading">#</a></h1>
+<p>مصطلح “consumer” هو كائن (مُقدِّر، أو ميتا-مُقدِّر، أو مُقيِّم، أو مُقسِّم) يقبل ويستخدم بعض البيانات الوصفية <a class="reference internal" href="glossary.html#term-metadata"><span class="xref std std-term">metadata</span></a> في واحدة على الأقل من طرقه (على سبيل المثال، “fit”، “predict”، “inverse_transform”، “transform”، “score”، “split”). الميتا-مُقدِّرات التي تقوم فقط بتمرير البيانات الوصفية إلى كائنات أخرى (المُقدِّرات أو المُقيِّمين أو المُقسِّمين التابعين) ولا تستخدم البيانات الوصفية بأنفسهم ليست مستهلكين. المُقدِّرات (الميتا) التي تقوم بتوجيه البيانات الوصفية إلى كائنات أخرى هي <a class="reference internal" href="glossary.html#term-router"><span class="xref std std-term">routers</span></a>. يمكن أن يكون المُقدِّر (الميتا) مُستهلكًا و <a class="reference internal" href="glossary.html#term-router"><span class="xref std std-term">router</span></a> في نفس الوقت. تعرض المُقدِّرات (الميتا) والمُقسِّمات طريقة <code class="docutils literal notranslate"><span class="pre">set_{method}_request</span></code> لكل طريقة تقبل على الأقل بيانات وصفية واحدة. على سبيل المثال، إذا كان المُقدِّر يدعم “sample_weight” في “fit” و “score”، فإنه يعرض “estimator.set_fit_request(sample_weight=value)” و “estimator.set_score_request(sample_weight=value)”. يمكن أن يكون “value” ما يلي:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: تشير الطريقة إلى طلب “sample_weight”. وهذا يعني أنه إذا تم توفير البيانات الوصفية، فسيتم استخدامها، وإلا فلن يتم رفع أي خطأ.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: الطريقة لا تطلب “sample_weight”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: سيرفع الراوتر خطأً إذا تم تمرير “sample_weight”. هذه هي القيمة الافتراضية في جميع الحالات تقريبًا عند إنشاء كائن، ويضمن أن المستخدم يحدد طلبات البيانات الوصفية بشكل صريح عندما يتم تمرير البيانات الوصفية. والاستثناء الوحيد هو مُقسِّمات “Group*Fold”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;param_name&quot;</span></code>: اسم مستعار لـ “sample_weight” إذا كنا نريد تمرير أوزان مختلفة إلى مستهلكين مختلفين. إذا تم استخدام الأسماء المستعارة، فيجب ألا يقوم الميتا-مُقدِّر بتمرير “param_name” إلى المُستهلك، ولكن “sample_weight” بدلاً من ذلك، لأن المُستهلك سيتوقع معلمة تسمى “sample_weight”. وهذا يعني أن الخريطة بين البيانات الوصفية المطلوبة بواسطة الكائن، على سبيل المثال “sample_weight” واسم المتغير المقدم من قبل المستخدم، على سبيل المثال “my_weights”، تتم على مستوى الراوتر، وليس بواسطة الكائن المستهلك نفسه.</p></li>
+</ul>
+<p>يتم طلب البيانات الوصفية بنفس الطريقة للمُقيِّمين باستخدام “set_score_request”.</p>
+<p>إذا قام المستخدم بتمرير بيانات وصفية، على سبيل المثال “sample_weight”، فيجب على المستخدم تعيين طلب البيانات الوصفية لجميع الكائنات التي يمكنها استهلاك “sample_weight”، وإلا سيرفع كائن الراوتر خطأً. على سبيل المثال، يرفع الكود التالي خطأً، لأنه لم يتم تحديد ما إذا كان يجب تمرير “sample_weight” إلى مُقيِّم المُقدِّر بشكل صريح أم لا:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span><span class="o">.</span><span class="n">set_fit_request</span><span class="p">(</span><span class="n">sample_weight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">GridSearchCV</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">estimator</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span>
+<span class="gp">... </span>    <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">my_weights</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">[sample_weight] يتم تمريرها ولكن لم يتم تحديدها بشكل صريح على أنها مطلوبة أو غير مطلوبة لـ LogisticRegression.score، والتي يتم استخدامها داخل GridSearchCV.fit.</span>
+<span class="go">استدعاء `LogisticRegression.set_score_request({metadata}=True/False)` لكل البيانات الوصفية التي تريد طلبها/تجاهلها.</span>
+</pre></div>
+</div>
+<p>يمكن إصلاح المشكلة عن طريق تعيين قيمة الطلب بشكل صريح:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span><span class="o">.</span><span class="n">set_fit_request</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">sample_weight</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">... </span><span class="p">)</span><span class="o">.</span><span class="n">set_score_request</span><span class="p">(</span><span class="n">sample_weight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>في نهاية قسم <strong>أمثلة الاستخدام</strong>، نقوم بتعطيل علم التهيئة لتوجيه البيانات الوصفية:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sklearn</span><span class="o">.</span><span class="n">set_config</span><span class="p">(</span><span class="n">enable_metadata_routing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="metadata-routing-models">
+<span id="id15"></span><h1><span class="section-number">3. </span>حالة دعم توجيه البيانات الوصفية<a class="headerlink" href="#metadata-routing-models" title="Link to this heading">#</a></h1>
+<p>يدعم جميع المستهلكين (أي المُقدِّرات البسيطة التي تستهلك البيانات الوصفية فقط ولا تقوم بتوجيهها) توجيه البيانات الوصفية، مما يعني أنه يمكن استخدامها داخل الميتا-مُقدِّرات التي تدعم توجيه البيانات الوصفية. ومع ذلك، فإن تطوير دعم توجيه البيانات الوصفية للميتا-مُقدِّرات قيد التقدم، وفيما يلي قائمة بالميتا-مُقدِّرات والأدوات التي تدعم توجيه البيانات الوصفية ولا تدعمها بعد.</p>
+<p>الميتا-مُقدِّرات والوظائف التي تدعم توجيه البيانات الوصفية:</p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.calibration.CalibratedClassifierCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.compose.ColumnTransformer</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.compose.TransformedTargetRegressor</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.covariance.GraphicalLassoCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble.StackingClassifier</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble.StackingRegressor</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble.VotingClassifier</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble.VotingRegressor</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble.BaggingClassifier</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble.BaggingRegressor</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection.RFE</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection.RFECV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection.SelectFromModel</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection.SequentialFeatureSelector</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.impute.IterativeImputer</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.ElasticNetCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.LarsCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.LassoCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.LassoLarsCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.LogisticRegressionCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.MultiTaskElasticNetCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.MultiTaskLassoCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.OrthogonalMatchingPursuitCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.RANSACRegressor</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.RidgeClassifierCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model.RidgeCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.GridSearchCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.HalvingGridSearchCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.HalvingRandomSearchCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.RandomizedSearchCV</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.permutation_test_score</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.model_selection.cross_validate</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.model_selection.cross_val_score</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.model_selection.cross_val_predict</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.learning_curve</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.model_selection.validation_curve</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.multiclass.OneVsOneClassifier</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.multiclass.OneVsRestClassifier</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.multiclass.OutputCodeClassifier</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.multioutput.ClassifierChain</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.multioutput.MultiOutputClassifier</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.multioutput.MultiOutputRegressor</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.multioutput.RegressorChain</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.FeatureUnion</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.semi_supervised.SelfTrainingClassifier</span></code></p></li>
+</ul>
+<p>الميتا-مُقدِّرات والأدوات التي لا تدعم توجيه البيانات الوصفية بعد:</p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble.AdaBoostClassifier</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.ensemble.AdaBoostRegressor</span></code></p></li>
+</ul>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="presentations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>الموارد الخارجية، الفيديوهات، والمحاضرات</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. أمثلة الاستخدام</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">1.1. التسجيل والتناسب المرجح</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">1.2. التسجيل المرجح والتناسب غير المرجح</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">1.3. اختيار الميزة غير المرجحة</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#api-interface">2. واجهة برمجة التطبيقات API Interface</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-routing-models">3. حالة دعم توجيه البيانات الوصفية</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/metadata_routing.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
