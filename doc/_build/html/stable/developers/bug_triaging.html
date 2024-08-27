@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="فرز الأخطاء وإدارة المشكلات" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/developers/bug_triaging.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="تعد تتبع المشكلات مهمة للتواصل في المشروع: فهي تساعد المطورين على تحديد المشاريع الرئيسية للعمل عليها، بالإضافة إلى مناقشة الأولويات. ولهذا السبب، من المهم تنظيمها، وإضافة العلامات إلى المشكلات وإغ..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="تعد تتبع المشكلات مهمة للتواصل في المشروع: فهي تساعد المطورين على تحديد المشاريع الرئيسية للعمل عليها، بالإضافة إلى مناقشة الأولويات. ولهذا السبب، من المهم تنظيمها، وإضافة العلامات إلى المشكلات وإغ..." />
+
+    <title>فرز الأخطاء وإدارة المشكلات &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'developers/bug_triaging';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">فرز الأخطاء...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="bug-triaging">
+<span id="id1"></span><h1>فرز الأخطاء وإدارة المشكلات<a class="headerlink" href="#bug-triaging" title="Link to this heading">#</a></h1>
+<p>تعد <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">تتبع المشكلات</a>
+مهمة للتواصل في المشروع: فهي تساعد
+المطورين على تحديد المشاريع الرئيسية للعمل عليها، بالإضافة إلى مناقشة
+الأولويات. ولهذا السبب، من المهم تنظيمها، وإضافة العلامات
+إلى المشكلات وإغلاق المشكلات التي ليست ضرورية.</p>
+<section id="id3">
+<h2>العمل على المشكلات لتحسينها<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>يزيد تحسين المشكلات من فرص حلها بنجاح.
+يمكن العثور على إرشادات حول تقديم المشكلات الجيدة هنا <a class="reference internal" href="contributing.html#filing-bugs"><span class="std std-ref">هنا</span></a>.
+يمكن لطرف ثالث تقديم تعليقات مفيدة أو حتى
+إضافة تعليقات على المشكلة.
+فيما يلي الإجراءات النموذجية المفيدة:</p>
+<ul class="simple">
+<li><p>توثيق المشكلات التي تفتقد إلى العناصر اللازمة لإعادة إنتاج المشكلة
+مثل عينات التعليمات البرمجية</p></li>
+<li><p>اقتراح استخدام أفضل لتنسيق التعليمات البرمجية</p></li>
+<li><p>اقتراح إعادة صياغة العنوان والوصف لجعلهما أكثر
+وضوحًا حول المشكلة التي يتعين حلها</p></li>
+<li><p>ربط المشكلات أو المناقشات ذات الصلة مع وصف موجز لكيفية
+ارتباطها، على سبيل المثال “راجع أيضًا #xyz لمحاولة مماثلة
+في هذا” أو “راجع أيضًا #xyz حيث حدث نفس الشيء في
+SomeEstimator” يوفر السياق ويساعد في المناقشة.</p></li>
+</ul>
+<aside class="topic">
+<p class="topic-title">مناقشات مثمرة</p>
+<p>قد تكون المناقشات عبر الإنترنت أكثر صعوبة مما تبدو للوهلة الأولى، خاصة
+بالنظر إلى أن شخصًا جديدًا في المصادر المفتوحة قد يكون لديه فهم مختلف جدًا
+للعملية عن الشخص المحنك.</p>
+<p>بشكل عام، من المفيد أن تظل إيجابيًا وتفترض النوايا الحسنة. <a class="reference external" href="https://gael-varoquaux.info/programming/technical-discussions-are-hard-a-few-tips.html">تستكشف المقالة
+التالية</a>
+كيفية قيادة المناقشات عبر الإنترنت في سياق المصادر المفتوحة.</p>
+</aside>
+</section>
+<section id="id5">
+<h2>العمل على طلبات السحب للمساعدة في المراجعة<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>يتم أيضًا تشجيع مراجعة التعليمات البرمجية. يُرحب بالمساهمين والمستخدمين للمشاركة
+في عملية المراجعة باتباع إرشادات المراجعة الخاصة بنا <span class="xref std std-ref">&lt;code_review&gt;</span>.</p>
+</section>
+<section id="id6">
+<h2>عمليات الفرز لأعضاء فريق النواة وفريق خبرة المساهمين<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>بالإضافة إلى ما سبق، يمكن لأعضاء فريق النواة وفريق خبرة المساهمين
+القيام بالمهام المهمة التالية:</p>
+<ul class="simple">
+<li><p>تحديث <span class="xref std std-ref">علامات للمشكلات وطلبات السحب</span>: راجع قائمة
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/labels">علامات جيثب المتاحة</a>.</p></li>
+<li><p><a class="reference internal" href="contributing.html#stalled-pull-request"><span class="std std-ref">تحديد ما إذا كان يجب إعادة تسمية طلب السحب على أنه متوقف</span></a>
+أو يحتاج إلى مساعدة (هذا مهم جدًا في سياق
+الرشقات، حيث يكمن الخطر في إنشاء العديد من طلبات السحب غير المكتملة)</p></li>
+<li><p>إذا تم الاستيلاء على طلب السحب المتوقف بواسطة طلب سحب أحدث، فقم بتسمية طلب السحب المتوقف باسم
+“متجاوز”، واترك تعليقًا على طلب السحب المتوقف مع رابط إلى طلب السحب الجديد، ومن
+المحتمل إغلاق طلب السحب المتوقف.</p></li>
+<li><p>فرز المشكلات:</p>
+<ul>
+<li><p><strong>إغلاق أسئلة الاستخدام</strong> وأشر بلطف إلى المبلغ لاستخدام
+Stack Overflow بدلاً من ذلك.</p></li>
+<li><p><strong>إغلاق المشكلات المكررة</strong>، بعد التحقق من أنها
+في الواقع مكررة. في الوضع المثالي، ينقل مقدم الطلب الأصلي
+المناقشة إلى المشكلة الأقدم المكررة</p></li>
+<li><p><strong>إغلاق المشكلات التي لا يمكن إعادة إنتاجها</strong>، بعد ترك الوقت (على
+الأقل أسبوع) لإضافة معلومات إضافية</p></li>
+</ul>
+</li>
+</ul>
+<p><a class="reference internal" href="tips.html#saved-replies"><span class="std std-ref">الردود المحفوظة</span></a> مفيدة لتوفير الوقت ومع ذلك تكون
+مرحبة ومهذبة عند الفرز.</p>
+<p>راجع وصف جيثب لأدوار في المنظمة
+&lt;<a class="reference external" href="https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization">https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization</a>&gt;`_.</p>
+<aside class="topic">
+<p class="topic-title">إغلاق المشكلات: قرار صعب</p>
+<p>عندما يكون هناك شك في ما إذا كان يجب إغلاق المشكلة أم لا، فمن الأفضل
+السعي إلى تحقيق الإجماع مع الشخص الذي نشرها في الأصل، وربما
+طلب الخبرة ذات الصلة. ومع ذلك، عندما تكون المشكلة سؤالًا عن الاستخدام، أو عندما
+يتم اعتبارها غير واضحة لسنوات عديدة، فيجب إغلاقها.</p>
+</aside>
+</section>
+<section id="id8">
+<h2>سير عمل نموذجي لفرز المشكلات<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>سير العمل التالي <a class="footnote-reference brackets" href="#id11" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> هو طريقة جيدة لفرز المشكلات:</p>
+<ol class="arabic">
+<li><p>شكر المبلغ عن فتح مشكلة</p>
+<p>يعد تعقب المشكلات أول تفاعل للعديد من الأشخاص مع
+مشروع scikit-learn نفسه، إلى جانب استخدام المكتبة فقط. لذلك،
+نريد أن تكون تجربة ممتعة ومرحبة.</p>
+</li>
+<li><p>هل هذا سؤال عن الاستخدام؟ إذا كان الأمر كذلك، فأغلقه برسالة مهذبة
+(<a class="reference internal" href="tips.html#saved-replies"><span class="std std-ref">هنا مثال</span></a>).</p></li>
+<li><p>هل تم توفير المعلومات اللازمة؟</p>
+<p>إذا كانت المعلومات الحاسمة (مثل إصدار scikit-learn المستخدم)
+مفقودة، فلا تتردد في طلب ذلك ووضع علامة على المشكلة باسم “تحتاج
+إلى معلومات”.</p>
+</li>
+<li><p>هل هذه مشكلة مكررة؟</p>
+<p>لدينا العديد من المشكلات المفتوحة. إذا بدت مشكلة جديدة مكررة،
+فأشر إلى المشكلة الأصلية. إذا كانت مكررة بشكل واضح، أو كان هناك إجماع
+على أنها زائدة عن الحاجة، فأغلقها. تأكد من شكر المبلغ
+على أي حال، وشجعهم على المشاركة في المناقشة الأصلية، وربما حاول إصلاحها.</p>
+<p>إذا قدمت المشكلة الجديدة معلومات ذات صلة، مثل مثال أفضل أو
+مختلف قليلاً، فأضفه إلى المشكلة الأصلية كتعليق أو تعديل على المشاركة الأصلية.</p>
+</li>
+<li><p>تأكد من أن العنوان يعكس المشكلة بدقة. إذا كان لديك
+الأذونات اللازمة فقم بتحريرها بنفسك إذا لم يكن الأمر واضحًا.</p></li>
+<li><p>هل المشكلة بسيطة ويمكن إعادة إنتاجها؟</p>
+<p>بالنسبة لتقارير الأخطاء، نطلب من المبلغ توفير مثال يمكن إعادة إنتاجه. راجع <a class="reference external" href="https://matthewrocklin.com/blog/work/2018/02/28/minimal-bug-reports">هذه المشاركة المفيدة</a>
+بواسطة ماثيو روكلين للحصول على تفسير جيد. إذا لم يكن المثال قابلاً لإعادة الإنتاج، أو
+إذا لم يكن بسيطًا بشكل واضح، فلا تتردد في طلب ما إذا كان بإمكان المبلغ توفير مثال أو تبسيط المثال المقدم.
+اعترف بأن كتابة أمثلة يمكن إعادة إنتاجها أمر شاق. إذا كان المبلغ يواجه صعوبة، فيمكنك محاولة كتابة مثال بنفسك.</p>
+<p>إذا تم توفير مثال يمكن إعادة إنتاجه، ولكنك ترى تبسيطًا،
+أضف مثالك البسيط الذي يمكن إعادة إنتاجه.</p>
+</li>
+<li><p>أضف العلامات ذات الصلة، مثل “الوثائق” عندما تكون
+المشكلة متعلقة بالوثائق، “خطأ” إذا كان من الواضح أنه خطأ، “تحسين” إذا كان
+طلب تحسين، …</p>
+<p>إذا كانت المشكلة محددة بوضوح ويبدو الإصلاح بسيطًا نسبيًا، فقم بوضع علامة على المشكلة باسم “Good first issue”.</p>
+<p>يمكن أن تكون الخطوة الإضافية المفيدة هي وضع علامة على الوحدة النمطية المقابلة، على سبيل المثال
+<code class="docutils literal notranslate"><span class="pre">sklearn.linear_models</span></code> عند الاقتضاء.</p>
+</li>
+<li><p>أزل علامة “تحتاج إلى فرز” من المشكلة إذا كانت العلامة موجودة.</p></li>
+</ol>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id11" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">1</a><span class="fn-bracket">]</span></span>
+<p>تم التكييف من دليل مسؤولي مشروع الباندا `
+&lt;<a class="reference external" href="https://pandas.pydata.org/docs/development/maintaining.html">https://pandas.pydata.org/docs/development/maintaining.html</a>&gt;`_</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">العمل على المشكلات لتحسينها</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">العمل على طلبات السحب للمساعدة في المراجعة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">عمليات الفرز لأعضاء فريق النواة وفريق خبرة المساهمين</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">سير عمل نموذجي لفرز المشكلات</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/developers/bug_triaging.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
