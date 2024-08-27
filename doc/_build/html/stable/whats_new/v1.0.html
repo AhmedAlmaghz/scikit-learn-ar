@@ -1,0 +1,1844 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="الإصدار 1.0" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/whats_new/v1.0.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="يتم في هذا الملف تعيين أسماء المساهمين إلى عناوين URL الخاصة بهم. وينبغي أن يستخدم في الغالب للمساهمين الأساسيين، وفي بعض الأحيان للمساهمين الذين لا يرغبون في أن تكون صفحتهم على GitHub هي عنوان URL..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="يتم في هذا الملف تعيين أسماء المساهمين إلى عناوين URL الخاصة بهم. وينبغي أن يستخدم في الغالب للمساهمين الأساسيين، وفي بعض الأحيان للمساهمين الذين لا يرغبون في أن تكون صفحتهم على GitHub هي عنوان URL..." />
+
+    <title>الإصدار 1.0 &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'whats_new/v1.0';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="الإصدار 0.24" href="v0.24.html" />
+    <link rel="prev" title="Version 1.1" href="v1.1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.6.html">Version 1.6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.html">Version 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.html">Version 1.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.html">Version 1.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.html">Version 1.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.html">Version 1.1</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">الإصدار 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.html">الإصدار 0.24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.html">نماذج معدلة</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.22.html">الإصدار 0.22</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.21.html">الإصدار 0.21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.html">المساهمون</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.19.html">أبرز المميزات</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="v0.18.html">سجل التغييرات</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.17.html">الميزات الجديدة</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.16.html">الإصدار 0.16</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.html">الأشخاص</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.14.html">الإصدار 0.14</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.13.html">الإصدار 0.13.1</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="older_versions.html">الإصدارات القديمة</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../whats_new.html" class="nav-link">تاريخ الإصدارات</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">الإصدار 1.0</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>يتم في هذا الملف تعيين أسماء المساهمين إلى عناوين URL الخاصة بهم. وينبغي أن يستخدم في الغالب للمساهمين الأساسيين، وفي بعض الأحيان للمساهمين الذين لا يرغبون في أن تكون صفحتهم على GitHub هي عنوان URL المستهدف الخاص بهم. وقد تم استخدامه تاريخياً لربط جميع أسماء المساهمين، ويجب الآن تفضيل “:user:”. كما أنه يحدد استبدالات ReST الأخرى.</p>
+<section id="release-notes-1-0">
+<span id="id1"></span><h1>الإصدار 1.0<a class="headerlink" href="#release-notes-1-0" title="Link to this heading">#</a></h1>
+<p>للحصول على وصف موجز لأبرز الميزات في الإصدار، يرجى الرجوع إلى
+:ref:sphx_glr_auto_examples_release_highlights_plot_release_highlights_1_0_0.py.</p>
+<p class="rubric">Legend for changelogs</p>
+<ul class="simple">
+<li><p><a href="#id29"><span class="problematic" id="id30">|MajorFeature|</span></a> something big that you couldn’t do before.</p></li>
+<li><p><a href="#id31"><span class="problematic" id="id32">|Feature|</span></a> something that you couldn’t do before.</p></li>
+<li><p><a href="#id33"><span class="problematic" id="id34">|Efficiency|</span></a> an existing feature now may not require as much computation or
+memory.</p></li>
+<li><p><a href="#id35"><span class="problematic" id="id36">|Enhancement|</span></a> a miscellaneous minor improvement.</p></li>
+<li><p><a href="#id37"><span class="problematic" id="id38">|Fix|</span></a> something that previously didn’t work as documented – or according
+to reasonable expectations – should now work.</p></li>
+<li><p><a href="#id39"><span class="problematic" id="id40">|API|</span></a> you will need to change your code to have the same effect in the
+future; or a feature will be removed in the future.</p></li>
+</ul>
+<section id="changes-1-0-2">
+<span id="id2"></span><h2>الإصدار 1.0.2<a class="headerlink" href="#changes-1-0-2" title="Link to this heading">#</a></h2>
+<p><strong>ديسمبر 2021</strong></p>
+<ul class="simple">
+<li><p><a href="#id41"><span class="problematic" id="id42">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.Birch</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">feature_selection.RFECV</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomForestRegressor</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomForestClassifier</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingRegressor</span></code>، و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingClassifier</span></code> لم تعد تُظهر تحذيرًا عند ملائمتها
+على DataFrame من Pandas. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21578">#21578</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+<section id="id3">
+<h3>سجل التغييرات<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="sklearn-cluster">
+<h4><a class="reference internal" href="../api/sklearn.cluster.html#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a><a class="headerlink" href="#sklearn-cluster" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id43"><span class="problematic" id="id44">|Fix|</span></a> تم إصلاح حلقة لانهائية في <code class="xref py py-func docutils literal notranslate"><span class="pre">cluster.SpectralClustering</span></code> عن طريق
+نقل عداد التكرار من محاولة إلى استثناء.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21271">#21271</a> بواسطة <a class="reference external" href="https://github.com/martintb">Tyler Martin</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-datasets">
+<h4><a class="reference internal" href="../api/sklearn.datasets.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.datasets</span></code></a><a class="headerlink" href="#sklearn-datasets" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id45"><span class="problematic" id="id46">|Fix|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">datasets.fetch_openml</span></code> آمنة الآن للخيوط. يتم تنزيل البيانات أولاً
+إلى مجلد فرعي مؤقت ثم إعادة تسميته.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21833">#21833</a> بواسطة <a class="reference external" href="https://github.com/siavrez">Siavash Rezazadeh</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-decomposition">
+<h4><a class="reference internal" href="../api/sklearn.decomposition.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.decomposition</span></code></a><a class="headerlink" href="#sklearn-decomposition" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id47"><span class="problematic" id="id48">|Fix|</span></a> تم إصلاح القيد على دالة الهدف لـ
+<code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.DictionaryLearning</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.MiniBatchDictionaryLearning</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.SparsePCA</span></code>
+و <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.MiniBatchSparsePCA</span></code> ليكون محدبًا ويتطابق مع المقال المشار إليه.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19210">#19210</a> بواسطة <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-ensemble">
+<h4><a class="reference internal" href="../api/sklearn.ensemble.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a><a class="headerlink" href="#sklearn-ensemble" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id49"><span class="problematic" id="id50">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomForestClassifier</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomForestRegressor</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.ExtraTreesClassifier</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.ExtraTreesRegressor</span></code>،
+و <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomTreesEmbedding</span></code> تُظهر الآن خطأ <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> عندما
+<code class="docutils literal notranslate"><span class="pre">bootstrap=False</span></code> و <code class="docutils literal notranslate"><span class="pre">max_samples</span></code> ليس <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21295">#21295</a> <a class="reference external" href="https://github.com/PSSF23">Haoyin Xu</a>.</p></li>
+<li><p><a href="#id51"><span class="problematic" id="id52">|Fix|</span></a> حل خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingClassifier</span></code> حيث
+كانت الخسارة الأسية تحسب التدرج الإيجابي بدلاً من
+السلبي.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/22050">#22050</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-feature-selection">
+<h4><a class="reference internal" href="../api/sklearn.feature_selection.html#module-sklearn.feature_selection" title="sklearn.feature_selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_selection</span></code></a><a class="headerlink" href="#sklearn-feature-selection" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id53"><span class="problematic" id="id54">|Fix|</span></a> تم إصلاح <code class="xref py py-class docutils literal notranslate"><span class="pre">feature_selection.SelectFromModel</span></code> عن طريق تحسين الدعم
+للمقدّرات الأساسية التي لا تقوم بتعيين <code class="docutils literal notranslate"><span class="pre">feature_names_in_</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21991">#21991</a> بواسطة
+<a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-impute">
+<h4><a class="reference internal" href="../api/sklearn.impute.html#module-sklearn.impute" title="sklearn.impute"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.impute</span></code></a><a class="headerlink" href="#sklearn-impute" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id55"><span class="problematic" id="id56">|Fix|</span></a> إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.RidgeClassifierCV</span></code> حيث كانت طريقة
+<code class="docutils literal notranslate"><span class="pre">predict</span></code> تقوم بعملية <code class="docutils literal notranslate"><span class="pre">argmax</span></code> على الدرجات التي تم الحصول عليها من
+<code class="docutils literal notranslate"><span class="pre">decision_function</span></code> بدلاً من إعادة مصفوفة مؤشر التصنيف متعدد التصنيفات.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19869">#19869</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-linear-model">
+<h4><a class="reference internal" href="../api/sklearn.linear_model.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a><a class="headerlink" href="#sklearn-linear-model" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id57"><span class="problematic" id="id58">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LassoLarsIC</span></code> يحسب الآن بشكل صحيح AIC
+و BIC. يتم الآن إلقاء خطأ عندما <code class="docutils literal notranslate"><span class="pre">n_features</span> <span class="pre">&gt;</span> <span class="pre">n_samples</span></code>
+وعندما لا يتم توفير تباين الضوضاء.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21481">#21481</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a> و
+<a class="reference external" href="https://github.com/ababino">Andrés Babino</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-manifold">
+<h4><a class="reference internal" href="../api/sklearn.manifold.html#module-sklearn.manifold" title="sklearn.manifold"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.manifold</span></code></a><a class="headerlink" href="#sklearn-manifold" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id59"><span class="problematic" id="id60">|Fix|</span></a> تم إصلاح خطأ غير ضروري عند ملاءمة <code class="xref py py-class docutils literal notranslate"><span class="pre">manifold.Isomap</span></code> بمصفوفة
+مسافات محسوبة مسبقًا حيث يحتوي رسم الجيران على مكونات منفصلة متعددة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21915">#21915</a> بواسطة <a class="reference external" href="https://github.com/TomDLT">Tom Dupre la Tour</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-metrics">
+<h4><a class="reference internal" href="../api/sklearn.metrics.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics</span></code></a><a class="headerlink" href="#sklearn-metrics" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id61"><span class="problematic" id="id62">|Fix|</span></a> جميع فئات <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.metrics.DistanceMetric</span></code> الفرعية تدعم الآن بشكل صحيح
+سمات المخزن المؤقت للقراءة فقط.
+ويصلح هذا تراجعًا تم تقديمه في 1.0.0 فيما يتعلق بـ 0.24.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21694">#21694</a> بواسطة <a class="reference external" href="https://github.com/jjerphan">Julien Jerphanion</a>.</p></li>
+<li><p><a href="#id63"><span class="problematic" id="id64">|Fix|</span></a> تقبل جميع <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.MinkowskiDistance</span></code> الآن معلمة وزن
+مما يجعل من الممكن كتابة كود يتصرف بشكل متسق مع كل من
+scipy 1.8 والإصدارات السابقة. وهذا يعني بدوره أن جميع
+المقدرات المستندة إلى الجيران (باستثناء تلك التي تستخدم <code class="docutils literal notranslate"><span class="pre">algorithm=&quot;kd_tree&quot;</span></code>)
+تقبل الآن معلمة وزن مع <code class="docutils literal notranslate"><span class="pre">metric=&quot;minknowski&quot;</span></code> لإنتاج نتائج متسقة دائمًا مع
+<code class="docutils literal notranslate"><span class="pre">scipy.spatial.distance.cdist</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21741">#21741</a> بواسطة <a class="reference external" href="https://github.com/ogrisel">Olivier Grisel</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-multiclass">
+<h4><a class="reference internal" href="../api/sklearn.multiclass.html#module-sklearn.multiclass" title="sklearn.multiclass"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.multiclass</span></code></a><a class="headerlink" href="#sklearn-multiclass" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id65"><span class="problematic" id="id66">|Fix|</span></a> <code class="xref py py-meth docutils literal notranslate"><span class="pre">multiclass.OneVsRestClassifier.predict_proba</span></code> لا يخطئ عندما
+تم ملاءمته على أهداف ثابتة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21871">#21871</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-neighbors">
+<h4><a class="reference internal" href="../api/sklearn.neighbors.html#module-sklearn.neighbors" title="sklearn.neighbors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neighbors</span></code></a><a class="headerlink" href="#sklearn-neighbors" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id67"><span class="problematic" id="id68">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.KDTree</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.BallTree</span></code> تدعم بشكل صحيح
+سمات المخزن المؤقت للقراءة فقط. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21845">#21845</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-preprocessing">
+<h4><a class="reference internal" href="../api/sklearn.preprocessing.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code></a><a class="headerlink" href="#sklearn-preprocessing" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id69"><span class="problematic" id="id70">|Fix|</span></a> إصلاح خطأ توافق مع NumPy 1.22 في <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.OneHotEncoder</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21517">#21517</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-tree">
+<h4><a class="reference internal" href="../api/sklearn.tree.html#module-sklearn.tree" title="sklearn.tree"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.tree</span></code></a><a class="headerlink" href="#sklearn-tree" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id71"><span class="problematic" id="id72">|Fix|</span></a> يمنع <code class="xref py py-func docutils literal notranslate"><span class="pre">tree.plot_tree</span></code> من الرسم خارج حدود
+الشكل. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21917">#21917</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id73"><span class="problematic" id="id74">|Fix|</span></a> دعم تحميل عمليات حفظ نماذج شجرة القرار عندما تم
+إنشاء عملية الحفظ على منصة ذات عدد بتات مختلف. مثال نموذجي هو
+تدريب ونمذجة النموذج على آلة 64 بت وتحميل النموذج على آلة 32
+بت للتنبؤ. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21552">#21552</a> بواسطة <a class="reference external" href="https://github.com/lesteve">Loïc Estève</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-utils">
+<h4><a class="reference internal" href="../api/sklearn.utils.html#module-sklearn.utils" title="sklearn.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.utils</span></code></a><a class="headerlink" href="#sklearn-utils" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id75"><span class="problematic" id="id76">|Fix|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">utils.estimator_html_repr</span></code> يقوم الآن بتجنب جميع أوصاف
+المقدر في HTML المولّد. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21493">#21493</a> بواسطة
+<a class="reference external" href="https://github.com/ageron">Aurélien Geron</a>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="changes-1-0-1">
+<span id="id4"></span><h2>الإصدار 1.0.1<a class="headerlink" href="#changes-1-0-1" title="Link to this heading">#</a></h2>
+<p><strong>أكتوبر 2021</strong></p>
+<section id="id5">
+<h3>نماذج ثابتة<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a href="#id77"><span class="problematic" id="id78">|Fix|</span></a> لا تُظهر الطرق غير الملائمة في الفئات التالية تحذيرًا
+عند ملائمتها على DataFrames مع أسماء ميزات صالحة:
+<code class="xref py py-class docutils literal notranslate"><span class="pre">covariance.EllipticEnvelope</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.IsolationForest</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.AdaBoostClassifier</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.KNeighborsClassifier</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.KNeighborsRegressor</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.RadiusNeighborsClassifier</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.RadiusNeighborsRegressor</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21199">#21199</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+<section id="sklearn-calibration">
+<h4><a class="reference internal" href="../api/sklearn.calibration.html#module-sklearn.calibration" title="sklearn.calibration"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.calibration</span></code></a><a class="headerlink" href="#sklearn-calibration" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id79"><span class="problematic" id="id80">|Fix|</span></a> تم إصلاح <code class="xref py py-class docutils literal notranslate"><span class="pre">calibration.CalibratedClassifierCV</span></code> لمراعاة
+<code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> عند حساب تنبؤ المقدر الأساسي عندما
+<code class="docutils literal notranslate"><span class="pre">ensemble=False</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20638">#20638</a> بواسطة <a class="reference external" href="https://github.com/JulienB-78">Julien Bohné</a>.</p></li>
+<li><p><a href="#id81"><span class="problematic" id="id82">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">calibration.CalibratedClassifierCV</span></code> مع
+<code class="docutils literal notranslate"><span class="pre">method=&quot;sigmoid&quot;</span></code> الذي كان يتجاهل <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> عند حساب
+الاحتمالات السابقة البايزية.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21179">#21179</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+</ul>
+</section>
+<section id="id6">
+<h4><a class="reference internal" href="../api/sklearn.cluster.html#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a><a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id83"><span class="problematic" id="id84">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.KMeans</span></code>، مما يضمن قابلية إعادة الإنتاج والتكافؤ
+بين الإدخال النادر والكثيف. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21195">#21195</a>
+بواسطة <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+</ul>
+</section>
+<section id="id7">
+<h4><a class="reference internal" href="../api/sklearn.ensemble.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a><a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id85"><span class="problematic" id="id86">|Fix|</span></a> تم إصلاح خطأ يمكن أن يتسبب في حدوث خطأ في حالة نادرة لـ
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.HistGradientBoostingClassifier</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.HistGradientBoostingRegressor</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21130">#21130</a> <a class="reference external" href="https://github.com/lorentzenchr">Christian Lorentzen</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-gaussian-process">
+<h4><a class="reference internal" href="../api/sklearn.gaussian_process.html#module-sklearn.gaussian_process" title="sklearn.gaussian_process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.gaussian_process</span></code></a><a class="headerlink" href="#sklearn-gaussian-process" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id87"><span class="problematic" id="id88">|Fix|</span></a> احسب <code class="docutils literal notranslate"><span class="pre">y_std</span></code> بشكل صحيح مع الأهداف المتعددة في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.GaussianProcessRegressor</span></code> مما يسمح
+بالتطبيع الصحيح في مشهد الأهداف المتعددة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20761">#20761</a> بواسطة <a class="reference external" href="https://github.com/patrickctrf">Patrick de C. T. R. Ferreira</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-feature-extraction">
+<h4><a class="reference internal" href="../api/sklearn.feature_extraction.html#module-sklearn.feature_extraction" title="sklearn.feature_extraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction</span></code></a><a class="headerlink" href="#sklearn-feature-extraction" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id89"><span class="problematic" id="id90">|Efficiency|</span></a> تم إصلاح تراجع الكفاءة الذي تم تقديمه في الإصدار 1.0.0 في طريقة
+<code class="docutils literal notranslate"><span class="pre">transform</span></code> لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">feature_extraction.text.CountVectorizer</span></code> والتي لم تعد
+تتحقق من وجود أحرف كبيرة في المفردات المقدمة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21251">#21251</a>
+بواسطة <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id91"><span class="problematic" id="id92">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">feature_extraction.text.CountVectorizer</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">feature_extraction.text.TfidfVectorizer</span></code> عن طريق إلقاء خطأ
+عندما تكون ‘min_idf’ أو ‘max_idf’ أرقامًا عشرية أكبر من 1.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20752">#20752</a> بواسطة <a class="reference external" href="https://github.com/AlekLefebvre">Alek Lefebvre</a>.</p></li>
+</ul>
+</section>
+<section id="id8">
+<h4><a class="reference internal" href="../api/sklearn.linear_model.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a><a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id93"><span class="problematic" id="id94">|Fix|</span></a> تحسين استقرار <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LassoLars</span></code> لمختلف
+إصدارات openblas. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21340">#21340</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id95"><span class="problematic" id="id96">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LogisticRegression</span></code> الآن يرفع رسالة خطأ
+أفضل عندما لا تدعم المحللة القيم النادرة بمؤشرات int64.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21093">#21093</a> بواسطة <a class="reference external" href="https://github.com/TomDLT">Tom Dupre la Tour</a>.</p></li>
+</ul>
+</section>
+<section id="id9">
+<h4><a class="reference internal" href="../api/sklearn.neighbors.html#module-sklearn.neighbors" title="sklearn.neighbors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neighbors</span></code></a><a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id97"><span class="problematic" id="id98">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.KNeighborsClassifier</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.KNeighborsRegressor</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.RadiusNeighborsClassifier</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.RadiusNeighborsRegresser</span></code> مع <code class="docutils literal notranslate"><span class="pre">metric=&quot;precomputed&quot;</span></code> تُظهر
+خطأ لمصفوفات <code class="docutils literal notranslate"><span class="pre">bsr</span></code> و <code class="docutils literal notranslate"><span class="pre">dok</span></code> النادرة في الطرق: <code class="docutils literal notranslate"><span class="pre">fit</span></code>، <code class="docutils literal notranslate"><span class="pre">kneighbors</span></code>
+و <code class="docutils literal notranslate"><span class="pre">radius_neighbors</span></code>، بسبب التعامل مع الأصفار الصريحة في تنسيقات
+<code class="docutils literal notranslate"><span class="pre">bsr</span></code> و <code class="docutils literal notranslate"><span class="pre">dok</span></code> :term: <code class="docutils literal notranslate"><span class="pre">sparse</span> <span class="pre">graph</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21199">#21199</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-pipeline">
+<h4><a class="reference internal" href="../api/sklearn.pipeline.html#module-sklearn.pipeline" title="sklearn.pipeline"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.pipeline</span></code></a><a class="headerlink" href="#sklearn-pipeline" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id99"><span class="problematic" id="id100">|Fix|</span></a> <code class="xref py py-meth docutils literal notranslate"><span class="pre">pipeline.Pipeline.get_feature_names_out</span></code> تمرر بشكل صحيح أسماء
+الميزات من خطوة واحدة في خط الأنابيب إلى الخطوة التالية. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21351">#21351</a> بواسطة
+<a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-svm">
+<h4><a class="reference internal" href="../api/sklearn.svm.html#module-sklearn.svm" title="sklearn.svm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a><a class="headerlink" href="#sklearn-svm" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id101"><span class="problematic" id="id102">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">svm.SVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">svm.SVR</span></code> تتحقق من عدم الاتساق
+في تمثيلها الداخلي وترفع خطأ بدلاً من التوقف.
+يحل هذا الإصلاح أيضًا
+<a class="reference external" href="https://nvd.nist.gov/vuln/detail/CVE-2Multiplier0-28975">CVE-2020-28975</a>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21336">#21336</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="id10">
+<h4><a class="reference internal" href="../api/sklearn.utils.html#module-sklearn.utils" title="sklearn.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.utils</span></code></a><a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id103"><span class="problematic" id="id104">|Enhancement|</span></a> يمكن لـ <code class="docutils literal notranslate"><span class="pre">utils.validation._check_sample_weight</span></code> إجراء
+فحص عدم السلبية على أوزان العينات. يمكن تشغيله
+باستخدام معلمة bool فقط_غير_سالب.
+تم تحديث المقدرات التي تتحقق من أوزان غير سالبة:
+<code class="xref py py-func docutils literal notranslate"><span class="pre">linear_model.LinearRegression</span></code> (هنا كانت رسالة الخطأ السابقة
+مضللة)،
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ensemble.AdaBoostClassifier</span></code>،
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ensemble.AdaBoostRegressor</span></code>،
+<code class="xref py py-func docutils literal notranslate"><span class="pre">neighbors.KernelDensity</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20880">#20880</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>
+و <a class="reference external" href="https://github.com/simonandras">András Simon</a>.</p></li>
+<li><p><a href="#id105"><span class="problematic" id="id106">|Fix|</span></a> حل خطأ في <code class="docutils literal notranslate"><span class="pre">sklearn.utils.metaestimators.if_delegate_has_method</span></code>
+حيث لم تعمل الفحص الأساسي لسمة مع صفيفات NumPy.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21145">#21145</a> بواسطة <a class="reference external" href="https://github.com/Zahlii">Zahlii</a>.</p></li>
+</ul>
+</section>
+<section id="id11">
+<h4>متفرقات<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id107"><span class="problematic" id="id108">|Fix|</span></a> لا يحتفظ ملاءمة مقدر على مجموعة بيانات بدون أسماء ميزات، والتي تم ملاءمتها سابقًا
+على مجموعة بيانات بأسماء ميزات، بأسماء الميزات القديمة المخزنة في
+السمة <code class="docutils literal notranslate"><span class="pre">feature_names_in_</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21389">#21389</a> بواسطة
+<a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+</ul>
+<p id="changes-1-0">الإصدار 1.0.0
+<strong>سبتمبر 2021</strong></p>
+</section>
+</section>
+<section id="id12">
+<h3>الاعتماديات الدنيا<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>يتطلب الإصدار 1.0.0 من scikit-learn الإصدار 3.7+ من بايثون، والإصدار 1.14.6+ من numpy والإصدار 1.1.0+ من scipy. والاعتماد الاختياري الأدنى هو matplotlib 2.2.2+.</p>
+</section>
+<section id="id13">
+<h3>فرض استخدام وسائط الكلمات المفتاحية فقط<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<p>في محاولة لتعزيز الاستخدام الواضح وغير المبهم للمكتبة، يجب الآن تمرير معظم وسائط البناء والوظائف كوسائط كلمات رئيسية (أي باستخدام بناء الجملة <code class="docutils literal notranslate"><span class="pre">param=value</span></code>) بدلاً من الموضعية. إذا تم استخدام وسيط الكلمة الرئيسية فقط كموضعي، فسيتم الآن إثارة <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. :issue: <code class="docutils literal notranslate"><span class="pre">15005</span></code> :pr: <code class="docutils literal notranslate"><span class="pre">20002</span></code> by <a class="reference external" href="https://joelnothman.com/">Joel Nothman</a>، <a class="reference external" href="https://github.com/adrinjalali">Adrin Jalali</a>، <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>، <a class="reference external" href="https://github.com/NicolasHug">Nicolas Hug</a>، and <a class="reference external" href="https://github.com/TomDLT">Tom Dupre la Tour</a>. راجع <a class="reference external" href="https://scikit-learn-enhancement-proposals.readthedocs.io/en/latest/slep009/proposal.html">SLEP009</a> لمزيد من التفاصيل.</p>
+</section>
+<section id="id14">
+<h3>نماذج معدلة<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<p>قد ينتج عن أدوات التقدير والوظائف التالية، عند ملاءمتها بنفس البيانات والوسائط، نماذج مختلفة عن الإصدار السابق. غالبًا ما يحدث هذا بسبب تغييرات في منطق النمذجة (تصحيحات الأخطاء أو التحسينات)، أو في إجراءات أخذ العينات العشوائية.</p>
+<ul class="simple">
+<li><p><a href="#id109"><span class="problematic" id="id110">|Fix|</span></a> :class: <code class="docutils literal notranslate"><span class="pre">manifold.TSNE</span></code> الآن يتجنب مشكلات نقص العدد أثناء حساب مصفوفة التشابه.</p></li>
+<li><p><a href="#id111"><span class="problematic" id="id112">|Fix|</span></a> :class: <code class="docutils literal notranslate"><span class="pre">manifold.Isomap</span></code> الآن يقوم بتوصيل المكونات غير المتصلة من رسم بياني للجيران على طول بعض أزواج المسافات الدنيا، بدلاً من تغيير كل المسافات اللانهائية إلى الصفر.</p></li>
+<li><p><a href="#id113"><span class="problematic" id="id114">|Fix|</span></a> قد تتأثر معايير التقسيم لـ :class: <code class="docutils literal notranslate"><span class="pre">tree.DecisionTreeClassifier</span></code> و :class: <code class="docutils literal notranslate"><span class="pre">tree.DecisionTreeRegressor</span></code> بتصحيح في التعامل مع أخطاء التقريب. في السابق، يمكن أن تحدث بعض الانقسامات الزائفة الإضافية.</p></li>
+<li><p><a href="#id115"><span class="problematic" id="id116">|Fix|</span></a> :func: <code class="docutils literal notranslate"><span class="pre">model_selection.train_test_split</span></code> مع وسيط <code class="docutils literal notranslate"><span class="pre">stratify</span></code> و :class: <code class="docutils literal notranslate"><span class="pre">model_selection.StratifiedShuffleSplit</span></code> قد يؤدي إلى نتائج مختلفة قليلاً.</p></li>
+</ul>
+<p>ترد التفاصيل في سجل التغييرات أدناه.</p>
+<p>(في حين أننا نحاول إبلاغ المستخدمين بشكل أفضل من خلال توفير هذه المعلومات، لا يمكننا التأكد من اكتمال هذه القائمة.)</p>
+<p>سجل التغييرات
+بالتأكيد! فيما يلي ترجمة لنص ReStructuredText المحدد إلى اللغة العربية:</p>
+<p>يجب تجميع الإدخالات حسب الوحدة النمطية (بترتيب أبجدي) وأن تكون مسبوقة بواحدة من التسميات: <a href="#id117"><span class="problematic" id="id118">|MajorFeature|</span></a> أو <a href="#id119"><span class="problematic" id="id120">|Feature|</span></a> أو <a href="#id121"><span class="problematic" id="id122">|Efficiency|</span></a> أو <a href="#id123"><span class="problematic" id="id124">|Enhancement|</span></a> أو <a href="#id125"><span class="problematic" id="id126">|Fix|</span></a> أو <a href="#id127"><span class="problematic" id="id128">|API|</span></a> (راجع whats_new.rst للوصف). يجب ترتيب الإدخالات حسب هذه التسميات (على سبيل المثال، <a href="#id129"><span class="problematic" id="id130">|Fix|</span></a> بعد <a href="#id131"><span class="problematic" id="id132">|Efficiency|</span></a>). يجب إدراج التغييرات غير الخاصة بوحدة نمطية معينة تحت <em>Multiple Modules</em> أو <em>Miscellaneous</em>. يجب أن تنتهي الإدخالات بـ:</p>
+<p><a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/123456">#123456</a> by <a class="reference external" href="https://github.com/joeongithub">Joe Bloggs</a>.</p>
+<p>حيث 123456 هو رقم طلب السحب، وليس رقم المشكلة.</p>
+<ul class="simple">
+<li><p><a href="#id133"><span class="problematic" id="id134">|API|</span></a> تم جعل خيار استخدام الخطأ المربع عبر معلمات “loss” و “criterion” أكثر اتساقًا. الطريقة المفضلة هي من خلال تعيين القيمة إلى “squared_error”. لا تزال أسماء الخيارات القديمة صالحة، وتنتج نفس النماذج، ولكنها مهملة وسيتم إزالتها في الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19310">#19310</a> by <a class="reference external" href="https://github.com/lorentzenchr">Christian Lorentzen</a>.</p>
+<ul>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.ExtraTreesRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">criterion=&quot;mse&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;squared_error&quot;</span></code> بدلاً من ذلك والذي يعد الآن الافتراضي.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">loss=&quot;ls&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;squared_error&quot;</span></code> بدلاً من ذلك والذي يعد الآن الافتراضي.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomForestRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">criterion=&quot;mse&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;squared_error&quot;</span></code> بدلاً من ذلك والذي يعد الآن الافتراضي.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.HistGradientBoostingRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">loss=&quot;least_squares&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;squared_error&quot;</span></code> بدلاً من ذلك والذي يعد الآن الافتراضي.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.RANSACRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">loss=&quot;squared_loss&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;squared_error&quot;</span></code> بدلاً من ذلك.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.SGDRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">loss=&quot;squared_loss&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;squared_error&quot;</span></code> بدلاً من ذلك والذي يعد الآن الافتراضي.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">criterion=&quot;mse&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;squared_error&quot;</span></code> بدلاً من ذلك والذي يعد الآن الافتراضي.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">tree.ExtraTreeRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">criterion=&quot;mse&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;squared_error&quot;</span></code> بدلاً من ذلك والذي يعد الآن الافتراضي.</p></li>
+</ul>
+</li>
+<li><p><a href="#id135"><span class="problematic" id="id136">|API|</span></a> تم جعل خيار استخدام الخطأ المطلق عبر معلمات “loss” و “criterion” أكثر اتساقًا. الطريقة المفضلة هي من خلال تعيين القيمة إلى “absolute_error”. لا تزال أسماء الخيارات القديمة صالحة، وتنتج نفس النماذج، ولكنها مهملة وسيتم إزالتها في الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19733">#19733</a> by <a class="reference external" href="https://github.com/lorentzenchr">Christian Lorentzen</a>.</p>
+<ul>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.ExtraTreesRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">criterion=&quot;mae&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;absolute_error&quot;</span></code> بدلاً من ذلك.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">loss=&quot;lad&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;absolute_error&quot;</span></code> بدلاً من ذلك.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomForestRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">criterion=&quot;mae&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;absolute_error&quot;</span></code> بدلاً من ذلك.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.HistGradientBoostingRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">loss=&quot;least_absolute_deviation&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;absolute_error&quot;</span></code> بدلاً من ذلك.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.RANSACRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">loss=&quot;absolute_loss&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;absolute_error&quot;</span></code> بدلاً من ذلك والذي يعد الآن الافتراضي.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">criterion=&quot;mae&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;absolute_error&quot;</span></code> بدلاً من ذلك.</p></li>
+<li><p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">tree.ExtraTreeRegressor</span></code>، تم إهمال <code class="docutils literal notranslate"><span class="pre">criterion=&quot;mae&quot;</span></code>، واستخدم <code class="docutils literal notranslate"><span class="pre">&quot;absolute_error&quot;</span></code> بدلاً من ذلك.</p></li>
+</ul>
+</li>
+<li><p><a href="#id137"><span class="problematic" id="id138">|API|</span></a> تم إهمال استخدام <code class="docutils literal notranslate"><span class="pre">np.matrix</span></code> في الإصدار 1.0 وسيؤدي إلى حدوث خطأ <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> في الإصدار 1.2. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20165">#20165</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id139"><span class="problematic" id="id140">|API|</span></a> تم إضافة <a class="reference internal" href="../glossary.html#term-get_feature_names_out"><span class="xref std std-term">get_feature_names_out</span></a> إلى واجهة برمجة التطبيقات (API) المحولة للحصول على أسماء ميزات الإخراج. تم إهمال <code class="docutils literal notranslate"><span class="pre">get_feature_names</span></code> بدوره. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18444">#18444</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id141"><span class="problematic" id="id142">|API|</span></a> تخزن جميع التقديرات <code class="docutils literal notranslate"><span class="pre">feature_names_in_</span></code> عند ملاءمتها على أطر بيانات Pandas. تتم مقارنة أسماء الميزات هذه مع الأسماء الموجودة في الطرق غير الملائمة، مثل “التحويل”، وستؤدي إلى تحذير <code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> إذا لم تكن متسقة. سيتم تحويل هذه التحذيرات “FutureWarning” إلى أخطاء “ValueError” في الإصدار 1.2. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18010">#18010</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+<p><a class="reference internal" href="../api/sklearn.base.html#module-sklearn.base" title="sklearn.base"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.base</span></code></a></p>
+<ul class="simple">
+<li><p><a href="#id143"><span class="problematic" id="id144">|Fix|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">config_context</span></code> أصبح الآن آمنًا للخيوط. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18736">#18736</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+<p><a class="reference internal" href="../api/sklearn.calibration.html#module-sklearn.calibration" title="sklearn.calibration"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.calibration</span></code></a></p>
+<ul class="simple">
+<li><p><a href="#id145"><span class="problematic" id="id146">|Feature|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">calibration.CalibrationDisplay</span></code> تمت إضافته لرسم منحنيات المعايرة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17443">#17443</a> by <a class="reference external" href="https://github.com/lucyleeow">Lucy Liu</a>.</p></li>
+<li><p><a href="#id147"><span class="problematic" id="id148">|Fix|</span></a> يمكن الآن استخدام طرق “التوقع” و”التوقع_الاحتمالي” لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">calibration.CalibratedClassifierCV</span></code> بشكل صحيح على الأنابيب المجهزة مسبقًا. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19641">#19641</a> by <a class="reference external" href="https://github.com/AlekLefebvre">Alek Lefebvre</a>.</p></li>
+<li><p><a href="#id149"><span class="problematic" id="id150">|Fix|</span></a> تم إصلاح خطأ عند استخدام <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.VotingClassifier</span></code> كمصنف أساسي في <code class="xref py py-class docutils literal notranslate"><span class="pre">calibration.CalibratedClassifierCV</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20087">#20087</a> by <a class="reference external" href="https://github.com/clement-f">Clément Fauchereau</a>.</p></li>
+</ul>
+<p><a class="reference internal" href="../api/sklearn.cluster.html#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a></p>
+<ul class="simple">
+<li><p><a href="#id151"><span class="problematic" id="id152">|Efficiency|</span></a> أصبح التهيئة “k-means++” لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.KMeans</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.MiniBatchKMeans</span></code> أسرع، خاصة في إعدادات متعددة النواة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19002">#19002</a> by <a class="reference external" href="https://github.com/Erotemic">Jon Crall</a> و <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id153"><span class="problematic" id="id154">|Efficiency|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.KMeans</span></code> مع <code class="docutils literal notranslate"><span class="pre">algorithm='elkan'</span></code> أصبح الآن أسرع في إعدادات متعددة النواة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19052">#19052</a> by <a class="reference external" href="https://github.com/YusukeNagasaka">Yusuke Nagasaka</a>.</p></li>
+<li><p><a href="#id155"><span class="problematic" id="id156">|Efficiency|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.MiniBatchKMeans</span></code> أصبح الآن أسرع في إعدادات متعددة النواة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17622">#17622</a> by <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id157"><span class="problematic" id="id158">|Efficiency|</span></a> يمكن لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.OPTICS</span></code> الآن تخزين إخراج حساب الشجرة، باستخدام معلمة “الذاكرة”. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19024">#19024</a> by <a class="reference external" href="https://github.com/frankier">Frankie Robertson</a>.</p></li>
+<li><p><a href="#id159"><span class="problematic" id="id160">|Enhancement|</span></a> تقبل طرق “التوقع” و”الملاءمة_التوقع” لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.AffinityPropagation</span></code> الآن نوع البيانات المبعثرة كمدخلات.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20117">#20117</a> by <a class="reference external" href="https://github.com/venkyyuvy">Venkatachalam Natchiappan</a></p></li>
+<li><p><a href="#id161"><span class="problematic" id="id162">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.MiniBatchKMeans</span></code> حيث تم تجاهل أوزان العينات جزئيًا عندما كان الإدخال مبعثرًا. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17622">#17622</a> by <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id163"><span class="problematic" id="id164">|Fix|</span></a> تم تحسين اكتشاف التقارب بناءً على تغيير المركز في <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.MiniBatchKMeans</span></code> والذي كان من المستحيل تقريبًا تحقيقه.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17622">#17622</a> by <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id165"><span class="problematic" id="id166">|FIX|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.AgglomerativeClustering</span></code> يدعم الآن مجموعات البيانات المقروءة فقط والمرسلة إلى الذاكرة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19883">#19883</a> by <a class="reference external" href="https://github.com/jjerphan">Julien Jerphanion</a>.</p></li>
+<li><p><a href="#id167"><span class="problematic" id="id168">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.AgglomerativeClustering</span></code> يقوم الآن بتوصيل المكونات بشكل صحيح عندما تكون الاتصال والانتماء محسوبة مسبقًا وعدد المكونات المتصلة أكبر من 1. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20597">#20597</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id169"><span class="problematic" id="id170">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.FeatureAgglomeration</span></code> لم يعد يقبل وسيط “params” في دالة “التهيئة”، مما يؤدي إلى رسالة خطأ أكثر إيجازًا. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20899">#20899</a> by <a class="reference external" href="https://github.com/adam2392">Adam Li</a>.</p></li>
+<li><p><a href="#id171"><span class="problematic" id="id172">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.KMeans</span></code>، وضمان إمكانية إعادة الإنتاج والتكافؤ بين الإدخال المبعثر والمكثف. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20200">#20200</a> by <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id173"><span class="problematic" id="id174">|API|</span></a> تم إهمال سمات <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.Birch</span></code>، <code class="docutils literal notranslate"><span class="pre">fit_</span></code> و`partial_fit_`، وسيتم إزالتها في الإصدار 1.2. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19297">#19297</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id175"><span class="problematic" id="id176">|API|</span></a> تم تغيير القيمة الافتراضية لمعلمة “batch_size” لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.MiniBatchKMeans</span></code> من 100 إلى 1024 لأسباب تتعلق بالكفاءة. تقوم سمة “<a href="#id425"><span class="problematic" id="id426">n_iter_</span></a>” لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.MiniBatchKMeans</span></code> الآن بالإبلاغ عن عدد العصور التي بدأت فيها، وتقوم السمة “<a href="#id427"><span class="problematic" id="id428">n_steps_</span></a>” بالإبلاغ عن عدد دفعات البيانات المصغرة التي تمت معالجتها.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17622">#17622</a> by <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id177"><span class="problematic" id="id178">|API|</span></a> يقوم <code class="xref py py-func docutils literal notranslate"><span class="pre">cluster.spectral_clustering</span></code> بإصدار خطأ محسن عند تمرير <code class="docutils literal notranslate"><span class="pre">np.matrix</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20560">#20560</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+<p><a class="reference internal" href="../api/sklearn.compose.html#module-sklearn.compose" title="sklearn.compose"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.compose</span></code></a></p>
+<ul class="simple">
+<li><p><a href="#id179"><span class="problematic" id="id180">|Enhancement|</span></a> يقوم <code class="xref py py-class docutils literal notranslate"><span class="pre">compose.ColumnTransformer</span></code> الآن بتسجيل إخراج كل محول في <code class="docutils literal notranslate"><span class="pre">output_indices_</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18393">#18393</a> by <a class="reference external" href="https://github.com/lbittarello">Luca Bittarello</a>.</p></li>
+<li><p><a href="#id181"><span class="problematic" id="id182">|Enhancement|</span></a> يسمح <code class="xref py py-class docutils literal notranslate"><span class="pre">compose.ColumnTransformer</span></code> الآن بإدخال DataFrame لتغيير ترتيب ظهور أعمدته في “التحويل”. علاوة على ذلك، لن تكون الأعمدة التي تم إسقاطها مطلوبة في “التحويل”، وسيتم تجاهل الأعمدة الإضافية إذا كان <code class="docutils literal notranslate"><span class="pre">remainder='drop'</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19263">#19263</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id183"><span class="problematic" id="id184">|Enhancement|</span></a> يضيف وسيط <code class="docutils literal notranslate"><span class="pre">**predict_params</span></code> الكلمة الرئيسية إلى <code class="xref py py-meth docutils literal notranslate"><span class="pre">compose.TransformedTargetRegressor.predict</span></code> التي تمرر وسيط الكلمة الرئيسية إلى المُرجع.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19244">#19244</a> by <a class="reference external" href="https://github.com/ricardojnf">Ricardo</a>.</p></li>
+<li><p><a href="#id185"><span class="problematic" id="id186">|FIX|</span></a> يدعم <code class="docutils literal notranslate"><span class="pre">compose.ColumnTransformer.get_feature_names</span></code> أسماء الميزات غير النصية التي تمت إعادتها بواسطة أي من محولاته. ومع ذلك، لاحظ أن “get_feature_names” مهملة، واستخدم “get_feature_names_out” بدلاً من ذلك. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18459">#18459</a> by <a class="reference external" href="https://github.com/albertvillanova">Albert Villanova del Moral</a> و <a class="reference external" href="https://github.com/alonsosilvaallende">Alonso Silva Allende</a>.</p></li>
+<li><p><a href="#id187"><span class="problematic" id="id188">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">compose.TransformedTargetRegressor</span></code> الآن يأخذ أهداف nD مع محول مناسب.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18898">#18898</a> by <a class="reference external" href="https://github.com/panangam">Oras Phongpanagnam</a>.</p></li>
+<li><p><a href="#id189"><span class="problematic" id="id190">|API|</span></a> يضيف <code class="docutils literal notranslate"><span class="pre">verbose_feature_names_out</span></code> إلى <code class="xref py py-class docutils literal notranslate"><span class="pre">compose.ColumnTransformer</span></code>. يتحكم هذا العلم في إضافة البادئات إلى أسماء الميزات في <a class="reference internal" href="../glossary.html#term-get_feature_names_out"><span class="xref std std-term">get_feature_names_out</span></a>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18444">#18444</a> و <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21080">#21080</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+<p><a class="reference internal" href="../api/sklearn.covariance.html#module-sklearn.covariance" title="sklearn.covariance"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.covariance</span></code></a></p>
+<ul class="simple">
+<li><p><a href="#id191"><span class="problematic" id="id192">|Fix|</span></a> يضيف فحص المصفوفات إلى <code class="xref py py-func docutils literal notranslate"><span class="pre">covariance.ledoit_wolf</span></code> و <code class="xref py py-func docutils literal notranslate"><span class="pre">covariance.ledoit_wolf_shrinkage</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20416">#20416</a> by <a class="reference external" href="https://github.com/defoishugo">Hugo Defois</a>.</p></li>
+<li><p><a href="#id193"><span class="problematic" id="id194">|API|</span></a> يهمل المفاتيح التالية في <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code>: <code class="docutils literal notranslate"><span class="pre">'mean_score'</span></code>، و <code class="docutils literal notranslate"><span class="pre">'std_score'</span></code>، و <code class="docutils literal notranslate"><span class="pre">'split(k)_score'</span></code> لصالح <code class="docutils literal notranslate"><span class="pre">'mean_test_score'</span></code>، و <code class="docutils literal notranslate"><span class="pre">'std_test_score'</span></code>، و <code class="docutils literal notranslate"><span class="pre">'split(k)_test_score'</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20583">#20583</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+<p><a class="reference internal" href="../api/sklearn.datasets.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.datasets</span></code></a></p>
+<ul class="simple">
+<li><p><a href="#id195"><span class="problematic" id="id196">|Enhancement|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">datasets.fetch_openml</span></code> يدعم الآن الفئات مع قيم مفقودة عند إرجاع إطار بيانات Pandas. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19365">#19365</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a> و <a class="reference external" href="https://github.com/amy12xx">Amanda Dsouza</a> و <a class="reference external" href="https://github.com/elateifsara">EL-ATEIF Sara</a>.</p></li>
+<li><p><a href="#id197"><span class="problematic" id="id198">|Enhancement|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">datasets.fetch_kddcup99</span></code> يرفع رسالة أفضل عندما يكون ملف ذاكرة التخزين المؤقت غير صالح. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19669">#19669</a> <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id199"><span class="problematic" id="id200">|Enhancement|</span></a> استبدل استخدامات <code class="docutils literal notranslate"><span class="pre">__file__</span></code> المتعلقة بإدخال/إخراج ملف الموارد بـ <code class="docutils literal notranslate"><span class="pre">importlib.resources</span></code> لتجنب الافتراض بأن ملفات الموارد هذه (مثل <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>) موجودة بالفعل في نظام الملفات، وكنتيجة لذلك، لتمكين التوافق مع الأدوات مثل <code class="docutils literal notranslate"><span class="pre">PyOxidizer</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20297">#20297</a> by <a class="reference external" href="https://github.com/jackzyliu">Jack Liu</a>.</p></li>
+<li><p><a href="#id201"><span class="problematic" id="id202">|Fix|</span></a> قم بتقصير أسماء ملفات البيانات في اختبارات openml لدعم التثبيت على Windows وحد الـ 260 حرف الافتراضي الخاص به على أسماء الملفات.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20209">#20209</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id203"><span class="problematic" id="id204">|Fix|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">datasets.fetch_kddcup99</span></code> يعيد أطر بيانات عندما تكون <code class="docutils literal notranslate"><span class="pre">return_X_y=True</span></code> و <code class="docutils literal notranslate"><span class="pre">as_frame=True</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19011">#19011</a> by <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id205"><span class="problematic" id="id206">|API|</span></a> يهمل <code class="docutils literal notranslate"><span class="pre">datasets.load_boston</span></code> في الإصدار 1.0 وسيتم إزالته في الإصدار 1.2. يتم توفير مقتطفات كود بديلة لتحميل مجموعات بيانات مماثلة. يرجى الرجوع إلى التوثيق الخاص بالدالة للحصول على التفاصيل.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20729">#20729</a> by <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+</ul>
+<p><a class="reference internal" href="../api/sklearn.decomposition.html#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.decomposition</span></code></a></p>
+<ul class="simple">
+<li><p><a href="#id207"><span class="problematic" id="id208">|Enhancement|</span></a> تمت إضافة محول تقريبي جديد (SVD العشوائي، متوفر باستخدام <code class="docutils literal notranslate"><span class="pre">eigen_solver='randomized'</span></code>) إلى <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.KernelPCA</span></code>. هذا يسرع الحساب بشكل كبير عندما يكون عدد العينات أكبر بكثير من عدد المكونات المطلوبة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/12069">#12069</a> by <a class="reference external" href="https://github.com/smarie">Sylvain Marié</a>.</p></li>
+<li><p><a href="#id209"><span class="problematic" id="id210">|Fix|</span></a> إصلاحات تحذيرات تحويل البيانات المتعددة غير الصحيحة عند تجميع البيانات الثنائية. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19046">#19046</a> by <a class="reference external" href="https://github.com/jdsurya">Surya Prakash</a>.</p></li>
+<li><p><a href="#id211"><span class="problematic" id="id212">|Fix|</span></a> تم إصلاح <code class="xref py py-func docutils literal notranslate"><span class="pre">decomposition.dict_learning</span></code>، المستخدم بواسطة <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.DictionaryLearning</span></code>، لضمان تحديد مخرجات SVD التي تستخدم لتهيئة الرمز. تم تحقيق ذلك عن طريق عكس إشارات إخراج SVD. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18433">#18433</a> by <a class="reference external" href="https://github.com/brcharron">Bruno Charron</a>.</p></li>
+<li><p><a href="#id213"><span class="problematic" id="id214">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.MiniBatchDictionaryLearning</span></code>، و <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.MiniBatchSparsePCA</span></code>، و <code class="xref py py-func docutils literal notranslate"><span class="pre">decomposition.dict_learning_online</span></code> حيث كان تحديث القاموس غير صحيح. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19198">#19198</a> by <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id215"><span class="problematic" id="id216">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.DictionaryLearning</span></code>، و <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.SparsePCA</span></code>، و <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.MiniBatchDictionaryLearning</span></code>، و <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.MiniBatchSparsePCA</span></code>، و <code class="xref py py-func docutils literal notranslate"><span class="pre">decomposition.dict_learning</span></code> و <code class="xref py py-func docutils literal notranslate"><span class="pre">decomposition.dict_learning_online</span></code> حيث لم يكن إعادة تشغيل الذرات غير المستخدمة أثناء تحديث القاموس يعمل كما هو متوقع.</p></li>
+</ul>
+<p>بالتأكيد! فيما يلي ترجمة لنص ReStructuredText المحدد إلى اللغة العربية:</p>
+<ul class="simple">
+<li><p><a href="#id217"><span class="problematic" id="id218">|API|</span></a> في <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.DictionaryLearning</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.MiniBatchDictionaryLearning</span></code>،
+<code class="xref py py-func docutils literal notranslate"><span class="pre">decomposition.dict_learning</span></code> و
+<code class="xref py py-func docutils literal notranslate"><span class="pre">decomposition.dict_learning_online</span></code>، ستكون قيمة <code class="docutils literal notranslate"><span class="pre">transform_alpha</span></code>
+مساوية لـ <code class="docutils literal notranslate"><span class="pre">alpha</span></code> بشكل افتراضي بدلاً من 1.0 بدءًا من الإصدار 1.2 <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19159">#19159</a>
+بواسطة <a class="reference external" href="https://github.com/bmalezieux">Benoît Malézieux</a>.</p></li>
+<li><p><a href="#id219"><span class="problematic" id="id220">|API|</span></a> تم تغيير أسماء المتغيرات في <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.KernelPCA</span></code> لتحسين
+قابلية القراءة. تمت إعادة تسمية <code class="docutils literal notranslate"><span class="pre">lambdas_</span></code> و <code class="docutils literal notranslate"><span class="pre">alphas_</span></code> إلى <code class="docutils literal notranslate"><span class="pre">eigenvalues_</span></code>
+و <code class="docutils literal notranslate"><span class="pre">eigenvectors_</span></code> على التوالي. تم إيقاف استخدام <code class="docutils literal notranslate"><span class="pre">lambdas_</span></code> و <code class="docutils literal notranslate"><span class="pre">alphas_</span></code>
+وسيتم إزالتهما في الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19908">#19908</a> بواسطة <a class="reference external" href="https://github.com/kstoneriv3">Kei Ishikawa</a>.</p></li>
+<li><p><a href="#id221"><span class="problematic" id="id222">|API|</span></a> تم إيقاف استخدام معلمي <code class="docutils literal notranslate"><span class="pre">alpha</span></code> و <code class="docutils literal notranslate"><span class="pre">regularization</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.NMF</span></code> و <code class="xref py py-func docutils literal notranslate"><span class="pre">decomposition.non_negative_factorization</span></code>
+وسيتم إزالتهما في الإصدار 1.2. يرجى استخدام المعلمتين الجديدتين
+<code class="docutils literal notranslate"><span class="pre">alpha_W</span></code> و <code class="docutils literal notranslate"><span class="pre">alpha_H</span></code> بدلاً من ذلك. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20512">#20512</a> بواسطة
+<a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+</ul>
+<section id="sklearn-dummy">
+<h4><a class="reference internal" href="../api/sklearn.dummy.html#module-sklearn.dummy" title="sklearn.dummy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.dummy</span></code></a><a class="headerlink" href="#sklearn-dummy" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id223"><span class="problematic" id="id224">|API|</span></a> تم إيقاف استخدام الخاصية <code class="docutils literal notranslate"><span class="pre">n_features_in_</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">dummy.DummyRegressor</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">dummy.DummyClassifier</span></code> وسيتم
+إزالتها في الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20960">#20960</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="id15">
+<h4><a class="reference internal" href="../api/sklearn.ensemble.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a><a class="headerlink" href="#id15" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id225"><span class="problematic" id="id226">|Enhancement|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">HistGradientBoostingClassifier</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">HistGradientBoostingRegressor</span></code> تأخذ حصص cgroups
+في الاعتبار عند تحديد عدد الخيوط التي يستخدمها OpenMP. يتجنب هذا
+أي مشكلات في الأداء بسبب الإفراط في الاشتراك عند استخدام هذه
+الفئات في حاوية Docker، على سبيل المثال. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20477">#20477</a>
+بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id227"><span class="problematic" id="id228">|Enhancement|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">HistGradientBoostingClassifier</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">HistGradientBoostingRegressor</span></code> لم تعد
+تجريبية. تعتبر الآن مستقرة وتخضع لنفس دورات الإيقاف مثل جميع
+المُقدِّرات الأخرى. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19799">#19799</a> بواسطة <a class="reference external" href="https://github.com/NicolasHug">Nicolas Hug</a>.</p></li>
+<li><p><a href="#id229"><span class="problematic" id="id230">|Enhancement|</span></a> تحسين عرض HTML لـ
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.StackingClassifier</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.StackingRegressor</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19564">#19564</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id231"><span class="problematic" id="id232">|Enhancement|</span></a> تمت إضافة معيار بواسون إلى
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomForestRegressor</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19836">#19836</a> بواسطة
+<a class="reference external" href="https://github.com/bsun94">Brian Sun</a>.</p></li>
+<li><p><a href="#id233"><span class="problematic" id="id234">|Fix|</span></a> لا تسمح بحساب النتيجة خارج الحقيبة (OOB) في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomForestClassifier</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.ExtraTreesClassifier</span></code> مع الهدف متعدد التصنيفات
+ومتعدد المخرجات حيث أن scikit-learn لا يوفر أي مقياس يدعم هذا
+النوع من الأهداف. تم إجراء إعادة تنظيم خاصة إضافية.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19162">#19162</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+<li><p><a href="#id235"><span class="problematic" id="id236">|Fix|</span></a> تحسين الدقة العددية لأوزان التعزيز في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.AdaBoostClassifier</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.AdaBoostRegressor</span></code>
+لتجنب حدوث حالات تحت التدفق.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/10096">#10096</a> بواسطة <a class="reference external" href="https://github.com/fenilsuchak">Fenil Suchak</a>.</p></li>
+<li><p><a href="#id237"><span class="problematic" id="id238">|Fix|</span></a> تم تصحيح نطاق وسيط <code class="docutils literal notranslate"><span class="pre">max_samples</span></code> ليكون <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">1.0]</span></code>
+في <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomForestClassifier</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomForestRegressor</span></code>، حيث يتم تفسير <code class="docutils literal notranslate"><span class="pre">max_samples=1.0</span></code>
+على أنه استخدام جميع <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> للتمهيد. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20159">#20159</a> بواسطة
+<a class="reference external" href="https://github.com/murata-yu">&#64;murata-yu</a>.</p></li>
+<li><p><a href="#id239"><span class="problematic" id="id240">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.AdaBoostClassifier</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.AdaBoostRegressor</span></code> حيث تم الكتابة فوق وسيط
+<code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> أثناء <code class="docutils literal notranslate"><span class="pre">fit</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20534">#20534</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+<li><p><a href="#id241"><span class="problematic" id="id242">|API|</span></a> تمت إزالة الخيار <code class="docutils literal notranslate"><span class="pre">tol=None</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.HistGradientBoostingClassifier</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.HistGradientBoostingRegressor</span></code>. يرجى استخدام <code class="docutils literal notranslate"><span class="pre">tol=0</span></code>
+للحصول على نفس السلوك. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19296">#19296</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="id16">
+<h4><a class="reference internal" href="../api/sklearn.feature_extraction.html#module-sklearn.feature_extraction" title="sklearn.feature_extraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction</span></code></a><a class="headerlink" href="#id16" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id243"><span class="problematic" id="id244">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">feature_extraction.text.HashingVectorizer</span></code>
+حيث كانت بعض السلاسل المدخلة تؤدي إلى مؤشرات سلبية في البيانات
+المحولة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19035">#19035</a> بواسطة <a class="reference external" href="https://github.com/ly648499246">Liu Yu</a>.</p></li>
+<li><p><a href="#id245"><span class="problematic" id="id246">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">feature_extraction.DictVectorizer</span></code> من خلال
+إثارة خطأ عند وجود قيمة من نوع غير مدعوم.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19520">#19520</a> بواسطة <a class="reference external" href="https://github.com/kamiyaa">Jeff Zhao</a>.</p></li>
+<li><p><a href="#id247"><span class="problematic" id="id248">|Fix|</span></a> تم إصلاح خطأ في <code class="xref py py-func docutils literal notranslate"><span class="pre">feature_extraction.image.img_to_graph</span></code>
+و <code class="xref py py-func docutils literal notranslate"><span class="pre">feature_extraction.image.grid_to_graph</span></code> حيث لم يتم التعامل
+مع المكونات المتصلة الفردية بشكل صحيح، مما أدى إلى فهرسة خاطئة
+للرؤوس.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18964">#18964</a> بواسطة <a class="reference external" href="https://team.inria.fr/parietal/bertrand-thirions-page">Bertrand Thirion</a>.</p></li>
+<li><p><a href="#id249"><span class="problematic" id="id250">|Fix|</span></a> رفع تحذير في <code class="xref py py-class docutils literal notranslate"><span class="pre">feature_extraction.text.CountVectorizer</span></code>
+مع <code class="docutils literal notranslate"><span class="pre">lowercase=True</span></code> عند وجود كلمات في المفردات تحتوي على أحرف كبيرة
+لتجنب الإغفال الصامت في متجهات الميزات الناتجة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19401">#19401</a> بواسطة <a class="reference external" href="https://github.com/zitorelova">Zito Relova</a></p></li>
+</ul>
+</section>
+<section id="id17">
+<h4><a class="reference internal" href="../api/sklearn.feature_selection.html#module-sklearn.feature_selection" title="sklearn.feature_selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_selection</span></code></a><a class="headerlink" href="#id17" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id251"><span class="problematic" id="id252">|Feature|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">feature_selection.r_regression</span></code> يحسب معاملات ارتباط
+بيرسون بين الميزات والهدف.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17169">#17169</a> بواسطة <a class="reference external" href="https://github.com/DSLituiev">Dmytro Lituiev</a>
+و <a class="reference external" href="https://github.com/jjerphan">Julien Jerphanion</a>.</p></li>
+<li><p><a href="#id253"><span class="problematic" id="id254">|Enhancement|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">feature_selection.RFE.fit</span></code> يقبل معلمات المُقدِّر
+الإضافية التي يتم تمريرها مباشرةً إلى طريقة <code class="docutils literal notranslate"><span class="pre">fit</span></code> للمُقدِّر.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20380">#20380</a> بواسطة <a class="reference external" href="https://github.com/ijpulidos">Iván Pulido</a>، <a class="reference external" href="https://github.com/fbidu">Felipe Bidu</a>،
+<a class="reference external" href="https://github.com/g-rutter">Gil Rutter</a>، و <a class="reference external" href="https://github.com/adrinjalali">Adrin Jalali</a>.</p></li>
+<li><p><a href="#id255"><span class="problematic" id="id256">|FIX|</span></a> إصلاح خطأ في <code class="xref py py-func docutils literal notranslate"><span class="pre">isotonic.isotonic_regression</span></code> حيث تم
+الكتابة فوق <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> التي مررها المستخدم أثناء <code class="docutils literal notranslate"><span class="pre">fit</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20515">#20515</a> بواسطة <a class="reference external" href="https://github.com/allefeld">Carsten Allefeld</a>.</p></li>
+<li><p><a href="#id257"><span class="problematic" id="id258">|Fix|</span></a> تغيير <code class="xref py py-func docutils literal notranslate"><span class="pre">feature_selection.SequentialFeatureSelector</span></code>
+للسماح بالنمذجة غير الخاضعة للإشراف بحيث لا تحتاج توقيع <code class="docutils literal notranslate"><span class="pre">fit</span></code>
+إلى أي تحقق من <code class="docutils literal notranslate"><span class="pre">y</span></code> والسماح بـ <code class="docutils literal notranslate"><span class="pre">y=None</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19568">#19568</a> بواسطة <a class="reference external" href="https://github.com/ShyamDesai">Shyam Desai</a>.</p></li>
+<li><p><a href="#id259"><span class="problematic" id="id260">|API|</span></a> يرفع خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">feature_selection.VarianceThreshold</span></code>
+عندما تكون عتبة التباين سالبة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20207">#20207</a> بواسطة <a class="reference external" href="https://github.com/europeanplaice">Tomohiro Endo</a></p></li>
+<li><p><a href="#id261"><span class="problematic" id="id262">|API|</span></a> إيقاف استخدام <code class="docutils literal notranslate"><span class="pre">grid_scores_</span></code> لصالح درجات التقسيم في <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">feature_selection.RFECV</span></code>. سيتم إزالة <code class="docutils literal notranslate"><span class="pre">grid_scores_</span></code> في
+الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20161">#20161</a> بواسطة <a class="reference external" href="https://github.com/wowry">Shuhei Kayawari</a> و <a class="reference external" href="https://github.com/arka204">&#64;arka204</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-inspection">
+<h4><a class="reference internal" href="../api/sklearn.inspection.html#module-sklearn.inspection" title="sklearn.inspection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.inspection</span></code></a><a class="headerlink" href="#sklearn-inspection" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id263"><span class="problematic" id="id264">|Enhancement|</span></a> إضافة وسيط <code class="docutils literal notranslate"><span class="pre">max_samples</span></code> في
+<code class="xref py py-func docutils literal notranslate"><span class="pre">inspection.permutation_importance</span></code>. يمكّن ذلك من استخلاص عينة
+فرعية من العينات لحساب الأهمية بالترتيب. هذا مفيد للحفاظ على
+قابلية التتبع عند تقييم أهمية الميزة على مجموعات بيانات كبيرة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20431">#20431</a> بواسطة <a class="reference external" href="https://github.com/o1iv3r">Oliver Pfaffel</a>.</p></li>
+<li><p><a href="#id265"><span class="problematic" id="id266">|Enhancement|</span></a> إضافة kwargs لتنسيق خطوط ICE و PD بشكل منفصل في مخططات
+الاعتماد الجزئي <code class="docutils literal notranslate"><span class="pre">inspection.plot_partial_dependence</span></code> و
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">inspection.PartialDependenceDisplay.plot</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19428">#19428</a> بواسطة
+<a class="reference external" href="https://github.com/mhham">Mehdi Hamoumi</a>.</p></li>
+<li><p><a href="#id267"><span class="problematic" id="id268">|Fix|</span></a> السماح بإدخال عدة مقيّمين إلى
+<code class="xref py py-func docutils literal notranslate"><span class="pre">inspection.permutation_importance</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19411">#19411</a> بواسطة
+<a class="reference external" href="https://github.com/simonamaggio">Simona Maggio</a>.</p></li>
+<li><p><a href="#id269"><span class="problematic" id="id270">|API|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">inspection.PartialDependenceDisplay</span></code> تعرض طريقة فئة:
+<code class="xref py py-func docutils literal notranslate"><span class="pre">from_estimator</span></code>.
+تم إيقاف استخدام <code class="docutils literal notranslate"><span class="pre">inspection.plot_partial_dependence</span></code> لصالح
+طريقة الفئة وسيتم إزالتها في الإصدار 1.2. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20959">#20959</a> بواسطة
+<a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-kernel-approximation">
+<h4><a class="reference internal" href="../api/sklearn.kernel_approximation.html#module-sklearn.kernel_approximation" title="sklearn.kernel_approximation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.kernel_approximation</span></code></a><a class="headerlink" href="#sklearn-kernel-approximation" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id271"><span class="problematic" id="id272">|Fix|</span></a> إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">kernel_approximation.Nystroem</span></code>
+حيث لم يتطابق الخاصية <code class="docutils literal notranslate"><span class="pre">component_indices_</span></code> مع مجموعة فرعية من
+مؤشرات العينات المستخدمة لتوليد النواة التقريبية. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20554">#20554</a> بواسطة
+<a class="reference external" href="https://github.com/kxytim">Xiangyin Kong</a>.</p></li>
+</ul>
+</section>
+<section id="id18">
+<h4><a class="reference internal" href="../api/sklearn.linear_model.html#module-sklearn.linear_model" title="sklearn.linear_model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a><a class="headerlink" href="#id18" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id273"><span class="problematic" id="id274">|MajorFeature|</span></a> تمت إضافة <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.QuantileRegressor</span></code>
+التي تنفذ الانحدار الكمي الخطي مع العقوبة L1.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/9978">#9978</a> بواسطة <a class="reference external" href="https://github.com/avidale">David Dale</a> و
+<a class="reference external" href="https://github.com/lorentzenchr">Christian Lorentzen</a>.</p></li>
+<li><p><a href="#id275"><span class="problematic" id="id276">|Feature|</span></a> يوفر <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.SGDOneClassSVM</span></code> الجديد تنفيذ SGD
+للـ SVM أحادي الفئة الخطي. عند دمجه مع تقنيات تقريب النواة،
+يقارب هذا التنفيذ حل SVM أحادي الفئة المعمم مع الاستفادة من
+التعقيد الخطي في عدد العينات.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/10027">#10027</a> بواسطة <a class="reference external" href="https://github.com/albertcthomas">Albert Thomas</a>.</p></li>
+<li><p><a href="#id277"><span class="problematic" id="id278">|Feature|</span></a> تمت إضافة وسيط <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> إلى
+<code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LassoCV</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.ElasticNetCV</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/16449">#16449</a> بواسطة <a class="reference external" href="https://github.com/lorentzenchr">Christian Lorentzen</a>.</p></li>
+<li><p><a href="#id279"><span class="problematic" id="id280">|Feature|</span></a> تمت إضافة محسن <code class="docutils literal notranslate"><span class="pre">lbfgs</span></code> (متاح باستخدام <code class="docutils literal notranslate"><span class="pre">solver=&quot;lbfgs&quot;</span></code>)
+وحجة <code class="docutils literal notranslate"><span class="pre">positive</span></code> إلى <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.Ridge</span></code>. عندما يتم تعيين
+<code class="docutils literal notranslate"><span class="pre">positive</span></code> إلى <code class="docutils literal notranslate"><span class="pre">True</span></code>، فإنه يجبر المعاملات على أن تكون موجبة
+(مدعوم فقط بواسطة <code class="docutils literal notranslate"><span class="pre">lbfgs</span></code>). <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20231">#20231</a> بواسطة <a class="reference external" href="https://github.com/tnakae">Toshihiro Nakae</a>.</p></li>
+<li><p><a href="#id281"><span class="problematic" id="id282">|Efficiency|</span></a> تم تحسين تنفيذ <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LogisticRegression</span></code>
+للمصفوفات الكثيفة عند استخدام <code class="docutils literal notranslate"><span class="pre">solver='newton-cg'</span></code> و
+<code class="docutils literal notranslate"><span class="pre">multi_class!='multinomial'</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19571">#19571</a> بواسطة <a class="reference external" href="https://github.com/jjerphan">Julien Jerphanion</a>.</p></li>
+<li><p><a href="#id283"><span class="problematic" id="id284">|Enhancement|</span></a> تحافظ طريقة <code class="docutils literal notranslate"><span class="pre">fit</span></code> على النوع dtype لـ numpy.float32 في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.Lars</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LassoLars</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LassoLars</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LarsCV</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LassoLarsCV</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20155">#20155</a> بواسطة <a class="reference external" href="https://github.com/takoika">Takeshi Oura</a>.</p></li>
+<li><p><a href="#id285"><span class="problematic" id="id286">|Enhancement|</span></a> التحقق من مصفوفة غرام التي يوفرها المستخدم والتي يتم تمريرها
+إلى النماذج الخطية عبر وسيط <code class="docutils literal notranslate"><span class="pre">precompute</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19004">#19004</a> بواسطة
+<a class="reference external" href="https://github.com/amidvidy">Adam Midvidy</a>.</p></li>
+<li><p><a href="#id287"><span class="problematic" id="id288">|Fix|</span></a> <code class="xref py py-meth docutils literal notranslate"><span class="pre">linear_model.ElasticNet.fit</span></code> لم يعد يعدل <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code>
+في مكانه. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19055">#19055</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id289"><span class="problematic" id="id290">|Fix|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.Lasso</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.ElasticNet</span></code> لم
+تعد تحتوي على <code class="docutils literal notranslate"><span class="pre">dual_gap_</span></code> لا تتطابق مع هدفها. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19172">#19172</a>
+بواسطة <a class="reference external" href="https://github.com/mathurinm">Mathurin Massias</a></p></li>
+<li><p><a href="#id291"><span class="problematic" id="id292">|Fix|</span></a> يتم الآن أخذ <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code> في الاعتبار بالكامل في النماذج الخطية
+عندما يكون <code class="docutils literal notranslate"><span class="pre">normalize=True</span></code> لكل من مراكز الميزات وتدرج الميزات.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19426">#19426</a> بواسطة <a class="reference external" href="https://github.com/agramfort">Alexandre Gramfort</a> و
+<a class="reference external" href="https://github.com/maikia">Maria Telenczuk</a>.</p></li>
+<li><p><a href="#id293"><span class="problematic" id="id294">|Fix|</span></a> يتم الآن اعتبار النقاط ذات البقايا تساوي <code class="docutils literal notranslate"><span class="pre">residual_threshold</span></code>
+كنقاط ضمنية بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.RANSACRegressor</span></code>. يسمح هذا
+بتناسب نموذج بشكل مثالي على بعض مجموعات البيانات عندما يكون
+<code class="docutils literal notranslate"><span class="pre">residual_threshold=0</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19499">#19499</a> بواسطة <a class="reference external" href="https://github.com/gregorystrubel">Gregory Strubel</a>.</p></li>
+<li><p><a href="#id295"><span class="problematic" id="id296">|Fix|</span></a> تم إصلاح عدم تغير الأوزان العينية لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.Ridge</span></code> في
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19616">#19616</a> بواسطة <a class="reference external" href="https://github.com/ogrisel">Oliver Grisel</a> و <a class="reference external" href="https://github.com/lorentzenchr">Christian Lorentzen</a>.</p></li>
+<li><p><a href="#id297"><span class="problematic" id="id298">|Fix|</span></a> يجب أن تحتوي القاموس <code class="docutils literal notranslate"><span class="pre">params</span></code> في <code class="xref py py-func docutils literal notranslate"><span class="pre">linear_model.enet_path</span></code> و
+<code class="xref py py-func docutils literal notranslate"><span class="pre">linear_model.lasso_path</span></code> على معلمات محسن التنسق النازل فقط.
+وإلا، سيتم إثارة خطأ.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19391">#19391</a> بواسطة <a class="reference external" href="https://github.com/hongshaoyang">Shao Yang Hong</a>.</p></li>
+<li><p><a href="#id299"><span class="problematic" id="id300">|API|</span></a> رفع تحذير في <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.RANSACRegressor</span></code> أنه بدءًا
+من الإصدار 1.2، يجب تعيين <code class="docutils literal notranslate"><span class="pre">min_samples</span></code> بشكل صريح للنماذج الأخرى
+غير <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LinearRegression</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19390">#19390</a> بواسطة
+<a class="reference external" href="https://github.com/hongshaoyang">Shao Yang Hong</a>.</p></li>
+</ul>
+<p>هذا هو النص المترجم إلى اللغة العربية:</p>
+<ul class="simple">
+<li><p><a href="#id301"><span class="problematic" id="id302">|API|</span></a>: تم إيقاف استخدام المعلمة “normalize” في class:<code class="docutils literal notranslate"><span class="pre">linear_model.LinearRegression</span></code>
+وهي لم تعد مدعومة وسيتم إزالتها في الإصدار 1.2. وكان الدافع وراء هذا التغيير هو أن
+معلمة “normalize” لم يكن لها أي تأثير إذا تم تعيين “fit_intercept” على القيمة False،
+وبالتالي تم اعتبارها مربكة. يمكن إعادة إنتاج سلوك “LinearModel(normalize=True)”
+الموقوف باستخدام <code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code> مع “LinearModel” (حيث “LinearModel”
+هي <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearRegression</span></code>، أو <code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code>، أو
+<code class="xref py py-class docutils literal notranslate"><span class="pre">RidgeClassifier</span></code>، أو <code class="xref py py-class docutils literal notranslate"><span class="pre">RidgeCV</span></code>، أو
+<code class="xref py py-class docutils literal notranslate"><span class="pre">RidgeClassifierCV</span></code>) على النحو التالي: <code class="docutils literal notranslate"><span class="pre">make_pipeline(StandardScaler(with_mean=False),</span>
+<span class="pre">LinearModel())</span></code>. تم إيقاف استخدام معلمة “normalize” في <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearRegression</span></code>
+في <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17743">#17743</a> بواسطة <a class="reference external" href="https://github.com/maikia">Maria Telenczuk</a> و:user:<code class="docutils literal notranslate"><span class="pre">Alexandre</span> <span class="pre">Gramfort</span> <span class="pre">&lt;agramfort&gt;</span></code>.
+ينطبق الشيء نفسه على <code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.RidgeClassifier</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.RidgeCV</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.RidgeClassifierCV</span></code>، في: <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17772">#17772</a>
+بواسطة <a class="reference external" href="https://github.com/maikia">Maria Telenczuk</a> و:user:<code class="docutils literal notranslate"><span class="pre">Alexandre</span> <span class="pre">Gramfort</span> <span class="pre">&lt;agramfort&gt;</span></code>. وينطبق
+الشيء نفسه أيضًا على <code class="xref py py-class docutils literal notranslate"><span class="pre">BayesianRidge</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.ARDRegression</span></code>
+في: <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17746">#17746</a> بواسطة <a class="reference external" href="https://github.com/maikia">Maria Telenczuk</a>. كما ينطبق على
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Lasso</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.LassoCV</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.ElasticNet</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.ElasticNetCV</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.MultiTaskLasso</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.MultiTaskLassoCV</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.MultiTaskElasticNet</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.MultiTaskElasticNetCV</span></code>، في: <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17785">#17785</a> بواسطة <a class="reference external" href="https://github.com/maikia">Maria Telenczuk</a>
+و:user:<code class="docutils literal notranslate"><span class="pre">Alexandre</span> <span class="pre">Gramfort</span> <span class="pre">&lt;agramfort&gt;</span></code>.</p></li>
+<li><p><a href="#id303"><span class="problematic" id="id304">|API|</span></a> سيتم تعيين القيمة الافتراضية لمعلمة “normalize” في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">OrthogonalMatchingPursuit</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.OrthogonalMatchingPursuitCV</span></code>
+إلى False في الإصدار 1.2 وسيتم إزالتها في الإصدار 1.4. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17750">#17750</a> بواسطة <a class="reference external" href="https://github.com/maikia">Maria Telenczuk</a> و:user:<code class="docutils literal notranslate"><span class="pre">Alexandre</span> <span class="pre">Gramfort</span> <span class="pre">&lt;agramfort&gt;</span></code>. وينطبق الشيء نفسه على
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Lars</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.LarsCV</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.LassoLars</span></code>
+و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.LassoLarsCV</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.LassoLarsIC</span></code>، في <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17769">#17769</a>
+بواسطة <a class="reference external" href="https://github.com/maikia">Maria Telenczuk</a> و:user:<code class="docutils literal notranslate"><span class="pre">Alexandre</span> <span class="pre">Gramfort</span> <span class="pre">&lt;agramfort&gt;</span></code>.</p></li>
+<li><p><a href="#id305"><span class="problematic" id="id306">|API|</span></a> تم نقل التحقق من الكلمات الرئيسية من <code class="docutils literal notranslate"><span class="pre">__init__</span></code> و`set_params` إلى <code class="docutils literal notranslate"><span class="pre">fit</span></code>
+بالنسبة للمقدّرات التالية المتوافقة مع اتفاقيات scikit-learn:
+<code class="xref py py-class docutils literal notranslate"><span class="pre">SGDClassifier</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.SGDRegressor</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.SGDOneClassSVM</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.PassiveAggressiveClassifier</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">~linear_model.PassiveAggressiveRegressor</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20683">#20683</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+</ul>
+</section>
+<section id="id19">
+<h4><a class="reference internal" href="../api/sklearn.manifold.html#module-sklearn.manifold" title="sklearn.manifold"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.manifold</span></code></a><a class="headerlink" href="#id19" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id307"><span class="problematic" id="id308">|Enhancement|</span></a> تم تنفيذ خوارزمية <code class="docutils literal notranslate"><span class="pre">'auto'</span></code> لحساب معدل التعلم في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">manifold.TSNE</span></code>. وسيصبح هذا هو المعدل الافتراضي في الإصدار 1.2. كما سيتم
+تغيير طريقة التهيئة الافتراضية إلى <code class="docutils literal notranslate"><span class="pre">pca</span></code> في الإصدار 1.2. وسيتم ضبط التهيئة باستخدام
+PCA بحيث يكون الانحراف المعياري 1e-4 في الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19491">#19491</a> بواسطة <a class="reference external" href="https://github.com/dkobak">Dmitry Kobak</a>.</p></li>
+<li><p><a href="#id309"><span class="problematic" id="id310">|Fix|</span></a> تم تغيير الدقة العددية لمنع مشاكل الانخفاض الحاد في القيم أثناء حساب مصفوفة
+المماثلة في <code class="xref py py-class docutils literal notranslate"><span class="pre">manifold.TSNE</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19472">#19472</a> بواسطة <a class="reference external" href="https://github.com/dkobak">Dmitry Kobak</a>.</p></li>
+<li><p><a href="#id311"><span class="problematic" id="id312">|Fix|</span></a> يستخدم <code class="xref py py-class docutils literal notranslate"><span class="pre">manifold.Isomap</span></code> الآن الدالة <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.shortest_path</span></code>
+لحساب أقصر مسار في الرسم البياني. كما يقوم بتوصيل المكونات غير المتصلة في رسم
+الجيران البياني على طول بعض أزواج المسافات الدنيا، بدلاً من تغيير جميع المسافات اللانهائية
+إلى الصفر. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20531">#20531</a> بواسطة <a class="reference external" href="https://github.com/rth">Roman Yurchak</a> و`Tom Dupre la Tour`_.</p></li>
+<li><p><a href="#id313"><span class="problematic" id="id314">|Fix|</span></a> تم تقليل الحد الأدنى للتسامح العددي في دالة lobpcg في
+<code class="xref py py-func docutils literal notranslate"><span class="pre">manifold.spectral_embedding</span></code> لمنع عدم الاستقرار العددي.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/21194">#21194</a> بواسطة <a class="reference external" href="https://github.com/lobpcg">Andrew Knyazev</a>.</p></li>
+</ul>
+</section>
+<section id="id20">
+<h4><a class="reference internal" href="../api/sklearn.metrics.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics</span></code></a><a class="headerlink" href="#id20" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id315"><span class="problematic" id="id316">|Feature|</span></a> تعرض الدالة <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.mean_pinball_loss</span></code> خسارة pinball للتنبؤ
+بالكميات. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19415">#19415</a> بواسطة <a class="reference external" href="https://github.com/sdpython">Xavier Dupré</a>
+و:user:<code class="docutils literal notranslate"><span class="pre">Oliver</span> <span class="pre">Grisel</span> <span class="pre">&lt;ogrisel&gt;</span></code>.</p></li>
+<li><p><a href="#id317"><span class="problematic" id="id318">|Feature|</span></a> تقوم الدالة <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.d2_tweedie_score</span></code> بحساب درجة D^2 للانحدار
+بالنسبة إلى انحرافات Tweedie بمعامل القوة “power”. وهذا تعميم لدرجة <code class="docutils literal notranslate"><span class="pre">r2_score</span></code> ويمكن
+تفسيره على أنه النسبة المئوية لانحراف Tweedie الموضح.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/17036">#17036</a> بواسطة <a class="reference external" href="https://github.com/lorentzenchr">Christian Lorentzen</a>.</p></li>
+<li><p><a href="#id319"><span class="problematic" id="id320">|Feature|</span></a> تدعم الدالة <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.mean_squared_log_error</span></code> الآن
+المعامل <code class="docutils literal notranslate"><span class="pre">squared=False</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20326">#20326</a> بواسطة <a class="reference external" href="https://github.com/helper-uttam">Uttam kumar</a>.</p></li>
+<li><p><a href="#id321"><span class="problematic" id="id322">|Efficiency|</span></a> تم تحسين سرعة الدالة <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.confusion_matrix</span></code> عندما تكون
+العلامات أعدادًا صحيحة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/9843">#9843</a> بواسطة <a class="reference external" href="https://github.com/Erotemic">Jon Crall</a>.</p></li>
+<li><p><a href="#id323"><span class="problematic" id="id324">|Enhancement|</span></a> تم إجراء إصلاح لرفع خطأ في الدالة <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.hinge_loss</span></code> عندما
+يكون “pred_decision” أحادي البعد في حين أنها تصنيف متعدد الفئات، أو عندما تكون
+معلمة “pred_decision” غير متسقة مع معلمة “labels”.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19643">#19643</a> بواسطة <a class="reference external" href="https://github.com/PierreAttard">Pierre Attard</a>.</p></li>
+<li><p><a href="#id325"><span class="problematic" id="id326">|Fix|</span></a> تستخدم الدالة <code class="xref py py-meth docutils literal notranslate"><span class="pre">metrics.ConfusionMatrixDisplay.plot</span></code> القيمة القصوى
+الصحيحة لخريطة الألوان. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19784">#19784</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id327"><span class="problematic" id="id328">|Fix|</span></a> لا تؤثر العينات ذات الأوزان الصفرية على النتائج من الدوال
+<code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.det_curve</span></code>، و:func:<code class="docutils literal notranslate"><span class="pre">metrics.precision_recall_curve</span></code>،
+و:func:<code class="docutils literal notranslate"><span class="pre">metrics.roc_curve</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18328">#18328</a> بواسطة <a class="reference external" href="https://github.com/albertvillanova">Albert Villanova del Moral</a>
+و:user:<code class="docutils literal notranslate"><span class="pre">Alonso</span> <span class="pre">Silva</span> <span class="pre">Allende</span> <span class="pre">&lt;alonsosilvaallende&gt;</span></code>.</p></li>
+<li><p><a href="#id329"><span class="problematic" id="id330">|Fix|</span></a> تجنب الفائض في الدالة <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.adjusted_rand_score</span></code> مع
+كمية كبيرة من البيانات. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20312">#20312</a> بواسطة <a class="reference external" href="https://github.com/divyanshudeoli">Divyanshu Deoli</a>.</p></li>
+<li><p><a href="#id331"><span class="problematic" id="id332">|API|</span></a> تعرض الفئة <code class="xref py py-class docutils literal notranslate"><span class="pre">metrics.ConfusionMatrixDisplay</span></code> طريقتين للفصل
+<code class="xref py py-func docutils literal notranslate"><span class="pre">from_estimator</span></code> و
+<code class="xref py py-func docutils literal notranslate"><span class="pre">from_predictions</span></code> تسمحان بإنشاء
+رسم مصفوفة الارتباك باستخدام مُقدّر أو التنبؤات.
+تم إيقاف استخدام الدالة <code class="docutils literal notranslate"><span class="pre">metrics.plot_confusion_matrix</span></code> لصالح هاتين الطريقتين
+وسيتم إزالتها في الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18543">#18543</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+<li><p><a href="#id333"><span class="problematic" id="id334">|API|</span></a> تعرض الفئة <code class="xref py py-class docutils literal notranslate"><span class="pre">metrics.PrecisionRecallDisplay</span></code> طريقتين للفصل
+<code class="xref py py-func docutils literal notranslate"><span class="pre">from_estimator</span></code> و
+<code class="xref py py-func docutils literal notranslate"><span class="pre">from_predictions</span></code> تسمحان بإنشاء
+رسم منحنى الدقة والاستدعاء باستخدام مُقدّر أو التنبؤات.
+تم إيقاف استخدام الدالة <code class="docutils literal notranslate"><span class="pre">metrics.plot_precision_recall_curve</span></code> لصالح هاتين الطريقتين
+وسيتم إزالتها في الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20552">#20552</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+<li><p><a href="#id335"><span class="problematic" id="id336">|API|</span></a> تعرض الفئة <code class="xref py py-class docutils literal notranslate"><span class="pre">metrics.DetCurveDisplay</span></code> طريقتين للفصل
+<code class="xref py py-func docutils literal notranslate"><span class="pre">from_estimator</span></code> و
+<code class="xref py py-func docutils literal notranslate"><span class="pre">from_predictions</span></code> تسمحان بإنشاء
+رسم مصفوفة الارتباك باستخدام مُقدّر أو التنبؤات.
+تم إيقاف استخدام الدالة <code class="docutils literal notranslate"><span class="pre">metrics.plot_det_curve</span></code> لصالح هاتين الطريقتين
+وسيتم إزالتها في الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19278">#19278</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-mixture">
+<h4><a class="reference internal" href="../api/sklearn.mixture.html#module-sklearn.mixture" title="sklearn.mixture"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.mixture</span></code></a><a class="headerlink" href="#sklearn-mixture" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id337"><span class="problematic" id="id338">|Fix|</span></a> التأكد من تعيين أفضل المعلمات بشكل مناسب في حالة الانحراف في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">mixture.GaussianMixture</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">mixture.BayesianGaussianMixture</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20030">#20030</a> بواسطة <a class="reference external" href="https://github.com/tliu68">Tingshan Liu</a> و:user:<code class="docutils literal notranslate"><span class="pre">Benjamin</span> <span class="pre">Pedigo</span> <span class="pre">&lt;bdpedigo&gt;</span></code>.</p></li>
+</ul>
+</section>
+<section id="sklearn-model-selection">
+<h4><a class="reference internal" href="../api/sklearn.model_selection.html#module-sklearn.model_selection" title="sklearn.model_selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.model_selection</span></code></a><a class="headerlink" href="#sklearn-model-selection" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id339"><span class="problematic" id="id340">|Feature|</span></a> تمت إضافة الفئة <code class="xref py py-class docutils literal notranslate"><span class="pre">model_selection.StratifiedGroupKFold</span></code>،
+والتي تجمع بين <code class="xref py py-class docutils literal notranslate"><span class="pre">model_selection.StratifiedKFold</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">model_selection.GroupKFold</span></code>، مما يوفر القدرة على تقسيم البيانات مع الحفاظ
+على توزيع الفئات في كل تقسيم مع الحفاظ على كل مجموعة داخل تقسيم واحد.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18649">#18649</a> بواسطة <a class="reference external" href="https://github.com/hermidalc">Leandro Hermida</a> و:user:<code class="docutils literal notranslate"><span class="pre">Rodion</span> <span class="pre">Martynov</span> <span class="pre">&lt;marrodion&gt;</span></code>.</p></li>
+<li><p><a href="#id341"><span class="problematic" id="id342">|Enhancement|</span></a> إظهار تحذير واحد فقط في العملية الرئيسية لفشل التهيئة لكل تقسيم
+في التحقق المتقاطع. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20619">#20619</a> بواسطة <a class="reference external" href="https://github.com/lesteve">Loïc Estève</a></p></li>
+<li><p><a href="#id343"><span class="problematic" id="id344">|Enhancement|</span></a> أصبحت فئة <code class="docutils literal notranslate"><span class="pre">model_selection.BaseShuffleSplit</span></code> الأساسية
+عامة الآن. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20056">#20056</a> بواسطة <a class="reference external" href="https://github.com/pabloduque0">&#64;pabloduque0</a>.</p></li>
+<li><p><a href="#id345"><span class="problematic" id="id346">|Fix|</span></a> تجنب الفائض المبكر في الدالة <code class="xref py py-func docutils literal notranslate"><span class="pre">model_selection.train_test_split</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20904">#20904</a> بواسطة <a class="reference external" href="https://github.com/t-jakubek">Tomasz Jakubek</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-naive-bayes">
+<h4><a class="reference internal" href="../api/sklearn.naive_bayes.html#module-sklearn.naive_bayes" title="sklearn.naive_bayes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.naive_bayes</span></code></a><a class="headerlink" href="#sklearn-naive-bayes" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id347"><span class="problematic" id="id348">|Fix|</span></a> تقوم دالتا <code class="docutils literal notranslate"><span class="pre">fit</span></code> و`partial_fit` في مصنفات نايف بايز المنفصلة
+(<code class="xref py py-class docutils literal notranslate"><span class="pre">naive_bayes.BernoulliNB</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">naive_bayes.CategoricalNB</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">naive_bayes.ComplementNB</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">naive_bayes.MultinomialNB</span></code>) الآن
+بمعالجة الحالة المنحرفة لفئة واحدة في مجموعة التدريب بشكل صحيح.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18925">#18925</a> بواسطة <a class="reference external" href="https://github.com/dpoznik">David Poznik</a>.</p></li>
+<li><p><a href="#id349"><span class="problematic" id="id350">|API|</span></a> أصبحت السمة “<a href="#id429"><span class="problematic" id="id430">sigma_</span></a>” موقوفة الآن في <code class="xref py py-class docutils literal notranslate"><span class="pre">naive_bayes.GaussianNB</span></code>
+وسيتم إزالتها في الإصدار 1.2. استخدم “<a href="#id431"><span class="problematic" id="id432">var_</span></a>” بدلاً من ذلك.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18842">#18842</a> بواسطة <a class="reference external" href="https://github.com/hongshaoyang">Hong Shao Yang</a>.</p></li>
+</ul>
+</section>
+<section id="id21">
+<h4><a class="reference internal" href="../api/sklearn.neighbors.html#module-sklearn.neighbors" title="sklearn.neighbors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neighbors</span></code></a><a class="headerlink" href="#id21" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id351"><span class="problematic" id="id352">|Enhancement|</span></a> تم تحسين إنشاء <code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.KDTree</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">neighbors.BallTree</span></code>
+بالنسبة لتعقيد الوقت الأسوأ من <span class="math notranslate nohighlight">\(\mathcal{O}(n^2)\)</span> إلى <span class="math notranslate nohighlight">\(\mathcal{O}(n)\)</span>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19473">#19473</a> بواسطة <a class="reference external" href="https://github.com/jiefangxuanyan">jiefangxuanyan</a> و:user:<code class="docutils literal notranslate"><span class="pre">Julien</span> <span class="pre">Jerphanion</span> <span class="pre">&lt;jjerphan&gt;</span></code>.</p></li>
+<li><p><a href="#id353"><span class="problematic" id="id354">|FIX|</span></a> تدعم فئات <code class="docutils literal notranslate"><span class="pre">neighbors.DistanceMetric</span></code> الآن مجموعات البيانات المقروءة فقط
+والمُدارة بواسطة الذاكرة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19883">#19883</a> بواسطة <a class="reference external" href="https://github.com/jjerphan">Julien Jerphanion</a>.</p></li>
+<li><p><a href="#id355"><span class="problematic" id="id356">|FIX|</span></a> لا تقوم الفئات <code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.NearestNeighbors</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">neighbors.KNeighborsClassifier</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">neighbors.RadiusNeighborsClassifier</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">neighbors.KNeighborsRegressor</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">neighbors.RadiusNeighborsRegressor</span></code> بالتحقق من صحة “weights” في
+<code class="docutils literal notranslate"><span class="pre">__init__</span></code> وتقوم بالتحقق من صحتها في <code class="docutils literal notranslate"><span class="pre">fit</span></code> بدلاً من ذلك. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20072">#20072</a> بواسطة
+<a class="reference external" href="https://github.com/alfaro96">Juan Carlos Alfaro Jiménez</a>.</p></li>
+<li><p><a href="#id357"><span class="problematic" id="id358">|API|</span></a> تم إيقاف استخدام معلمة <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> في <code class="xref py py-class docutils literal notranslate"><span class="pre">neighbors.RadiusNeighborsClassifier</span></code>
+وسيتم إزالتها في الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20842">#20842</a> بواسطة <a class="reference external" href="https://github.com/jmloyola">Juan Martín Loyola</a>.</p></li>
+</ul>
+</section>
+<section id="sklearn-neural-network">
+<h4><a class="reference internal" href="../api/sklearn.neural_network.html#module-sklearn.neural_network" title="sklearn.neural_network"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neural_network</span></code></a><a class="headerlink" href="#sklearn-neural-network" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id359"><span class="problematic" id="id360">|Fix|</span></a> يقوم كل من <code class="xref py py-class docutils literal notranslate"><span class="pre">neural_network.MLPClassifier</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">neural_network.MLPRegressor</span></code> الآن بدعم الاستمرار في التدريب
+عند التحميل من ملف مؤرشف. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19631">#19631</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+</ul>
+</section>
+<section id="id22">
+<h4><a class="reference internal" href="../api/sklearn.pipeline.html#module-sklearn.pipeline" title="sklearn.pipeline"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.pipeline</span></code></a><a class="headerlink" href="#id22" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id361"><span class="problematic" id="id362">|API|</span></a> تدعم دالتا <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> و`predict_log_proba` في الفئة
+<code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.Pipeline</span></code> الآن تمرير وسائط التنبؤ إلى المُقدّر النهائي.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19790">#19790</a> بواسطة <a class="reference external" href="https://github.com/crflynn">Christopher Flynn</a>.</p></li>
+</ul>
+</section>
+<section id="id23">
+<h4><a class="reference internal" href="../api/sklearn.preprocessing.html#module-sklearn.preprocessing" title="sklearn.preprocessing"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code></a><a class="headerlink" href="#id23" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id363"><span class="problematic" id="id364">|Feature|</span></a> محول <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.SplineTransformer</span></code> الجديد هو أداة لمعالجة
+الميزات لإنشاء B-splines، ويتم معايرتها بواسطة درجة البولي “degree” للعقد،
+وعدد العقد “n_knots” واستراتيجية وضع العقدة “knots”.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18368">#18368</a> بواسطة <a class="reference external" href="https://github.com/lorentzenchr">Christian Lorentzen</a>.
+يدعم <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.SplineTransformer</span></code> أيضًا المنحنيات الدورية
+عبر وسيط “extrapolation”.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19483">#19483</a> بواسطة <a class="reference external" href="https://github.com/mlondschien">Malte Londschien</a>.
+يدعم <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.SplineTransformer</span></code> أوزان العينات لاستراتيجية
+وضع العقدة “quantile”.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20526">#20526</a> بواسطة <a class="reference external" href="https://github.com/mlondschien">Malte Londschien</a>.</p></li>
+<li><p><a href="#id365"><span class="problematic" id="id366">|Feature|</span></a> يدعم <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.OrdinalEncoder</span></code> الآن تمرير القيم المفقودة
+بشكل افتراضي. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19069">#19069</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id367"><span class="problematic" id="id368">|Feature|</span></a> تدعم <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.OneHotEncoder</span></code> الآن
+<code class="docutils literal notranslate"><span class="pre">handle_unknown='ignore'</span></code> وإسقاط الفئات. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19041">#19041</a> بواسطة
+<a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id369"><span class="problematic" id="id370">|Feature|</span></a> تدعم <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.PolynomialFeatures</span></code> الآن تمرير
+زوج إلى <code class="docutils literal notranslate"><span class="pre">degree</span></code>، أي <code class="docutils literal notranslate"><span class="pre">degree=(min_degree,</span> <span class="pre">max_degree)</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20250">#20250</a> بواسطة <a class="reference external" href="https://github.com/lorentzenchr">Christian Lorentzen</a>.</p></li>
+<li><p><a href="#id371"><span class="problematic" id="id372">|Efficiency|</span></a> أصبح <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.StandardScaler</span></code> أسرع وأكثر كفاءة في
+استخدام الذاكرة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20652">#20652</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id373"><span class="problematic" id="id374">|Efficiency|</span></a> تم تغيير وسيط “algorithm” لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.KMeans</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.KBinsDiscretizer</span></code> من “auto” إلى “full”.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19934">#19934</a> بواسطة <a class="reference external" href="https://github.com/GLevV">Gleb Levitskiy</a>.</p></li>
+<li><p><a href="#id375"><span class="problematic" id="id376">|Efficiency|</span></a> أصبح تنفيذ دالة <code class="docutils literal notranslate"><span class="pre">fit</span></code> لمحول
+<code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.PolynomialFeatures</span></code> أسرع. وهذا ملحوظ بشكل خاص
+في الإدخال الكبير المُفرق. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19734">#19734</a> بواسطة <a class="reference external" href="https://github.com/frrad">Fred Robinson</a>.</p></li>
+<li><p><a href="#id377"><span class="problematic" id="id378">|Fix|</span></a> تقوم الدالة <code class="xref py py-func docutils literal notranslate"><span class="pre">preprocessing.StandardScaler.inverse_transform</span></code> الآن
+برفع خطأ عندما تكون بيانات الإدخال أحادية البعد. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19752">#19752</a> بواسطة :user:<a href="#id24"><span class="problematic" id="id25">`</span></a>Zhe</p></li>
+</ul>
+<p>هذا هو النص المترجم إلى اللغة العربية:</p>
+<ul class="simple">
+<li><p><a href="#id379"><span class="problematic" id="id380">|إصلاح|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">preprocessing.scale</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.StandardScaler</span></code>
+والمقيّمات المماثلة تكتشف الميزات شبه الثابتة لتجنب تحجيمها إلى
+قيم كبيرة جداً. تحدث هذه المشكلة بشكل خاص عند استخدام أداة تحجيم على
+البيانات المتناثرة مع عمود ثابت مع أوزان العينات، وفي هذه الحالة
+يتم عادةً تعطيل التمركيز. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19527">#19527</a> بواسطة <a class="reference external" href="https://github.com/ogrisel">Oliver Grisel</a> و <a class="reference external" href="https://github.com/maikia">Maria Telenczuk</a> و <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19788">#19788</a> بواسطة
+<a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id381"><span class="problematic" id="id382">|إصلاح|</span></a> <code class="xref py py-meth docutils literal notranslate"><span class="pre">preprocessing.StandardScaler.inverse_transform</span></code> الآن
+يتعامل بشكل صحيح مع أنواع البيانات الصحيحة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19356">#19356</a> بواسطة <a class="reference external" href="https://github.com/makoeppel">&#64;makoeppel</a>.</p></li>
+<li><p><a href="#id383"><span class="problematic" id="id384">|إصلاح|</span></a> <code class="xref py py-meth docutils literal notranslate"><span class="pre">preprocessing.OrdinalEncoder.inverse_transform</span></code> لا
+يدعم المصفوفة المتناثرة ويرفع رسالة الخطأ المناسبة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19879">#19879</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+<li><p><a href="#id385"><span class="problematic" id="id386">|إصلاح|</span></a> لن ترفع طريقة <code class="docutils literal notranslate"><span class="pre">fit</span></code> من <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.OrdinalEncoder</span></code>
+خطأ عندما تكون <code class="docutils literal notranslate"><span class="pre">handle_unknown='ignore'</span></code> ومجهولة الفئات معطاة
+لـ <code class="docutils literal notranslate"><span class="pre">fit</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19906">#19906</a> بواسطة <a class="reference external" href="https://github.com/MaxwellLZH">Zhehao Liu</a>.</p></li>
+<li><p><a href="#id387"><span class="problematic" id="id388">|إصلاح|</span></a> إصلاح تراجع في <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.OrdinalEncoder</span></code> حيث
+الأعداد الصحيحة الكبيرة في بايثون ستؤدي إلى خطأ بسبب فيض
+عند تحويلها إلى نوع C (<code class="docutils literal notranslate"><span class="pre">np.float64</span></code> أو <code class="docutils literal notranslate"><span class="pre">np.int64</span></code>).
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20727">#20727</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+<li><p><a href="#id389"><span class="problematic" id="id390">|إصلاح|</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.FunctionTransformer</span></code> لا يحدد <code class="docutils literal notranslate"><span class="pre">n_features_in_</span></code>
+بناءً على الإدخال إلى <code class="docutils literal notranslate"><span class="pre">inverse_transform</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20961">#20961</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id391"><span class="problematic" id="id392">|واجهة برمجة التطبيقات|</span></a> تم إيقاف استخدام معلمة <code class="docutils literal notranslate"><span class="pre">n_input_features_</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.PolynomialFeatures</span></code> لصالح
+<code class="docutils literal notranslate"><span class="pre">n_features_in_</span></code> وسيتم إزالتها في الإصدار 1.2. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20240">#20240</a> بواسطة
+<a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+</ul>
+</section>
+<section id="id26">
+<h4><a class="reference internal" href="../api/sklearn.svm.html#module-sklearn.svm" title="sklearn.svm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a><a class="headerlink" href="#id26" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id393"><span class="problematic" id="id394">|واجهة برمجة التطبيقات|</span></a> تم إيقاف استخدام معلمة <code class="docutils literal notranslate"><span class="pre">**params</span></code> في <code class="xref py py-func docutils literal notranslate"><span class="pre">svm.OneClassSVM.fit</span></code>
+وسيتم إزالتها في الإصدار 1.2.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20843">#20843</a> بواسطة <a class="reference external" href="https://github.com/jmloyola">Juan Martín Loyola</a>.</p></li>
+</ul>
+</section>
+<section id="id27">
+<h4><a class="reference internal" href="../api/sklearn.tree.html#module-sklearn.tree" title="sklearn.tree"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.tree</span></code></a><a class="headerlink" href="#id27" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id395"><span class="problematic" id="id396">|تحسين|</span></a> إضافة وسيط <code class="docutils literal notranslate"><span class="pre">fontname</span></code> في <code class="xref py py-func docutils literal notranslate"><span class="pre">tree.export_graphviz</span></code>
+للتعامل مع الأحرف غير الإنجليزية. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/18959">#18959</a> بواسطة <a class="reference external" href="https://github.com/Zeroto521">Zero</a>
+و <a class="reference external" href="https://github.com/wstates">wstates</a>.</p></li>
+<li><p><a href="#id397"><span class="problematic" id="id398">|إصلاح|</span></a> تحسين توافق <code class="xref py py-func docutils literal notranslate"><span class="pre">tree.plot_tree</span></code> مع الشاشات عالية الدقة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20023">#20023</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id399"><span class="problematic" id="id400">|إصلاح|</span></a> إصلاح خلل في <code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeClassifier</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeRegressor</span></code> حيث يمكن تقسيم العقدة في حين
+أنه لا ينبغي أن يكون بسبب التعامل غير الصحيح مع أخطاء التقريب.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19336">#19336</a> بواسطة <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id401"><span class="problematic" id="id402">|واجهة برمجة التطبيقات|</span></a> تم إيقاف استخدام معلمة <code class="docutils literal notranslate"><span class="pre">n_features_</span></code> في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeClassifier</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeRegressor</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">tree.ExtraTreeClassifier</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">tree.ExtraTreeRegressor</span></code> لصالح <code class="docutils literal notranslate"><span class="pre">n_features_in_</span></code>
+وسيتم إزالتها في الإصدار 1.2. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20272">#20272</a> بواسطة
+<a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+</ul>
+</section>
+<section id="id28">
+<h4><a class="reference internal" href="../api/sklearn.utils.html#module-sklearn.utils" title="sklearn.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.utils</span></code></a><a class="headerlink" href="#id28" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a href="#id403"><span class="problematic" id="id404">|تحسين|</span></a> تم إيقاف استخدام القيمة الافتراضية لـ <code class="docutils literal notranslate"><span class="pre">random_state=0</span></code> في
+<code class="xref py py-func docutils literal notranslate"><span class="pre">randomized_svd</span></code>. بدءًا من الإصدار 1.2،
+ستكون القيمة الافتراضية لـ <code class="docutils literal notranslate"><span class="pre">random_state</span></code> هي <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19459">#19459</a> بواسطة <a class="reference external" href="https://github.com/cinbez">Cindy Bezuidenhout</a> و
+<a class="reference external" href="https://github.com/cliffordEmmanuel">Clifford Akai-Nettey</a>.</p></li>
+<li><p><a href="#id405"><span class="problematic" id="id406">|تحسين|</span></a> تمت إضافة الديكور المساعد <code class="xref py py-func docutils literal notranslate"><span class="pre">utils.metaestimators.available_if</span></code>
+لتوفير المرونة في ميتا-المقدرات التي تجعل الأساليب متاحة أو
+غير متاحة على أساس الحالة، بطريقة أكثر قابلية للقراءة.
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19948">#19948</a> بواسطة <a class="reference external" href="https://joelnothman.com/">Joel Nothman</a>.</p></li>
+<li><p><a href="#id407"><span class="problematic" id="id408">|تحسين|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">utils.validation.check_is_fitted</span></code> الآن يستخدم
+<code class="docutils literal notranslate"><span class="pre">__sklearn_is_fitted__</span></code> إذا كان متاحًا، بدلاً من التحقق من السمات
+التي تنتهي بشرطة سفلية. هذا يجعل أيضًا <code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.Pipeline</span></code> و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.FunctionTransformer</span></code> تمرير
+<code class="docutils literal notranslate"><span class="pre">check_is_fitted(estimator)</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20657">#20657</a> بواسطة <a class="reference external" href="https://github.com/adrinjalali">Adrin Jalali</a>.</p></li>
+<li><p><a href="#id409"><span class="problematic" id="id410">|إصلاح|</span></a> إصلاح خلل في <code class="xref py py-func docutils literal notranslate"><span class="pre">utils.sparsefuncs.mean_variance_axis</span></code> حيث
+كانت دقة التباين المحسوب منخفضة للغاية عندما يكون التباين الحقيقي
+صفرًا بالضبط. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/19766">#19766</a> بواسطة <a class="reference external" href="https://github.com/jeremiedbb">Jérémie du Boisberranger</a>.</p></li>
+<li><p><a href="#id411"><span class="problematic" id="id412">|إصلاح|</span></a> يتم الآن لف سلاسل التوثيق للخصائص التي يتم تزيينها باستخدام
+<code class="xref py py-func docutils literal notranslate"><span class="pre">utils.deprecated</span></code> بشكل صحيح. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20385">#20385</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas
+Fan</a>.</p></li>
+<li><p><a href="#id413"><span class="problematic" id="id414">|إصلاح|</span></a> <code class="docutils literal notranslate"><span class="pre">utils.stats._weighted_percentile</span></code> الآن يتجاهل بشكل صحيح
+الملاحظات ذات الأوزان الصفرية الأصغر من الملاحظة الأصغر ذات الوزن الإيجابي
+لـ <code class="docutils literal notranslate"><span class="pre">percentile=0</span></code>. الفئات المتأثرة هي
+<code class="xref py py-class docutils literal notranslate"><span class="pre">dummy.DummyRegressor</span></code> لـ <code class="docutils literal notranslate"><span class="pre">quantile=0</span></code> و
+<code class="docutils literal notranslate"><span class="pre">ensemble.HuberLossFunction</span></code> و <code class="docutils literal notranslate"><span class="pre">ensemble.HuberLossFunction</span></code>
+لـ <code class="docutils literal notranslate"><span class="pre">alpha=0</span></code>. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20528">#20528</a> بواسطة <a class="reference external" href="https://github.com/mlondschien">Malte Londschien</a>.</p></li>
+<li><p><a href="#id415"><span class="problematic" id="id416">|إصلاح|</span></a> <code class="xref py py-func docutils literal notranslate"><span class="pre">utils._safe_indexing</span></code> يأخذ صراحة نسخة من إطار البيانات عند
+توفير المؤشرات الصحيحة، مما يتجنب رفع تحذير من Pandas. تم رفع هذا
+التحذير سابقًا في مرافق إعادة أخذ العينات والوظائف التي تستخدم تلك
+المرافق (على سبيل المثال <code class="xref py py-func docutils literal notranslate"><span class="pre">model_selection.train_test_split</span></code>،
+<code class="xref py py-func docutils literal notranslate"><span class="pre">model_selection.cross_validate</span></code>،
+<code class="xref py py-func docutils literal notranslate"><span class="pre">model_selection.cross_val_score</span></code>،
+<code class="xref py py-func docutils literal notranslate"><span class="pre">model_selection.cross_val_predict</span></code>).
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20673">#20673</a> بواسطة <a class="reference external" href="https://github.com/jorisvandenbossche">Joris Van den Bossche</a>.</p></li>
+<li><p><a href="#id417"><span class="problematic" id="id418">|إصلاح|</span></a> إصلاح تراجع في <code class="docutils literal notranslate"><span class="pre">utils.is_scalar_nan</span></code> حيث ستؤدي الأعداد الكبيرة في بايثون
+إلى خطأ بسبب فيض في أنواع C (<code class="docutils literal notranslate"><span class="pre">np.float64</span></code> أو
+<code class="docutils literal notranslate"><span class="pre">np.int64</span></code>).
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20727">#20727</a> بواسطة <a class="reference external" href="https://github.com/glemaitre">Guillaume Lemaitre</a>.</p></li>
+<li><p><a href="#id419"><span class="problematic" id="id420">|إصلاح|</span></a> تم إيقاف دعم <code class="docutils literal notranslate"><span class="pre">np.matrix</span></code> في
+<code class="xref py py-func docutils literal notranslate"><span class="pre">check_array</span></code> في الإصدار 1.0 وسيؤدي إلى
+<code class="docutils literal notranslate"><span class="pre">TypeError</span></code> في الإصدار 1.2. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20165">#20165</a> بواسطة <a class="reference external" href="https://github.com/thomasjpfan">Thomas Fan</a>.</p></li>
+<li><p><a href="#id421"><span class="problematic" id="id422">|واجهة برمجة التطبيقات|</span></a> <code class="docutils literal notranslate"><span class="pre">utils._testing.assert_warns</span></code> و <code class="docutils literal notranslate"><span class="pre">utils._testing.assert_warns_message</span></code>
+تم إيقاف استخدامهما في الإصدار 1.0 وسيتم إزالتهما في الإصدار 1.2. استخدم
+بدلاً من ذلك مدير السياق <code class="docutils literal notranslate"><span class="pre">pytest.warns</span></code>. لاحظ أن هذه الوظائف لم يتم توثيقها
+ولم تكن جزءًا من واجهة برمجة التطبيقات العامة. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20521">#20521</a> بواسطة <a class="reference external" href="https://github.com/ogrisel">Olivier Grisel</a>.</p></li>
+<li><p><a href="#id423"><span class="problematic" id="id424">|واجهة برمجة التطبيقات|</span></a> تم إصلاح العديد من الأخطاء في <code class="docutils literal notranslate"><span class="pre">utils.graph.graph_shortest_path</span></code>،
+والذي تم إيقاف استخدامه الآن. استخدم <code class="docutils literal notranslate"><span class="pre">scipy.sparse.csgraph.shortest_path</span></code> بدلاً من ذلك. <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pull/20531">#20531</a>
+بواسطة <a class="reference external" href="https://github.com/TomDLT">Tom Dupre la Tour</a>.</p></li>
+</ul>
+<p class="rubric">المساهمون في الكود والتوثيق</p>
+<p>شكرًا لكل من ساهم في صيانة وتحسين المشروع منذ الإصدار 0.24، بما في ذلك:</p>
+<p>Abdulelah S. Al Mesfer، Abhinav Gupta، Adam J. Stewart، Adam Li، Adam Midvidy،
+Adrian Garcia Badaracco، Adrian Sadłocha، Adrin Jalali، Agamemnon Krasoulis،
+Alberto Rubiales، Albert Thomas، Albert Villanova del Moral، Alek Lefebvre،
+Alessia Marcolini، Alexandr Fonari، Alihan Zihna، Aline Ribeiro de Almeida،
+Amanda، Amanda Dsouza، Amol Deshmukh، Ana Pessoa، Anavelyz، Andreas Mueller،
+Andrew Delong، Ashish، Ashvith Shetty، Atsushi Nukariya، Aurélien Geron، Avi
+Gupta، Ayush Singh، baam، BaptBillard، Benjamin Pedigo، Bertrand Thirion،
+Bharat Raghunathan، bmalezieux، Brian Rice، Brian Sun، Bruno Charron، Bryan
+Chen، bumblebee، caherrera-meli، Carsten Allefeld، CeeThinwa، Chiara Marmo،
+chrissobel، Christian Lorentzen، Christopher Yeh، Chuliang Xiao، Clément
+Fauchereau، cliffordEmmanuel، Conner Shen، Connor Tann، David Dale، David Katz،
+David Poznik، Dimitri Papadopoulos Orfanos، Divyanshu Deoli، dmallia17،
+Dmitry Kobak، DS_anas، Eduardo Jardim، EdwinWenink، EL-ATEIF Sara، Eleni
+Markou، EricEllwanger، Eric Fiegel، Erich Schubert، Ezri-Mudde، Fatos Morina،
+Felipe Rodrigues، Felix Hafner، Fenil Suchak، flyingdutchman23، Flynn، Fortune
+Uwha، Francois Berenger، Frankie Robertson، Frans Larsson، Frederick Robinson،
+frellwan، Gabriel S Vicente، Gael Varoquaux، genvalen، Geoffrey Thomas،
+geroldcsendes، Gleb Levitskiy، Glen، Glòria Macià Muñoz، gregorystrubel،
+groceryheist، Guillaume Lemaitre، guiweber، Haidar Almubarak، Hans Moritz
+Günther، Haoyin Xu، Harris Mirza، Harry Wei، Harutaka Kawamura، Hassan
+Alsawadi، Helder Geovane Gomes de Lima، Hugo DEFOIS، Igor Ilic، Ikko Ashimine،
+Isaack Mungui، Ishaan Bhat، Ishan Mishra، Iván Pulido، iwhalvic، J Alexander،
+Jack Liu، James Alan Preiss، James Budarz، James Lamb، Jannik، Jeff Zhao،
+Jennifer Maldonado، Jérémie du Boisberranger، Jesse Lima، Jianzhu Guo، jnboehm،
+Joel Nothman، JohanWork، John Paton، Jonathan Schneider، Jon Crall، Jon Haitz
+Legarreta Gorroño، Joris Van den Bossche، José Manuel Nápoles Duarte، Juan
+Carlos Alfaro Jiménez، Juan Martin Loyola، Julien Jerphanion، Julio Batista
+Silva، julyrashchenko، JVM، Kadatatlu Kishore، Karen Palacio، Kei Ishikawa،
+kmatt10، kobaski، Kot271828، Kunj، KurumeYuta، kxytim، lacrosse91، LalliAcqua،
+Laveen Bagai، Leonardo Rocco، Leonardo Uieda، Leopoldo Corona، Loic Esteve،
+LSturtew، Luca Bittarello، Luccas Quadros، Lucy Jiménez، Lucy Liu، ly648499246،
+Mabu Manaileng، Manimaran، makoeppel، Marco Gorelli، Maren Westermann،
+Mariangela، Maria Telenczuk، marielaraj، Martin Hirzel، Mateo Noreña، Mathieu
+Blondel، Mathis Batoul، mathurinm، Matthew Calcote، Maxime Prieur، Maxwell،
+Mehdi Hamoumi، Mehmet Ali Özer، Miao Cai، Michal Karbownik، michalkrawczyk،
+Mitzi، mlondschien، Mohamed Haseeb، Mohamed Khoualed، Muhammad Jarir Kanji،
+murata-yu، Nadim Kawwa، Nanshan Li، naozin555، Nate Parsons، Neal Fultz، Nic
+Annau، Nicolas Hug، Nicolas Miller، Nico Stefani، Nigel Bosch، Nikita Titov،
+Nodar Okroshiashvili، Norbert Preining، novaya، Ogbonna Chibuike Stephen،
+OGordon100، Oliver Pfaffel، Olivier Grisel، Oras Phongpanangam، Pablo Duque،
+Pablo Ibieta-Jimenez، Patric Lacouth، Paulo S. Costa، Paweł Olszewski، Peter
+Dye، PierreAttard، Pierre-Yves Le Borgne، PranayAnchuri، Prince Canuma،
+putschblos، qdeffense، RamyaNP، ranjanikrishnan، Ray Bell، Rene Jean Corneille،
+Reshama Shaikh، ricardojnf، RichardScottOZ، Rodion Martynov، Rohan Paul، Roman
+Lutz، Roman Yurchak، Samuel Brice، Sandy Khosasi، Sean Benhur J، Sebastian
+Flores، Sebastian Pölsterl، Shao Yang Hong، shinehide، shinnar، shivamgargsya،
+Shooter23، Shuhei Kayawari، Shyam Desai، simonamaggio، Sina Tootoonian،
+solosilence، Steven Kolawole، Steve Stagg، Surya Prakash، swpease، Sylvain
+Marié، Takeshi Oura، Terence Honles، TFiFiE، Thomas A Caswell، Thomas J. Fan،
+Tim Gates، TimotheeMathieu، Timothy Wolodzko، Tim Vink، t-jakubek، t-kusanagi،
+tliu68، Tobias Uhmann، tom1092، Tomás Moreyra، Tomás Ronald Hughes، Tom
+Dupré la Tour، Tommaso Di Noto، Tomohiro Endo، TONY GEORGE، Toshihiro NAKAE،
+tsuga، Uttam kumar، vadim-ushtanit، Vangelis Gkiastas، Venkatachalam N، Vilém
+Zouhar، Vinicius Rios Fuck، Vlasovets، waijean، Whidou، xavier dupré،
+xiaoyuchai، Yasmeen Alsaedy، yoch، Yosuke KOBAYASHI، Yu Feng، YusukeNagasaka،
+yzhenman، Zero، ZeyuSun، ZhaoweiWang، Zito، Zito Relova</p>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="v1.1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Version 1.1</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="v0.24.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">الإصدار 0.24</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-1-0-2">الإصدار 1.0.2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">سجل التغييرات</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-cluster"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-datasets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.datasets</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-decomposition"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.decomposition</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-feature-selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_selection</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-impute"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.impute</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-linear-model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-manifold"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.manifold</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-metrics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-multiclass"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.multiclass</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-neighbors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neighbors</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-preprocessing"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-tree"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.tree</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.utils</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changes-1-0-1">الإصدار 1.0.1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">نماذج ثابتة</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-calibration"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.calibration</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-gaussian-process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.gaussian_process</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-feature-extraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neighbors</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-pipeline"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.pipeline</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-svm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.utils</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">متفرقات</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">الاعتماديات الدنيا</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">فرض استخدام وسائط الكلمات المفتاحية فقط</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">نماذج معدلة</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-dummy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.dummy</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id15"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id16"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id17"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_selection</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-inspection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.inspection</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-kernel-approximation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.kernel_approximation</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id18"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.linear_model</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id19"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.manifold</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id20"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-mixture"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.mixture</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-model-selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.model_selection</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-naive-bayes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.naive_bayes</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id21"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neighbors</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-neural-network"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.neural_network</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id22"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.pipeline</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id23"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.preprocessing</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id26"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id27"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.tree</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id28"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.utils</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/whats_new/v1.0.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
