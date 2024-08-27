@@ -1,0 +1,1293 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/decomposition.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="يُستخدم تحليل المكونات الرئيسية (PCA) لتفكيك مجموعة بيانات متعددة المتغيرات إلى مجموعة من المكونات المتعامدة المتتالية التي تفسر الحد الأقصى من التباين. في سكيت-ليرن، يتم تنفيذ PCA ككائن محول يتعلم..." />
+<meta property="og:image" content="https://scikit-learn/stable/_images/sphx_glr_plot_kernel_pca_002.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="يُستخدم تحليل المكونات الرئيسية (PCA) لتفكيك مجموعة بيانات متعددة المتغيرات إلى مجموعة من المكونات المتعامدة المتتالية التي تفسر الحد الأقصى من التباين. في سكيت-ليرن، يتم تنفيذ PCA ككائن محول يتعلم..." />
+
+    <title>2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة) &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/decomposition';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.13. التغاير التجريبي" href="covariance.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="biclustering.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../supervised_learning.html">1. التعلم الخَلفي</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../unsupervised_learning.html">2. التعلم غير الخاضع للإشراف</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mixture.html">2.1. نماذج المزيج الغاوسي</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="manifold.html">2.3. تعلم المنوال</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="clustering.html">2.9. التجميع</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="covariance.html">2.13. التغاير التجريبي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="outlier_detection.html">2.16. تناسب غلاف إهليلجي</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="density.html">2.27. تقدير الكثافة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="neural_networks_unsupervised.html">2.30. نماذج الشبكات العصبية (غير الخاضعة للإشراف)</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../model_selection.html">3. اختيار النموذج وتقييمه</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation.html">3.1. التدقيق المتقاطع: تقييم أداء أداة التقدير</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="grid_search.html">3.4. البحث الشامل عن الشبكة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="classification_threshold.html">3.7. تعديل عتبة القرار للتنبؤ بالصنف</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="model_evaluation.html">3.9. مقاييس الأداء وتقييمها: تقييم جودة التنبؤات كميًا</a></li>
+<li class="toctree-l2"><a class="reference internal" href="learning_curve.html">3.10. منحنيات التحقق: رسم الدرجات لتقييم النماذج</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../inspection.html">4. التفتيش</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualizations.html">5. التمثيل المرئي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_transforms.html">6. تحويلات مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="compose.html">6.1. خطوط الأنابيب ومقدّرات المُركّبات</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="feature_extraction.html">6.4. استخراج الخصائص</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">6.7. معالجة البيانات الأولية</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="impute.html">6.12. إكمال القيم المفقودة</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="unsupervised_reduction.html">6.19. PCA: التحليل التكويني الرئيسي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="random_projection.html">6.22. الإسقاط العشوائي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_approximation.html">6.23. طريقة Nystroem لتقريب النواة</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">6.28. مقاييس الاقتران، الألفة والنواة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_targets.html">6.29. تحويل هدف التنبؤ (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../datasets.html">7. مرافق تحميل مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/toy_dataset.html">7.1. مجموعات البيانات التجريبية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/real_world.html">7.2. مجموعات البيانات من العالم الحقيقي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/sample_generators.html">7.3. المجموعات البيانات المولدة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/loading_other_datasets.html">7.4. أمثلة</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing.html">8. الحوسبة باستخدام scikit-learn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_persistence.html">9. نظرة عامة على سير العمل</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../common_pitfalls.html">14. المعالجة المسبقة غير المتسقة</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../dispatching.html">16. التشغيل التلقائي</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../machine_learning_map.html">17. اختيار المحلل المناسب</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentations.html">18. الموارد الخارجية، الفيديوهات، والمحاضرات</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">مرجع المستخدم</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../unsupervised_learning.html" class="nav-link"><span class="section-number">2. </span>التعلم غير الخاضع للإشراف</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1><span class="section-number">2.10. </span>تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>يُستخدم تحليل المكونات الرئيسية (PCA) لتفكيك مجموعة بيانات متعددة المتغيرات إلى مجموعة من المكونات المتعامدة المتتالية التي تفسر الحد الأقصى من التباين. في سكيت-ليرن، يتم تنفيذ PCA ككائن محول يتعلم n مكونًا في طريقة التجهيز الخاصة به، ويمكن استخدامه على بيانات جديدة لمشروعها على هذه المكونات.</p>
+<p>يقوم PCA بمركزة بيانات الإدخال ولكنه لا يقوم بمقياسها لكل ميزة قبل تطبيق SVD. تسمح المعلمة الاختيارية “whiten=True” بإسقاط البيانات على مساحة المميز مع قياس كل مكون إلى تباين الوحدة. غالبًا ما يكون هذا مفيدًا إذا كانت النماذج أسفل البث تضع افتراضات قوية بشأن توزيع الإشارة: هذا هو الحال، على سبيل المثال، بالنسبة لآلات المتجهات الداعمة مع نواة RBF وخوارزمية التجميع K-Means.</p>
+<p>فيما يلي مثال لمجموعة بيانات Iris، والتي تتكون من 4 ميزات، يتم إسقاطها على البعدين اللذين يفسران معظم التباين:</p>
+<p>توفر كائن PCA أيضًا تفسيرًا احتماليًا لـ PCA يمكن أن يعطي احتمالية للبيانات بناءً على مقدار التباين الذي تفسره. على هذا النحو، فإنه ينفذ طريقة “التسجيل” التي يمكن استخدامها في التحقق من الصلاحية:</p>
+<section id="pca-svd">
+<h2><span class="section-number">2.10.1. </span>PCA باستخدام SVD العشوائي<a class="headerlink" href="#pca-svd" title="Link to this heading">#</a></h2>
+<p>غالبًا ما يكون من المثير للاهتمام إسقاط البيانات إلى مساحة ذات أبعاد أقل تحافظ على معظم التباين، عن طريق إسقاط متجه المميز للمكونات المرتبط بقيم مميزة أقل.</p>
+<p>على سبيل المثال، إذا كنا نعمل مع صور رمادية بمقياس 64x64 بكسل للتعرف على الوجه، فإن أبعاد البيانات هي 4096 ومن البطيء تدريب آلة المتجهات الداعمة RBF على مثل هذه البيانات العريضة. علاوة على ذلك، نحن نعلم أن البعد الجوهري للبيانات أقل بكثير من 4096 لأن جميع صور الوجوه البشرية تبدو متشابهة إلى حد ما.</p>
+<p>توجد عينات على متعدد شعب ذو أبعاد أقل بكثير (حوالي 200 على سبيل المثال). يمكن استخدام خوارزمية PCA لتحويل البيانات الخطي مع تقليل الأبعاد والحفاظ على معظم التباين الموضح في نفس الوقت.</p>
+<p>تعد فئة PCA المستخدمة مع المعلمة الاختيارية “svd_solver=’randomized’” مفيدة جدًا في هذه الحالة: نظرًا لأننا سنقوم بإسقاط معظم متجهات المميز، فمن الأكثر كفاءة الحد من الحساب إلى تقدير تقريبي لمتجهات المميز التي سنحتفظ بها لأداء التحويل بالفعل.</p>
+<p>على سبيل المثال، يُظهر ما يلي 16 صورة شخصية عينة (مركزة حول 0.0) من مجموعة بيانات Olivetti. على الجانب الأيمن، توجد المتجهات المميزة الأولى التي تمت إعادة تشكيلها على شكل صور شخصية. نظرًا لأننا نحتاج فقط إلى المتجهات المميزة العليا لمجموعة بيانات بحجم n_samples = 400 وn_features = 64 × 64 = 4096، فإن وقت الحساب أقل من 1 ثانية:</p>
+<p>يُظهر المثال التالي 16 مكونًا مستخرجًا باستخدام PCA غير المتناظر من مجموعة بيانات وجوه Olivetti. يمكن ملاحظة كيفية قيام مصطلح الانتظام بإحداث العديد من الأصفار. علاوة على ذلك، يتسبب الهيكل الطبيعي للبيانات في أن تكون المعاملات غير الصفرية متجاورة عموديًا. لا يفرض النموذج هذا رياضيًا: كل مكون هو متجه h ∈ R^4096، ولا يوجد مفهوم للتجاور الرأسي باستثناء التصور الودي للبشر كصور 64x64 بكسل. إن حقيقة أن المكونات الموضحة أدناه تبدو محلية هي تأثير الهيكل المتأصل للبيانات، والذي يجعل مثل هذه الأنماط المحلية تقلل من خطأ إعادة البناء. هناك قواعد ل-1 تحفيز تأخذ في الاعتبار التجاورة وأنواع مختلفة من الهياكل؛ راجع [Jen09] _ لمحة عامة عن هذه الأساليب.</p>
+<p>توجد صيغ مختلفة لمشكلة PCA غير المتناظرة. يعتمد التنفيذ هنا على [Mrl09] _. مشكلة التحسين التي تم حلها هي مشكلة PCA (تعلم القاموس) مع عقوبة l1 على المكونات:</p>
+<p>حيث || . ||_Fro يمثل المعيار فروبينيوس و||. ||_1،1 يمثل معيار المصفوفة القائم على الإدخال والذي هو مجموع القيم المطلقة لجميع الإدخالات في المصفوفة.</p>
+<p>تمنع قاعدة L1 المُحفِّزة للمصفوفة أيضًا تعلم المكونات من الضوضاء عند توفر عدد قليل من عينات التدريب. يمكن ضبط درجة العقوبة (وبالتالي التجزئة) من خلال معلمة “ألفا” الفرط. تؤدي القيم الصغيرة إلى تفكيك معتدل، في حين أن القيم الأكبر حجمًا تقلص العديد من المعاملات إلى الصفر.</p>
+<p>ملاحظة: على الرغم من أنها في روح خوارزمية عبر الإنترنت، فإن فئة MiniBatchSparsePCA لا تنفذ “partial_fit” لأن الخوارزمية عبر الإنترنت على اتجاه الميزات، وليس اتجاه العينات.</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">2.10.2. </span>مراجع<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>خوارزمية 4.3 في “إيجاد البنية باستخدام العشوائية: خوارزميات احتمالية لبناء تقريبي لتفكيك المصفوفة” Halko، وآخرون، 2009</p></li>
+<li><p>“تنفيذ خوارزمية عشوائية لتحليل المكونات الرئيسية” A. Szlam et al. 2014</p></li>
+</ul>
+</section>
+<section id="pca-sparsepca-minibatchsparsepca">
+<h2><span class="section-number">2.10.3. </span>PCA غير المتناظرة (SparsePCA وMiniBatchSparsePCA)<a class="headerlink" href="#pca-sparsepca-minibatchsparsepca" title="Link to this heading">#</a></h2>
+<p>PCA غير المتناظرة هو متغير من PCA، بهدف استخراج مجموعة من المكونات غير المتناظرة التي تعيد بناء البيانات بشكل أفضل.</p>
+<p>Mini-batch Sparse PCA (MiniBatchSparsePCA) هو متغير من SparsePCA الذي يكون أسرع ولكنه أقل دقة. تتم زيادة السرعة عن طريق التكرار فوق أجزاء صغيرة من مجموعة الميزات، لعدد معين من التكرارات.</p>
+<p>يتمثل عيب تحليل المكونات الرئيسية (PCA) في أن المكونات المستخرجة بواسطة هذه الطريقة لها تعبيرات كثيفة بشكل حصري، أي أن لها معاملات غير صفرية عند التعبير عنها كمزيج خطي من المتغيرات الأصلية. يمكن أن يجعل هذا التفسير صعبًا. في كثير من الحالات، يمكن تصور المكونات الأساسية الفعلية بشكل أكثر طبيعية كمؤشرات غير متناظرة؛ على سبيل المثال في التعرف على الوجه، قد ترتبط المكونات بشكل طبيعي بأجزاء من الوجوه.</p>
+<p>يؤدي PCA غير المتناظر إلى تمثيل أكثر إيجازًا وقابلية للفهم، مما يؤكد بوضوح أي من الميزات الأصلية تساهم في الاختلافات بين العينات.</p>
+<p>يوضح المثال التالي 16 مكونًا مستخرجًا باستخدام PCA غير المتناظر من مجموعة بيانات وجوه Olivetti. يمكن ملاحظة كيفية قيام مصطلح الانتظام بإحداث العديد من الأصفار. علاوة على ذلك، يتسبب الهيكل الطبيعي للبيانات في أن تكون المعاملات غير الصفرية متجاورة عموديًا. لا يفرض النموذج هذا رياضيًا: كل مكون هو متجه h ∈ R^4096، ولا يوجد مفهوم للتجاور الرأسي باستثناء التصور الودي للبشر كصور 64x64 بكسل. إن حقيقة أن المكونات الموضحة أدناه تبدو محلية هي تأثير الهيكل المتأصل للبيانات، والذي يجعل مثل هذه الأنماط المحلية تقلل من خطأ إعادة البناء. هناك قواعد ل-1 تحفيز تأخذ في الاعتبار التجاورة وأنواع مختلفة من الهياكل؛ راجع [Jen09] _ لمحة عامة عن هذه الأساليب.</p>
+<p>لاحظ أن هناك صيغًا مختلفة لمشكلة PCA غير المتناظرة. يعتمد التنفيذ هنا على [Mrl09] _. مشكلة التحسين التي تم حلها هي مشكلة PCA (تعلم القاموس) مع عقوبة l1 على المكونات:</p>
+<p>حيث || . ||_Fro يمثل معيار فروبينيوس و||. ||_1،1 يمثل معيار المصفوفة القائم على الإدخال والذي هو مجموع القيم المطلقة لجميع الإدخالات في المصفوفة.</p>
+<p>تمنع قاعدة L1 المُحفِّزة للمصفوفة أيضًا تعلم المكونات من الضوضاء عند توفر عدد قليل من عينات التدريب. يمكن ضبط درجة العقوبة (وبالتالي التجزئة) من خلال معلمة “ألفا” الفرط. تؤدي القيم الصغيرة إلى تفكيك معتدل، في حين أن القيم الأكبر حجمًا تقلص العديد من المعاملات إلى الصفر.</p>
+<p>تحليل المكونات الرئيسية للنواة (kPCA)
+Kernel PCA الدقيق
+—————-</p>
+<p>: class: ‘KernelPCA’ هو امتداد لPCA يحقق تقليل الأبعاد غير الخطية من خلال استخدام النواة (راجع: ref: ‘metrics’) [Scholkopf1997] _. ولديه العديد من التطبيقات بما في ذلك إزالة الضوضاء والضغط والتنبؤ المنظم (تقدير اعتماد النواة). يدعم: class: ‘KernelPCA’ كل من “التحويل” و “inverse_transform”.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_kernel_pca.html"><img alt="../_images/sphx_glr_plot_kernel_pca_002.png" src="../_images/sphx_glr_plot_kernel_pca_002.png" style="width: 1050.0px; height: 300.0px;" />
+</a>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>: meth: ‘KernelPCA.inverse_transform’ يعتمد على ريدج النواة لتعلم
+وظيفة رسم الخرائط للعينات من أساس PCA إلى مساحة الميزة الأصلية [Bakir2003] _. وبالتالي، فإن إعادة البناء التي تم الحصول عليها مع
+: meth: ‘KernelPCA.inverse_transform’ هو تقريب. راجع المثال
+أدناه للحصول على مزيد من التفاصيل.</p>
+</div>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p>: ref: ‘sphx_glr_auto_examples_decomposition_plot_kernel_pca.py’</p></li>
+<li><p>: ref: ‘sphx_glr_auto_examples_applications_plot_digits_denoising.py’</p></li>
+</ul>
+<p class="rubric">المراجع</p>
+<div role="list" class="citation-list">
+<div class="citation" id="scholkopf1997" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Scholkopf1997<span class="fn-bracket">]</span></span>
+<p>شولكوف، برنارد، ألكسندر سمولا، وكلاوس روبرت مولر.
+“تحليل المكونات الأساسية للنواة”.
+&lt;<a class="reference external" href="https://people.eecs.berkeley.edu/~wainwrig/stat241b/scholkopf_kernel.pdf">https://people.eecs.berkeley.edu/~wainwrig/stat241b/scholkopf_kernel.pdf</a>&gt;’
+المؤتمر الدولي للشبكات العصبية الاصطناعية.
+سبرينغر، برلين، هايدلبرغ، 1997.</p>
+</div>
+<div class="citation" id="bakir2003" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Bakir2003<span class="fn-bracket">]</span></span>
+<p>باكير، جوهان ح، جيسون ويستون، وبرنارد شولكوف.
+“التعلم للعثور على الصور المسبقة”.
+&lt;<a class="reference external" href="https://papers.nips.cc/paper/2003/file/ac1ad983e08ad3304a97e147f522747e-Paper.pdf">https://papers.nips.cc/paper/2003/file/ac1ad983e08ad3304a97e147f522747e-Paper.pdf</a>&gt;’
+تقدم في معالجة المعلومات العصبية 16 (2003): 449-456.</p>
+</div>
+</div>
+</section>
+<section id="kernel-pca">
+<span id="kpca-solvers"></span><h2><span class="section-number">2.10.4. </span>خيار المحلل لـ Kernel PCA<a class="headerlink" href="#kernel-pca" title="Link to this heading">#</a></h2>
+<p>في حين أن: class: ‘PCA’ عدد المكونات محدود بعدد الميزات، في: class: ‘KernelPCA’ عدد المكونات محدود بعدد
+العينات. تحتوي العديد من مجموعات البيانات الواقعية على عدد كبير من العينات! في
+هذه الحالات، يعد العثور على <em>جميع</em> المكونات باستخدام kPCA الكامل مضيعة لوقت الحساب، حيث يتم وصف البيانات بشكل أساسي بواسطة المكونات القليلة الأولى
+(على سبيل المثال، “n_components&lt;=100”). وبعبارة أخرى، فإن مصفوفة غرام المركزة التي
+يتم تحليلها ذاتيًا في عملية التجهيز لـ Kernel PCA لها مرتبة فعالة
+أصغر بكثير من حجمها. هذا هو موقف حيث يمكن لمحللات القيمة الذاتية التقريبية توفير تسريع مع فقدان دقة منخفض جدًا.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="eigensolvers">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Eigensolvers<a class="headerlink" href="#eigensolvers" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">يمكن استخدام المعلمة الاختيارية “eigen_solver=’randomized’” ل
+الحد بشكل كبير من وقت الحساب عندما يكون عدد “n_components” المطلوب
+صغيرًا مقارنة بعدد العينات. يعتمد على طرق التحليل العشوائي للعثور على
+حل تقريبي في وقت أقصر.</p>
+<p class="sd-card-text">تبلغ التعقيد الزمني لـ KernelPCA العشوائي: math: ‘O (<a href="#id22"><span class="problematic" id="id23">n_</span></a> {samples} ^ 2 cdot <a href="#id24"><span class="problematic" id="id25">n_</span></a> {components})’
+بدلاً من: math: ‘O (<a href="#id26"><span class="problematic" id="id27">n_</span></a> {samples} ^ 3)’ للطريقة الدقيقة
+التي تم تنفيذها باستخدام “eigen_solver=’dense’”.</p>
+<p class="sd-card-text">بصمة الذاكرة لـ KernelPCA العشوائي تتناسب أيضًا مع:
+math: ‘2 cdot <a href="#id28"><span class="problematic" id="id29">n_</span></a> {samples} cdot <a href="#id30"><span class="problematic" id="id31">n_</span></a> {components}` بدلاً من
+: math: ‘<a href="#id32"><span class="problematic" id="id33">n_</span></a> {samples} ^ 2` للطريقة الدقيقة.</p>
+<p class="sd-card-text">ملاحظة: هذه التقنية هي نفسها كما في: ref: ‘RandomizedPCA’.</p>
+<p class="sd-card-text">بالإضافة إلى المحللين أعلاه، يمكن استخدام “eigen_solver=’arpack’” ك
+طريقة بديلة للحصول على تحليل تقريبي. في الممارسة العملية، توفر هذه الطريقة فقط أوقات تنفيذ معقولة عندما يكون عدد المكونات التي سيتم العثور عليها
+صغيرًا جدًا. يتم تمكينه بشكل افتراضي عندما يكون عدد المكونات المطلوبة أقل من 10 (صارم) وعدد العينات أكبر من 200
+(صارم). راجع: class: ‘KernelPCA’ للحصول على التفاصيل.</p>
+<p class="rubric">المراجع</p>
+<ul>
+<li><p class="sd-card-text">المحلل <em>الكثيف</em>:
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.eigh.html">scipy.linalg.eigh documentation</a></p></li>
+<li><p class="sd-card-text">المحلل <em>العشوائي</em>:</p>
+<ul>
+<li><p class="sd-card-text">الخوارزمية 4.3 في
+:arxiv: “العثور على البنية باستخدام العشوائية: خوارزميات عشوائية
+لبناء التحليلات التقريبية للمصفوفة &lt;0909.4061&gt;`
+Halko، et al. (2009)</p></li>
+<li><dl class="field-list simple">
+<dt class="field-odd">arxiv<span class="colon">:</span></dt>
+<dd class="field-odd"><p class="sd-card-text">“تنفيذ خوارزمية عشوائية</p>
+</dd>
+</dl>
+<p class="sd-card-text">لتحليل المكونات الأساسية &lt;1412.3510&gt;`
+أ. Szlam et al. (2014)</p>
+</li>
+</ul>
+</li>
+<li><p class="sd-card-text">محلل <em>arpack</em>:
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.eigsh.html">scipy.sparse.linalg.eigsh documentation</a>
+R. B. Lehoucq، D. C. سورينسن، و C. يانغ، (1998)</p></li>
+</ul>
+</div>
+</details></section>
+</section>
+<section id="lsa">
+<span id="id3"></span><h1><span class="section-number">2.11. </span>تحليل القيمة المفردة المبتورة وتحليل المعنى الكامن<a class="headerlink" href="#lsa" title="Link to this heading">#</a></h1>
+<p>: class: ‘TruncatedSVD’ ينفذ متغيرًا من تحليل القيمة الفردية
+(SVD) الذي يحسب فقط: math: ‘k’ أكبر القيم الفردية،
+حيث: math: ‘k’ هو معلمة يحددها المستخدم.</p>
+<p>: class: ‘TruncatedSVD’ مشابه جدًا لـ: class: ‘PCA’، ولكنه يختلف
+في أن المصفوفة: math: ‘X’ لا تحتاج إلى أن تكون مركزة.
+عندما يتم طرح الوسائل العمودية (لكل ميزة) من: math: ‘X’
+من قيم الميزة، فإن SVD المبتور للمصفوفة الناتجة يعادل PCA.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="حول-svd-المبتور-وتحليل-المعنى-الكامن-(lsa)">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">حول SVD المبتور وتحليل المعنى الكامن (LSA)<a class="headerlink" href="#حول-svd-المبتور-وتحليل-المعنى-الكامن-(lsa)" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">عندما يتم تطبيق SVD المبتور على مصفوفات المصطلحات والمستندات
+(كما هو موضح بواسطة: class: ‘~sklearn.feature_extraction.text.CountVectorizer` أو
+: class: ‘~sklearn.feature_extraction.text.TfidfVectorizer`)،
+يُعرف هذا التحول باسم
+<a class="reference external" href="https://nlp.stanford.edu/IR-book/pdf/18lsi.pdf">تحليل المعنى الكامن</a>
+(LSA)، لأنه يحول هذه المصفوفات
+إلى مساحة “معنوية” ذات أبعاد منخفضة.
+على وجه الخصوص، من المعروف أن LSA تكافح آثار الترادف وتعدد المعاني
+(كلاهما يعني تقريبًا وجود معانٍ متعددة لكل كلمة)،
+مما يتسبب في أن تكون مصفوفات المصطلحات والمستندات متباعدة جدًا
+وتظهر تشابهًا سيئًا وفقًا لتدابير مثل تشابه جيب التمام.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="sd-card-text">LSA معروف أيضًا باسم الفهرسة الدلالية الكامنة، LSI،
+على الرغم من أن هذا يشير بشكل صارم إلى استخدامه في الفهارس الدائمة
+لأغراض استرجاع المعلومات.</p>
+</div>
+<p class="sd-card-text">من الناحية الرياضية، ينتج SVD المبتور المطبق على عينات التدريب: math: ‘X’
+تقريبًا منخفض الرتبة: math: ‘X’:</p>
+<div class="math notranslate nohighlight">
+\[X \ approx X_k = U_k \ Sigma_k V_k ^ \ top\]</div>
+<p class="sd-card-text">بعد هذه العملية،: math: ‘U_k Sigma_k’
+هي مجموعة بيانات التدريب المحولة مع: math: ‘k’ ميزات
+(تسمى “n_components” في واجهة برمجة التطبيقات).</p>
+<p class="sd-card-text">لتحويل مجموعة اختبار: math: ‘X’ أيضًا، نقوم بضربها في: math: ‘V_k’:</p>
+<div class="math notranslate nohighlight">
+\[X' = X V_k\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="sd-card-text">تتبادل معظم معالجات LSA في أدبيات معالجة اللغات الطبيعية (NLP)
+واسترجاع المعلومات (IR) محاور المصفوفة: math: ‘X’ بحيث يكون لها شكل
+“(n_features، n_samples)”.
+نقدم LSA بطريقة مختلفة تتوافق بشكل أفضل مع واجهة برمجة تطبيقات scikit-learn،
+ولكن القيم الفردية التي تم العثور عليها هي نفسها.</p>
+</div>
+<p class="sd-card-text">في حين أن محول: class: ‘TruncatedSVD’
+يعمل مع أي مصفوفة ميزات،
+يوصى باستخدامه على مصفوفات tf-idf بدلاً من عدات التردد الخام
+في إعداد LSA/معالجة المستندات.
+على وجه الخصوص، يجب تشغيل التوسيع تحت الخطي والتردد العكسي للمستند
+(sublinear_tf=True، use_idf=True)
+لجعل قيم الميزة أقرب إلى التوزيع الطبيعي،
+للتعويض عن الافتراضات الخاطئة لـ LSA حول البيانات النصية.</p>
+</div>
+</details><p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p>: ref: ‘sphx_glr_auto_examples_text_plot_document_clustering.py’</p></li>
+</ul>
+<p class="rubric">المراجع</p>
+<ul class="simple">
+<li><p>كريستوفر د. مانينج، برابهاكار راغافان وهينريش شوتزي (2008)،
+<em>مقدمة في استرجاع المعلومات</em>، مطبعة جامعة كامبريدج،
+الفصل 18: “تحليل المصفوفة والفهرسة الدلالية الكامنة
+&lt;<a class="reference external" href="https://nlp.stanford.edu/IR-book/pdf/18lsi.pdf">https://nlp.stanford.edu/IR-book/pdf/18lsi.pdf</a>&gt;`_</p></li>
+</ul>
+<p id="dictionarylearning">تعلم القاموس
+الترميز المُقَشَّع باستخدام قاموس مُحَسَّب مُسْبَقًا
+———————————————————-</p>
+<p>يُعد كائن <code class="xref py py-class docutils literal notranslate"><span class="pre">SparseCoder</span></code> مُقَدِّرًا يمكن استخدامه لتحويل الإشارات إلى تركيبة خطية مُقَشَّعة من الذرات المُستخرجة من قاموس ثابت مُحَسَّب مُسْبَقًا مثل أساس موجة متقطعة. لذلك، فإن هذا الكائن لا ينفذ طريقة <code class="docutils literal notranslate"><span class="pre">fit</span></code>. ويبلغ مقدار التحويل إلى مشكلة ترميز مُقَشَّع: العثور على تمثيل للبيانات كتركيبة خطية لأقل عدد ممكن من ذرات القاموس. وتنفذ جميع تنويعات تعلم القاموس طرق التحويل التالية، والتي يمكن التحكم فيها عبر معامل <code class="docutils literal notranslate"><span class="pre">transform_method</span></code> عند تهيئة المعلمة:</p>
+<ul class="simple">
+<li><p>مطاردة المطابقة المتعامدة (<a class="reference internal" href="linear_model.html#omp"><span class="std std-ref">البحث عن المطابقة العمودية (OMP)</span></a>)</p></li>
+<li><p>الانحدار ذو الزاوية الصغرى (<a class="reference internal" href="linear_model.html#least-angle-regression"><span class="std std-ref">الانحدار بزاوية أصغر</span></a>)</p></li>
+<li><p>لسو باستخدام الانحدار ذو الزاوية الصغرى</p></li>
+<li><p>لسو باستخدام الانحدار التنسيقي (<a class="reference internal" href="linear_model.html#lasso"><span class="std std-ref">Lasso</span></a>)</p></li>
+<li><p>العتبات</p></li>
+</ul>
+<p>إن العتبات سريعة للغاية ولكنها لا تُنتج ترميمات دقيقة. وقد ثبت أنها مفيدة في الأدبيات لمهام التصنيف. وبالنسبة لمهام ترميم الصور، فإن مطاردة المطابقة المتعامدة تُنتج أكثر الترميمات دقة وحيادية.</p>
+<p>توفر كائنات تعلم القاموس، عبر معامل <code class="docutils literal notranslate"><span class="pre">split_code</span></code>، إمكانية فصل القيم الموجبة والسالبة في نتائج الترميز المُقَشَّع. وهذا مفيد عندما يُستخدم تعلم القاموس لاستخراج ميزات ستُستخدم للتعلم المُشرف، لأنه يسمح لخوارزمية التعلم بتعيين أوزان مختلفة لتحميلات سالبة لذرة معينة، مُقارنة بالتحميل الموجب المُقابل.</p>
+<p>يكون للرمز المُقسَّم لعينة واحدة طول <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">n_components</span></code>، ويتم بناؤه باستخدام القاعدة التالية: أولاً، يتم حساب الرمز العادي بطول <code class="docutils literal notranslate"><span class="pre">n_components</span></code>. بعد ذلك، يتم ملء الإدخالات الأولى لـ <code class="docutils literal notranslate"><span class="pre">n_components</span></code> من <code class="docutils literal notranslate"><span class="pre">split_code</span></code> بالجزء الموجب من متجه الرمز العادي. ويتم ملء النصف الثاني من الرمز المُقسَّم بالجزء السالب من متجه الرمز، ولكن بإشارة موجبة. وبالتالي، يكون <code class="docutils literal notranslate"><span class="pre">split_code</span></code> غير سالب.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/decomposition/plot_sparse_coding.html#sphx-glr-auto-examples-decomposition-plot-sparse-coding-py"><span class="std std-ref">Sparse coding with a precomputed dictionary</span></a></p></li>
+</ul>
+<section id="id5">
+<h2><span class="section-number">2.11.1. </span>تعلم القاموس العام<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>يُعد تعلم القاموس (<code class="xref py py-class docutils literal notranslate"><span class="pre">DictionaryLearning</span></code>) مشكلة تحليل إلى عوامل تُعادل إيجاد قاموس (عادة ما يكون مكتملًا) سيؤدي أداءً جيدًا في الترميز المُقَشَّع للبيانات المُلائمة.</p>
+<p>ويُقترح أن تمثيل البيانات كتركيبات مُقَشَّعة من ذرات مُستخرجة من قاموس مكتمل هو الطريقة التي تعمل بها القشرة البصرية الأولية للثدييات. ونتيجة لذلك، فقد ثبت أن تعلم القاموس المُطبق على رقع الصور يُعطي نتائج جيدة في مهام معالجة الصور مثل استكمال الصور، والرسم على اللوحات، وإزالة التشويش، بالإضافة إلى مهام التعرف الخاضعة للإشراف.</p>
+<p>إن تعلم القاموس هو مشكلة تحسين يتم حلها عن طريق تحديث الرمز المُقَشَّع بشكل مُتكرر، كحل لمشكلات لسو المُتعددة، مع اعتبار القاموس ثابتًا، ثم تحديث القاموس ليتناسب بشكل أفضل مع الرمز المُقَشَّع.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}(U^*, V^*) = \underset{U, V}{\operatorname{arg\,min\,}} &amp; \frac{1}{2}
+             ||X-UV||_{\text{Fro}}^2+\alpha||U||_{1,1} \\
+             \text{subject to } &amp; ||V_k||_2 &lt;= 1 \text{ for all }
+             0 \leq k &lt; n_{\mathrm{atoms}}\end{split}\]</div>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img2" src="../_images/sphx_glr_plot_faces_decomposition_002.png" style="width: 360.0px; height: 275.4px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="dict_img2" src="../_images/sphx_glr_plot_faces_decomposition_007.png" style="width: 360.0px; height: 275.4px;" /></a></strong></p><p>يرمز <span class="math notranslate nohighlight">\(||.||_{\text{Fro}}\)</span> إلى معيار فروبينيوس، ويرمز <span class="math notranslate nohighlight">\(||.||_{1,1}\)</span> إلى معيار المصفوفة حسب العنصر، وهو مجموع القيم المطلقة لجميع الإدخالات في المصفوفة.
+وبعد استخدام مثل هذا الإجراء لملاءمة القاموس، يكون التحويل ببساطة عبارة عن خطوة ترميز مُقَشَّع تتشارك في نفس التنفيذ مع جميع كائنات تعلم القاموس (انظر <span class="xref std std-ref">SparseCoder</span>).</p>
+<p>ومن الممكن أيضًا تقييد القاموس و/أو الرمز ليكون موجبًا لمطابقة القيود التي قد تكون موجودة في البيانات. وفيما يلي الوجوه مع قيود الموجبة المُختلفة المُطبقة. يشير اللون الأحمر إلى القيم السالبة، ويشير اللون الأزرق إلى القيم الموجبة، ويمثل اللون الأبيض الأصفار.</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos1" src="../_images/sphx_glr_plot_faces_decomposition_010.png" style="width: 360.0px; height: 275.4px;" /></a> <a href="#id12"><span class="problematic" id="id13">|dict_img_pos2|</span></a></strong></p><p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos3" src="../_images/sphx_glr_plot_faces_decomposition_012.png" style="width: 360.0px; height: 275.4px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="dict_img_pos4" src="../_images/sphx_glr_plot_faces_decomposition_013.png" style="width: 360.0px; height: 275.4px;" /></a></strong></p><p>وتُظهر الصورة التالية كيف يبدو القاموس المُتعلم من رقع صور 4x4 بكسل المُستخرجة من جزء من صورة وجه الراكون.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_image_denoising.html"><img alt="../_images/sphx_glr_plot_image_denoising_001.png" src="../_images/sphx_glr_plot_image_denoising_001.png" style="width: 250.0px; height: 165.0px;" />
+</a>
+</figure>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/decomposition/plot_image_denoising.html#sphx-glr-auto-examples-decomposition-plot-image-denoising-py"><span class="std std-ref">Image denoising using dictionary learning</span></a></p></li>
+</ul>
+<p class="rubric">المراجع</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.di.ens.fr/sierra/pdfs/icml09.pdf">“Online dictionary learning for sparse coding”</a>
+J. Mairal, F. Bach, J. Ponce, G. Sapiro, 2009</p></li>
+</ul>
+</section>
+<section id="minibatchdictionarylearning">
+<span id="id6"></span><h2><span class="section-number">2.11.2. </span>تعلم القاموس بالدفعات الصغرى<a class="headerlink" href="#minibatchdictionarylearning" title="Link to this heading">#</a></h2>
+<p>ينفذ <code class="xref py py-class docutils literal notranslate"><span class="pre">MiniBatchDictionaryLearning</span></code> إصدارًا أسرع، ولكن أقل دقة من خوارزمية تعلم القاموس، وهو أكثر ملاءمة للمجموعات الضخمة من البيانات.</p>
+<p>يقوم <code class="xref py py-class docutils literal notranslate"><span class="pre">MiniBatchDictionaryLearning</span></code> بشكل افتراضي بتقسيم البيانات إلى دفعات صغرى ويحسنها بطريقة عبر الإنترنت عن طريق الدوران عبر الدفعات الصغرى للعدد المحدد من التكرارات. ومع ذلك، ففي الوقت الحالي، لا ينفذ شرط التوقف.</p>
+<p>ينفذ المُقَدِّر أيضًا طريقة <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code>، والتي تُحدِّث القاموس عن طريق التكرار مرة واحدة فقط عبر دفعة صغرى. ويمكن استخدام ذلك للتعلم عبر الإنترنت عندما لا تكون البيانات مُتاحة بسهولة من البداية، أو عندما لا تتناسب البيانات مع الذاكرة.</p>
+<a class="reference external image-reference" href="../auto_examples/cluster/plot_dict_face_patches.html"><img alt="../_images/sphx_glr_plot_dict_face_patches_001.png" class="align-right" src="../_images/sphx_glr_plot_dict_face_patches_001.png" style="width: 210.0px; height: 200.0px;" />
+</a>
+<aside class="topic">
+<p class="topic-title"><strong>التجميع لتعلم القاموس</strong></p>
+<p>لاحظ أنه عند استخدام تعلم القاموس لاستخراج تمثيل (على سبيل المثال، للترميز المُقَشَّع) يمكن أن يكون التجميع بديلاً جيدًا لتعلم القاموس. على سبيل المثال، فإن مُقَدِّر <code class="xref py py-class docutils literal notranslate"><span class="pre">MiniBatchKMeans</span></code> فعال من حيث الكفاءة الحسابية وينفذ التعلم عبر الإنترنت بطريقة <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code>.</p>
+<p>مثال: <a class="reference internal" href="../auto_examples/cluster/plot_dict_face_patches.html#sphx-glr-auto-examples-cluster-plot-dict-face-patches-py"><span class="std std-ref">Online learning of a dictionary of parts of faces</span></a></p>
+</aside>
+</section>
+</section>
+<section id="fa">
+<span id="id7"></span><h1><span class="section-number">2.12. </span>التحليل العاملي<a class="headerlink" href="#fa" title="Link to this heading">#</a></h1>
+<p>في التعلم غير المُشرف، لا نمتلك سوى مجموعة بيانات <span class="math notranslate nohighlight">\(X = \{x_1, x_2, \dots, x_n \}\)</span>. كيف يمكن وصف هذه المجموعة من البيانات رياضياً؟ إن أبسط نموذج <code class="docutils literal notranslate"><span class="pre">المتغيرات</span> <span class="pre">الكامنة</span> <span class="pre">المستمرة</span></code> لـ <span class="math notranslate nohighlight">\(X\)</span> هو</p>
+<div class="math notranslate nohighlight">
+\[x_i = W h_i + \mu + \epsilon\]</div>
+<p>يُطلق على المتجه <span class="math notranslate nohighlight">\(h_i\)</span> اسم “كامن” لأنه غير مرئي. ويُعتبر <span class="math notranslate nohighlight">\(\epsilon\)</span> مصطلحًا عشوائيًا موزعًا وفقًا لتوزيع غاوسي بمتوسط 0 وانحراف معياري <span class="math notranslate nohighlight">\(\Psi\)</span> (أي <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal{N}(0, \Psi)\)</span>)، و:math:<code class="docutils literal notranslate"><span class="pre">mu</span></code> هو متجه إزاحة عشوائي. ويُطلق على هذا النموذج اسم “التوليدي” لأنه يصف كيفية توليد <span class="math notranslate nohighlight">\(x_i\)</span> من <span class="math notranslate nohighlight">\(h_i\)</span>. وإذا استخدمنا جميع <span class="math notranslate nohighlight">\(x_i\)</span>’s كأعمدة لتشكيل مصفوفة <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> وجميع <span class="math notranslate nohighlight">\(h_i\)</span>’s كأعمدة لمصفوفة <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>، فيمكننا أن نكتب (مع تعريف <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> و:math:<code class="docutils literal notranslate"><span class="pre">mathbf{E}</span></code> بشكل مناسب):</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{X} = W \mathbf{H} + \mathbf{M} + \mathbf{E}\]</div>
+<p>بعبارة أخرى، فقد <em>فَكَكنا</em> المصفوفة <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
+<p>إذا كانت <span class="math notranslate nohighlight">\(h_i\)</span> مُعطاة، فإن المعادلة السابقة تعني ضمنيًا التفسير الاحتمالي التالي:</p>
+<div class="math notranslate nohighlight">
+\[p(x_i|h_i) = \mathcal{N}(Wh_i + \mu, \Psi)\]</div>
+<p>وللحصول على نموذج احتمالي كامل، نحتاج أيضًا إلى توزيع سابق للمتغير الكامن <span class="math notranslate nohighlight">\(h\)</span>. وافتراض الأكثر مباشرة (بناءً على الخصائص الجيدة لتوزيع غاوسي) هو <span class="math notranslate nohighlight">\(h \sim \mathcal{N}(0, \mathbf{I})\)</span>. وينتج عن هذا توزيع غاوسي كاحتمال هامشي لـ <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[p(x) = \mathcal{N}(\mu, WW^T + \Psi)\]</div>
+<p>والآن، بدون أي افتراضات إضافية، ستكون فكرة وجود متغير كامن <span class="math notranslate nohighlight">\(h\)</span> غير ضرورية - يمكن نمذجة <span class="math notranslate nohighlight">\(x\)</span> بالكامل باستخدام المتوسط والانحراف المعياري. نحتاج إلى فرض بعض الهياكل الأكثر تحديدًا على أحد هذين المعلمين. ويتمثل أحد الافتراضات الإضافية البسيطة في هيكل مصفوفة الانحراف المعياري للعشوائية <span class="math notranslate nohighlight">\(\Psi\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Psi = \sigma^2 \mathbf{I}\)</span>: يؤدي هذا الافتراض إلى
+نموذج احتمالي لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Psi = \mathrm{diag}(\psi_1, \psi_2, \dots, \psi_n)\)</span>: يُطلق على هذا النموذج اسم
+<code class="xref py py-class docutils literal notranslate"><span class="pre">التحليل</span> <span class="pre">العاملي</span></code>، وهو نموذج إحصائي كلاسيكي. وتُسمى المصفوفة W أحيانًا “مصفوفة التحميل العاملي”.</p></li>
+</ul>
+<p>ويُقدر كلا النموذجين بشكل أساسي توزيع غاوسي بانحراف معياري منخفض الترتيب.
+وبما أن كلا النموذجين هما نموذجان احتماليان، فيمكن دمجهما في نماذج أكثر تعقيدًا، على سبيل المثال، مزيج من محللات العوامل. وسينتج عن ذلك نماذج مختلفة جدًا (على سبيل المثال، <code class="xref py py-class docutils literal notranslate"><span class="pre">FastICA</span></code>) إذا افترضنا توزيعات غير غاوسية للمتغيرات الكامنة.</p>
+<p>يمكن أن ينتج التحليل العاملي مكونات مُشابهة (أعمدة مصفوفة التحميل الخاصة به) لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code>. ومع ذلك، لا يمكن إجراء أي تصريحات عامة حول هذه المكونات (على سبيل المثال، ما إذا كانت متعامدة):</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="pca_img3" src="../_images/sphx_glr_plot_faces_decomposition_002.png" style="width: 360.0px; height: 275.4px;" /></a> <a class="reference external" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="fa_img3" src="../_images/sphx_glr_plot_faces_decomposition_008.png" style="width: 360.0px; height: 275.4px;" /></a></strong></p><p>وتتمثل الميزة الرئيسية للتحليل العاملي على <code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code> في أنه يمكنه نمذجة التباين في كل اتجاه من اتجاهات فضاء الإدخال بشكل مستقل
+(الضوضاء غير المتسقة):</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_faces_decomposition.html"><img alt="../_images/sphx_glr_plot_faces_decomposition_009.png" src="../_images/sphx_glr_plot_faces_decomposition_009.png" style="width: 240.0px; height: 270.0px;" />
+</a>
+</figure>
+<p>ويسمح ذلك بتحسين اختيار النموذج عن <code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code> الاحتمالي في وجود ضوضاء غير متسقة:</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html"><img alt="../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png" src="../_images/sphx_glr_plot_pca_vs_fa_model_selection_002.png" style="width: 480.0px; height: 360.0px;" />
+</a>
+</figure>
+<p>وعادة ما يتبع التحليل العاملي عملية تدوير للعوامل (باستخدام معامل <code class="docutils literal notranslate"><span class="pre">rotation</span></code>)، وعادة ما يكون ذلك لتحسين قابلية التفسير. على سبيل المثال، تُعظم عملية التدوير Varimax مجموع انحرافات التقديرات التربيعية، أي أنها تميل إلى إنتاج عوامل أكثر ندرة، والتي تتأثر بعدد قليل من الميزات في كل مرة (الهيكل البسيط). راجع على سبيل المثال، المثال الأول أدناه.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/decomposition/plot_varimax_fa.html#sphx-glr-auto-examples-decomposition-plot-varimax-fa-py"><span class="std std-ref">Factor Analysis (with rotation) to visualize patterns</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/decomposition/plot_pca_vs_fa_model_selection.html#sphx-glr-auto-examples-decomposition-plot-pca-vs-fa-model-selection-py"><span class="std std-ref">Model selection with Probabilistic PCA and Factor Analysis (FA)</span></a></p></li>
+</ul>
+<p id="ica">التحليل التمييزي للمكونات المستقلة (ICA)
+التحليل المكون المستقل يفصل إشارة متعددة المتغيرات إلى مكونات فرعية إضافية مستقلة بحد أقصى. يتم تنفيذه في scikit-learn باستخدام خوارزمية Fast ICA. عادةً ما لا يتم استخدام ICA لخفض الأبعاد ولكن لفصل الإشارات المتداخلة. نظرًا لأن نموذج ICA لا يتضمن مصطلح ضوضاء، يجب تطبيق التبييض ليكون النموذج صحيحًا. يمكن القيام بذلك داخليًا باستخدام حجة التبييض أو يدويًا باستخدام أحد متغيرات PCA.</p>
+<p>يتم استخدامه بشكل كلاسيكي لفصل الإشارات المختلطة (وهي مشكلة تُعرف باسم الفصل الأعمى للمصدر)، كما هو موضح في المثال أدناه:</p>
+<p>يستخدم ICA أيضًا كطريقة أخرى للتحليل غير الخطي الذي يجد المكونات مع بعض الندرة:</p>
+<p><a href="#id14"><span class="problematic" id="id15">|pca_img4|</span></a> <a href="#id16"><span class="problematic" id="id17">|ica_img4|</span></a></p>
+<p>أمثلة:</p>
+<ul class="simple">
+<li><p>sphx_glr_auto_examples_decomposition_plot_ica_blind_source_separation.py</p></li>
+<li><p>sphx_glr_auto_examples_decomposition_plot_ica_vs_pca.py</p></li>
+<li><p>sphx_glr_auto_examples_decomposition_plot_faces_decomposition.py</p></li>
+</ul>
+<p>التحليل العاملي للصفوف غير السالبة (NMF أو NNMF)</p>
+<p>NMF مع معيار فروبنيويس</p>
+<p>NMF [1] _ هو نهج بديل للتحليل يفترض أن البيانات والمكونات غير سالبة. يمكن استخدام NMF بدلاً من PCA أو متغيراته، في الحالات التي لا تحتوي فيها مصفوفة البيانات على قيم سلبية. فهو يجد تحليلًا للعينات X إلى مصفوفتين W و H من العناصر غير السالبة، عن طريق تحسين المسافة d بين X ومُنتج المصفوفة WH. دالة المسافة الأكثر استخدامًا على نطاق واسع هي معيار Frobenius المربع، والذي يعد امتدادًا واضحًا للمعيار الإقليدي للمصفوفات:</p>
+<p>على عكس PCA، يتم الحصول على تمثيل المتجه بطريقة إضافية، عن طريق تراكب المكونات، دون طرح. تعد هذه النماذج الإضافية فعالة لتمثيل الصور والنص.</p>
+<p>وقد لوحظ في [Hoyer، 2004] [2] _ أنه عندما يتم تقييد NMF بعناية، يمكنه إنتاج تمثيل قائم على الأجزاء لمجموعة البيانات، مما يؤدي إلى نماذج يمكن تفسيرها. يعرض المثال التالي 16 مكونًا متفرقًا تم العثور عليه بواسطة NMF من الصور في مجموعة بيانات وجوه Olivetti، مقارنة بـ eigenfaces PCA.</p>
+<p><a href="#id18"><span class="problematic" id="id19">|pca_img5|</span></a> <a href="#id20"><span class="problematic" id="id21">|nmf_img5|</span></a></p>
+<p>تحدد صفة init طريقة التهيئة المطبقة، والتي يكون لها تأثير كبير على أداء الطريقة. ينفذ NMF طريقة التحلل القيمي المزدوج غير السلبي. تستند NNDSVD [4] _ إلى عمليتي SVD، واحدة تقريب مصفوفة البيانات، والأخرى تقريب الأقسام الإيجابية لعوامل SVD الجزئية الناتجة باستخدام خاصية جبرية لمصفوفات الرتبة الوحيدة. خوارزمية NNDSVD الأساسية مناسبة بشكل أفضل للتحليل المتقطع. يوصى باستخدام متغيراتهما NNDSVDa (حيث يتم تعيين جميع الأصفار إلى متوسط جميع عناصر البيانات)، وNNDSVDar (حيث يتم تعيين الأصفار إلى اضطرابات عشوائية أقل من متوسط البيانات مقسومًا على 100) في الحالة الكثيفة.</p>
+<p>لاحظ أن محدد التحديث المضاعف (“mu”) لا يمكنه تحديث الأصفار الموجودة في التهيئة، لذا فإنه يؤدي إلى نتائج أسوأ عند استخدامه بشكل مشترك مع خوارزمية NNDSVD الأساسية التي تقدم الكثير من الأصفار؛ في هذه الحالة، يجب تفضيل NNDSVDa أو NNDSVDar.</p>
+<p>يمكن أيضًا تهيئة NMF بمصفوفات عشوائية غير سالبة ذات مقياس صحيح عن طريق تعيين “init =” random “”. يمكن أيضًا تمرير بذرة صحيحة أو “RandomState” إلى “random_state” للتحكم في إمكانية إعادة الإنتاج.</p>
+<p>في NMF، يمكن إضافة L1 وL2 إلى دالة الخسارة من أجل تنظيم النموذج. يستخدم L2 معيار Frobenius، بينما يستخدم L1 معيار L1 عنصرًا. كما هو الحال في sklearn.linear_model.ElasticNet، فإننا نتحكم في مزيج L1 وL2 باستخدام معلمة l1_ratio (:math: rho)، وشدة التنظيم مع معلمات alpha_W وalpha_H (:math: alpha_W و: math: alpha_H). يتم ضبط المقاييس المسبقة بواسطة عدد العينات (:math: n_samples) لـ H وعدد الميزات (:math: n_features) لـ W للحفاظ على توازن تأثيرها مع بعضها البعض ومع مصطلح ملاءمة البيانات قدر الإمكان من حجم مجموعة التدريب. ثم تكون مصطلحات المقاييس المسبقة هي:</p>
+<p>والدالة الهدف المنتظمة هي:</p>
+<p>NMF مع انحراف بيتا</p>
+<p>كما هو موضح سابقًا، فإن دالة المسافة الأكثر استخدامًا على نطاق واسع هي معيار Frobenius المربع، والذي يعد امتدادًا واضحًا للمعيار الإقليدي للمصفوفات:</p>
+<p>يمكن استخدام دالات مسافة أخرى في NMF، على سبيل المثال، انحراف (تعميم) كولباك-لايبلر (KL)، والذي يُشار إليه أيضًا باسم I-divergence:</p>
+<p>أو انحراف إيتاكورا-سايتو (IS):</p>
+<p>هذه المسافات الثلاثة هي حالات خاصة لعائلة انحراف بيتا، مع: math: beta = 2، 1، 0 على التوالي [6] _. يتم تعريف انحرافات بيتا بواسطة:</p>
+<p>محللو NMF المنفذون:</p>
+<p>ينفذ NMF محددين، باستخدام الانحدار المتدرج (“cd”) [5] _، والتحديث المضاعف (“mu”) [6] _. يمكن لمحسن “mu” تحسين أي انحراف بيتا، بما في ذلك بالطبع معيار Frobenius (:math: beta = 2)، وانحراف كولباك-لايبلر (:math: beta = 1) وانحراف إيتاكورا-سايتو (:math: beta = 0). لاحظ أنه بالنسبة لـ: math: beta in (1؛ 2)، يكون محسن “mu” أسرع بكثير من القيم الأخرى لـ: math: beta. لاحظ أيضًا أنه باستخدام قيمة سالبة (أو 0، أي “itakura-saito”) لـ: math: beta، لا يمكن أن تحتوي مصفوفة الإدخال على قيم صفرية.</p>
+<p>يمكن لمحسن “cd” تحسين معيار Frobenius فقط. نظرًا لعدم التحدب الأساسي لـ NMF، قد تتقارب المحاليل المختلفة إلى حد أدنى مختلف، حتى عند تحسين دالة المسافة نفسها.</p>
+<p>من الأفضل استخدام NMF مع طريقة “fit_transform”، والتي تعيد مصفوفة W. يتم تخزين المصفوفة H في النموذج المناسب في صفة “<a href="#id34"><span class="problematic" id="id35">components_</span></a>”؛ ستعمل طريقة “transform” على تحليل مصفوفة X_new جديدة بناءً على هذه المكونات المخزنة:</p>
+<p>أمثلة:</p>
+<ul class="simple">
+<li><p>sphx_glr_auto_examples_decomposition_plot_faces_decomposition.py</p></li>
+<li><p>sphx_glr_auto_examples_applications_plot_topics_extraction_with_nmf_lda.py</p></li>
+</ul>
+<p>التحليل العاملي للصفوف غير السالبة الدُفعي الصغير</p>
+<p>ينفذ MiniBatchNMF [7] _ إصدارًا أسرع، ولكنه أقل دقة من التحليل العاملي للصفوف غير السالبة (أي sklearn.decomposition.NMF)، وهو أكثر ملاءمة لمجموعات البيانات الكبيرة.</p>
+<p>يقسم MiniBatchNMF بشكل افتراضي البيانات إلى دفعات صغيرة ويحسن نموذج NMF بطريقة عبر الإنترنت عن طريق الدوران فوق الدفعات الصغيرة للعدد المحدد من التكرارات. تتحكم معلمة “batch_size” في حجم الدفعات.</p>
+<p>للتسريع من خوارزمية الدفعات الصغيرة، من الممكن أيضًا قياس الدفعات السابقة، مما يمنحها أهمية أقل من الدفعات الأحدث. يتم ذلك بتقديم ما يسمى بمعامل النسيان الذي يتحكم فيه معلمة “forget_factor”.</p>
+<p>ينفذ المحلل أيضًا “partial_fit”، والذي يقوم بتحديث “H” عن طريق التكرار مرة واحدة فقط عبر دفعة صغيرة. يمكن استخدام هذا للتعلم عبر الإنترنت عندما لا تكون البيانات متاحة بسهولة من البداية، أو عندما لا تتسع البيانات في الذاكرة.</p>
+<p>المراجع:</p>
+<ul class="simple">
+<li><p>“تعلم أجزاء الكائنات بواسطة التحليل العاملي للصفوف غير السالبة” D. Lee، S. Seung، 1999</p></li>
+<li><p>“التحليل العاملي للصفوف غير السالبة مع قيود الندرة” P. Hoyer، 2004</p></li>
+<li><p>“التحلل القيمي الفردي القائم على التهيئة: بداية جيدة للتحليل العاملي للصفوف غير السالبة” C. Boutsidis، E. Gallopoulos، 2008</p></li>
+<li><p>“خوارزميات محلية سريعة للتحليل العاملي للصفوف غير السالبة والمتوترة غير السالبة.” A. Cichocki، A. Phan، 2009</p></li>
+<li><p>“خوارزميات للتحليل العاملي للصفوف غير السالبة مع انحراف بيتا” C. Fevotte، J. Idier، 2011</p></li>
+<li><p>“خوارزميات عبر الإنترنت للتحليل العاملي للصفوف غير السالبة مع انحراف إيتاكورا-سايتو” A. Lefevre، F. Bach، C. Fevotte، 2011</p></li>
+</ul>
+<p>تخصيص ديرييشليت (LDA)
+تخصيص ديريتشلي الكامن هو نموذج احتمالي تنموي لمجموعات من مجموعات البيانات المنفصلة مثل مجموعات النصوص. وهو أيضًا نموذج مواضيعي يستخدم لاستكشاف المواضيع المجردة من مجموعة من الوثائق.</p>
+<p>نموذج LDA البياني هو نموذج تنبئي ثلاثي المستويات:</p>
+<img alt="../_images/lda_model_graph.png" class="align-center" src="../_images/lda_model_graph.png" />
+<p>ملاحظة حول الرموز المقدمة في النموذج البياني أعلاه، والتي يمكن العثور عليها في Hoffman et al. (2013):</p>
+<ul class="simple">
+<li><p>المجموعة هي مجموعة من <span class="math notranslate nohighlight">\(D\)</span> الوثائق.</p></li>
+<li><p>الوثيقة هي تسلسل من <span class="math notranslate nohighlight">\(N\)</span> الكلمات.</p></li>
+<li><p>هناك <span class="math notranslate nohighlight">\(K\)</span> مواضيع في المجموعة.</p></li>
+<li><p>تمثل الصناديق تكرار أخذ العينات.</p></li>
+</ul>
+<p>في النموذج البياني، كل عقدة هي متغير عشوائي ولها دور في العملية التنموية. تشير العقدة المظللة إلى متغير مرصود، في حين تشير العقدة غير المظللة إلى متغير مخفي (كامن). في هذه الحالة، الكلمات في المجموعة هي البيانات الوحيدة التي نرصدها. تحدد المتغيرات الكامنة المزيج العشوائي للمواضيع في المجموعة وتوزيع الكلمات في الوثائق.
+هدف LDA هو استخدام الكلمات المرصودة لاستنتاج بنية الموضوع المخفية.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="تفاصيل-حول-نمذجة-مجموعات-النصوص">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">تفاصيل حول نمذجة مجموعات النصوص<a class="headerlink" href="#تفاصيل-حول-نمذجة-مجموعات-النصوص" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">عند نمذجة مجموعات النصوص، يفترض النموذج العملية التنموية التالية
+لمجموعة بها <span class="math notranslate nohighlight">\(D\)</span> الوثائق و <span class="math notranslate nohighlight">\(K\)</span> المواضيع، مع <span class="math notranslate nohighlight">\(K\)</span>
+المقابلة لـ <code class="docutils literal notranslate"><span class="pre">n_components</span></code> في واجهة برمجة التطبيقات:</p>
+<ol class="arabic">
+<li><p class="sd-card-text">لكل موضوع <span class="math notranslate nohighlight">\(k \in K\)</span>، ارسم <span class="math notranslate nohighlight">\(\beta_k \sim
+\mathrm{Dirichlet}(\eta)\)</span>. يوفر هذا توزيعًا للكلمات،
+أي احتمال ظهور كلمة في الموضوع <span class="math notranslate nohighlight">\(k\)</span>.
+<span class="math notranslate nohighlight">\(\eta\)</span> يقابل <code class="docutils literal notranslate"><span class="pre">topic_word_prior</span></code>.</p></li>
+<li><p class="sd-card-text">لكل وثيقة <span class="math notranslate nohighlight">\(d \in D\)</span>، ارسم نسب الموضوعات
+<span class="math notranslate nohighlight">\(\theta_d \sim \mathrm{Dirichlet}(\alpha)\)</span>. <span class="math notranslate nohighlight">\(\alpha\)</span>
+يقابل <code class="docutils literal notranslate"><span class="pre">doc_topic_prior</span></code>.</p></li>
+<li><p class="sd-card-text">لكل كلمة <span class="math notranslate nohighlight">\(i\)</span> في الوثيقة <span class="math notranslate nohighlight">\(d\)</span>:</p>
+<dl class="simple">
+<dt>أ. ارسم تعيين الموضوع :math:<a href="#id8"><span class="problematic" id="id9">`</span></a>z_{di} sim mathrm{Multinomial}</dt><dd><p class="sd-card-text">(theta_d)`</p>
+</dd>
+<dt>ب. ارسم الكلمة المرصودة :math:<a href="#id10"><span class="problematic" id="id11">`</span></a>w_{ij} sim mathrm{Multinomial}</dt><dd><p class="sd-card-text">(beta_{z_{di}})`</p>
+</dd>
+</dl>
+</li>
+</ol>
+<p class="sd-card-text">بالنسبة لتقدير المعلمات، يكون التوزيع الاحتمالي اللاحق هو:</p>
+<div class="math notranslate nohighlight">
+\[p(z, \theta, \beta |w, \alpha, \eta) =
+\frac{p(z, \theta, \beta|\alpha, \eta)}{p(w|\alpha, \eta)}\]</div>
+<p class="sd-card-text">نظرًا لأن التوزيع اللاحق غير قابل للتعامل معه، يستخدم الأسلوب الخلوي البايزي توزيعًا أبسط <span class="math notranslate nohighlight">\(q(z,\theta,\beta | \lambda, \phi، \gamma)\)</span>
+لتقريبه، ويتم تحسين معلمات التباين هذه <span class="math notranslate nohighlight">\(\lambda\)</span>،
+<span class="math notranslate nohighlight">\(\phi\)</span>، <span class="math notranslate nohighlight">\(\gamma\)</span> لتعظيم حد الأدلة السفلي (ELBO):</p>
+<div class="math notranslate nohighlight">
+\[\log\: P(w | \alpha, \eta) \geq L(w,\phi,\gamma,\lambda) \overset{\triangle}{=}
+E_{q}[\log\:p(w,z,\theta,\beta|\alpha,\eta)] - E_{q}[\log\:q(z, \theta, \beta)]\]</div>
+<p class="sd-card-text">تعظيم ELBO يعادل تقليل التباعد Kullback-Leibler (KL)
+بين <span class="math notranslate nohighlight">\(q(z,\theta,\beta)\)</span> والتوزيع اللاحق الحقيقي
+<span class="math notranslate nohighlight">\(p(z, \theta, \beta |w, \alpha, \eta)\)</span>.</p>
+</div>
+</details><p><code class="xref py py-class docutils literal notranslate"><span class="pre">LatentDirichletAllocation</span></code> ينفذ خوارزمية بايز المتغيرة عبر الإنترنت
+تدعم كل من أساليب التحديث عبر الإنترنت والدفعات.
+في حين أن طريقة الدفعة تحدّث المتغيرات المتغيرة بعد كل مرور كامل بالبيانات،
+تقوم الطريقة عبر الإنترنت بتحديث المتغيرات المتغيرة من نقاط بيانات الدفعات الصغيرة.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>على الرغم من أن الطريقة عبر الإنترنت تضمن التقارب إلى نقطة مثالية محلية، إلا أن جودة
+نقطة المثالية وسرعة التقارب قد تعتمد على حجم الدفعة الصغيرة والسمات المتعلقة بإعداد معدل التعلم.</p>
+</div>
+<p>عندما يتم تطبيق <code class="xref py py-class docutils literal notranslate"><span class="pre">LatentDirichletAllocation</span></code> على مصفوفة “مصطلح المستند”، يتم تحليل المصفوفة
+إلى مصفوفة “مصطلح الموضوع” ومصفوفة “موضوع المستند”. في حين
+يتم تخزين مصفوفة “مصطلح الموضوع” على أنها <code class="docutils literal notranslate"><span class="pre">components_</span></code> في النموذج، يمكن حساب مصفوفة “موضوع المستند”
+من طريقة <code class="docutils literal notranslate"><span class="pre">transform</span></code>.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">LatentDirichletAllocation</span></code> ينفذ أيضًا طريقة <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code>. يتم استخدام هذا عندما يمكن جلب البيانات بشكل تسلسلي.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/applications/plot_topics_extraction_with_nmf_lda.html#sphx-glr-auto-examples-applications-plot-topics-extraction-with-nmf-lda-py"><span class="std std-ref">Topic extraction with Non-negative Matrix Factorization and Latent Dirichlet Allocation</span></a></p></li>
+</ul>
+<p class="rubric">مراجع</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf">“Latent Dirichlet Allocation”</a>
+D. Blei, A. Ng, M. Jordan, 2003</p></li>
+<li><p><a class="reference external" href="https://papers.nips.cc/paper/3902-online-learning-for-latent-dirichlet-allocation.pdf">“Online Learning for Latent Dirichlet Allocation”</a>
+M. Hoffman, D. Blei, F. Bach, 2010</p></li>
+<li><p><a class="reference external" href="https://www.cs.columbia.edu/~blei/papers/HoffmanBleiWangPaisley2013.pdf">“Stochastic Variational Inference”</a>
+M. Hoffman, D. Blei, C. Wang, J. Paisley, 2013</p></li>
+<li><p><a class="reference external" href="https://link.springer.com/article/10.1007%2FBF02289233">“The varimax criterion for analytic rotation in factor analysis”</a>
+H. F. Kaiser, 1958</p></li>
+</ul>
+<p>انظر أيضًا <span class="xref std std-ref">nca_dim_reduction</span> لخفض الأبعاد مع
+تحليل مكونات الجوار.</p>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="biclustering.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="covariance.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.13. </span>التغاير التجريبي</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-svd">2.10.1. PCA باستخدام SVD العشوائي</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.10.2. مراجع</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-sparsepca-minibatchsparsepca">2.10.3. PCA غير المتناظرة (SparsePCA وMiniBatchSparsePCA)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-pca">2.10.4. خيار المحلل لـ Kernel PCA</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lsa">2.11. تحليل القيمة المفردة المبتورة وتحليل المعنى الكامن</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.11.1. تعلم القاموس العام</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minibatchdictionarylearning">2.11.2. تعلم القاموس بالدفعات الصغرى</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fa">2.12. التحليل العاملي</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/decomposition.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
