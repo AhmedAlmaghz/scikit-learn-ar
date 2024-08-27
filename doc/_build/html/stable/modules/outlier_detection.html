@@ -1,0 +1,1002 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="2.16. تناسب غلاف إهليلجي" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/outlier_detection.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="كشف النُقاط الشاذة والبيانات الجديدة تتطلب العديد من التطبيقات القدرة على تحديد ما إذا كان المُلاحظة الجديدة تنتمي إلى نفس التوزيع مثل الملاحظات الموجودة (فهي نُقطة داخلية)، أو يجب اعتبارها مختلفة ..." />
+<meta property="og:image" content="https://scikit-learn/stable/_images/sphx_glr_plot_lof_novelty_detection_001.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="كشف النُقاط الشاذة والبيانات الجديدة تتطلب العديد من التطبيقات القدرة على تحديد ما إذا كان المُلاحظة الجديدة تنتمي إلى نفس التوزيع مثل الملاحظات الموجودة (فهي نُقطة داخلية)، أو يجب اعتبارها مختلفة ..." />
+
+    <title>2.16. تناسب غلاف إهليلجي &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/outlier_detection';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.27. تقدير الكثافة" href="density.html" />
+    <link rel="prev" title="2.13. التغاير التجريبي" href="covariance.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../supervised_learning.html">1. التعلم الخَلفي</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../unsupervised_learning.html">2. التعلم غير الخاضع للإشراف</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mixture.html">2.1. نماذج المزيج الغاوسي</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="manifold.html">2.3. تعلم المنوال</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="clustering.html">2.9. التجميع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decomposition.html">2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="covariance.html">2.13. التغاير التجريبي</a></li>
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.16. تناسب غلاف إهليلجي</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="density.html">2.27. تقدير الكثافة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="neural_networks_unsupervised.html">2.30. نماذج الشبكات العصبية (غير الخاضعة للإشراف)</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../model_selection.html">3. اختيار النموذج وتقييمه</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation.html">3.1. التدقيق المتقاطع: تقييم أداء أداة التقدير</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="grid_search.html">3.4. البحث الشامل عن الشبكة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="classification_threshold.html">3.7. تعديل عتبة القرار للتنبؤ بالصنف</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="model_evaluation.html">3.9. مقاييس الأداء وتقييمها: تقييم جودة التنبؤات كميًا</a></li>
+<li class="toctree-l2"><a class="reference internal" href="learning_curve.html">3.10. منحنيات التحقق: رسم الدرجات لتقييم النماذج</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../inspection.html">4. التفتيش</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualizations.html">5. التمثيل المرئي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_transforms.html">6. تحويلات مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="compose.html">6.1. خطوط الأنابيب ومقدّرات المُركّبات</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="feature_extraction.html">6.4. استخراج الخصائص</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">6.7. معالجة البيانات الأولية</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="impute.html">6.12. إكمال القيم المفقودة</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="unsupervised_reduction.html">6.19. PCA: التحليل التكويني الرئيسي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="random_projection.html">6.22. الإسقاط العشوائي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_approximation.html">6.23. طريقة Nystroem لتقريب النواة</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">6.28. مقاييس الاقتران، الألفة والنواة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_targets.html">6.29. تحويل هدف التنبؤ (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../datasets.html">7. مرافق تحميل مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/toy_dataset.html">7.1. مجموعات البيانات التجريبية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/real_world.html">7.2. مجموعات البيانات من العالم الحقيقي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/sample_generators.html">7.3. المجموعات البيانات المولدة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/loading_other_datasets.html">7.4. أمثلة</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing.html">8. الحوسبة باستخدام scikit-learn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_persistence.html">9. نظرة عامة على سير العمل</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../common_pitfalls.html">14. المعالجة المسبقة غير المتسقة</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../dispatching.html">16. التشغيل التلقائي</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../machine_learning_map.html">17. اختيار المحلل المناسب</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentations.html">18. الموارد الخارجية، الفيديوهات، والمحاضرات</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">مرجع المستخدم</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../unsupervised_learning.html" class="nav-link"><span class="section-number">2. </span>التعلم غير الخاضع للإشراف</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>كشف النُقاط الشاذة والبيانات الجديدة</p>
+<p>تتطلب العديد من التطبيقات القدرة على تحديد ما إذا كان المُلاحظة الجديدة تنتمي إلى نفس التوزيع مثل الملاحظات الموجودة (فهي نُقطة داخلية)، أو يجب اعتبارها مختلفة (فهي نُقطة شاذة). غالبًا ما تُستخدم هذه القدرة لتنظيف مجموعات البيانات الحقيقية. يجب إجراء تمييزين مهمين:</p>
+<ul class="simple">
+<li><p>كشف النُقاط الشاذة: تحتوي بيانات التدريب على نُقاط شاذة يتم تعريفها على أنها مُلاحظات بعيدة عن الآخرين. لذلك، تحاول خوارزميات تقدير كشف النُقاط الشاذة أن تتناسب مع المناطق التي تكون فيها بيانات التدريب مُركَّزة بشكل أكبر، مع تجاهل المُلاحظات المنحرفة.</p></li>
+<li><p>كشف البيانات الجديدة: بيانات التدريب غير مُلوثة بالنُقاط الشاذة، ونحن مهتمون بالكشف عما إذا كانت المُلاحظة الجديدة نُقطة شاذة. في هذا السياق، يُطلق على النُقطة الشاذة أيضًا اسم البيانات الجديدة.</p></li>
+</ul>
+<p>يُستخدم كل من كشف النُقاط الشاذة وكشف البيانات الجديدة في كشف الانحرافات، حيث يكون الهدف هو اكتشاف الملاحظات غير الطبيعية أو غير المعتادة. بعد ذلك، يُعرف كشف النُقاط الشاذة أيضًا باسم كشف الانحرافات غير المُشرف، وكشف البيانات الجديدة باسم كشف الانحرافات شبه المُشرف. في سياق كشف النُقاط الشاذة، لا يُمكن أن تشكل النُقاط الشاذة/الانحرافات مجموعة مُتراصة، حيث تفترض الخوارزميات المُتاحة أن النُقاط الشاذة/الانحرافات تقع في مناطق ذات كثافة منخفضة. على العكس من ذلك، في سياق كشف البيانات الجديدة، يُمكن أن تشكل البيانات الجديدة/الانحرافات مجموعة مُتراصة طالما أنها تقع في منطقة ذات كثافة منخفضة من بيانات التدريب، والتي تُعتبر طبيعية في هذا السياق.</p>
+<p>يوفر مشروع scikit-learn مجموعة من أدوات التعلم الآلي التي يُمكن استخدامها لاكتشاف النُقاط الشاذة أو البيانات الجديدة. يتم تنفيذ هذه الاستراتيجية باستخدام كائنات تتعلم بطريقة غير مُشرفة من البيانات:</p>
+<p>estimator.fit(X_train)</p>
+<p>بعد ذلك، يُمكن تصنيف المُلاحظات الجديدة على أنها نُقاط داخلية أو نُقاط شاذة باستخدام طريقة “التوقع”:</p>
+<p>estimator.predict(X_test)</p>
+<p>يتم وضع علامة على النُقاط الداخلية بالرقم 1، في حين يتم وضع علامة على النُقاط الشاذة بالرقم -1. تستخدم طريقة “التوقع” عتبة لدالة التسجيل الخام التي يحسبها المُقدر. يُمكن الوصول إلى دالة التسجيل هذه من خلال طريقة “score_samples”، في حين يُمكن التحكم في العتبة بواسطة مُعامل “التلوث”.</p>
+<p>يتم أيضًا تحديد طريقة “decision_function” من دالة التسجيل، بحيث تكون القيم السالبة نُقاطًا شاذة والقيم غير السالبة نُقاطًا داخلية:</p>
+<p>estimator.decision_function(X_test)</p>
+<p>ملاحظة: لا يدعم neighbors.LocalOutlierFactor بشكل افتراضي طرق “التوقع” و”decision_function” و”score_samples”، ولكنه يدعم فقط طريقة “fit_predict”، حيث كان المقصود في الأصل أن يتم تطبيق هذا المُقدر لاكتشاف النُقاط الشاذة. يُمكن الوصول إلى درجات الشذوذ لعينات التدريب من خلال الخاصية “negative_outlier_factor”.</p>
+<p>إذا كنت ترغب حقًا في استخدام neighbors.LocalOutlierFactor لاكتشاف البيانات الجديدة، أي التنبؤ بالتصنيفات أو حساب درجة الشذوذ لبيانات جديدة غير مرئية، فيُمكنك إنشاء مثيل للمُقدر مع تعيين مُعامل “البيانات الجديدة” إلى “True” قبل ضبط المُقدر. في هذه الحالة، لا تتوفر طريقة “fit_predict”.</p>
+<p>تحذير: كشف البيانات الجديدة باستخدام Local Outlier Factor</p>
+<p>عند تعيين مُعامل “البيانات الجديدة” إلى “True”، يجب الانتباه إلى أنه يجب استخدام طرق “التوقع” و”decision_function” و”score_samples” فقط على بيانات جديدة غير مرئية، وليس على عينات التدريب، حيث قد يؤدي ذلك إلى نتائج خاطئة. أي أن نتيجة طريقة “التوقع” لن تكون مُطابقة لنتيجة طريقة “fit_predict”. يُمكن دائمًا الوصول إلى درجات الشذوذ لعينات التدريب من خلال الخاصية “negative_outlier_factor”.</p>
+<p>يتم تلخيص سلوك neighbors.LocalOutlierFactor في الجدول التالي:</p>
+<div class="line-block">
+<div class="line">الأسلوب | كشف النُقاط الشاذة | كشف البيانات الجديدة |</div>
+<div class="line">——– | ——————- | ——————– |</div>
+<div class="line">fit_predict | متاح | غير متاح |</div>
+<div class="line">predict | غير متاح | استخدم فقط على بيانات جديدة |</div>
+<div class="line">decision_function | غير متاح | استخدم فقط على بيانات جديدة |</div>
+<div class="line">score_samples | استخدم negative_outlier_factor | استخدم فقط على بيانات جديدة |</div>
+<div class="line">negative_outlier_factor | متاح | متاح |</div>
+</div>
+<p>نظرة عامة على طرق كشف النُقاط الشاذة</p>
+<p>مقارنة بين خوارزميات كشف النُقاط الشاذة في scikit-learn. لا يُظهر Local Outlier Factor (LOF) حدًا فاصلاً باللون الأسود حيث لا توجد لديه طريقة “توقع” لتطبيقها على بيانات جديدة عند استخدامها لاكتشاف النُقاط الشاذة.</p>
+<p>يؤدي كل من ensemble.IsolationForest وneighbors.LocalOutlierFactor أداءً جيدًا بشكل معقول على مجموعات البيانات المُستخدمة هنا. من المعروف أن svm.OneClassSVM حساس للنُقاط الشاذة، وبالتالي لا يؤدي أداءً جيدًا جدًا لاكتشاف النُقاط الشاذة. ومع ذلك، فإن كشف النُقاط الشاذة في الأبعاد العالية، أو بدون أي افتراضات حول توزيع بيانات النُقاط الداخلية، يُمثل تحديًا صعبًا. لا يزال يُمكن استخدام svm.OneClassSVM مع كشف النُقاط الشاذة، ولكنه يتطلب ضبط دقيق لمعامله “nu” للتعامل مع النُقاط الشاذة ومنع الإفراط في التلائم. يوفر linear_model.SGDOneClassSVM تنفيذًا لخوارزمية One-Class SVM الخطية ذات التعقيد الخطي في عدد العينات. يتم استخدام هذا التنفيذ هنا مع تقنية تقريب النواة للحصول على نتائج مُشابهة لنتائج svm.OneClassSVM الذي يستخدم نواة غاوسية بشكل افتراضي. وأخيرًا، يفترض covariance.EllipticEnvelope أن البيانات تتبع توزيع غاوسي ويتعلم شكل إهليلجي. لمزيد من التفاصيل حول المُقدرات المُختلفة، يُرجى الرجوع إلى المثال sphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py والأقسام أدناه.</p>
+<p>أمثلة</p>
+<ul class="simple">
+<li><p>يُرجى الرجوع إلى sphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py لمُقارنة بين svm.OneClassSVM وensemble.IsolationForest وneighbors.LocalOutlierFactor وcovariance.EllipticEnvelope.</p></li>
+<li><p>يُرجى الرجوع إلى sphx_glr_auto_examples_miscellaneous_plot_outlier_detection_bench.py لمثال يوضح كيفية تقييم خوارزميات كشف النُقاط الشاذة، باستخدام منحنيات ROC من metrics.RocCurveDisplay.</p></li>
+</ul>
+<p>كشف البيانات الجديدة</p>
+<p>لنأخذ مجموعة بيانات تتكون من n مُلاحظة من نفس التوزيع الذي يصفه p من الخصائص. دعونا الآن نضيف مُلاحظة واحدة أخرى إلى مجموعة البيانات هذه. هل المُلاحظة الجديدة مُختلفة جدًا عن الآخرين بحيث يُمكننا الشك في كونها مُنحرفة؟ (أي هل تأتي من نفس التوزيع؟) أو على العكس من ذلك، هل هي مُشابهة جدًا للآخرين بحيث لا يُمكن تمييزها عن المُلاحظات الأصلية؟ هذا هو السؤال الذي تتناوله أدوات وطرق كشف البيانات الجديدة.</p>
+<p>بشكل عام، يتعلق الأمر بتعلم حدود قريبة تقريبية تُحدد محيط توزيع المُلاحظات الأولية، المُخططة في مساحة تضم p بعدًا. بعد ذلك، إذا كانت المُلاحظات الإضافية تقع ضمن المنطقة الفرعية المُحددة بالحدود، فيُفترض أنها تأتي من نفس التوزيع مثل المُلاحظات الأولية. من ناحية أخرى، إذا كانت تقع خارج الحدود، فيُمكننا القول إنها غير طبيعية بمستوى ثقة مُعين.</p>
+<p>تم تقديم One-Class SVM من قبل شولكوف وآخرون. لهذا الغرض وتم تنفيذه في وحدة نمطية svm في كائن svm.OneClassSVM. يتطلب اختيار نواة ومُعامل قياسي لتحديد حد. عادة ما يتم اختيار نواة RBF على الرغم من عدم وجود صيغة أو خوارزمية دقيقة لتحديد مُعامل نطاقها. هذا هو الافتراضي في تنفيذ scikit-learn. يتوافق مُعامل “nu”، المعروف أيضًا باسم هامش One-Class SVM، مع احتمال العثور على مُلاحظة جديدة ولكنها طبيعية، خارج الحدود.</p>
+<p>مراجع</p>
+<ul class="simple">
+<li><p>تقدير دعم توزيع الأبعاد العالية، شولكوف، برنارد، وآخرون. الحساب العصبي 13.7 (2001): 1443-1471.</p></li>
+</ul>
+<p>أمثلة</p>
+<ul class="simple">
+<li><p>يُرجى الرجوع إلى sphx_glr_auto_examples_svm_plot_oneclass.py لتصور الحدود المُتعلمة حول بعض البيانات بواسطة كائن svm.OneClassSVM.</p></li>
+<li><p>sphx_glr_auto_examples_applications_plot_species_distribution_modeling.py</p></li>
+</ul>
+<p>تحجيم One-Class SVM</p>
+<p>تم تنفيذ إصدار One-Class SVM الخطي عبر الإنترنت في linear_model.SGDOneClassSVM. ينمو هذا التنفيذ بشكل خطي مع عدد العينات ويُمكن استخدامه مع تقريب النواة لتقريب حل One-Class SVM المُستخدم مع نواة، والذي يكون تعقيده في أفضل الأحوال تربيعيًا في عدد العينات. يُرجى الرجوع إلى القسم sgd_online_one_class_svm لمزيد من التفاصيل.</p>
+<p>أمثلة</p>
+<ul class="simple">
+<li><p>يُرجى الرجوع إلى sphx_glr_auto_examples_linear_model_plot_sgdocsvm_vs_ocsvm.py لتوضيح تقريب One-Class SVM المُستخدم مع النواة باستخدام linear_model.SGDOneClassSVM المُدمج مع تقريب النواة.</p></li>
+</ul>
+<p>كشف النُقاط الشاذة
+يكشف الشواذ  مشابه لكشف  في كون الهدف هو فصل نواة الملاحظات العادية عن بعض الملوثات، والتي تسمى <em>الشاذة</em>. ومع ذلك، في حالة كشف الشواذ، لا نملك مجموعة بيانات نظيفة تمثل مجموعة السكان من الملاحظات العادية التي يمكن استخدامها لتدريب أي أداة.</p>
+<section id="id1">
+<h1><span class="section-number">2.16. </span>تناسب غلاف إهليلجي<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>هناك طريقة شائعة لأداء كشف الشواذ وهي افتراض أن البيانات العادية تأتي من توزيع معروف (على سبيل المثال، البيانات موزعة بشكل غاوسي). من هذا الافتراض، نحاول عمومًا تحديد “شكل” البيانات، ويمكننا تحديد الملاحظات الشاذة على أنها ملاحظات تقف بعيدًا بما فيه الكفاية عن الشكل المناسب.</p>
+<p>يوفر scikit-learn كائنًا covariance.EllipticEnvelope الذي يناسب تقديرًا قويًا للتباين المشترك للبيانات، وبالتالي يناسب إهليلجًا لنقاط البيانات المركزية، متجاهلاً النقاط خارج الوضع المركزي.</p>
+<p>على سبيل المثال، بافتراض أن بيانات النقاط الداخلية موزعة بشكل غاوسي، فإنه سيقدر موقع النقاط الداخلية والتباين المشترك بطريقة قوية (أي بدون التأثر بالنقاط الشاذة). يتم استخدام مسافات ماهالانوبيس المستمدة من هذا التقدير لاستنباط مقياس للشذوذ. توضح هذه الاستراتيجية أدناه.</p>
+</section>
+<section id="id2">
+<h1><span class="section-number">2.17. </span>مثال<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>راجعsphx_glr_auto_examples_covariance_plot_mahalanobis_distances.py للحصول على توضيح للفرق بين استخدام تقدير قياسي (covariance.EmpiricalCovariance) أو تقدير قوي (covariance.MinCovDet) للموقع والتباين المشترك لتقييم درجة شذوذ الملاحظة.</p></li>
+<li><p>راجعsphx_glr_auto_examples_applications_plot_outlier_detection_wine.py للحصول على مثال على تقدير التباين المشترك القوي على مجموعة بيانات حقيقية.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h1><span class="section-number">2.18. </span>المراجع<a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>روسيو، ب. جي، فان دريسين، ك. “خوارزمية سريعة لمقدّر الحد الأدنى للتحديد المشترك” Technometrics 41(3)، 212 (1999)</p></li>
+</ul>
+</section>
+<section id="id4">
+<h1><span class="section-number">2.19. </span>غابة العزل<a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+<p>هناك طريقة فعالة لأداء كشف الشواذ في مجموعات البيانات عالية الأبعاد هي استخدام الغابات العشوائية.
+يعزل class=’ensemble.IsolationForest’ الملاحظات عن طريق اختيار ميزة بشكل عشوائي ثم اختيار قيمة تقسيم بشكل عشوائي بين الحد الأقصى والحد الأدنى لقيم الميزة المحددة.</p>
+<p>بما أن التقسيم المتكرر يمكن تمثيله بهيكل شجري، فإن عدد الانقسامات المطلوبة لعزل عينة يساوي طول المسار من العقدة الجذرية إلى العقدة النهائية.</p>
+<p>يمثل طول هذا المسار، بمتوسطه عبر غابة من الأشجار العشوائية مثل هذه، مقياسًا للطبيعية ودالة القرار الخاصة بنا.</p>
+<p>تنتج التقسيمات العشوائية مسارات أقصر بشكل ملحوظ للشذوذ.
+لذلك، عندما تنتج غابة من الأشجار العشوائية بشكل جماعي مسارات أقصر لمجموعات معينة من العينات، فمن المحتمل جدًا أن تكون هذه العينات شاذة.</p>
+<p>يستند تنفيذ class=’ensemble.IsolationForest’ إلى مجموعة من class=’tree.ExtraTreeRegressor’. وفقًا لورقة غابة العزل الأصلية، يتم تعيين العمق الأقصى لكل شجرة إلى math: lceil log_2(n) rceil حيث math: n هو عدد العينات المستخدمة لبناء الشجرة (راجع (ليو وآخرون، 2008) لمزيد من التفاصيل).</p>
+<p>توضح هذه الخوارزمية أدناه.</p>
+</section>
+<section id="id5">
+<h1><span class="section-number">2.20. </span>مثال<a class="headerlink" href="#id5" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>راجعsphx_glr_auto_examples_ensemble_plot_isolation_forest.py للحصول على توضيح لاستخدام IsolationForest.</p></li>
+<li><p>راجعsphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py لمقارنة class=’ensemble.IsolationForest’ مع class=’neighbors.LocalOutlierFactor’ و class=’svm.OneClassSVM’ (ضبطت لأداء مثل طريقة كشف الشواذ)، class=’linear_model.SGDOneClassSVM’، وكشف الشواذ القائم على التباين المشترك باستخدام class=’covariance.EllipticEnvelope’.</p></li>
+</ul>
+</section>
+<section id="id6">
+<h1><span class="section-number">2.21. </span>المراجع<a class="headerlink" href="#id6" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>ليو، في توني، تينغ، كاي مينغ، تشو، تشي هوا. “غابة العزل.”</p></li>
+</ul>
+<p>تعدين البيانات، 2008. ICDM’08. المؤتمر الدولي الثامن IEEE حول.</p>
+</section>
+<section id="id7">
+<h1><span class="section-number">2.22. </span>عامل الشذوذ المحلي<a class="headerlink" href="#id7" title="Link to this heading">#</a></h1>
+<p>هناك طريقة فعالة أخرى لأداء كشف الشواذ في مجموعات البيانات عالية الأبعاد بشكل معتدل هي استخدام خوارزمية عامل الشذوذ المحلي (LOF).</p>
+<p>يحسب class=’neighbors.LocalOutlierFactor’ (LOF) خوارزمية درجة (تسمى عامل الشذوذ المحلي) تعكس درجة شذوذ الملاحظات.
+إنه يقيس انحراف الكثافة المحلية لنقطة بيانات معينة فيما يتعلق بجيرانها. الفكرة هي اكتشاف العينات التي لها كثافة أقل بكثير من جيرانها.</p>
+<p>في الممارسة العملية، يتم الحصول على الكثافة المحلية من أقرب k جار.
+تساوي درجة LOF لملاحظة نسبة متوسط الكثافة المحلية لجيرانها k الأقرب وكثافتها المحلية: من المتوقع أن يكون للملاحظة العادية كثافة محلية مشابهة لتلك الخاصة بجيرانها، في حين أن البيانات الشاذة من المتوقع أن يكون لها كثافة محلية أقل بكثير.</p>
+<p>يتم اختيار عدد الجيران k المعتبرين، (الاسم المستعار لمعلمة n_neighbors) عادةً 1) أكبر من الحد الأدنى لعدد الكائنات التي يجب أن تحتويها المجموعة، بحيث يمكن أن تكون الكائنات الأخرى شاذة محليًا بالنسبة لهذه المجموعة، و2) أصغر من الحد الأقصى لعدد الكائنات القريبة التي يمكن أن تكون شاذة محليًا.
+في الممارسة العملية، لا تتوفر مثل هذه المعلومات بشكل عام، ويبدو أن اختيار n_neighbors=20 يعمل بشكل جيد بشكل عام.
+عندما تكون نسبة الشواذ مرتفعة (أي أكثر من 10٪، كما في المثال أدناه)، يجب أن يكون n_neighbors أكبر (n_neighbors=35 في المثال أدناه).</p>
+<p>تكمن قوة خوارزمية LOF في أنها تأخذ في الاعتبار الخصائص المحلية والعالمية لمجموعات البيانات: فيمكنها الأداء بشكل جيد حتى في مجموعات البيانات التي يكون فيها للعينات الشاذة كثافات أساسية مختلفة.
+السؤال ليس هو مدى عزلة العينة، ولكن مدى عزلتها فيما يتعلق بالحي المحيط.</p>
+<p>عند تطبيق LOF للكشف عن الشواذ، لا توجد طرق “التنبؤ” و”دالة القرار” و”score_samples”، ولكن فقط طريقة “fit_predict”. يمكن الوصول إلى درجات الشذوذ لعينات التدريب من خلال سمة “<a href="#id12"><span class="problematic" id="id13">negative_outlier_factor_</span></a>”.
+لاحظ أنه يمكن استخدام “التنبؤ” و”دالة القرار” و”score_samples” على بيانات جديدة غير مرئية عند تطبيق LOF للكشف عن الأنماط، أي عندما يتم تعيين معلمة “novelty” إلى “True”، ولكن قد تختلف نتيجة “التنبؤ” عن نتيجة “fit_predict”. راجع :ref: novelty_with_lof.</p>
+<p>توضح هذه الاستراتيجية أدناه.</p>
+</section>
+<section id="id8">
+<h1><span class="section-number">2.23. </span>مثال<a class="headerlink" href="#id8" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>راجعsphx_glr_auto_examples_neighbors_plot_lof_outlier_detection.py للحصول على توضيح لاستخدام class=’neighbors.LocalOutlierFactor’.</p></li>
+<li><p>راجعsphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py للحصول على مقارنة مع طرق اكتشاف الشذوذ الأخرى.</p></li>
+</ul>
+</section>
+<section id="id9">
+<h1><span class="section-number">2.24. </span>المراجع<a class="headerlink" href="#id9" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>بريونيج، كريجيل، نج، وساندر (2000)</p></li>
+</ul>
+</section>
+<section id="id10">
+<h1><span class="section-number">2.25. </span>كشف الأنماط باستخدام عامل الشذوذ المحلي<a class="headerlink" href="#id10" title="Link to this heading">#</a></h1>
+<p>لاستخدام class=’neighbors.LocalOutlierFactor’ للكشف عن الأنماط، أي التنبؤ بالعلامات أو حساب درجة شذوذ البيانات الجديدة غير المرئية، يجب عليك إنشاء مثيل للمقدّر بمعلمة “novelty”
+تعيين إلى “صحيح” قبل تناسب المقدّر:</p>
+</section>
+<section id="id11">
+<h1><span class="section-number">2.26. </span>تنبيه<a class="headerlink" href="#id11" title="Link to this heading">#</a></h1>
+<p>عند تعيين “novelty” إلى “صحيح”، كن على دراية بأنه يجب عليك فقط استخدام “التنبؤ” و”دالة القرار” و”score_samples” على بيانات جديدة غير مرئية وليس على عينات التدريب، حيث قد يؤدي ذلك إلى نتائج خاطئة.
+أي أن نتيجة “التنبؤ” لن تكون هي نفسها “fit_predict”. يمكن دائمًا الوصول إلى درجات الشذوذ لعينات التدريب من خلال سمة “<a href="#id14"><span class="problematic" id="id15">negative_outlier_factor_</span></a>”.</p>
+<p>يوضح الشكل أدناه كشف الأنماط باستخدام عامل الشذوذ المحلي.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/neighbors/plot_lof_novelty_detection.html"><img alt="../_images/sphx_glr_plot_lof_novelty_detection_001.png" src="../_images/sphx_glr_plot_lof_novelty_detection_001.png" style="width: 480.0px; height: 360.0px;" />
+</a>
+</figure>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="covariance.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.13. </span>التغاير التجريبي</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="density.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.27. </span>تقدير الكثافة</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2.16. تناسب غلاف إهليلجي</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.17. مثال</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.18. المراجع</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.19. غابة العزل</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.20. مثال</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.21. المراجع</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.22. عامل الشذوذ المحلي</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.23. مثال</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2.24. المراجع</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2.25. كشف الأنماط باستخدام عامل الشذوذ المحلي</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.26. تنبيه</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/outlier_detection.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
