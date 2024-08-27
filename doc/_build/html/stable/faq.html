@@ -1,0 +1,957 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="حول المشروع" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/faq.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="ما هو اسم المشروع (الكثيرون يخطئون في ذلك)؟: سكيت-ليرن، ولكن ليس سكيت أو ساي-كيت ولا ساي-كيت ليرن. كما لا يجب أن يُكتب على النحو التالي: سايكيتس.ليرن أو سايكيتس-ليرن، حيث كان يُستخدم هذان الاسمان ف..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="ما هو اسم المشروع (الكثيرون يخطئون في ذلك)؟: سكيت-ليرن، ولكن ليس سكيت أو ساي-كيت ولا ساي-كيت ليرن. كما لا يجب أن يُكتب على النحو التالي: سايكيتس.ليرن أو سايكيتس-ليرن، حيث كان يُستخدم هذان الاسمان ف..." />
+
+    <title>حول المشروع &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=97f0b27d"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'faq';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="الدعم" href="support.html" />
+    <link rel="prev" title="المفاهيم العامة:" href="glossary.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">حول المشروع</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <style>
+  /* تنسيق العناوين الفرعية h3 على هذه الصفحة بحيث تبدو مثل العناوين الفرعية */
+  h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    padding-bottom: 0.2rem;
+    margin: 2rem 0 1.15rem 0;
+    border-bottom: 1px solid var(--pst-color-border);
+  }
+
+  /* زيادة الهامش العلوي للسؤال الأول في كل قسم */
+  h2 + section > h3 {
+    margin-top: 2.5rem;
+  }
+
+  /* جعل الروابط في العناوين أكثر وضوحًا */
+  h3 > a.headerlink {
+    font-size: 0.9rem;
+  }
+
+  /* إزالة التزيين في الروابط العكسية في العناوين */
+  h2 > a.toc-backref,
+  h3 > a.toc-backref {
+    text-decoration: none;
+  }
+</style><section id="faq">
+<span id="id1"></span><h1>حول المشروع<a class="headerlink" href="#faq" title="Link to this heading">#</a></h1>
+<section id="id2">
+<h2>ما هو اسم المشروع (الكثيرون يخطئون في ذلك)؟<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>سكيت-ليرن، ولكن ليس سكيت أو ساي-كيت ولا ساي-كيت ليرن.
+كما لا يجب أن يُكتب على النحو التالي: سايكيتس.ليرن أو سايكيتس-ليرن، حيث كان يُستخدم هذان الاسمان في السابق.</p>
+</section>
+<section id="id3">
+<h2>كيف تنطق اسم المشروع؟<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>سي-كيت ليرن. ساي تشير إلى العلم!</p>
+</section>
+<section id="id4">
+<h2>لماذا سكيت؟<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>هناك العديد من المكتبات التي تعتمد على سايكيت، وهي عبارة عن صناديق أدوات علمية مبنية على مكتبة سايكوب.
+باستثناء سكيت-ليرن، هناك مكتبة أخرى شائعة وهي سكيت-إيماج.</p>
+</section>
+<section id="id5">
+<h2>هل تدعمون باي باي؟<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>نظرًا لمحدودية موارد المُصَان والمُطوّرين، وقلة عدد المستخدمين، فإن استخدام
+سكيت-ليرن مع باي باي (وهو تنفيذ بديل للغة بايثون مع مترجم مدمج في الوقت المناسب) غير مدعوم رسميًا.</p>
+</section>
+<section id="id6">
+<h2>كيف يمكنني الحصول على إذن لاستخدام الصور الموجودة في سكيت-ليرن في عملي؟<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>يمكن استخدام الصور الموجودة في مستودع سكيت-ليرن
+والصور المُنشأة داخل وثائق سكيت-ليرن
+بموجب ترخيص BSD المكون من 3 بنود
+لعملك. يُشجع بشدة على الاستشهاد بمكتبة سكيت-ليرن. راجع
+:ref: الاستشهاد بمكتبة سكيت-ليرن &lt;citing-scikit-learn&gt;.</p>
+</section>
+</section>
+<section id="id7">
+<h1>قرارات التنفيذ<a class="headerlink" href="#id7" title="Link to this heading">#</a></h1>
+<section id="id8">
+<h2>لماذا لا يوجد دعم للتعلم العميق أو التعلم التعزيزي؟ هل سيكون هناك دعم لمثل هذه الحالات في المستقبل؟<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+</section>
+<section id="id9">
+<h2>كيف يمكنني المساهمة في سكيت-ليرن؟<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>راجع القسم :ref: ‘contributing’ . قبل الرغبة في إضافة خوارزمية جديدة، والتي
+عادة ما تكون مهمة كبيرة وطويلة الأمد، يوصى بالبدء مع :ref: ‘known issues
+&lt;new_contributors&gt;’ . يرجى عدم الاتصال بمساهمي سكيت-ليرن مباشرة فيما يتعلق بالمساهمة في
+سكيت-ليرن.</p>
+</section>
+<section id="id10">
+<h2>لماذا لا يحصل طلب السحب الخاص بي على أي اهتمام؟<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<p>تستغرق عملية مراجعة سكيت-ليرن وقتًا طويلاً، ولا يجب أن يشعر المساهمون بالإحباط بسبب
+عدم وجود نشاط أو مراجعة لطلب السحب الخاص بهم. نهتم كثيرًا بالقيام بالأمور بشكل صحيح
+من المرة الأولى، حيث أن الصيانة والتغيير لاحقًا يأتيان بتكلفة عالية.
+نحن نادرًا ما نقوم بإصدار أي تعليمات برمجية “تجريبية”، لذلك ستكون جميع مساهماتنا
+خاضعة للاستخدام المكثف على الفور ويجب أن تكون ذات أعلى جودة ممكنة في البداية.</p>
+<p>وبعيداً عن ذلك، فإن سكيت-ليرن محدود في نطاق مراجعته؛ حيث يعمل العديد من المراجعين
+والمطورين الأساسيين على سكيت-ليرن في أوقات فراغهم. إذا جاءت مراجعة طلب السحب الخاص بك
+ببطء، فمن المحتمل أن يكون المراجعون مشغولين. نطلب تفهمك ونتمنى ألا تغلق طلب السحب
+الخاص بك أو توقف عملك لهذا السبب فقط.</p>
+</section>
+<section id="new-algorithms-inclusion-criteria">
+<span id="id11"></span><h2>ما هي معايير الإدراج للخوارزميات الجديدة؟<a class="headerlink" href="#new-algorithms-inclusion-criteria" title="Link to this heading">#</a></h2>
+<p>نحن لا نأخذ في الاعتبار سوى الخوارزميات الراسخة جيدًا لإدراجها. كقاعدة عامة، يجب أن
+يكون قد مر على نشرها 3 سنوات على الأقل، وأن يكون لها 200+ استشهاد، وأن تكون مستخدمة
+على نطاق واسع ومفيدة. كما سيتم النظر في التقنية التي توفر تحسنًا واضحًا (مثل هيكل
+بيانات محسّن أو تقنية تقريبية أكثر كفاءة) لطريقة مستخدمة على نطاق واسع لإدراجها.</p>
+<p>من بين الخوارزميات أو التقنيات التي تفي بالمعايير المذكورة أعلاه، لا يتم قبول سوى
+تلك التي تتوافق جيدًا مع واجهة برمجة التطبيقات الحالية لـسكيت-ليرن، أي واجهة “fit”،
+“predict/transform” وعادة ما يكون لها إدخال/إخراج مصفوفة نومبي أو مصفوفة متفرقة.</p>
+<p>يجب على المساهم دعم أهمية الإضافة المقترحة بأوراق بحثية و/أو تطبيقات في حزم أخرى
+مماثلة، وإظهار فائدتها من خلال حالات الاستخدام/التطبيقات الشائعة وتأكيد تحسينات
+الأداء، إن وجدت، باستخدام معايير القياس و/أو الرسوم البيانية. من المتوقع أن تتفوق
+الخوارزمية المقترحة على الطرق التي تم تنفيذها بالفعل في سكيت-ليرن على الأقل في بعض
+المجالات.</p>
+<p>من الأسهل إدراج خوارزمية جديدة لتسريع نموذج موجود إذا:</p>
+<ul class="simple">
+<li><p>لا تقدم أي فرط معلمات جديدة (حيث تجعل المكتبة أكثر مقاومة للمستقبل)،</p></li>
+<li><p>من السهل توثيقها بوضوح عندما يحسن المساهمة السرعة وعندما لا تفعل ذلك، على سبيل
+المثال، “عندما <code class="docutils literal notranslate"><span class="pre">n_features</span> <span class="pre">&gt;&gt;</span> <span class="pre">n_samples</span></code>”،</p></li>
+<li><p>تعرض المعايير المرجعية بوضوح تسريعًا.</p></li>
+</ul>
+<p>كما يرجى ملاحظة أن تنفيذك لا يحتاج إلى أن يكون في سكيت-ليرن لاستخدامه مع أدوات
+سكيت-ليرن. يمكنك تنفيذ خوارزميتك المفضلة بطريقة متوافقة مع سكيت-ليرن، وتحميلها على
+جيثب وإعلامنا بذلك. سنكون سعداء بإدراجها تحت :ref: ‘related_projects’ . إذا كان
+لديك بالفعل حزمة على جيثب تتبع واجهة برمجة تطبيقات سكيت-ليرن، فقد تكون مهتمًا أيضًا
+بالاطلاع على <a class="reference external" href="https://scikit-learn-contrib.github.io">سكيت-ليرن-كونتريب</a>.</p>
+</section>
+<section id="selectiveness">
+<span id="id13"></span><h2>لماذا أنت انتقائي للغاية بشأن الخوارزميات التي تدرجها في سكيت-ليرن؟<a class="headerlink" href="#selectiveness" title="Link to this heading">#</a></h2>
+<p>يأتي الكود بتكلفة صيانة، ويجب أن نوازن بين كمية الكود الذي لدينا مع حجم الفريق (أضف
+إلى ذلك حقيقة أن التعقيد يتزايد بشكل غير خطي مع عدد الميزات).
+تعتمد الحزمة على المطورين الأساسيين الذين يستخدمون وقتهم الحر لإصلاح الأخطاء،
+وصيانة الكود ومراجعة المساهمات.
+تحتاج أي خوارزمية مضافة إلى الاهتمام في المستقبل من قبل المطورين، وفي هذه المرحلة،
+قد يكون المؤلف الأصلي قد فقد الاهتمام منذ فترة طويلة.
+راجع أيضًا :ref: ‘new_algorithms_inclusion_criteria’ . لمزيد من القراءة الرائعة حول
+مشكلات الصيانة طويلة الأجل في البرمجيات مفتوحة المصدر، راجع “الملخص التنفيذي
+للطرق والجسور &lt;<a class="reference external" href="https://www.fordfoundation.org/media/2976/roads-and-bridges-the-unseen">https://www.fordfoundation.org/media/2976/roads-and-bridges-the-unseen</a>-
+labor-behind-our-digital-infrastructure.pdf#page=8&gt;`_”.</p>
+<p>استخدام سكيت-ليرن
+ما أفضل طريقة للحصول على مساعدة بشأن استخدام scikit-learn؟
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</p>
+<ul class="simple">
+<li><p>أسئلة عامة حول التعلم الآلي: استخدم <a class="reference external" href="https://stats.stackexchange.com/">Cross Validated</a> مع علامة <code class="docutils literal notranslate"><span class="pre">[machine-learning]</span></code>.</p></li>
+<li><p>أسئلة حول استخدام scikit-learn: استخدم <a class="reference external" href="https://stackoverflow.com/questions/tagged/scikit-learn">Stack Overflow</a> مع علامتي <code class="docutils literal notranslate"><span class="pre">[scikit-learn]</span></code> و <code class="docutils literal notranslate"><span class="pre">[python]</span></code>. يمكنك أيضًا استخدام <a class="reference external" href="https://mail.python.org/mailman/listinfo/scikit-learn">قائمة البريد الإلكتروني</a>.</p></li>
+</ul>
+<p>يرجى التأكد من تضمين مقتطف من التعليمات البرمجية القابلة للتكرار (يفضل أن يكون أقصر من 10 أسطر) والذي يسلط الضوء على مشكلتك على مجموعة بيانات تجريبية (على سبيل المثال، من <a class="reference internal" href="api/sklearn.datasets.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.datasets</span></code></a> أو التي تم إنشاؤها بشكل عشوائي باستخدام وظائف <code class="docutils literal notranslate"><span class="pre">numpy.random</span></code> مع بذرة عشوائية ثابتة). يرجى إزالة أي سطر من التعليمات البرمجية غير ضروري لتكرار مشكلتك.</p>
+<p>يجب أن تكون المشكلة قابلة للتكرار عن طريق نسخ ولصق مقتطف التعليمات البرمجية الخاص بك في بيئة Python مع تثبيت scikit-learn. لا تنس تضمين عبارات الاستيراد. يمكن العثور على مزيد من الإرشادات حول كتابة مقتطفات التعليمات البرمجية القابلة للتكرار في: <a class="reference external" href="https://stackoverflow.com/help/mcve">https://stackoverflow.com/help/mcve</a>.</p>
+<p>إذا تسببت مشكلتك في حدوث استثناء لا تفهمه (حتى بعد البحث عنه في Google)، يرجى التأكد من تضمين تتبع الاستثناء الكامل الذي تحصل عليه عند تشغيل برنامج التكرار.</p>
+<p>بالنسبة لتقارير الأخطاء أو طلبات الميزات، يرجى استخدام <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">تتبع المشكلات على GitHub</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>يرجى عدم إرسال بريد إلكتروني إلى أي من المؤلفين مباشرة لطلب المساعدة أو الإبلاغ عن الأخطاء أو لأي مشكلة أخرى تتعلق بـ scikit-learn.</p>
+</div>
+</section>
+<section id="id15">
+<h2>كيف يمكنني حفظ أو تصدير أو نشر النماذج للاستخدام في الإنتاج؟<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
+<p>راجع <span class="xref std std-ref">model_persistence</span>.</p>
+</section>
+<section id="bunch">
+<h2>كيف يمكنني إنشاء كائن Bunch؟<a class="headerlink" href="#bunch" title="Link to this heading">#</a></h2>
+<p>تُستخدم كائنات Bunch أحيانًا كإخراج لوظائف وأساليب. فهي تمد القواميس عن طريق تمكين الوصول إلى القيم إما بواسطة المفتاح، <code class="docutils literal notranslate"><span class="pre">bunch[&quot;value_key&quot;]</span></code>، أو بواسطة الخاصية، <code class="docutils literal notranslate"><span class="pre">bunch.value_key</span></code>.</p>
+<p>لا يجب استخدامها كإدخال. لذلك، أنت لست بحاجة إلى إنشاء كائن <code class="xref py py-class docutils literal notranslate"><span class="pre">Bunch</span></code>، إلا إذا كنت تقوم بتوسيع واجهة برمجة تطبيقات scikit-learn.</p>
+</section>
+<section id="scikit-learn">
+<h2>كيف يمكنني تحميل مجموعات البيانات الخاصة بي بتنسيق يمكن لـ scikit-learn استخدامه؟<a class="headerlink" href="#scikit-learn" title="Link to this heading">#</a></h2>
+<p>بشكل عام، يعمل scikit-learn على أي بيانات رقمية مخزنة كمصفوفات Numpy أو مصفوفات scipy متفرقة. كما يتم قبول الأنواع الأخرى القابلة للتحويل إلى مصفوفات رقمية مثل <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a>.</p>
+<p>لمزيد من المعلومات حول تحميل ملفات البيانات الخاصة بك إلى هذه البنى البيانات القابلة للاستخدام، يرجى الرجوع إلى <span class="xref std std-ref">تحميل مجموعات البيانات الخارجية</span>.</p>
+</section>
+<section id="id16">
+<h2>كيف أتعامل مع البيانات النصية (أو الأشجار، أو الرسوم البيانية…)؟<a class="headerlink" href="#id16" title="Link to this heading">#</a></h2>
+<p>يفترض مُقدِّرو scikit-learn أنك ستزودهم بمتجهات ميزات ذات قيم حقيقية. وهذا الافتراض مُدمج في معظم المكتبة. ومع ذلك، يمكنك إدخال مدخلات غير رقمية إلى المُقدِّرات بعدة طرق.</p>
+<p>إذا كانت لديك وثائق نصية، فيمكنك استخدام ميزات تكرار المصطلحات؛ راجع <span class="xref std std-ref">text_feature_extraction</span> لمُرشِّحات <em>النص</em> المضمنة. للحصول على استخراج ميزات أكثر عمومية من أي نوع من البيانات، راجع <span class="xref std std-ref">dict_feature_extraction</span> و <span class="xref std std-ref">feature_hashing</span>.</p>
+<p>وتتمثل الحالة الشائعة الأخرى في وجود بيانات غير رقمية ومقاييس مخصصة للمسافة (أو التشابه) على هذه البيانات. ومن الأمثلة على ذلك السلاسل النصية مع مسافة التحرير (المعروفة أيضًا باسم مسافة ليفينشتاين)، على سبيل المثال، تسلسلات الحمض النووي الريبي منقوص الأكسجين أو الحمض النووي الريبي. يمكن ترميز هذه البيانات كأرقام، ولكن القيام بذلك أمر مؤلم وعرضة للأخطاء. يمكن العمل مع مقاييس المسافة على البيانات التعسفية بطريقتين.</p>
+<p>أولاً، يأخذ العديد من المُقدِّرات مصفوفات المسافة/التشابه المحسوبة مسبقًا، لذا إذا لم تكن مجموعة البيانات كبيرة جدًا، فيمكنك حساب المسافات لجميع أزواج المدخلات. إذا كانت مجموعة البيانات كبيرة، فيمكنك استخدام متجهات الميزات التي تحتوي على ميزة واحدة فقط، والتي تعد فهرسًا لهيكل بيانات منفصل، وتوفير دالة مقياس مخصصة تقوم بالبحث عن البيانات الفعلية في هيكل البيانات هذا. على سبيل المثال، لاستخدام <code class="xref py py-class docutils literal notranslate"><span class="pre">dbscan</span></code> مع مسافات ليفينشتاين:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">leven</span> <span class="kn">import</span> <span class="n">levenshtein</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">dbscan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ACCTCCTAGAAG&quot;</span><span class="p">,</span> <span class="s2">&quot;ACCTACTAGAAGTT&quot;</span><span class="p">,</span> <span class="s2">&quot;GAATATTAGGCCGA&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">lev_metric</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># استخراج الفهارس</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">levenshtein</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">array([[0],</span>
+<span class="go">       [1],</span>
+<span class="go">       [2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># نحتاج إلى تحديد algorithm=&#39;brute&#39; لأن الافتراضي يفترض</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># فضاء الميزات المستمر.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dbscan</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">lev_metric</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;brute&#39;</span><span class="p">)</span>  
+<span class="go">(array([0, 1]), array([ 0,  0, -1]))</span>
+</pre></div>
+</div>
+<p>لاحظ أن المثال أعلاه يستخدم حزمة مسافة التحرير التابعة لجهة خارجية <a class="reference external" href="https://pypi.org/project/leven/">leven</a>. يمكن استخدام خدع مماثلة، مع بعض الحذر، لنوى الأشجار، ونوى الرسوم البيانية، وما إلى ذلك.</p>
+</section>
+<section id="n-jobs-1-osx-linux">
+<h2>لماذا تحدث أحيانًا تعطل/توقف عند استخدام <code class="docutils literal notranslate"><span class="pre">n_jobs</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> تحت OSX أو Linux؟<a class="headerlink" href="#n-jobs-1-osx-linux" title="Link to this heading">#</a></h2>
+<p>تعتمد العديد من أدوات scikit-learn مثل <code class="xref py py-class docutils literal notranslate"><span class="pre">GridSearchCV</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">cross_val_score</span></code> داخليًا على وحدة <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> في Python لتوازي التنفيذ
+إلى عدة عمليات Python عن طريق تمرير <code class="docutils literal notranslate"><span class="pre">n_jobs</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> كحجة.</p>
+<p>المشكلة هي أن <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> في Python يقوم بمكالمة نظام <code class="docutils literal notranslate"><span class="pre">fork</span></code> دون متابعتها بمكالمة نظام <code class="docutils literal notranslate"><span class="pre">exec</span></code> لأسباب تتعلق بالأداء. وتقوم العديد من المكتبات مثل (بعض إصدارات) Accelerate أو vecLib في OSX، و(بعض إصدارات) MKL، ووقت تشغيل OpenMP لـ GCC، وcuda من Nvidia (وربما العديد من المكتبات الأخرى)، بإدارة بركة الخيوط الخاصة بها. بعد استدعاء <code class="docutils literal notranslate"><span class="pre">fork</span></code>، يتم تلف حالة بركة الخيوط في عملية الطفل: تعتقد بركة الخيوط أنها تمتلك العديد من الخيوط في حين أن حالة الخيط الرئيسي فقط قد تم نسخها بواسطة <code class="docutils literal notranslate"><span class="pre">fork</span></code>. من الممكن تغيير المكتبات للكشف عن حدوث عملية <code class="docutils literal notranslate"><span class="pre">fork</span></code> وإعادة تهيئة بركة الخيوط في هذه الحالة: لقد فعلنا ذلك لـ OpenBLAS (دمج في المنبع الرئيسي منذ 0.2.10) وقمنا بالمساهمة <a class="reference external" href="https://gcc.gnu.org/bugzilla/show_bug.cgi?id=60035">رقعة</a> لوقت تشغيل OpenMP لـ GCC (لم تتم مراجعتها بعد).</p>
+<p>ولكن في النهاية، فإن الجاني الحقيقي هو <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> في Python الذي يقوم بـ <code class="docutils literal notranslate"><span class="pre">fork</span></code> دون <code class="docutils literal notranslate"><span class="pre">exec</span></code> لتقليل وقت بدء تشغيل عمليات Python الجديدة واستخدامها للحوسبة المتوازية. لسوء الحظ، هذا انتهاك لمعيار POSIX، وبالتالي يرفض بعض مطورو البرامج، مثل Apple، اعتبار عدم أمان عملية <code class="docutils literal notranslate"><span class="pre">fork</span></code> في Accelerate وvecLib كخطأ.</p>
+<p>في Python 3.4+، أصبح من الممكن الآن تكوين <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> لاستخدام أساليب البدء <code class="docutils literal notranslate"><span class="pre">&quot;forkserver&quot;</span></code> أو <code class="docutils literal notranslate"><span class="pre">&quot;spawn&quot;</span></code> (بدلاً من الافتراضي <code class="docutils literal notranslate"><span class="pre">&quot;fork&quot;</span></code>) لإدارة برك العمليات. للالتفاف حول هذه المشكلة عند استخدام scikit-learn، يمكنك تعيين متغير البيئة <code class="docutils literal notranslate"><span class="pre">JOBLIB_START_METHOD</span></code> إلى <code class="docutils literal notranslate"><span class="pre">&quot;forkserver&quot;</span></code>. ومع ذلك، يجب أن يكون المستخدم على دراية بأن استخدام أسلوب <code class="docutils literal notranslate"><span class="pre">&quot;forkserver&quot;</span></code> يمنع <a class="reference external" href="https://joblib.readthedocs.io/en/latest/generated/joblib.Parallel.html#joblib.Parallel" title="(in joblib v1.5.dev0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">joblib.Parallel</span></code></a> من استدعاء الدوال المحددة تفاعليًا في جلسة shell.</p>
+<p>إذا كان لديك رمز مخصص يستخدم <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> مباشرة بدلاً من استخدامه عبر <a class="reference external" href="https://joblib.readthedocs.io/en/latest/index.html#module-joblib" title="(in joblib v1.5.dev0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">joblib</span></code></a>، فيمكنك تمكين وضع <code class="docutils literal notranslate"><span class="pre">&quot;forkserver&quot;</span></code> عالميًا لبرنامجك. أضف التعليمات التالية إلى النص البرمجي الرئيسي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">multiprocessing</span>
+
+<span class="c1"># استيرادات أخرى، رمز مخصص، تحميل البيانات، تعريف النموذج...</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">multiprocessing</span><span class="o">.</span><span class="n">set_start_method</span><span class="p">(</span><span class="s2">&quot;forkserver&quot;</span><span class="p">)</span>
+
+    <span class="c1"># استدعاء وظائف scikit-learn مع n_jobs &gt; 1 هنا</span>
+</pre></div>
+</div>
+<p>يمكنك العثور على مزيد من الافتراضيات حول أساليب البدء الجديدة في <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods">توثيق multiprocessing</a>.</p>
+</section>
+<section id="n-jobs">
+<span id="faq-mkl-threading"></span><h2>لماذا تستخدم وظيفتي المزيد من الأنوية مما هو محدد بواسطة <code class="docutils literal notranslate"><span class="pre">n_jobs</span></code>؟<a class="headerlink" href="#n-jobs" title="Link to this heading">#</a></h2>
+<p>يرجع ذلك إلى أن <code class="docutils literal notranslate"><span class="pre">n_jobs</span></code> يتحكم فقط في عدد الوظائف للروتينات الموازية باستخدام <a class="reference external" href="https://joblib.readthedocs.io/en/latest/index.html#module-joblib" title="(in joblib v1.5.dev0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">joblib</span></code></a>، ولكن يمكن أن يأتي الكود الموازي من مصادر أخرى:</p>
+<ul class="simple">
+<li><p>قد تكون بعض الروتينات موازية باستخدام OpenMP (للرمز المكتوب في C أو Cython)،</p></li>
+<li><p>يعتمد scikit-learn بشكل كبير على numpy، والذي بدوره قد يعتمد على المكتبات العددية مثل MKL أو OpenBLAS أو BLIS والتي يمكن أن توفر تنفيذات متوازية.</p></li>
+</ul>
+<p>لمزيد من التفاصيل، يرجى الرجوع إلى <span class="xref std std-ref">ملاحظاتنا حول التوازي</span>.</p>
+</section>
+<section id="random-state">
+<h2>كيف يمكنني تعيين <code class="docutils literal notranslate"><span class="pre">random_state</span></code> لتنفيذ كامل؟<a class="headerlink" href="#random-state" title="Link to this heading">#</a></h2>
+<p>يرجى الرجوع إلى <span class="xref std std-ref">randomness</span>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="glossary.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">المفاهيم العامة:</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="support.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">الدعم</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">حول المشروع</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">ما هو اسم المشروع (الكثيرون يخطئون في ذلك)؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">كيف تنطق اسم المشروع؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">لماذا سكيت؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">هل تدعمون باي باي؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">كيف يمكنني الحصول على إذن لاستخدام الصور الموجودة في سكيت-ليرن في عملي؟</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">قرارات التنفيذ</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">لماذا لا يوجد دعم للتعلم العميق أو التعلم التعزيزي؟ هل سيكون هناك دعم لمثل هذه الحالات في المستقبل؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">كيف يمكنني المساهمة في سكيت-ليرن؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">لماذا لا يحصل طلب السحب الخاص بي على أي اهتمام؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-algorithms-inclusion-criteria">ما هي معايير الإدراج للخوارزميات الجديدة؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selectiveness">لماذا أنت انتقائي للغاية بشأن الخوارزميات التي تدرجها في سكيت-ليرن؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">كيف يمكنني حفظ أو تصدير أو نشر النماذج للاستخدام في الإنتاج؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bunch">كيف يمكنني إنشاء كائن Bunch؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn">كيف يمكنني تحميل مجموعات البيانات الخاصة بي بتنسيق يمكن لـ scikit-learn استخدامه؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">كيف أتعامل مع البيانات النصية (أو الأشجار، أو الرسوم البيانية…)؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-jobs-1-osx-linux">لماذا تحدث أحيانًا تعطل/توقف عند استخدام <code class="docutils literal notranslate"><span class="pre">n_jobs</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> تحت OSX أو Linux؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-jobs">لماذا تستخدم وظيفتي المزيد من الأنوية مما هو محدد بواسطة <code class="docutils literal notranslate"><span class="pre">n_jobs</span></code>؟</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-state">كيف يمكنني تعيين <code class="docutils literal notranslate"><span class="pre">random_state</span></code> لتنفيذ كامل؟</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/faq.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
