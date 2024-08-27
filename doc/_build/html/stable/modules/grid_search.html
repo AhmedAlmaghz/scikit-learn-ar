@@ -1,0 +1,1255 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="3.4. البحث الشامل عن الشبكة" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/grid_search.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="ضبط المعلمات فائقة المعلمات التي لا يتم تعلمها مباشرة داخل المعلمات. في scikit-learn يتم تمريرها كحجج إلى منشئ فئات المعلمات. تشمل الأمثلة النموذجية “C” و “kernel” و “gamma” لتصنيف الدعم الموجه، “a..." />
+<meta property="og:image" content="https://scikit-learn/stable/_images/sphx_glr_plot_successive_halving_iterations_001.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="ضبط المعلمات فائقة المعلمات التي لا يتم تعلمها مباشرة داخل المعلمات. في scikit-learn يتم تمريرها كحجج إلى منشئ فئات المعلمات. تشمل الأمثلة النموذجية “C” و “kernel” و “gamma” لتصنيف الدعم الموجه، “a..." />
+
+    <title>3.4. البحث الشامل عن الشبكة &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/grid_search';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.7. تعديل عتبة القرار للتنبؤ بالصنف" href="classification_threshold.html" />
+    <link rel="prev" title="3.1. التدقيق المتقاطع: تقييم أداء أداة التقدير" href="cross_validation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../supervised_learning.html">1. التعلم الخَلفي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unsupervised_learning.html">2. التعلم غير الخاضع للإشراف</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixture.html">2.1. نماذج المزيج الغاوسي</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="manifold.html">2.3. تعلم المنوال</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="clustering.html">2.9. التجميع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decomposition.html">2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="covariance.html">2.13. التغاير التجريبي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="outlier_detection.html">2.16. تناسب غلاف إهليلجي</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="density.html">2.27. تقدير الكثافة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="neural_networks_unsupervised.html">2.30. نماذج الشبكات العصبية (غير الخاضعة للإشراف)</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../model_selection.html">3. اختيار النموذج وتقييمه</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cross_validation.html">3.1. التدقيق المتقاطع: تقييم أداء أداة التقدير</a></li>
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.4. البحث الشامل عن الشبكة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="classification_threshold.html">3.7. تعديل عتبة القرار للتنبؤ بالصنف</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="model_evaluation.html">3.9. مقاييس الأداء وتقييمها: تقييم جودة التنبؤات كميًا</a></li>
+<li class="toctree-l2"><a class="reference internal" href="learning_curve.html">3.10. منحنيات التحقق: رسم الدرجات لتقييم النماذج</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../inspection.html">4. التفتيش</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualizations.html">5. التمثيل المرئي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_transforms.html">6. تحويلات مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="compose.html">6.1. خطوط الأنابيب ومقدّرات المُركّبات</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="feature_extraction.html">6.4. استخراج الخصائص</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">6.7. معالجة البيانات الأولية</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="impute.html">6.12. إكمال القيم المفقودة</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="unsupervised_reduction.html">6.19. PCA: التحليل التكويني الرئيسي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="random_projection.html">6.22. الإسقاط العشوائي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_approximation.html">6.23. طريقة Nystroem لتقريب النواة</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">6.28. مقاييس الاقتران، الألفة والنواة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_targets.html">6.29. تحويل هدف التنبؤ (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../datasets.html">7. مرافق تحميل مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/toy_dataset.html">7.1. مجموعات البيانات التجريبية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/real_world.html">7.2. مجموعات البيانات من العالم الحقيقي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/sample_generators.html">7.3. المجموعات البيانات المولدة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/loading_other_datasets.html">7.4. أمثلة</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing.html">8. الحوسبة باستخدام scikit-learn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_persistence.html">9. نظرة عامة على سير العمل</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../common_pitfalls.html">14. المعالجة المسبقة غير المتسقة</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../dispatching.html">16. التشغيل التلقائي</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../machine_learning_map.html">17. اختيار المحلل المناسب</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentations.html">18. الموارد الخارجية، الفيديوهات، والمحاضرات</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">مرجع المستخدم</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../model_selection.html" class="nav-link"><span class="section-number">3. </span>اختيار النموذج وتقييمه</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>ضبط المعلمات فائقة المعلمات التي لا يتم تعلمها مباشرة داخل المعلمات.
+في scikit-learn يتم تمريرها كحجج إلى منشئ فئات المعلمات. تشمل الأمثلة النموذجية “C” و “kernel” و “gamma”
+لتصنيف الدعم الموجه، “alpha” لLasso، وما إلى ذلك.</p>
+<p>من الممكن والموصى به البحث في مساحة المعلمة فائقة للحصول على أفضل نتيجة
+نتيجة التحقق من صحة متقاطعة.</p>
+<p>يمكن تحسين أي معلمة مقدمة أثناء إنشاء معلمة بهذه الطريقة. على وجه التحديد، للعثور على أسماء والقيم الحالية لجميع
+المعلمات لمعلمة معينة، استخدم:</p>
+<p>معلمة (معلمة. get_params ())</p>
+<p>يتكون البحث مما يلي:</p>
+<ul class="simple">
+<li><p>معلمة (مرجع أو مصنف مثل “sklearn.svm.SVC ()”)؛</p></li>
+<li><p>مساحة المعلمات؛</p></li>
+<li><p>طريقة للبحث أو أخذ عينات المرشحين؛</p></li>
+<li><p>مخطط التحقق من الصحة المتقاطع؛ و</p></li>
+<li><p>دالة النتيجة: ref:` &lt;gridsearch_scoring&gt;`.</p></li>
+</ul>
+<p>يوفر scikit-learn نهجين عامين للبحث عن المعلمات: بالنسبة للقيم المعطاة، ينظر GridSearchCV بشكل شامل
+جميع مجموعات المعلمات، في حين أن RandomizedSearchCV يمكن أن تعين عينة
+عدد معين من المرشحين من مساحة المعلمات مع توزيع محدد. كلا من هذه الأدوات لها نظائرها النصفية المتعاقبة
+HalvingGridSearchCV و HalvingRandomSearchCV، والتي يمكن أن تكون
+أسرع بكثير في العثور على مجموعة جيدة من المعلمات.</p>
+<p>بعد وصف هذه الأدوات، نقدم تفاصيل حول أفضل الممارسات
+ممارسات &lt;grid_search_tips&gt; المطبقة على هذه الأساليب. تسمح بعض النماذج باستراتيجيات بحث متخصصة وفعالة عن المعلمات،
+مخطط لها في التحقق من صحة بديل.</p>
+<p>لاحظ أنه من الشائع أن تؤثر مجموعة فرعية صغيرة من تلك المعلمات بشكل كبير على أداء التنبؤ أو الحساب للنموذج في حين يمكن ترك الآخرين
+قيمها الافتراضية. يُنصح بقراءة docstring لفئة المعلمة للحصول على فهم أدق لسلوكها المتوقع،
+ربما عن طريق قراءة المرجع المضمن إلى الأدبيات.</p>
+<section id="id1">
+<h1><span class="section-number">3.4. </span>البحث الشامل عن الشبكة<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>تولد شبكة البحث التي يوفرها GridSearchCV بشكل شامل المرشحين من شبكة من قيم المعلمات المحددة باستخدام
+معلمة “param_grid”. على سبيل المثال، فإن “param_grid” التالية:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">param_grid</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">]},</span>
+  <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">],</span> <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">]},</span>
+ <span class="p">]</span>
+</pre></div>
+</div>
+<p>تحدد أنه يجب استكشاف شبكتين: واحدة ذات نواة خطية
+وقيم “C” في [1، 10، 100، 1000]، والثانية ذات نواة RBF،
+والجدول الضمني لقيم “C” التي تتراوح في [1، 10، 100، 1000] وقيم “gamma” في [0.001، 0.0001].</p>
+<p>يحتوي مثيل GridSearchCV على واجهة برمجة التطبيقات المعتادة للمعلمات: عند
+“تناسبها” على مجموعة بيانات يتم تقييم جميع مجموعات قيم المعلمات والاحتفاظ بأفضل مجموعة.</p>
+</section>
+<section id="randomized-parameter-search">
+<span id="id2"></span><h1><span class="section-number">3.5. </span>تحسين المعلمة العشوائي<a class="headerlink" href="#randomized-parameter-search" title="Link to this heading">#</a></h1>
+<p>في حين أن استخدام شبكة من إعدادات المعلمات هو حاليًا الطريقة الأكثر استخدامًا على نطاق واسع
+لتحسين المعلمات، فإن طرق البحث الأخرى لها خصائص أكثر ملاءمة.
+ينفذ RandomizedSearchCV بحثًا عشوائيًا عبر المعلمات، حيث يتم أخذ كل إعداد كعينة من
+توزيع على قيم المعلمات المحتملة. يوفر هذا فوائد رئيسية على البحث الشامل:</p>
+<ul class="simple">
+<li><p>يمكن اختيار ميزانية مستقلة عن عدد المعلمات والقيم المحتملة.</p></li>
+<li><p>إضافة معلمات لا تؤثر على الأداء لا تقلل من الكفاءة.</p></li>
+</ul>
+<p>يتم تحديد كيفية أخذ عينات المعلمات باستخدام قاموس، مشابه جدًا لتحديد المعلمات لـ
+GridSearchCV. بالإضافة إلى ذلك، يتم تحديد ميزانية الحساب، والتي تكون عدد المرشحين المعينين أو
+تكرار العينات، باستخدام معلمة “n_iter”.
+بالنسبة لكل معلمة، يمكن تحديد توزيع على القيم الممكنة أو قائمة
+الخيارات المنفصلة (التي سيتم أخذ عينات منها بالتساوي):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">.1</span><span class="p">),</span>
+  <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span> <span class="s1">&#39;class_weight&#39;</span><span class="p">:[</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>يستخدم هذا المثال وحدة “scipy.stats”، والتي تحتوي على العديد من التوزيعات المفيدة
+لأخذ عينات المعلمات، مثل “expon”، و “gamma”، و “uniform”، و “loguniform”، أو “randint”.</p>
+<p>من حيث المبدأ، يمكن تمرير أي دالة توفر طريقة “rvs” (عينة عشوائية) لعينة
+قيمة. يجب أن يوفر استدعاء دالة “rvs” عينات عشوائية مستقلة من قيم المعلمات المحتملة
+على المكالمات المتتالية.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>لا تسمح التوزيعات في “scipy.stats” قبل إصدار scipy 0.16 بتحديد حالة عشوائية. بدلاً من ذلك، فإنها تستخدم</p>
+</div>
+<p>حالة numpy العشوائية العالمية، والتي يمكن بذرها عبر “np.random.seed” أو تعيينها
+باستخدام “np.random.set_state”. ومع ذلك، بدءًا من الإصدار 0.18 من scikit-learn،
+تعيين وحدة sklearn.model_selection حالة عشوائية التي يوفرها المستخدم إذا كان scipy &gt;= 0.16 متاح أيضًا.</p>
+<p>بالنسبة للمعلمات المستمرة، مثل “C” أعلاه، من المهم تحديد
+توزيع مستمر للاستفادة الكاملة من العشوائية. بهذه الطريقة،
+سيؤدي زيادة “n_iter” دائمًا إلى بحث أكثر دقة.</p>
+<p>تعد المتغير العشوائي المستمر والموحد بشكل لوغاريتمي إصدارًا مستمرًا من
+معلمة متباعدة لوغاريتميًا. على سبيل المثال، لتحديد ما يعادل “C” من أعلاه،
+يمكن استخدام “loguniform (1، 100)” بدلاً من “[1، 10، 100]”.</p>
+<p>انعكاسًا للمثال أعلاه في البحث الشبكي، يمكننا تحديد متغير عشوائي مستمر
+موزعة بشكل لوغاريتمي بين “1e0” و “1e3”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">من</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">fixes</span> <span class="kn">import</span> <span class="nn">loguniform</span>
+<span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">loguniform</span><span class="p">(</span><span class="mf">1e0</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">),</span>
+ <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="n">loguniform</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">),</span>
+ <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span>
+ <span class="s1">&#39;class_weight&#39;</span><span class="p">:[</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p id="successive-halving-user-guide">البحث عن المعلمات المثلى مع التخفيض المتتالي
+يوفر Scikit-learn أيضًا أداتي التقدير HalvingGridSearchCV و HalvingRandomSearchCV اللتين يمكن استخدامهما للبحث في مساحة المعلمات باستخدام التخفيض المتعاقب [1] [2]. التخفيض المتعاقب (SH) يشبه بطولة بين مجموعات معلمات المرشحين. SH هي عملية اختيار تكرارية يتم فيها تقييم جميع المرشحين (مجموعات المعلمات) باستخدام كمية صغيرة من الموارد في التكرار الأول. يتم اختيار بعض فقط من هؤلاء المرشحين للتكرار التالي، والذي سيتم تخصيص المزيد من الموارد له. بالنسبة لضبط المعلمات، فإن المورد هو عادةً عدد عينات التدريب، ولكنه يمكن أن يكون أيضًا معلمة رقمية تعسفية مثل n_estimators في غابة عشوائية.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>يجب أن تكون الزيادة في الموارد المختارة كبيرة بما يكفي بحيث يتم الحصول على تحسن كبير في الدرجات عند مراعاة الدلالة الإحصائية.</p>
+</div>
+<p>كما هو موضح في الشكل أدناه، لا “ينجو” سوى مجموعة فرعية من المرشحين حتى التكرار الأخير. هؤلاء هم المرشحون الذين تم تصنيفهم باستمرار ضمن أفضل المرشحين الحاصلين على الدرجات عبر جميع التكرارات. يتم تخصيص كمية متزايدة من الموارد لكل مرشح، وهنا عدد العينات، في كل تكرار.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/model_selection/plot_successive_halving_iterations.html"><img alt="../_images/sphx_glr_plot_successive_halving_iterations_001.png" src="../_images/sphx_glr_plot_successive_halving_iterations_001.png" />
+</a>
+</figure>
+<p>نقوم هنا بوصف المعلمات الرئيسية بإيجاز، ولكن يتم وصف كل معلمة وتفاعلاتها بالتفصيل في الأقسام أدناه. تتحكم معلمة “العامل” (&gt; 1) في معدل نمو الموارد، ومعدل انخفاض عدد المرشحين. في كل تكرار، يتم ضرب عدد الموارد لكل مرشح في “العامل” ويتم قسمة عدد المرشحين على نفس العامل. إلى جانب “الموارد” و “min_resources”، فإن “العامل” هو أهم معلمة للتحكم في البحث في تنفيذنا، على الرغم من أن القيمة 3 تعمل بشكل جيد عادةً. يتحكم “العامل” بشكل فعال في عدد التكرارات في HalvingGridSearchCV وعدد المرشحين (بشكل افتراضي) والتكرارات في HalvingRandomSearchCV. يمكن أيضًا استخدام aggressive_elimination=True إذا كان عدد الموارد المتاحة صغيرًا. تتوفر إمكانية التحكم بشكل أكبر من خلال ضبط معلمة min_resources.</p>
+<p>هذه التقديرات لا تزال <strong>تجريبية</strong>: قد تتغير تنبؤاتها وواجهة برمجة التطبيقات الخاصة بها دون أي دورة إهمال. لاستخدامها، يجب عليك استيراد enable_halving_search_cv بشكل صريح:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># تطلب صراحةً هذه الميزة التجريبية</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.experimental</span> <span class="kn">import</span> <span class="n">enable_halving_search_cv</span>  <span class="c1"># noqa</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># الآن يمكنك الاستيراد بشكل طبيعي من model_selection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">HalvingGridSearchCV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">HalvingRandomSearchCV</span>
+</pre></div>
+</div>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">ref<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sphx_glr_auto_examples_model_selection_plot_successive_halving_heatmap.py</p>
+</dd>
+</dl>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">ref<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sphx_glr_auto_examples_model_selection_plot_successive_halving_iterations.py</p>
+</dd>
+</dl>
+</li>
+</ul>
+<section id="min-resources">
+<h2><span class="section-number">3.5.1. </span>اختيار “min_resources” وعدد المرشحين<a class="headerlink" href="#min-resources" title="Link to this heading">#</a></h2>
+<p>بجانب “العامل”، هناك معلمتان رئيسيتان تؤثران على سلوك البحث بالتخفيض المتعاقب هما معلمة “min_resources”، وعدد المرشحين (أو مجموعات المعلمات) التي يتم تقييمها. “min_resources” هي كمية الموارد المخصصة في التكرار الأول لكل مرشح. يتم تحديد عدد المرشحين مباشرة في HalvingRandomSearchCV، ويتم تحديده من معلمة “param_grid” في HalvingGridSearchCV.</p>
+<p>لنأخذ حالة تكون فيها الموارد هي عدد العينات، ولدينا 1000 عينة. من الناحية النظرية، مع “min_resources=10” و “factor=2”، يمكننا تشغيل <strong>كحد أقصى</strong> 7 تكرارات بعدد العينات التالي: “[10، 20، 40، 80، 160، 320، 640]”.</p>
+<p>ولكن اعتمادًا على عدد المرشحين، قد نقوم بتشغيل أقل من 7 تكرارات: إذا بدأنا بعدد <strong>صغير</strong> من المرشحين، فقد يستخدم التكرار الأخير أقل من 640 عينة، مما يعني عدم استخدام جميع الموارد المتاحة (العينات). على سبيل المثال، إذا بدأنا بخمسة مرشحين، فسنحتاج إلى تكرارين فقط: 5 مرشحين للتكرار الأول، ثم “5 // 2 = 2” مرشحين في التكرار الثاني، وبعد ذلك نعرف أي مرشح يؤدي أفضل أداء (لذلك لا نحتاج إلى ثالث). سنستخدم ما لا يزيد عن 20 عينة فقط، وهو أمر غير فعال حيث لدينا 1000 عينة تحت تصرفنا. من ناحية أخرى، إذا بدأنا بعدد <strong>مرتفع</strong> من المرشحين، فقد ينتهي بنا الأمر بعدد كبير من المرشحين في التكرار الأخير، وهو ما قد لا يكون مثاليًا دائمًا: وهذا يعني أن العديد من المرشحين سيتم تشغيلهم بالموارد الكاملة، مما يقلل فعليًا الإجراء إلى البحث القياسي.</p>
+<p>في حالة HalvingRandomSearchCV، يتم تعيين عدد المرشحين افتراضيًا بحيث يستخدم التكرار الأخير أكبر قدر ممكن من الموارد المتاحة. بالنسبة لـ HalvingGridSearchCV، يتم تحديد عدد المرشحين بواسطة معلمة “param_grid”. سيؤثر تغيير قيمة “min_resources” على عدد التكرارات الممكنة، ونتيجة لذلك، سيكون له أيضًا تأثير على العدد المثالي للمرشحين.</p>
+<p>هناك اعتبار آخر عند اختيار “min_resources” وهو ما إذا كان من السهل التمييز بين المرشحين الجيدين والسيئين باستخدام كمية صغيرة من الموارد. على سبيل المثال، إذا كنت بحاجة إلى الكثير من العينات للتمييز بين المعلمات الجيدة والسيئة، فيوصى باستخدام “min_resources” عالية. من ناحية أخرى، إذا كان التمييز واضحًا حتى بعدد صغير من العينات، فقد يكون “min_resources” الصغير مفضلًا لأنه سيسرع الحساب.</p>
+<p>لاحظ في المثال أعلاه أن التكرار الأخير لا يستخدم الحد الأقصى من الموارد المتاحة: هناك 1000 عينة متاحة، ومع ذلك يتم استخدام 640 عينة كحد أقصى. بشكل افتراضي، يحاول كل من HalvingRandomSearchCV و HalvingGridSearchCV استخدام أكبر عدد ممكن من الموارد في التكرار الأخير، بشرط أن يكون مقدار الموارد هذا مضاعفًا لكل من “min_resources” و “factor” (سيصبح هذا القيد واضحًا في القسم التالي). يحقق HalvingRandomSearchCV ذلك عن طريق أخذ عينات من العدد الصحيح من المرشحين، بينما يحقق HalvingGridSearchCV ذلك عن طريق ضبط “min_resources” بشكل صحيح. يرجى الاطلاع على القسم exhausting_the_resources للحصول على التفاصيل.</p>
+</section>
+<section id="amount-of-resource-and-number-of-candidates">
+<span id="id3"></span><h2><span class="section-number">3.5.2. </span>كمية الموارد وعدد المرشحين في كل تكرار<a class="headerlink" href="#amount-of-resource-and-number-of-candidates" title="Link to this heading">#</a></h2>
+<p>في أي تكرار i، يتم تخصيص كمية معينة من الموارد لكل مرشح والتي نطلق عليها اسم n_resources_i. يتم التحكم في هذه الكمية بواسطة معلمتي “العامل” و “min_resources” كما يلي (يكون “العامل” أكبر بشكل صارم من 1):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>n_resources_i = factor ** i * min_resources،
+</pre></div>
+</div>
+<p>أو ما يعادله:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_resources_</span> <span class="p">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">}</span> <span class="o">=</span> <span class="n">n_resources_i</span> <span class="o">*</span> <span class="n">factor</span>
+</pre></div>
+</div>
+<p>حيث “min_resources == n_resources_0” هي كمية الموارد المستخدمة في التكرار الأول. يحدد “العامل” أيضًا نسب المرشحين الذين سيتم اختيارهم للتكرار التالي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_candidates_i</span> <span class="o">=</span> <span class="n">n_candidates</span> <span class="o">//</span> <span class="p">(</span><span class="n">factor</span> <span class="o">**</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>أو ما يعادله:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_candidates_0</span> <span class="o">=</span> <span class="n">n_candidates</span>
+<span class="n">n_candidates_</span> <span class="p">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">}</span> <span class="o">=</span> <span class="n">n_candidates_i</span> <span class="o">//</span> <span class="n">factor</span>
+</pre></div>
+</div>
+<p>لذلك، في التكرار الأول، نستخدم موارد “min_resources” عدد مرات “n_candidates”. في التكرار الثاني، نستخدم موارد “min_resources * factor” عدد مرات “n_candidates // factor”. التكرار الثالث يضاعف مرة أخرى الموارد لكل مرشح ويقسم عدد المرشحين. تتوقف هذه العملية عندما يتم الوصول إلى الحد الأقصى لمقدار الموارد لكل مرشح، أو عندما نحدد أفضل مرشح. يتم تحديد أفضل مرشح في التكرار الذي يقيم “العامل” أو أقل من المرشحين (انظر التفسير أدناه).</p>
+<p>هنا مثال على “min_resources=3” و “factor=2”، بدءًا من 70 مرشحًا:</p>
+<p>يمكننا ملاحظة ما يلي:</p>
+<ul class="simple">
+<li><p>تتوقف العملية في التكرار الأول الذي يقيم “العامل=2” من المرشحين: أفضل مرشح هو الأفضل من بين هذين المرشحين. ليس من الضروري تشغيل تكرار إضافي، حيث أنه سيقيم مرشحًا واحدًا فقط (وهو أفضل مرشح، والذي حددناه بالفعل). لهذا السبب، نريد بشكل عام أن يستخدم التكرار الأخير عددًا من المرشحين لا يزيد عن “العامل”. إذا قام التكرار الأخير بتقييم أكثر من “العامل” من المرشحين، فإن هذا التكرار الأخير يصبح مثل البحث العادي (كما هو الحال في RandomizedSearchCV أو GridSearchCV).</p></li>
+<li><p>كل “n_resources_i” هو مضاعف لكل من “العامل” و “min_resources” (وهو ما تؤكده تعريفه أعلاه).</p></li>
+</ul>
+<p>يمكن العثور على كمية الموارد المستخدمة في كل تكرار في سمة “<a href="#id15"><span class="problematic" id="id16">n_resources_</span></a>”.</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.5.3. </span>اختيار مورد<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>بشكل افتراضي، يتم تعريف المورد من حيث عدد العينات. أي أن كل تكرار سيستخدم عددًا متزايدًا من العينات للتدريب عليها. ومع ذلك، يمكنك تحديد معلمة لاستخدامها كمورد يدويًا باستخدام معلمة “resource”. فيما يلي مثال يتم فيه تعريف المورد من حيث عدد المُقدّرات في غابة عشوائية:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; from sklearn.datasets import make_classification
+&gt;&gt;&gt; from sklearn.ensemble import RandomForestClassifier
+&gt;&gt;&gt; from sklearn.experimental import enable_halving_search_cv  # noqa
+&gt;&gt;&gt; from sklearn.model_selection import HalvingGridSearchCV
+&gt;&gt;&gt; import pandas as pd
+&gt;&gt;&gt;
+&gt;&gt;&gt; param_grid = {&#39;max_depth&#39;: [3, 5, 10],
+...               &#39;min_samples_split&#39;: [2, 5, 10]}
+&gt;&gt;&gt; base_estimator = RandomForestClassifier(random_state=0)
+&gt;&gt;&gt; X, y = make_classification(n_samples=1000, random_state=0)
+&gt;&gt;&gt; sh = HalvingGridSearchCV(base_estimator، param_grid، cv=5،
+...                          factor=2، resource=&#39;n_estimators&#39;،
+...                          max_resources=30).fit(X، y)
+&gt;&gt;&gt; sh.best_estimator_
+RandomForestClassifier(max_depth=5، n_estimators=24، random_state=0)
+</pre></div>
+</div>
+<p>لاحظ أنه لا يمكن وضع ميزانية لمعلمة تكون جزءًا من شبكة المعلمات.</p>
+<p id="exhausting-the-resources">استنفاد الموارد المتاحة
+كما ذكر أعلاه، يعتمد عدد الموارد المستخدمة في كل تكرار على معلمة “min_resources”. إذا كان لديك الكثير من الموارد المتاحة ولكنك تبدأ بعدد قليل من الموارد، فقد يتم هدر بعضها (أي عدم استخدامها).</p>
+<p>تعتمد عملية البحث على 80 مورد كحد أقصى، في حين أن الحد الأقصى لعدد الموارد المتاحة لدينا هو “n_samples=1000”. هنا، لدينا “min_resources = r_0 = 20”.</p>
+<p>بالنسبة لـ “HalvingGridSearchCV”، يتم ضبط معلمة “min_resources” افتراضيًا على “exhaust”. وهذا يعني أن “min_resources” يتم ضبطها تلقائيًا بحيث يمكن للتكرار الأخير استخدام أكبر عدد ممكن من الموارد، ضمن حد “max_resources”.</p>
+<p>بالنسبة لـ “HalvingRandomSearchCV”، يمكن استنفاد الموارد بطريقتين:</p>
+<ul class="simple">
+<li><p>عن طريق ضبط “min_resources=’exhaust’”، تمامًا مثل “HalvingGridSearchCV”.</p></li>
+<li><p>عن طريق ضبط “n_candidates=’exhaust’”.</p></li>
+</ul>
+<p>الخياران متنافيان: يتطلب استخدام “min_resources=’exhaust’” معرفة عدد المرشحين، وبالمثل، يتطلب استخدام “n_candidates=’exhaust’” معرفة “min_resources”.</p>
+<p>وبشكل عام، يؤدي استنفاد العدد الإجمالي للموارد إلى الحصول على أفضل معلمة مرشحة نهائية، وهو أكثر كثافة في الوقت قليلاً.</p>
+<p>## القضاء العدواني على المرشحين</p>
+<p>في الوضع المثالي، نريد أن يقوم التكرار الأخير بتقييم “factor” من المرشحين (راجع: كمية الموارد وعدد المرشحين). بعد ذلك، كل ما علينا فعله هو اختيار الأفضل. عندما يكون عدد الموارد المتاحة صغيرًا مقارنة بعدد المرشحين، فقد يضطر التكرار الأخير إلى تقييم أكثر من “factor” من المرشحين.</p>
+<p>نظرًا لأنه لا يمكننا استخدام أكثر من “max_resources=40” من الموارد، يجب أن تتوقف العملية عند التكرار الثاني الذي يقيم أكثر من “factor=2” من المرشحين.</p>
+<p>باستخدام معلمة “aggressive_elimination”، يمكنك إجبار عملية البحث على الانتهاء بأقل من “factor” من المرشحين في التكرار الأخير. للقيام بذلك، ستعمل العملية على القضاء على أكبر عدد ممكن من المرشحين باستخدام موارد “min_resources”.</p>
+<p>لاحظ أننا ننهي بمرشحين اثنين في التكرار الأخير لأننا قضينا على عدد كافٍ من المرشحين خلال التكرارات الأولى، باستخدام “n_resources = min_resources = 20”.</p>
+<p>## تحليل النتائج باستخدام صفة “<a href="#id17"><span class="problematic" id="id18">cv_results_</span></a>”</p>
+<p>تحتوي صفة “<a href="#id19"><span class="problematic" id="id20">cv_results_</span></a>” على معلومات مفيدة لتحليل نتائج البحث. يمكن تحويلها إلى إطار بيانات بن بانداس باستخدام “df = pd.DataFrame(<a href="#id21"><span class="problematic" id="id22">est.cv_results_</span></a>)”. إن صفة “<a href="#id23"><span class="problematic" id="id24">cv_results_</span></a>” لكل من “HalvingGridSearchCV” و”HalvingRandomSearchCV” مشابهة لصفة “GridSearchCV” و”RandomizedSearchCV”، مع معلومات إضافية تتعلق بعملية التخفيض المتعاقب.</p>
+<p>هنا مثال على بعض أعمدة إطار البيانات (المقتطع):</p>
+<p>يمثل كل صف مجموعة معينة من المعلمات (مرشح) وتكرار معين. يعطى التكرار بواسطة عمود “iter”. ويخبرك عمود “n_resources” بعدد الموارد المستخدمة.</p>
+<p>في المثال أعلاه، أفضل مجموعة من المعلمات هي “ {‘criterion’: ‘log_loss’, ‘max_depth’: None, ‘max_features’: 9, ‘min_samples_split’: 10}” لأنها وصلت إلى التكرار الأخير (3) بأعلى درجة: 0.96.</p>
+<p>## المراجع</p>
+<p>[1] K. Jamieson, A. Talwalkar, Non-stochastic Best Arm Identification and Hyperparameter Optimization, in proc. of Machine Learning Research, 2016.</p>
+<p>[2] L. Li, K. Jamieson, G. DeSalvo, A. Rostamizadeh, A. Talwalkar, Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization, in Machine Learning Research 18, 2018.</p>
+<p>## نصائح للبحث عن المعلمات
+هذا هو نص RST مترجم إلى اللغة العربية مع اتباع التعليمات المحددة:</p>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2><span class="section-number">3.5.4. </span>تحديد مقياس موضوعي<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>بشكل افتراضي، يستخدم البحث عن المعلمات دالة “score” في المثمن لتقييم إعداد المعلمة. هذه هي
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.accuracy_score</span></code> للتصنيف و
+<code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.r2_score</span></code> للانحدار.  بالنسبة لبعض التطبيقات،
+تكون دالات التسجيل الأخرى أكثر ملاءمة (على سبيل المثال، في التصنيف غير المتوازن، تكون درجة الدقة غير مفيدة في كثير من الأحيان). يمكن تحديد دالة تسجيل بديلة عبر
+معلمة “التسجيل” في معظم أدوات البحث عن المعلمات. راجع <span class="xref std std-ref">scoring_parameter</span> لمزيد من التفاصيل.</p>
+</section>
+<section id="multimetric-grid-search">
+<span id="id6"></span><h2><span class="section-number">3.5.5. </span>تحديد مقاييس متعددة للتقييم<a class="headerlink" href="#multimetric-grid-search" title="Link to this heading">#</a></h2>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">GridSearchCV</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">RandomizedSearchCV</span></code> تسمح بتحديد
+مقاييس متعددة لمعلمة “التسجيل”.</p>
+<p>يمكن تحديد التسجيل متعدد المقاييس إما على أنه قائمة من السلاسل لمعرفات الأسماء المحددة مسبقًا أو قاموس يقوم بتعيين اسم المسجل إلى دالة المسجل و/أو اسم (أسماء) المسجل المحدد مسبقًا. راجع <span class="xref std std-ref">multimetric_scoring</span> لمزيد من التفاصيل.</p>
+<p>عند تحديد مقاييس متعددة، يجب تعيين معلمة “refit” على المقياس (سلسلة) الذي سيتم من خلاله العثور على “<a href="#id25"><span class="problematic" id="id26">best_params_</span></a>” واستخدامه لبناء “<a href="#id27"><span class="problematic" id="id28">best_estimator_</span></a>” على مجموعة البيانات بأكملها. إذا لم يكن البحث يجب أن يعاد ضبطه، فحدد “refit=False”. سيؤدي ترك إعادة الضبط إلى قيمة افتراضية “None” إلى حدوث خطأ عند استخدام مقاييس متعددة.</p>
+<p>راجع <a class="reference internal" href="../auto_examples/model_selection/plot_multi_metric_evaluation.html#sphx-glr-auto-examples-model-selection-plot-multi-metric-evaluation-py"><span class="std std-ref">Demonstration of multi-metric evaluation on cross_val_score and GridSearchCV</span></a>
+لمثال على الاستخدام.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">HalvingRandomSearchCV</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">HalvingGridSearchCV</span></code> لا تدعم
+التسجيل متعدد المقاييس.</p>
+</section>
+<section id="composite-grid-search">
+<span id="id7"></span><h2><span class="section-number">3.5.6. </span>المثمنات المركبة ومساحات المعلمات<a class="headerlink" href="#composite-grid-search" title="Link to this heading">#</a></h2>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">GridSearchCV</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">RandomizedSearchCV</span></code> تسمح بالبحث في
+معلمات المثمنات المركبة أو المضمنة مثل
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ColumnTransformer</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">VotingClassifier</span></code> أو
+<code class="xref py py-class docutils literal notranslate"><span class="pre">CalibratedClassifierCV</span></code> باستخدام بناء جملة مخصص
+<code class="docutils literal notranslate"><span class="pre">&lt;estimator&gt;__&lt;parameter&gt;</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">CalibratedClassifierCV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_moons</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calibrated_forest</span> <span class="o">=</span> <span class="n">CalibratedClassifierCV</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="n">estimator</span><span class="o">=</span><span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>   <span class="s1">&#39;estimator__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">calibrated_forest</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">GridSearchCV(cv=5,</span>
+<span class="go">             estimator=CalibratedClassifierCV(...),</span>
+<span class="go">             param_grid={&#39;estimator__max_depth&#39;: [2, 4, 6, 8]})</span>
+</pre></div>
+</div>
+<p>هنا، <code class="docutils literal notranslate"><span class="pre">&lt;estimator&gt;</span></code> هو اسم معلمة المثمن المضمن،
+في هذه الحالة “المثمن”.
+إذا تم بناء المثمن الفوقي كمجموعة من المثمنات كما هو الحال في
+<code class="docutils literal notranslate"><span class="pre">pipeline.Pipeline</span></code>، فإن <code class="docutils literal notranslate"><span class="pre">&lt;estimator&gt;</span></code> يشير إلى اسم المثمن،
+راجع <span class="xref std std-ref">pipeline_nested_parameters</span>. في الممارسة العملية، يمكن أن يكون هناك عدة
+مستويات من التضمين:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectKBest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+<span class="gp">... </span>   <span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">,</span> <span class="n">SelectKBest</span><span class="p">()),</span>
+<span class="gp">... </span>   <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">calibrated_forest</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>   <span class="s1">&#39;select__k&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>   <span class="s1">&#39;model__estimator__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>يرجى الرجوع إلى <span class="xref std std-ref">pipeline</span> لإجراء عمليات بحث عن المعلمات عبر الأنابيب.</p>
+</section>
+<section id="id8">
+<h2><span class="section-number">3.5.7. </span>اختيار النموذج: التطوير والتقييم<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>يمكن اعتبار اختيار النموذج عن طريق تقييم إعدادات المعلمات المختلفة كطريقة
+لاستخدام البيانات الموسومة لتدريب معلمات الشبكة.</p>
+<p>عند تقييم النموذج الناتج، من المهم القيام بذلك على
+عينات محجوزة لم يتم رؤيتها أثناء عملية البحث في الشبكة:
+من المستحسن تقسيم البيانات إلى مجموعة <strong>تطوير</strong> (لتغذية
+مثيل <code class="xref py py-class docutils literal notranslate"><span class="pre">GridSearchCV</span></code>) ومجموعة <strong>تقييم</strong>
+لحساب مقاييس الأداء.</p>
+<p>يمكن القيام بذلك باستخدام دالة المساعدة <code class="xref py py-func docutils literal notranslate"><span class="pre">train_test_split</span></code>.</p>
+</section>
+<section id="id9">
+<h2><span class="section-number">3.5.8. </span>التوازي<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>تقوم أدوات البحث عن المعلمات بتقييم كل مجموعة من المعلمات على كل طية من طيات البيانات
+بشكل مستقل. يمكن تشغيل الحسابات بالتوازي عن طريق استخدام الكلمة الأساسية “n_jobs=-1”. راجع توقيع الدالة لمزيد من التفاصيل، وكذلك إدخال مسرد المصطلحات لـ <a class="reference internal" href="../glossary.html#term-n_jobs"><span class="xref std std-term">n_jobs</span></a>.</p>
+</section>
+<section id="id10">
+<h2><span class="section-number">3.5.9. </span>الصلابة ضد الفشل<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<p>قد تؤدي بعض إعدادات المعلمات إلى فشل “fit” في طية واحدة أو أكثر من طيات البيانات.
+بافتراضياً، سيؤدي هذا إلى فشل البحث بأكمله، حتى إذا كان من الممكن تقييم بعض إعدادات المعلمات بشكل كامل. يؤدي تعيين “error_score=0”
+(أو <code class="docutils literal notranslate"><span class="pre">=np.nan</span></code>) إلى جعل الإجراء صلبًا ضد مثل هذا الفشل، وإصدار تحذير وتعيين درجة الطية إلى 0 (أو “نان”)، ولكن إكمال البحث.</p>
+</section>
+</section>
+<section id="alternative-cv">
+<span id="id11"></span><h1><span class="section-number">3.6. </span>بدائل للبحث المعلمي بالقوة الغاشمة<a class="headerlink" href="#alternative-cv" title="Link to this heading">#</a></h1>
+<section id="id12">
+<h2><span class="section-number">3.6.1. </span>التصنيف المتقاطع المحدد للنموذج<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p>يمكن لبعض النماذج ملاءمة البيانات لنطاق من القيم لبعض المعلمات بنفس الكفاءة تقريبًا
+كما هو الحال في ملاءمة المثمن لقيمة واحدة من المعلمة. يمكن الاستفادة من هذه الميزة لإجراء
+تصنيف متقاطع أكثر كفاءة يستخدم لاختيار نموذج لهذه المعلمة.</p>
+<p>المعلمة الأكثر شيوعًا التي يمكنها استيعاب هذه الاستراتيجية هي المعلمة
+ترميز قوة المنظم. في هذه الحالة نقول أننا
+حساب <strong>مسار التنظيم</strong> للمثمن.</p>
+<p>فيما يلي قائمة بهذه النماذج:</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.ElasticNetCV</span></code>(*[, l1_ratio, ...])</p></td>
+<td><p>Elastic Net model with iterative fitting along a regularization path.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.LarsCV</span></code>(*[, fit_intercept, ...])</p></td>
+<td><p>Cross-validated Least Angle Regression model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.LassoCV</span></code>(*[, eps, n_alphas, ...])</p></td>
+<td><p>Lasso linear model with iterative fitting along a regularization path.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.LassoLarsCV</span></code>(*[, fit_intercept, ...])</p></td>
+<td><p>Cross-validated Lasso, using the LARS algorithm.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.LogisticRegressionCV</span></code>(*[, Cs, ...])</p></td>
+<td><p>Logistic Regression CV (aka logit, MaxEnt) classifier.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.MultiTaskElasticNetCV</span></code>(*[, ...])</p></td>
+<td><p>Multi-task L1/L2 ElasticNet with built-in cross-validation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.MultiTaskLassoCV</span></code>(*[, eps, ...])</p></td>
+<td><p>Multi-task Lasso model trained with L1/L2 mixed-norm as regularizer.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.OrthogonalMatchingPursuitCV</span></code>(*)</p></td>
+<td><p>Cross-validated Orthogonal Matching Pursuit model (OMP).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.RidgeCV</span></code>([alphas, ...])</p></td>
+<td><p>Ridge regression with built-in cross-validation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.RidgeClassifierCV</span></code>([alphas, ...])</p></td>
+<td><p>Ridge classifier with built-in cross-validation.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id13">
+<h2><span class="section-number">3.6.2. </span>معيار المعلومات<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<p>يمكن لبعض النماذج تقديم صيغة مغلقة نظرية للمعلومات لمعامل التنظيم الأمثل عن طريق حساب
+مسار التنظيم الفردي (بدلاً من عدة مسارات عند استخدام التصنيف المتقاطع).</p>
+<p>فيما يلي قائمة بالنماذج التي تستفيد من معيار المعلومات أكايكي (AIC) أو معيار المعلومات الخليجية (BIC) لاختيار النموذج التلقائي:</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_model.LassoLarsIC</span></code>([criterion, ...])</p></td>
+<td><p>Lasso model fit with Lars using BIC or AIC for model selection.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="out-of-bag">
+<span id="id14"></span><h2><span class="section-number">3.6.3. </span>تقديرات خارج الحقيبة<a class="headerlink" href="#out-of-bag" title="Link to this heading">#</a></h2>
+<p>عند استخدام أساليب التجميع المستندة إلى التجميع، أي إنشاء مجموعات تدريب جديدة باستخدام
+العينات مع الاستبدال، يظل جزء من مجموعة التدريب غير مستخدم.  بالنسبة لكل مصنف في المجموعة،
+يتم ترك جزء مختلف من مجموعة التدريب.</p>
+<p>يمكن استخدام هذا الجزء المتروك لتقدير خطأ التعميم
+دون الحاجة إلى الاعتماد على مجموعة تحقق صحة منفصلة.  يأتي هذا التقدير “مجانًا” حيث لا توجد بيانات إضافية مطلوبة ويمكن استخدامه لاختيار النموذج.</p>
+<p>هذا منفذ حاليًا في الفئات التالية:</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensemble.RandomForestClassifier</span></code>([...])</p></td>
+<td><p>A random forest classifier.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensemble.RandomForestRegressor</span></code>([...])</p></td>
+<td><p>A random forest regressor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensemble.ExtraTreesClassifier</span></code>([...])</p></td>
+<td><p>An extra-trees classifier.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensemble.ExtraTreesRegressor</span></code>([n_estimators, ...])</p></td>
+<td><p>An extra-trees regressor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensemble.GradientBoostingClassifier</span></code>(*[, ...])</p></td>
+<td><p>Gradient Boosting for classification.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensemble.GradientBoostingRegressor</span></code>(*[, ...])</p></td>
+<td><p>Gradient Boosting for regression.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cross_validation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3.1. </span>التدقيق المتقاطع: تقييم أداء أداة التقدير</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="classification_threshold.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.7. </span>تعديل عتبة القرار للتنبؤ بالصنف</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3.4. البحث الشامل عن الشبكة</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-parameter-search">3.5. تحسين المعلمة العشوائي</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#min-resources">3.5.1. اختيار “min_resources” وعدد المرشحين</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#amount-of-resource-and-number-of-candidates">3.5.2. كمية الموارد وعدد المرشحين في كل تكرار</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.5.3. اختيار مورد</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.5.4. تحديد مقياس موضوعي</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multimetric-grid-search">3.5.5. تحديد مقاييس متعددة للتقييم</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composite-grid-search">3.5.6. المثمنات المركبة ومساحات المعلمات</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.5.7. اختيار النموذج: التطوير والتقييم</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.5.8. التوازي</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.5.9. الصلابة ضد الفشل</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-cv">3.6. بدائل للبحث المعلمي بالقوة الغاشمة</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">3.6.1. التصنيف المتقاطع المحدد للنموذج</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">3.6.2. معيار المعلومات</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#out-of-bag">3.6.3. تقديرات خارج الحقيبة</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/grid_search.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
