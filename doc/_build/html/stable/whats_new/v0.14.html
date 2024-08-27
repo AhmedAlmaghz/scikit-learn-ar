@@ -1,0 +1,949 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="الإصدار 0.14" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/whats_new/v0.14.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="يسعدني أن أساعدك في ترجمة هذا النص إلى اللغة العربية. يتم في هذا الملف تعيين أسماء المساهمين إلى عناوين URL الخاصة بهم. وينبغي أن يستخدم في الغالب للمساهمين الأساسيين، وفي بعض الأحيان للمساهمين الذ..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="يسعدني أن أساعدك في ترجمة هذا النص إلى اللغة العربية. يتم في هذا الملف تعيين أسماء المساهمين إلى عناوين URL الخاصة بهم. وينبغي أن يستخدم في الغالب للمساهمين الأساسيين، وفي بعض الأحيان للمساهمين الذ..." />
+
+    <title>الإصدار 0.14 &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'whats_new/v0.14';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="الإصدار 0.13.1" href="v0.13.html" />
+    <link rel="prev" title="الأشخاص" href="v0.15.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.6.html">Version 1.6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.html">Version 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.html">Version 1.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.html">Version 1.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.html">Version 1.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.html">Version 1.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.html">الإصدار 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.html">الإصدار 0.24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.html">نماذج معدلة</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.22.html">الإصدار 0.22</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.21.html">الإصدار 0.21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.html">المساهمون</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.19.html">أبرز المميزات</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="v0.18.html">سجل التغييرات</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.17.html">الميزات الجديدة</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.16.html">الإصدار 0.16</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.html">الأشخاص</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">الإصدار 0.14</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.13.html">الإصدار 0.13.1</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="older_versions.html">الإصدارات القديمة</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../whats_new.html" class="nav-link">تاريخ الإصدارات</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">الإصدار 0.14</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>يسعدني أن أساعدك في ترجمة هذا النص إلى اللغة العربية.</p>
+<p>يتم في هذا الملف تعيين أسماء المساهمين إلى عناوين URL الخاصة بهم. وينبغي أن يستخدم في الغالب للمساهمين الأساسيين، وفي بعض الأحيان للمساهمين الذين لا يرغبون في أن تكون صفحتهم على GitHub هي عنوان URL المستهدف الخاص بهم. وقد تم استخدامه تاريخياً لربط جميع أسماء المساهمين، ويجب الآن تفضيل “:user:”. كما أنه يحدد استبدالات ReST الأخرى.</p>
+<section id="id1">
+<h1>الإصدار 0.14<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p id="changes-0-14">الإصدار 0.14
+<strong>7 أغسطس 2013</strong></p>
+<p>سجل التغييرات</p>
+<ul class="simple">
+<li><p>يمكن تقدير القيم المفقودة مع المصفوفات المتناثرة والكثيفة باستخدام المحول “preprocessing.Imputer” من قبل “Nicolas Trésegnie”.</p></li>
+<li><p>تمت إعادة كتابة التنفيذ الأساسي لشجرة القرارات من الصفر، مما يسمح بتشجير أسرع واستهلاك ذاكرة أقل في جميع المحللين الشجريين. من قبل “Gilles Louppe”.</p></li>
+<li><p>تمت الإضافة: class: ‘ensemble.AdaBoostClassifier’ و class: ‘ensemble.AdaBoostRegressor’، من قبل “Noel Dawe” و “Gilles Louppe”. راجع قسم “AdaBoost” في دليل المستخدم للحصول على التفاصيل والأمثلة.</p></li>
+<li><p>تمت الإضافة: ‘grid_search.RandomizedSearchCV’ و ‘grid_search.ParameterSampler’ للتحسين العشوائي لضبط المعلمات. من قبل “Andreas Müller”.</p></li>
+<li><p>تمت الإضافة: مرجع: ‘biclustering’ و خوارزميات ‘sklearn.cluster.bicluster.SpectralCoclustering’ و ‘sklearn.cluster.bicluster.SpectralBiclustering’، وطرق توليد البيانات: func: ‘sklearn.datasets.make_biclusters’ و func: ‘sklearn.datasets.make_checkerboard’، ومقاييس التقييم: func: ‘sklearn.metrics.consensus_score’. من قبل “Kemal Eren”.</p></li>
+<li><p>تمت الإضافة: مرجع: ‘Restricted Boltzmann Machines’ و class: ‘neural_network.BernoulliRBM’. من قبل “Yann Dauphin”.</p></li>
+<li><p>دعم Python 3 من قبل: user: ‘Justin Vincent &lt;justinvf&gt;’، و ‘Lars Buitinck’، و user: ‘Subhodeep Moitra &lt;smoitra87&gt;’، و ‘Olivier Grisel’. جميع الاختبارات الآن تمر في Python 3.3.</p></li>
+<li><p>القدرة على تمرير عقوبة واحدة (قيمة ألفا) لكل هدف في class: ‘linear_model.Ridge’، من قبل &#64;eickenberg و “Mathieu Blondel”.</p></li>
+<li><p>تم إصلاح مشكلة L2 regularization في sklearn.linear_model.stochastic_gradient.py (أهمية عملية طفيفة). من قبل: user: ‘Norbert Crombach &lt;norbert&gt;’ و “Mathieu Blondel”.</p></li>
+<li><p>تمت إضافة نسخة تفاعلية من “Cheat Sheet للتعلم الآلي (لـ scikit-learn)” من قبل “Andreas Müller” إلى الوثائق. راجع: ref: ‘Choosing the right estimator &lt;ml_map&gt;’. من قبل “Jaques Grobler”.</p></li>
+<li><p>grid_search.GridSearchCV و cross_validation.cross_val_score الآن يدعمان استخدام وظيفة تسجيل النتائج المتقدمة مثل المنطقة تحت منحنى ROC ونتائج F-beta. راجع: ref: ‘scoring_parameter’ للحصول على التفاصيل. من قبل “Andreas Müller” و ‘Lars Buitinck’. تمرير دالة من: mod: ‘sklearn.metrics’ كـ “score_func” تم إهماله.</p></li>
+<li><p>مخرجات التصنيف متعدد التصنيفات مدعومة الآن من قبل: func: ‘metrics.accuracy_score’، و func: ‘metrics.zero_one_loss’، و func: ‘metrics.f1_score’، و func: ‘metrics.fbeta_score’، و func: ‘metrics.classification_report’، و func: ‘metrics.precision_score’ و func: ‘metrics.recall_score’ من قبل “Arnaud Joly”.</p></li>
+<li><p>تمت إضافة مقياسين جديدين: func: ‘metrics.hamming_loss’ و ‘metrics.jaccard_similarity_score’ مع دعم التصنيف متعدد التصنيفات من قبل “Arnaud Joly”.</p></li>
+<li><p>تحسينات السرعة واستخدام الذاكرة في class: ‘feature_extraction.text.CountVectorizer’ و class: ‘feature_extraction.text.TfidfVectorizer’، من قبل Jochen Wersdörfer و Roman Sinayev.</p></li>
+<li><p>تم إعادة تعيين معلمة “min_df” في class: ‘feature_extraction.text.CountVectorizer’ و class: ‘feature_extraction.text.TfidfVectorizer’، والتي كانت 2، إلى 1 لتجنب المفاجآت غير السارة (المفردات الفارغة) للمستخدمين المبتدئين الذين يجربونها على مجموعات وثائق صغيرة. لا يزال يوصى باستخدام قيمة 2 على الأقل للاستخدام العملي.</p></li>
+<li><p>class: ‘svm.LinearSVC’، و class: ‘linear_model.SGDClassifier’ و class: ‘linear_model.SGDRegressor’ لديها الآن طريقة “sparsify” التي تحول “<a href="#id3"><span class="problematic" id="id4">coef_</span></a>” إلى مصفوفة متفرقة، مما يعني أن النماذج المخزنة المدربة باستخدام هذه المحللين يمكن أن تكون أكثر إحكاما.</p></li>
+<li><p>class: ‘linear_model.SGDClassifier’ ينتج الآن تقديرات احتمالية متعددة الفئات عند تدريبه تحت خسارة لوج لوز أو خسارة هابر المعدلة.</p></li>
+<li><p>روابط إلى وثائق في كود المثال على الموقع من قبل: user: ‘Martin Luessi &lt;mluessi&gt;’.</p></li>
+<li><p>تم إصلاح خطأ في class: ‘preprocessing.MinMaxScaler’ يسبب عدم تناسق في تحجيم الميزات لإعدادات “feature_range” غير الافتراضية. من قبل “Andreas Müller”.</p></li>
+<li><p>“max_features” في class: ‘tree.DecisionTreeClassifier’، و class: ‘tree.DecisionTreeRegressor’ وجميع المحللين المجمعين المشتقين يدعمون الآن القيم النسبية. من قبل “Gilles Louppe”.</p></li>
+<li><p>تحسينات الأداء في class: ‘isotonic.IsotonicRegression’ من قبل “Nelle Varoquaux”.</p></li>
+<li><p>func: ‘metrics.accuracy_score’ لديها خيار التطبيع لإرجاع كسر أو عدد العينات المصنفة بشكل صحيح من قبل “Arnaud Joly”.</p></li>
+<li><p>تمت الإضافة: func: ‘metrics.log_loss’ الذي يحسب خسارة السجل، المعروف أيضًا باسم خسارة الإنتروبيا. من قبل Jochen Wersdörfer و ‘Lars Buitinck’.</p></li>
+<li><p>تم إصلاح خطأ تسبب في خرج احتمالات غير صحيحة من class: ‘ensemble.AdaBoostClassifier’.</p></li>
+<li><p>الآن، برامج اختيار الميزات تشترك في mixin توفر طرق “transform” و “inverse_transform” و “get_support” متسقة. من قبل “Joel Nothman”.</p></li>
+<li><p>يمكن الآن إجراء التخليل بشكل عام على class: ‘grid_search.GridSearchCV’ أو class: ‘grid_search.RandomizedSearchCV’ المناسب. من قبل “Joel Nothman”.</p></li>
+<li><p>تم إعادة تنظيم وتنفيذ func: ‘metrics.roc_curve’ و func: ‘metrics.precision_recall_curve’ باستخدام المتجهات. من قبل “Joel Nothman”.</p></li>
+<li><p>يقوم المحلل الجديد class: ‘sklearn.decomposition.TruncatedSVD’ بخفض الأبعاد باستخدام SVD على المصفوفات المتناثرة، ويمكن استخدامه لتحليل المعنى الدلالي الكامن (LSA). من قبل ‘Lars Buitinck’.</p></li>
+<li><p>تمت الإضافة: مثال ذاتي الاحتواء للتعلم خارج النواة على بيانات النص: ref: ‘sphx_glr_auto_examples_applications_plot_out_of_core_classification.py’. من قبل: user: ‘Eustache Diemert &lt;oddskool&gt;’.</p></li>
+<li><p>تم توثيق العدد الافتراضي للمكونات لـ ‘sklearn.decomposition.RandomizedPCA’ بشكل صحيح على أنه “n_features”. كان هذا هو السلوك الافتراضي، لذا ستستمر البرامج التي تستخدمه في العمل كما كانت من قبل.</p></li>
+<li><p>class: ‘sklearn.cluster.KMeans’ الآن يناسب عدة أوامر من حيث الحجم بشكل أسرع على البيانات المتناثرة (يعتمد التسريع على مدى ندرة البيانات). من قبل ‘Lars Buitinck’.</p></li>
+<li><p>تقليل البصمة الذاكرية لـ FastICA من قبل ‘Denis Engemann’ و ‘Alexandre Gramfort’.</p></li>
+<li><p>يستخدم الإخراج المفصل في ‘sklearn.ensemble.gradient_boosting’ الآن تنسيق العمود ويطبع التقدم بوتيرة متناقصة. كما أنه يظهر الوقت المتبقي. من قبل “Peter Prettenhofer”.</p></li>
+<li><p>يوفر ‘sklearn.ensemble.gradient_boosting’ تحسين خارج الحقيبة ‘<a href="#id5"><span class="problematic" id="id6">oob_improvement_</span></a>’ بدلاً من نتيجة OOB لاختيار النموذج. تمت إضافة مثال يوضح كيفية استخدام تقديرات خارج الحقيبة لاختيار عدد الأشجار. من قبل “Peter Prettenhofer”.</p></li>
+<li><p>معظم المقاييس تدعم الآن تسميات السلاسل لتصنيفات متعددة الفئات من قبل “Arnaud Joly” و ‘Lars Buitinck’.</p></li>
+<li><p>تمت الإضافة: class: ‘OrthogonalMatchingPursuitCV’ من قبل ‘Alexandre Gramfort’ و ‘Vlad Niculae’.</p></li>
+<li><p>تم إصلاح خطأ في ‘sklearn.covariance.GraphLassoCV’: معلمة “alphas” تعمل الآن كما هو متوقع عند إعطائها قائمة بالقيم. من قبل فيليب جيرفيس.</p></li>
+<li><p>تم إصلاح خطأ مهم في ‘sklearn.covariance.GraphLassoCV’ الذي منع جميع الطيات المقدمة من قبل كائن CV من الاستخدام (تم استخدام الطيات الثلاثة الأولى فقط). عند توفير كائن CV، قد يزيد وقت التنفيذ بشكل كبير مقارنة بالإصدار السابق (النتائج الصحيحة الآن). من قبل فيليب جيرفيس.</p></li>
+<li><p>cross_validation.cross_val_score ووحدة grid_search تم اختبارهما الآن مع بيانات متعددة الإخراج من قبل “Arnaud Joly”.</p></li>
+<li><p>func: ‘datasets.make_multilabel_classification’ يمكنه الآن إرجاع الإخراج بتنسيق مؤشر التصنيف متعدد التصنيفات من قبل “Arnaud Joly”.</p></li>
+<li><p>جيران أقرب-k، class: ‘neighbors.KNeighborsRegressor’ و class: ‘neighbors.RadiusNeighborsRegressor’، وجيران نصف القطر، class: ‘neighbors.RadiusNeighborsRegressor’ و class: ‘neighbors.RadiusNeighborsClassifier’ يدعمون بيانات الإخراج المتعددة من قبل “Arnaud Joly”.</p></li>
+<li><p>يمكن الآن التحكم في حالة العشوائية في المحللين القائمين على LibSVM (class: ‘svm.SVC’، و class: ‘svm.NuSVC’، و class: ‘svm.OneClassSVM’، و class: ‘svm.SVR’، و class: ‘svm.NuSVR’). هذا مفيد لضمان الاتساق في تقديرات الاحتمال للمحللين المدربين باستخدام “probability=True”. من قبل ‘Vlad Niculae’.</p></li>
+<li><p>دعم التعلم خارج النواة لمصنفي بايز النادرين: class: ‘sklearn.naive_bayes.MultinomialNB’ و class: ‘sklearn.naive_bayes.BernoulliNB’ عن طريق إضافة طريقة “partial_fit” من قبل ‘Olivier Grisel’.</p></li>
+<li><p>تصميم موقع ويب وتصميم جديدين من قبل “Gilles Louppe” و “Nelle Varoquaux” وفنسنت ميشيل و “Andreas Müller”.</p></li>
+<li><p>تحسين الوثائق حول: ref: ‘multi-class، multi-label and multi-output classification &lt;multiclass&gt;’ من قبل “Yannick Schwartz” و “Arnaud Joly”.</p></li>
+<li><p>معالجة الإدخال والخطأ المحسنة في الوحدة النمطية: mod: ‘sklearn.metrics’ من قبل “Arnaud Joly” و “Joel Nothman”.</p></li>
+<li><p>تحسين سرعة وحدة نمطية ‘hmm’ من قبل: user: ‘Mikhail Korobov &lt;kmike&gt;’.</p></li>
+<li><p>تحسينات كبيرة في السرعة لـ class: ‘sklearn.cluster.DBSCAN’ من قبل ‘cleverless &lt;<a class="github reference external" href="https://github.com/cleverless">cleverless</a>&gt;’.</p></li>
+</ul>
+<p>ملخص التغييرات في واجهة برمجة التطبيقات
+فيما يلي ترجمة النص إلى اللغة العربية:</p>
+<ul class="simple">
+<li><p>تم تغيير اسم <code class="docutils literal notranslate"><span class="pre">auc_score</span></code> إلى :func:<code class="docutils literal notranslate"><span class="pre">metrics.roc_auc_score</span></code>.</p></li>
+<li><p>استخدام <code class="docutils literal notranslate"><span class="pre">sklearn.test()</span></code> لاختبار scikit-learn أصبح مهملاً. استخدم بدلاً من ذلك <code class="docutils literal notranslate"><span class="pre">nosetests</span> <span class="pre">sklearn</span></code> من سطر الأوامر.</p></li>
+<li><p>أهمية الميزات في :class:<code class="docutils literal notranslate"><span class="pre">tree.DecisionTreeClassifier</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">tree.DecisionTreeRegressor</span></code>، وجميع مصنفات المجوعات المشتقة يتم حسابها الآن أثناء التنقل عند الوصول إلى سمة <code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code>. ولم يعد من المطلوب تعيين <code class="docutils literal notranslate"><span class="pre">compute_importances=True</span></code>. بواسطة <a class="reference external" href="http://www.montefiore.ulg.ac.be/~glouppe/">Gilles Louppe</a>.</p></li>
+<li><p>يمكن لـ :class:<code class="docutils literal notranslate"><span class="pre">linear_model.lasso_path</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">linear_model.enet_path</span></code> إرجاع نتائجهما بنفس تنسيق :class:<code class="docutils literal notranslate"><span class="pre">linear_model.lars_path</span></code>. يتم ذلك عن طريق تعيين معلمة <code class="docutils literal notranslate"><span class="pre">return_models</span></code> إلى <code class="docutils literal notranslate"><span class="pre">False</span></code>. بواسطة <a class="reference external" href="https://github.com/jaquesgrobler">Jaques Grobler</a> و`Alexandre Gramfort`_</p></li>
+<li><p>تم تغيير اسم <code class="docutils literal notranslate"><span class="pre">grid_search.IterGrid</span></code> إلى <code class="docutils literal notranslate"><span class="pre">grid_search.ParameterGrid</span></code>.</p></li>
+<li><p>تم إصلاح خطأ في <code class="docutils literal notranslate"><span class="pre">KFold</span></code> يتسبب في عدم توازن مثالي في الفئات في بعض الحالات. بواسطة <a class="reference external" href="http://alexandre.gramfort.net">Alexandre Gramfort</a> وTadej Janež.</p></li>
+<li><p>تمت إعادة صياغة :class:<code class="docutils literal notranslate"><span class="pre">sklearn.neighbors.BallTree</span></code>، وتمت إضافة :class:<code class="docutils literal notranslate"><span class="pre">sklearn.neighbors.KDTree</span></code> الذي يشارك نفس الواجهة. شجرة الكرة الآن تعمل مع مجموعة متنوعة من مقاييس المسافة. تحتوي كلتا الفئتين على العديد من الطرق الجديدة، بما في ذلك الاستعلامات ذات الشجرة الواحدة والمزدوجة، والبحث بعرض أول وعمق أول، والاستعلامات الأكثر تقدمًا مثل تقدير كثافة النواة ووظائف الارتباط ثنائية النقطة. بواسطة <a class="reference external" href="https://staff.washington.edu/jakevdp/">Jake Vanderplas</a></p></li>
+<li><p>تمت إزالة الدعم لـ scipy.spatial.cKDTree ضمن استعلامات الجيران، وتم استبدال الوظيفة بفئة :class:<code class="docutils literal notranslate"><span class="pre">sklearn.neighbors.KDTree</span></code> الجديدة.</p></li>
+<li><p>تمت إضافة :class:<code class="docutils literal notranslate"><span class="pre">sklearn.neighbors.KernelDensity</span></code>، والتي تقوم بتقدير كثافة النواة بكفاءة باستخدام مجموعة متنوعة من النواة.</p></li>
+<li><p>:class:<code class="docutils literal notranslate"><span class="pre">sklearn.decomposition.KernelPCA</span></code> الآن يعيد دائمًا الإخراج مع <code class="docutils literal notranslate"><span class="pre">n_components</span></code> المكونات، ما لم يتم تعيين معلمة <code class="docutils literal notranslate"><span class="pre">remove_zero_eig</span></code> الجديدة إلى <code class="docutils literal notranslate"><span class="pre">True</span></code>. هذا السلوك الجديد يتسق مع الطريقة التي تم بها توثيق Kernel PCA دائمًا؛ في السابق، كان يتم ضمنيًا إزالة المكونات ذات القيم الذاتية الصفرية من جميع البيانات.</p></li>
+<li><p>لم يعد <code class="docutils literal notranslate"><span class="pre">gcv_mode=&quot;auto&quot;</span></code> يحاول إجراء SVD على مصفوفة ممتلئة مبعثرة في :class:<code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.RidgeCV</span></code>.</p></li>
+<li><p>أصبح دعم المصفوفة المبعثرة في <code class="docutils literal notranslate"><span class="pre">sklearn.decomposition.RandomizedPCA</span></code> مهملاً لصالح <code class="docutils literal notranslate"><span class="pre">TruncatedSVD</span></code> الجديدة.</p></li>
+<li><p>الآن، يقوم <code class="docutils literal notranslate"><span class="pre">cross_validation.KFold</span></code> و`cross_validation.StratifiedKFold` بفرض <code class="docutils literal notranslate"><span class="pre">n_folds</span> <span class="pre">&gt;=</span> <span class="pre">2</span></code> وإلا يتم إلقاء <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. بواسطة <a class="reference external" href="https://twitter.com/ogrisel">Olivier Grisel</a>.</p></li>
+<li><p>تمت إعادة تسمية معلمات <code class="docutils literal notranslate"><span class="pre">charset</span></code> و``charset_errors`` في :func:<code class="docutils literal notranslate"><span class="pre">datasets.load_files</span></code> إلى <code class="docutils literal notranslate"><span class="pre">encoding</span></code> و``decode_errors`` على التوالي.</p></li>
+<li><p>أصبحت السمة <code class="docutils literal notranslate"><span class="pre">oob_score_</span></code> في :class:<code class="docutils literal notranslate"><span class="pre">sklearn.ensemble.GradientBoostingRegressor</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">sklearn.ensemble.GradientBoostingClassifier</span></code> مهملة وتم استبدالها بـ <code class="docutils literal notranslate"><span class="pre">oob_improvement_</span></code>.</p></li>
+<li><p>أصبحت السمات في OrthogonalMatchingPursuit مهملة (copy_X، Gram، …) وتمت إعادة تسمية precompute_gram إلى precompute للاتساق. راجع #2224.</p></li>
+<li><p>الآن، يقوم :class:<code class="docutils literal notranslate"><span class="pre">sklearn.preprocessing.StandardScaler</span></code> بتحويل الإدخال الصحيح إلى float، ويرفع تحذيرًا. في السابق، كان يقوم بالتقريب للإدخال الصحيح الكثيف.</p></li>
+<li><p>الآن، لدى :class:<code class="docutils literal notranslate"><span class="pre">sklearn.multiclass.OneVsRestClassifier</span></code> طريقة <code class="docutils literal notranslate"><span class="pre">decision_function</span></code>. ستعيد هذه الطريقة مسافة كل عينة من حد القرار لكل فئة، طالما أن المصنفات الأساسية تنفذ طريقة <code class="docutils literal notranslate"><span class="pre">decision_function</span></code>. بواسطة <a class="reference external" href="https://kastnerkyle.github.io/">Kyle Kastner</a>.</p></li>
+<li><p>التحقق من صحة الإدخال بشكل أفضل، والتحذير من الأشكال غير المتوقعة لـ y.</p></li>
+</ul>
+<section id="id2">
+<h2>الأشخاص<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>قائمة المساهمين للإصدار 0.14 حسب عدد الالتزامات.</p>
+<ul class="simple">
+<li><p>277  Gilles Louppe</p></li>
+<li><p>245  Lars Buitinck</p></li>
+<li><p>187  Andreas Mueller</p></li>
+<li><p>124  Arnaud Joly</p></li>
+<li><p>112  Jaques Grobler</p></li>
+<li><p>109  Gael Varoquaux</p></li>
+<li><p>107  Olivier Grisel</p></li>
+<li><p>102  Noel Dawe</p></li>
+<li><p>99  Kemal Eren</p></li>
+<li><p>79  Joel Nothman</p></li>
+<li><p>75  Jake VanderPlas</p></li>
+<li><p>73  Nelle Varoquaux</p></li>
+<li><p>71  Vlad Niculae</p></li>
+<li><p>65  Peter Prettenhofer</p></li>
+<li><p>64  Alexandre Gramfort</p></li>
+<li><p>54  Mathieu Blondel</p></li>
+<li><p>38  Nicolas Trésegnie</p></li>
+<li><p>35  eustache</p></li>
+<li><p>27  Denis Engemann</p></li>
+<li><p>25  Yann N. Dauphin</p></li>
+<li><p>19  Justin Vincent</p></li>
+<li><p>17  Robert Layton</p></li>
+<li><p>15  Doug Coleman</p></li>
+<li><p>14  Michael Eickenberg</p></li>
+<li><p>13  Robert Marchman</p></li>
+<li><p>11  Fabian Pedregosa</p></li>
+<li><p>11  Philippe Gervais</p></li>
+<li><p>10  Jim Holmström</p></li>
+<li><p>10  Tadej Janež</p></li>
+<li><p>10  syhw</p></li>
+<li><p>9  Mikhail Korobov</p></li>
+<li><p>9  Steven De Gryze</p></li>
+<li><p>8  sergeyf</p></li>
+<li><p>7  Ben Root</p></li>
+<li><p>7  Hrishikesh Huilgolkar</p></li>
+<li><p>6  Kyle Kastner</p></li>
+<li><p>6  Martin Luessi</p></li>
+<li><p>6  Rob Speer</p></li>
+<li><p>5  Federico Vaggi</p></li>
+<li><p>5  Raul Garreta</p></li>
+<li><p>5  Rob Zinkov</p></li>
+<li><p>4  Ken Geis</p></li>
+<li><p>3  A. Flaxman</p></li>
+<li><p>3  Denton Cockburn</p></li>
+<li><p>3  Dougal Sutherland</p></li>
+<li><p>3  Ian Ozsvald</p></li>
+<li><p>3  Johannes Schönberger</p></li>
+<li><p>3  Robert McGibbon</p></li>
+<li><p>3  Roman Sinayev</p></li>
+<li><p>3  Szabo Roland</p></li>
+<li><p>2  Diego Molla</p></li>
+<li><p>2  Imran Haque</p></li>
+<li><p>2  Jochen Wersdörfer</p></li>
+<li><p>2  Sergey Karayev</p></li>
+<li><p>2  Yannick Schwartz</p></li>
+<li><p>2  jamestwebber</p></li>
+<li><p>1  Abhijeet Kolhe</p></li>
+<li><p>1  Alexander Fabisch</p></li>
+<li><p>1  Bastiaan van den Berg</p></li>
+<li><p>1  Benjamin Peterson</p></li>
+<li><p>1  Daniel Velkov</p></li>
+<li><p>1  Fazlul Shahriar</p></li>
+<li><p>1  Felix Brockherde</p></li>
+<li><p>1  Félix-Antoine Fortin</p></li>
+<li><p>1  Harikrishnan S</p></li>
+<li><p>1  Jack Hale</p></li>
+<li><p>1  JakeMick</p></li>
+<li><p>1  James McDermott</p></li>
+<li><p>1  John Benediktsson</p></li>
+<li><p>1  John Zwinck</p></li>
+<li><p>1  Joshua Vredevoogd</p></li>
+<li><p>1  Justin Pati</p></li>
+<li><p>1  Kevin Hughes</p></li>
+<li><p>1  Kyle Kelley</p></li>
+<li><p>1  Matthias Ekman</p></li>
+<li><p>1  Miroslav Shubernetskiy</p></li>
+<li><p>1  Naoki Orii</p></li>
+<li><p>1  Norbert Crombach</p></li>
+<li><p>1  Rafael Cunha de Almeida</p></li>
+<li><p>1  Rolando Espinoza La fuente</p></li>
+<li><p>1  Seamus Abshere</p></li>
+<li><p>1  Sergey Feldman</p></li>
+<li><p>1  Sergio Medina</p></li>
+<li><p>1  Stefano Lattarini</p></li>
+<li><p>1  Steve Koch</p></li>
+<li><p>1  Sturla Molden</p></li>
+<li><p>1  Thomas Jarosch</p></li>
+<li><p>1  Yaroslav Halchenko</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="v0.15.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">الأشخاص</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="v0.13.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">الإصدار 0.13.1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">الأشخاص</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/whats_new/v0.14.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
