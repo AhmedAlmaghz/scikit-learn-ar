@@ -1,0 +1,962 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="الإصدار 0.13.1" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/whats_new/v0.13.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="23 فبراير 2013 يصلح إصدار 0.13.1 بعض الأخطاء فقط ولا يضيف أي وظائف جديدة. سجل التغييرات: تم إصلاح خطأ في الاختبار ناتج عن تفسير دالة cross_validation.train_test_split على أنها اختبار بواسطة`Yarosla..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="23 فبراير 2013 يصلح إصدار 0.13.1 بعض الأخطاء فقط ولا يضيف أي وظائف جديدة. سجل التغييرات: تم إصلاح خطأ في الاختبار ناتج عن تفسير دالة cross_validation.train_test_split على أنها اختبار بواسطة`Yarosla..." />
+
+    <title>الإصدار 0.13.1 &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'whats_new/v0.13';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="الإصدارات القديمة" href="older_versions.html" />
+    <link rel="prev" title="الإصدار 0.14" href="v0.14.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.6.html">Version 1.6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.html">Version 1.5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.html">Version 1.4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.html">Version 1.3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.html">Version 1.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.html">Version 1.1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.html">الإصدار 1.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.html">الإصدار 0.24</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.html">نماذج معدلة</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.22.html">الإصدار 0.22</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.21.html">الإصدار 0.21</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.html">المساهمون</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.19.html">أبرز المميزات</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="v0.18.html">سجل التغييرات</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.17.html">الميزات الجديدة</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="v0.16.html">الإصدار 0.16</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.html">الأشخاص</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.14.html">الإصدار 0.14</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">الإصدار 0.13.1</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="older_versions.html">الإصدارات القديمة</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../whats_new.html" class="nav-link">تاريخ الإصدارات</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">الإصدار 0.13.1</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>الإصدار 0.13.1<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p><strong>23 فبراير 2013</strong></p>
+<p>يصلح إصدار 0.13.1 بعض الأخطاء فقط ولا يضيف أي وظائف جديدة.</p>
+<section id="id2">
+<h2>سجل التغييرات<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>تم إصلاح خطأ في الاختبار ناتج عن تفسير دالة <code class="docutils literal notranslate"><span class="pre">cross_validation.train_test_split</span></code> على أنها اختبار بواسطة <a href="#id6"><span class="problematic" id="id7">`Yaroslav Halchenko`_</span></a>.</p></li>
+<li><p>تم إصلاح خطأ في إعادة تعيين المجموعات الصغيرة في <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.MiniBatchKMeans</span></code> بواسطة <a href="#id8"><span class="problematic" id="id9">`Gael Varoquaux`_</span></a>.</p></li>
+<li><p>تم إصلاح القيمة الافتراضية لـ <code class="docutils literal notranslate"><span class="pre">gamma</span></code> في <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.KernelPCA</span></code> بواسطة <a href="#id10"><span class="problematic" id="id11">`Lars Buitinck`_</span></a>.</p></li>
+<li><p>تم تحديث joblib إلى الإصدار <code class="docutils literal notranslate"><span class="pre">0.7.0d</span></code> بواسطة <a href="#id12"><span class="problematic" id="id13">`Gael Varoquaux`_</span></a>.</p></li>
+<li><p>تم إصلاح عملية قياس الانحراف في <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingClassifier</span></code> بواسطة <a href="#id14"><span class="problematic" id="id15">`Peter Prettenhofer`_</span></a>.</p></li>
+<li><p>تم تحسين كسر التعادل في <code class="xref py py-class docutils literal notranslate"><span class="pre">multiclass.OneVsOneClassifier</span></code> بواسطة <a href="#id16"><span class="problematic" id="id17">`Andreas Müller`_</span></a>.</p></li>
+<li><p>تحسينات طفيفة أخرى على الاختبارات والتوثيق.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>الأشخاص<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>قائمة المساهمين في الإصدار 0.13.1 حسب عدد الالتزامات.</p>
+<ul class="simple">
+<li><p>16  <a href="#id18"><span class="problematic" id="id19">`Lars Buitinck`_</span></a></p></li>
+<li><p>12  <a href="#id20"><span class="problematic" id="id21">`Andreas Müller`_</span></a></p></li>
+<li><p>8  <a href="#id22"><span class="problematic" id="id23">`Gael Varoquaux`_</span></a></p></li>
+<li><p>5  Robert Marchman</p></li>
+<li><p>3  <a href="#id24"><span class="problematic" id="id25">`Peter Prettenhofer`_</span></a></p></li>
+<li><p>2  Hrishikesh Huilgolkar</p></li>
+<li><p>1  Bastiaan van den Berg</p></li>
+<li><p>1  Diego Molla</p></li>
+<li><p>1  <a href="#id26"><span class="problematic" id="id27">`Gilles Louppe`_</span></a></p></li>
+<li><p>1  <a href="#id28"><span class="problematic" id="id29">`Mathieu Blondel`_</span></a></p></li>
+<li><p>1  <a href="#id30"><span class="problematic" id="id31">`Nelle Varoquaux`_</span></a></p></li>
+<li><p>1  Rafael Cunha de Almeida</p></li>
+<li><p>1  Rolando Espinoza La fuente</p></li>
+<li><p>1  <a href="#id32"><span class="problematic" id="id33">`Vlad Niculae`_</span></a></p></li>
+<li><p>1  <a href="#id34"><span class="problematic" id="id35">`Yaroslav Halchenko`_</span></a></p></li>
+</ul>
+</section>
+</section>
+<section id="id4">
+<h1>الإصدار 0.13<a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+<p>هذا هو الإصدار الأول من Scikit-learn الذي يتضمن تغييرات كبيرة. لقد تم توثيق معظمها في <a class="reference external" href="http://scikit-learn.org/stable/whats_new.html#version-0-13">دليل ترحيل الإصدار 0.13</a>، ولكن تم أيضًا توضيح بعضها أدناه.</p>
+<p><strong>21 يناير 2013</strong></p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dummy.DummyClassifier</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">dummy.DummyRegressor</span></code>، مُقدِّران مستقلان عن البيانات بواسطة <a href="#id36"><span class="problematic" id="id37">`Mathieu Blondel`_</span></a>. مفيدة لاختبار سلامة مُقدِّراتك. راجع <span class="xref std std-ref">dummy_estimators</span> في دليل المستخدم. تمت إضافة دعم الإخراج المتعدد بواسطة <a href="#id38"><span class="problematic" id="id39">`Arnaud Joly`_</span></a>.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.FactorAnalysis</span></code>، محوِّل ينفذ تحليل العوامل الكلاسيكي، بواسطة <a href="#id40"><span class="problematic" id="id41">`Christian Osendorfer`_</span></a> و <a href="#id42"><span class="problematic" id="id43">`Alexandre Gramfort`_</span></a>. راجع <a class="reference internal" href="../modules/decomposition.html#fa"><span class="std std-ref">التحليل العاملي</span></a> في دليل المستخدم.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">feature_extraction.FeatureHasher</span></code>، محوِّل ينفذ “خدعة التجزئة” للاستخراج السريع والمُقتصد للذاكرة للميزات من الحقول النصية بواسطة <a href="#id44"><span class="problematic" id="id45">`Lars Buitinck`_</span></a> و <code class="xref py py-class docutils literal notranslate"><span class="pre">feature_extraction.text.HashingVectorizer</span></code> لوثائق النص بواسطة <a href="#id46"><span class="problematic" id="id47">`Olivier Grisel`_</span></a> راجع <span class="xref std std-ref">feature_hashing</span> و <span class="xref std std-ref">hashing_vectorizer</span> للاطلاع على الوثائق والاستخدام النموذجي.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.FeatureUnion</span></code>، محوِّل يقوم بدمج نتائج العديد من المحولات الأخرى بواسطة <a href="#id48"><span class="problematic" id="id49">`Andreas Müller`_</span></a>. راجع <a class="reference internal" href="../modules/compose.html#feature-union"><span class="std std-ref">FeatureUnion: مساحات الميزات المركبة</span></a> في دليل المستخدم.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">random_projection.GaussianRandomProjection</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">random_projection.SparseRandomProjection</span></code> ووظيفة <code class="xref py py-func docutils literal notranslate"><span class="pre">random_projection.johnson_lindenstrauss_min_dim</span></code>. الأولان هما محوِّلان ينفذان مصفوفة الإسقاط العشوائي الغاوسي والمُبعثر بواسطة <a href="#id50"><span class="problematic" id="id51">`Olivier Grisel`_</span></a> و <a href="#id52"><span class="problematic" id="id53">`Arnaud Joly`_</span></a>. راجع <a class="reference internal" href="../modules/random_projection.html#random-projection"><span class="std std-ref">الإسقاط العشوائي</span></a> في دليل المستخدم.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">kernel_approximation.Nystroem</span></code>، محوِّل لتقريب النواة التعسفية بواسطة <a href="#id54"><span class="problematic" id="id55">`Andreas Müller`_</span></a>. راجع <span class="xref std std-ref">nystroem_kernel_approx</span> في دليل المستخدم.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">preprocessing.OneHotEncoder</span></code>، محوِّل يحسب الترميزات الثنائية للميزات الفئوية بواسطة <a href="#id56"><span class="problematic" id="id57">`Andreas Müller`_</span></a>. راجع <span class="xref std std-ref">preprocessing_categorical_features</span> في دليل المستخدم.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.PassiveAggressiveClassifier</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.PassiveAggressiveRegressor</span></code>، مُقدِّرات تنفذ تحسينًا احتماليًا فعالًا للنماذج الخطية بواسطة <a href="#id58"><span class="problematic" id="id59">`Rob Zinkov`_</span></a> و <a href="#id60"><span class="problematic" id="id61">`Mathieu Blondel`_</span></a>. راجع <a class="reference internal" href="../modules/linear_model.html#passive-aggressive"><span class="std std-ref">خوارزميات عدوانية سلبية</span></a> في دليل المستخدم.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.RandomTreesEmbedding</span></code>، محوِّل لإنشاء تمثيلات مُبعثرة عالية الأبعاد باستخدام مجموعات من الأشجار العشوائية تمامًا بواسطة <a href="#id62"><span class="problematic" id="id63">`Andreas Müller`_</span></a>. راجع <span class="xref std std-ref">random_trees_embedding</span> في دليل المستخدم.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">manifold.SpectralEmbedding</span></code> ووظيفة <code class="xref py py-func docutils literal notranslate"><span class="pre">manifold.spectral_embedding</span></code>، التي تنفذ تحويل “خرائط لابلاسيان” للاختزال غير الخطي للأبعاد بواسطة Wei Li. راجع <span class="xref std std-ref">spectral_embedding</span> في دليل المستخدم.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">isotonic.IsotonicRegression</span></code> بواسطة <a href="#id64"><span class="problematic" id="id65">`Fabian Pedregosa`_</span></a>، <a href="#id66"><span class="problematic" id="id67">`Alexandre Gramfort`_</span></a> و <a href="#id68"><span class="problematic" id="id69">`Nelle Varoquaux`_</span></a>،</p></li>
+</ul>
+<ul class="simple">
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.zero_one_loss</span></code> (كان يُسمى سابقًا <code class="docutils literal notranslate"><span class="pre">metrics.zero_one</span></code>) لديه الآن خيار للناتج المعياري الذي يُبلغ عن نسبة التصنيفات الخاطئة، بدلاً من العدد الخام للتصنيفات الخاطئة. بواسطة Kyle Beauchamp.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeClassifier</span></code> وجميع نماذج المجوعة المشتقة تدعم الآن ترجيح العينات، بواسطة <a href="#id70"><span class="problematic" id="id71">`Noel Dawe`_</span></a> و <a href="#id72"><span class="problematic" id="id73">`Gilles Louppe`_</span></a>.</p></li>
+<li><p>تحسين السرعة عند استخدام عينات التمهيد في غابات الأشجار العشوائية، بواسطة <a href="#id74"><span class="problematic" id="id75">`Peter Prettenhofer`_</span></a> و <a href="#id76"><span class="problematic" id="id77">`Gilles Louppe`_</span></a>.</p></li>
+<li><p>مخططات التبعية الجزئية لـ <span class="xref std std-ref">gradient_boosting</span> في <code class="docutils literal notranslate"><span class="pre">ensemble.partial_dependence.partial_dependence</span></code> بواسطة <a href="#id78"><span class="problematic" id="id79">`Peter Prettenhofer`_</span></a>. راجع <a class="reference internal" href="../auto_examples/inspection/plot_partial_dependence.html#sphx-glr-auto-examples-inspection-plot-partial-dependence-py"><span class="std std-ref">Partial Dependence and Individual Conditional Expectation Plots</span></a> لمثال.</p></li>
+<li><p>تم الآن توسيع جدول المحتويات على الموقع بواسطة <a href="#id80"><span class="problematic" id="id81">`Jaques Grobler`_</span></a>.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">feature_selection.SelectPercentile</span></code> يكسر الآن التعادل بشكل حاسم بدلاً من إرجاع جميع الميزات ذات الترتيب المتساوي.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">feature_selection.SelectKBest</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">feature_selection.SelectPercentile</span></code> أكثر استقرارًا من الناحية العددية لأنهما يستخدمان الدرجات، بدلاً من القيم الاحتمالية، لترتيب النتائج. وهذا يعني أنها قد تختار في بعض الأحيان ميزات مختلفة عما كانت عليه في السابق.</p></li>
+<li><p>لم يعد الانحدار والتصنيف الضمني باستخدام مُحسِّن <code class="docutils literal notranslate"><span class="pre">sparse_cg</span></code> لهما تعقيد ذاكري تربيعي، بواسطة <a href="#id82"><span class="problematic" id="id83">`Lars Buitinck`_</span></a> و <a href="#id84"><span class="problematic" id="id85">`Fabian Pedregosa`_</span></a>.</p></li>
+<li><p>الانحدار والتصنيف الضمني يدعمان الآن مُحسِّنًا سريعًا جديدًا يسمى <code class="docutils literal notranslate"><span class="pre">lsqr</span></code>، بواسطة <a href="#id86"><span class="problematic" id="id87">`Mathieu Blondel`_</span></a>.</p></li>
+<li><p>تسريع <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.precision_recall_curve</span></code> بواسطة Conrad Lee.</p></li>
+<li><p>تمت إضافة دعم لقراءة/كتابة ملفات svmlight مع سمة التفضيل الزوجي (qid في تنسيق ملف svmlight) في <code class="xref py py-func docutils literal notranslate"><span class="pre">datasets.dump_svmlight_file</span></code> و <code class="xref py py-func docutils literal notranslate"><span class="pre">datasets.load_svmlight_file</span></code> بواسطة <a href="#id88"><span class="problematic" id="id89">`Fabian Pedregosa`_</span></a>.</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.confusion_matrix</span></code> و <span class="xref std std-ref">clustering_evaluation</span> أسرع وأكثر متانة بواسطة Wei Li.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cross_validation.cross_val_score</span></code> يعمل الآن مع نوى مُسبقة الحساب ومصفوفات التشابه، بواسطة <a href="#id90"><span class="problematic" id="id91">`Andreas Müller`_</span></a>.</p></li>
+<li><p>جعل خوارزمية LARS أكثر استقرارًا من الناحية العددية باستخدام قواعد لحذف المُتوقعين المترابطين للغاية وكذلك لإيقاف المسار عندما يصبح الضجيج العددي سائدًا، بواسطة <a href="#id92"><span class="problematic" id="id93">`Gael Varoquaux`_</span></a>.</p></li>
+<li><p>تنفيذ أسرع لـ <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.precision_recall_curve</span></code> بواسطة Conrad Lee.</p></li>
+<li><p>نواة جديدة <code class="docutils literal notranslate"><span class="pre">metrics.chi2_kernel</span></code> بواسطة <a href="#id94"><span class="problematic" id="id95">`Andreas Müller`_</span></a>، تُستخدم غالبًا في تطبيقات رؤية الكمبيوتر.</p></li>
+<li><p>إصلاح خطأ طويل الأمد في <code class="xref py py-class docutils literal notranslate"><span class="pre">naive_bayes.BernoulliNB</span></code> بواسطة Shaun Jackman.</p></li>
+<li><p>تم تنفيذ <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> في <code class="xref py py-class docutils literal notranslate"><span class="pre">multiclass.OneVsRestClassifier</span></code>، بواسطة Andrew Winterman.</p></li>
+<li><p>تحسين الاتساق في التعزيز التدريجي: تستخدم المُقدِّرات <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingRegressor</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingClassifier</span></code> المُقدِّر <code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeRegressor</span></code> بدلاً من بنية البيانات <code class="docutils literal notranslate"><span class="pre">tree._tree.Tree</span></code> بواسطة <a href="#id96"><span class="problematic" id="id97">`Arnaud Joly`_</span></a>.</p></li>
+<li><p>إصلاح استثناء النقطة العائمة في وحدة نماذج <span class="xref std std-ref">decision trees</span>، بواسطة Seberg.</p></li>
+<li><p>إصلاح <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.roc_curve</span></code> يفشل عندما يكون لدى y_true فئة واحدة فقط بواسطة Wei Li.</p></li>
+<li><p>إضافة دالة <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.mean_absolute_error</span></code> التي تحسب متوسط الخطأ المطلق. تدعم المقاييس <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.mean_squared_error</span></code>، <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.mean_absolute_error</span></code> و <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.r2_score</span></code> الإخراج المتعدد بواسطة <a href="#id98"><span class="problematic" id="id99">`Arnaud Joly`_</span></a>.</p></li>
+<li><p>إصلاح دعم <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> في <code class="xref py py-class docutils literal notranslate"><span class="pre">svm.LinearSVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LogisticRegression</span></code> بواسطة <a href="#id100"><span class="problematic" id="id101">`Andreas Müller`_</span></a>. كان معنى <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> معكوسًا حيث كان يعني الوزن الأعلى عددًا أقل من الإيجابيات لفئة معينة في الإصدارات السابقة.</p></li>
+<li><p>تحسين الوثائق السردية والاتساق في <a class="reference internal" href="../api/sklearn.metrics.html#module-sklearn.metrics" title="sklearn.metrics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics</span></code></a> لمقاييس الانحدار والتصنيف بواسطة <a href="#id102"><span class="problematic" id="id103">`Arnaud Joly`_</span></a>.</p></li>
+<li><p>إصلاح خطأ في <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm.SVC</span></code> عند استخدام مصفوفات csr بمؤشرات غير مرتبة بواسطة Xinfan Meng و <a href="#id104"><span class="problematic" id="id105">`Andreas Müller`_</span></a>.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.MiniBatchKMeans</span></code>: إضافة إعادة تعيين عشوائي لمراكز التجميع مع القليل من الملاحظات المرفقة بها، بواسطة <a href="#id106"><span class="problematic" id="id107">`Gael Varoquaux`_</span></a>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>تمت إعادة تسمية جميع حالات <code class="docutils literal notranslate"><span class="pre">n_atoms</span></code> إلى <code class="docutils literal notranslate"><span class="pre">n_components</span></code> للاتساق. ينطبق هذا على <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.DictionaryLearning</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.MiniBatchDictionaryLearning</span></code>، <code class="xref py py-func docutils literal notranslate"><span class="pre">decomposition.dict_learning</span></code>، <code class="xref py py-func docutils literal notranslate"><span class="pre">decomposition.dict_learning_online</span></code>.</p></li>
+<li><p>تمت إعادة تسمية جميع حالات <code class="docutils literal notranslate"><span class="pre">max_iters</span></code> إلى <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> للاتساق. ينطبق هذا على <code class="docutils literal notranslate"><span class="pre">semi_supervised.LabelPropagation</span></code> و <code class="docutils literal notranslate"><span class="pre">semi_supervised.label_propagation.LabelSpreading</span></code>.</p></li>
+<li><p>تمت إعادة تسمية جميع حالات <code class="docutils literal notranslate"><span class="pre">learn_rate</span></code> إلى <code class="docutils literal notranslate"><span class="pre">learning_rate</span></code> للاتساق في <code class="docutils literal notranslate"><span class="pre">ensemble.BaseGradientBoosting</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingRegressor</span></code>.</p></li>
+<li><p>تمت إزالة الوحدة النمطية <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.sparse</span></code>. كان دعم المصفوفة المُبعثرة مدمجًا بالفعل في النماذج الخطية “العادية”.</p></li>
+<li><p>تمت إزالة <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.mean_square_error</span></code>، التي كانت تُعيد الخطأ المتراكم بشكل غير صحيح. استخدم <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.mean_squared_error</span></code> بدلاً من ذلك.</p></li>
+<li><p>لم يعد تمرير معلمات <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> إلى طرق <code class="docutils literal notranslate"><span class="pre">fit</span></code> مدعومًا. قم بتمريرها إلى منشئي المُقدِّر بدلاً من ذلك.</p></li>
+<li><p>لم تعد نماذج المزج الغاوسي تحتوي على طرق <code class="docutils literal notranslate"><span class="pre">decode</span></code> و <code class="docutils literal notranslate"><span class="pre">rvs</span></code>. استخدم طرق <code class="docutils literal notranslate"><span class="pre">score</span></code> أو <code class="docutils literal notranslate"><span class="pre">predict</span></code> أو <code class="docutils literal notranslate"><span class="pre">sample</span></code> بدلاً من ذلك.</p></li>
+<li><p>تم الآن إهمال خيار “solver” fit في الانحدار والتصنيف الضمني وسيتم إزالته في الإصدار 0.14. استخدم خيار المنشئ بدلاً من ذلك.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">feature_extraction.text.DictVectorizer</span></code> تعيد الآن مصفوفات مُبعثرة بتنسيق CSR، بدلاً من COO.</p></li>
+<li><p>تمت إعادة تسمية <code class="docutils literal notranslate"><span class="pre">k</span></code> في <code class="docutils literal notranslate"><span class="pre">cross_validation.KFold</span></code> و <code class="docutils literal notranslate"><span class="pre">cross_validation.StratifiedKFold</span></code> إلى <code class="docutils literal notranslate"><span class="pre">n_folds</span></code>، وتمت إعادة تسمية <code class="docutils literal notranslate"><span class="pre">n_bootstraps</span></code> إلى <code class="docutils literal notranslate"><span class="pre">n_iter</span></code> في <code class="docutils literal notranslate"><span class="pre">cross_validation.Bootstrap</span></code>.</p></li>
+<li><p>تمت إعادة تسمية جميع حالات <code class="docutils literal notranslate"><span class="pre">n_iterations</span></code> إلى <code class="docutils literal notranslate"><span class="pre">n_iter</span></code> للاتساق. ينطبق هذا على <code class="docutils literal notranslate"><span class="pre">cross_validation.ShuffleSplit</span></code>، <code class="docutils literal notranslate"><span class="pre">cross_validation.StratifiedShuffleSplit</span></code>، <code class="xref py py-func docutils literal notranslate"><span class="pre">utils.extmath.randomized_range_finder</span></code> و <code class="xref py py-func docutils literal notranslate"><span class="pre">utils.extmath.randomized_svd</span></code>.</p></li>
+<li><p>استبدال <code class="docutils literal notranslate"><span class="pre">rho</span></code> في <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.ElasticNet</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_Multiplier.SGDClassifier</span></code> بـ <code class="docutils literal notranslate"><span class="pre">l1_ratio</span></code>. كان لمعلمة <code class="docutils literal notranslate"><span class="pre">rho</span></code> معانٍ مختلفة؛ تم تقديم <code class="docutils literal notranslate"><span class="pre">l1_ratio</span></code> لتجنب الالتباس. لها نفس معنى <code class="docutils literal notranslate"><span class="pre">rho</span></code> سابقًا في <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.ElasticNet</span></code> و <code class="docutils literal notranslate"><span class="pre">(1-rho)</span></code> في <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.SGDClassifier</span></code>.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.LassoLars</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.Lars</span></code> تخزنان الآن قائمة من المسارات في حالة وجود أهداف متعددة، بدلاً من مصفوفة من المسارات.</p></li>
+<li><p>تمت إعادة تسمية سمة <code class="docutils literal notranslate"><span class="pre">gmm</span></code> من <code class="docutils literal notranslate"><span class="pre">hmm.GMMHMM</span></code> إلى <code class="docutils literal notranslate"><span class="pre">gmm_</span></code> للالتزام بشكل أكثر صرامة بواجهة برمجة التطبيقات.</p></li>
+<li><p>تم نقل <code class="docutils literal notranslate"><span class="pre">cluster.spectral_embedding</span></code> إلى <code class="xref py py-func docutils literal notranslate"><span class="pre">manifold.spectral_embedding</span></code>.</p></li>
+<li><p>تمت إعادة تسمية <code class="docutils literal notranslate"><span class="pre">eig_tol</span></code> في <code class="xref py py-func docutils literal notranslate"><span class="pre">manifold.spectral_embedding</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.SpectralClustering</span></code> إلى <code class="docutils literal notranslate"><span class="pre">eigen_tol</span></code>، وتمت إعادة تسمية <code class="docutils literal notranslate"><span class="pre">mode</span></code> إلى <code class="docutils literal notranslate"><span class="pre">eigen_solver</span></code>.</p></li>
+<li><p>تمت إعادة تسمية <code class="docutils literal notranslate"><span class="pre">mode</span></code> في <code class="xref py py-func docutils literal notranslate"><span class="pre">manifold.spectral_embedding</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.SpectralClustering</span></code> إلى <code class="docutils literal notranslate"><span class="pre">eigen_solver</span></code>.</p></li>
+<li><p>سمات <code class="docutils literal notranslate"><span class="pre">classes_</span></code> و <code class="docutils literal notranslate"><span class="pre">n_classes_</span></code> من <code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeClassifier</span></code> وجميع نماذج المجوعة المشتقة مسطحة الآن في حالة مشكلات الإخراج الفردي ومُضمَّنة في حالة مشكلات الإخراج المتعدد.</p></li>
+<li><p>سمة <code class="docutils literal notranslate"><span class="pre">estimators_</span></code> من <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingRegressor</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">ensemble.GradientBoostingClassifier</span></code> هي الآن مصفوفة من <code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeRegressor</span></code>.</p></li>
+<li><p>تمت إعادة تسمية <code class="docutils literal notranslate"><span class="pre">chunk_size</span></code> إلى <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> في <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.MiniBatchDictionaryLearning</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.MiniBatchSparsePCA</span></code> للاتساق.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">svm.SVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">svm.NuSVC</span></code> توفر الآن سمة <code class="docutils literal notranslate"><span class="pre">classes_</span></code> وتدعم أنواع البيانات التعسفية للملصقات <code class="docutils literal notranslate"><span class="pre">y</span></code>. أيضًا، يعكس نوع البيانات الذي تُعيده <code class="docutils literal notranslate"><span class="pre">predict</span></code> الآن نوع البيانات من <code class="docutils literal notranslate"><span class="pre">y</span></code> أثناء <code class="docutils literal notranslate"><span class="pre">fit</span></code> (كان يُستخدم سابقًا <code class="docutils literal notranslate"><span class="pre">np.float</span></code>).</p></li>
+<li><p>تم تغيير حجم الاختبار الافتراضي في <code class="docutils literal notranslate"><span class="pre">cross_validation.train_test_split</span></code> إلى None، وتمت إضافة إمكانية استنتاج <code class="docutils literal notranslate"><span class="pre">test_size</span></code> من <code class="docutils literal notranslate"><span class="pre">train_size</span></code> في <code class="docutils literal notranslate"><span class="pre">cross_validation.ShuffleSplit</span></code> و <code class="docutils literal notranslate"><span class="pre">cross_validation.StratifiedShuffleSplit</span></code>.</p></li>
+<li><p>تمت إعادة تسمية دالة <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.zero_one</span></code> إلى <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.zero_one_loss</span></code>. لاحظ أن السلوك الافتراضي في <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.zero_one_loss</span></code> يختلف عن <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.zero_one</span></code>: تم تغيير <code class="docutils literal notranslate"><span class="pre">normalize=False</span></code> إلى <code class="docutils literal notranslate"><span class="pre">normalize=True</span></code>.</p></li>
+<li><p>تمت إعادة تسمية دالة <code class="docutils literal notranslate"><span class="pre">metrics.zero_one_score</span></code> إلى <code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.accuracy_score</span></code>.</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">datasets.make_circles</span></code> لديه الآن نفس عدد النقاط الداخلية والخارجية.</p></li>
+<li><p>في مُصنِّفات Bayes الساذجة، تم نقل معلمة <code class="docutils literal notranslate"><span class="pre">class_prior</span></code> من <code class="docutils literal notranslate"><span class="pre">fit</span></code> إلى <code class="docutils literal notranslate"><span class="pre">__init__</span></code>.</p></li>
+</ul>
+<p>People
+فيما يلي قائمة المساهمين في الإصدار 0.13 حسب عدد الالتزامات:</p>
+<ul class="simple">
+<li><p>364 أندرياس مولر</p></li>
+<li><p>143 أرنو جولي</p></li>
+<li><p>137 بيتر بريتنهوفر</p></li>
+<li><p>131 جيل فاروكو</p></li>
+<li><p>117 ماثيو بلونديل</p></li>
+<li><p>108 لارس بوتينك</p></li>
+<li><p>106 وي لي</p></li>
+<li><p>101 أوليفييه جريسل</p></li>
+<li><p>65 فلاد نيكولاي</p></li>
+<li><p>54 جيل لوب</p></li>
+<li><p>40 جاك جروبلر</p></li>
+<li><p>38 ألكسندر جرامفورت</p></li>
+<li><p>30 روب زينكوف</p></li>
+<li><p>19 ايمريك ماسوريل</p></li>
+<li><p>18 أندرو وينترمان</p></li>
+<li><p>17 فابيان بيدريجوسا</p></li>
+<li><p>17 نيل فاروكو</p></li>
+<li><p>16 كريستيان أوسندورفر</p></li>
+<li><p>14 دانيال نوري</p></li>
+<li><p>13 فيرجيل فيريش</p></li>
+<li><p>13 syhw</p></li>
+<li><p>12 ساتراجيت غوش</p></li>
+<li><p>10 كوري لينش</p></li>
+<li><p>10 كايل بيشامب</p></li>
+<li><p>9 بريان تشيونغ</p></li>
+<li><p>9 ايمانويل باير</p></li>
+<li><p>9 السيد شو</p></li>
+<li><p>8 كونراد لي</p></li>
+<li><p>8 جيمس بيرجسترا</p></li>
+<li><p>7 تاديج جانيز</p></li>
+<li><p>6 بريان كاجيس</p></li>
+<li><p>6 جيك فانديربلاس</p></li>
+<li><p>6 مايكل</p></li>
+<li><p>6 نويل داو</p></li>
+<li><p>6 تياجو نونيس</p></li>
+<li><p>6 بقرة</p></li>
+<li><p>5 أنزي</p></li>
+<li><p>5 شي تشياو دو</p></li>
+<li><p>4 كريستيان جوفين</p></li>
+<li><p>4 جاكيس كفام</p></li>
+<li><p>4 ريتشارد تي. جواي</p></li>
+<li><p>4 روبرت لايتون</p></li>
+<li><p>3 ألكسندر أبراهام</p></li>
+<li><p>3 دوغ كولمان</p></li>
+<li><p>3 سكوت ديكرسون</p></li>
+<li><p>2 ApproximateIdentity</p></li>
+<li><p>2 جون بينيديكتسون</p></li>
+<li><p>2 مارك فيروندا</p></li>
+<li><p>2 ماتي ليرا</p></li>
+<li><p>2 ميخائيل كوروبوف</p></li>
+<li><p>2 شينفان مينغ</p></li>
+<li><p>1 أليخاندرو وينشتاين</p></li>
+<li><p>1 ألكسندر باسوس</p></li>
+<li><p>1 كريستوف ديل</p></li>
+<li><p>1 يوجين نيزهيبيتسكي</p></li>
+<li><p>1 كينيث سي. أرنولد</p></li>
+<li><p>1 لويس بيدرو كويلهو</p></li>
+<li><p>1 ميروسلاف باتشكاروف</p></li>
+<li><p>1 بافيل</p></li>
+<li><p>1 سيباستيان بيرج</p></li>
+<li><p>1 شون جاكمان</p></li>
+<li><p>1 سوبهوديب موترا</p></li>
+<li><p>1 بوب</p></li>
+<li><p>1 دينغيمان</p></li>
+<li><p>1 إيمانويل</p></li>
+<li><p>1 x006</p></li>
+</ul>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="v0.14.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">الإصدار 0.14</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="older_versions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">الإصدارات القديمة</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">الإصدار 0.13.1</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">سجل التغييرات</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">الأشخاص</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">الإصدار 0.13</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/whats_new/v0.13.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
