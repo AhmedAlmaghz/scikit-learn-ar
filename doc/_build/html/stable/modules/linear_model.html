@@ -1,0 +1,1804 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="نُظم “Linear Models” الخطية" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/linear_model.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="المنهجية التالية هي مجموعة من الطرق المُستخدمة في الانحدار، حيث يُتوقع أن تكون القيمة المُستهدفة مزيجًا خطيًا من الميزات. في الصيغة الرياضية، إذا كان\hat{y} هو القيمة المُتوقعة.\hat{y}(w, x) = w_0 ..." />
+<meta property="og:image" content="https://scikit-learn/stable/_images/sphx_glr_plot_ols_001.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="المنهجية التالية هي مجموعة من الطرق المُستخدمة في الانحدار، حيث يُتوقع أن تكون القيمة المُستهدفة مزيجًا خطيًا من الميزات. في الصيغة الرياضية، إذا كان\hat{y} هو القيمة المُتوقعة.\hat{y}(w, x) = w_0 ..." />
+
+    <title>نُظم “Linear Models” الخطية &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/linear_model';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">نُظم...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="linear-models">
+<h1>نُظم “Linear Models” الخطية<a class="headerlink" href="#linear-models" title="Link to this heading">#</a></h1>
+<p>المنهجية التالية هي مجموعة من الطرق المُستخدمة في الانحدار، حيث
+يُتوقع أن تكون القيمة المُستهدفة مزيجًا خطيًا من الميزات.
+في الصيغة الرياضية، إذا كان <span class="math notranslate nohighlight">\(\hat{y}\)</span> هو القيمة المُتوقعة.</p>
+<div class="math notranslate nohighlight">
+\[\hat{y}(w, x) = w_0 + w_1 x_1 + ... + w_p x_p\]</div>
+<p>في جميع أنحاء الوحدة النمطية، نُشير إلى المتجه <span class="math notranslate nohighlight">\(w = (w_1,
+..., w_p)\)</span> باسم “<a href="#id57"><span class="problematic" id="id58">coef_</span></a>” و <span class="math notranslate nohighlight">\(w_0\)</span> باسم “<a href="#id59"><span class="problematic" id="id60">intercept_</span></a>”.</p>
+<p>لتنفيذ التصنيف باستخدام النماذج الخطية المعممة، راجع
+:ref: <code class="docutils literal notranslate"><span class="pre">Logistic_regression</span></code>.</p>
+<section id="id1">
+<h2>انحدار المربعات الصغرى العادي<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> يلائم نموذجًا خطيًا بمعاملات</p>
+</dd>
+</dl>
+<p><span class="math notranslate nohighlight">\(w = (w_1, ..., w_p)\)</span> لتقليل مجموع مربعات الانحدار بين الأهداف المُلاحظة في مجموعة البيانات،
+والأهداف التي يتنبأ بها التقدير الخطي. رياضيا، يحل مشكلة على الشكل:</p>
+<div class="math notranslate nohighlight">
+\[\min_{w} || X w - y||_2^2\]</div>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ols.html"><img alt="../_images/sphx_glr_plot_ols_001.png" src="../_images/sphx_glr_plot_ols_001.png" style="width: 320.0px; height: 240.0px;" />
+</a>
+</figure>
+<p>سيقبل :class: <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> في طريقة “fit” الخاصة به المصفوفات “X”، “y”
+وسيخزن معاملات <span class="math notranslate nohighlight">\(w\)</span> للنموذج الخطي في عضو “<a href="#id61"><span class="problematic" id="id62">coef_</span></a>” الخاص به:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="go">LinearRegression()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([0.5, 0.5])</span>
+</pre></div>
+</div>
+<p>تعتمد تقديرات المعاملات لانحدار المربعات الصغرى العادي على
+استقلالية الميزات. عندما تكون الميزات مترابطة وتكون أعمدة مصفوفة التصميم <span class="math notranslate nohighlight">\(X\)</span>
+ذات اعتماد خطي تقريبي، فإن مصفوفة التصميم تقترب من الحالة الفردية
+ونتيجة لذلك، يصبح تقدير المربعات الصغرى شديد الحساسية
+للأخطاء العشوائية في الهدف المُلاحظ، مما يؤدي إلى تباين كبير.
+يمكن أن ينشأ هذا الوضع من “تعدد الارتباط” على سبيل المثال،
+عندما تُجمع البيانات بدون تصميم تجريبي.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_ols.html#sphx-glr-auto-examples-linear-model-plot-ols-py"><span class="std std-ref">Linear Regression Example</span></a></p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>المربعات الصغرى غير السالبة<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>من الممكن تقييد جميع المعاملات لتكون غير سالبة، والتي قد
+تكون مفيدة عندما تمثل بعض الكميات الفيزيائية أو الطبيعية غير السالبة
+(على سبيل المثال، ترددات العد أو أسعار السلع).
+يقبل :class: <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> معلمة منطقية “positive”:
+عندما يتم تعيينها إلى <code class="docutils literal notranslate"><span class="pre">True</span></code>، يتم تطبيق “المربعات الصغرى غير السالبة
+&lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Non-negative_least_squares">https://en.wikipedia.org/wiki/Non-negative_least_squares</a>&gt;`_.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_nnls.html#sphx-glr-auto-examples-linear-model-plot-nnls-py"><span class="std std-ref">Non-negative least squares</span></a></p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>تعقيد انحدار المربعات الصغرى العادي<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>يتم حساب حل المربعات الصغرى باستخدام التحلل القيمي المنفرد للمصفوفة “X”.
+إذا كانت “X” مصفوفة ذات شكل <code class="docutils literal notranslate"><span class="pre">(n_samples،</span> <span class="pre">n_features)</span></code>
+فإن لهذه الطريقة تكلفة تبلغ
+<span class="math notranslate nohighlight">\(O(n_{\text{samples}} n_{\text{features}}^2)\)</span>، بافتراض أن
+<span class="math notranslate nohighlight">\(n_{\text{samples}} \geq n_{\text{features}}\)</span>.</p>
+</section>
+</section>
+<section id="ridge">
+<h1>انحدار وتصنيف Ridge<a class="headerlink" href="#ridge" title="Link to this heading">#</a></h1>
+<section id="id4">
+<h2>انحدار<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>يعالج :class: <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> الانحدار بعض مشكلات
+:ref: <code class="docutils literal notranslate"><span class="pre">ordinary_least_squares</span></code> من خلال فرض عقوبة على حجم المعاملات.
+تقلل معاملات Ridge من مجموع مربعات الانحدار المعاقب عليه:</p>
+<div class="math notranslate nohighlight">
+\[\min_{w} || X w - y||_2^2 + \alpha ||w||_2^2\]</div>
+<p>تتحكم معلمة التعقيد <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span> في مقدار
+الانكماش: كلما زادت قيمة <span class="math notranslate nohighlight">\(\alpha\)</span>، زاد مقدار
+الانكماش وبالتالي تصبح المعاملات أكثر مرونة للتعدد الخطي.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_ridge_path.html"><img alt="../_images/sphx_glr_plot_ridge_path_001.png" src="../_images/sphx_glr_plot_ridge_path_001.png" style="width: 320.0px; height: 240.0px;" />
+</a>
+</figure>
+<p>كما هو الحال مع النماذج الخطية الأخرى، سيقبل :class: <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> في طريقة “fit” الخاصة به
+المصفوفات “X”، “y” وسيخزن معاملات <span class="math notranslate nohighlight">\(w\)</span> للنموذج الخطي في
+عضو “<a href="#id63"><span class="problematic" id="id64">coef_</span></a>” الخاص به:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">Ridge(alpha=0.5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([0.34545455, 0.34545455])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="go">0.13636...</span>
+</pre></div>
+</div>
+<p>لاحظ أن الفئة :class: <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> تسمح للمستخدم بتحديد أن
+يتم اختيار المُحسن تلقائيًا عن طريق تعيين <code class="docutils literal notranslate"><span class="pre">solver=&quot;auto&quot;</span></code>.
+عندما يتم تحديد هذا الخيار، سيختار :class: <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> بين محسنات <code class="docutils literal notranslate"><span class="pre">&quot;lbfgs&quot;</span></code>، <code class="docutils literal notranslate"><span class="pre">&quot;cholesky&quot;</span></code>،
+و <code class="docutils literal notranslate"><span class="pre">&quot;sparse_cg&quot;</span></code>. سيبدأ :class: <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> في التحقق من الشروط
+الموضحة في الجدول التالي من الأعلى إلى الأسفل. إذا كان الشرط صحيحًا،
+يتم اختيار المُحسن المُقابل.</p>
+</section>
+<section id="id5">
+<h2>تصنيف<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>لمعامل الانحدار :class: <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> مُتغير من التصنيف:
+:class: <code class="docutils literal notranslate"><span class="pre">RidgeClassifier</span></code>. يحول هذا المُصنف أولاً الأهداف الثنائية إلى
+<code class="docutils literal notranslate"><span class="pre">{-1،</span> <span class="pre">1}</span></code> ثم يتعامل مع المشكلة على أنها مهمة انحدار، ويحسن الهدف نفسه كما هو موضح أعلاه.
+تتوافق الفئة المُتوقعة مع علامة تنبؤ المُصنف. بالنسبة للتصنيف متعدد الفئات،
+تتم معالجة المشكلة على أنها انحدار متعدد الإخراج، وتتوافق الفئة المُتوقعة مع
+الإخراج الذي يحتوي على أعلى قيمة.</p>
+<p>قد يبدو من المشكوك فيه استخدام (المعاقب عليه) خسارة المربعات الصغرى الأقل لتناسب نموذج التصنيف
+بدلاً من خسائر اللوغاريتم أو المفصل الأكثر تقليدية. ومع ذلك، في الممارسة العملية،
+يمكن أن تؤدي جميع هذه النماذج إلى درجات تحقق متشابهة من حيث الدقة أو الدقة/التذكير،
+في حين أن خسارة المربعات الصغرى الأقل المعاقب عليها التي يستخدمها :class: <code class="docutils literal notranslate"><span class="pre">RidgeClassifier</span></code>
+تسمح بخيار مختلف جدًا لمحسنات الأرقام مع ملفات تعريف الأداء الحسابي المتميزة.</p>
+<p>قد يكون :class: <code class="docutils literal notranslate"><span class="pre">RidgeClassifier</span></code> أسرع بكثير من :class: <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code>
+على سبيل المثال، مع عدد كبير من الفئات لأنه يمكنه حساب مصفوفة الإسقاط <span class="math notranslate nohighlight">\((X^T X)^{-1} X^T\)</span> مرة واحدة فقط.</p>
+<p>يُشار إلى هذا المُصنف أحيانًا باسم <a class="reference external" href="https://en.wikipedia.org/wiki/Least-squares_support-vector_machine">Least Squares Support Vector</a> مع
+نواة خطية.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_ridge_path.html#sphx-glr-auto-examples-linear-model-plot-ridge-path-py"><span class="std std-ref">Plot Ridge coefficients as a function of the regularization</span></a></p></li>
+<li><p><span class="xref std std-ref">sphmin_glr_auto_examples_text_plot_document_classification_20newsgroups.py</span></p></li>
+<li><p><a class="reference internal" href="../auto_examples/inspection/plot_linear_model_coefficient_interpretation.html#sphx-glr-auto-examples-inspection-plot-linear-model-coefficient-interpretation-py"><span class="std std-ref">Common pitfalls in the interpretation of coefficients of linear models</span></a></p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>تعقيد Ridge<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>لهذه الطريقة نفس ترتيب التعقيد مثل
+<span class="xref std std-ref">ordinary_least_squares</span>.</p>
+</section>
+<section id="id7">
+<h2>ضبط معلمة الضبط: التحقق من صحة الاستبعاد<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p>ينفذ :class: <code class="docutils literal notranslate"><span class="pre">RidgeCV</span></code> و :class: <code class="docutils literal notranslate"><span class="pre">RidgeClassifierCV</span></code> انحدار/تصنيف Ridge
+مع التحقق من صحة مدمج لمعلمة alpha.
+إنها تعمل بنفس طريقة :class: <code class="docutils literal notranslate"><span class="pre">~sklearn.model_selection.GridSearchCV</span></code> باستثناء
+أنه يُفترض أن يكون الافتراضي هو التحقق من صحة الاستبعاد.
+عند استخدام التحقق من الصحة الافتراضي، لا يمكن أن يكون alpha 0 بسبب
+الصيغة المستخدمة لحساب خطأ الاستبعاد. راجع <a class="reference internal" href="#rl2007" id="id8"><span>[RL2007]</span></a> لمزيد من التفاصيل.</p>
+<p>مثال الاستخدام:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">RidgeCV</span><span class="p">(</span><span class="n">alphas</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">RidgeCV(alphas=array([1.e-06, 1.e-05, 1.e-04, 1.e-03, 1.e-02, 1.e-01, 1.e+00, 1.e+01,</span>
+<span class="go">      1.e+02, 1.e+03, 1.e+04, 1.e+05, 1.e+06]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">alpha_</span>
+<span class="go">0.01</span>
+</pre></div>
+</div>
+<p>يؤدي تحديد قيمة خاصية :term: <code class="docutils literal notranslate"><span class="pre">cv</span></code> إلى تشغيل التحقق من الصحة باستخدام :class: <code class="docutils literal notranslate"><span class="pre">~sklearn.model_selection.GridSearchCV</span></code>،
+على سبيل المثال <code class="docutils literal notranslate"><span class="pre">cv=10</span></code> للتحقق من الصحة 10-fold، بدلاً من التحقق من صحة الاستبعاد.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المراجع">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المراجع<a class="headerlink" href="#المراجع" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div role="list" class="citation-list">
+<div class="citation" id="rl2007" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">RL2007</a><span class="fn-bracket">]</span></span>
+<p class="sd-card-text">“ملاحظات حول Least Squares العادية المنتظمة”، Rifkin &amp; Lippert (<a class="reference external" href="http://cbcl.mit.edu/publications/ps/MIT-CSAIL-TR-2007-025.pdf">التقرير الفني</a>،
+<a class="reference external" href="https://www.mit.edu/~9.520/spring07/Classes/rlsslides.pdf">شرائح الدورة التدريبية</a>).</p>
+</div>
+</div>
+</div>
+</details></section>
+</section>
+<section id="lasso">
+<span id="id11"></span><h1>Lasso<a class="headerlink" href="#lasso" title="Link to this heading">#</a></h1>
+<p>الـ <code class="xref py py-class docutils literal notranslate"><span class="pre">Lasso</span></code> هو نموذج خطي يقدر معاملات متفرقة. إنه مفيد في بعض السياقات بسبب ميله إلى تفضيل الحلول ذات معاملات غير صفرية أقل، مما يقلل بشكل فعال من عدد الميزات التي يعتمد عليها الحل المعطى. لهذا السبب، يعتبر الـ Lasso ومتغيراته أساسية في مجال الاستشعار المضغوط. في ظل ظروف معينة، يمكنه استعادة المجموعة الدقيقة للمعاملات غير الصفرية (راجع
+<a class="reference internal" href="../auto_examples/applications/plot_tomography_l1_reconstruction.html#sphx-glr-auto-examples-applications-plot-tomography-l1-reconstruction-py"><span class="std std-ref">Compressive sensing: tomography reconstruction with L1 prior (Lasso)</span></a>).</p>
+<p>رياضيًا، يتكون من نموذج خطي مع إضافة مصطلح منتظم. دالة الهدف للتقليل هي:</p>
+<div class="math notranslate nohighlight">
+\[\min_{w} { \frac{1}{2n_{\text{samples}}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}\]</div>
+<p>وبالتالي يحل تقدير الـ Lasso مسألة تقليل عقوبة المربعات الصغرى مع <span class="math notranslate nohighlight">\(\alpha ||w||_1\)</span> المضافة، حيث
+<span class="math notranslate nohighlight">\(\alpha\)</span> هو ثابت و:math:<code class="docutils literal notranslate"><span class="pre">||w||_1</span></code> هو <span class="math notranslate nohighlight">\(\ell_1\)</span> -معيار
+متجه المعامل.</p>
+<p>يستخدم التنفيذ في فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">Lasso</span></code> الانحدار المنسق كخوارزمية لضبط المعاملات. راجع <a class="reference internal" href="#least-angle-regression"><span class="std std-ref">الانحدار بزاوية أصغر</span></a>
+لتنفيذ آخر:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">Lasso(alpha=0.1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="go">array([0.8])</span>
+</pre></div>
+</div>
+<p>وظيفة <code class="xref py py-func docutils literal notranslate"><span class="pre">lasso_path</span></code> مفيدة للمهام منخفضة المستوى، حيث
+تحسب المعاملات على طول المسار الكامل للقيم الممكنة.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_and_elasticnet.html#sphx-glr-auto-examples-linear-model-plot-lasso-and-elasticnet-py"><span class="std std-ref">L1-based models for Sparse Signals</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/applications/plot_tomography_l1_reconstruction.html#sphx-glr-auto-examples-applications-plot-tomography-l1-reconstruction-py"><span class="std std-ref">Compressive sensing: tomography reconstruction with L1 prior (Lasso)</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/inspection/plot_linear_model_coefficient_interpretation.html#sphx-glr-auto-examples-inspection-plot-linear-model-coefficient-interpretation-py"><span class="std std-ref">Common pitfalls in the interpretation of coefficients of linear models</span></a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>اختيار الميزة باستخدام Lasso</strong></p>
+<p>نظرًا لأن الانحدار Lasso ينتج نماذج متفرقة،
+يمكن استخدامه بالتالي لأداء اختيار الميزة، كما هو موضح بالتفصيل في
+<a class="reference internal" href="feature_selection.html#l1-feature-selection"><span class="std std-ref">اختيار الميزة المستندة إلى L1</span></a>.</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المراجع-2">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المراجع<a class="headerlink" href="#المراجع-2" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">المرجعان التاليان يشرحان التكرارات
+المستخدمة في محسن الانحدار المنسق في scikit-learn، وكذلك
+حساب فجوة الازدواجية المستخدمة للتحكم في التقارب.</p>
+<ul class="simple">
+<li><p class="sd-card-text">“مسار المنتظم لنماذج الخطية المعممة بالانحدار المنسق”،
+فريدمان، هاستي وتيبرياني، J Stat Softw، 2010 (<a class="reference external" href="https://www.jstatsoft.org/article/view/v033i01/v33i01.pdf">ورقة</a>).</p></li>
+<li><p class="sd-card-text">“طريقة داخلية النقطة للـ L1-Regularized Least Squares كبير الحجم”،
+س. ج. كيم، ك. كوه، م. لوستيج، س. بويد ود. جورينيفسكي،
+في IEEE Journal of Selected Topics in Signal Processing، 2007
+(<a class="reference external" href="https://web.stanford.edu/~boyd/papers/pdf/l1_ls.pdf">ورقة</a>)</p></li>
+</ul>
+</div>
+</details><section id="id12">
+<h2>ضبط معلمة المنتظم<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p>تتحكم معلمة <code class="docutils literal notranslate"><span class="pre">alpha</span></code> في درجة ندرة المعاملات المقدرة.</p>
+<section id="id13">
+<h3>استخدام التصديق المتقاطع<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<p>يكشف scikit-learn عن كائنات تقوم بضبط معلمة الـ Lasso <code class="docutils literal notranslate"><span class="pre">alpha</span></code> عن طريق
+التصديق المتقاطع: <code class="xref py py-class docutils literal notranslate"><span class="pre">LassoCV</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">LassoLarsCV</span></code>.
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsCV</span></code> يعتمد على خوارزمية <a class="reference internal" href="#least-angle-regression"><span class="std std-ref">الانحدار بزاوية أصغر</span></a>
+الموضحة أدناه.</p>
+<p>بالنسبة لمجموعات البيانات عالية الأبعاد ذات الميزات المتعددة،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LassoCV</span></code> هو الأفضل في معظم الأحيان. ومع ذلك، فإن <code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsCV</span></code> لديه
+ميزة استكشاف قيم أكثر ملاءمة للمعلمة <code class="docutils literal notranslate"><span class="pre">alpha</span></code>، وإذا كان عدد العينات صغيرًا جدًا مقارنة بعدد
+الميزات، فهو غالبًا ما يكون أسرع من <code class="xref py py-class docutils literal notranslate"><span class="pre">LassoCV</span></code>.</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_1" src="../_images/sphx_glr_plot_lasso_model_selection_002.png" style="width: 307.2px; height: 230.39999999999998px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_lasso_model_selection.html"><img alt="lasso_cv_2" src="../_images/sphx_glr_plot_lasso_model_selection_003.png" style="width: 307.2px; height: 230.39999999999998px;" /></a></strong></p></section>
+<section id="lasso-lars-ic">
+<span id="id14"></span><h3>اختيار النموذج القائم على معيار المعلومات<a class="headerlink" href="#lasso-lars-ic" title="Link to this heading">#</a></h3>
+<p>بدلاً من ذلك، يقترح المقدر <code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsIC</span></code> استخدام
+معيار معلومات أكايكي (AIC) ومعيار معلومات بايز (BIC).
+إنه بديل أقل تكلفة من الناحية الحسابية للعثور على القيمة المثلى لـ alpha
+حيث يتم حساب مسار المنتظم مرة واحدة فقط بدلاً من k+1 مرة
+عند استخدام التصديق المتقاطع k-fold.</p>
+<p>في الواقع، يتم حساب هذه المعايير على مجموعة التدريب داخل العينة. وباختصار،
+إنها تعاقب الدرجات المتفائلة بشكل مفرط لمختلف نماذج الـ Lasso بمرونتها (راجع قسم “التفاصيل الرياضية” أدناه).</p>
+<p>ومع ذلك، تحتاج مثل هذه المعايير إلى تقدير صحيح لدرجات حرية
+الحل، مستمدة من عينات كبيرة (نتائج حدية) وتفترض أن النموذج الصحيح هو المرشح قيد التحقيق. كما أنها تميل إلى التعطل عندما
+تكون المشكلة سيئة الشرط (على سبيل المثال، المزيد من الميزات أكثر من العينات).</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_lars_ic.html"><img alt="../_images/sphx_glr_plot_lasso_lars_ic_001.png" src="../_images/sphx_glr_plot_lasso_lars_ic_001.png" style="width: 320.0px; height: 240.0px;" />
+</a>
+</figure>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_model_selection.html#sphx-glr-auto-examples-linear-model-plot-lasso-model-selection-py"><span class="std std-ref">Lasso model selection: AIC-BIC / cross-validation</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_lars_ic.html#sphx-glr-auto-examples-linear-model-plot-lasso-lars-ic-py"><span class="std std-ref">Lasso model selection via information criteria</span></a></p></li>
+</ul>
+</section>
+<section id="aic-bic">
+<span id="id15"></span><h3>معايير AIC وBIC<a class="headerlink" href="#aic-bic" title="Link to this heading">#</a></h3>
+<p>قد يختلف تعريف AIC (وبالتالي BIC) في الأدبيات. في هذا
+القسم، نقدم مزيدًا من المعلومات حول المعيار المحسوب في
+scikit-learn.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="التفاصيل-الرياضية">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">التفاصيل الرياضية<a class="headerlink" href="#التفاصيل-الرياضية" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">يتم تعريف معيار AIC على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[AIC = -2 \log(\hat{L}) + 2 d\]</div>
+<p class="sd-card-text">حيث <span class="math notranslate nohighlight">\(\hat{L}\)</span> هو الاحتمالية القصوى للنموذج و
+<span class="math notranslate nohighlight">\(d\)</span> هو عدد المعلمات (يشار إليها أيضًا بدرجات الحرية في القسم السابق).</p>
+<p class="sd-card-text">يستبدل تعريف BIC الثابت <span class="math notranslate nohighlight">\(2\)</span> بـ <span class="math notranslate nohighlight">\(\log(N)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[BIC = -2 \log(\hat{L}) + \log(N) d\]</div>
+<p class="sd-card-text">حيث <span class="math notranslate nohighlight">\(N\)</span> هو عدد العينات.</p>
+<p class="sd-card-text">بالنسبة للنموذج الخطي الغاوسي، يتم تعريف الاحتمالية القصوى للاحتمالية على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[\log(\hat{L}) = - \frac{n}{2} \log(2 \pi) - \frac{n}{2} \ln(\sigma^2) - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{2\sigma^2}\]</div>
+<p class="sd-card-text">حيث <span class="math notranslate nohighlight">\(\sigma^2\)</span> هو تقدير لتشتت الضوضاء،
+<span class="math notranslate nohighlight">\(y_i\)</span> و:math:<code class="docutils literal notranslate"><span class="pre">hat{y}_i</span></code> هما على التوالي الأهداف الحقيقية والمتوقعة، و:math:<code class="docutils literal notranslate"><span class="pre">n</span></code> هو عدد العينات.</p>
+<p class="sd-card-text">يؤدي إدخال الاحتمالية القصوى لمعيار AIC إلى ما يلي:</p>
+<div class="math notranslate nohighlight">
+\[AIC = n \log(2 \pi \sigma^2) + \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sigma^2} + 2 d\]</div>
+<p class="sd-card-text">يتم أحيانًا تجاهل المصطلح الأول للتعبير أعلاه لأنه ثابت عندما
+يتم توفير <span class="math notranslate nohighlight">\(\sigma^2\)</span>. بالإضافة إلى ذلك،
+يقال أحيانًا أن AIC يعادل إحصائية <span class="math notranslate nohighlight">\(C_p\)</span> <a class="footnote-reference brackets" href="#id18" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>. ومع ذلك، في المعنى الدقيق للكلمة، فإنه يعادل فقط حتى ثابت وعامل مضاعف.</p>
+<p class="sd-card-text">أخيرًا، ذكرنا أعلاه أن <span class="math notranslate nohighlight">\(\sigma^2\)</span> هو تقدير لتشتت الضوضاء. في <code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsIC</span></code> عندما لا يتم توفير معلمة <code class="docutils literal notranslate"><span class="pre">noise_variance</span></code> (الافتراضية)، يتم تقدير تشتت الضوضاء عبر المقدر غير المتحيز <a class="footnote-reference brackets" href="#id19" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a> المعرف على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2 = \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{n - p}\]</div>
+<p class="sd-card-text">حيث <span class="math notranslate nohighlight">\(p\)</span> هو عدد الميزات و:math:<code class="docutils literal notranslate"><span class="pre">hat{y}_i</span></code> هو</p>
+</div>
+</details><p>الهدف المتوقع باستخدام الانحدار الخطي العادي. لاحظ أن هذه
+الصيغة صالحة فقط عندما <code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">&gt;</span> <span class="pre">n_features</span></code>.</p>
+<blockquote>
+<div><p class="rubric">المراجع</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id18" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">12</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://arxiv.org/abs/0712.0881.pdf">Zou, Hui, Trevor Hastie, and Robert Tibshirani.
+“On the degrees of freedom of the lasso.”
+The Annals of Statistics 35.5 (2007): 2173-2192.</a></p>
+</aside>
+<aside class="footnote brackets" id="id19" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">13</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.1162/089976603321891864">Cherkassky, Vladimir, and Yunqian Ma.
+“Comparison of model selection for regression.”
+Neural computation 15.7 (2003): 1691-1714.</a></p>
+</aside>
+</aside>
+</div></blockquote>
+</section>
+<section id="svm">
+<h3>المقارنة بمعلمة المنتظم SVM<a class="headerlink" href="#svm" title="Link to this heading">#</a></h3>
+<p>التكافؤ بين <code class="docutils literal notranslate"><span class="pre">alpha</span></code> ومعلمة المنتظم SVM،
+<code class="docutils literal notranslate"><span class="pre">C</span></code> يعطى بـ <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">C</span></code> أو <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">(n_samples</span> <span class="pre">*</span> <span class="pre">C)</span></code>،
+اعتمادًا على المقدر ووظيفة الهدف الدقيقة التي يتم تحسينها بواسطة
+النموذج.</p>
+</section>
+</section>
+</section>
+<section id="multi-task-lasso">
+<span id="id20"></span><h1>Lasso متعدد المهام<a class="headerlink" href="#multi-task-lasso" title="Link to this heading">#</a></h1>
+<p>الـ <code class="xref py py-class docutils literal notranslate"><span class="pre">MultiTaskLasso</span></code> هو نموذج خطي يقدر معاملات متفرقة
+لمشكلات الانحدار المتعددة بشكل مشترك: <code class="docutils literal notranslate"><span class="pre">y</span></code> هو مصفوفة ثنائية الأبعاد،
+من الشكل <code class="docutils literal notranslate"><span class="pre">(n_samples،</span> <span class="pre">n_tasks)</span></code>. القيد هو أن الميزات المحددة هي نفسها لجميع
+مشكلات الانحدار، والتي يطلق عليها أيضًا المهام.</p>
+<p>تقارن الصورة التالية موقع الإدخالات غير الصفرية في
+مصفوفة المعاملات W التي تم الحصول عليها باستخدام Lasso بسيط أو MultiTaskLasso.
+تعطي تقديرات الـ Lasso إدخالات غير صفرية متفرقة بينما تكون الإدخالات غير الصفرية لـ
+MultiTaskLasso عبارة عن أعمدة كاملة.</p>
+<p class="centered">
+<strong><a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_1" src="../_images/sphx_glr_plot_multi_task_lasso_support_001.png" style="width: 384.0px; height: 240.0px;" /></a> <a class="reference external" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html"><img alt="multi_task_lasso_2" src="../_images/sphx_glr_plot_multi_task_lasso_support_002.png" style="width: 307.2px; height: 230.39999999999998px;" /></a></strong></p><p class="centered">
+<strong>تناسب نموذج السلسلة الزمنية، مع فرض أن أي ميزة نشطة تكون نشطة في جميع الأوقات.</strong></p><p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_multi_task_lasso_support.html#sphx-glr-auto-examples-linear-model-plot-multi-task-lasso-support-py"><span class="std std-ref">Joint feature selection with multi-task Lasso</span></a></p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="التفاصيل-الرياضية-2">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">التفاصيل الرياضية<a class="headerlink" href="#التفاصيل-الرياضية-2" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">رياضيًا، يتكون من نموذج خطي مدرب بمعيار مختلط
+<span class="math notranslate nohighlight">\(\ell_1\)</span> <span class="math notranslate nohighlight">\(\ell_2\)</span> للمنتظم.
+دالة الهدف للتقليل هي:</p>
+<div class="math notranslate nohighlight">
+\[\min_{W} { \frac{1}{2n_{\text{samples}}} ||X W - Y||_{\text{Fro}} ^ 2 + \alpha ||W||_{21}}\]</div>
+<p class="sd-card-text">حيث <span class="math notranslate nohighlight">\(\text{Fro}\)</span> يشير إلى معيار فروبنيس</p>
+<div class="math notranslate nohighlight">
+\[||A||_{\text{Fro}} = \sqrt{\sum_{ij} a_{ij}^2}\]</div>
+<p class="sd-card-text">و:math:<code class="docutils literal notranslate"><span class="pre">ell_1</span></code> <span class="math notranslate nohighlight">\(\ell_2\)</span> تقرأ</p>
+<div class="math notranslate nohighlight">
+\[||A||_{2 1} = \sum_i \sqrt{\sum_j a_{ij}^2}.\]</div>
+<p class="sd-card-text">يستخدم التنفيذ في فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">MultiTaskLasso</span></code> الانحدار المنسق كخوارزمية لضبط المعاملات.</p>
+</div>
+</details><p id="elastic-net">الشبكة المرنة
+يسمى النموذج <code class="xref py py-class docutils literal notranslate"><span class="pre">ElasticNet</span></code> نموذج رجوع خطي تم تدريبه باستخدام كل من معياري <span class="math notranslate nohighlight">\(\ell_1\)</span> و <span class="math notranslate nohighlight">\(\ell_2\)</span> المنتظمين للمعاملات. يسمح هذا المزيج بتعلم نموذج متفرق حيث يكون عدد قليل من الأوزان غير صفري مثل <code class="xref py py-class docutils literal notranslate"><span class="pre">Lasso</span></code>، مع الحفاظ على خصائص التنظيم لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">Ridge</span></code>. نحن نتحكم في المزيج المحدب من <span class="math notranslate nohighlight">\(\ell_1\)</span> و <span class="math notranslate nohighlight">\(\ell_2\)</span> باستخدام معامل “l1_ratio”.</p>
+<p>يعد Elastic-net مفيدًا عندما يكون هناك ميزات متعددة مترابطة مع بعضها البعض. ومن المرجح أن يختار لسو أحد هذه الميزات بشكل عشوائي، في حين أن من المرجح أن يختار Elastic-net كلا منهما.</p>
+<p>وتتمثل إحدى المزايا العملية للمقايضة بين لسو وريج في أنها تسمح لـ Elastic-Net بأن يرث بعضًا من استقرار ريدج تحت الدوران.</p>
+<p>دالة الهدف التي يجب تقليلها في هذه الحالة هي:</p>
+<div class="math notranslate nohighlight">
+\[\min_{w} { \frac{1}{2n_{\text{samples}}} ||X w - y||_2 ^ 2 + \alpha \rho ||w||_1 +
+\frac{\alpha(1-\rho)}{2} ||w||_2 ^ 2}\]</div>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html"><img alt="../_images/sphx_glr_plot_lasso_coordinate_descent_path_001.png" src="../_images/sphx_glr_plot_lasso_coordinate_descent_path_001.png" style="width: 320.0px; height: 240.0px;" />
+</a>
+</figure>
+<p>يمكن استخدام فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">ElasticNetCV</span></code> لضبط معلمي “alpha” (<span class="math notranslate nohighlight">\(\alpha\)</span>) و”l1_ratio” (<span class="math notranslate nohighlight">\(\rho\)</span>) عن طريق التحقق من صحة المستعرض.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_and_elasticnet.html#sphx-glr-auto-examples-linear-model-plot-lasso-and-elasticnet-py"><span class="std std-ref">L1-based models for Sparse Signals</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_coordinate_descent_path.html#sphx-glr-auto-examples-linear-model-plot-lasso-coordinate-descent-path-py"><span class="std std-ref">Lasso and Elastic Net</span></a></p></li>
+<li><p><span class="xref std std-ref">sphx_glr_auto_examples_linear_model/plot_elastic_net_precomputed_gram_matrix_with_weighted_samples.py</span></p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المراجع-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المراجع<a class="headerlink" href="#المراجع-3" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><p>توضح المرجعان التاليان التكرارات المستخدمة في محسن الانحدار المنسق لـ scikit-learn، وكذلك حساب فجوة الازدواجية المستخدمة للتحكم في التقارب.</p>
+<ul class="simple">
+<li><p>“مسار التنظيم لنماذج عامة خطية بواسطة الانحدار المنسق”، فريدمان، هاستي وتيبشراني، J Stat Softw، 2010 (<a class="reference external" href="https://www.jstatsoft.org/article/view/v033i01/v33i01.pdf">ورقة</a>).</p></li>
+<li><p>“طريقة داخلية لنموذج L1-Regularized Least Squares الكبير”، كيم، كوه، لوستيج، بويد وجورينيفسكي، في مجلة IEEE Journal on Selected Topics in Signal Processing، 2007 (<a class="reference external" href="https://web.stanford.edu/~boyd/papers/pdf/l1_ls.pdf">ورقة</a>)</p></li>
+</ul>
+</section>
+<section id="multi-task-elastic-net">
+<span id="id21"></span><h1>شبكة مطاطية متعددة المهام<a class="headerlink" href="#multi-task-elastic-net" title="Link to this heading">#</a></h1>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiTaskElasticNet</span></code> هو نموذج شبكة مطاطية يقدر معاملات متفرقة لمهام متعددة الانحدار بشكل مشترك: “Y” عبارة عن مصفوفة ثنائية الأبعاد ذات شكل “n_samples، n_tasks”. والقيود هي أن الميزات المحددة هي نفسها لجميع مشكلات الانحدار، والتي يطلق عليها أيضًا مهام.</p>
+<p>من الناحية الرياضية، يتكون من نموذج خطي مدرب باستخدام معيار مختلط <span class="math notranslate nohighlight">\(\ell_1\)</span> <span class="math notranslate nohighlight">\(\ell_2\)</span> و <span class="math notranslate nohighlight">\(\ell_2\)</span> للتنظيم. دالة الهدف التي يجب تقليلها هي:</p>
+<div class="math notranslate nohighlight">
+\[\min_{W} { \frac{1}{2n_{\text{samples}}} ||X W - Y||_{\text{Fro}}^2 + \alpha \rho ||W||_{2 1} +
+\frac{\alpha(1-\rho)}{2} ||W||_{\text{Fro}}^2}\]</div>
+<p>يستخدم التنفيذ في فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">MultiTaskElasticNet</span></code> الانحدار المنسق كخوارزمية لضبط المعاملات.</p>
+<p>يمكن استخدام فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">MultiTaskElasticNetCV</span></code> لضبط معلمي “alpha” (<span class="math notranslate nohighlight">\(\alpha\)</span>) و”l1_ratio” (<span class="math notranslate nohighlight">\(\rho\)</span>) عن طريق التحقق من صحة المستعرض.</p>
+</section>
+<section id="least-angle-regression">
+<span id="id22"></span><h1>الانحدار بزاوية أصغر<a class="headerlink" href="#least-angle-regression" title="Link to this heading">#</a></h1>
+<p>الانحدار بزاوية أصغر (LARS) هو خوارزمية الانحدار للبيانات عالية الأبعاد، طورها برادلي إفرون، وتريفور هاستي، وإيان جونستون، وروبرت تيبشراني. LARS مشابه للانحدار الخطي. في كل خطوة، يجد الميزة الأكثر ارتباطًا بالهدف. عندما تكون هناك ميزات متعددة ذات ارتباط متساوٍ، بدلاً من الاستمرار على نفس الميزة، فإنه يستمر في اتجاه متساوي الزوايا بين الميزات.</p>
+<p>مزايا LARS هي:</p>
+<ul class="simple">
+<li><p>إنه فعال من الناحية العددية في السياقات التي يكون فيها عدد الميزات أكبر بكثير من عدد العينات.</p></li>
+<li><p>إنه سريع الحساب مثل الاختيار الأمامي وله نفس ترتيب التعقيد مثل المربعات الصغرى العادية.</p></li>
+<li><p>ينتج مسار حل خطي قطاعي كامل، وهو مفيد في التحقق من صحة المستعرض أو المحاولات المماثلة لضبط النموذج.</p></li>
+<li><p>إذا كانت ميزتان مرتبطتين تقريبًا بالهدف، فيجب أن تزداد معاملاتهما بنفس المعدل تقريبًا. وبالتالي، يتصرف الخوارزم كما هو متوقع من الحدس، وهو أيضًا أكثر استقرارًا.</p></li>
+<li><p>يمكن تعديله بسهولة لإنتاج حلول لمقدّرات أخرى، مثل لسو.</p></li>
+</ul>
+<p>تشمل عيوب طريقة LARS ما يلي:</p>
+<ul class="simple">
+<li><p>نظرًا لأن LARS يعتمد على إعادة تركيب بقايا المتكررة، فمن المحتمل أن يكون حساسًا بشكل خاص لآثار الضوضاء. تتم مناقشة هذه المشكلة بالتفصيل من قبل وايزبرج في قسم المناقشة من مقال إفرون وآخرون. (2004) في Annals of Statistics.</p></li>
+</ul>
+<p>يمكن استخدام نموذج LARS عبر المُقدِّر <code class="xref py py-class docutils literal notranslate"><span class="pre">Lars</span></code>، أو تنفيذه منخفض المستوى <code class="xref py py-func docutils literal notranslate"><span class="pre">lars_path</span></code> أو <code class="xref py py-func docutils literal notranslate"><span class="pre">lars_path_gram</span></code>.</p>
+</section>
+<section id="lars">
+<h1>LARS لسو<a class="headerlink" href="#lars" title="Link to this heading">#</a></h1>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLars</span></code> هو نموذج لسو تم تنفيذه باستخدام خوارزمية LARS، وعلى عكس التنفيذ القائم على الانحدار المنسق، فإن هذا يعطي الحل الدقيق، والذي يكون خطيًا قطاعيًا كدالة لمعيار معاملاته.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_lasso_lars.html"><img alt="../_images/sphx_glr_plot_lasso_lars_001.png" src="../_images/sphx_glr_plot_lasso_lars_001.png" style="width: 320.0px; height: 240.0px;" />
+</a>
+</figure>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LassoLars</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">LassoLars(alpha=0.1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([0.6..., 0.        ])</span>
+</pre></div>
+</div>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_lars.html#sphx-glr-auto-examples-linear-model-plot-lasso-lars-py"><span class="std std-ref">Lasso path using LARS</span></a></p></li>
+</ul>
+<p>توفر خوارزمية لارس مسار المعاملات الكامل لمعامل التنظيم تقريبًا مجانًا، وبالتالي فإن إحدى العمليات الشائعة هي استرداد المسار بوظيفة من وظائف <code class="xref py py-func docutils literal notranslate"><span class="pre">lars_path</span></code> أو <code class="xref py py-func docutils literal notranslate"><span class="pre">lars_path_gram</span></code>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="الصيغة-الرياضية">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">الصيغة الرياضية<a class="headerlink" href="#الصيغة-الرياضية" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><p>الخوارزمية مشابهة للانحدار الخطي، ولكن بدلاً من تضمين ميزات في كل خطوة، يتم زيادة المعاملات المقدرة في اتجاه متساوي الزوايا مع كل ارتباطاتهم بالبقايا.</p>
+<p>بدلاً من إعطاء نتيجة متجه، يتكون حل LARS من منحنى يشير إلى الحل لكل قيمة لمعيار <span class="math notranslate nohighlight">\(\ell_1\)</span> لمُتجه المعلمة. يتم تخزين مسار المعاملات الكامل في المصفوفة “<a href="#id65"><span class="problematic" id="id66">coef_path_</span></a>” ذات الشكل <code class="docutils literal notranslate"><span class="pre">(n_features،</span> <span class="pre">max_features</span> <span class="pre">+</span> <span class="pre">1)</span></code>. العمود الأول هو دائمًا صفر.</p>
+<p class="rubric">المراجع</p>
+<ul class="simple">
+<li><p>الخوارزمية الأصلية مفصلة في الورقة <a class="reference external" href="https://www-stat.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf">Least Angle Regression</a> بواسطة Hastie et al.</p></li>
+</ul>
+</section>
+<section id="omp">
+<span id="id24"></span><h1>البحث عن المطابقة العمودية (OMP)<a class="headerlink" href="#omp" title="Link to this heading">#</a></h1>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">OrthogonalMatchingPursuit</span></code> و <code class="xref py py-func docutils literal notranslate"><span class="pre">orthogonal_mp</span></code> تنفذان خوارزمية OMP لتقريب ملاءمة نموذج خطي مع قيود مفروضة على عدد المعاملات غير الصفرية (أي معيار <span class="math notranslate nohighlight">\(\ell_0\)</span> شبه).</p>
+<p>باعتباره طريقة اختيار ميزة أمامية مثل <a class="reference internal" href="#least-angle-regression"><span class="std std-ref">الانحدار بزاوية أصغر</span></a>، يمكن للبحث عن المطابقة العمودية تقريب متجه الحل الأمثل بعدد ثابت من العناصر غير الصفرية:</p>
+<div class="math notranslate nohighlight">
+\[\underset{w}{\operatorname{arg\,min\,}}  ||y - Xw||_2^2 \text{ subject to } ||w||_0 \leq n_{\text{nonzero_coefs}}\]</div>
+<p>بدلاً من ذلك، يمكن للبحث عن المطابقة العمودية استهداف خطأ محدد بدلاً من عدد محدد من المعاملات غير الصفرية. يمكن التعبير عن هذا على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[\underset{w}{\operatorname{arg\,min\,}} ||w||_0 \text{ subject to } ||y-Xw||_2^2 \leq \text{tol}\]</div>
+<p>يستند OMP إلى خوارزمية جشعة تتضمن في كل خطوة الذرة الأكثر ارتباطًا بالبقايا الحالية. إنه مشابه لطريقة مطاردة المطابقة (MP) البسيطة، ولكنه أفضل في أن البقايا في كل تكرار يتم إعادة حسابها باستخدام إسقاط عمودي على مساحة عناصر القاموس المحددة سابقًا.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_omp.html#sphx-glr-auto-examples-linear-model-plot-omp-py"><span class="std std-ref">Orthogonal Matching Pursuit</span></a></p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المراجع-4">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المراجع<a class="headerlink" href="#المراجع-4" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><ul class="simple">
+<li><p><a class="reference external" href="https://www.cs.technion.ac.il/~ronrubin/Publications/KSVD-OMP-v2.pdf">https://www.cs.technion.ac.il/~ronrubin/Publications/KSVD-OMP-v2.pdf</a></p></li>
+<li><dl class="simple">
+<dt><a href="#id25"><span class="problematic" id="id26">`</span></a>Matching pursuits with time-frequency dictionaries</dt><dd><p>&lt;<a class="reference external" href="https://www.di.ens.fr/~mallat/papiers/MallatPursuit93.pdf">https://www.di.ens.fr/~mallat/papiers/MallatPursuit93.pdf</a>&gt;`_،
+S. G. Mallat، Z. Zhang،</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p id="bayesian-regression">الانحدار الخلوي
+تقنيات الانحدار البايزي:</p>
+<p>يمكن استخدام تقنيات الانحدار البايزي لدمج معلمات التنظيم في إجراء التقدير. حيث لا يتم تحديد معلمة التنظيم بشكل صارم، ولكن يتم ضبطها وفقًا للبيانات المتاحة. ويمكن تحقيق ذلك من خلال تقديم “معلومات مسبقة غير مفيدة” فوق المعلمات فائقة الدقة للنماذج.</p>
+<p>إن التنظيم L2 المستخدم في الانحدار التليدي يعادل إيجاد تقدير الحد الأقصى لاحتمالية الخلف وفقًا لتوزيع غاوسي مسبق على المعاملات w مع دقة λ−1. بدلاً من تحديد λ يدويًا، من الممكن التعامل معه كمتغير عشوائي يتم تقديره من البيانات.</p>
+<p>للحصول على نموذج احتمالي كامل، يفترض أن يكون الإخراج y موزعًا وفقًا لتوزيع غاوسي حول Xw:</p>
+<p>حيث يتم التعامل مع α مرة أخرى كمتغير عشوائي يتم تقديره من البيانات.</p>
+<p>مزايا الانحدار البايزي:</p>
+<ol class="arabic simple">
+<li><p>يتكيف مع البيانات المتاحة.</p></li>
+<li><p>يمكن استخدامه لدمج معلمات التنظيم في إجراء التقدير.</p></li>
+</ol>
+<p>أما مساوئ الانحدار البايزي:</p>
+<ol class="arabic simple">
+<li><p>قد يكون استنتاج النموذج استنتاجًا مستهلكًا للوقت.</p></li>
+</ol>
+<p>الانحدار البايزي ريدج:</p>
+<p>يقدر BayesianRidge نموذجًا احتماليًا لمشكلة الانحدار كما هو موضح أعلاه. يتم إعطاء السابقة للمعامل w بواسطة غاوسي كروي:</p>
+<p>حيث يتم اختيار التوزيعات السابقة على α و λ لتكون توزيعات جاما، السابقة المؤتلفة لدقة غاوسي. ويطلق على النموذج الناتج اسم “انحدار بايزي ريدج”، وهو مشابه للانحدار التليدي الكلاسيكي.</p>
+<p>يتم تقدير المعلمات w و α و λ بشكل مشترك أثناء ملاءمة النموذج، ويتم تقدير معلمات التنظيم α و λ عن طريق تعظيم “الاحتمالية الهامشية للحد الأقصى”. ويستند تنفيذ سكيت-ليرن على الخوارزمية الموضحة في التذييل A من (تيبينج، 2001) حيث يتم تحديث المعلمات α و λ كما هو مقترح في (ماكاي، 1992). ويمكن تعيين القيمة الأولية لإجراء التعظيم باستخدام المعلمات فائقة الدقة alpha_init وlambda_init.</p>
+<p>هناك أربع معلمات فائقة أخرى، α_1 و α_2 و λ_1 و λ_2 من التوزيعات السابقة جاما على α و λ. وعادة ما يتم اختيارها لتكون “غير مفيدة”. افتراضيًا، α_1 = α_2 = λ_1 = λ_2 = 10^−6.</p>
+<p>يستخدم الانحدار البايزي ريدج للانحدار:</p>
+<p>بعد التجهيز، يمكن استخدام النموذج للتنبؤ بالقيم الجديدة:</p>
+<p>يمكن الوصول إلى معاملات النموذج w:</p>
+<p>بسبب الإطار البايزي، تختلف الأوزان الموجودة اختلافًا طفيفًا عن تلك التي تم العثور عليها بواسطة طريقة المربعات الصغرى العادية. ومع ذلك، فإن انحدار بايزي ريدج أكثر قوة للمشاكل غير المحددة جيدًا.</p>
+<p>تحديد الأهمية التلقائي (ARD):</p>
+<p>تحديد الأهمية التلقائي (كما هو مطبق في ARDRegression) هو نوع من النماذج الخطية المشابهة جدًا لانحدار بايزي ريدج، ولكنه يؤدي إلى معاملات أكثر ندرة.</p>
+<p>يفرض ARDRegression سابقًا مختلفًا على w: فهو يسقط التوزيع الغاوسي الكروي لصالح التوزيع الغاوسي الإهليلجي المركز. وهذا يعني أنه يمكن استخلاص كل معامل w_i نفسه من توزيع غاوسي، مع مركز صفري ودقة λ_i:</p>
+<p>حيث A هي مصفوفة قطرية موجبة محددة وdiag(A) = λ = {λ_1,…,λ_p}.</p>
+<p>على عكس انحدار بايزي ريدج، فإن لكل إحداثي من w_i انحرافه المعياري الخاص 1/λ_i. يتم اختيار التوزيع السابق على جميع λ_i ليكون نفس توزيع جاما المعطى بواسطة المعلمات فائقة الدقة λ_1 و λ_2.</p>
+<p>يُعرف ARD أيضًا في الأدبيات باسم “التعلم البايزي النادر” و “آلة المتجه ذي الصلة”. للحصول على مقارنة مفصلة بين ARD وانحدار بايزي ريدج، راجع المثال أدناه.
+تم تنفيذ الانحدار اللوجستي في <code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code>. وعلى الرغم من اسمه، إلا أنه يتم تنفيذه كنموذج خطي للتصنيف بدلاً من الانحدار من حيث تسمية سكيت-ليرن/ML. ويعرف الانحدار اللوجستي أيضًا في الأدبيات باسم الانحدار اللوجستي، أو التصنيف بحد أقصى للإنتروبيا (MaxEnt) أو المصنف اللوغاريتمي الخطي. في هذا النموذج، يتم نمذجة الاحتمالات التي تصف النتائج المحتملة لمحاكمة واحدة باستخدام ‘دالة لوجستية &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Logistic_function">https://en.wikipedia.org/wiki/Logistic_function</a>&gt;`_.</p>
+<p>يمكن أن يلائم هذا التنفيذ الانحدار اللوجستي الثنائي، أو One-vs-Rest، أو الانحدار اللوجستي متعدد الحدود مع خيار <span class="math notranslate nohighlight">\(\ell_1\)</span>، أو <span class="math notranslate nohighlight">\(\ell_2\)</span> أو الانتظام المرن.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>التنظيم</strong></p>
+</div>
+<p>يتم تطبيق الانتظام بشكل افتراضي، وهو أمر شائع في تعلم الآلة ولكن ليس في الإحصاء. تتمثل إحدى مزايا الانتظام الأخرى في أنه يحسن الاستقرار العددي. لا يعني عدم وجود انتظام سوى تعيين C إلى قيمة عالية جدًا.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>الانحدار اللوجستي كحالة خاصة من النماذج الخطية العامة (GLM)</strong></p>
+</div>
+<p>الانحدار اللوجستي هو حالة خاصة من
+<span class="xref std std-ref">generalized_linear_models</span> مع توزيع شرطي ثنائي/برنولي وارتباط لوغاريتمي. يمكن استخدام الإخراج الرقمي للانحدار اللوجستي، والذي هو الاحتمال المتوقع، كمصنف عن طريق تطبيق عتبة (0.5 افتراضيًا) عليه. هذا هو كيفية تنفيذه في سكيت-ليرن، لذلك فهو يتوقع هدفًا فئويًا، مما يجعل الانحدار اللوجستي مصنفًا.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_logistic_l1_l2_sparsity.html#sphx-glr-auto-examples-linear-model-plot-logistic-l1-l2-sparsity-py"><span class="std std-ref">L1 Penalty and Sparsity in Logistic Regression</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_logistic_path.html#sphx-glr-auto-examples-linear-model-plot-logistic-path-py"><span class="std std-ref">Regularization path of L1- Logistic Regression</span></a></p></li>
+<li><p>:ref:<a href="#id27"><span class="problematic" id="id28">`</span></a>sph</p></li>
+</ul>
+<p>x_glr_auto_examples_linear_model_plot_logistic_multinomial.py`
+* <a class="reference internal" href="../auto_examples/linear_model/plot_sparse_logistic_regression_20newsgroups.html#sphx-glr-auto-examples-linear-model-plot-sparse-logistic-regression-20newsgroups-py"><span class="std std-ref">Multiclass sparse logistic regression on 20newgroups</span></a>
+* <a class="reference internal" href="../auto_examples/linear_model/plot_sparse_logistic_regression_mnist.html#sphx-glr-auto-examples-linear-model-plot-sparse-logistic-regression-mnist-py"><span class="std std-ref">MNIST classification using multinomial logistic + L1</span></a></p>
+<section id="id29">
+<h2>الحالة الثنائية<a class="headerlink" href="#id29" title="Link to this heading">#</a></h2>
+<p>لتسهيل التدوين، نفترض أن الهدف <span class="math notranslate nohighlight">\(y_i\)</span> يأخذ قيمًا في
+المجموعة <span class="math notranslate nohighlight">\(\{0، 1\}\)</span> لنقطة البيانات <span class="math notranslate nohighlight">\(i\)</span>.
+بمجرد ملاءمة النموذج، فإن طريقة <code class="xref py py-meth docutils literal notranslate"><span class="pre">predict_proba</span></code>
+من فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code> تتنبأ
+باحتمالية الفئة الإيجابية <span class="math notranslate nohighlight">\(P(y_i=1|X_i)\)</span> كما</p>
+<div class="math notranslate nohighlight">
+\[\hat{p}(X_i) = \operatorname{expit}(X_i w + w_0) = \frac{1}{1 + \exp(-X_i w - w_0)}.\]</div>
+<p>كمشكلة تحسين، فإن الانحدار اللوجستي الثنائي
+مع مصطلح الانتظام <span class="math notranslate nohighlight">\(r(w)\)</span> يقلل من
+دالة التكلفة التالية:</p>
+<div class="math notranslate nohighlight" id="regularized-logistic-loss">
+<span id="equation-regularized-logistic-loss"></span><span class="eqno">(1)<a class="headerlink" href="#regularized-logistic-loss" title="Link to this equation">#</a></span>\[\min_{w} \frac{1}{S}\sum_{i=1}^n s_i
+\left(-y_i \log(\hat{p}(X_i)) - (1 - y_i) \log(1 - \hat{p}(X_i))\right)
++ \frac{r(w)}{S C}\,,\]</div>
+<p>حيث <span class="math notranslate nohighlight">\({s_i}\)</span> يقابل الأوزان التي يعينها المستخدم لعينة تدريب محددة (يتم تشكيل المتجه <span class="math notranslate nohighlight">\(s\)</span> عن طريق الضرب العنصري لأوزان الفصل وأوزان العينة)،
+والمجموع <span class="math notranslate nohighlight">\(S = \sum_{i=1}^n s_i\)</span>.</p>
+<p>نقدم حاليًا أربعة خيارات لمصطلح الانتظام <span class="math notranslate nohighlight">\(r(w)\)</span> عبر
+حجة <code class="docutils literal notranslate"><span class="pre">penalty</span></code>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>penalty</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(r(w)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\ell_1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\|w\|_1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\ell_2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{2}\|w\|_2^2 = \frac{1}{2}w^T w\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ElasticNet</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1 - \rho}{2}w^T w + \rho \|w\|_1\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>بالنسبة لـ ElasticNet، يتحكم <span class="math notranslate nohighlight">\(\rho\)</span> (الذي يقابله معلمة <code class="docutils literal notranslate"><span class="pre">l1_ratio</span></code>)
+في قوة الانتظام <span class="math notranslate nohighlight">\(\ell_1\)</span> مقابل <span class="math notranslate nohighlight">\(\ell_2\)</span>. الانتظام المرن مكافئ لـ <span class="math notranslate nohighlight">\(\ell_1\)</span> عندما
+<span class="math notranslate nohighlight">\(\rho = 1\)</span> ومكافئ لـ <span class="math notranslate nohighlight">\(\ell_2\)</span> عندما <span class="math notranslate nohighlight">\(\rho=0\)</span>.</p>
+<p>لاحظ أن مقياس أوزان الفصل وأوزان العينة سيؤثر
+على مشكلة التحسين. على سبيل المثال، فإن ضرب أوزان العينة بمضاعف ثابت <span class="math notranslate nohighlight">\(b&gt;0\)</span> مكافئ لضرب قوة الانتظام (العكسي) <code class="docutils literal notranslate"><span class="pre">C</span></code> بـ <span class="math notranslate nohighlight">\(b\)</span>.</p>
+</section>
+<section id="id30">
+<h2>الحالة متعددة الحدود<a class="headerlink" href="#id30" title="Link to this heading">#</a></h2>
+<p>يمكن تمديد الحالة الثنائية إلى <span class="math notranslate nohighlight">\(K\)</span> فئات تؤدي إلى الانحدار اللوجستي متعدد الحدود، راجع أيضًا <a class="reference external" href="https://en.wikipedia.org/wiki/Multinomial_logistic_regression#As_a_log-linear_model">النموذج اللوغاريتمي</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>من الممكن معلمية نموذج تصنيف من <span class="math notranslate nohighlight">\(K\)</span> فئة
+باستخدام <span class="math notranslate nohighlight">\(K-1\)</span> فقط من متجهات الأوزان، مما يجعل احتمالية فئة واحدة محددة تمامًا بواسطة احتمالات الفئات الأخرى عن طريق الاستفادة من حقيقة أن جميع احتمالات الفئات يجب أن تكون مجموعها واحد. نختار عن قصد المبالغة في معلمية النموذج
+باستخدام <span class="math notranslate nohighlight">\(K\)</span> متجهات أوزان لسهولة التنفيذ وللحفاظ على التحيز الاستقرائي المتماثل فيما يتعلق بترتيب الفئات، راجع <a class="footnote-reference brackets" href="#id45" id="id32" role="doc-noteref"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></a>. يصبح هذا التأثير مهمًا بشكل خاص عند استخدام الانتظام. يمكن أن يكون اختيار المبالغة في المعلمية ضارًا بالنماذج غير المعاقب عليها لأن الحل قد لا يكون فريدًا من نوعه، كما هو موضح في <a class="footnote-reference brackets" href="#id45" id="id33" role="doc-noteref"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></a>.</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="التفاصيل-الرياضية-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">التفاصيل الرياضية<a class="headerlink" href="#التفاصيل-الرياضية-3" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">دع <span class="math notranslate nohighlight">\(y_i \in {1, \ldots, K}\)</span> يكون المتغير المستهدف المشفر (العلامة) للملاحظة <span class="math notranslate nohighlight">\(i\)</span>.
+بدلاً من متجه معامل واحد، لدينا الآن
+مصفوفة المعاملات <span class="math notranslate nohighlight">\(W\)</span> حيث كل متجه صف <span class="math notranslate nohighlight">\(W_k\)</span> يقابل الفئة
+<span class="math notranslate nohighlight">\(k\)</span>. نهدف إلى التنبؤ باحتمالات الفصل <span class="math notranslate nohighlight">\(P(y_i=k|X_i)\)</span> عبر
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">predict_proba</span></code> كما يلي:</p>
+<div class="math notranslate nohighlight">
+\[\hat{p}_k(X_i) = \frac{\exp(X_i W_k + W_{0, k})}{\sum_{l=0}^{K-1} \exp(X_i W_l + W_{0, l})}.\]</div>
+<p class="sd-card-text">يصبح الهدف للتحسين</p>
+<div class="math notranslate nohighlight">
+\[\min_W -\frac{1}{S}\sum_{i=1}^n \sum_{k=0}^{K-1} s_{ik} [y_i = k] \log(\hat{p}_k(X_i))
++ \frac{r(W)}{S C}\,,\]</div>
+<p class="sd-card-text">حيث <span class="math notranslate nohighlight">\([P]\)</span> تمثل قوس إيفيرسون الذي يأخذ القيمة <span class="math notranslate nohighlight">\(0\)</span>
+إذا كان <span class="math notranslate nohighlight">\(P\)</span> غير صحيح، وإلا فإنه يأخذ القيمة <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p class="sd-card-text">مرة أخرى، <span class="math notranslate nohighlight">\(s_{ik\)</span> هي الأوزان التي يعينها المستخدم (ضرب أوزان العينة وأوزان الفصل) مع مجموعها <span class="math notranslate nohighlight">\(S = \sum_{i=1}^n \sum_{k=0}^{K-1} s_{ik}\)</span>.</p>
+<p class="sd-card-text">نقدم حاليًا أربعة خيارات
+لمصطلح الانتظام <span class="math notranslate nohighlight">\(r(W)\)</span> عبر حجة <code class="docutils literal notranslate"><span class="pre">penalty</span></code>، حيث <span class="math notranslate nohighlight">\(m\)</span>
+هو عدد الميزات:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">penalty</p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(r(W)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\ell_1\)</span></p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\|W\|_{1,1} = \sum_{i=1}^m\sum_{j=1}^{K}|W_{i،j}|\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\ell_2\)</span></p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\frac{1}{2}\|W\|_F^2 = \frac{1}{2}\sum_{i=1}^m\sum_{j=1}^{K} W_{i،j}^2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">ElasticNet</span></code></p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\frac{1 - \rho}{2}\|W\|_F^2 + \rho \|W\|_{1,1}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</details><p>حلول
+بالتأكيد! فيما يلي ترجمة للنص المحدد بتنسيق ReStructuredText إلى اللغة العربية:</p>
+<p>المنقحات المطبقة في الفئة <code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code>
+هي “lbfgs” و “liblinear” و “newton-cg” و “newton-cholesky” و “sag” و “saga”:</p>
+<p>يلخص الجدول التالي العقوبات والمتعددة الحدود متعددة الفئات التي يدعمها كل منقح:</p>
+<p>يستخدم المنقح “lbfgs” بشكل افتراضي لقوته. بالنسبة للمجموعات الكبيرة من البيانات،
+عادة ما يكون المنقح “saga” أسرع.
+بالنسبة للمجموعات الكبيرة من البيانات، يمكنك أيضًا النظر في استخدام <code class="xref py py-class docutils literal notranslate"><span class="pre">SGDClassifier</span></code>
+مع <code class="docutils literal notranslate"><span class="pre">loss=&quot;log_loss&quot;</span></code>، والذي قد يكون أسرع ولكنه يتطلب مزيدًا من الضبط.</p>
+<section id="liblinear-differences">
+<span id="id34"></span><h3>الاختلافات بين المنقحات<a class="headerlink" href="#liblinear-differences" title="Link to this heading">#</a></h3>
+<p>قد يكون هناك اختلاف في الدرجات التي تم الحصول عليها بين
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code> مع <code class="docutils literal notranslate"><span class="pre">solver=liblinear</span></code> أو
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> ومكتبة liblinear الخارجية مباشرة،
+عندما <code class="docutils literal notranslate"><span class="pre">fit_intercept=False</span></code> والملاءمة <code class="docutils literal notranslate"><span class="pre">coef_</span></code> (أو) البيانات التي يتعين التنبؤ بها
+هي أصفار. ويرجع ذلك إلى أنه بالنسبة للعينة (عينات) ذات “دالة القرار” الصفرية،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> يتنبآن بالصنف السلبي،
+بينما يتنبأ liblinear بالصنف الإيجابي. لاحظ أن النموذج الذي يحتوي على
+<code class="docutils literal notranslate"><span class="pre">fit_intercept=False</span></code> ولديه العديد من العينات ذات “دالة القرار” الصفرية،
+من المحتمل أن يكون نموذجًا سيئًا وغير مناسب، ويُنصح بتعيين
+<code class="docutils literal notranslate"><span class="pre">fit_intercept=True</span></code> وزيادة <code class="docutils literal notranslate"><span class="pre">intercept_scaling</span></code>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="تفاصيل-المنقحات">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">تفاصيل المنقحات<a class="headerlink" href="#تفاصيل-المنقحات" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text">يستخدم المنقح “liblinear” خوارزمية الانحدار المنسق (CD)، ويعتمد على مكتبة C++ الممتازة
+<a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/liblinear/">LIBLINEAR library</a>، والتي يتم شحنها مع
+scikit-learn. ومع ذلك، لا يمكن لخوارزمية الانحدار المنسق (CD) المطبقة في liblinear أن تتعلم
+نموذجًا متعدد الحدود حقيقيًا (متعدد الفئات)؛ بدلاً من ذلك، يتم تحليل مشكلة التحسين
+بطريقة “واحد مقابل الباقي” بحيث يتم تدريب مصنفات ثنائية منفصلة لجميع الفئات. يحدث هذا
+تحت الغطاء، لذا فإن <code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code> التي تستخدم هذا المنقح تتصرف كمصنفات متعددة الفئات.
+بالنسبة إلى <span class="math notranslate nohighlight">\(\ell_1\)</span> المنتظم، يسمح <code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.svm.l1_min_c</span></code> بحساب الحد الأدنى لـ C للحصول على نموذج “غير فارغ” (جميع أوزان الميزات تساوي الصفر).</p></li>
+<li><p class="sd-card-text">تدعم المنقحات “lbfgs” و “newton-cg” و “sag” فقط <span class="math notranslate nohighlight">\(\ell_2\)</span>
+الانتظام أو عدم الانتظام، وُجد أنها تتقارب بشكل أسرع لبعض
+البيانات عالية الأبعاد. يؤدي تعيين <code class="docutils literal notranslate"><span class="pre">multi_class</span></code> إلى “multinomial” مع هذه المنقحات
+إلى تعلم نموذج انحدار لوجستي متعدد الحدود حقيقي <a class="footnote-reference brackets" href="#id40" id="id35" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>، مما يعني أن تقديرات الاحتمالية الخاصة به يجب أن تكون
+معايرة أفضل من إعداد “واحد مقابل الباقي” الافتراضي.</p></li>
+<li><p class="sd-card-text">يستخدم المنقح “sag” الانحدار المتوسط ​​العشوائي <a class="footnote-reference brackets" href="#id41" id="id36" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>. إنه أسرع
+من المنقحات الأخرى للمجموعات الكبيرة من البيانات، عندما يكون كل من عدد العينات وعدد
+الميزات كبيرًا.</p></li>
+<li><p class="sd-card-text">المنقح “saga” <a class="footnote-reference brackets" href="#id42" id="id37" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> هو متغير من “sag” يدعم أيضًا
+عقوبة <code class="docutils literal notranslate"><span class="pre">penalty=&quot;l1&quot;</span></code> غير الملساء. لذلك، فهو المنقح المفضل للانحدار اللوجستي متعدد الحدود المتناثر.
+كما أنه المنقح الوحيد الذي يدعم <code class="docutils literal notranslate"><span class="pre">penalty=&quot;elasticnet&quot;</span></code>.</p></li>
+<li><p class="sd-card-text">“lbfgs” هو خوارزمية تحسين تقارب خوارزمية برويدن-فليتشر-غولدفارب-شانو <a class="footnote-reference brackets" href="#id43" id="id38" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>،
+التي تنتمي إلى طرق كوايزي-نيوتن. وباعتبارها كذلك، يمكنها التعامل مع مجموعة واسعة من بيانات التدريب المختلفة،
+وبالتالي فهي المنقح الافتراضي. ومع ذلك، فإن أداءها يعاني من مجموعات البيانات ذات المقياس الضعيف
+ومجموعات البيانات ذات الميزات الفئوية المشفرة ذات الفئات النادرة.</p></li>
+<li><p class="sd-card-text">المنقح “newton-cholesky” هو منقح نيوتن الدقيق الذي يحسب مصفوفة هيسيان
+ويحل نظام الخطي الناتج. إنه خيار جيد جدًا لـ <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> &gt;&gt; <code class="docutils literal notranslate"><span class="pre">n_features</span></code>،
+ولكن لديه بعض أوجه القصور: فقط <span class="math notranslate nohighlight">\(\ell_2\)</span>
+يتم دعم الانتظام. علاوة على ذلك، نظرًا لحساب مصفوفة هيسيان بشكل صريح،
+تعتمد الذاكرة بشكل تربيعي على <code class="docutils literal notranslate"><span class="pre">n_features</span></code> وكذلك على <code class="docutils literal notranslate"><span class="pre">n_classes</span></code>.
+ونتيجة لذلك، يتم تنفيذ مخطط “واحد مقابل الباقي” فقط لحالة الفئات المتعددة.</p></li>
+</ul>
+<p class="sd-card-text">لمقارنة بعض هذه المنقحات، راجع <a class="footnote-reference brackets" href="#id44" id="id39" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>.</p>
+<p class="rubric">المراجع</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id40" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id35">5</a><span class="fn-bracket">]</span></span>
+<p class="sd-card-text">كريستوفر م. بيشوب: التعرف على الأنماط والتعلم الآلي، الفصل 4.3.4</p>
+</aside>
+<aside class="footnote brackets" id="id41" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id36">6</a><span class="fn-bracket">]</span></span>
+<p class="sd-card-text">مارك شميت، ونيكولاس لو روكس، وفرانسيس باش: <a class="reference external" href="https://hal.inria.fr/hal-00860051/document">Minimizing Finite Sums with the Stochastic Average Gradient.</a></p>
+</aside>
+<aside class="footnote brackets" id="id42" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id37">7</a><span class="fn-bracket">]</span></span>
+<p class="sd-card-text">آرون ديفازيو، وفرانسيس باش، وسيمون لاكوست-جوليان:
+<a class="reference external" href="https://arxiv.org/abs/1407.0202">SAGA: A Fast Incremental Gradient Method With Support for
+Non-Strongly Convex Composite Objectives.</a></p>
+</aside>
+<aside class="footnote brackets" id="id43" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id38">8</a><span class="fn-bracket">]</span></span>
+<p class="sd-card-text"><a class="reference external" href="https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm">https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm</a></p>
+</aside>
+<aside class="footnote brackets" id="id44" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id39">9</a><span class="fn-bracket">]</span></span>
+<p class="sd-card-text">توماس بي. مينكا <a class="reference external" href="https://tminka.github.io/papers/logreg/minka-logreg.pdf">“A comparison of numerical optimizers for logistic regression”</a></p>
+</aside>
+<aside class="footnote brackets" id="id45" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id32">1</a>,<a role="doc-backlink" href="#id33">2</a>)</span>
+<p class="sd-card-text"><a class="reference external" href="https://arxiv.org/abs/1311.6529">سيمون، نوح، جيه فريدمان وت. هاستي.
+“A Blockwise Descent Algorithm for Group-penalized Multiresponse and
+Multinomial Regression.”</a></p>
+</aside>
+</aside>
+</div>
+</details><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>اختيار الميزة مع الانحدار اللوجستي المتناثر</strong></p>
+<p>يؤدي الانحدار اللوجستي مع عقوبة <span class="math notranslate nohighlight">\(\ell_1\)</span> إلى نماذج متناثرة، ويمكن
+استخدامه بالتالي لأداء اختيار الميزة، كما هو مفصل في
+<a class="reference internal" href="feature_selection.html#l1-feature-selection"><span class="std std-ref">اختيار الميزة المستندة إلى L1</span></a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>تقدير قيمة p</strong></p>
+<p>من الممكن الحصول على قيم p وتقديرات الثقة للمعاملات
+في حالات الانحدار بدون عقوبة. تدعم حزمة <a class="reference external" href="https://pypi.org/project/statsmodels/">statsmodels</a> هذا بشكلٍ افتراضي.
+ضمن sklearn، يمكن للمرء استخدام الاستمثال بدلاً من ذلك أيضًا.</p>
+</div>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegressionCV</span></code> ينفذ الانحدار اللوجستي مع دعم مدمج
+لتصنيف متقاطع، للعثور على القيم المثلى لـ <code class="docutils literal notranslate"><span class="pre">C</span></code> و <code class="docutils literal notranslate"><span class="pre">l1_ratio</span></code>
+وفقًا لسمة “التسجيل”. تم العثور على المنقحات “newton-cg” و “sag” و “saga” و “lbfgs”
+أنها أسرع للبيانات الكثيفة عالية الأبعاد، بسبب البدء الدافئ (راجع: المصطلحات <a class="reference internal" href="../glossary.html#term-warm_start"><span class="xref std std-term">warm_start</span></a>).</p>
+<p id="generalized-linear-models"><span id="generalized-linear-regression"></span>نماذج الخطية العامة
+نماذج الخطية المعممة (GLM) توسع النماذج الخطية بطريقتين [10] _ أولاً، يتم ربط القيم المتوقعة: math: ‘hat {y} ‘ بمجموع خطي للمتغيرات المدخلة: math: ‘X’ عبر دالة ارتباط عكسية: math: ‘h’ كما هو موضح أدناه:</p>
+<div class="math notranslate nohighlight">
+\[\ hat {y} (w، X) = h (Xw)\]</div>
+<p>ثانيًا، يتم استبدال دالة الخسارة التربيعية بوحدة الانحراف: math: ‘d’ لتوزيع عائلة الأسية (أو بشكل أكثر دقة، نموذج تشتت الأسية التكاثري (EDM) [11] _).</p>
+<p>تصبح مشكلة التحسين على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[\ min_w \ frac {1} {2 n_ {samples}} \ sum_i d (y_i، \ hat {y} _i) + \ frac {\ alpha} {2} || w || _2 ^ 2،\]</div>
+<p>حيث: math: ‘alpha’ هي عقوبة التنظيم L2. عندما يتم توفير أوزان العينات، يصبح المتوسط متوسطًا مرجحًا.</p>
+<p>يسرد الجدول التالي بعض نماذج EDM المحددة وانحراف الوحدة:</p>
+<p>يتم توضيح دالة كثافة الاحتمال (PDF) لهذه التوزيعات في الشكل التالي:</p>
+<figure class="align-center" id="id56">
+<a class="reference internal image-reference" href="../_images/poisson_gamma_tweedie_distributions.png"><img alt="../_images/poisson_gamma_tweedie_distributions.png" src="../_images/poisson_gamma_tweedie_distributions.png" style="width: 1200.0px; height: 350.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">دالة كثافة الاحتمال لمتغير عشوائي Y يتبع توزيع بواسون، وتوزيع تويد (power=1.5) وتوزيع غاما بمختلف القيم المتوسطة (:math: ‘mu’). لاحظ كتلة النقطة في: math: ‘Y = 0’ لتوزيع بواسون وتوزيع تويد (power=1.5)، ولكن ليس لتوزيع غاما الذي له نطاق مستهدف إيجابي صارم.</span><a class="headerlink" href="#id56" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>توزيع برنولي هو توزيع احتمالي منفصل لنمذجة تجربة برنولي - وهو حدث له نتيجتان حصريتان فقط.</p>
+<p>التوزيع الفئوي هو تعميم لتوزيع برنولي لمتغير عشوائي فئوي. في حين أن للمتغير العشوائي في توزيع برنولي نتيجتان محتملتان، يمكن للمتغير العشوائي الفئوي أن يأخذ إحدى الفئات K الممكنة، مع تحديد احتمال كل فئة بشكل منفصل.</p>
+<p>يعتمد اختيار التوزيع على المشكلة المطروحة:</p>
+<ul class="simple">
+<li><p>إذا كانت القيم المستهدفة: math: ‘y’ عبارة عن عدد (قيم صحيحة غير سالبة) أو تكرارات نسبية (غير سالبة)، فيمكنك استخدام توزيع بواسون مع رابط لوغاريتمي.</p></li>
+<li><p>إذا كانت القيم المستهدفة ذات قيمة موجبة ومائلة، فيمكنك تجربة توزيع غاما برابط لوغاريتمي.</p></li>
+<li><p>إذا كانت القيم المستهدفة ذات ذيول أثقل من توزيع غاما، فيمكنك تجربة توزيع غاوسي عكسي (أو حتى قوى أعلى لعائلة تويد).</p></li>
+<li><p>إذا كانت القيم المستهدفة: math: ‘y’ عبارة عن احتمالات، فيمكنك استخدام توزيع برنولي. يمكن استخدام توزيع برنولي مع رابط لوغاريتم للاحتمالات في التصنيف الثنائي. يمكن استخدام التوزيع الفئوي مع رابط softmax للتصنيف متعدد الفئات.</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="أمثلة-على-حالات-الاستخدام">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">أمثلة على حالات الاستخدام<a class="headerlink" href="#أمثلة-على-حالات-الاستخدام" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><ul class="simple">
+<li><p>الزراعة / نمذجة الطقس: عدد أحداث المطر في السنة (بواسون)، كمية هطول الأمطار لكل حدث (غاما)، إجمالي هطول الأمطار في السنة (تويد / مركب بواسون غاما).</p></li>
+<li><p>نمذجة المخاطر / تسعير وثائق التأمين: عدد أحداث المطالبات / حامل الوثيقة في السنة (بواسون)، التكلفة لكل حدث (غاما)، إجمالي التكلفة لكل حامل وثيقة في السنة (تويد / مركب بواسون غاما).</p></li>
+<li><p>التخلف عن سداد الائتمان: احتمال عدم القدرة على سداد القرض (بيرنولي).</p></li>
+<li><p>كشف الاحتيال: احتمال أن تكون معاملة مالية مثل تحويل نقدي معاملة احتيالية (بيرنولي).</p></li>
+<li><p>الصيانة التنبؤية: عدد أحداث انقطاع الإنتاج في السنة (بواسون)، مدة الانقطاع (غاما)، إجمالي وقت الانقطاع في السنة (تويد / مركب بواسون غاما).</p></li>
+<li><p>اختبار الأدوية الطبية: احتمال شفاء مريض في مجموعة من التجارب أو احتمال تعرض المريض لآثار جانبية (بيرنولي).</p></li>
+<li><p>تصنيف الأخبار: تصنيف مقالات الأخبار إلى ثلاث فئات وهي أخبار الأعمال والسياسة والترفيه (فئوي).</p></li>
+</ul>
+<p class="rubric">المراجع</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id46" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
+<p>McCullagh، Peter؛ Nelder، John (1989). نماذج الخطية المعممة، الطبعة الثانية. بوكا راتون: تشابمان وهال / سي آر سي. ردمك 0-412-31760-5.</p>
+</aside>
+<aside class="footnote brackets" id="id47" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
+<p>Jørgensen، B. (1992). نظرية نماذج التشتت الأسية وتحليل الانحراف. Monografias de matemática، no. 51. راجع أيضًا <a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_dispersion_model">نموذج التشتت الأسية.</a></p>
+</aside>
+</aside>
+</section>
+</section>
+<section id="id49">
+<h2>الاستخدام<a class="headerlink" href="#id49" title="Link to this heading">#</a></h2>
+<p>: class: ‘TweedieRegressor’ ينفذ نموذجًا خطيًا معممًا لتوزيع تويد، والذي يسمح بنمذجة أي من التوزيعات المذكورة أعلاه باستخدام معلمة “power” المناسبة. على وجه التحديد:</p>
+<ul class="simple">
+<li><p>“power = 0”: التوزيع الطبيعي. تعتبر المقدرات المحددة مثل: class: ‘Ridge’،: class: ‘ElasticNet’ أكثر ملاءمة في هذه الحالة.</p></li>
+<li><p>“power = 1”: توزيع بواسون. يتم عرض: class: ‘PoissonRegressor’ للراحة. ومع ذلك، فهو مكافئ تمامًا لـ: ‘TweedieRegressor (power = 1، link =’ log ‘)`.</p></li>
+<li><p>“power = 2”: توزيع غاما. يتم عرض: class: ‘GammaRegressor’ للراحة. ومع ذلك، فهو مكافئ تمامًا لـ: ‘TweedieRegressor (power = 2، link =’ log ‘)`.</p></li>
+<li><p>“power = 3”: التوزيع الغاوسي العكسي.</p></li>
+</ul>
+<p>تتم تحديد دالة الارتباط بواسطة معلمة “الرابط”.</p>
+<p>مثال الاستخدام:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; from sklearn.linear_model import TweedieRegressor
+&gt;&gt;&gt; reg = TweedieRegressor (power = 1، alpha = 0.5، link = &#39;log&#39;)
+&gt;&gt;&gt; reg.fit ([[0،0]، [0،1]، [2،2]]، [0،1،2])
+TweedieRegressor (alpha = 0.5، link = &#39;log&#39;، power = 1)
+&gt;&gt;&gt; reg.coef_
+array ([0.2463 ...، 0.4337 ...])
+&gt;&gt;&gt; reg.intercept_
+-0.7638 ...
+</pre></div>
+</div>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p>: ref: ‘sphx_glr_auto_examples_linear_model_plot_poisson_regression_non_normal_loss.py`</p></li>
+<li><p>: ref: ‘sphx_glr_auto_examples_linear_model_plot_tweedie_regression_insurance_claims.py`</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="اعتبارات-عملية">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">اعتبارات عملية<a class="headerlink" href="#اعتبارات-عملية" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">يجب توحيد معيار مصفوفة الميزة ‘X’ قبل التثبيت. يضمن هذا أن العقوبة تعامل الميزات على قدم المساواة.</p>
+<p class="sd-card-text">نظرًا لأن المتنبئ الخطي: math: ‘Xw’ قد يكون سالبًا ولا تدعم توزيعات بواسون وغاما والغاوسي العكسي القيم السالبة، فمن الضروري تطبيق دالة ارتباط عكسية تضمن عدم السلبية. على سبيل المثال مع “link = ‘log’”، تصبح دالة الارتباط العكسية: math: ‘h (Xw) = exp (Xw)`.</p>
+<p class="sd-card-text">إذا كنت تريد نمذجة تكرار نسبي، أي عدد لكل تعرض (وقت، حجم، …) فيمكنك القيام بذلك باستخدام توزيع بواسون وإدخال: math: ‘y = frac {mathrm {counts}} {mathrm {exposure}}` كقيم مستهدفة مع: math: ‘mathrm {exposure}` كأوزان عينة. لمثال ملموس، راجع على سبيل المثال: ref: ‘sphx_glr_auto_examples_linear_model_plot_tweedie_regression_insurance_claims.py`.</p>
+<p class="sd-card-text">عند إجراء التحقق من صحة التعابر لمعلمة “power” لـ “TweedieRegressor”، يُنصح بتحديد دالة “تسجيل” صريحة، لأن مسجل الافتراضي: meth: ‘TweedieRegressor.score’ هو دالة في “power” نفسها.</p>
+</div>
+</details></section>
+</section>
+<section id="sgd">
+<h1>التدرج المنحدر العشوائي - SGD<a class="headerlink" href="#sgd" title="Link to this heading">#</a></h1>
+<p>التدرج المنحدر العشوائي هو نهج بسيط ولكنه فعال للغاية لتناسب النماذج الخطية. إنه مفيد بشكل خاص عندما يكون عدد العينات (وعدد الميزات) كبيرًا جدًا.</p>
+<p>تسمح طريقة “partial_fit” بالتعلم عبر الإنترنت / خارج النواة.</p>
+<p>توفر الفئتان: class: ‘SGDClassifier’ و: class: ‘SGDRegressor’ الوظائف اللازمة لتناسب النماذج الخطية للتصنيف والانحدار باستخدام دالات خسارة وعقوبات مختلفة (محدبة). على سبيل المثال، باستخدام “loss =” log “، يناسب: class: ‘SGDClassifier’ نموذج الانحدار اللوجستي، في حين أنه باستخدام “loss =” hinge “، فإنه يناسب آلة المتجه الداعم الخطي (SVM).</p>
+<p>يمكنك الرجوع إلى قسم التوثيق المخصص: ref: ‘sgd` لمزيد من التفاصيل.</p>
+</section>
+<section id="perceptron">
+<span id="id50"></span><h1>Perceptron<a class="headerlink" href="#perceptron" title="Link to this heading">#</a></h1>
+<p>: class: ‘Perceptron’ هو خوارزمية تصنيف أخرى مناسبة للتعلم على نطاق واسع. بشكل افتراضي:</p>
+<ul class="simple">
+<li><p>لا يتطلب معدل تعلم.</p></li>
+<li><p>غير منظم (معاقب).</p></li>
+<li><p>يقوم بتحديث نموذجه فقط عند ارتكاب أخطاء.</p></li>
+</ul>
+<p>تتضمن الخاصية الأخيرة أن Perceptron أسرع قليلاً في التدريب من SGD مع خسارة الهامش وأن النماذج الناتجة أكثر ندرة.</p>
+<p>في الواقع،: class: ‘Perceptron’ هو غلاف حول فئة: class: ‘SGDClassifier’ باستخدام خسارة الإدراك ومعدل تعلم ثابت. راجع قسم: ref: ‘sgd_mathematical_formulation` الإجرائي للحصول على مزيد من التفاصيل.</p>
+</section>
+<section id="passive-aggressive">
+<span id="id51"></span><h1>خوارزميات عدوانية سلبية<a class="headerlink" href="#passive-aggressive" title="Link to this heading">#</a></h1>
+<p>الخوارزميات السلبية العدوانية هي عائلة من الخوارزميات للتعلم على نطاق واسع. إنها تشبه الإدراك في أنها لا تتطلب معدل تعلم. ومع ذلك، على عكس الإدراك، فإنها تتضمن معلمة تنظيم “C”.</p>
+<p>بالنسبة للتصنيف، يمكن استخدام: class: ‘PassiveAggressiveClassifier’ مع “loss = ‘hinge’” (PA-I) أو “loss = ‘squared_hinge’” (PA-II). للانحدار، يمكن استخدام: class: ‘PassiveAggressiveRegressor’ مع “loss = ‘epsilon_insensitive’” (PA-I) أو “loss = ‘squared_epsilon_insensitive’” (PA-II).</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المراجع-5">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المراجع<a class="headerlink" href="#المراجع-5" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference external" href="http://jmlr.csail.mit.edu/papers/volume7/crammer06a/crammer06a.pdf">“خوارزميات عبر الإنترنت سلبية عدوانية”</a>
+K. Crammer، O. Dekel، J. Keshat، S. Shalev-Shwartz، Y. Singer - JMLR 7 (2006)</p></li>
+</ul>
+</div>
+</details><p>متانة الانحدار: القيم الشاذة وأخطاء النمذجة
+يهدف الانحدار المتين إلى ملاءمة نموذج الانحدار في وجود بيانات تالفة: إما نقاط شاذة، أو خطأ في النموذج.</p>
+<p>هناك أمور مختلفة يجب مراعاتها عند التعامل مع البيانات التي أفسدتها النقاط الشاذة:</p>
+<ul>
+<li><p><strong>النقاط الشاذة في X أو في y</strong>؟</p></li>
+<li><p><strong>نسبة النقاط الشاذة مقابل حجم الخطأ</strong></p>
+<p>عدد النقاط الشاذة مهم، ولكن أيضًا مدى شذوذهما.</p>
+</li>
+</ul>
+<p>هناك مفهوم مهم في الملاءمة المتينة وهو نقطة الانكسار: نسبة البيانات التي يمكن أن تكون شاذة لبدء تجاهل البيانات الداخلية.</p>
+<p>لاحظ أنه بشكل عام، من الصعب جدًا إجراء الملاءمة المتينة في الإعداد عالي الأبعاد (عدد كبير من الميزات). ومن المحتمل ألا تعمل النماذج المتينة هنا في هذه الإعدادات.</p>
+<p>يوفر Scikit-learn 3 مقدرات للانحدار المتين: RANSAC وTheil Sen وHuberRegressor.</p>
+<ul class="simple">
+<li><p>يجب أن يكون HuberRegressor أسرع من RANSAC وTheil Sen ما لم يكن عدد العينات كبيرًا جدًا، أي “n_samples”&gt;&gt; “n_features”. ويرجع ذلك إلى أن RANSAC وTheil Sen يلائمان مجموعات فرعية أصغر من البيانات. ومع ذلك، من غير المرجح أن يكون كل من Theil Sen وRANSAC بنفس المتانة مثل HuberRegressor لمعلمات الافتراضي.</p></li>
+<li><p>RANSAC أسرع من Theil Sen ويتوسع بشكل أفضل مع عدد العينات.</p></li>
+<li><p>سيتعامل RANSAC بشكل أفضل مع نقاط شاذة كبيرة في اتجاه y (الوضع الأكثر شيوعًا).</p></li>
+<li><p>ستتعامل Theil Sen بشكل أفضل مع نقاط شاذة متوسطة الحجم في اتجاه X، ولكن هذه الخاصية ستختفي في الإعدادات عالية الأبعاد.</p></li>
+</ul>
+<p>عند الشك، استخدم RANSAC.</p>
+<p>RANSAC: توافق العينات العشوائية</p>
+<p>يتم تثبيت RANSAC (توافق العينات العشوائية) نموذجًا من مجموعات فرعية عشوائية من النقاط الداخلية من مجموعة البيانات الكاملة.</p>
+<p>RANSAC هو خوارزمية غير حتمية تنتج نتيجة معقولة فقط باحتمالية معينة، والتي تعتمد على عدد التكرارات (راجع معلمة “max_trials”). ويُستخدم عادةً لمشكلات الانحدار الخطي وغير الخطي وهو شائع بشكل خاص في مجال رؤية الكمبيوتر الفوتوغرافية.</p>
+<p>يقسم الخوارزمية مجموعة البيانات المدخلة الكاملة إلى مجموعة من النقاط الداخلية، والتي قد تخضع للضوضاء، والنقاط الشاذة، والتي تسببها على سبيل المثال القياسات الخاطئة أو الفرضيات غير الصحيحة حول البيانات. ثم يتم تقدير النموذج الناتج فقط من النقاط الداخلية المحددة.</p>
+<p>يستخدم مقدر TheilSenRegressor تعميمًا للوسيط في أبعاد متعددة. وبالتالي، فهو متين ضد النقاط الشاذة متعددة المتغيرات. لاحظ مع ذلك أن متانة المقدر تنخفض بسرعة مع أبعاد المشكلة. يفقد خصائصه المتينة ويصبح أفضل من طريقة المربعات الصغرى العادية في الأبعاد العالية.</p>
+<p>مقدر TheilSenRegressor مشابه لطريقة المربعات الصغرى العادية من حيث الكفاءة الحدية وكمقدر غير متحيز. على عكس طريقة المربعات الصغرى العادية، فإن Theil-Sen هي طريقة غير بارامترية، مما يعني أنها لا تفترض أي افتراضات حول التوزيع الأساسي للبيانات. نظرًا لأن Theil-Sen هو مقدر قائم على الوسيط، فإنه أكثر متانة ضد البيانات الفاسدة أو النقاط الشاذة. في الإعداد أحادي المتغير، يبلغ نقطة الانكسار الخاصة بـ Theil-Sen حوالي 29.3% في حالة الانحدار الخطي البسيط، مما يعني أنه يمكنه تحمل بيانات تالفة تعسفية تصل إلى 29.3%.</p>
+<p>ينفذ TheilSenRegressor في Scikit-learn تعميمًا لنموذج الانحدار الخطي متعدد المتغيرات باستخدام الوسيط المكاني، وهو تعميم للوسيط إلى أبعاد متعددة.</p>
+<p>من حيث تعقيد الوقت والمساحة، يتناسب Theil-Sen مع:</p>
+<div class="math notranslate nohighlight">
+\[\binom{n_{\text{samples}}}{n_{\text{subsamples}}}\]</div>
+<p>مما يجعله غير عملي للتطبيق الشامل على المشكلات التي تحتوي على عدد كبير من العينات والميزات. لذلك، يمكن اختيار حجم مجموعة فرعية للحد من تعقيد الوقت والمساحة عن طريق مراعاة مجموعة فرعية عشوائية فقط من جميع المجموعات الممكنة.</p>
+<p>يختلف HuberRegressor عن Ridge لأنه يطبق خسارة خطية على العينات التي تصنف على أنها نقاط شاذة. يتم تصنيف عينة على أنها نقطة داخلية إذا كان الخطأ المطلق لتلك العينة أقل من عتبة معينة. إنه يختلف عن TheilSenRegressor وRANSACRegressor لأنه لا يتجاهل تأثير النقاط الشاذة ولكنه يعطي وزنًا أقل لها.</p>
+<p>الخسارة التي يقللها HuberRegressor هي:</p>
+<div class="math notranslate nohighlight">
+\[\min_{w, \sigma} {\sum_{i=1}^n\left(\sigma + H_{\epsilon}\left(\frac{X_{i}w - y_{i}}{\sigma}\right)\sigma\right) + \alpha {||w||_2}^2}\]</div>
+<p>حيث:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}H_{\epsilon}(z) = \begin{cases}
+      z^2, &amp; \text {if } |z| &lt; \epsilon, \\
+      2\epsilon|z| - \epsilon^2, &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+<p>من المستحسن تعيين معلمة “epsilon” إلى 1.35 لتحقيق كفاءة إحصائية تبلغ 95%.</p>
+<p>يختلف HuberRegressor عن استخدام SGDRegressor مع الخسارة المحددة على “huber” بالطرق التالية:</p>
+<ul class="simple">
+<li><p>HuberRegressor متسق في المقياس. بمجرد تعيين “epsilon”، فإن تغيير مقياس “X” و”y” بقيم مختلفة سينتج عنه نفس المتانة للنقاط الشاذة كما كان من قبل، مقارنة بـ SGDRegressor حيث يجب تعيين “epsilon” مرة أخرى عند تغيير مقياس “X” و”y”.</p></li>
+<li><p>يجب أن يكون HuberRegressor أكثر كفاءة للاستخدام في البيانات التي تحتوي على عدد صغير من العينات في حين أن SGDRegressor يحتاج إلى عدد من المرور على بيانات التدريب لإنتاج نفس المتانة.</p></li>
+</ul>
+<p>لاحظ أن هذا المقدر يختلف عن تنفيذ R لطريقة الانحدار المتين (<a class="reference external" href="https://stats.oarc.ucla.edu/r/dae/robust-regression/">https://stats.oarc.ucla.edu/r/dae/robust-regression/</a>) لأن تنفيذ R يقوم بتنفيذ طريقة المربعات الصغرى المرجحة حيث يتم إعطاء الأوزان لكل عينة بناءً على مدى زيادة الباقي عن عتبة معينة.</p>
+</section>
+<section id="id53">
+<h1>انحدار كميلي<a class="headerlink" href="#id53" title="Link to this heading">#</a></h1>
+<p>يقدر الانحدار الكمياني الوسيط أو الكميات الأخرى لـ <span class="math notranslate nohighlight">\(y\)</span>
+مشروطة بـ <span class="math notranslate nohighlight">\(X\)</span>، بينما تقدر المربعات الصغرى العادية (OLS)
+الوسط المشروط.</p>
+<p>قد يكون الانحدار الكمياني مفيدًا إذا كان الشخص مهتمًا بالتنبؤ بفترة بدلاً من التنبؤ النقطي. في بعض الأحيان، يتم حساب فترات التنبؤ
+بناءً على افتراض أن خطأ التنبؤ له توزيع طبيعي بمتوسط صفري وتباين ثابت. يوفر الانحدار الكمياني فترات تنبؤ معقولة حتى بالنسبة للأخطاء ذات التباين غير الثابت (ولكن يمكن التنبؤ به) أو التوزيع غير الطبيعي.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_quantile_regression.html"><img alt="../_images/sphx_glr_plot_quantile_regression_002.png" src="../_images/sphx_glr_plot_quantile_regression_002.png" style="width: 320.0px; height: 240.0px;" />
+</a>
+</figure>
+<p>بناءً على تقليل خسارة الكرة والدبابيس، يمكن أيضًا تقدير الكميات الشرطية بواسطة نماذج أخرى غير النماذج الخطية. على سبيل المثال،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">GradientBoostingRegressor</span></code> يمكن أن يتنبأ بالكميات الشرطية إذا تم تعيين معلمة “خسارة” الخاصة به إلى “الكمية”
+ويتم تعيين معلمة “ألفا” إلى الكمية التي يجب التنبؤ بها. راجع المثال في
+<a class="reference internal" href="../auto_examples/ensemble/plot_gradient_boosting_quantile.html#sphx-glr-auto-examples-ensemble-plot-gradient-boosting-quantile-py"><span class="std std-ref">Prediction Intervals for Gradient Boosting Regression</span></a>.</p>
+<p>تستند معظم تطبيقات الانحدار الكمياني إلى مشكلة البرمجة الخطية. يعتمد التنفيذ الحالي على
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html#scipy.optimize.linprog" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.linprog</span></code></a>.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_quantile_regression.html#sphx-glr-auto-examples-linear-model-plot-quantile-regression-py"><span class="std std-ref">Quantile regression</span></a></p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="التفاصيل-الرياضية-4">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">التفاصيل الرياضية<a class="headerlink" href="#التفاصيل-الرياضية-4" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">كنموذج خطي، فإن <code class="xref py py-class docutils literal notranslate"><span class="pre">QuantileRegressor</span></code> يعطي تنبؤات خطية
+<span class="math notranslate nohighlight">\(\hat{y}(w, X) = Xw\)</span> للكمية <span class="math notranslate nohighlight">\(q\)</span>-th، <span class="math notranslate nohighlight">\(q \in (0, 1)\)</span>.
+ثم يتم العثور على الأوزان أو المعاملات <span class="math notranslate nohighlight">\(w\)</span> بواسطة مشكلة التحسين التالية:</p>
+<div class="math notranslate nohighlight">
+\[\min_{w} {\frac{1}{n_{\text{samples}}}
+\sum_i PB_q(y_i - X_i w) + \alpha ||w||_1}.\]</div>
+<p class="sd-card-text">يتكون هذا من خسارة الكرة والدبابيس (المعروفة أيضًا باسم الخسارة الخطية)،
+راجع أيضًا <code class="xref py py-class docutils literal notranslate"><span class="pre">mean_pinball_loss</span></code>،</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}PB_q(t) = q \max(t, 0) + (1 - q) \max(-t, 0) =
+\begin{cases}
+    q t, &amp; t &gt; 0, \\
+    0,    &amp; t = 0, \\
+    (q-1) t, &amp; t &lt; 0
+\end{cases}\end{split}\]</div>
+<p class="sd-card-text">وعقوبة L1 التي يتحكم فيها معلمة “ألفا”، على غرار
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Lasso</span></code>.</p>
+<p class="sd-card-text">نظرًا لأن خسارة الكرة والدبابيس خطية فقط في المتبقيات، فإن الانحدار الكمياني
+أكثر مرونة بكثير تجاه القيم الشاذة من تقدير الخطأ المربع القائم على تقدير الوسط.
+يقع <code class="xref py py-class docutils literal notranslate"><span class="pre">HuberRegressor</span></code> في مكان ما بينهما.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المراجع-6">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المراجع<a class="headerlink" href="#المراجع-6" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text">كوينكر، ر.، و باسيت الابن، ج. (1978). <a class="reference external" href="https://gib.people.uic.edu/RQ.pdf">الانحدار الكمياني.</a>
+Econometrica: مجلة جمعية الاقتصاد القياسي، 33-50.</p></li>
+<li><p class="sd-card-text">بورتنوي، س.، وكوينكر، ر. (1997). <a class="reference external" href="https://doi.org/10.1214/ss/1030037960">الأرنب الغاوسي والسلحفاة اللابلاسية: قابلية تقدير الخطأ المطلق مقابل تقدير الخطأ التربيعي.
+العلوم الإحصائية، 12، 279-300</a>.</p></li>
+<li><p class="sd-card-text">كوينكر، ر. (2005). <a class="reference external" href="https://doi.org/10.1017/CBO9780511754098">الانحدار الكمياني</a>.
+مطبعة جامعة كامبريدج.</p></li>
+</ul>
+</div>
+</details></section>
+<section id="polynomial-regression">
+<span id="id55"></span><h1>الانحدار متعدد الحدود: توسيع النماذج الخطية باستخدام دالات الأساس<a class="headerlink" href="#polynomial-regression" title="Link to this heading">#</a></h1>
+<p>هناك نمط شائع في التعلم الآلي يتمثل في استخدام النماذج الخطية المدربة
+على الدوال غير الخطية للبيانات. يحافظ هذا النهج على الأداء السريع بشكل عام للطرق الخطية، مع السماح لها بالتناسب مع نطاق أوسع بكثير من البيانات.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="التفاصيل-الرياضية-5">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">التفاصيل الرياضية<a class="headerlink" href="#التفاصيل-الرياضية-5" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">على سبيل المثال، يمكن توسيع الانحدار الخطي البسيط من خلال إنشاء
+<strong>الميزات متعددة الحدود</strong> من المعاملات. في حالة الانحدار الخطي القياسي، قد يبدو النموذج كما يلي للبيانات ثنائية الأبعاد:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y}(w, x) = w_0 + w_1 x_1 + w_2 x_2\]</div>
+<p class="sd-card-text">إذا أردنا أن نناسب قطع مكافئ للبيانات بدلاً من مستوى، فيمكننا الجمع</p>
+</div>
+</details><p>بين الميزات في متعددات الحدود من الدرجة الثانية، بحيث يبدو النموذج كما يلي:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\hat{y}(w, x) = w_0 + w_1 x_1 + w_2 x_2 + w_3 x_1 x_2 + w_4 x_1^2 + w_5 x_2^2\]</div>
+<p>الملاحظة (المفاجئة أحيانًا) هي أن هذا <em>لا يزال نموذجًا خطيًا</em>:</p>
+</div></blockquote>
+<p>لرؤية ذلك، تخيل إنشاء مجموعة جديدة من الميزات</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[z = [x_1, x_2, x_1 x_2, x_1^2, x_2^2]\]</div>
+<p>مع هذه إعادة التسمية للبيانات، يمكن كتابة المشكلة على النحو التالي</p>
+<div class="math notranslate nohighlight">
+\[\hat{y}(w, z) = w_0 + w_1 z_1 + w_2 z_2 + w_3 z_3 + w_4 z_4 + w_5 z_5\]</div>
+<p>نلاحظ أن الانحدار متعدد الحدود الناتج يقع في نفس فئة</p>
+</div></blockquote>
+<p>النماذج الخطية التي نعتبرها أعلاه (أي أن النموذج خطي في <span class="math notranslate nohighlight">\(w\)</span>)
+ويمكن حلها بنفس التقنيات. من خلال النظر في التلائم الخطي داخل
+مساحة ذات أبعاد أعلى تم بناؤها باستخدام دالات الأساس هذه، يكون للنموذج المرونة للتناسب مع نطاق أوسع بكثير من البيانات.</p>
+<p>فيما يلي مثال على تطبيق هذه الفكرة على بيانات أحادية البعد، باستخدام
+ميزات متعددة الحدود بدرجات متفاوتة:</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/linear_model/plot_polynomial_interpolation.html"><img alt="../_images/sphx_glr_plot_polynomial_interpolation_001.png" src="../_images/sphx_glr_plot_polynomial_interpolation_001.png" style="width: 320.0px; height: 240.0px;" />
+</a>
+</figure>
+<p>تم إنشاء هذا الشكل باستخدام محول <code class="xref py py-class docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code>، والذي
+يحول مصفوفة بيانات الإدخال إلى مصفوفة بيانات جديدة ذات درجة معينة.
+يمكن استخدامه على النحو التالي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [2, 3],</span>
+<span class="go">       [4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[ 1.,  0.,  1.,  0.,  0.,  1.],</span>
+<span class="go">       [ 1.,  2.,  3.,  4.,  6.,  9.],</span>
+<span class="go">       [ 1.,  4.,  5., 16., 20., 25.]])</span>
+</pre></div>
+</div>
+<p>تم تحويل ميزات “X” من <span class="math notranslate nohighlight">\([x_1، x_2]\)</span> إلى
+<span class="math notranslate nohighlight">\([1، x_1، x_2، x_1^2، x_1 x_2، x_2^2]\)</span>، ويمكن الآن استخدامها في أي نموذج خطي.</p>
+<p>يمكن تبسيط هذا النوع من المعالجة المسبقة باستخدام أدوات
+<span class="xref std std-ref">Pipeline</span>. يمكن إنشاء كائن واحد يمثل انحدارًا متعدد الحدود بسيطًا واستخدامه كما يلي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;poly&#39;</span><span class="p">,</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span>
+<span class="gp">... </span>                  <span class="p">(</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># fit to an order-3 polynomial data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([ 3., -2.,  1., -1.])</span>
+</pre></div>
+</div>
+<p>يمكن للنموذج الخطي المدرب على الميزات متعددة الحدود استرداد
+معاملات متعددة الحدود المدخلة بدقة.</p>
+<p>في بعض الحالات، لا يكون من الضروري تضمين قوى أعلى لأي ميزة فردية،
+ولكن فقط ما يسمى ميزات “التفاعل”
+التي تضرب معًا على الأكثر <span class="math notranslate nohighlight">\(d\)</span> ميزات متميزة.
+يمكن الحصول على هذه الميزات من <code class="xref py py-class docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code> مع الإعداد
+<code class="docutils literal notranslate"><span class="pre">interaction_only=True</span></code>.</p>
+<p>على سبيل المثال، عند التعامل مع الميزات الثنائية،
+<span class="math notranslate nohighlight">\(x_i^n = x_i\)</span> لكل <span class="math notranslate nohighlight">\(n\)</span> وبالتالي فهي عديمة الفائدة؛
+ولكن <span class="math notranslate nohighlight">\(x_i x_j\)</span> يمثل الاقتران بين اثنين من الثنائيات.
+بهذه الطريقة، يمكننا حل مشكلة XOR باستخدام مصنف خطي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Perceptron</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">^</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([0, 1, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">interaction_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">array([[1, 0, 0, 0],</span>
+<span class="go">       [1, 0, 1, 0],</span>
+<span class="go">       [1, 1, 0, 0],</span>
+<span class="go">       [1, 1, 1, 1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>وتكون “تنبؤات” المصنف مثالية:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([0, 1, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">نُظم “Linear Models” الخطية</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">انحدار المربعات الصغرى العادي</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">المربعات الصغرى غير السالبة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">تعقيد انحدار المربعات الصغرى العادي</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge">انحدار وتصنيف Ridge</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">انحدار</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">تصنيف</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">تعقيد Ridge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">ضبط معلمة الضبط: التحقق من صحة الاستبعاد</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso">Lasso</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">ضبط معلمة المنتظم</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">استخدام التصديق المتقاطع</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-lars-ic">اختيار النموذج القائم على معيار المعلومات</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aic-bic">معايير AIC وBIC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#svm">المقارنة بمعلمة المنتظم SVM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-task-lasso">Lasso متعدد المهام</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-task-elastic-net">شبكة مطاطية متعددة المهام</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#least-angle-regression">الانحدار بزاوية أصغر</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lars">LARS لسو</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#omp">البحث عن المطابقة العمودية (OMP)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">الحالة الثنائية</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id30">الحالة متعددة الحدود</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#liblinear-differences">الاختلافات بين المنقحات</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id49">الاستخدام</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sgd">التدرج المنحدر العشوائي - SGD</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron">Perceptron</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-aggressive">خوارزميات عدوانية سلبية</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id53">انحدار كميلي</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression">الانحدار متعدد الحدود: توسيع النماذج الخطية باستخدام دالات الأساس</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/linear_model.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
