@@ -1,0 +1,1180 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="آلات المتجهات الداعمة SVM" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/svm.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="آلات المتجهات الداعمة (SVMs) هي مجموعة من طرق التعلم الخاضعة للإشراف والتي تستخدم في: التصنيف، والانحدار، وكشف النقاط الشاذة. مزايا آلات المتجهات الداعمة هي: فعالة في الفراغات ذات الأبعاد العالية.,..." />
+<meta property="og:image" content="https://scikit-learn/stable/_images/sphx_glr_plot_iris_svc_001.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="آلات المتجهات الداعمة (SVMs) هي مجموعة من طرق التعلم الخاضعة للإشراف والتي تستخدم في: التصنيف، والانحدار، وكشف النقاط الشاذة. مزايا آلات المتجهات الداعمة هي: فعالة في الفراغات ذات الأبعاد العالية.,..." />
+
+    <title>آلات المتجهات الداعمة SVM &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/svm';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">آلات...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="svm">
+<h1>آلات المتجهات الداعمة SVM<a class="headerlink" href="#svm" title="Link to this heading">#</a></h1>
+<p><strong>آلات المتجهات الداعمة (SVMs)</strong> هي مجموعة من طرق التعلم الخاضعة للإشراف والتي تستخدم في: التصنيف، والانحدار، وكشف النقاط الشاذة.</p>
+<p>مزايا آلات المتجهات الداعمة هي:</p>
+<ul class="simple">
+<li><p>فعالة في الفراغات ذات الأبعاد العالية.</p></li>
+<li><p>لا تزال فعالة في الحالات التي يكون فيها عدد الأبعاد أكبر من عدد العينات.</p></li>
+<li><p>تستخدم مجموعة فرعية من نقاط التدريب في دالة القرار (تسمى المتجهات الداعمة)، لذلك فهي أيضًا فعالة من حيث الذاكرة.</p></li>
+<li><p>متعددة الاستخدامات: يمكن تحديد نوى مختلفة لدالة القرار. يتم توفير النواة الشائعة، ولكن من الممكن أيضًا تحديد نوى مخصصة.</p></li>
+</ul>
+<p>تشمل عيوب آلات المتجهات الداعمة ما يلي:</p>
+<ul class="simple">
+<li><p>إذا كان عدد الميزات أكبر بكثير من عدد العينات، فإن تجنب الإفراط في الملاءمة عند اختيار النواة ومصطلح التنظيم أمر بالغ الأهمية.</p></li>
+<li><p>لا توفر SVMs تقديرات احتمالية مباشرة، ويتم حسابها باستخدام التحقق من صحة الاسترجاع الخماسي المكلف.</p></li>
+</ul>
+<p>تدعم آلات المتجهات الداعمة في scikit-learn كلاً من المتجهات الكثيفة (numpy.ndarray والقابلة للتحويل إلى ذلك بواسطة numpy.asarray) والمتجهات النادرة (أي scipy.sparse) كمدخلات. ومع ذلك، لاستخدام SVM للتنبؤ بالبيانات النادرة، يجب أن يكون قد تم ملاءمته على مثل هذه البيانات. للحصول على أداء مثالي، استخدم C-ordered numpy.ndarray (dense) أو scipy.sparse.csr_matrix (sparse) مع dtype=float64.</p>
+<p>التصنيف
+<code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> هي فئات قادرة على أداء التصنيف الثنائي والمتعدد الفئات على مجموعة بيانات.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/svm/plot_iris_svc.html"><img alt="../_images/sphx_glr_plot_iris_svc_001.png" src="../_images/sphx_glr_plot_iris_svc_001.png" />
+</a>
+</figure>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code> هما أسلوبان متشابهان، ولكنهما يقبلان مجموعات مختلفة قليلاً من المعلمات ولهما صيغ رياضية مختلفة (راجع القسم <span class="xref std std-ref">svm_mathematical_formulation</span>). من ناحية أخرى، <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> هو تنفيذ آخر (أسرع) لتصنيف المتجه الداعم في حالة النواة الخطية. كما يفتقر أيضًا إلى بعض سمات <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code>، مثل <code class="docutils literal notranslate"><span class="pre">support_</span></code>. يستخدم <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> دالة الخسارة <code class="docutils literal notranslate"><span class="pre">squared_hinge</span></code> وبسبب تنفيذه في <code class="docutils literal notranslate"><span class="pre">liblinear</span></code>، فإنه ينظم أيضًا المعترض، إذا تم أخذه في الاعتبار. ومع ذلك، يمكن تقليل هذا التأثير عن طريق الضبط الدقيق بعناية لمعلمة <code class="docutils literal notranslate"><span class="pre">intercept_scaling</span></code> الخاصة به، والتي تسمح لمصطلح المعترض بأن يكون له سلوك تنظيم مختلف مقارنة بالسمات الأخرى. لذلك، قد تختلف نتائج التصنيف والنتيجة عن المصنفين الآخرين.</p>
+<p>كما هو الحال مع المصنفات الأخرى، <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> تأخذ كمدخلات مصفوفتين: مصفوفة <code class="docutils literal notranslate"><span class="pre">X</span></code> ذات شكل <code class="docutils literal notranslate"><span class="pre">(n_samples،</span> <span class="pre">n_features)</span></code> التي تحتوي على عينات التدريب، ومصفوفة <code class="docutils literal notranslate"><span class="pre">y</span></code> من تسميات الفئات (سلاسل أو أعداد صحيحة)، ذات شكل <code class="docutils literal notranslate"><span class="pre">(n_samples)</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">SVC()</span>
+</pre></div>
+</div>
+<p>بعد التهيئة، يمكن بعد ذلك استخدام النموذج للتنبؤ بقيم جديدة</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([1])</span>
+</pre></div>
+</div>
+<p>تعتمد دالة القرار الخاصة بالآلات الداعمة للمتجهات (كما هو موضح بالتفصيل في <span class="xref std std-ref">svm_mathematical_formulation</span>) على بعض المجموعات الفرعية من بيانات التدريب، والتي يطلق عليها المتجهات الداعمة. يمكن العثور على بعض خصائص هذه المتجهات الداعمة في السمات “<a href="#id23"><span class="problematic" id="id24">support_vectors_</span></a>” و”<a href="#id25"><span class="problematic" id="id26">support_</span></a>” و”<a href="#id27"><span class="problematic" id="id28">n_support_</span></a>”</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># الحصول على المتجهات الداعمة</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">support_vectors_</span>
+<span class="go">array([[0., 0.],</span>
+<span class="go">       [1., 1.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># الحصول على مؤشرات المتجهات الداعمة</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">support_</span>
+<span class="go">array([0, 1]...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># الحصول على عدد المتجهات الداعمة لكل فئة</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">n_support_</span>
+<span class="go">array([1, 1]...)</span>
+</pre></div>
+</div>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane.html#sphx-glr-auto-examples-svm-plot-separating-hyperplane-py"><span class="std std-ref">SVM: Maximum margin separating hyperplane</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/svm/plot_svm_anova.html#sphx-glr-auto-examples-svm-plot-svm-anova-py"><span class="std std-ref">SVM-Anova: SVM with univariate feature selection</span></a></p></li>
+</ul>
+<section id="svm-multi-class">
+<span id="id1"></span><h2>التصنيف متعدد الفئات<a class="headerlink" href="#svm-multi-class" title="Link to this heading">#</a></h2>
+<p>ينفذ <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code> نهج “واحد مقابل واحد” للتصنيف متعدد الفئات. في المجموع، يتم إنشاء <code class="docutils literal notranslate"><span class="pre">n_classes</span> <span class="pre">*</span> <span class="pre">(n_classes</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2</span></code> من المصنفات، ويتم تدريب كل منها على بيانات من فئتين.</p>
+<p>لتوفير واجهة متسقة مع المصنفات الأخرى، يسمح خيار <code class="docutils literal notranslate"><span class="pre">decision_function_shape</span></code> بالتحويل الأحادي الاتجاه لنتائج مصنفات “واحد مقابل واحد” إلى دالة قرار “واحد مقابل الباقي” ذات شكل <code class="docutils literal notranslate"><span class="pre">(n_samples،</span> <span class="pre">n_classes)</span></code>، وهو الإعداد الافتراضي للمعلمة (default=’ovr’).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">decision_function_shape</span><span class="o">=</span><span class="s1">&#39;ovo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="go">SVC(decision_function_shape=&#39;ovo&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 6 فئات: 4*3/2 = 6</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">decision_function_shape</span> <span class="o">=</span> <span class="s2">&quot;ovr&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 4 فئات</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>من ناحية أخرى، ينفذ <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> استراتيجية “واحد مقابل الباقي” متعددة الفئات، وبالتالي تدريب <code class="docutils literal notranslate"><span class="pre">n_classes</span></code> من النماذج.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lin_clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">LinearSVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lin_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="go">LinearSVC()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span> <span class="o">=</span> <span class="n">lin_clf</span><span class="o">.</span><span class="n">decision_function</span><span class="p">([[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>راجع <span class="xref std std-ref">svm_mathematical_formulation</span> للحصول على وصف كامل لدالة القرار.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="تفاصيل-حول-استراتيجيات-متعددة-الفئات">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">تفاصيل حول استراتيجيات متعددة الفئات<a class="headerlink" href="#تفاصيل-حول-استراتيجيات-متعددة-الفئات" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">لاحظ أن <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> ينفذ أيضًا استراتيجية متعددة الفئات بديلة، ما يسمى SVM متعدد الفئات الذي صاغه كرامر وسينجر <a class="footnote-reference brackets" href="#id22" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a>، باستخدام خيار <code class="docutils literal notranslate"><span class="pre">multi_class='crammer_singer'</span></code>. في الممارسة العملية، يُفضل التصنيف “واحد مقابل الباقي” عادةً، حيث تكون النتائج متشابهة في الغالب، ولكن وقت التشغيل أقل بكثير.</p>
+<p class="sd-card-text">بالنسبة لـ “واحد مقابل الباقي” <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code>، يكون للسمات <code class="docutils literal notranslate"><span class="pre">coef_</span></code> و <code class="docutils literal notranslate"><span class="pre">intercept_</span></code> الشكل <code class="docutils literal notranslate"><span class="pre">(n_classes،</span> <span class="pre">n_features)</span></code> و <code class="docutils literal notranslate"><span class="pre">(n_classes,)</span></code> على التوالي. يتوافق كل صف من المعاملات مع أحد المصنفات “واحد مقابل الباقي” من <code class="docutils literal notranslate"><span class="pre">n_classes</span></code>، وبالمثل بالنسبة للمعترضات، بترتيب فئة “الواحد”.</p>
+<p class="sd-card-text">في حالة “واحد مقابل واحد” <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code>، يكون تخطيط السمات أكثر تعقيدًا بعض الشيء. في حالة النواة الخطية، يكون للسمات <code class="docutils literal notranslate"><span class="pre">coef_</span></code> و <code class="docutils literal notranslate"><span class="pre">intercept_</span></code> الشكل <code class="docutils literal notranslate"><span class="pre">(n_classes</span> <span class="pre">*</span> <span class="pre">(n_classes</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2،</span> <span class="pre">n_features)</span></code> و <code class="docutils literal notranslate"><span class="pre">(n_classes</span> <span class="pre">*</span> <span class="pre">(n_classes</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2)</span></code> على التوالي. هذا مشابه لتخطيط <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> الموضح أعلاه، مع كل صف الآن يتوافق مع مصنف ثنائي. الترتيب للفئات من 0 إلى n هو “0 مقابل 1”، “0 مقابل 2”، … “0 مقابل n”، “1 مقابل 2”، “1 مقابل 3”، “1 مقابل n”، … “n-1 مقابل n”.</p>
+<p class="sd-card-text">شكل مصفوفة <code class="docutils literal notranslate"><span class="pre">dual_coef_</span></code> هو <code class="docutils literal notranslate"><span class="pre">(n_classes-1،</span> <span class="pre">n_SV)</span></code> بتخطيط يصعب فهمه بعض الشيء.
+تتوافق الأعمدة مع المتجهات الداعمة المشاركة في أي من مصنفات “واحد مقابل واحد” <code class="docutils literal notranslate"><span class="pre">n_classes</span> <span class="pre">*</span> <span class="pre">(n_classes</span> <span class="pre">-</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2</span></code>.
+لكل متجه داعم <code class="docutils literal notranslate"><span class="pre">v</span></code> معامل ثنائي في كل من مصنفات <code class="docutils literal notranslate"><span class="pre">n_classes</span> <span class="pre">-</span> <span class="pre">1</span></code> التي تقارن فئة <code class="docutils literal notranslate"><span class="pre">v</span></code> بفئة أخرى.
+لاحظ أن بعض هذه المعاملات الثنائية، ولكن ليس كلها، قد تكون صفرية.
+تكون إدخالات <code class="docutils literal notranslate"><span class="pre">n_classes</span> <span class="pre">-</span> <span class="pre">1</span></code> في كل عمود هي هذه المعاملات الثنائية، مرتبة حسب الفئة المعارضة.</p>
+<p class="sd-card-text">قد يكون هذا أوضح مع مثال: ضع في اعتبارك مشكلة ذات ثلاث فئات حيث تحتوي الفئة 0 على ثلاث متجهات داعمة <span class="math notranslate nohighlight">\(v^0_0, v^1_0, v^2_0\)</span> والفئتين 1 و2 تحتوي على متجهين داعمين <span class="math notranslate nohighlight">\(v^0_1, v^1_1\)</span> و:math:<code class="docutils literal notranslate"><span class="pre">v^0_2,</span> <span class="pre">v^1_2</span></code> على التوالي. لكل متجه داعم <span class="math notranslate nohighlight">\(v^j_i\)</span>، هناك معاملان ثنائيان. دعنا نطلق على معامل المتجه الداعم <span class="math notranslate nohighlight">\(v^j_i\)</span> في المصنف بين الفئتين <span class="math notranslate nohighlight">\(i\)</span> و:math:<code class="docutils literal notranslate"><span class="pre">k</span></code> اسم <span class="math notranslate nohighlight">\(\alpha^j_{i,k}\)</span>.
+ثم يبدو <code class="docutils literal notranslate"><span class="pre">dual_coef_</span></code> على النحو التالي:</p>
+</div>
+</details><p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/svm/plot_iris_svc.html#sphx-glr-auto-examples-svm-plot-iris-svc-py"><span class="std std-ref">Plot different SVM classifiers in the iris dataset</span></a></p></li>
+</ul>
+</section>
+<section id="scores-probabilities">
+<span id="id3"></span><h2>النتائج والاحتمالات<a class="headerlink" href="#scores-probabilities" title="Link to this heading">#</a></h2>
+<p>تعطي طريقة <code class="docutils literal notranslate"><span class="pre">decision_function</span></code> في <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code> درجات لكل فئة لكل عينة (أو درجة واحدة لكل عينة في الحالة الثنائية). عندما يتم تعيين خيار الباني <code class="docutils literal notranslate"><span class="pre">probability</span></code> إلى <code class="docutils literal notranslate"><span class="pre">True</span></code>، يتم تمكين تقديرات احتمالية العضوية في الفئات (من طريقتي <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> و <code class="docutils literal notranslate"><span class="pre">predict_log_proba</span></code>). في الحالة الثنائية، يتم معايرة الاحتمالات باستخدام تحجيم Platt <a class="footnote-reference brackets" href="#id16" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>: الانحدار اللوجستي على درجات SVM، والتي يتم ضبطها بواسطة تحقق إضافي من الصحة متقاطع على بيانات التدريب.
+في حالة الفئات المتعددة، يتم تمديدها كما هو موضح في <a class="footnote-reference brackets" href="#id17" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>تتوفر نفس إجراءات معايرة الاحتمالات لجميع التقديرات
+عبر <code class="xref py py-class docutils literal notranslate"><span class="pre">CalibratedClassifierCV</span></code> (راجع
+<span class="xref std std-ref">التدرج</span>). في حالة <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code>، يتم تضمين هذا الإجراء في <a href="#id29"><span class="problematic" id="id30">`libsvm`_</span></a> المستخدم تحت الغطاء، لذا فهو لا يعتمد على <code class="xref py py-class docutils literal notranslate"><span class="pre">CalibratedClassifierCV</span></code> من scikit-learn.</p>
+</div>
+<p>التحقق من الصحة المتقاطع المعني في تحجيم Platt
+هي عملية مكلفة للمجموعات الكبيرة من البيانات.
+بالإضافة إلى ذلك، قد تكون تقديرات الاحتمالات غير متسقة مع الدرجات:</p>
+<ul class="simple">
+<li><p>قد لا يكون “argmax” من الدرجات هو “argmax” من الاحتمالات</p></li>
+<li><p>في التصنيف الثنائي، قد يتم وضع علامة على عينة بواسطة <code class="docutils literal notranslate"><span class="pre">predict</span></code> على أنها
+تنتمي إلى الفئة الإيجابية حتى إذا كان إخراج <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> أقل من 0.5؛ وبالمثل، فقد يتم وضع علامة عليه على أنه سلبي حتى إذا كان إخراج <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> أكبر من 0.5.</p></li>
+</ul>
+<p>من المعروف أيضًا أن طريقة Platt بها مشكلات نظرية.
+إذا كانت درجات الثقة مطلوبة، ولكن لا يلزم أن تكون احتمالات،
+فمن المستحسن تعيين <code class="docutils literal notranslate"><span class="pre">probability=False</span></code>
+واستخدام <code class="docutils literal notranslate"><span class="pre">decision_function</span></code> بدلاً من <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code>.</p>
+<p>يرجى ملاحظة أنه عندما يكون <code class="docutils literal notranslate"><span class="pre">decision_function_shape='ovr'</span></code> و <code class="docutils literal notranslate"><span class="pre">n_classes</span> <span class="pre">&gt;</span> <span class="pre">2</span></code>، على عكس <code class="docutils literal notranslate"><span class="pre">decision_function</span></code>، لا تحاول طريقة <code class="docutils literal notranslate"><span class="pre">predict</span></code> كسر التعادل بشكل افتراضي. يمكنك تعيين <code class="docutils literal notranslate"><span class="pre">break_ties=True</span></code> ليكون إخراج <code class="docutils literal notranslate"><span class="pre">predict</span></code> هو نفسه <code class="docutils literal notranslate"><span class="pre">np.argmax(clf.decision_function(...)،</span> <span class="pre">axis=1)</span></code>، وإلا فسيتم دائمًا إرجاع الفئة الأولى بين الفئات المتعادلة؛ ولكن ضع في اعتبارك أنها تأتي بتكلفة حسابية. راجع
+<a class="reference internal" href="../auto_examples/svm/plot_svm_tie_breaking.html#sphx-glr-auto-examples-svm-plot-svm-tie-breaking-py"><span class="std std-ref">SVM Tie Breaking Example</span></a> للحصول على مثال على كسر التعادل.</p>
+</section>
+<section id="id6">
+<h2>المشكلات غير المتوازنة<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>في المشكلات التي يرغب المرء فيها في إعطاء أهمية أكبر لفئات أو عينات فردية معينة، يمكن استخدام معلمتي <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> و <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code>.</p>
+<p>ينفذ <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> (ولكن ليس <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code>) معلمة <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> في طريقة <code class="docutils literal notranslate"><span class="pre">fit</span></code>. إنها عبارة عن قاموس على الشكل <code class="docutils literal notranslate"><span class="pre">{class_label:</span> <span class="pre">value}</span></code>، حيث تكون القيمة عبارة عن رقم مميز أكبر من 0
+يحدد معلمة <code class="docutils literal notranslate"><span class="pre">C</span></code> لفئة <code class="docutils literal notranslate"><span class="pre">class_label</span></code> إلى <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">*</span> <span class="pre">value</span></code>.
+يوضح الشكل أدناه حدود القرار لمشكلة غير متوازنة،
+مع تصحيح الوزن وبدونه.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/svm/plot_separating_hyperplane_unbalanced.html"><img alt="../_images/sphx_glr_plot_separating_hyperplane_unbalanced_001.png" src="../_images/sphx_glr_plot_separating_hyperplane_unbalanced_001.png" style="width: 480.0px; height: 360.0px;" />
+</a>
+</figure>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVR</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code>،
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVR</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code> تنفذ أيضًا أوزانًا للعينات الفردية في طريقة <code class="docutils literal notranslate"><span class="pre">fit</span></code> من خلال معلمة <code class="docutils literal notranslate"><span class="pre">sample_weight</span></code>.
+على غرار <code class="docutils literal notranslate"><span class="pre">class_weight</span></code>، يحدد هذا المعلمة <code class="docutils literal notranslate"><span class="pre">C</span></code> للعينة i-th إلى <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">*</span> <span class="pre">sample_weight[i]</span></code>، والتي ستشجع المصنف على الحصول على هذه العينات بشكل صحيح. يوضح الشكل أدناه تأثير وزن العينة على حد القرار. يتناسب حجم الدوائر مع أوزان العينات:</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/svm/plot_weighted_samples.html"><img alt="../_images/sphx_glr_plot_weighted_samples_001.png" src="../_images/sphx_glr_plot_weighted_samples_001.png" style="width: 1050.0px; height: 450.0px;" />
+</a>
+</figure>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/svm/plot_separating_hyperplane_unbalanced.html#sphx-glr-auto-examples-svm-plot-separating-hyperplane-unbalanced-py"><span class="std std-ref">SVM: Separating hyperplane for unbalanced classes</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/svm/plot_weighted_samples.html#sphx-glr-auto-examples-svm-plot-weighted-samples-py"><span class="std std-ref">SVM: Weighted samples</span></a></p></li>
+</ul>
+<p id="svm-regression">الانحدار
+يمكن توسيع طريقة تصنيف المتجه الداعم لحل مشكلات الانحدار. وتسمى هذه الطريقة “انحدار المتجه الداعم”.</p>
+<p>يعتمد النموذج الذي ينتجه تصنيف المتجه الداعم (كما هو موضح أعلاه) فقط على مجموعة فرعية من بيانات التدريب، لأن دالة التكلفة لبناء النموذج لا تهتم بنقاط التدريب التي تقع خارج الهامش. وبالمثل، يعتمد النموذج الذي ينتجه انحدار المتجه الداعم فقط على مجموعة فرعية من بيانات التدريب، لأن دالة التكلفة تتجاهل العينات التي يكون تنبؤها قريبًا من هدفها.</p>
+<p>هناك ثلاث عمليات تنفيذ مختلفة لانحدار المتجه الداعم: <code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">NuSVR</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">LinearSVR</span></code>. يوفر <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVR</span></code> تنفيذًا أسرع من <code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code> ولكنه لا يأخذ في الاعتبار سوى النواة الخطية، في حين أن <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVR</span></code> ينفذ صيغة مختلفة قليلاً عن <code class="xref py py-class docutils literal notranslate"><span class="pre">SVR</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">LinearSVR</span></code>. وبسبب تنفيذه في <code class="docutils literal notranslate"><span class="pre">liblinear</span></code>، فإن <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVR</span></code> ينظم أيضًا المعترض، إذا تم أخذه في الاعتبار. ومع ذلك، يمكن تقليل هذا التأثير عن طريق الضبط الدقيق بعناية لمعلمة <code class="docutils literal notranslate"><span class="pre">intercept_scaling</span></code> الخاصة به، والتي تسمح لمصطلح المعترض أن يكون له سلوك تنظيم مختلف مقارنة بالسمات الأخرى. لذلك، قد تختلف نتائج التصنيف والدرجات عن المصنفين الآخرين. راجع <a class="reference internal" href="#svm-implementation-details"><span class="std std-ref">تفاصيل التنفيذ</span></a> لمزيد من التفاصيل.</p>
+<p>كما هو الحال مع فئات التصنيف، ستأخذ طريقة التجهيز كوسائل متجهات X، y، ولكن في هذه الحالة من المتوقع أن يكون لـ y قيم ذات نقطة عائمة بدلاً من قيم صحيحة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVR</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">SVR()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="go">array([1.5])</span>
+</pre></div>
+</div>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/svm/plot_svm_regression.html#sphx-glr-auto-examples-svm-plot-svm-regression-py"><span class="std std-ref">Support Vector Regression (SVR) using linear and non-linear kernels</span></a></p></li>
+</ul>
+</section>
+</section>
+<section id="svm-outlier-detection">
+<span id="id7"></span><h1>تقدير الكثافة، اكتشاف الأنماط غير المعتادة<a class="headerlink" href="#svm-outlier-detection" title="Link to this heading">#</a></h1>
+<p>تنفذ فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code> طريقة SVM ذات الفئة الواحدة والتي تستخدم في اكتشاف القيم الشاذة.</p>
+<p>راجع <span class="xref std std-ref">outlier_detection</span> للحصول على وصف واستخدام <code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code>.</p>
+</section>
+<section id="id8">
+<h1>التعقيد<a class="headerlink" href="#id8" title="Link to this heading">#</a></h1>
+<p>تعد آلات المتجهات الداعمة أدوات قوية، ولكن متطلبات الحوسبة والتخزين الخاصة بها تزداد بسرعة مع عدد متجهات التدريب. جوهر SVM هو مشكلة البرمجة التربيعية (QP)، والتي تفصل المتجهات الداعمة عن بقية بيانات التدريب. يتراوح محسن QP الذي يستخدمه التنفيذ القائم على <a href="#id31"><span class="problematic" id="id32">`libsvm`_</span></a> بين <span class="math notranslate nohighlight">\(O(n_{features} \times n_{samples}^2)\)</span> و:math:<code class="docutils literal notranslate"><span class="pre">O(n_{features}</span> <span class="pre">times</span> <span class="pre">n_{samples}^3)</span></code> اعتمادًا على مدى كفاءة استخدام ذاكرة التخزين المؤقتة <a href="#id33"><span class="problematic" id="id34">`libsvm`_</span></a> في الممارسة العملية (تعتمد على مجموعة البيانات). إذا كانت البيانات غير متجانسة للغاية، فيجب استبدال <span class="math notranslate nohighlight">\(n_{features}\)</span> بمتوسط عدد السمات غير الصفرية في متجه العينة.</p>
+<p>بالنسبة للحالة الخطية، فإن الخوارزمية المستخدمة في <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> بواسطة تنفيذ <a href="#id35"><span class="problematic" id="id36">`liblinear`_</span></a> أكثر كفاءة بكثير من نظيرتها القائمة على <a href="#id37"><span class="problematic" id="id38">`libsvm`_</span></a> <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> ويمكن أن تتوسع بشكل خطي تقريبًا إلى الملايين من العينات و/أو الميزات.</p>
+</section>
+<section id="id9">
+<h1>نصائح حول الاستخدام العملي<a class="headerlink" href="#id9" title="Link to this heading">#</a></h1>
+<ul>
+<li><p><strong>تجنب نسخ البيانات</strong>: بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">SVR</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">NuSVC</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">NuSVR</span></code>، إذا لم تكن البيانات التي تم تمريرها إلى طرق معينة مرتبة بشكل متجاور ومتواصلة ودقة مزدوجة، فسيتم نسخها قبل استدعاء التنفيذ C الأساسي. يمكنك التحقق مما إذا كان صفيف نومبي معين متجاورًا عن طريق فحص سمة “الأعلام” الخاصة به.</p>
+<p>بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> (و:class:<code class="docutils literal notranslate"><span class="pre">LogisticRegression</span> <span class="pre">&lt;sklearn.linear_model.LogisticRegression&gt;</span></code>)، يتم نسخ أي إدخال تم تمريره كصفيف نومبي وتحويله إلى تمثيل البيانات المتناثرة الداخلي <a href="#id39"><span class="problematic" id="id40">`liblinear`_</span></a> (أرقام الفاصلة العائمة ذات الدقة المزدوجة ومؤشرات 32 بت للمكونات غير الصفرية). إذا كنت تريد ملاءمة مصنف خطي واسع النطاق بدون نسخ صفيف نومبي متجاور مزدوج الدقة كإدخال، فنحن نقترح استخدام فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">SGDClassifier</span></code> بدلاً من ذلك. يمكن تكوين دالة الهدف لتكون مشابهة تقريبًا لنموذج <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code>.</p>
+</li>
+<li><p><strong>حجم ذاكرة التخزين المؤقت للنواة</strong>: بالنسبة لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">SVR</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">NuSVC</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">NuSVR</span></code>، يكون لحجم ذاكرة التخزين المؤقت للنواة تأثير قوي على أوقات التشغيل للمشكلات الأكبر. إذا كان لديك ذاكرة RAM كافية، فيوصى بتعيين “حجم_الذاكرة_المؤقتة” إلى قيمة أعلى من القيمة الافتراضية 200(ميجابايت)، مثل 500(ميجابايت) أو 1000(ميجابايت).</p></li>
+<li><p><strong>تعيين C</strong>: القيمة الافتراضية لـ C هي 1 وهي اختيار افتراضي معقول. إذا كان لديك الكثير من الملاحظات الضجيج، فيجب تقليلها: حيث يتوافق تقليل C مع المزيد من التنظيم.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">LinearSVR</span></code> أقل حساسية لـ C عندما تصبح كبيرة، وتتوقف نتائج التنبؤ عن التحسن بعد عتبة معينة. في الوقت نفسه، ستستغرق قيم C الأكبر وقتًا أطول للتدريب، وقد يستغرق الأمر 10 مرات أطول، كما هو موضح في <a class="footnote-reference brackets" href="#id18" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a>.</p>
+</li>
+<li><p>خوارزميات آلات المتجهات الداعمة ليست ثابتة النطاق، لذلك <strong>من المستحسن بشدة ضبط نطاق بياناتك</strong>. على سبيل المثال، قم بضبط كل سمة في متجه الإدخال X إلى [0,1] أو [-1,+1]، أو قم بتوحيدها بحيث يكون لها متوسط 0 وانحراف معياري 1. لاحظ أنه يجب تطبيق <em>نفس</em> الضبط على متجه الاختبار للحصول على نتائج ذات معنى. يمكن القيام بذلك بسهولة باستخدام <code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">SVC</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>راجع القسم <span class="xref std std-ref">preprocessing</span> لمزيد من التفاصيل حول الضبط والتطبيع.</p>
+</li>
+</ul>
+<ul id="shrinking-svm">
+<li><p>فيما يتعلق بمعلمة “الانكماش”، نقلاً عن <a class="footnote-reference brackets" href="#id19" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a>: <em>وجدنا أنه إذا كان عدد التكرارات كبيرًا، فيمكن للانكماش أن يقصر وقت التدريب. ومع ذلك، إذا قمنا بحل مشكلة التحسين بشكل فضفاض (على سبيل المثال، باستخدام حد تسامح إيقاف كبير)، فقد يكون الكود بدون استخدام الانكماش أسرع بكثير</em></p></li>
+<li><p>تقريب معلمة “nu” في <code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVC</span></code>/<code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code>/<code class="xref py py-class docutils literal notranslate"><span class="pre">NuSVR</span></code> نسبة أخطاء التدريب والمتجهات الداعمة.</p></li>
+<li><p>في <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code>، إذا كانت البيانات غير متوازنة (على سبيل المثال، العديد من الإيجابيات والقليل من السلبيات)، فحدد <code class="docutils literal notranslate"><span class="pre">class_weight='balanced'</span></code> و/أو جرب معلمات العقوبة المختلفة <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p></li>
+<li><p><strong>عشوائية التنفيذ الأساسي</strong>: يستخدم التنفيذ الأساسي لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">NuSVC</span></code> مولد رقم عشوائي لخلط البيانات من أجل تقدير الاحتمالية (عندما يتم تعيين “الاحتمالية” على “صحيح”). يمكن التحكم في هذه العشوائية باستخدام معلمة “حالة_عشوائية”. إذا تم تعيين “الاحتمالية” على “خطأ”، فإن هذه المصنفات ليست عشوائية و”حالة_عشوائية” ليس لها تأثير على النتائج. التنفيذ الأساسي لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code> مشابه لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">SVC</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">NuSVC</span></code>. نظرًا لأنه لا يتم توفير تقدير الاحتمالية لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">OneClassSVM</span></code>، فإنه ليس عشوائيًا.</p>
+<p>يستخدم التنفيذ الأساسي لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> مولد رقم عشوائي لاختيار الميزات عند ملاءمة النموذج باستخدام الانحدار المنسق المزدوج (أي عندما يتم تعيين “ثنائي” على “صحيح”). لذلك، من غير المعتاد الحصول على نتائج مختلفة قليلاً لنفس بيانات الإدخال. إذا حدث ذلك، فجرب باستخدام معلمة “tol” أصغر. يمكن أيضًا التحكم في هذه العشوائية باستخدام معلمة “حالة_عشوائية”. عندما يتم تعيين “ثنائي” على “خطأ”، فإن التنفيذ الأساسي لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code> ليس عشوائيًا و”حالة_عشوائية” ليس لها تأثير على النتائج.</p>
+</li>
+<li><p>يؤدي استخدام العقوبة L1 كما هو موضح في <code class="docutils literal notranslate"><span class="pre">LinearSVC(penalty='l1'،</span> <span class="pre">dual=False)</span></code> إلى حل متفرق، أي أن مجموعة فرعية فقط من أوزان الميزات تختلف عن الصفر وتساهم في دالة القرار. يؤدي زيادة C إلى الحصول على نموذج أكثر تعقيدًا (يتم تحديد المزيد من الميزات). يمكن حساب قيمة C التي ينتج عنها نموذج “صفري” (جميع الأوزان تساوي الصفر) باستخدام <code class="xref py py-func docutils literal notranslate"><span class="pre">l1_min_c</span></code>.</p></li>
+</ul>
+</section>
+<section id="svm-kernels">
+<span id="id12"></span><h1>دالات النواة<a class="headerlink" href="#svm-kernels" title="Link to this heading">#</a></h1>
+<p>يمكن أن تكون <em>دالة النواة</em> أي مما يلي:</p>
+<ul class="simple">
+<li><p>خطية: <span class="math notranslate nohighlight">\(\langle x، x'\rangle\)</span>.</p></li>
+<li><p>متعددة الحدود: <span class="math notranslate nohighlight">\((\gamma \langle x، x'\rangle + r)^d\)</span>، حيث
+<span class="math notranslate nohighlight">\(d\)</span> تحددها معلمة “الدرجة”، <span class="math notranslate nohighlight">\(r\)</span> بواسطة “coef0”.</p></li>
+<li><p>rbf: <span class="math notranslate nohighlight">\(\exp(-\gamma \|x-x'\|^2)\)</span>، حيث <span class="math notranslate nohighlight">\(\gamma\)</span> تحددها معلمة “جاما”، ويجب أن تكون أكبر من 0.</p></li>
+<li><p>سيجمويد <span class="math notranslate nohighlight">\(\tanh(\gamma \langle x،x'\rangle + r)\)</span>،
+حيث <span class="math notranslate nohighlight">\(r\)</span> تحددها “coef0”.</p></li>
+</ul>
+<p>يتم تحديد نوى مختلفة بواسطة معلمة “النواة”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">linear_svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linear_svc</span><span class="o">.</span><span class="n">kernel</span>
+<span class="go">&#39;linear&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbf_svc</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbf_svc</span><span class="o">.</span><span class="n">kernel</span>
+<span class="go">&#39;rbf&#39;</span>
+</pre></div>
+</div>
+<p>راجع أيضًا <span class="xref std std-ref">kernel_approximation</span> للحصول على حل لاستخدام نوى RBF أسرع وأكثر قابلية للتطوير.</p>
+<section id="rbf">
+<h2>معلمات نواة RBF<a class="headerlink" href="#rbf" title="Link to this heading">#</a></h2>
+<p>عند تدريب SVM باستخدام نواة “دالة الأساس الشعاعي” (RBF)، يجب مراعاة معلمتين: “C” و”جاما”. المعلمة “C”، المشتركة في جميع نوى SVM، تُوازن بين سوء تصنيف أمثلة التدريب وسلاسة سطح القرار. تجعل قيمة “C” المنخفضة سطح القرار سلسًا، بينما تهدف قيمة “C” المرتفعة إلى تصنيف جميع أمثلة التدريب بشكل صحيح. تحدد “جاما” مدى تأثير مثال التدريب الفردي. كلما كانت “جاما” أكبر، اقتربت الأمثلة الأخرى التي يجب أن تتأثر.</p>
+<p>يعد الاختيار الصحيح لـ “C” و”جاما” أمرًا بالغ الأهمية لأداء SVM. يُنصح باستخدام <code class="xref py py-class docutils literal notranslate"><span class="pre">GridSearchCV</span></code> مع “C” و”جاما” المتباعدة بشكل أسّي للاختيار من بين القيم الجيدة.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/svm/plot_rbf_parameters.html#sphx-glr-auto-examples-svm-plot-rbf-parameters-py"><span class="std std-ref">RBF SVM parameters</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/svm/plot_svm_scale_c.html#sphx-glr-auto-examples-svm-plot-svm-scale-c-py"><span class="std std-ref">Scaling the regularization parameter for SVCs</span></a></p></li>
+</ul>
+</section>
+<section id="id13">
+<h2>نوى مخصصة<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<p>يمكنك تحديد نواك الخاصة إما عن طريق إعطاء النواة كدالة بايثون أو عن طريق حساب مصفوفة غرام مسبقًا.</p>
+<p>تتصرف المصنفات ذات النواة المخصصة بنفس طريقة أي مصنفات أخرى، باستثناء ما يلي:</p>
+<ul class="simple">
+<li><p>حقل “<a href="#id41"><span class="problematic" id="id42">support_vectors_</span></a>” فارغ الآن، ويتم تخزين مؤشرات المتجهات الداعمة فقط في “الدعم”</p></li>
+<li><p>يتم تخزين مرجع (وليس نسخة) من الحجة الأولى في طريقة “التجهيز”
+للرجوع إليها في المستقبل. إذا تغير هذا الصفيف بين استخدام “التجهيز” و”التنبؤ”، فستحصل على نتائج غير متوقعة.</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="استخدام-دالات-بايثون-كنوى">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">استخدام دالات بايثون كنوى<a class="headerlink" href="#استخدام-دالات-بايثون-كنوى" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">يمكنك استخدام نواك المحددة عن طريق تمرير دالة إلى
+معلمة “النواة”.</p>
+<p class="sd-card-text">يجب أن تأخذ نواة الدالة كوسيطين مصفوفتين بشكل
+<code class="docutils literal notranslate"><span class="pre">(n_samples_1،</span> <span class="pre">n_features)</span></code>، <code class="docutils literal notranslate"><span class="pre">(n_samples_2،</span> <span class="pre">n_features)</span></code>
+وإرجاع مصفوفة نواة الشكل <code class="docutils literal notranslate"><span class="pre">(n_samples_1،</span> <span class="pre">n_samples_2)</span></code>.</p>
+<p class="sd-card-text">يقوم الكود التالي بتعريف نواة خطية وإنشاء مثيل مصنف
+سيستخدم تلك النواة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from sklearn import svm
+&gt;&gt;&gt; def my_kernel(X، Y):
+...:     return np.dot(X، Y.T)
+...:
+&gt;&gt;&gt; clf = svm.SVC(kernel=my_kernel)
+</pre></div>
+</div>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="استخدام-مصفوفة-غرام">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">استخدام مصفوفة غرام<a class="headerlink" href="#استخدام-مصفوفة-غرام" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">يمكنك تمرير نوى محسوبة مسبقًا باستخدام الخيار “kernel=’precomputed’”. يجب عليك بعد ذلك تمرير مصفوفة غرام بدلاً من X إلى طريقتي “التجهيز” و”التنبؤ”. يجب توفير قيم النواة بين
+<em>جميع</em> متجهات التدريب ومتجهات الاختبار:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from sklearn.datasets import make_classification
+&gt;&gt;&gt; from sklearn.model_selection import train_test_split
+&gt;&gt;&gt; from sklearn import svm
+&gt;&gt;&gt; X، y = make_classification(n_samples=10، random_state=0)
+&gt;&gt;&gt; X_train، X_test، y_train، y_test = train_test_split(X، y، random_state=0)
+&gt;&gt;&gt; clf = svm.SVC(kernel=&#39;precomputed&#39;)
+&gt;&gt;&gt; # حساب النواة الخطية
+&gt;&gt;&gt; غرام_التدريب = np.dot(X_train، X_train.T)
+&gt;&gt;&gt; clf.fit(gram_train، y_train)
+SVC(kernel=&#39;precomputed&#39;)
+&gt;&gt;&gt; # التنبؤ على أمثلة التدريب
+&gt;&gt;&gt; غرام_الاختبار = np.dot(X_test، X_train.T)
+&gt;&gt;&gt; clf.predict(gram_test)
+array([0، 1، 0])
+</pre></div>
+</div>
+</div>
+</details><p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/svm/plot_custom_kernel.html#sphx-glr-auto-examples-svm-plot-custom-kernel-py"><span class="std std-ref">SVM with custom kernel</span></a></p></li>
+</ul>
+<p id="svm-mathematical-formulation">الصيغة الرياضية
+تقوم آلة المتجهات الداعمة ببناء فراغ فائق أو مجموعة من الفضاءات الفائقة في فضاء عالي الأبعاد أو لا نهائي الأبعاد، والذي يمكن استخدامه للتصنيف أو الانحدار أو مهام أخرى. بديهيا، يتم تحقيق فصل جيد بواسطة الفضاء الفائق الذي له أكبر مسافة إلى أقرب نقاط بيانات التدريب من أي فئة (ما يسمى الهامش الوظيفي)، لأن الهامش الأكبر يؤدي بشكل عام إلى خطأ تعميم أقل للمصنف. يوضح الشكل أدناه دالة القرار لمشكلة قابلة للفصل الخطي، مع ثلاث عينات على حدود الهوامش، تسمى “متجهات الدعم”:</p>
+<p>في العموم، عندما لا تكون المشكلة قابلة للفصل الخطي، تكون متجهات الدعم هي العينات <em>داخل</em> حدود الهامش.</p>
+<p>نوصي بـ [#5] _ و [#6] _ كمراجع جيدة لنظرية SVMs وواقعيتها.</p>
+</section>
+<section id="svc">
+<h2>SVC<a class="headerlink" href="#svc" title="Link to this heading">#</a></h2>
+<p>بالنسبة لمتجهات التدريب <span class="math notranslate nohighlight">\(x_i \in \mathbb{R}^p\)</span>، i=1,…, n، في فئتين، ومتجه <span class="math notranslate nohighlight">\(y \in {1, -1}^n\)</span>، يكون هدفنا هو إيجاد <span class="math notranslate nohighlight">\(w \in \mathbb{R}^p\)</span> و <span class="math notranslate nohighlight">\(b \in \mathbb{R}\)</span> بحيث يكون التنبؤ الذي يعطيه <span class="math notranslate nohighlight">\(\text {sign} (w^T\phi (x) + b)\)</span> صحيحًا لمعظم العينات.</p>
+<p>تحل SVC مشكلة المعلم الأولية التالية:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\min_ {w, b, \zeta} \frac{1}{2} w^T w + C \sum_{i=1}^{n} \zeta_i\\\begin{split}\textrm {subject to } &amp; y_i (w^T \phi (x_i) + b) \geq 1 - \zeta_i، \\
+&amp; \zeta_i \geq 0، i=1، ...، n\end{split}\end{aligned}\end{align} \]</div>
+<p>بديهيا، نحاول تعظيم الهامش (عن طريق تقليل <span class="math notranslate nohighlight">\(|| w ||^2 = w^Tw\)</span>)، مع تحمل عقوبة عند تصنيف عينة بشكل خاطئ أو ضمن حد الهامش. في الوضع المثالي، ستكون القيمة <span class="math notranslate nohighlight">\(y_i (w^T \phi (x_i) + b)\)</span> <span class="math notranslate nohighlight">\(\geq 1\)</span> لجميع العينات، مما يشير إلى تنبؤ مثالي. ولكن المشكلات لا تكون دائمًا قابلة للفصل تمامًا بواسطة فراغ فائق، لذا فإننا نسمح لبعض العينات بأن تكون على مسافة <span class="math notranslate nohighlight">\(\zeta_i\)</span> من حد الهامش الصحيح. يتحكم مصطلح العقوبة <code class="docutils literal notranslate"><span class="pre">C</span></code> في قوة هذه العقوبة، ونتيجة لذلك، يعمل كمعلمة عكسية للتنظيم (راجع الملاحظة أدناه).</p>
+<p>المشكلة المزدوجة للمعلم الأولي هي</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\min_{\alpha} \frac{1}{2} \alpha^T Q \alpha - e^T \alpha\\\begin{split}
+\textrm {subject to } &amp; y^T \alpha = 0\\
+&amp; 0 \leq \alpha_i \leq C، i=1، ...، n\end{split}\end{aligned}\end{align} \]</div>
+<p>حيث <span class="math notranslate nohighlight">\(e\)</span> هو متجه الوحدة،
+و <span class="math notranslate nohighlight">\(Q\)</span> هو مصفوفة <span class="math notranslate nohighlight">\(n\)</span> بواسطة <span class="math notranslate nohighlight">\(n\)</span> نصف محددة إيجابية،
+<span class="math notranslate nohighlight">\(Q_{ij} \equiv y_i y_j K (x_i، x_j)\)</span>، حيث <span class="math notranslate nohighlight">\(K (x_i، x_j) = \phi (x_i)^T \phi (x_j)\)</span>
+هي النواة. تسمى المصطلحات <span class="math notranslate nohighlight">\(\alpha_i\)</span> معاملات مزدوجة،
+وهي محددة علويًا بـ <span class="math notranslate nohighlight">\(C\)</span>.
+يسلط هذا التمثيل المزدوج الضوء على حقيقة أن متجهات التدريب يتم رسمها
+ضمنيًا إلى مساحة ذات أبعاد أعلى (ربما لانهائية)
+بواسطة الدالة <span class="math notranslate nohighlight">\(\phi\)</span>: راجع <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_method">حيلة النواة</a>.</p>
+<p>بمجرد حل مشكلة التحسين، يصبح إخراج :term: <code class="docutils literal notranslate"><span class="pre">decision_function</span></code> لعينة معينة <span class="math notranslate nohighlight">\(x\)</span> هو:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i \in SV} y_i \ alpha_i K (x_i، x) + b،\]</div>
+<p>وتتوافق الفئة المتوقعة مع إشارتها. نحن بحاجة فقط إلى جمع متجهات الدعم (أي العينات الموجودة داخل الهامش) لأن معاملات المزدوج <span class="math notranslate nohighlight">\(\ alpha_i\)</span> تساوي صفرا للعينات الأخرى.</p>
+<p>يمكن الوصول إلى هذه المعلمات من خلال السمات <code class="docutils literal notranslate"><span class="pre">dual_coef_</span></code>
+التي تحتوي على المنتج <span class="math notranslate nohighlight">\(y_i \ alpha_i\)</span>، <code class="docutils literal notranslate"><span class="pre">support_vectors_</span></code> التي
+تحتوي على متجهات الدعم، و <code class="docutils literal notranslate"><span class="pre">intercept_</span></code> التي تحتوي على المصطلح المستقل <span class="math notranslate nohighlight">\(b\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>بينما تستخدم نماذج SVM المستمدة من <a href="#id43"><span class="problematic" id="id44">`libsvm`_</span></a> و <a href="#id45"><span class="problematic" id="id46">`liblinear`_</span></a> <code class="docutils literal notranslate"><span class="pre">C</span></code> كمعلمة للتنظيم، تستخدم معظم التقديرات الأخرى <code class="docutils literal notranslate"><span class="pre">alpha</span></code>. تعتمد المطابقة الدقيقة بين مقدار التنظيم في نموذجين على دالة الهدف الدقيقة التي يحسنها النموذج. على سبيل المثال، عندما يكون المثمن المستخدم هو :class: <code class="docutils literal notranslate"><span class="pre">~</span> <span class="pre">sklearn.linear_model.Ridge</span></code> regression،</p>
+</div>
+<p>تكون العلاقة بينهما هي <span class="math notranslate nohighlight">\(C = \frac {1} {alpha}\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="linearsvc">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">LinearSVC<a class="headerlink" href="#linearsvc" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><p>يمكن صياغة مشكلة المعلم الأولي بشكل مكافئ على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[\min_ {w، b} \frac {1} {2} w^T w + C \sum_{i=1}^{n} \max (0، 1 - y_i (w^T \phi (x_i) + b))،\]</div>
+<p>حيث نستخدم “خسارة المفصل
+&lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Hinge_loss">https://en.wikipedia.org/wiki/Hinge_loss</a>&gt;`_. هذا هو النموذج الذي يحسن مباشرة من قبل :class: <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code>، ولكن على عكس النموذج المزدوج، لا يتضمن هذا النموذج المنتجات الداخلية بين العينات، لذا لا يمكن تطبيق خدعة النواة الشهيرة. هذا هو السبب في أن :class: <code class="docutils literal notranslate"><span class="pre">LinearSVC</span></code> يدعم فقط النواة الخطية (<span class="math notranslate nohighlight">\(\ phi\)</span> هي دالة الهوية).</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="nu-svc">
+<span id="nusvc"></span><summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">NuSVC<a class="headerlink" href="#nusvc" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><p>الصيغة <span class="math notranslate nohighlight">\(\ nu\)</span> -SVC [#7] _ هي إعادة معلمجة لـ <span class="math notranslate nohighlight">\(C\)</span> -SVC وبالتالي فهي مكافئة رياضيا.</p>
+<p>نقدم معلمة جديدة <span class="math notranslate nohighlight">\(\ nu\)</span> (بدلاً من <span class="math notranslate nohighlight">\(C\)</span>) والتي
+التحكم في عدد متجهات الدعم وأخطاء الهامش: <span class="math notranslate nohighlight">\(\ nu \in (0، 1]\)</span> هو حد أعلى على كسر أخطاء الهامش و
+حد أدنى من كسر متجهات الدعم. يتوافق خطأ الهامش مع عينة موجودة على الجانب الخطأ من حد الهامش الخاص بها: إما
+مصنف بشكل خاطئ، أو مصنف بشكل صحيح ولكنه لا يقع بعد الهامش.</p>
+</section>
+<section id="svr">
+<h2>SVR<a class="headerlink" href="#svr" title="Link to this heading">#</a></h2>
+<p>بالنسبة لمتجهات التدريب <span class="math notranslate nohighlight">\(x_i \in \mathbb{R}^p\)</span>، i=1,…, n، ومتجه <span class="math notranslate nohighlight">\(y \in \mathbb{R}^n\)</span>، يحل <span class="math notranslate nohighlight">\(\varepsilon\)</span> -SVR مشكلة المعلم الأولية التالية:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\min_ {w، b، \ zeta، \ zeta ^*} \frac {1} {2} w^T w + C \ sum_ {i = 1} ^ {n} (\ zeta_i + \ zeta_i ^ *)\\\begin{split}\ textrm {subject to } &amp; y_i - w^T \ phi (x_i) - b \ leq \ varepsilon + \ zeta_i، \\
+&amp; w^T \ phi (x_i) + b - y_i \ leq \ varepsilon + \ zeta_i ^ *، \\
+&amp; \ zeta_i، \ zeta_i ^ * \ geq 0، i = 1، ...، n\end{split}\end{aligned}\end{align} \]</div>
+<p>هنا، نحن نعاقب العينات التي يكون تنبؤها على الأقل <span class="math notranslate nohighlight">\(\ varepsilon\)</span>
+بعيدًا عن هدفهم الحقيقي. تعاقب هذه العينات الهدف بـ <span class="math notranslate nohighlight">\(\ zeta_i\)</span> أو <span class="math notranslate nohighlight">\(\ zeta_i ^ *\)</span>، اعتمادًا على ما إذا كانت تنبؤاتها تقع فوق أو أسفل أنبوب <span class="math notranslate nohighlight">\(\ varepsilon\)</span>.</p>
+<p>المشكلة المزدوجة هي</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\min_{\alpha، \ alpha ^*} \frac {1} {2} (\ alpha - \ alpha ^ *)^ T Q (\ alpha - \ alpha ^ *) + \ varepsilon e^ T (\ alpha + \ alpha ^ *) - y^ T (\ alpha - \ alpha ^ *)\\\begin{split}
+\ textrm {subject to } &amp; e^ T (\ alpha - \ alpha ^ *) = 0\\
+&amp; 0 \ leq \ alpha_i، \ alpha_i ^ * \ leq C، i = 1، ...، n\end{split}\end{aligned}\end{align} \]</div>
+<p>حيث <span class="math notranslate nohighlight">\(e\)</span> هو متجه الوحدة،
+<span class="math notranslate nohighlight">\(Q\)</span> هو مصفوفة <span class="math notranslate nohighlight">\(n\)</span> بواسطة <span class="math notranslate nohighlight">\(n\)</span> نصف محددة إيجابية،
+<span class="math notranslate nohighlight">\(Q_{ij} \equiv K (x_i، x_j) = \ phi (x_i)^ T \ phi (x_j)\)</span>
+هي النواة. هنا يتم رسم متجهات التدريب ضمنيًا إلى مساحة ذات أبعاد أعلى
+(ربما لانهائي) بواسطة الدالة <span class="math notranslate nohighlight">\(\ phi\)</span>.</p>
+<p>التنبؤ هو:</p>
+<div class="math notranslate nohighlight">
+\[\ sum_ {i \ in SV} (\ alpha_i - \ alpha_i ^ *) K (x_i، x) + b\]</div>
+<p>يمكن الوصول إلى هذه المعلمات من خلال السمات <code class="docutils literal notranslate"><span class="pre">dual_coef_</span></code>
+التي تحتوي على الفرق <span class="math notranslate nohighlight">\(\ alpha_i - \ alpha_i ^ *\)</span>، <code class="docutils literal notranslate"><span class="pre">support_vectors_</span></code> التي
+تحتوي على متجهات الدعم، و <code class="docutils literal notranslate"><span class="pre">intercept_</span></code> التي تحتوي على المصطلح المستقل <span class="math notranslate nohighlight">\(b\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="linearsvr">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">LinearSVR<a class="headerlink" href="#linearsvr" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><p>يمكن صياغة مشكلة المعلم الأولي بشكل مكافئ على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[\min_ {w، b} \frac {1} {2} w^T w + C \ sum_ {i = 1} ^ {n} \ max (0، | y_i - (w^T \ phi (x_i) + b) | - \ varepsilon)،\]</div>
+<p>حيث نستخدم الخسارة غير الحساسة لـ epsilon، أي يتم تجاهل الأخطاء الأقل من
+<span class="math notranslate nohighlight">\(\ varepsilon\)</span>. هذا هو النموذج الذي يحسن مباشرة من قبل :class: <code class="docutils literal notranslate"><span class="pre">LinearSVR</span></code>.</p>
+</section>
+</section>
+<section id="svm-implementation-details">
+<span id="id15"></span><h1>تفاصيل التنفيذ<a class="headerlink" href="#svm-implementation-details" title="Link to this heading">#</a></h1>
+<p>داخليا، نستخدم <a href="#id47"><span class="problematic" id="id48">`libsvm`_</span></a> [#4] _ و <a href="#id49"><span class="problematic" id="id50">`liblinear`_</span></a> [#3] _ للتعامل مع جميع
+عمليات الحساب. يتم لف هذه المكتبات باستخدام C و Cython.
+لوصف التنفيذ وتفاصيل الخوارزميات المستخدمة، يرجى الرجوع إلى أوراقهم البحثية.</p>
+<p class="rubric">المراجع</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id16" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">6</a><span class="fn-bracket">]</span></span>
+<p>بلات “المخرجات الاحتمالية لـ SVMs ومقارناتها بطرق الاحتمالية المنتظمة”</p>
+</aside>
+</aside>
+<p>&lt;<a class="reference external" href="https://www.cs.colorado.edu/~mozer/Teaching/syllabi/6622/papers/Platt1999.pdf">https://www.cs.colorado.edu/~mozer/Teaching/syllabi/6622/papers/Platt1999.pdf</a>&gt;`_.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id17" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">9</a><span class="fn-bracket">]</span></span>
+<p>وو، لين وونج، “تقديرات الاحتمالية للتصنيف متعدد الفئات عن طريق الاقتران الزوجي”</p>
+</aside>
+</aside>
+<p>&lt;<a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/papers/svmprob/svmprob.pdf">https://www.csie.ntu.edu.tw/~cjlin/papers/svmprob/svmprob.pdf</a>&gt;`_،
+JMLR 5: 975-1005، 2004.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id18" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">10</a><span class="fn-bracket">]</span></span>
+<p>المعجب، رونج -إن، وآخرون.،</p>
+</aside>
+</aside>
+<p>“LIBLINEAR: مكتبة للتصنيف الخطي الكبير.”
+&lt;<a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/papers/liblinear.pdf">https://www.csie.ntu.edu.tw/~cjlin/papers/liblinear.pdf</a>&gt;`_،
+مجلة بحوث التعلم الآلي 9. أغسطس (2008): 1871-1874.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id19" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">11</a><span class="fn-bracket">]</span></span>
+<p>تشانغ ولين، “LIBSVM: مكتبة لآلات المتجهات الداعمة</p>
+</aside>
+</aside>
+<p>&lt;<a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">https://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf</a>&gt;`_.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id20" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
+<p>الأسقف، “الاعتراف بالأنماط والتعلم الآلي</p>
+</aside>
+</aside>
+<p>&lt;<a class="reference external" href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf</a>&gt;`_،
+الفصل 7 آلات النواة المتناثرة</p>
+<p>&lt;10.1023/B: STCO.0000035301.49549.88&gt;`
+أليكس جي سمولا، بيرنهارد شولكوف - إحصاءات وحوسبة المحفوظات
+المجلد 14 العدد 3، أغسطس 2004، ص. 199-222.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id21" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></span>
+<p>شولكوف وآخرون. “خوارزميات متجه الدعم الجديدة</p>
+</aside>
+</aside>
+<p>&lt;<a class="reference external" href="https://www.stat.purdue.edu/~yuzhu/stat598m3/Papers/NewSVM.pdf">https://www.stat.purdue.edu/~yuzhu/stat598m3/Papers/NewSVM.pdf</a>&gt;`_</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id22" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">14</a><span class="fn-bracket">]</span></span>
+<p>كرامر وسينجر “حول التنفيذ الخوارزمي لـ Multiclass</p>
+</aside>
+</aside>
+<p>Kernel-based Vector Machines
+&lt;<a class="reference external" href="http://jmlr.csail.mit.edu/papers/volume2/crammer01a/crammer01a.pdf">http://jmlr.csail.mit.edu/papers/volume2/crammer01a/crammer01a.pdf</a>&gt;`_، JMLR 2001.</p>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">آلات المتجهات الداعمة SVM</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svm-multi-class">التصنيف متعدد الفئات</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scores-probabilities">النتائج والاحتمالات</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">المشكلات غير المتوازنة</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#svm-outlier-detection">تقدير الكثافة، اكتشاف الأنماط غير المعتادة</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">التعقيد</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">نصائح حول الاستخدام العملي</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#svm-kernels">دالات النواة</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rbf">معلمات نواة RBF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">نوى مخصصة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svc">SVC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svr">SVR</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#svm-implementation-details">تفاصيل التنفيذ</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/svm.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
