@@ -1,0 +1,1655 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="المساهمة" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/developers/contributing.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="هذا المشروع هو جهد مجتمعي، والجميع مرحب به للمساهمة فيه. يستضيف المشروع على scikit-learn/scikit-learn. وتتم مناقشة عملية صنع القرار وهيكل إدارة المشروع في حوكمة Scikit-learn وعملية صنع القرار. Scik..." />
+<meta property="og:image" content="https://scikit-learn/stable/_images/generated-doc-ci.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="هذا المشروع هو جهد مجتمعي، والجميع مرحب به للمساهمة فيه. يستضيف المشروع على scikit-learn/scikit-learn. وتتم مناقشة عملية صنع القرار وهيكل إدارة المشروع في حوكمة Scikit-learn وعملية صنع القرار. Scik..." />
+
+    <title>المساهمة &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'developers/contributing';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">المساهمة</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="contributing">
+<span id="id1"></span><h1>المساهمة<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h1>
+<p>هذا المشروع هو جهد مجتمعي، والجميع مرحب به للمساهمة فيه. يستضيف المشروع على <a class="github reference external" href="https://github.com/scikit-learn/scikit-learn">scikit-learn/scikit-learn</a>.
+وتتم مناقشة عملية صنع القرار وهيكل إدارة المشروع في <a class="reference internal" href="../governance.html#governance"><span class="std std-ref">حوكمة Scikit-learn وعملية صنع القرار</span></a>.</p>
+<p>Scikit-learn هو مشروع <a class="reference internal" href="../faq.html#selectiveness"><span class="std std-ref">selective</span></a> عندما يتعلق الأمر
+بإضافة خوارزميات جديدة، وأفضل طريقة للمساهمة ومساعدة المشروع
+هي البدء بالعمل على القضايا المعروفة.
+راجع <a class="reference internal" href="#new-contributors"><span class="std std-ref">القضايا للمساهمين الجدد</span></a> للبدء.</p>
+<aside class="topic">
+<p class="topic-title"><strong>مجتمعنا، قيمنا</strong></p>
+<p>نحن مجتمع قائم على الانفتاح والمناقشات الودية والتعليمية.</p>
+<p>نسعى إلى معاملة الجميع على قدم المساواة، وتقدير مساهماتهم. نحن
+نسعى بشكل خاص إلى مشاركة الأشخاص من الخلفيات الممثلة تمثيلا ناقصا في مجال البرمجيات مفتوحة المصدر وفي scikit-learn على وجه الخصوص للمشاركة والمساهمة بخبراتهم وتجاربهم.</p>
+<p>تتخذ القرارات على أساس الجدارة التقنية وتوافق الآراء.</p>
+<p>المساهمة في المشروع لا تقتصر على كتابة الأكواد. مراجعة طلبات السحب، والرد على الاستفسارات لمساعدة الآخرين في قوائم البريد أو
+القضايا، وتنظيم وتدريس البرامج التعليمية، والعمل على الموقع الإلكتروني، وتحسين الوثائق، كلها مساهمات لا تقدر بثمن.</p>
+<p>نلتزم بمبادئ الانفتاح والاحترام ومراعاة الآخرين لمؤسسة برمجيات Python:
+<a class="reference external" href="https://www.python.org/psf/codeofconduct/">https://www.python.org/psf/codeofconduct/</a></p>
+</aside>
+<p>في حال واجهتك مشكلات في استخدام هذه الحزمة، لا تتردد في إرسال تذكرة إلى
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">تتبع مشكلات GitHub</a>. أنت أيضًا
+مرحب بك في نشر طلبات الميزات أو طلبات السحب.</p>
+</section>
+<section id="id2">
+<h1>طرق المساهمة<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p>هناك العديد من الطرق للمساهمة في scikit-learn، وأكثرها شيوعًا هي المساهمة في الأكواد أو الوثائق في المشروع. إن تحسين الوثائق لا يقل أهمية عن تحسين المكتبة نفسها. إذا
+وجدت خطأ إملائيًا في الوثائق، أو قمت بإجراء تحسينات، فلا تتردد في
+إرسال بريد إلكتروني إلى قائمة البريد أو يفضل تقديم طلب سحب على GitHub.
+يمكن العثور على الوثائق الكاملة في دليل doc/.</p>
+<p>ولكن هناك العديد من الطرق الأخرى للمساعدة. على وجه الخصوص، فإن المساعدة في
+<a class="reference internal" href="bug_triaging.html#bug-triaging"><span class="std std-ref">تحسين وتقييم والتحقيق في القضايا</span></a> و
+<a class="reference internal" href="#code-review"><span class="std std-ref">مراجعة طلبات السحب من المطورين الآخرين</span></a> هي مساهمات
+مهمة جدًا تقلل من العبء على مسؤولي المشروع.</p>
+<p>طريقة أخرى للمساهمة هي الإبلاغ عن المشكلات التي تواجهها، وإعطاء “إعجاب”
+بالقضايا التي أبلغ عنها الآخرون والتي لها صلة بك. كما يساعدنا أيضًا إذا قمت بنشر المشروع: قم بالرجوع إليه من مدونتك ومقالاتك، واربطه بموقعك على الويب، أو قم ببساطة بالضغط على زر النجمة للإشارة إلى أنك تستخدمه:</p>
+<p>
+  <object
+    data="https://img.shields.io/github/stars/scikit-learn/scikit-learn?style=for-the-badge&logo=github"
+    type="image/svg+xml">
+  </object>
+</p><p>في حال تضمنت المساهمة/المشكلة تغييرات على مبادئ واجهة برمجة التطبيقات
+أو تغييرات على التبعيات أو الإصدارات المدعومة، فيجب أن تكون مدعومة من قبل
+<a class="reference internal" href="../governance.html#slep"><span class="std std-ref">اقتراحات التحسين (SLEPs)</span></a>، حيث يجب تقديم اقتراح تحسين Scikit-learn (SLEP) كطلب سحب إلى
+<a class="reference external" href="https://scikit-learn-enhancement-proposals.readthedocs.io">مقترحات التحسين</a>
+باستخدام <a class="reference external" href="https://scikit-learn-enhancement-proposals.readthedocs.io/en/latest/slep_template.html">قالب SLEP</a>
+ويتبع عملية صنع القرار المحددة في <a class="reference internal" href="../governance.html#governance"><span class="std std-ref">حوكمة Scikit-learn وعملية صنع القرار</span></a>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المساهمة-في-المشاريع-ذات-الصلة">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المساهمة في المشاريع ذات الصلة<a class="headerlink" href="#المساهمة-في-المشاريع-ذات-الصلة" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">تزدهر Scikit-learn في نظام بيئي يتضمن العديد من المشاريع ذات الصلة، والتي قد يكون لها أيضًا قضايا ذات صلة للعمل عليها، بما في ذلك المشاريع الأصغر مثل:</p>
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference external" href="https://github.com/search?q=org%3Ascikit-learn-contrib+is%3Aissue+is%3Aopen+sort%3Aupdated-desc&amp;type=Issues">scikit-learn-contrib</a></p></li>
+<li><p class="sd-card-text"><a class="reference external" href="https://github.com/joblib/joblib/issues">joblib</a></p></li>
+<li><p class="sd-card-text"><a class="reference external" href="https://github.com/sphinx-gallery/sphinx-gallery/issues">sphinx-gallery</a></p></li>
+<li><p class="sd-card-text"><a class="reference external" href="https://github.com/numpy/numpydoc/issues">numpydoc</a></p></li>
+<li><p class="sd-card-text"><a class="reference external" href="https://github.com/renatopp/liac-arff/issues">liac-arff</a></p></li>
+</ul>
+<p class="sd-card-text">والمشاريع الأكبر:</p>
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference external" href="https://github.com/numpy/numpy/issues">numpy</a></p></li>
+<li><p class="sd-card-text"><a class="reference external" href="https://github.com/scipy/scipy/issues">scipy</a></p></li>
+<li><p class="sd-card-text"><a class="reference external" href="https://github.com/matplotlib/matplotlib/issues">matplotlib</a></p></li>
+<li><p class="sd-card-text">وهكذا.</p></li>
+</ul>
+<p class="sd-card-text">ابحث عن القضايا التي تحمل علامة “مطلوب المساعدة” أو ما شابه ذلك. قد تساعد هذه المشاريع أيضًا
+scikit-learn. راجع أيضًا <span class="xref std std-ref">related_projects</span>.</p>
+</div>
+</details></section>
+<section id="id4">
+<h1>سياسة المساهمات الآلية<a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+<p>يرجى الامتناع عن تقديم المشكلات أو طلبات السحب التي تم إنشاؤها بواسطة
+أدوات آلية بالكامل. يحتفظ المسؤولون بالحق، وفقًا لتقديرهم الخاص،
+بإغلاق مثل هذه التقديمات وحظر أي حساب مسؤول عنها.</p>
+<p>من الناحية المثالية، يجب أن تتبع المساهمات من مناقشة إنسان إلى إنسان في
+شكل قضية.</p>
+</section>
+<section id="id5">
+<h1>تقديم تقرير عن خطأ أو طلب ميزة<a class="headerlink" href="#id5" title="Link to this heading">#</a></h1>
+<p>نحن نستخدم قضايا GitHub لتتبع جميع الأخطاء وطلبات الميزات؛ لا تتردد في فتح
+قضية إذا كنت قد وجدت خطأ أو ترغب في رؤية ميزة يتم تنفيذها.</p>
+<p>في حال واجهتك مشكلات في استخدام هذه الحزمة، لا تتردد في إرسال تذكرة إلى
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">تتبع الأخطاء</a>. أنت أيضًا
+مرحب بك في نشر طلبات الميزات أو طلبات السحب.</p>
+<p>من المستحسن التحقق من امتثال قضيتك للقواعد
+التالية قبل تقديمها:</p>
+<ul class="simple">
+<li><p>التحقق من أن قضيتك لا يتم معالجتها حاليًا بواسطة قضايا أو
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pulls?q=">طلبات سحب</a> أخرى.</p></li>
+<li><p>إذا كنت تقدم خوارزمية أو طلب ميزة، يرجى التحقق من أن الخوارزمية تفي بمتطلباتنا
+<a class="reference external" href="https://scikit-learn.org/stable/faq.html#what-are-the-inclusion-criteria-for-new-algorithms">متطلبات الخوارزمية الجديدة</a>.</p></li>
+<li><p>إذا كنت تقدم تقريرًا عن خطأ، فنحن نشجعك بشدة على اتباع الإرشادات في
+<a class="reference internal" href="#filing-bugs"><span class="std std-ref">كيفية كتابة تقرير جيد عن الأخطاء</span></a>.</p></li>
+</ul>
+<section id="filing-bugs">
+<span id="id9"></span><h2>كيفية كتابة تقرير جيد عن الأخطاء<a class="headerlink" href="#filing-bugs" title="Link to this heading">#</a></h2>
+<p>عند تقديم قضية إلى <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">GitHub</a>، يرجى بذل قصارى جهدك
+للاتباع هذه الإرشادات! سيسهل ذلك علينا كثيرًا تقديم تعليقات مفيدة لك:</p>
+<ul>
+<li><p>تقرير الخطأ المثالي يحتوي على <span class="xref std std-ref">شريحة قابلة للتكرار</span>، بهذه الطريقة يمكن لأي شخص أن يحاول بسهولة إعادة إنتاج الخطأ. إذا كانت شريحتك أطول من حوالي 50 سطرًا، فيرجى الرابط إلى <a class="reference external" href="https://gist.github.com">Gist</a> أو مستودع GitHub.</p></li>
+<li><p>إذا لم يكن من الممكن تضمين شريحة قابلة للتكرار، فيرجى التحديد بالتفصيل
+<strong>المقدرات و/أو الوظائف المعنية وشكل البيانات</strong>.</p></li>
+<li><p>إذا تم رفع استثناء، يرجى <strong>توفير تتبع الاستثناء الكامل</strong>.</p></li>
+<li><p>يرجى تضمين <strong>نوع نظام التشغيل وإصداره</strong>، بالإضافة إلى
+<strong>إصدارات Python وscikit-learn وnumpy وscipy</strong>. يمكن العثور على هذه المعلومات
+عن طريق تشغيل:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><style type="text/css">
+span.prompt1:before {
+  content: "$ ";
+}
+</style><span class="prompt1">python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sklearn; sklearn.show_versions()&quot;</span></span>
+</pre></div></div></li>
+<li><p>يرجى التأكد من تنسيق <strong>جميع شفرات البرنامج ورسائل الخطأ في كتل الأكواد المناسبة</strong>.  راجع <a class="reference external" href="https://help.github.com/articles/creating-and-highlighting-code-blocks">إنشاء وتسليط الضوء على كتل الأكواد</a>
+لمزيد من التفاصيل.</p></li>
+</ul>
+<p>إذا كنت تريد المساعدة في تنظيم القضايا، فاقرأ عن <a class="reference internal" href="bug_triaging.html#bug-triaging"><span class="std std-ref">فرز الأخطاء وإدارة المشكلات</span></a>.</p>
+<p>المساهمة بالشيفرة
+ملاحظة
+——–</p>
+<p>للتأكد من عدم تكرار العمل، يُنصح بشدة بالبحث في <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">قائمة المشكلات</a> و <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/pulls">قائمة طلبات السحب</a>. إذا كنت غير متأكد من تكرار العمل، أو إذا كنت تريد العمل على ميزة غير بسيطة، فيُنصح أولاً بفتح مشكلة في <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues">قائمة المشكلات</a> للحصول على بعض التعليقات من المطورين الأساسيين.</p>
+<p>تتمثل إحدى الطرق السهلة للعثور على مشكلة للعمل عليها في استخدام تسمية “help wanted” في بحثك. ستظهر لك قائمة بجميع المشكلات التي لم يتم المطالبة بها حتى الآن. وللمطالبة بمشكلة لنفسك، يرجى التعليق بـ <code class="docutils literal notranslate"><span class="pre">/take</span></code> بالضبط عليها حتى يتمكن CI من تعيين المشكلة لك تلقائيًا.</p>
+<p>للحفاظ على جودة قاعدة التعليمات البرمجية وتسهيل عملية المراجعة، يجب أن يتوافق أي مساهمة مع <a class="reference external" href="https://scikit-learn.org/dev/developers/contributing.html#coding-guidelines">المبادئ التوجيهية للترميز</a> الخاصة بالمشروع، وخاصة:</p>
+<ul class="simple">
+<li><p>لا تعدل السطور غير ذات الصلة للحفاظ على تركيز طلب السحب على النطاق المحدد في الوصف أو المشكلة.</p></li>
+<li><p>اكتب التعليقات التوضيحية فقط التي تضيف قيمة وتجنب ذكر البديهيات: اشرح “السبب” بدلاً من “ماذا”.</p></li>
+<li><p><strong>الأهم من ذلك</strong>: لا تساهم بالرمز الذي لا تفهمه.</p></li>
+</ul>
+</section>
+<section id="id15">
+<h2>الموارد المرئية<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
+<p>هذه مقاطع فيديو توضح خطوة بخطوة كيفية المساهمة في
+scikit-learn، وهي رفيق رائع للمبادئ التوجيهية النصية التالية.
+يرجى التأكد من مراجعة مبادئنا التوجيهية أدناه، لأنها تصف أحدث سير عمل محدث.</p>
+<ul class="simple">
+<li><p>دورة مكثفة في المساهمة في Scikit-Learn ومشاريع المصادر المفتوحة:
+<a class="reference external" href="https://youtu.be/5OL8XoMMOfA">فيديو</a>،
+<a class="reference external" href="https://github.com/data-umbrella/event-transcripts/blob/main/2020/05-andreas-mueller-contributing.md">نسخة مكتوبة</a></p></li>
+<li><p>مثال على تقديم طلب سحب إلى scikit-learn:
+<a class="reference external" href="https://youtu.be/PU1WyDPGePI">فيديو</a>،
+<a class="reference external" href="https://github.com/data-umbrella/event-transcripts/blob/main/2020/06-reshama-shaikh-sklearn-pr.md">نسخة مكتوبة</a></p></li>
+<li><p>تعليمات خاصة بالسباقات ونصائح عملية:
+<a class="reference external" href="https://youtu.be/p_2Uw2BxdhA">فيديو</a>،
+<a class="reference external" href="https://github.com/data-umbrella/data-umbrella-scikit-learn-sprint/blob/master/3_transcript_ACM_video_vol2.md">نسخة مكتوبة</a></p></li>
+<li><p>3 مكونات مراجعة طلب السحب:
+<a class="reference external" href="https://youtu.be/dyxS9KKCNzA">فيديو</a>،
+<a class="reference external" href="https://github.com/data-umbrella/event-transcripts/blob/main/2021/27-thomas-pr.md">نسخة مكتوبة</a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>في يناير 2021، تم تغيير اسم الفرع الافتراضي من <code class="docutils literal notranslate"><span class="pre">master</span></code> إلى <code class="docutils literal notranslate"><span class="pre">main</span></code>
+لمستودع GitHub الخاص بـ scikit-learn لاستخدام مصطلحات أكثر شمولاً.
+تم إنشاء هذه الفيديوهات قبل إعادة تسمية الفرع.
+بالنسبة للمساهمين الذين يشاهدون هذه الفيديوهات لإعداد بيئة عملهم وإرسال طلب سحب، يجب استبدال <code class="docutils literal notranslate"><span class="pre">master</span></code> بـ <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+</div>
+</section>
+<section id="id16">
+<h2>كيفية المساهمة<a class="headerlink" href="#id16" title="Link to this heading">#</a></h2>
+<p>الطريقة المفضلة للمساهمة في scikit-learn هي إنشاء نسخة من <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/">المستودع الرئيسي</a> على GitHub،
+ثم تقديم “طلب سحب” (PR).</p>
+<p>في الخطوات القليلة الأولى، نشرح كيفية تثبيت scikit-learn محليًا، وكيفية إعداد مستودع Git الخاص بك:</p>
+<ol class="arabic">
+<li><p><a class="reference external" href="https://github.com/join">أنشئ حسابًا</a> على
+GitHub إذا لم يكن لديك واحد بالفعل.</p></li>
+<li><p>أنشئ نسخة من <a class="reference external" href="https://github.com/scikit-learn/scikit-learn">مستودع المشروع</a>: انقر على زر “Fork”
+بالقرب من أعلى الصفحة. سيؤدي هذا إلى إنشاء نسخة من التعليمات البرمجية تحت حسابك على
+حساب مستخدم GitHub. لمزيد من التفاصيل حول كيفية إنشاء نسخة من مستودع، راجع <a class="reference external" href="https://help.github.com/articles/fork-a-repo/">هذا الدليل</a>.</p></li>
+<li><p>استنسخ نسخة من مستودع scikit-learn من حسابك على GitHub إلى القرص المحلي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">git<span class="w"> </span>clone<span class="w"> </span>git@github.com:YourLogin/scikit-learn.git<span class="w">  </span><span class="c1"># add --depth 1 if your connection is slow</span></span>
+<span class="prompt1"><span class="nb">cd</span><span class="w"> </span>scikit-learn</span>
+</pre></div></div></li>
+<li><p>اتبع الخطوات من 2 إلى 6 في <a class="reference internal" href="advanced_installation.html#install-bleeding-edge"><span class="std std-ref">البناء من المصدر</span></a> لبناء scikit-learn في
+وضع التطوير والعودة إلى هذه الوثيقة.</p></li>
+<li><p>قم بتثبيت التبعيات الخاصة بالتطوير:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">pip<span class="w"> </span>install<span class="w"> </span>pytest<span class="w"> </span>pytest-cov<span class="w"> </span>ruff<span class="w"> </span>mypy<span class="w"> </span>numpydoc<span class="w"> </span><span class="nv">black</span><span class="o">==</span><span class="m">24</span>.3.0</span>
+</pre></div></div></li>
+</ol>
+<ol class="arabic" id="upstream" start="6">
+<li><p>أضف المستودع البعيد <code class="docutils literal notranslate"><span class="pre">upstream</span></code>. سيحفظ هذا مرجعًا للمستودع الرئيسي لـ scikit-learn، والذي يمكنك استخدامه لإبقاء مستودعك متزامنًا مع أحدث التغييرات:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>git@github.com:scikit-learn/scikit-learn.git</span>
+</pre></div></div></li>
+<li><p>تحقق من أن أسماء المستودعات البعيدة <code class="docutils literal notranslate"><span class="pre">upstream</span></code> و <code class="docutils literal notranslate"><span class="pre">origin</span></code> تم تكوينها بشكل صحيح
+عن طريق تشغيل <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> الذي يجب أن يعرض:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>origin  git@github.com:YourLogin/scikit-learn.git (fetch)
+origin  git@github.com:YourLogin/scikit-learn.git (push)
+upstream        git@github.com:scikit-learn/scikit-learn.git (fetch)
+upstream        git@github.com:scikit-learn/scikit-learn.git (push)
+</pre></div>
+</div>
+</li>
+</ol>
+<p>يجب أن يكون لديك الآن تثبيتًا عاملًا لـ scikit-learn، ومستودع Git الخاص بك
+مُهيأ بشكل صحيح. قد يكون من المفيد تشغيل بعض الاختبارات للتحقق من تثبيتك.
+يرجى الرجوع إلى <a class="reference internal" href="tips.html#pytest-tips"><span class="std std-ref">اختصارات وأعلام pytest المفيدة</span></a> للحصول على أمثلة.</p>
+<p>تصف الخطوات التالية عملية تعديل التعليمات البرمجية وتقديم طلب سحب:</p>
+<ol class="arabic" start="8">
+<li><p>قم بمزامنة فرع <code class="docutils literal notranslate"><span class="pre">main</span></code> الخاص بك مع فرع <code class="docutils literal notranslate"><span class="pre">upstream/main</span></code>،
+للمزيد من التفاصيل راجع <a class="reference external" href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork">وثائق GitHub</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">git<span class="w"> </span>checkout<span class="w"> </span>main</span>
+<span class="prompt1">git<span class="w"> </span>fetch<span class="w"> </span>upstream</span>
+<span class="prompt1">git<span class="w"> </span>merge<span class="w"> </span>upstream/main</span>
+</pre></div></div></li>
+<li><p>قم بإنشاء فرع ميزة للاحتفاظ بتغييرات التطوير الخاصة بك:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>my_feature</span>
+</pre></div></div><p>وبدء إجراء التغييرات. استخدم دائمًا فرع ميزة. من الممارسات الجيدة ألا تعمل أبدًا على الفرع <code class="docutils literal notranslate"><span class="pre">main</span></code>!</p>
+</li>
+<li><p>(<strong>اختياري</strong>) قم بتثبيت <a class="reference external" href="https://pre-commit.com/#install">pre-commit</a> لتشغيل
+فحوصات نمط التعليمات البرمجية قبل كل ارتكاب:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">pip<span class="w"> </span>install<span class="w"> </span>pre-commit</span>
+<span class="prompt1">pre-commit<span class="w"> </span>install</span>
+</pre></div></div><p>يمكن تعطيل فحوصات pre-commit لالتزام معين باستخدام
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-n</span></code>.</p>
+</li>
+<li><p>قم بتطوير الميزة على فرع الميزة على جهاز الكمبيوتر الخاص بك، باستخدام Git للتحكم في الإصدار. عندما تنتهي من التحرير، أضف الملفات المعدلة باستخدام
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> ثم <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">git<span class="w"> </span>add<span class="w"> </span>modified_files</span>
+<span class="prompt1">git<span class="w"> </span>commit</span>
+</pre></div></div><p>لتسجيل تغييراتك في Git، ثم أرسل التغييرات إلى حسابك على GitHub باستخدام:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>my_feature</span>
+</pre></div></div></li>
+<li><p>اتبع <a class="reference external" href="https://help.github.com/articles/creating-a-pull-request-from-a-fork">هذه</a>
+التعليمات لإنشاء طلب سحب من نسختك. سيؤدي هذا إلى إرسال
+بريد إلكتروني إلى الملتزمين. قد ترغب في النظر في إرسال بريد إلكتروني إلى قائمة البريد للحصول على مزيد من الرؤية.</p></li>
+</ol>
+<p>غالبًا ما يكون من المفيد الحفاظ على مزامنة فرع الميزة المحلية الخاص بك مع
+أحدث التغييرات في مستودع scikit-learn الرئيسي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">git<span class="w"> </span>fetch<span class="w"> </span>upstream</span>
+<span class="prompt1">git<span class="w"> </span>merge<span class="w"> </span>upstream/main</span>
+</pre></div></div><p>بعد ذلك، قد تحتاج إلى حل التعارضات. يمكنك الرجوع إلى
+<a class="reference external" href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/">توثيق Git المتعلق بحل تعارض الاندماج باستخدام سطر الأوامر</a>.</p>
+<aside class="topic">
+<p class="topic-title">تعلم Git</p>
+<p>تعد <a class="reference external" href="https://git-scm.com/documentation">وثائق Git</a> و
+<a class="reference external" href="http://try.github.io">http://try.github.io</a> موارد ممتازة للبدء باستخدام Git،
+وفهم جميع الأوامر الموضحة هنا.</p>
+</aside>
+<p id="pr-checklist">قائمة مراجعة طلب السحب
+قبل دمج طلب سحب (PR)، يجب أن يوافق عليه مطوران أساسيان. يجب وضع علامة على المساهمة غير المكتملة - حيث تتوقع إجراء المزيد من العمل قبل تلقي مراجعة كاملة - على أنها “مسودة طلب سحب” وتغييرها إلى “جاهزة للمراجعة” عند اكتمالها. قد تكون مسودات طلبات السحب مفيدة للإشارة إلى أنك تعمل على شيء ما لتجنب ازدواجية العمل، أو لطلب مراجعة واسعة لوظيفة أو واجهة برمجة تطبيقات (API)، أو للبحث عن متعاونين. غالبًا ما تستفيد مسودات طلبات السحب من تضمين “قائمة مهام” في وصف طلب السحب.</p>
+<p>ولتسهيل عملية المراجعة، نوصي بأن تمتثل مساهمتك للقواعد التالية قبل وضع علامة “جاهز للمراجعة” على طلب السحب. القواعد <strong>المكتوبة بخط عريض</strong> مهمة بشكل خاص:</p>
+<ol class="arabic">
+<li><p><strong>أعط طلب السحب الخاص بك عنوانًا مفيدًا</strong> يلخص ما تفعله مساهمتك. غالبًا ما يصبح هذا العنوان رسالة الالتزام بمجرد دمجها، لذا يجب أن يلخص مساهمتك للمستقبل. في بعض الحالات، يكون “إصلاح &lt;عنوان المشكلة&gt;” كافيًا. “إصلاح #&lt;رقم المشكلة&gt;” ليس أبدًا عنوانًا جيدًا.</p></li>
+<li><p><strong>تأكد من اجتياز رمزك للاختبارات</strong>. يمكن تشغيل جناح الاختبار بالكامل باستخدام pytest، ولكن لا يوصى بذلك عادةً لأنه يستغرق وقتًا طويلاً. غالبًا ما يكون من الكافي تشغيل الاختبار المتعلق بالتغييرات الخاصة بك فقط: على سبيل المثال، إذا قمت بتغيير شيء ما في sklearn/linear_model/_logistic.py، فإن تشغيل الأوامر التالية سيكون كافيًا عادةً:</p>
+<ul class="simple">
+<li><p>pytest sklearn/linear_model/_logistic.py للتأكد من صحة أمثلة doctest</p></li>
+<li><p>pytest sklearn/linear_model/tests/test_logistic.py لتشغيل الاختبارات المحددة للملف</p></li>
+<li><p>pytest sklearn/linear_model لاختبار وحدة :mod: sklearn.linear_model بأكملها</p></li>
+<li><p>pytest doc/modules/linear_model.rst للتأكد من صحة أمثلة دليل المستخدم.</p></li>
+<li><p>pytest sklearn/tests/test_common.py -k LogisticRegression لتشغيل جميع فحوصاتنا للمقدّر (تحديدًا لـ LogisticRegression، إذا كان هذا هو المقدّر الذي قمت بتغييره).</p></li>
+</ul>
+<p>قد تكون هناك اختبارات فاشلة أخرى، ولكن سيتم اكتشافها بواسطة CI، لذلك لا تحتاج إلى تشغيل جناح الاختبار بالكامل محليًا. للحصول على إرشادات حول كيفية استخدام pytest بكفاءة، راجع :ref: pytest_tips.</p>
+</li>
+<li><p><strong>تأكد من التعليق على رمزك وتوثيقه بشكل صحيح</strong>، <strong>وتأكد من عرض الوثائق بشكل صحيح</strong>. لبناء الوثائق، يرجى الرجوع إلى إرشاداتنا :ref: contribute_documentation. سيقوم CI أيضًا ببناء المستندات: يرجى الرجوع إلى :ref: generated_doc_CI.</p></li>
+<li><p><strong>الاختبارات ضرورية لقبول التحسينات</strong>. يجب توفير الإصلاحات العاجلة أو الميزات الجديدة مع “اختبارات عدم التراجع”. تتحقق هذه الاختبارات من السلوك الصحيح للإصلاح أو الميزة. بهذه الطريقة، يُضمن أن تكون التعديلات الإضافية على قاعدة الكود متسقة مع السلوك المرغوب. في حالة الإصلاحات العاجلة، يجب أن تفشل اختبارات عدم التراجع وقت طلب السحب، بالنسبة لقاعدة الكود في الفرع “الرئيسي”، وتمريرها لرمز طلب السحب.</p></li>
+<li><p>اتبع :ref: coding-guidelines.</p></li>
+<li><p>عند الاقتضاء، استخدم أدوات البرامج النصية للتحقق في وحدة sklearn.utils. يمكن العثور على قائمة روتينات المساعدة المتاحة للمطورين في صفحة :ref: developers-utils.</p></li>
+<li><p>غالبًا ما تحل طلبات السحب مشكلة واحدة أو أكثر (أو طلبات سحب). إذا كان دمج طلب السحب الخاص بك يعني أنه يجب إغلاق بعض القضايا/طلبات السحب الأخرى، فيجب عليك “استخدام كلمات رئيسية لإنشاء رابط إليها” (على سبيل المثال، “إصلاحات #1234”؛ يُسمح بعدد من القضايا/طلبات السحب طالما يسبق كل منها كلمة رئيسية). عند الدمج، سيتم إغلاق هذه القضايا/طلبات السحب تلقائيًا بواسطة GitHub. إذا كان طلب السحب الخاص بك مرتبطًا فقط ببعض القضايا/طلبات السحب الأخرى، أو إذا كان يحل الهدف المستهدف جزئيًا فقط، فقم بإنشاء رابط إليها دون استخدام الكلمات الرئيسية (على سبيل المثال، “نحو #1234”).</p></li>
+<li><p>يجب أن تبرر طلبات السحب غالبًا التغيير، من خلال معايير الأداء والكفاءة (راجع :ref: monitoring_performances) أو من خلال أمثلة الاستخدام. توضح الأمثلة أيضًا ميزات المكتبة ودقائقها للمستخدمين. الق نظرة على الأمثلة الأخرى في الدليل “الأمثلة/” للرجوع إليها. يجب أن توضح الأمثلة سبب كون الوظيفة الجديدة مفيدة في الممارسة العملية، وإذا أمكن، قم بمقارنتها بالطرق الأخرى المتاحة في مجموعة أدوات التعلم.</p></li>
+<li><p>تفرض الميزات الجديدة بعض النفقات العامة للصيانة. نتوقع من مؤلفي طلبات السحب المشاركة في صيانة الكود الذي يقدمونه، على الأقل في البداية. يجب توضيح الميزات الجديدة بوثائق سردية في دليل المستخدم، مع مقتطفات صغيرة من التعليمات البرمجية. إذا كان ذلك مناسبًا، يرجى أيضًا إضافة مراجع في الأدبيات، مع روابط PDF عند الإمكان.</p></li>
+<li><p>يجب أن يتضمن دليل المستخدم أيضًا التعقيد الزمني والمكاني المتوقع للخوارزمية وقابليتها للتطوير، على سبيل المثال، “يمكن أن يتوسع هذا الخوارزم في عدد كبير من العينات &gt; 100000، ولكنه لا يتوسع في الأبعاد: من المتوقع أن يكون n_features أقل من 100”.</p></li>
+</ol>
+<p>يمكنك أيضًا التحقق من :ref: code_review لدينا لمعرفة ما يمكن أن يتوقعه المراجعون.</p>
+<p>يمكنك التحقق من أخطاء البرمجة الشائعة باستخدام الأدوات التالية:</p>
+<ul>
+<li><p>الكود مع تغطية جيدة لاختبارات الوحدة (80% على الأقل، والأفضل 100%)، والتحقق باستخدام:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">pip<span class="w"> </span>install<span class="w"> </span>pytest<span class="w"> </span>pytest-cov</span>
+<span class="prompt1">pytest<span class="w"> </span>--cov<span class="w"> </span>sklearn<span class="w"> </span>path/to/tests</span>
+</pre></div></div><p>راجع أيضًا :ref: testing_coverage.</p>
+</li>
+<li><p>قم بتشغيل التحليل الثابت باستخدام mypy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">mypy<span class="w"> </span>sklearn</span>
+</pre></div></div><p>يجب ألا ينتج هذا أخطاء جديدة في طلب السحب الخاص بك. يمكن أن يكون استخدام التعليق # type: ignore حلًا مؤقتًا لبعض الحالات التي لا تدعمها mypy، خاصةً:</p>
+<ul class="simple">
+<li><p>عند استيراد الوحدات النمطية C أو Cython،</p></li>
+<li><p>على الخصائص مع الديكورات.</p></li>
+</ul>
+</li>
+</ul>
+<p>نقاط المكافأة للمساهمات التي تتضمن تحليل الأداء باستخدام نص برمجي للمقارنة ومخرجات التوصيف (راجع :ref: monitoring_performances). تحقق أيضًا من دليل :ref: performance-howto للحصول على مزيد من التفاصيل حول التوصيف وتحسينات Cython.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>الحالة الحالية لقاعدة كود scikit-learn لا تمتثل لجميع هذه الإرشادات، ولكننا نتوقع أن يؤدي فرض هذه القيود على جميع المساهمات الجديدة إلى تحسين جودة قاعدة الكود بشكل عام.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>للحصول على دليلين موثقين جيدًا ومفصلين بشكل أكبر حول سير عمل التطوير، يرجى زيارة قسم “سير عمل تطوير Scipy” &lt;<a class="reference external" href="http://scipy.github.io/devdocs/dev/dev_quickstart.html">http://scipy.github.io/devdocs/dev/dev_quickstart.html</a>&gt; - وقسم “سير عمل Astropy للمطورين” &lt;<a class="reference external" href="https://astropy.readthedocs.io/en/latest/development/workflow/development_workflow.html">https://astropy.readthedocs.io/en/latest/development/workflow/development_workflow.html</a>&gt;.</p>
+</div>
+</section>
+<section id="ci">
+<h2>التكامل المستمر (CI)<a class="headerlink" href="#ci" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>تُستخدم خطوط أنابيب Azure لاختبار scikit-learn على Linux وMac وWindows، باستخدام تبعيات وإعدادات مختلفة.</p></li>
+<li><p>يستخدم CircleCI لبناء المستندات لعرضها.</p></li>
+<li><p>تُستخدم إجراءات GitHub لمهام مختلفة، بما في ذلك بناء العجلات والتوزيعات المصدرية.</p></li>
+<li><p>يستخدم Cirrus CI للبناء على ARM.</p></li>
+</ul>
+<section id="commit-markers">
+<span id="id22"></span><h3>مؤشرات رسالة الالتزام<a class="headerlink" href="#commit-markers" title="Link to this heading">#</a></h3>
+<p>يرجى ملاحظة أنه إذا ظهر أحد المؤشرات التالية في رسالة الالتزام الأخيرة، فسيتم اتخاذ الإجراءات التالية.</p>
+<p>يرجى ملاحظة أنه، بشكل افتراضي، يتم بناء الوثائق ولكن يتم تنفيذ الأمثلة التي يتم تعديلها مباشرة بواسطة طلب السحب فقط.</p>
+</section>
+<section id="id23">
+<h3>ملفات القفل<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
+<p>تستخدم CI ملفات القفل لبناء البيئات بإصدارات محددة من التبعيات. عندما يحتاج طلب السحب إلى تعديل التبعيات أو إصداراتها، يجب تحديث ملفات القفل وفقًا لذلك. يمكن القيام بذلك عن طريق التعليق في طلب السحب:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>@scikit-learn-bot update lock-files
+</pre></div>
+</div>
+<p>سيقوم بوت بالدفع بالتزام إلى فرع طلب السحب الخاص بك بملفات القفل المحدثة في غضون دقائق قليلة. تأكد من تحديد خانة الاختيار “السماح بالتحرير من قبل المشرفين” الموجودة في أسفل الجانب الأيمن من طلب السحب. يمكنك أيضًا تحديد خيارات –select-build و–skip-build و–select-tag كما هو الحال في سطر الأوامر. استخدم –help في البرنامج النصي build_tools/update_environments_and_lock_files.py لمزيد من المعلومات. على سبيل المثال،</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>@scikit-learn-bot update lock-files --select-tag main-ci --skip-build doc
+</pre></div>
+</div>
+<p>سيضيف البوت تلقائيًا :ref: commit message markers &lt;commit_markers&gt; إلى الالتزام لبعض العلامات. إذا كنت تريد إضافة المزيد من العلامات يدويًا، فيمكنك القيام بذلك باستخدام الخيار –commit-marker. على سبيل المثال، سيؤدي التعليق التالي إلى تشغيل البوت لتحديث ملفات القفل المتعلقة بالوثائق وإضافة العلامة “[doc build]” إلى الالتزام:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>@scikit-learn-bot update lock-files --select-build doc --commit-marker &quot;[doc build]&quot;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="stalled-pull-request">
+<span id="id24"></span><h2>طلبات السحب المتوقفة<a class="headerlink" href="#stalled-pull-request" title="Link to this heading">#</a></h2>
+<p>نظرًا لأن المساهمة بميزة يمكن أن تكون عملية طويلة، فإن بعض طلبات السحب تبدو غير نشطة ولكنها غير مكتملة. في مثل هذه الحالة، فإن الاستيلاء عليها يعد خدمة رائعة للمشروع. تعد قواعد السلوك الجيدة للاستيلاء على ما يلي:</p>
+<ul>
+<li><p><strong>تحديد ما إذا كان طلب السحب متوقفًا</strong></p>
+<ul>
+<li><p>قد يكون لطلب السحب علامة “متوقف” أو “مطلوب المساعدة” إذا كنا قد حددناه بالفعل كمرشح لمساهمين آخرين.</p></li>
+<li><p>لتحديد ما إذا كان طلب السحب غير النشط متوقفًا، اسأل المساهم عما إذا كان/كانت تخطط لمواصلة العمل على طلب السحب في المستقبل القريب. عدم الرد خلال أسبوعين مع نشاط يدفع طلب السحب للأمام يشير إلى أن طلب السحب متوقف وسيؤدي إلى وضع علامة “مطلوب المساعدة” على طلب السحب.</p>
+<p>يرجى ملاحظة أنه إذا تلقى طلب السحب تعليقات على المساهمة لم يتم الرد عليها لمدة شهر، فمن الآمن افتراض أن طلب السحب متوقف ويمكن تقليل وقت الانتظار إلى يوم واحد.</p>
+<p>بعد سبرينت، سيتم التواصل مع المشاركين في سبرينت لمتابعة طلبات السحب غير المندمجة المفتوحة أثناء سبرينت، وسيتم وضع علامة “سبرينت” على طلبات السحب هذه. يمكن إعادة تعيين طلبات السحب التي تحمل علامة “سبرينت” أو إعلانها متوقفة من قبل قادة سبرينت.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>الاستيلاء على طلب سحب متوقف</strong>: من المهم التعليق على طلب السحب المتوقف للإشارة إلى أنك تستولي عليه ولإنشاء رابط من طلب السحب الجديد إلى القديم. يجب إنشاء طلب السحب الجديد عن طريق السحب من القديم.</p></li>
+</ul>
+<p>بشكل عام، ستكون القضايا التي يمكن العمل عليها لها علامة “مساعدة مطلوبة”. ومع ذلك، لن يكون لدى جميع القضايا التي تحتاج إلى مساهمين هذه العلامة، حيث أن علامة “مساعدة مطلوبة” ليست دائمًا محدثة مع حالة القضية. يمكن للمساهمين العثور على القضايا التي لا تزال متاحة من خلال اتباع الإرشادات التالية:</p>
+<ul class="simple">
+<li><p>أولاً، لتحديد ما إذا كانت القضية قد تم المطالبة بها:</p>
+<ul>
+<li><p>التحقق من طلبات السحب المرتبطة</p></li>
+<li><p>التحقق من المحادثة لمعرفة ما إذا كان أي شخص قد ذكر أنه يعمل على إنشاء طلب سحب</p></li>
+</ul>
+</li>
+<li><p>إذا علق أحد المساهمين على قضية ليقول إنه يعمل عليها، فمن المتوقع تقديم طلب سحب خلال أسبوعين (لمساهم جديد) أو 4 أسابيع (لمساهم أو مطور أساسي)، ما لم يتم منح إطار زمني أكبر بشكل صريح. بعد ذلك الوقت، يمكن لمساهم آخر أخذ القضية وتقديم طلب سحب لها. نشجع المساهمين على التعليق مباشرة على القضية المتوقفة أو غير المطالب بها لإبلاغ أعضاء المجتمع بأنهم سيعملون عليها.</p></li>
+<li><p>إذا كانت القضية مرتبطة بـ “طلب سحب متوقف”، فإننا نوصي بأن يتبع المساهمون الإجراء الموصوف في قسم “طلب السحب المتوقف” بدلاً من العمل مباشرة على القضية.</p></li>
+</ul>
+</section>
+<section id="new-contributors">
+<span id="id25"></span><h2>القضايا للمساهمين الجدد<a class="headerlink" href="#new-contributors" title="Link to this heading">#</a></h2>
+<p>ينبغي على المساهمين الجدد البحث عن العلامات التالية عند البحث عن القضايا. نوصي بشدة بأن يتناول المساهمون الجدد القضايا “السهلة” أولاً: يساعد هذا المساهم على التعرف على سير عمل المساهمة، وعلى المطورين الأساسيين التعرف على المساهم؛ بالإضافة إلى ذلك، فإننا غالبًا ما نقلل من مدى سهولة حل مشكلة ما!</p>
+<ul>
+<li><p><strong>علامة Good first issue</strong></p>
+<p>هناك طريقة رائعة للبدء في المساهمة في scikit-learn وهي اختيار عنصر من قائمة “good first issues” في متتبع القضايا. يسمح حل هذه القضايا بالبدء في المساهمة في المشروع دون معرفة مسبقة كثيرة. إذا كنت قد ساهمت بالفعل في scikit-learn، فيجب عليك النظر في القضايا السهلة بدلاً من ذلك.</p>
+</li>
+<li><p><strong>علامة Easy</strong></p>
+<p>إذا كنت قد ساهمت بالفعل في scikit-learn، فهناك طريقة رائعة أخرى للمساهمة في scikit-learn وهي اختيار عنصر من قائمة “Easy issues” في متتبع القضايا. ستكون مساعدتك في هذا المجال موضع تقدير كبير من قبل المطورين الأكثر خبرة حيث تساعدهم على تحرير وقتهم للتركيز على قضايا أخرى.</p>
+</li>
+<li><p><strong>علامة Help wanted</strong></p>
+<p>غالبًا ما نستخدم علامة “مساعدة مطلوبة” لوضع علامة على القضايا بغض النظر عن صعوبتها. بالإضافة إلى ذلك، نستخدم علامة “مساعدة مطلوبة” لوضع علامة على طلبات السحب التي تم التخلي عنها من قبل المساهم الأصلي وهي متاحة لشخص ما لمتابعة المكان الذي توقف فيه المساهم الأصلي. يمكن العثور على قائمة القضايا التي تحتوي على علامة “مساعدة مطلوبة” هنا. لاحظ أن ليس كل القضايا التي تحتاج إلى مساهمين سيكون لها هذه العلامة.</p>
+</li>
+</ul>
+<p id="contribute-documentation">الوثائق
+يسعدنا قبول أي نوع من أنواع الوثائق:</p>
+<ul class="simple">
+<li><p><strong>توثيق الدوال/الطرق/الصفوف</strong>: المعروف أيضًا باسم “توثيق واجهة برمجة التطبيقات”، يصف هذا النوع ما تقوم به الكائنات وتفاصيل أي معلمات أو سمات أو طرق. وتعيش وثائق التوثيق هذه جنبًا إلى جنب مع الكود في sklearn/ &lt;<a class="github reference external" href="https://github.com/scikit-learn/scikit-learn/tree/main/sklearn">scikit-learn/scikit-learn</a>&gt; _، ويتم إنشاؤها وفقًا لـ doc/api_reference.py &lt;<a class="github reference external" href="https://github.com/scikit-learn/scikit-learn/blob/main/doc/api_reference.py">scikit-learn/scikit-learn</a>&gt; _. للقيام بإضافة أو تحديث أو إزالة أو إيقاف استخدام واجهة برمجة تطبيقات عامة مدرجة في: ref: api_ref، فهذا هو المكان الذي يجب البحث فيه.</p></li>
+<li><p><strong>دليل المستخدم</strong>: توفر هذه الوثائق معلومات أكثر تفصيلاً حول الخوارزميات المنفذة في سكيت-ليرن وعادة ما توجد في دليل الجذر doc/ &lt;<a class="github reference external" href="https://github.com/scikit-learn/scikit-learn/tree/main/doc">scikit-learn/scikit-learn</a>&gt; _ و doc/modules/ &lt;<a class="github reference external" href="https://github.com/scikit-learn/scikit-learn/tree/main/doc/modules">scikit-learn/scikit-learn</a>&gt; _.</p></li>
+<li><p><strong>الأمثلة</strong>: توفر هذه الوثائق أمثلة كاملة للكود والتي قد توضح استخدام وحدات سكيت-ليرن، أو تقارن خوارزميات مختلفة، أو تناقش تفسيرها، وما إلى ذلك. ويمكن العثور على الأمثلة في examples/ &lt;<a class="github reference external" href="https://github.com/scikit-learn/scikit-learn/tree/main/examples">scikit-learn/scikit-learn</a>&gt; _.</p></li>
+<li><p><strong>وثائق ReStructuredText الأخرى</strong>: توفر هذه الوثائق معلومات مفيدة مختلفة (مثل: ref: contributing guide) وتوجد في doc/ &lt;<a class="github reference external" href="https://github.com/scikit-learn/scikit-learn/tree/main/doc">scikit-learn/scikit-learn</a>&gt; _.</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المبادئ-التوجيهية-لكتابة-وثائق-التوثيق">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المبادئ التوجيهية لكتابة وثائق التوثيق<a class="headerlink" href="#المبادئ-التوجيهية-لكتابة-وثائق-التوثيق" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<ul>
+<li><p class="sd-card-text">عند توثيق المعلمات والسمات، إليك قائمة ببعض الأمثلة ذات التنسيق الجيد:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>n_clusters : int, default=3
+    عدد المجموعات التي يكتشفها الخوارزم.
+
+some_param : {&quot;hello&quot;, &quot;goodbye&quot;}, bool or int, default=True
+    يذهب وصف المعلمة هنا، والذي يمكن أن يكون إما سلسلة نصية
+    (إما &quot;hello&quot; أو &quot;goodbye&quot;)، أو قيمة منطقية، أو عدد صحيح. والقيمة
+    الافتراضية هي True.
+
+array_parameter : {array-like, sparse matrix} of shape (n_samples, n_features) \
+    or (n_samples,)
+    تقبل هذه المعلمة البيانات بأي من الأشكال المذكورة، مع أحد
+    الأشكال المذكورة. والقيمة الافتراضية هي np.ones(shape=(n_samples,)).
+
+list_param : list of int
+
+typed_ndarray : ndarray of shape (n_samples,), dtype=np.int32
+
+sample_weight : array-like of shape (n_samples,), default=None
+
+multioutput_array : ndarray of shape (n_samples, n_classes) or list of such arrays
+</pre></div>
+</div>
+<p class="sd-card-text">بشكل عام، ضع في اعتبارك ما يلي:</p>
+<ul class="simple">
+<li><p class="sd-card-text">استخدم الأنواع الأساسية في بايثون. (bool بدلاً من boolean)</p></li>
+<li><p class="sd-card-text">استخدم الأقواس لتعريف الأشكال: array-like of shape (n_samples,)
+أو array-like of shape (n_samples, n_features)</p></li>
+<li><p class="sd-card-text">بالنسبة للسلاسل النصية مع خيارات متعددة، استخدم الأقواس المجعدة: input: {‘log’,
+‘squared’, ‘multinomial’}</p></li>
+<li><p class="sd-card-text">يمكن أن تكون البيانات أحادية أو ثنائية الأبعاد مجموعة فرعية من {array-like,
+ndarray, sparse matrix, dataframe}. لاحظ أن “array-like” يمكن أن تكون أيضًا
+“list”، في حين أن “ndarray” هي صراحةً “numpy.ndarray”.</p></li>
+<li><p class="sd-card-text">حدد “dataframe” عند استخدام ميزات “frame-like”، مثل أسماء الأعمدة.</p></li>
+<li><p class="sd-card-text">عند تحديد نوع البيانات لقائمة، استخدم “of” كفاصل: list of int. وعند دعم
+المعلمة للمصفوفات، يمكنك إعطاء تفاصيل حول الشكل و/أو نوع البيانات وقائمة
+من هذه المصفوفات، ويمكنك استخدام أحد الخيارات التالية: array-like of shape
+(n_samples,) or list of such arrays.</p></li>
+<li><p class="sd-card-text">عند تحديد نوع البيانات لـ “ndarray”، استخدم np.int32 لتحديد الشكل:
+ndarray of shape (n_samples,), dtype=np.int32. يمكنك تحديد أنواع بيانات
+متعددة كمجموعة: array-like of shape (n_samples,), dtype={np.float64,
+np.float32}. إذا كنت تريد ذكر الدقة العشوائية، استخدم “integral” و
+“floating” بدلاً من أنواع البيانات في بايثون “int” و “float”. وعندما يكون
+كلا الخيارين “int” و “floating” مدعومين، لا توجد حاجة لتحديد نوع البيانات.</p></li>
+<li><p class="sd-card-text">عندما تكون القيمة الافتراضية هي “None”، يجب تحديد “None” فقط في النهاية
+باستخدام default=None. تأكد من تضمين ما يعنيه أن تكون المعلمة أو السمة
+“None” في وثائق التوثيق.</p></li>
+</ul>
+</li>
+<li><p class="sd-card-text">أضف “انظر أيضًا” في وثائق التوثيق للصفوف/الدوال ذات الصلة.</p></li>
+<li><p class="sd-card-text">يجب أن يكون “انظر أيضًا” في وثائق التوثيق عبارة عن سطر واحد لكل مرجع، مع
+علامة استعمار وفسرير، على سبيل المثال:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>انظر أيضًا
+--------
+SelectKBest : حدد الميزات بناءً على أعلى k نقاط.
+SelectFpr : حدد الميزات بناءً على اختبار معدل الإيجابيات الخاطئة.
+</pre></div>
+</div>
+</li>
+<li><p class="sd-card-text">أضف مقتطف أو اثنين من الكود في قسم “مثال” لإظهار كيفية استخدامه.</p></li>
+</ul>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المبادئ-التوجيهية-لكتابة-دليل-المستخدم-ووثائق-restructuredtext-الأخرى">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المبادئ التوجيهية لكتابة دليل المستخدم ووثائق ReStructuredText الأخرى<a class="headerlink" href="#المبادئ-التوجيهية-لكتابة-دليل-المستخدم-ووثائق-restructuredtext-الأخرى" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<dl class="simple">
+<dt>من المهم الحفاظ على حل وسط جيد بين التفاصيل الرياضية والخوارزمية، وإعطاء</dt><dd><p class="sd-card-text">الحدس للقارئ حول ما يفعله الخوارزم.</p>
+</dd>
+</dl>
+<ul>
+<li><p class="sd-card-text">ابدأ بشرح موجز وواضح لما يفعله الخوارزم/الكود بالبيانات.</p></li>
+<li><p class="sd-card-text">أبرز فائدة الميزة وتطبيقها الموصى به. ضع في اعتبارك تضمين تعقيد الخوارزمية
+(<span class="math notranslate nohighlight">\(O\left(g\left(n\right)\right)\)</span>) إذا كان متاحًا، حيث يمكن أن تكون
+“قواعد الإبهام” خاصة جدًا بالآلة. فقط إذا كانت هذه التعقيدات غير متاحة،
+فيمكن حينها توفير “قواعد الإبهام” بدلاً من ذلك.</p></li>
+<li><p class="sd-card-text">أدرج صورة ذات صلة (تم إنشاؤها من مثال) لتوفير حدس.</p></li>
+<li><p class="sd-card-text">أدرج مثال أو مثالين قصيرين من الكود لتوضيح استخدام الميزة.</p></li>
+<li><p class="sd-card-text">قدم أي معادلات رياضية ضرورية، تليها المراجع. من خلال تأجيل الجوانب
+الرياضية، تصبح الوثائق أكثر سهولة للوصول إليها من قبل المستخدمين
+المهتمين بشكل أساسي بفهم الآثار العملية للميزة بدلاً من آلياتها
+الأساسية.</p></li>
+<li><p class="sd-card-text">عند تحرير ملفات ReStructuredText (“.rst”)، حاول الحفاظ على طول السطر أقل
+من 88 حرفًا عندما يكون ذلك ممكنًا (تعتبر الروابط والجداول استثناءات).</p></li>
+<li><p class="sd-card-text">في ملفات ReStructuredText في سكيت-ليرن، يؤدي استخدام علامات الاقتباس
+الخلفية المفردة أو المزدوجة حول النص إلى عرضه كنص حرفي متداخل (يستخدم
+غالبًا للكود، على سبيل المثال، “list”). ويرجع ذلك إلى تكوينات محددة
+قمنا بضبطها. يجب استخدام علامات الاقتباس المفردة في الوقت الحالي.</p></li>
+<li><p class="sd-card-text">تؤدي وفرة المعلومات إلى صعوبة وصول المستخدمين إلى المحتوى الذي يهمهم.
+استخدم قوائم التصفح لتصنيفها باستخدام بناء الجملة التالي:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">dropdown</span><span class="p">::</span> عنوان قائمة التصفح
+
+  محتوى قائمة التصفح.
+</pre></div>
+</div>
+<p class="sd-card-text">ستؤدي الشفرة القصيرة أعلاه إلى ظهور قائمة التصفح التالية:</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="عنوان-قائمة-التصفح">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">عنوان قائمة التصفح<a class="headerlink" href="#عنوان-قائمة-التصفح" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">محتوى قائمة التصفح.</p>
+</div>
+</details></li>
+<li><p class="sd-card-text">المعلومات التي يمكن إخفاؤها افتراضيًا باستخدام قوائم التصفح هي:</p>
+<ul class="simple">
+<li><p class="sd-card-text">أقسام التسلسل الهرمي المنخفض مثل “المراجع” و “الخصائص”، وما إلى ذلك (راجع
+على سبيل المثال الأقسام الفرعية في: ref: det_curve)؛</p></li>
+<li><p class="sd-card-text">التفاصيل الرياضية المعمقة؛</p></li>
+<li><p class="sd-card-text">السرد القصصي المحدد للاستخدام؛</p></li>
+<li><p class="sd-card-text">بشكل عام، السرد القصصي الذي قد يهم المستخدمين الذين يرغبون في تجاوز
+براغماتية أداة معينة.</p></li>
+</ul>
+</li>
+<li><p class="sd-card-text">لا تستخدم قوائم التصفح لقسم المستوى المنخفض “أمثلة”، حيث يجب أن يظل
+مرئيًا لجميع المستخدمين. تأكد من أن قسم “الأمثلة” يأتي مباشرة بعد
+المناقشة الرئيسية مع أقل عدد ممكن من الأقسام المطوية بينهما.</p></li>
+<li><p class="sd-card-text">كن على دراية بأن قوائم التصفح تكسر المراجع المتقاطعة. إذا كان ذلك منطقيًا،
+فقم بإخفاء المرجع مع النص الذي يشير إليه. وإلا، فلا تستخدم قوائم التصفح.</p></li>
+</ul>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="المبادئ-التوجيهية-لكتابة-المراجع">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">المبادئ التوجيهية لكتابة المراجع<a class="headerlink" href="#المبادئ-التوجيهية-لكتابة-المراجع" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<ul>
+<li><p class="sd-card-text">عندما تكون المراجع الببليوغرافية متاحة بأرقام تعريف “arxiv
+&lt;<a class="reference external" href="https://arxiv.org/">https://arxiv.org/</a>&gt;” أو “Digital Object Identifier
+&lt;<a class="reference external" href="https://www.doi.org/">https://www.doi.org/</a>&gt;”، استخدم توجيهات سفينكس: arxiv: أو: doi:. على سبيل
+المثال، راجع المراجع في: ref: spectral_clustering_graph.</p></li>
+<li><p class="sd-card-text">بالنسبة لقسم “المراجع” في وثائق التوثيق، راجع: func:
+sklearn.metrics.silhouette_score كمثال.</p></li>
+<li><p class="sd-card-text">للرجوع إلى صفحات أخرى في وثائق سكيت-ليرن، استخدم بناء جملة المراجع
+المتقاطعة ReStructuredText:</p>
+<ul>
+<li><p class="sd-card-text"><strong>القسم</strong>: للرجوع إلى قسم عشوائي في الوثائق، استخدم تسميات المرجع (راجع
+“وثائق سفينكس
+&lt;<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/roles.html#ref-role">https://www.sphinx-doc.org/en/master/usage/restructuredtext/roles.html#ref-role</a>&gt;
+“). على سبيل المثال:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="nt">_my-section:</span>
+
+<span class="gh">My section</span>
+<span class="gh">----------</span>
+
+هذا هو نص القسم.
+
+للرجوع إلى نفسه، استخدم: ref: my-section.
+</pre></div>
+</div>
+<p class="sd-card-text">لا يجب عليك تعديل تسميات مرجع سفينكس الموجودة مسبقًا حيث أن ذلك قد
+يكسر المراجع المتقاطعة والروابط الخارجية الموجودة التي تشير إلى أقسام
+محددة في وثائق سكيت-ليرن.</p>
+</li>
+<li><p class="sd-card-text"><strong>المسرد</strong>: للرجوع إلى مصطلح في: ref: glossary:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="na">:term:</span><span class="nv">`cross_validation`</span>
+</pre></div>
+</div>
+</li>
+<li><p class="sd-card-text"><strong>الدالة</strong>: للرجوع إلى وثائق دالة، استخدم مسار الاستيراد الكامل إلى
+الدالة:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="na">:func:</span><span class="nv">`~sklearn.model_selection.cross_val_score`</span>
+</pre></div>
+</div>
+<p class="sd-card-text">ومع ذلك، إذا كان هناك توجيه “.. currentmodule::” أعلاه في المستند،
+فستحتاج فقط إلى استخدام المسار إلى الدالة بعد الوحدة الحالية المحددة.
+على سبيل المثال:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">currentmodule</span><span class="p">::</span> sklearn.model_selection
+
+<span class="na">:func:</span><span class="nv">`cross_val_score`</span>
+</pre></div>
+</div>
+</li>
+<li><p class="sd-card-text"><strong>الصف</strong>: للرجوع إلى وثائق صف، استخدم مسار الاستيراد الكامل إلى الصف،
+ما لم يكن هناك توجيه “.. currentmodule::” في المستند أعلاه (راجع
+أعلاه):</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="na">:class:</span><span class="nv">`~sklearn.preprocessing.StandardScaler`</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</details><dl class="simple">
+<dt>يمكنك تحرير الوثائق باستخدام أي محرر نصوص، ثم إنشاء إخراج HTML باتباع: ref:</dt><dd><p>building_documentation. سيتم وضع ملفات HTML الناتجة في “_build/html/” ويمكن
+عرضها في متصفح ويب، على سبيل المثال من خلال فتح الملف المحلي
+“_build/html/index.html” أو عن طريق تشغيل خادم محلي:</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">python<span class="w"> </span>-m<span class="w"> </span>http.server<span class="w"> </span>-d<span class="w"> </span>_build/html</span>
+</pre></div></div><p id="building-documentation">بناء الوثائق
+<strong>قبل إرسال طلب سحب، تحقق مما إذا كانت تعديلاتك قد أدخلت أي تحذيرات جديدة من Sphinx من خلال بناء الوثائق محليًا وحاول إصلاحها.</strong></p>
+<p>أولاً، تأكد من أنك قمت بتثبيت نسخة التطوير <a class="reference internal" href="advanced_installation.html#install-bleeding-edge"><span class="std std-ref">بشكل صحيح</span></a>. بالإضافة إلى ذلك، يتطلب بناء الوثائق تثبيت بعض الحزم الإضافية:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">pip<span class="w"> </span>install<span class="w"> </span>sphinx<span class="w"> </span>sphinx-gallery<span class="w"> </span>numpydoc<span class="w"> </span>matplotlib<span class="w"> </span>Pillow<span class="w"> </span>pandas<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>polars<span class="w"> </span>scikit-image<span class="w"> </span>packaging<span class="w"> </span>seaborn<span class="w"> </span>sphinx-prompt<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>sphinxext-opengraph<span class="w"> </span>sphinx-copybutton<span class="w"> </span>plotly<span class="w"> </span>pooch<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>pydata-sphinx-theme<span class="w"> </span>sphinxcontrib-sass<span class="w"> </span>sphinx-design<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>sphinx-remove-toctrees</span>
+</pre></div></div><p>للبناء الوثائق، تحتاج إلى أن تكون في مجلد <code class="docutils literal notranslate"><span class="pre">doc</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1"><span class="nb">cd</span><span class="w"> </span>doc</span>
+</pre></div></div><p>في الغالبية العظمى من الحالات، تحتاج فقط إلى إنشاء موقع الويب الكامل،
+بدون معرض الأمثلة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">make</span>
+</pre></div></div><p>ستتم توليد الوثائق في دليل <code class="docutils literal notranslate"><span class="pre">_build/html/stable</span></code>
+ويمكن عرضها في مستعرض ويب، على سبيل المثال من خلال فتح ملف
+<code class="docutils literal notranslate"><span class="pre">_build/html/stable/index.html</span></code> المحلي.
+لإنشاء معرض الأمثلة أيضًا، يمكنك استخدام:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">make<span class="w"> </span>html</span>
+</pre></div></div><p>سيؤدي هذا إلى تشغيل جميع الأمثلة، وهو ما يستغرق بعض الوقت. إذا كنت تريد فقط إنشاء بعض الأمثلة، وهو ما سيكون مفيدًا بشكل خاص إذا كنت تعدل عددًا قليلاً من الأمثلة، فيمكنك استخدام:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1"><span class="nv">EXAMPLES_PATTERN</span><span class="o">=</span>your_regex_goes_here<span class="w"> </span>make<span class="w"> </span>html</span>
+</pre></div></div><p>قم بتعيين متغير البيئة <code class="docutils literal notranslate"><span class="pre">NO_MATHJAX=1</span></code> إذا كنت تنوي عرض الوثائق
+في إعداد غير متصل بالإنترنت. لبناء دليل PDF، قم بتشغيل:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">make<span class="w"> </span>latexpdf</span>
+</pre></div></div></section>
+<section id="github-actions">
+<span id="generated-doc-ci"></span><h2>الوثائق المولدة على GitHub Actions<a class="headerlink" href="#github-actions" title="Link to this heading">#</a></h2>
+<p>عندما تقوم بتغيير الوثائق في طلب سحب، فإن GitHub Actions يقوم تلقائيًا
+ببنائها. لعرض الوثائق التي تم إنشاؤها بواسطة GitHub Actions، انتقل ببساطة إلى
+أسفل صفحة طلب السحب الخاص بك، وابحث عن العنصر “تحقق من الوثائق المعروضة هنا!” وانقر فوق “التفاصيل” بجانبه:</p>
+<img alt="../_images/generated-doc-ci.png" class="align-center" src="../_images/generated-doc-ci.png" />
+<p id="testing-coverage">الاختبار وتحسين تغطية الاختبار
+يعد إجراء اختبارات الوحدات عالية الجودة ركنًا أساسيًا في عملية تطوير سكيت-ليرن. ولهذا الغرض، نستخدم حزمة “باي تيست”. وتكون الاختبارات عبارة عن وظائف مسماة بشكل مناسب، وموجودة في مجلدات “الاختبارات” الفرعية، والتي تتحقق من صحة الخوارزميات والخيارات المختلفة للكود.</p>
+<p>ويؤدي تشغيل “باي تيست” في مجلد ما إلى تشغيل جميع اختبارات الحزم الفرعية المقابلة. وللحصول على سير عمل أكثر تفصيلاً لـ “باي تيست”، يرجى الرجوع إلى: القائمة المرجعية لطلبات السحب.</p>
+<p>نتوقع أن تكون تغطية الكود للميزات الجديدة حوالي 90% على الأقل.</p>
+<p>اختبارات متعلقة بمكتبة ماتبلوتليب:
+تضمن اختبارات التهيئة أن مجموعة من الاختبارات سيتم تنفيذها مع التهيئة والتنظيف المناسبين. وينفذ برنامج اختبار سكيت-ليرن مجموعة اختبارات “بايبلوت” التي يمكن استخدامها مع “ماتبلوتليب”.</p>
+<p>وينبغي استخدام مجموعة اختبارات “بايبلوت” عندما تتعامل وظيفة الاختبار مع “ماتبلوتليب”. وتعد “ماتبلوتليب” اعتمادًا اختياريًا وليست مطلوبة. وتكون مجموعة الاختبارات هذه مسؤولة عن تخطي الاختبارات إذا لم يتم تثبيت “ماتبلوتليب”. بالإضافة إلى ذلك، سيتم إغلاق الأشكال التي تم إنشاؤها أثناء الاختبارات تلقائيًا بمجرد تنفيذ وظيفة الاختبار.</p>
+<p>ولاستخدام مجموعة الاختبارات هذه في وظيفة الاختبار، يجب تمريرها كحجة:</p>
+<p>اختبار يتطلب مجموعة اختبارات ماتبلوتليب:</p>
+<p>سير عمل لتحسين تغطية الاختبارات:
+لاختبار تغطية الكود، تحتاج إلى تثبيت حزمة “كوفيراج” بالإضافة إلى “باي تيست”.</p>
+<ol class="arabic simple">
+<li><p>قم بتشغيل الأمر “باي تيست –كوف سكيليرن /بات/تو/تستس”. وتدرج النتيجة مخرجات لأرقام الأسطر غير المختبرة لكل ملف.</p></li>
+<li><p>ابحث عن ثمرة سهلة المنال، من خلال النظر إلى أرقام الأسطر غير المختبرة، واكتب أو عدل الاختبار خصيصًا لهذه الأسطر.</p></li>
+<li><p>كرر الخطوتين 1 و2 حتى تصل إلى مستوى التغطية المطلوب.</p></li>
+</ol>
+<p>مراقبة الأداء:
+عند اقتراح تغييرات على قاعدة الكود الحالية، من المهم التأكد من أنها لا تسبب تراجعًا في الأداء. ويستخدم سكيت-ليرن “معايير إيه إس في” لمراقبة أداء مجموعة مختارة من التقديرات والوظائف الشائعة. ويمكنك عرض هذه المعايير على صفحة معايير سكيت-ليرن. وتوجد مجموعة المعايير المقابلة في دليل “إيه إس في_بينشمارك”.</p>
+<p>ولاستخدام جميع ميزات “إيه إس في”، ستحتاج إلى إما “كوندا” أو “فيرتشوال إنف”. لمزيد من التفاصيل، يرجى التحقق من صفحة تثبيت “إيه إس في”.</p>
+<p>أولاً، تحتاج إلى تثبيت الإصدار التنموي من “إيه إس في”:</p>
+<p>ثم انتقل إلى دليل “إيه إس في_بينشمارك”:</p>
+<p>تم تكوين مجموعة معايير الأداء للعمل مقابل النسخة المحلية المستنسخة من سكيت-ليرن. تأكد من أنها محدثة:</p>
+<p>في مجموعة معايير الأداء، يتم تنظيم المعايير وفقًا لنفس هيكل سكيت-ليرن. على سبيل المثال، يمكنك مقارنة أداء مُقدر محدد بين “أبستريم/ماين” وفرع العمل الذي تقوم به:</p>
+<p>يستخدم الأمر افتراضيًا برنامج “كوندا” لإنشاء بيئات معايير الأداء. إذا كنت تريد استخدام “فيرتشوال إنف” بدلاً من ذلك، استخدم العلم “-إي”:</p>
+<p>يمكنك أيضًا تحديد نموذج كامل لمعايرته:</p>
+<p>يمكنك استبدال “هيد” بأي فرع محلي. وبشكل افتراضي، لن يبلغ سوى عن المعايير التي تغيرت بنسبة 10% على الأقل. يمكنك التحكم في هذه النسبة باستخدام العلم “-إف”.</p>
+<p>لتشغيل مجموعة معايير الأداء الكاملة، ما عليك سوى إزالة العلم “-بي”:</p>
+<p>ومع ذلك، يمكن أن يستغرق ذلك ما يصل إلى ساعتين. ويقبل العلم “-بي” أيضًا تعبيرًا منتظمًا لمجموعة فرعية أكثر تعقيدًا من معايير الأداء لتشغيلها.</p>
+<p>لتشغيل معايير الأداء دون مقارنتها بفرع آخر، استخدم الأمر “ران”:</p>
+<p>يمكنك أيضًا تشغيل مجموعة معايير الأداء باستخدام إصدار سكيت-ليرن المثبت بالفعل في بيئة بايثون الحالية:</p>
+<p>وهو مفيد بشكل خاص عندما قمت بتثبيت سكيت-ليرن في وضع التحرير لتجنب إنشاء بيئة جديدة في كل مرة تقوم فيها بتشغيل معايير الأداء. وبشكل افتراضي، لا يتم حفظ النتائج عند استخدام تثبيت موجود. لحفظ النتائج، يجب عليك تحديد هاش الالتزام:</p>
+<p>يتم حفظ معايير الأداء وتنظيمها حسب الجهاز والبيئة والالتزام. لعرض قائمة بجميع معايير الأداء المحفوظة:</p>
+<p>ولعرض تقرير تشغيل محدد:</p>
+<p>عند تشغيل معايير الأداء لطلب سحب تعمل عليه، يرجى الإبلاغ عن النتائج على جيثب.</p>
+<p>تدعم مجموعة معايير الأداء خيارات تكوين إضافية يمكن تعيينها في ملف تكوين “بينشمارك/كونفيج.جسون”. على سبيل المثال، يمكن أن تعمل المعايير لمجموعة قيم مقدمة لمعلمة “إن_جوبس”.</p>
+<p>يمكن العثور على مزيد من المعلومات حول كيفية كتابة معيار أداء وكيفية استخدام “إيه إس في” في وثائق “إيه إس في”.</p>
+<p>علامات متعقب القضايا:
+يجب أن تحتوي جميع القضايا وطلبات السحب على متعقب جيثب على (على الأقل) واحدة من العلامات التالية:</p>
+<dl class="field-list simple">
+<dt class="field-odd">باج<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>يحدث شيء ما لا يجب أن يحدث بوضوح. تذهب النتائج الخاطئة بالإضافة إلى الأخطاء غير المتوقعة من التقديرات هنا.</p>
+<dl class="field-list simple">
+<dt class="field-odd">إنهانسمنت<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>تحسين الأداء أو قابلية الاستخدام أو الاتساق.</p>
+<dl class="field-list simple">
+<dt class="field-odd">دوكومنتاشن<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>وثائق أو أمثلة مفقودة أو غير صحيحة أو دون المستوى المطلوب.</p>
+<dl class="field-list simple">
+<dt class="field-odd">نيو فيتشر<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>طلبات الميزات وطلبات السحب التي تنفذ ميزة جديدة.</p>
+<p>هناك أربع علامات أخرى لمساعدة المساهمين الجدد:</p>
+<dl class="field-list simple">
+<dt class="field-odd">جود فيرست إيشو<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>هذه القضية مثالية للمساهمة الأولى في سكيت-ليرن. اطلب المساعدة إذا كانت الصياغة غير واضحة. إذا كنت قد ساهمت بالفعل في سكيت-ليرن، فراجع القضايا السهلة بدلاً من ذلك.</p>
+<dl class="field-list simple">
+<dt class="field-odd">إيزي<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>يمكن التعامل مع هذه القضية دون الكثير من الخبرة السابقة.</p>
+<dl class="field-list simple">
+<dt class="field-odd">موديرات<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>قد تحتاج إلى بعض المعرفة بمجال التعلم الآلي أو الحزمة، ولكنها لا تزال في متناول شخص جديد للمشروع.</p>
+<dl class="field-list simple">
+<dt class="field-odd">هيلب وانتد<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>هذه العلامة تحدد قضية تفتقر حاليًا إلى مساهم أو طلب سحب يحتاج إلى مساهم آخر لتولي العمل. ويمكن أن تتراوح هذه القضايا في الصعوبة، وقد لا تكون في متناول المساهمين الجدد. يرجى ملاحظة أن القضايا التي تحتاج إلى مساهمين لن يكون لها جميعها هذه العلامة.</p>
+<p>التوافق مع الإصدارات السابقة:
+بالتأكيد! فيما يلي ترجمة لنص ReStructuredText إلى اللغة العربية:</p>
+<hr class="docutils" />
+</section>
+<section id="contributing-deprecation">
+<span id="id26"></span><h2>إهمال الوظائف والخصائص<a class="headerlink" href="#contributing-deprecation" title="Link to this heading">#</a></h2>
+<p>إذا تم إعادة تسمية أي فئة أو دالة أو طريقة أو خاصية أو معلمة يمكن الوصول إليها بشكل عام،
+فإننا لا نزال ندعم الإصدار القديم لمدة إصدارين ونصدر تحذيرًا بالإهمال عند استدعائه أو تمريره أو الوصول إليه.</p>
+<p class="rubric">إهمال فئة أو دالة</p>
+<p>لنفترض أن الدالة <code class="docutils literal notranslate"><span class="pre">zero_one</span></code> أعيدت تسميتها إلى <code class="docutils literal notranslate"><span class="pre">zero_one_loss</span></code>، فنضيف الزخرفة
+:class: <code class="docutils literal notranslate"><span class="pre">utils.deprecated</span></code> إلى <code class="docutils literal notranslate"><span class="pre">zero_one</span></code> ونستدعي <code class="docutils literal notranslate"><span class="pre">zero_one_loss</span></code> من تلك
+الدالة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">deprecated</span>
+
+<span class="k">def</span> <span class="nf">zero_one_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="c1"># actual implementation</span>
+    <span class="k">pass</span>
+
+<span class="nd">@deprecated</span><span class="p">(</span>
+    <span class="s2">&quot;تمت إعادة تسمية الدالة `zero_one` إلى `zero_one_loss` في الإصدار 0.13 وسيتم</span>
+</pre></div>
+</div>
+<p>إزالتها في الإصدار 0.15. تم تغيير السلوك الافتراضي من <code class="docutils literal notranslate"><span class="pre">normalize=False</span></code> إلى
+<code class="docutils literal notranslate"><span class="pre">normalize=True</span></code>”</p>
+<blockquote>
+<div><p>)
+def zero_one(y_true, y_pred, normalize=False):</p>
+<blockquote>
+<div><p>return zero_one_loss(y_true, y_pred, normalize)</p>
+</div></blockquote>
+</div></blockquote>
+<p>يجب أيضًا نقل <code class="docutils literal notranslate"><span class="pre">zero_one</span></code> من <code class="docutils literal notranslate"><span class="pre">API_REFERENCE</span></code> إلى
+<code class="docutils literal notranslate"><span class="pre">DEPRECATED_API_REFERENCE</span></code> وإضافة <code class="docutils literal notranslate"><span class="pre">zero_one_loss</span></code> إلى <code class="docutils literal notranslate"><span class="pre">API_REFERENCE</span></code> في
+ملف <code class="docutils literal notranslate"><span class="pre">doc/api_reference.py</span></code> ليعكس التغييرات في :ref: ‘api_ref’.</p>
+<p class="rubric">إهمال خاصية أو طريقة</p>
+<p>إذا كان من المقرر إهمال خاصية أو طريقة، فيجب استخدام الزخرفة
+:class: <code class="docutils literal notranslate"><span class="pre">~utils.deprecated</span></code> على الخاصية. يرجى ملاحظة أن
+زخرفة :class: <code class="docutils literal notranslate"><span class="pre">~utils.deprecated</span></code> يجب أن توضع قبل زخرفة <code class="docutils literal notranslate"><span class="pre">property</span></code>
+إذا كان هناك واحد، بحيث يمكن عرض التوثيق بشكل صحيح. على سبيل المثال، يمكن إعادة تسمية
+خاصية <code class="docutils literal notranslate"><span class="pre">labels_</span></code> إلى <code class="docutils literal notranslate"><span class="pre">classes_</span></code> كما يلي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@deprecated</span><span class="p">(</span>
+    <span class="s2">&quot;تم إهمال الخاصية `labels_` في الإصدار 0.13 وسيتم إزالتها في الإصدار 0.15. استخدم</span>
+</pre></div>
+</div>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">classes_</span></code> بدلاً من ذلك”</dt><dd><p>)
+&#64;property
+def labels_(self):</p>
+<blockquote>
+<div><p>return <a href="#id34"><span class="problematic" id="id35">self.classes_</span></a></p>
+</div></blockquote>
+</dd>
+</dl>
+<p class="rubric">إهمال معلمة</p>
+<p>إذا كان يجب إهمال معلمة، فيجب رفع تحذير “FutureWarning”
+يدويًا. في المثال التالي، يتم إهمال المعلمة <code class="docutils literal notranslate"><span class="pre">k</span></code> وتعاد تسميتها إلى <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>import warnings
+
+def example_function(n_clusters=8, k=&quot;deprecated&quot;):
+    if k != &quot;deprecated&quot;:
+        warnings.warn(
+            &quot;تمت إعادة تسمية `k` إلى `n_clusters` في الإصدار 0.13 وسيتم إزالتها في الإصدار 0.15&quot;،
+            FutureWarning،
+        )
+        n_clusters = k
+</pre></div>
+</div>
+<p>عندما يكون التغيير في فئة، فإننا نتحقق من صحة ونرفع التحذير في <code class="docutils literal notranslate"><span class="pre">fit</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>import warnings
+
+class ExampleEstimator(BaseEstimator):
+    def __init__(self, n_clusters=8, k=&#39;deprecated&#39;):
+        self.n_clusters = n_clusters
+        self.k = k
+
+    def fit(self, X, y):
+        if self.k != &quot;deprecated&quot;:
+            warnings.warn(
+                &quot;تمت إعادة تسمية `k` إلى `n_clusters` في الإصدار 0.13 وسيتم إزالتها في الإصدار 0.15.&quot;,
+                FutureWarning،
+            )
+            self._n_clusters = self.k
+        else:
+            self._n_clusters = self.n_clusters
+</pre></div>
+</div>
+<p>كما هو الحال في هذه الأمثلة، يجب أن توفر رسالة التحذير دائمًا كل من
+الإصدار الذي حدث فيه الإهمال والإصدار الذي سيتم إزالة السلوك القديم فيه. إذا حدث الإهمال
+في الإصدار 0.x-dev، فيجب أن تشير الرسالة إلى أن الإهمال حدث في الإصدار 0.x وأن الإزالة ستكون
+في 0. (x+2)، بحيث يكون لدى المستخدمين وقت كافٍ</p>
+<p>لتكييف رمزها مع السلوك الجديد. على سبيل المثال، إذا حدث الإهمال
+في الإصدار 0.18-dev، يجب أن تشير الرسالة إلى أنها حدثت في الإصدار 0.18
+وسيتم إزالة السلوك القديم في الإصدار 0.20.</p>
+<p>يجب أن تتضمن رسالة التحذير أيضًا تفسيرًا موجزًا للتغيير وتوجيه المستخدمين إلى بديل.</p>
+<p>بالإضافة إلى ذلك، يجب إضافة ملاحظة حول الإهمال في التوثيق، مع تذكر
+نفس المعلومات كما هو موضح أعلاه في تحذير الإهمال. استخدم التوجيه
+<code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">deprecated::</span></code>:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">deprecated</span><span class="p">::</span> 0.13
+   تمت إعادة تسمية <span class="s">``k``</span> إلى <span class="s">``n_clusters``</span> في الإصدار 0.13 وسيتم إزالتها
+   في الإصدار 0.15.
+</pre></div>
+</div>
+<p>علاوة على ذلك، يتطلب الإهمال اختبارًا يضمن رفع التحذير في الحالات ذات الصلة ولكن ليس في الحالات الأخرى. يجب
+التقاط التحذير في جميع الاختبارات الأخرى (باستخدام على سبيل المثال، <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.filterwarnings</span></code>)،
+وينبغي ألا يكون هناك أي تحذير في الأمثلة.</p>
+</section>
+<section id="id27">
+<h2>تغيير القيمة الافتراضية لمعلمة<a class="headerlink" href="#id27" title="Link to this heading">#</a></h2>
+<p>إذا كان يجب تغيير القيمة الافتراضية لمعلمة، فيرجى استبدال
+القيمة الافتراضية بقيمة محددة (على سبيل المثال، <code class="docutils literal notranslate"><span class="pre">&quot;warn&quot;</span></code>) ورفع
+<code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> عندما يستخدم المستخدمون القيمة الافتراضية. يفترض المثال التالي
+أن الإصدار الحالي هو 0.20 وأننا نغير القيمة الافتراضية لـ <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> من 5 (القيمة الافتراضية القديمة لـ 0.20) إلى 10
+(القيمة الافتراضية الجديدة لـ 0.22):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>import warnings
+
+def example_function(n_clusters=&quot;warn&quot;):
+    if n_clusters == &quot;warn&quot;:
+        warnings.warn(
+            &quot;ستتغير القيمة الافتراضية لـ `n_clusters` من 5 إلى 10 في الإصدار 0.22.&quot;,
+            FutureWarning،
+        )
+        n_clusters = 5
+</pre></div>
+</div>
+<p>عندما يكون التغيير في فئة، فإننا نتحقق من صحة ونرفع التحذير في <code class="docutils literal notranslate"><span class="pre">fit</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>import warnings
+
+class ExampleEstimator:
+    def __init__(self, n_clusters=&quot;warn&quot;):
+        self.n_clusters = n_clusters
+
+    def fit(self, X, y):
+        if self.n_clusters == &quot;warn&quot;:
+            warnings.warn(
+                &quot;ستتغير القيمة الافتراضية لـ `n_clusters` من 5 إلى 10 في الإصدار 0.22.&quot;,
+                FutureWarning،
+            )
+            self._n_clusters = 5
+</pre></div>
+</div>
+<p>مثل حالات الإهمال، يجب أن توفر رسالة التحذير دائمًا كل من
+الإصدار الذي حدث فيه التغيير والإصدار الذي سيتم إزالة السلوك القديم فيه.</p>
+<p>يجب تحديث وصف المعلمة في التوثيق وفقًا لذلك عن طريق إضافة
+توجيه <code class="docutils literal notranslate"><span class="pre">versionchanged</span></code> بالقيمة الافتراضية القديمة والجديدة، مع الإشارة إلى
+الإصدار الذي سيكون التغيير فيه فعالاً:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">versionchanged</span><span class="p">::</span> 0.22
+   ستتغير القيمة الافتراضية لـ <span class="nv">`n_clusters`</span> من 5 إلى 10 في الإصدار 0.22.
+</pre></div>
+</div>
+<p>أخيرًا، نحتاج إلى اختبار يضمن رفع التحذير في الحالات ذات الصلة ولكن ليس في الحالات الأخرى. يجب
+التقاط التحذير في جميع الاختبارات الأخرى
+(باستخدام على سبيل المثال، <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.filterwarnings</span></code>)،
+وينبغي ألا يكون هناك أي تحذير في الأمثلة.</p>
+</section>
+</section>
+<section id="code-review">
+<span id="id28"></span><h1>مبادئ توجيهية لمراجعة التعليمات البرمجية<a class="headerlink" href="#code-review" title="Link to this heading">#</a></h1>
+<p>تعد مراجعة التعليمات البرمجية المساهمة في المشروع على شكل طلبات سحب (PRs) مكونًا أساسيًا
+من تطوير Scikit-learn. نشجع أي شخص على بدء مراجعة تعليمات برمجية لمطورين آخرين. عملية مراجعة التعليمات البرمجية
+مفيدة للغاية لكل من المشاركين. هذا مناسب بشكل خاص إذا كانت ميزة تود استخدامها، ويمكنك بالتالي الرد
+بانتقاد ما إذا كان طلب السحب يلبي احتياجاتك. في حين
+تحتاج كل عملية سحب إلى موافقة مطورين أساسيين، يمكنك تسريع
+هذه العملية من خلال تقديم ملاحظاتك.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>الفرق بين التحسين الموضوعي والتحسين الذاتي ليس
+دائمًا واضحًا. يجب على المراجعين أن يتذكروا أن مراجعة التعليمات البرمجية تتعلق بشكل أساسي
+تقليل المخاطر في المشروع. عند مراجعة التعليمات البرمجية، يجب أن تهدف إلى
+منع المواقف التي قد تتطلب إصلاح خطأ أو إهمال أو سحب. فيما يتعلق بالوثائق: الأخطاء المطبعية،
+مشكلات قواعد اللغة والتوضيحات من الأفضل معالجتها على الفور.</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="الجوانب-المهمة-التي-يجب-تغطيتها-في-أي-مراجعة-للتعليمات-البرمجية">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">الجوانب المهمة التي يجب تغطيتها في أي مراجعة للتعليمات البرمجية<a class="headerlink" href="#الجوانب-المهمة-التي-يجب-تغطيتها-في-أي-مراجعة-للتعليمات-البرمجية" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">فيما يلي بعض الجوانب المهمة التي يجب تغطيتها في أي مراجعة للتعليمات البرمجية،
+من الأسئلة رفيعة المستوى إلى قائمة مراجعة أكثر تفصيلاً.</p>
+<ul class="simple">
+<li><p class="sd-card-text">هل نريدها في المكتبة؟ هل من المحتمل استخدامه؟ هل أنت،
+كمستخدم لـ Scikit-learn، تحب التغيير وتنوي استخدامه؟ هل هو في
+نطاق Scikit-learn؟ هل ستكون تكلفة الحفاظ على ميزة جديدة جديرة بالفوائد؟</p></li>
+<li><p class="sd-card-text">هل التعليمات البرمجية متسقة مع واجهة برمجة التطبيقات (API) لـ Scikit-learn؟ هل
+الوظائف/الفئات/المعلمات العامة مسماة بشكل جيد ومصممة بشكل بديهي؟</p></li>
+<li><p class="sd-card-text">هل جميع الوظائف/الفئات العامة ومعلماتها، وأنواع الإرجاع، و
+تم تسمية السمات المخزنة وفقًا لاتفاقيات Scikit-learn وتوثيقها بوضوح؟</p></li>
+<li><p class="sd-card-text">هل يتم وصف أي وظائف جديدة في الدليل التوضيحي وتوضيحها بأمثلة؟</p></li>
+<li><p class="sd-card-text">هل يتم اختبار كل وظيفة/فئة عامة؟ هل يتم اختبار مجموعة معقولة من
+المعلمات، وقيمها، وأنواع القيم، والمجموعات؟ هل
+الاختبارات تتحقق من أن التعليمات البرمجية صحيحة، أي أنها تفعل ما تقوله الوثائق؟ إذا كان التغيير هو إصلاح خطأ،
+هل تم تضمين اختبار عدم الرجوع؟ راجع هذا الرابط
+&lt;<a class="reference external" href="https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/">https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/</a>&gt; لمعرفة المزيد عن الاختبار في Python.</p></li>
+<li><p class="sd-card-text">هل تجتاز الاختبارات في عملية البناء للتكامل المستمر؟ إذا
+كان ذلك مناسبًا، فساعد المساهم على فهم سبب فشل الاختبارات.</p></li>
+<li><p class="sd-card-text">هل تغطي الاختبارات كل سطر من التعليمات البرمجية (راجع تقرير التغطية في سجل البناء)؟ إذا لم يكن كذلك،
+هل الأسطر المفقودة من التغطية استثناءات جيدة؟</p></li>
+<li><p class="sd-card-text">هل التعليمات البرمجية سهلة القراءة وخالية من التكرار؟ هل يجب تحسين أسماء المتغيرات
+من أجل الوضوح أو الاتساق؟ هل يجب إضافة تعليقات؟ هل
+يجب إزالة التعليقات باعتبارها غير مفيدة أو غير ضرورية؟</p></li>
+<li><p class="sd-card-text">هل يمكن إعادة كتابة التعليمات البرمجية بسهولة لتعمل بكفاءة أكبر
+للإعدادات ذات الصلة؟</p></li>
+<li><p class="sd-card-text">هل التعليمات البرمجية متوافقة مع الإصدارات السابقة مع الإصدارات السابقة؟ (أو هل
+دورة الإهمال ضرورية؟)</p></li>
+<li><p class="sd-card-text">هل ستضيف التعليمات البرمجية الجديدة أي تبعيات على المكتبات الأخرى؟ (هذا
+من غير المرجح أن يتم قبوله)</p></li>
+<li><p class="sd-card-text">هل يتم عرض الوثائق بشكل صحيح (راجع القسم: ref: ‘contribute_documentation’ لمزيد من التفاصيل)، وهل الرسوم البيانية
+تعليمي؟</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">ref<span class="colon">:</span></dt>
+<dd class="field-odd"><p class="sd-card-text">‘saved_replies’ يتضمن بعض التعليقات المتكررة التي قد يقدمها المراجعون.</p>
+</dd>
+</dl>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="communication">
+<span id="مبادئ-توجيهية-للتواصل"></span><summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">مبادئ توجيهية للتواصل<a class="headerlink" href="#مبادئ-توجيهية-للتواصل" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">تساعد مراجعة طلبات السحب المفتوحة (PRs) في المضي قدمًا بالمشروع. إنها طريقة رائعة
+للتعرف على قاعدة التعليمات البرمجية ويجب أن تحفز المساهم على الاستمرار في المشاركة في المشروع. <a class="footnote-reference brackets" href="#id30" id="id29" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<ul class="simple">
+<li><p class="sd-card-text">كل طلب سحب، جيدًا كان أم سيئًا، هو عمل من أعمال الكرم. بدءًا بتعليق إيجابي
+سيساعد المؤلف على الشعور بالمكافأة، وقد يتم سماع ملاحظاتك اللاحقة بشكل أوضح. قد تشعر أيضًا بالرضا.</p></li>
+<li><p class="sd-card-text">ابدأ إذا أمكن مع القضايا واسعة النطاق، حتى يعرف المؤلف أنها تم
+فهمها. قاوم الرغبة في الذهاب على الفور سطرًا تلو الآخر، أو البدء في قضايا صغيرة شائعة.</p></li>
+<li><p class="sd-card-text">لا تدع الكمال يكون عدو الجيد. إذا وجدت نفسك تقوم بذلك
+العديد من الاقتراحات الصغيرة التي لا تقع ضمن: ref: ‘code_review’، فكر في
+النهج التالية:</p>
+<ul>
+<li><p class="sd-card-text">الامتناع عن تقديم هذه الاقتراحات.</p></li>
+<li><p class="sd-card-text">قم بوضع علامة عليها على أنها “Nit” حتى يعرف المساهم أنه من الجيد عدم معالجتها.</p></li>
+<li><p class="sd-card-text">تابعها في طلب سحب لاحق، من باب المجاملة، قد ترغب في إبلاغ
+المساهم الأصلي.</p></li>
+</ul>
+</li>
+<li><p class="sd-card-text">لا تتسرع، خذ الوقت الكافي لجعل تعليقاتك واضحة وبرر اقتراحاتك.</p></li>
+<li><p class="sd-card-text">أنت واجهة المشروع. تحدث أيام سيئة للجميع، في هذه المناسبة أنت تستحق استراحة: حاول أن تأخذ وقتك والابتعاد عن الإنترنت.</p></li>
+</ul>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id30" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id29">1</a><span class="fn-bracket">]</span></span>
+<p class="sd-card-text">تم تكييفه من مبادئ توجيهية للتواصل في NumPy
+&lt;<a class="reference external" href="https://numpy.org/devdocs/dev/reviewer_guidelines.html#communication-guidelines">https://numpy.org/devdocs/dev/reviewer_guidelines.html#communication-guidelines</a>&gt;`_.</p>
+</aside>
+</aside>
+</div>
+</details><p>قراءة قاعدة التعليمات البرمجية الموجودة
+قراءة واستيعاب قاعدة كود موجودة مسبقًا هي دائمًا عملية صعبة تستغرق وقتًا وخبرة لإتقانها. على الرغم من أننا نحاول كتابة كود بسيط بشكل عام، إلا أن فهم الكود قد يبدو ساحقًا في البداية، نظرًا لحجم المشروع الهائل. فيما يلي قائمة بالنصائح التي قد تساعد في تسهيل هذه المهمة وتسريعها (دون ترتيب معين).</p>
+<ul>
+<li><p>تعرف على <a class="reference internal" href="develop.html#api-overview"><span class="std std-ref">واجهات برمجة تطبيقات كائنات scikit-learn</span></a>: افهم ما هي <a class="reference internal" href="../glossary.html#term-fit"><span class="xref std std-term">fit</span></a>، و <a class="reference internal" href="../glossary.html#term-predict"><span class="xref std std-term">predict</span></a>، و <span class="xref std std-term">transform</span>، وما إلى ذلك، وما هي استخداماتها.</p></li>
+<li><p>قبل الغوص في قراءة كود دالة/فصل، قم بقراءة التوثيقات (docstrings) أولاً وحاول الحصول على فكرة عن الغرض من كل معلمة/خاصية. قد يكون من المفيد أيضًا التوقف لدقيقة والتفكير في كيفية القيام بذلك بنفسك إذا اضطررت إلى ذلك.</p></li>
+<li><p>غالبًا ما يكون أصعب شيء هو تحديد أجزاء الكود ذات الصلة والأجزاء غير ذات الصلة. في مجموعة أدوات التعلم الآلي <strong>scikit-learn</strong>، يتم تنفيذ الكثير من التحقق من صحة الإدخال، خاصة في بداية طرق <a class="reference internal" href="../glossary.html#term-fit"><span class="xref std std-term">fit</span></a>. في بعض الأحيان، يكون جزء صغير جدًا من الكود هو الذي يقوم بالمهمة الفعلية. على سبيل المثال، عند النظر في طريقة <code class="xref py py-meth docutils literal notranslate"><span class="pre">fit</span></code> للفصل <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearRegression</span></code>، فقد يكون ما تبحث عنه هو مجرد استدعاء للدالة <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lstsq.html#scipy.linalg.lstsq" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.linalg.lstsq</span></code></a>، ولكنها مدفونة في عدة أسطر من التحقق من صحة الإدخال ومعالجة أنواع مختلفة من المعلمات.</p></li>
+<li><p>بسبب استخدام <a class="reference external" href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)">الوراثة</a>، قد يتم تنفيذ بعض الطرق في الفصول الأب (الأساسية). يرث جميع المقدرات (estimators) من فصل <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEstimator</span></code> على الأقل، ومن فصل <code class="docutils literal notranslate"><span class="pre">Mixin</span></code> (مثل <code class="xref py py-class docutils literal notranslate"><span class="pre">ClassifierMixin</span></code>) الذي يمكّن السلوك الافتراضي اعتمادًا على طبيعة المقدر (مصنف، أو مرجع، أو محول، وما إلى ذلك).</p></li>
+<li><p>في بعض الأحيان، قد تعطيك قراءة الاختبارات لدالة معينة فكرة عن الغرض المقصود منها. يمكنك استخدام <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">grep</span></code> (انظر أدناه) للعثور على جميع الاختبارات المكتوبة لدالة ما. وتوضع معظم الاختبارات لدالة/فصل محددين في مجلد <code class="docutils literal notranslate"><span class="pre">tests/</span></code> الخاص بالنموذج.</p></li>
+<li><p>غالبًا ما سترى كودًا يشبه هذا: <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">=</span> <span class="pre">Parallel(...)(delayed(some_function)(param)</span> <span class="pre">for</span> <span class="pre">param</span> <span class="pre">in</span> <span class="pre">some_iterable)</span></code>. وهذا يشغل <code class="docutils literal notranslate"><span class="pre">some_function</span></code> بالتوازي باستخدام <a class="reference external" href="https://joblib.readthedocs.io/">Joblib</a>. ثم تكون <code class="docutils literal notranslate"><span class="pre">out</span></code> عبارة عن مجموعة من العناصر القابلة للتحديد (iterable) تحتوي على القيم التي تعيدها <code class="docutils literal notranslate"><span class="pre">some_function</span></code> لكل استدعاء.</p></li>
+<li><p>نستخدم <a class="reference external" href="https://cython.org/">Cython</a> لكتابة كود سريع. يوجد كود Cython في ملفات <code class="docutils literal notranslate"><span class="pre">.pyx</span></code> و <code class="docutils literal notranslate"><span class="pre">.pxd</span></code>. وللكود Cython نكهة أكثر تشابهًا مع لغة C: فنحن نستخدم المؤشرات، ونقوم بتخصيص الذاكرة يدويًا، وما إلى ذلك. ومن الضروري هنا أن يكون لديك بعض الخبرة، ولو قليلة، في لغات C/C++. لمزيد من المعلومات، راجع <a class="reference internal" href="cython.html#cython"><span class="std std-ref">أفضل الممارسات والتوجيهات والمعرفة في Cython</span></a>.</p></li>
+<li><p>أتقن أدواتك:</p>
+<ul class="simple">
+<li><p>مع مشروع بهذا الحجم، فإن الكفاءة في استخدام محرر أو بيئة التطوير المتكاملة (IDE) المفضل لديك ستفيدك كثيرًا في استيعاب قاعدة الكود. وتساعدك القدرة على القفز (أو <em>الاطلاع</em>) بسرعة إلى تعريف دالة/فصل/خاصية بشكل كبير. كما أن القدرة على رؤية مكان استخدام اسم معين في ملف ما بسرعة مفيدة أيضًا.</p></li>
+<li><p>يحتوي Git أيضًا على بعض الميزات المدمجة الرائعة. وغالبًا ما يكون من المفيد فهم كيفية تغيير ملف معين بمرور الوقت، باستخدام <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">blame</span></code> على سبيل المثال (<a class="reference external" href="https://git-scm.com/docs/git-blame">دليل الاستخدام</a>). ويمكن القيام بذلك مباشرة على GitHub. كما أن <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">grep</span></code> (<a class="reference external" href="https://git-scm.com/docs/git-grep#_examples">أمثلة</a>) مفيد للغاية أيضًا لرؤية كل ظهور لنمط (مثل استدعاء دالة أو متغير) في قاعدة الكود.</p></li>
+</ul>
+</li>
+<li><p>قم بضبط إعدادات <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">blame</span></code> لتجاهل الالتزام (commit) الذي قام بتهيئة نمط الكود إلى <code class="docutils literal notranslate"><span class="pre">black</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span class="prompt1">git<span class="w"> </span>config<span class="w"> </span>blame.ignoreRevsFile<span class="w"> </span>.git-blame-ignore-revs</span>
+</pre></div></div><p>يمكنك معرفة المزيد من المعلومات في وثائق <code class="docutils literal notranslate"><span class="pre">black</span></code> حول <a class="reference external" href="https://black.readthedocs.io/en/stable/guides/introducing_black_to_your_project.html#avoiding-ruining-git-blame">تجنب إفساد git blame</a>.</p>
+</li>
+</ul>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">المساهمة</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">طرق المساهمة</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">سياسة المساهمات الآلية</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">تقديم تقرير عن خطأ أو طلب ميزة</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filing-bugs">كيفية كتابة تقرير جيد عن الأخطاء</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">الموارد المرئية</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">كيفية المساهمة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ci">التكامل المستمر (CI)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-markers">مؤشرات رسالة الالتزام</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">ملفات القفل</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stalled-pull-request">طلبات السحب المتوقفة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-contributors">القضايا للمساهمين الجدد</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-actions">الوثائق المولدة على GitHub Actions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-deprecation">إهمال الوظائف والخصائص</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">تغيير القيمة الافتراضية لمعلمة</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-review">مبادئ توجيهية لمراجعة التعليمات البرمجية</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/developers/contributing.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
