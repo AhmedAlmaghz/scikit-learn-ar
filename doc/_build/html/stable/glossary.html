@@ -1,0 +1,1853 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="المفاهيم العامة:" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/glossary.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="هذا القاموس يهدف إلى تمثيل واضح للاتفاقيات الضمنية والصريحة المطبقة في Scikit-learn وواجهة برمجة التطبيقات (API) الخاصة بها، مع توفير مرجع للمستخدمين والمساهمين على حد سواء. ويهدف إلى وصف المفاهيم ..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="هذا القاموس يهدف إلى تمثيل واضح للاتفاقيات الضمنية والصريحة المطبقة في Scikit-learn وواجهة برمجة التطبيقات (API) الخاصة بها، مع توفير مرجع للمستخدمين والمساهمين على حد سواء. ويهدف إلى وصف المفاهيم ..." />
+
+    <title>المفاهيم العامة: &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=97f0b27d"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'glossary';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="حول المشروع" href="faq.html" />
+    <link rel="prev" title="الإصدارات القديمة" href="whats_new/older_versions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">المفاهيم العامة:</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>هذا القاموس يهدف إلى تمثيل واضح للاتفاقيات الضمنية والصريحة المطبقة في Scikit-learn وواجهة برمجة التطبيقات (API) الخاصة بها، مع توفير مرجع للمستخدمين والمساهمين على حد سواء. ويهدف إلى وصف المفاهيم وتفصيل واجهة برمجة التطبيقات (API) المقابلة أو توفير رابط إلى أجزاء أخرى ذات صلة من الوثائق التي تفعل ذلك. من خلال الربط إلى إدخالات القاموس من مرجع واجهة برمجة التطبيقات (API) ودليل المستخدم، يمكننا تقليل التكرار وعدم الاتساق.</p>
+<p>نبدأ بإدراج المفاهيم العامة (وأي مفاهيم لم تناسب الأقسام الأخرى)، ولكن هناك مجموعات أكثر تحديدًا من المصطلحات ذات الصلة مدرجة أدناه: :ref: <code class="docutils literal notranslate"><span class="pre">glossary_estimator_types</span></code>، :ref: <code class="docutils literal notranslate"><span class="pre">glossary_target_types</span></code>، :ref: <code class="docutils literal notranslate"><span class="pre">glossary_methods</span></code>، :ref: <code class="docutils literal notranslate"><span class="pre">glossary_parameters</span></code>، :ref: <code class="docutils literal notranslate"><span class="pre">glossary_attributes</span></code>، :ref: <code class="docutils literal notranslate"><span class="pre">glossary_sample_props</span></code>.</p>
+<section id="id1">
+<h1>المفاهيم العامة:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<dl class="glossary">
+<dt id="term-1d">1d<a class="headerlink" href="#term-1d" title="Link to this term">#</a></dt><dt id="term-1d-array">1d array<a class="headerlink" href="#term-1d-array" title="Link to this term">#</a></dt><dd><p>مصفوفة أحادية البعد. مصفوفة NumPy التي يكون لخاصية “.shape” فيها طول 1.
+متجه.</p>
+</dd>
+<dt id="term-2d">2d<a class="headerlink" href="#term-2d" title="Link to this term">#</a></dt><dt id="term-2d-array">2d array<a class="headerlink" href="#term-2d-array" title="Link to this term">#</a></dt><dd><p>مصفوفة ثنائية الأبعاد. مصفوفة NumPy التي يكون لخاصية “.shape” فيها طول 2.
+غالبًا ما تمثل مصفوفة.</p>
+</dd>
+<dt id="term-API">API<a class="headerlink" href="#term-API" title="Link to this term">#</a></dt><dd><p>يشير إلى كل من الواجهات <em>المحددة</em> للمُقدِّرات المُنفَّذة في
+Scikit-learn و*الاتفاقيات العامة* عبر أنواع المُقدِّرات كما هو موصوف في
+هذا المسرد و:ref:<code class="docutils literal notranslate"><span class="pre">نظرة</span> <span class="pre">عامة</span> <span class="pre">في</span> <span class="pre">وثائق</span> <span class="pre">المساهمين</span> <span class="pre">&lt;api_overview&gt;</span></code>.</p>
+<p>يتم توثيق واجهات محددة تشكل واجهة برمجة التطبيقات العامة لـ Scikit-learn
+بشكل أساسي في <a class="reference internal" href="api/index.html#api-ref"><span class="std std-ref">API Reference</span></a>. ومع ذلك، فإننا نعتبر بشكل غير رسمي أي شيء
+كجزء من واجهة برمجة التطبيقات العامة إذا لم يبدأ أي من المعرفات المطلوبة
+للوصول إليه بشرطة سفلية “”. نحاول بشكل عام الحفاظ على <span class="xref std std-term">التوافق
+مع الإصدارات السابقة</span> لجميع الكائنات في واجهة برمجة التطبيقات العامة.</p>
+<p>لا يُضمن استقرار واجهة برمجة التطبيقات الخاصة، بما في ذلك الوظائف
+والوحدات والطرق التي تبدأ بشرطة سفلية “”.</p>
+</dd>
+<dt id="term-array-like">array-like<a class="headerlink" href="#term-array-like" title="Link to this term">#</a></dt><dd><p>تنسيق البيانات الأكثر شيوعًا لـ <em>الإدخال</em> إلى مُقدِّرات ووظائف
+Scikit-learn، يمكن أن يكون array-like أي نوع كائن ينتج عنه مصفوفة
+بالشكل المناسب (عادة أحادية أو ثنائية الأبعاد) من النوع المناسب (عادة
+رقمي) عند تمريره إلى الدالة <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html#numpy.asarray" title="(in NumPy v2.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.asarray</span></code></a>.</p>
+<p>يشمل ذلك:</p>
+<ul class="simple">
+<li><p>مصفوفة NumPy</p></li>
+<li><p>قائمة من الأرقام</p></li>
+<li><p>قائمة من القوائم ذات الطول k من الأرقام لبعض الطول الثابت k</p></li>
+<li><p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a> مع أعمدة رقمية فقط</p></li>
+<li><p>سلسلة رقمية من فئة <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.2.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Series</span></code></a></p></li>
+</ul>
+<p>يستبعد ذلك:</p>
+<ul class="simple">
+<li><p><span class="xref std std-term">مصفوفة متفرقة</span></p></li>
+<li><p>مصفوفة متفرقة</p></li>
+<li><p>مُولِّد</p></li>
+<li><p>مُنشئ</p></li>
+</ul>
+<p>ملاحظة: يجب أن تكون <em>النتائج</em> من مُقدِّرات ووظائف Scikit-learn (مثل
+التنبؤات) بشكل عام مصفوفات أو مصفوفات متفرقة، أو قوائم منها (كما هو
+الحال في فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">tree.DecisionTreeClassifier</span></code> متعددة الإخراج
+<code class="docutils literal notranslate"><span class="pre">predict_proba</span></code>). لا يُعتبر المُقدِّر صالحًا إذا أعادت دالة
+<code class="docutils literal notranslate"><span class="pre">predict()</span></code> الخاصة به قائمة أو <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code>.</p>
+</dd>
+<dt id="term-attribute">attribute<a class="headerlink" href="#term-attribute" title="Link to this term">#</a></dt><dt id="term-attributes">attributes<a class="headerlink" href="#term-attributes" title="Link to this term">#</a></dt><dd><p>نستخدم مصطلح attribute في الغالب للإشارة إلى كيفية تخزين معلومات النموذج
+على مُقدِّر أثناء التجهيز. يجب أن يبدأ أي attribute عام مخزن على
+مثيل المُقدِّر بحرف أبجدي وينتهي بشرطة سفلية واحدة إذا تم تعيينه في
+<a class="reference internal" href="#term-fit"><span class="xref std std-term">fit</span></a> أو <a class="reference internal" href="#term-partial_fit"><span class="xref std std-term">partial_fit</span></a>. يتم توثيق هذه الأنواع من
+attributes في قسم <em>Attributes</em> الخاص بالـمُقدِّر. عادةً ما تكون
+المعلومات المخزنة في attributes إما إحصائيات كافية تُستخدم للتنبؤ أو
+التحويل؛ أو مخرجات <span class="xref std std-term">transductive</span> مثل <a class="reference internal" href="#term-labels_"><span class="xref std std-term">labels_</span></a> أو
+<a class="reference internal" href="#term-embedding_"><span class="xref std std-term">embedding_</span></a>; أو بيانات تشخيصية، مثل <a class="reference internal" href="#term-feature_importances_"><span class="xref std std-term">feature_importances_</span></a>.
+ترد قائمة بالـ attributes الشائعة <a class="reference internal" href="#glossary-attributes"><span class="std std-ref">أدناه</span></a>.</p>
+<p>قد يكون للـ attribute العام نفس اسم معلمة الباني، مع إضافة شرطة سفلية.
+ويُستخدم هذا لتخزين نسخة تم التحقق منها أو تقديرها من إدخال المستخدم.
+على سبيل المثال، يتم إنشاء <code class="xref py py-class docutils literal notranslate"><span class="pre">decomposition.PCA</span></code> بمعلمة
+“n_components”. ومن ذلك، إلى جانب معلمات وبيانات أخرى، يُقدِّر PCA
+attribute “<a href="#id5"><span class="problematic" id="id6">n_components_</span></a>”.</p>
+<p>قد يتم أيضًا تعيين attributes خاصة إضافية تُستخدم في
+التنبؤ/التحويل/إلخ. أثناء التجهيز. تبدأ هذه الأنواع من attributes
+بشرطة سفلية واحدة ولا يُضمن استقرارها للوصول العام.</p>
+<p>يجب أن يكون أي attribute عام على مثيل المُقدِّر لا ينتهي بشرطة سفلية
+القيمة المخزنة، وغير المعدلة، لمعلمة “مُنشئ” بنفس الاسم. نظرًا لهذا
+التكافؤ، يتم توثيق هذه الأنواع من الـ attributes في قسم <em>Parameters</em>
+الخاص بالمُقدِّر.</p>
+</dd>
+<dt id="term-backwards-compatibility">backwards compatibility<a class="headerlink" href="#term-backwards-compatibility" title="Link to this term">#</a></dt><dd><p>نحاول بشكل عام الحفاظ على التوافق مع الإصدارات السابقة (أي أنه يمكن
+توسيع الواجهات والسلوكيات، ولكن لا يمكن تغييرها أو إزالتها) من إصدار
+إلى آخر، ولكن مع بعض الاستثناءات:</p>
+<dl class="simple">
+<dt>واجهة برمجة التطبيقات العامة فقط</dt><dd><p>قد يتغير سلوك الكائنات التي يتم الوصول إليها من خلال معرفات خاصة
+(تلك التي تبدأ بشرطة سفلية “”) بشكل تعسفي بين الإصدارات.</p>
+</dd>
+<dt>كما هو موثق</dt><dd><p>سنفترض بشكل عام أن المستخدمين قد التزموا بأنواع المعلمات والنطاقات
+الموثقة. إذا طلبت الوثائق قائمة وقدم المستخدم مجموعة، فلا نضمن
+سلوكًا متسقًا من إصدار إلى آخر.</p>
+</dd>
+<dt>الإلغاء التدريجي</dt><dd><p>قد تتغير السلوكيات بعد فترة <span class="xref std std-term">الإلغاء التدريجي</span> (عادة ما تكون
+إصدارين). يتم إصدار التحذيرات باستخدام وحدة <a class="reference external" href="https://docs.python.org/3/library/warnings.html#module-warnings" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code></a> في
+بايثون.</p>
+</dd>
+<dt>معلمات الكلمات الرئيسية</dt><dd><p>قد نفترض في بعض الأحيان أن جميع المعلمات الاختيارية (باستثناء X
+وy إلى <a class="reference internal" href="#term-fit"><span class="xref std std-term">fit</span></a> والطرق المماثلة) يتم تمريرها كمعلمات كلمات رئيسية
+فقط وقد يتم إعادة ترتيبها بشكل متكرر.</p>
+</dd>
+<dt>إصلاح الأخطاء والتحسينات</dt><dd><p>قد يؤدي إصلاح الأخطاء، وفي بعض الأحيان التحسينات، إلى تغيير سلوك
+المُقدِّرات، بما في ذلك تنبؤات مُقدِّر تم تدريبه على نفس البيانات
+و:term:<code class="docutils literal notranslate"><span class="pre">random_state</span></code>. عندما يحدث هذا، نحاول الإشارة إليه بوضوح في
+سجل التغييرات.</p>
+</dd>
+<dt>التخزين</dt><dd><p>لا نقدم أي ضمانات بأن تخزين مُقدِّر في إصدار ما سيسمح بفك تخزينه
+إلى نموذج مكافئ في الإصدار التالي. (بالنسبة للمُقدِّرات في حزمة
+sklearn، نقوم بإصدار تحذير عند محاولة فك التخزين، حتى لو كان
+من المحتمل أن يعمل). راجع <span class="xref std std-ref">persistence_limitations</span>.</p>
+</dd>
+<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">utils.estimator_checks.check_estimator</span></code></dt><dd><p>نقدم ضمانات محدودة للتوافق مع الإصدارات السابقة لفحوصات المُقدِّرات:
+قد نضيف متطلبات إضافية على المُقدِّرات التي تم اختبارها باستخدام
+هذه الدالة، وعادةً ما تكون هذه المتطلبات مفترضة بشكل غير رسمي ولكن
+لم يتم اختبارها بشكل رسمي.</p>
+</dd>
+</dl>
+<p>على الرغم من هذا العقد غير الرسمي مع مستخدمينا، يتم توفير البرنامج كما
+هو، كما هو مذكور في الترخيص. عندما يتسبب إصدار ما عن غير قصد في
+تغييرات غير متوافقة مع الإصدارات السابقة، يُعرف ذلك باسم تراجعات
+البرامج.</p>
+</dd>
+<dt id="term-callable">callable<a class="headerlink" href="#term-callable" title="Link to this term">#</a></dt><dd><p>دالة أو فئة أو كائن ينفذ طريقة <code class="docutils literal notranslate"><span class="pre">__call__</span></code>؛ أي شيء يعيد القيمة True
+عندما يتم تمريره كوسيط للدالة <a class="reference external" href="https://docs.python.org/3/library/functions.html#callable">callable()</a>.</p>
+</dd>
+<dt id="term-categorical-feature">categorical feature<a class="headerlink" href="#term-categorical-feature" title="Link to this term">#</a></dt><dd><p>ميزة تصنيفية أو اسمية لها مجموعة محدودة من القيم المنفصلة عبر
+مجموعة البيانات. يتم تمثيل هذه الميزات عادةً كأعمدة من الأرقام أو
+السلاسل النصية. سيرفض معظم مُقدِّرات scikit-learn السلاسل النصية،
+وسيتم التعامل مع الأرقام على أنها ترتيبية أو ذات قيم عددية. ولاستخدامها
+مع معظم المُقدِّرات، يجب ترميز المتغيرات التصنيفية بطريقة الترميز
+one-hot encoding. ومن الاستثناءات الملحوظة النماذج الشجرية مثل الغابات
+العشوائية ونماذج التعزيز التدريجي التي غالبًا ما تعمل بشكل أفضل وأسرع
+مع المتغيرات التصنيفية المشفرة بالأرقام الصحيحة.
+تساعد الفئة <code class="xref py py-class docutils literal notranslate"><span class="pre">OrdinalEncoder</span></code> في ترميز
+الميزات التصنيفية ذات القيم النصية كأعداد صحيحة ترتيبية، ويمكن استخدام
+الفئة <code class="xref py py-class docutils literal notranslate"><span class="pre">OneHotEncoder</span></code> لترميز المتغيرات
+التصنيفية بطريقة one-hot encoding.
+راجع أيضًا <span class="xref std std-ref">preprocessing_categorical_features</span> وحزمة
+<a class="reference external" href="https://github.com/scikit-learn-contrib/category_encoders">categorical-encoding</a> للأدوات
+ذات الصلة بترميز الميزات التصنيفية.</p>
+</dd>
+<dt id="term-clone">clone<a class="headerlink" href="#term-clone" title="Link to this term">#</a></dt><dt id="term-cloned">cloned<a class="headerlink" href="#term-cloned" title="Link to this term">#</a></dt><dd><p>لنسخ مثيل <a class="reference internal" href="#term-estimator"><span class="xref std std-term">estimator</span></a> وإنشاء مثيل جديد له نفس <span class="xref std std-term">parameters</span>،
+ولكن بدون أي <a class="reference internal" href="#term-attributes"><span class="xref std std-term">attributes</span></a> مجهزة، باستخدام
+<code class="xref py py-func docutils literal notranslate"><span class="pre">clone</span></code>.</p>
+<p>عندما يتم استدعاء <code class="docutils literal notranslate"><span class="pre">fit</span></code>، عادةً ما يقوم <a class="reference internal" href="#term-meta-estimator"><span class="xref std std-term">meta-estimator</span></a> باستنساخ
+مثيل المُقدِّر المُغلَّف قبل تجهيز مثيل المُقدِّر المستنسخ. (تُعد
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code> و:class:<code class="docutils literal notranslate"><span class="pre">~pipeline.FeatureUnion</span></code> استثناءات
+لهذا، لأسباب متعلقة بالإرث).</p>
+<p>إذا كانت معلمة “random_state” للمُقدِّر عبارة عن عدد صحيح (أو إذا لم
+يكن للمُقدِّر معلمة “random_state”)، فسيتم إرجاع <em>نسخة مطابقة تمامًا</em>.
+وإلا، فسيتم إرجاع <em>نسخة إحصائية</em>، والتي قد تعطي نتائج مختلفة عن
+المُقدِّر الأصلي. يمكن العثور على مزيد من التفاصيل في <span class="xref std std-ref">randomness</span>.</p>
+</dd>
+<dt id="term-common-tests">common tests<a class="headerlink" href="#term-common-tests" title="Link to this term">#</a></dt><dd><p>يشير هذا إلى الاختبارات التي يتم تشغيلها على كل فئة تقريبًا في
+Scikit-learn للتحقق من امتثالها لاتفاقيات واجهة برمجة التطبيقات
+الأساسية. وهي متاحة للاستخدام الخارجي من خلال
+<code class="xref py py-func docutils literal notranslate"><span class="pre">utils.estimator_checks.check_estimator</span></code>، مع معظم التنفيذ في
+<code class="docutils literal notranslate"><span class="pre">sklearn/utils/estimator_checks.py</span></code>.</p>
+<p>ملاحظة: هناك بعض الاستثناءات لنظام الاختبار الشائع المرمز حاليًا في
+المكتبة، ولكن نأمل أن نستبدل ذلك عن طريق وضع علامة على السلوكيات
+الاستثنائية للمُقدِّر باستخدام علامات <span class="xref std std-term">estimator tags</span> الدلالية.</p>
+</dd>
+<dt id="term-cross-fitting">cross-fitting<a class="headerlink" href="#term-cross-fitting" title="Link to this term">#</a></dt><dt id="term-0">cross fitting<a class="headerlink" href="#term-0" title="Link to this term">#</a></dt><dd><p>طريقة إعادة أخذ العينات التي تقسم البيانات بشكل تكراري إلى أقسام
+حصرية بشكل متبادل لتجهيز مرحلتين. خلال المرحلة الأولى، تمكّن الأقسام
+الحصرية بشكل متبادل من حساب التنبؤات أو التحويلات على بيانات غير
+مرئية أثناء التدريب. يتم بعد ذلك استخدام البيانات المحسوبة في المرحلة
+الثانية. الهدف من ذلك هو تجنب حدوث أي تحيز في توزيع بيانات الإدخال
+للمرحلة الثانية بسبب الإفراط في التجهيز في المرحلة الأولى.
+للحصول على أمثلة على استخدامها، راجع: <code class="xref py py-class docutils literal notranslate"><span class="pre">TargetEncoder</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">~ensemble.StackingClassifier</span></code>، و:class:<code class="docutils literal notranslate"><span class="pre">~ensemble.StackingRegressor</span></code>،
+و:class:<code class="docutils literal notranslate"><span class="pre">~calibration.CalibratedClassifierCV</span></code>.</p>
+</dd>
+<dt id="term-cross-validation">cross-validation<a class="headerlink" href="#term-cross-validation" title="Link to this term">#</a></dt><dt id="term-1">cross validation<a class="headerlink" href="#term-1" title="Link to this term">#</a></dt><dd><p>طريقة إعادة أخذ العينات التي تقسم البيانات بشكل تكراري إلى أقسام
+حصرية بشكل متبادل لـ “التدريب” و”الاختبار” بحيث يمكن تقييم أداء
+النموذج على بيانات غير مرئية. يحافظ هذا على البيانات ويتجنب الحاجة إلى
+الاحتفاظ بمجموعة بيانات “التحقق” ويحسب التباين حيث يتم إجراء عدة جولات
+من التحقق من الصحة بشكل عام.
+راجع <span class="xref std std-ref">User Guide</span> لمزيد من التفاصيل.</p>
+</dd>
+<dt id="term-deprecation">deprecation<a class="headerlink" href="#term-deprecation" title="Link to this term">#</a></dt><dd><p>نستخدم الإلغاء التدريجي لانتهاك ضمانات <span class="xref std std-term">التوافق مع الإصدارات
+السابقة</span> الخاصة بنا تدريجيًا، وعادةً لتغيير:</p>
+<ul class="simple">
+<li><p>القيمة الافتراضية لمعلمة ما؛ أو</p></li>
+<li><p>إزالة معلمة أو attribute أو طريقة أو فئة، إلخ.</p></li>
+</ul>
+<p>سنصدر عادةً تحذيرًا عند استخدام عنصر تم إلغاؤه تدريجيًا، على الرغم
+من أنه قد تكون هناك قيود على ذلك. على سبيل المثال، سنقوم بإصدار
+تحذير عندما يحدد المستخدم معلمة تم إلغاؤها تدريجيًا، ولكن قد لا
+نقوم بذلك عندما يصل المستخدم إلى attribute تلك المعلمة على مثيل
+المُقدِّر.</p>
+<p>راجع <a class="reference internal" href="developers/contributing.html#contributing-deprecation"><span class="std std-ref">Contributors’ Guide</span></a>.</p>
+</dd>
+<dt id="term-dimensionality">dimensionality<a class="headerlink" href="#term-dimensionality" title="Link to this term">#</a></dt><dd><p>قد يُستخدم هذا المصطلح للإشارة إلى عدد <span class="xref std std-term">الميزات</span> (أي
+<span class="xref std std-term">n_features</span>)، أو أعمدة مصفوفة الميزات ثنائية الأبعاد.
+ومع ذلك، يتم أيضًا استخدام الأبعاد للإشارة إلى طول شكل مصفوفة NumPy،
+مما يميز مصفوفة أحادية البعد عن مصفوفة ثنائية الأبعاد.</p>
+</dd>
+<dt id="term-docstring">docstring<a class="headerlink" href="#term-docstring" title="Link to this term">#</a></dt><dd><p>الوثائق المدمجة لوحدة أو فئة أو دالة، إلخ، عادةً ما تكون في الكود
+كسلسلة في بداية تعريف الكائن، ويمكن الوصول إليها كـ attribute
+<code class="docutils literal notranslate"><span class="pre">__doc__</span></code> للكائن.</p>
+<p>نحاول الالتزام بـ <a class="reference external" href="https://www.python.org/dev/peps/pep-0257/">PEP257</a>، واتباع <a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">اتفاقيات NumpyDoc</a>.</p>
+</dd>
+</dl>
+<p>علامة التسطير المزدوجة</p>
+<dl>
+<dt>علامة التسطير المزدوجة</dt><dd><dl class="simple">
+<dt>علامة التسطير المزدوجة</dt><dd><p>عند تحديد أسماء المعلمات لمقدّري التداخل، يمكن استخدام “__” لفصل</p>
+</dd>
+</dl>
+<p>بين الوالد والطفل في بعض السياقات. الاستخدام الأكثر شيوعًا هو عند
+تعيين المعلمات من خلال أداة تقدير البيانات الوصفية باستخدام
+:term: <code class="docutils literal notranslate"><span class="pre">set_params</span></code> وبالتالي في تحديد شبكة بحث في
+:ref: <code class="docutils literal notranslate"><span class="pre">grid_search</span></code>. راجع :term: <code class="docutils literal notranslate"><span class="pre">parameter</span></code>.
+كما يتم استخدامه في :meth: <code class="docutils literal notranslate"><span class="pre">pipeline.Pipeline.fit</span></code> لمرور
+:term: <code class="docutils literal notranslate"><span class="pre">sample</span> <span class="pre">properties</span></code> إلى أساليب “fit” للمقدّرين في
+الأنابيب.</p>
+</dd>
+</dl>
+<p>نوع البيانات
+نوع البيانات</p>
+<blockquote>
+<div><p>تفترض مصفوفات NumPy نوع بيانات متجانس في جميع أنحاء، وهو متاح في
+سمة <code class="docutils literal notranslate"><span class="pre">.dtype</span></code> لمصفوفة (أو مصفوفة متقطعة). نفترض عمومًا أنواع بيانات بسيطة
+لبيانات scikit-learn: float أو integer.
+قد ندعم أنواع بيانات الكائنات أو السلاسل قبل الترميز أو التحويل إلى
+شكل ناقلات. لا تعمل أدواتنا التقديرية مع صفائف struct، على سبيل
+المثال.</p>
+<p>يمكن أن توفر وثائقنا في بعض الأحيان معلومات حول دقة dtype، على سبيل
+المثال. <code class="docutils literal notranslate"><span class="pre">np.int32</span></code>، <code class="docutils literal notranslate"><span class="pre">np.int64</span></code>، إلخ. عندما يتم توفير الدقة، فإنه يشير
+إلى نوع بيانات NumPy. إذا تم استخدام دقة عشوائية، فستشير الوثائق إلى
+نوع بيانات <code class="docutils literal notranslate"><span class="pre">integer</span></code> أو <code class="docutils literal notranslate"><span class="pre">floating</span></code>.
+لاحظ أنه في هذه الحالة، يمكن أن تكون الدقة خاصة بالمنصة.
+يشير نوع البيانات <code class="docutils literal notranslate"><span class="pre">numeric</span></code> إلى قبول كل من <code class="docutils literal notranslate"><span class="pre">integer</span></code> و`floating`.</p>
+<p>عندما يتعلق الأمر بالاختيار بين نوع بيانات 64 بت (أي <code class="docutils literal notranslate"><span class="pre">np.float64</span></code> و
+<code class="docutils literal notranslate"><span class="pre">np.int64</span></code>) ونوع بيانات 32 بت (أي <code class="docutils literal notranslate"><span class="pre">np.float32</span></code> و <code class="docutils literal notranslate"><span class="pre">np.int32</span></code>)، فإنه
+يتلخص في المقايضة بين الكفاءة والدقة. توفر أنواع 64 بت نتائج أكثر
+دقة بسبب خطأ النقطة العائمة الأقل، ولكنها تتطلب المزيد من الموارد
+الحسابية، مما يؤدي إلى عمليات أبطأ واستخدام ذاكرة أكبر. على النقيض
+من ذلك، تعد أنواع 32 بت بتعزيز سرعة التشغيل وتقليل استهلاك الذاكرة،
+ولكنها تقدم خطأ أكبر في النقطة العائمة. تعتمد تحسينات الكفاءة على
+مستوى أدنى من التحسين مثل التجهيز المتجهي، أو التعليمات الفردية
+المتعددة الإرسال (SIMD)، أو تحسين الذاكرة المؤقتة ولكن بشكل حاسم على
+توافق الخوارزمية قيد الاستخدام.</p>
+<p>على وجه التحديد، يجب أن يراعي اختيار الدقة ما إذا كانت الخوارزمية
+المستخدمة يمكنها الاستفادة بشكل فعال من <code class="docutils literal notranslate"><span class="pre">np.float32</span></code>. بعض الخوارزميات،
+خاصة بعض طرق التبسيط، مبرمجة حصريًا لـ <code class="docutils literal notranslate"><span class="pre">np.float64</span></code>، مما يعني أنه
+حتى إذا تم تمرير <code class="docutils literal notranslate"><span class="pre">np.float32</span></code>، فإنه يؤدي إلى تحويل تلقائي مرة أخرى
+إلى <code class="docutils literal notranslate"><span class="pre">np.float64</span></code>. لا يؤدي هذا فقط إلى إلغاء التوفير الحسابي المقصود،
+ولكنه أيضًا يقدم عبئًا إضافيًا، مما يجعل العمليات باستخدام
+<code class="docutils literal notranslate"><span class="pre">np.float32</span></code> أبطأ بشكل غير متوقع وأكثر كثافة في استخدام الذاكرة
+بسبب خطوة التحويل الإضافية هذه.</p>
+</div></blockquote>
+<dl>
+<dt>الكتابة بأسلوب البط</dt><dd><p>نحاول تطبيق <a class="reference external" href="https://en.wikipedia.org/wiki/Duck_typing">duck typing</a> لتحديد كيفية
+التعامل مع بعض قيم الإدخال (على سبيل المثال، التحقق مما إذا كان
+أداة تقدير البيانات الوصفية معينة هي أداة لتصنيف البيانات). أي،
+نتجنب استخدام “isinstance” حيثما أمكن، ونعتمد على وجود أو عدم وجود
+سمات لتحديد سلوك كائن. مطلوب بعض الدقة عند اتباع هذا النهج:</p>
+<ul>
+<li><p>بالنسبة لبعض أدوات تقدير البيانات الوصفية، قد لا تكون السمة متاحة
+حتى يتم تركيبها. على سبيل المثال، لا يمكننا مسبقًا تحديد ما إذا كان
+:term: <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> متاحًا في بحث الشبكة حيث تتضمن الشبكة
+التناوب بين أداة لتصنيف البيانات التنبؤية وغير التنبؤية في الخطوة
+الأخيرة من الأنبوب. في ما يلي، لا يمكننا تحديد ما إذا كان “clf”
+أداة لتصنيف البيانات التنبؤية إلا بعد تركيبه على بعض البيانات:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">SGDClassifier</span><span class="p">(),</span>
+<span class="gp">... </span>                   <span class="n">param_grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;log_loss&#39;</span><span class="p">,</span> <span class="s1">&#39;hinge&#39;</span><span class="p">]})</span>
+</pre></div>
+</div>
+<p>هذا يعني أنه يمكننا التحقق فقط من سمات الكتابة بأسلوب البط بعد
+التركيب، ويجب أن نكون حذرين لجعل أدوات تقدير البيانات الوصفية
+لا تقدم سوى سمات وفقًا لحالة أداة التقدير الأساسية بعد التركيب.</p>
+</li>
+<li><p>التحقق مما إذا كانت السمة موجودة (باستخدام “hasattr”) مكلف بشكل
+عام مثل الحصول على السمة (<code class="docutils literal notranslate"><span class="pre">getattr</span></code> أو ترميز النقطة). في بعض
+الحالات، قد يكون الحصول على السمة مكلفًا بالفعل (على سبيل المثال،
+لبعض تطبيقات :term: <code class="docutils literal notranslate"><span class="pre">feature_importances_`</span></code>، والتي قد تشير إلى
+وجود عيب في تصميم واجهة برمجة التطبيقات). لذا يجب تجنب الكود الذي
+يقوم بـ “hasattr” متبوعًا بـ “getattr”؛ يُفضل “getattr” داخل كتلة
+“try-except”.</p></li>
+<li><p>لتحديد بعض جوانب توقعات أداة تقدير البيانات الوصفية أو دعمها
+لبعض الميزات، نستخدم :term: <code class="docutils literal notranslate"><span class="pre">estimator</span> <span class="pre">tags</span></code> بدلاً من الكتابة
+بأسلوب البط.</p></li>
+</ul>
+</dd>
+<dt>التوقف المبكر</dt><dd><p>يتكون هذا من إيقاف طريقة تحسين تكرارية قبل تقارب فقد التدريب، لتجنب
+الإفراط في التجهيز. يتم ذلك بشكل عام عن طريق مراقبة نتيجة التعميم
+على مجموعة التحقق من الصحة. عندما تكون متاحة، يتم تنشيطها من خلال
+معلمة “early_stopping” أو عن طريق تعيين :term: <code class="docutils literal notranslate"><span class="pre">n_iter_no_change</span></code>
+إيجابية.</p>
+</dd>
+<dt>مثيل أداة التقدير</dt><dd><p>نستخدم هذه المصطلحات أحيانًا للتمييز بين فئة أداة تقدير البيانات
+الوصفية ومثيلها المُنشأ. على سبيل المثال، في ما يلي، “cls” هي فئة
+أداة تقدير البيانات الوصفية، في حين أن “est1” و “est2” هما مثيلان:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">cls</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span>
+<span class="n">est1</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+<span class="n">est2</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt>أمثلة</dt><dd><p>نحاول تقديم أمثلة على الاستخدام الأساسي لمعظم الوظائف والفئات في
+واجهة برمجة التطبيقات:</p>
+<ul class="simple">
+<li><p>كاختبارات توثيق في وثائقهم (أي داخل كود “sklearn/” نفسه).</p></li>
+<li><p>كأمثلة في :ref: <code class="docutils literal notranslate"><span class="pre">example</span> <span class="pre">gallery</span> <span class="pre">&lt;general_examples&gt;</span></code>
+تم تقديمها (باستخدام <a class="reference external" href="https://sphinx-gallery.readthedocs.io/">sphinx-gallery</a>) من النصوص في دليل
+“examples/”، والتي توضح الميزات أو المعلمات الرئيسية لأداة
+تقدير البيانات الوصفية/الوظيفة. يجب أيضًا الإشارة إليها من دليل
+المستخدم.</p></li>
+<li><p>في بعض الأحيان في :ref: <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Guide</span> <span class="pre">&lt;user_guide&gt;</span></code> (المبني من
+“doc/”) إلى جانب وصف تقني لأداة تقدير البيانات الوصفية.</p></li>
+</ul>
+</dd>
+<dt>تجريبي</dt><dd><p>تعد الأداة التجريبية قابلة للاستخدام بالفعل، ولكن واجهة برمجة
+التطبيقات العامة الخاصة بها، مثل قيم المعلمات الافتراضية أو
+السمات المجهزة، لا تزال عرضة للتغيير في الإصدارات المستقبلية
+دون سياسة تحذير الإلغاء التدريجي المعتادة.</p>
+</dd>
+</dl>
+<p>مقياس التقييم
+مقاييس التقييم</p>
+<blockquote>
+<div><p>توفر مقاييس التقييم مقياسًا لكيفية أداء النموذج. قد نستخدم هذا المصطلح
+على وجه التحديد للإشارة إلى الوظائف الموجودة في
+:mod: <code class="docutils literal notranslate"><span class="pre">~sklearn.metrics</span></code> (باستثناء :mod: <code class="docutils literal notranslate"><span class="pre">~sklearn.metrics.pairwise</span></code>)،
+على عكس طريقة :term: <code class="docutils literal notranslate"><span class="pre">score</span></code> وواجهة برمجة تطبيقات التقييم المستخدمة
+في التحقق من صحة التقاطع. راجع :ref: <code class="docutils literal notranslate"><span class="pre">model_evaluation</span></code>.</p>
+<p>تقبل هذه الوظائف عادةً الحقيقة الأرضية (أو البيانات الخام حيث
+تقيم المترية التجميع دون حقيقة أرضية) وتوقعًا، سواء كان ناتج
+:term: <code class="docutils literal notranslate"><span class="pre">predict</span></code> (<code class="docutils literal notranslate"><span class="pre">y_pred</span></code>)، أو :term: <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code>
+(<code class="docutils literal notranslate"><span class="pre">y_proba</span></code>)، أو دالة تسجيل درجات تعسفية بما في ذلك
+:term: <code class="docutils literal notranslate"><span class="pre">decision_function</span></code> (<code class="docutils literal notranslate"><span class="pre">y_score</span></code>).
+يتم تسمية الوظائف عادةً بحيث تنتهي بـ <code class="docutils literal notranslate"><span class="pre">_score</span></code> إذا كان ارتفاع
+النتيجة يشير إلى نموذج أفضل، و <code class="docutils literal notranslate"><span class="pre">_loss</span></code> إذا كانت النتيجة الأقل
+تشير إلى نموذج أفضل. تدعو هذه التنوع في واجهة برمجة التطبيقات إلى
+واجهة برمجة تطبيقات التقييم.</p>
+<p>لاحظ أن بعض أدوات تقدير البيانات الوصفية يمكنها حساب المقاييس التي
+لا تُدرج في :mod: <code class="docutils literal notranslate"><span class="pre">~sklearn.metrics</span></code> وهي خاصة بأداة تقدير البيانات
+الوصفية، ولا سيما احتمالات النموذج.</p>
+</div></blockquote>
+<dl>
+<dt>علامات أداة تقدير البيانات الوصفية</dt><dd><p>ميزة مقترحة (على سبيل المثال: :issue: <code class="docutils literal notranslate"><span class="pre">8022</span></code>) والتي يتم من خلالها
+وصف قدرات أداة تقدير البيانات الوصفية من خلال مجموعة من العلامات
+الدلالية. سيمكن ذلك بعض سلوكيات وقت التشغيل بناءً على فحص أداة
+تقدير البيانات الوصفية، ولكنه يسمح أيضًا باختبار كل أداة تقدير
+بيانات وصفية لثوابت مناسبة مع استثنائها من الاختبارات
+:term: <code class="docutils literal notranslate"><span class="pre">common</span> <span class="pre">tests</span></code> الأخرى.</p>
+<p>يتم تحديد بعض جوانب علامات أداة تقدير البيانات الوصفية حاليًا من
+خلال :term: <code class="docutils literal notranslate"><span class="pre">duck</span> <span class="pre">typing</span></code> لأساليب مثل “predict_proba” ومن خلال
+بعض السمات الخاصة على كائنات أداة تقدير البيانات الوصفية:</p>
+<dl class="simple glossary">
+<dt id="term-_estimator_type"><code class="docutils literal notranslate"><span class="pre">_estimator_type</span></code><a class="headerlink" href="#term-_estimator_type" title="Link to this term">#</a></dt><dd><p>تحدد هذه السمة ذات القيمة النصية أداة تقدير البيانات الوصفية
+على أنها أداة لتصنيف البيانات أو أداة للتنبؤ بالبيانات، إلخ.
+يتم تعيينه بواسطة المزج مثل :class: <code class="docutils literal notranslate"><span class="pre">base.ClassifierMixin</span></code>،
+ولكنه يحتاج إلى تبنيه بشكل أكثر صراحةً على أداة تقدير
+بيانات وصفية ذات مستوى أعلى. يجب التحقق من قيمته عادةً عن
+طريق مساعد مثل :func: <code class="docutils literal notranslate"><span class="pre">base.is_classifier</span></code>.</p>
+</dd>
+</dl>
+<p>للحصول على معلومات أكثر تفصيلاً، راجع :ref: <code class="docutils literal notranslate"><span class="pre">estimator_tags</span></code>.</p>
+</dd>
+</dl>
+<p>سمة
+سمات
+متجه السمات</p>
+<blockquote>
+<div><p>من الناحية المجردة، السمة هي دالة (بالمعنى الرياضي) تقوم بتعيين كائن
+تمت معاينته إلى كمية رقمية أو فئة. يُعرف “الميزة” أيضًا باسم
+الكميات، كونها العناصر الفردية لمتجه يمثل عينة. في مصفوفة
+البيانات، يتم تمثيل الميزات كأعمدة: يحتوي كل عمود على نتيجة
+تطبيق دالة ميزة على مجموعة من العينات.</p>
+<p>تُعرف الميزات في أماكن أخرى باسم السمات أو عوامل التنبؤ أو
+عوامل التنبؤ أو المتغيرات المستقلة.</p>
+<p>يفترض معظم أدوات تقدير البيانات الوصفية في scikit-learn أن
+الميزات رقمية ومحدودة وغير مفقودة، حتى عندما تكون لها مجالات
+وتوزيعات دلالية متميزة (فئوية أو ترتيبية أو ذات قيمة عددية أو
+ذات قيمة حقيقية أو فاصلة). راجع أيضًا :term: <code class="docutils literal notranslate"><span class="pre">categorical</span> <span class="pre">feature</span></code>
+و :term: <code class="docutils literal notranslate"><span class="pre">missing</span> <span class="pre">values</span></code>.</p>
+<p>يشير <code class="docutils literal notranslate"><span class="pre">n_features</span></code> إلى عدد الميزات في مجموعة بيانات.</p>
+</div></blockquote>
+<dl>
+<dt>التجهيز</dt><dd><p>استدعاء :term: <code class="docutils literal notranslate"><span class="pre">fit</span></code> (أو :term: <code class="docutils literal notranslate"><span class="pre">fit_transform</span></code>، :term:
+<code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>، إلخ.) على أداة تقدير البيانات الوصفية.</p>
+</dd>
+<dt>مجهزة</dt><dd><p>حالة أداة تقدير البيانات الوصفية بعد :term: <code class="docutils literal notranslate"><span class="pre">fitting</span></code>.</p>
+<p>لا يوجد إجراء تقليدي للتحقق مما إذا كانت أداة تقدير البيانات
+الوصفية مجهزة. ومع ذلك، يجب أن ترفع أداة تقدير البيانات الوصفية
+التي لم يتم تجهيزها:</p>
+<ul>
+<li><dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">exceptions.NotFittedError</span></code> عند استدعاء طريقة التنبؤ</p>
+</dd>
+</dl>
+<p>(:term: <code class="docutils literal notranslate"><span class="pre">predict</span></code>، :term: <code class="docutils literal notranslate"><span class="pre">transform</span></code>، إلخ.).
+(:func: <code class="docutils literal notranslate"><span class="pre">utils.validation.check_is_fitted</span></code> مستخدم داخليًا
+لهذا الغرض.)</p>
+</li>
+<li><p>لا ينبغي أن يكون لها أي :term: <code class="docutils literal notranslate"><span class="pre">attributes</span></code> التي تبدأ بحرف أبجدي
+وتنتهي بشرطة سفلية. (لاحظ أنه قد يكون هناك لا يزال وصفًا
+للسمة على الفئة، ولكن يجب أن تعيد “hasattr” القيمة False)</p></li>
+</ul>
+</dd>
+<dt>وظيفة</dt><dd><p>نوفر واجهات وظيفية مخصصة للعديد من الخوارزميات، في حين أن فئات
+:term: <code class="docutils literal notranslate"><span class="pre">estimator</span></code> توفر واجهة أكثر اتساقًا.</p>
+<p>على وجه الخصوص، قد توفر Scikit-learn واجهة وظيفية تقوم بتناسب نموذج
+مع بعض البيانات وإرجاع معلمات التعلم، كما هو الحال في
+:func: <code class="docutils literal notranslate"><span class="pre">linear_model.enet_path</span></code>. بالنسبة للنماذج الاستقرائية،
+فإنه يعيد أيضًا التضمين أو تسميات التجميع، كما هو الحال في
+:func: <code class="docutils literal notranslate"><span class="pre">manifold.spectral_embedding</span></code> أو :func: <code class="docutils literal notranslate"><span class="pre">cluster.dbscan</span></code>.
+توفر العديد من المحولات التمهيدية أيضًا واجهة وظيفية، تشبه
+استدعاء :term: <code class="docutils literal notranslate"><span class="pre">fit_transform</span></code>، كما هو الحال في
+:func: <code class="docutils literal notranslate"><span class="pre">preprocessing.maxabs_scale</span></code>. يجب أن يكون المستخدمون حذرين
+لتجنب :term: <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">leakage</span></code> عند الاستفادة من هذه الوظائف
+المكافئة لـ “fit_transform”.</p>
+<p>ليس لدينا سياسة صارمة بشأن متى أو متى لا نوفر أشكال الوظائف لأدوات
+تقدير البيانات الوصفية، ولكن يجب على المشرفين مراعاة الاتساق مع
+واجهات موجودة، وما إذا كان توفير وظيفة سيؤدي بالمستخدمين إلى
+الابتعاد عن أفضل الممارسات (من حيث تسرب البيانات، إلخ.).</p>
+</dd>
+<dt>معرض</dt><dd><p>راجع :term: <code class="docutils literal notranslate"><span class="pre">examples</span></code>.</p>
+</dd>
+</dl>
+<p>معلمة فائقة
+معلمة فائقة</p>
+<blockquote>
+<div><p>راجع :term: <code class="docutils literal notranslate"><span class="pre">parameter</span></code>.</p>
+</div></blockquote>
+<p>impute</p>
+<p>imputation</p>
+<p>تتطلب معظم خوارزميات التعلم الآلي أن تكون مدخلاتها خالية من القيم المفقودة، ولن تعمل إذا تم انتهاك هذا الشرط. والخوارزميات التي تحاول ملء (أو استنباط) القيم المفقودة يشار إليها بخوارزميات الاستنباط.</p>
+<p>indexable</p>
+<p>صفيف أو مصفوفة متفرقة أو إطار بيانات Pandas أو تسلسل (عادة ما يكون قائمة).</p>
+<p>induction</p>
+<p>inductive</p>
+<p>التعلم الاستقرائي (على النقيض من التعلم بالاستقراء): يقوم ببناء نموذج لبعض البيانات التي يمكن بعد ذلك تطبيقها على حالات جديدة. معظم التقديرات في Scikit-learn استقرائية، ولديها طرق “توقع” و/أو “تحويل”.</p>
+<p>joblib</p>
+<p>مكتبة بايثون (<a class="reference external" href="https://joblib.readthedocs.io">https://joblib.readthedocs.io</a>) المستخدمة في Scikit-learn لتسهيل الموازاة والتخزين المؤقت البسيطين. يهدف Joblib إلى العمل بكفاءة مع صفائف Numpy، مثل استخدام memory mapping. راجع parallelism لمزيد من المعلومات.</p>
+<p>label indicator matrix</p>
+<p>multilabel indicator matrix</p>
+<p>multilabel indicator matrices</p>
+<p>تنسيق يستخدم لتمثيل البيانات متعددة التصنيفات، حيث يتوافق كل صف في مصفوفة ثنائية الأبعاد أو مصفوفة متفرقة مع عينة، وكل عمود مع فئة، وكل عنصر يساوي 1 إذا تم تصنيف العينة بالصنف و 0 إذا لم يتم ذلك.</p>
+<p>leakage</p>
+<p>data leakage</p>
+<p>مشكلة في التحقق المتقاطع حيث يمكن المبالغة في تقدير الأداء العام حيث تم تضمين معرفة بيانات الاختبار عن غير قصد في تدريب نموذج. هذا احتمال، على سبيل المثال، عند تطبيق محول على مجموعة البيانات بأكملها بدلاً من كل جزء تدريب في انقسام التحقق المتقاطع.</p>
+<p>نحن نهدف إلى توفير واجهات (مثل sklearn.pipeline و sklearn.model_selection) التي تحمي المستخدم من تسرب البيانات.</p>
+<p>memmapping</p>
+<p>memory map</p>
+<p>memory mapping</p>
+<p>استراتيجية كفاءة الذاكرة التي تبقي البيانات على القرص بدلاً من نسخها إلى الذاكرة الرئيسية. يمكن إنشاء خرائط الذاكرة للمصفوفات التي يمكن قراءتها أو كتابتها أو كليهما، باستخدام numpy.memmap. عند استخدام joblib لموازاة العمليات في Scikit-learn، فقد يقوم تلقائيًا بتعيين مصفوفات كبيرة إلى الذاكرة للحد من Overhead ازدواجية الذاكرة في المعالجة المتعددة.</p>
+<p>missing values</p>
+<p>لا تعمل معظم تقديرات Scikit-learn مع القيم المفقودة. عندما يفعلون ذلك (على سبيل المثال، في طريقة imputation.SimpleImputer)، NaN هو التمثيل المفضل للقيم المفقودة في صفائف float. إذا كان نوع البيانات في المصفوفة هو integer، فلا يمكن تمثيل NaN. لهذا السبب، ندعم تحديد قيمة “missing_values” أخرى عندما يمكن إجراء الاستنباط أو التعلم في مساحة الأعداد الصحيحة. البيانات غير المُعنونة هي حالة خاصة من القيم المفقودة في الهدف.</p>
+<p>n_features</p>
+<p>عدد الميزات.</p>
+<p>n_outputs</p>
+<p>عدد الإخراج في الهدف.</p>
+<p>n_samples</p>
+<p>عدد العينات.</p>
+<p>n_targets</p>
+<p>مرادف لـ n_outputs.</p>
+<p>narrative docs</p>
+<p>narrative documentation</p>
+<p>مرادف لـ User Guide، أي الوثائق المكتوبة في doc/modules/. على عكس مرجع واجهة برمجة التطبيقات المقدم من خلال docstrings، يهدف دليل المستخدم إلى:</p>
+<ul class="simple">
+<li><p>تجميع الأدوات التي يوفرها Scikit-learn معًا حسب الموضوع أو من حيث الاستخدام.</p></li>
+<li><p>توضيح سبب استخدام شخص ما لكل أداة معينة، غالبًا من خلال المقارنة.</p></li>
+<li><p>تقديم أوصاف بديهية وتقنية للأدوات.</p></li>
+<li><p>توفير أو ربط أمثلة على استخدام الميزات الرئيسية لأداة ما.</p></li>
+</ul>
+<p>np</p>
+<p>مختصر لـ Numpy بسبب عبارة الاستيراد التقليدية:</p>
+<p>import numpy as np</p>
+<p>online learning</p>
+<p>حيث يتم تحديث النموذج بشكل تكراري من خلال تلقي كل دفعة من بيانات ground truth الهدف قريبًا بعد إجراء تنبؤات على دفعة مناظرة من البيانات. يجب أن يكون النموذج قابلًا للاستخدام للتنبؤ بعد كل دفعة. راجع partial_fit.</p>
+<p>out-of-core</p>
+<p>استراتيجية كفاءة حيث لا يتم تخزين جميع البيانات في الذاكرة الرئيسية مرة واحدة، وعادة ما يتم ذلك عن طريق إجراء التعلم على دفعات من البيانات. راجع partial_fit.</p>
+<p>outputs</p>
+<p>متغيرات فردية لكل عينة في الهدف. على سبيل المثال، في التصنيف متعدد التصنيفات، يتوافق كل تصنيف محتمل مع إخراج ثنائي. يُطلق عليها أيضًا الاستجابات أو المهام أو الأهداف. راجع multiclass multioutput و continuous multioutput.</p>
+<p>pair</p>
+<p>زوج من طول اثنين.</p>
+<p>parameter</p>
+<p>params</p>
+<p>نستخدم في الغالب مصطلح “معلمة” للإشارة إلى جوانب المحلل التي يمكن تحديدها في بنائه. على سبيل المثال، max_depth و random_state هي معلمات طريقة ensemble.RandomForestClassifier. يتم تخزين معلمات مُنشئ المحلل دون تعديل كسمات على مثيل المحلل، وتبدأ تقليديًا بحرف أبجدي وتنتهي بحرف أبجدي رقمي. يتم وصف معلمات كل محلل في docstring الخاص به.</p>
+<p>لا نستخدم المعلمات بالمعنى الإحصائي، حيث تكون المعلمات هي القيم التي تحدد نموذجًا ويمكن تقديرها من البيانات. ما نسميه معلمات قد يكون ما يسميه الإحصائيون المعلمات الفائقة للنموذج: جوانب تكوين بنية النموذج التي غالبًا ما لا يتم تعلمها مباشرة من البيانات. ومع ذلك، فإن معلماتنا تُستخدم أيضًا لوصف عمليات النمذجة التي لا تؤثر على النموذج المُتعلم، مثل n_jobs للتحكم في الموازية.</p>
+<p>عند التحدث عن معلمات محلل علوي، فقد نكون أيضًا ندرج معلمات المحللين المضمنين بواسطة المحلل العلوي. عادةً، يتم الإشارة إلى هذه المعلمات المضمنة باستخدام علامة تسطير مزدوجة (__) للفصل بين المحلل كمعلمة ومعلمته. وبالتالي، فإن clf = BaggingClassifier(estimator=DecisionTreeClassifier(max_depth=3)) لها معلمة عميقة باسم “estimator__max_depth” بقيمة “3”، والتي يمكن الوصول إليها باستخدام clf.estimator.max_depth أو clf.get_params()[‘estimator__max_depth’].</p>
+<p>يمكن استرداد قائمة المعلمات وقيمها الحالية من مثيل المحلل باستخدام طريقة get_params الخاصة به.</p>
+<p>بين البناء والتجهيز، يمكن تعديل المعلمات باستخدام set_params. لتمكين ذلك، لا يتم عادةً التحقق من صحة المعلمات أو تعديلها عندما يتم بناء المحلل، أو عندما يتم تعيين كل معلمة. يتم تنفيذ التحقق من صحة المعلمة عند استدعاء fit.</p>
+<p>يتم سرد المعلمات الشائعة أدناه.</p>
+<p>pairwise metric</p>
+<p>pairwise metrics</p>
+<p>بالمعنى الواسع، تحدد المترية الزوجية دالة لقياس التشابه أو الاختلاف بين عيناتين (يمثل كل منهما عادةً متجه ميزة). نقدم بشكل خاص تطبيقات لمقاييس المسافة (بالإضافة إلى المقاييس غير الصحيحة مثل مسافة جيب التمام) من خلال metrics.pairwise_distances، ولوظائف النواة (فئة مقيدة من وظائف التشابه) في metrics.pairwise.pairwise_kernels. يمكن أن تحسب هذه المصفوفات مصفوفة المسافات الزوجية التي تكون متماثلة وبالتالي تخزين البيانات بشكل مكرر.</p>
+<p>راجع أيضًا precomputed و metric.</p>
+<p>ملاحظة: بالنسبة لمعظم مقاييس المسافة، نعتمد على التطبيقات من scipy.spatial.distance، ولكن قد نعيد التنفيذ من أجل الكفاءة في سياقنا. يستخدم metrics.DistanceMetric واجهة لتنفيذ مقاييس المسافة للتكامل مع البحث عن الجيران بكفاءة.</p>
+<p>pd</p>
+<p>مختصر لـ Pandas بسبب عبارة الاستيراد التقليدية:</p>
+<p>import pandas as pd</p>
+<p>precomputed</p>
+<p>حيث تعتمد الخوارزميات على المقاييس الزوجية، ويمكن حسابها من المقاييس الزوجية وحدها، فنحن غالبًا ما نسمح للمستخدم بتحديد أن X المقدم موجود بالفعل في مساحة التشابه (الاختلاف)، بدلاً من مساحة الميزة. أي أنه عند تمريره إلى fit، يكون عبارة عن مصفوفة مربعة متماثلة، حيث يشير كل متجه إلى التشابه (الاختلاف) مع كل عينة، وعند تمريره إلى طرق التنبؤ/التحويل، يتوافق كل صف مع عينة اختبار وكل عمود مع عينة تدريب.</p>
+<p>يتم الإشارة إلى استخدام X مسبقًا عادةً عن طريق تعيين معلمة “metric” أو “affinity” أو “kernel” إلى سلسلة “precomputed”. إذا كان الأمر كذلك، فيجب على المحلل تعيين علامة المحلل الزوجي كـ True.</p>
+<p>rectangular</p>
+<p>البيانات التي يمكن تمثيلها كمصفوفة مع عينات على المحور الأول ومجموعة ثابتة ومحدودة من الميزات على المحور الثاني تسمى مستطيلة.</p>
+<p>يستبعد هذا المصطلح العينات ذات البنى غير المتجهية، مثل النص أو الصورة ذات الحجم التعسفي أو سلسلة زمنية ذات طول تعسفي أو مجموعة من المتجهات، وما إلى ذلك. الغرض من vectorizer هو إنتاج أشكال مستطيلة من هذه البيانات.</p>
+<p>sample</p>
+<p>samples</p>
+<p>عادةً ما نستخدم هذا المصطلح كاسم للإشارة إلى متجه ميزة واحد. في مكان آخر، يُطلق على العينة اسم instance أو data point أو observation. يشير n_samples إلى عدد العينات في مجموعة البيانات، وهو عدد الصفوف في مصفوفة البيانات X.</p>
+<p>sample property</p>
+<p>sample properties</p>
+<p>تعد خاصية العينة بيانات لكل عينة (على سبيل المثال، مصفوفة بطول n_samples) يتم تمريرها إلى طريقة المحلل أو دالة مماثلة، إلى جانب ولكن بشكل منفصل عن الميزات (X) والهدف (y). المثال الأكثر بروزًا هو sample_weight؛ راجع الآخرين في glossary_sample_props.</p>
+<p>اعتبارًا من الإصدار 0.19، ليس لدينا نهج متسق للتعامل مع خصائص العينة وتوجيهها في المحللين العلويين، على الرغم من أنه يتم غالبًا استخدام معلمة “fit_params”.</p>
+<p>scikit-learn-contrib</p>
+<p>مكان لنشر المكتبات المتوافقة مع Scikit-learn التي يصرح بها مطورو النواة ومجتمع المساهمين بشكل عام، ولكن لا تتم صيانتها بواسطة فريق مطوري النواة.</p>
+<p>راجع <a class="reference external" href="https://scikit-learn-contrib.github.io">https://scikit-learn-contrib.github.io</a>.</p>
+<p>scikit-learn enhancement proposals</p>
+<p>SLEP</p>
+<p>SLEPs</p>
+<p>تحدث التغييرات على مبادئ واجهة برمجة التطبيقات والتغييرات على التبعيات أو الإصدارات المدعومة من خلال SLEP وتتبع عملية صنع القرار الموضحة في governance.</p>
+<p>بالنسبة لجميع الأصوات، يجب أن يكون الاقتراح قد تم طرحه للمناقشة قبل التصويت. يجب أن يكون هذا الاقتراح وثيقة موحدة، في شكل “اقتراح تحسين Scikit-Learn” (SLEP)، بدلاً من مناقشة طويلة حول مشكلة ما. يجب تقديم SLEP كطلب سحب إلى <a class="reference external" href="https://scikit-learn-enhancement-proposals.readthedocs.io">https://scikit-learn-enhancement-proposals.readthedocs.io</a> باستخدام نموذج SLEP.</p>
+<p>semi-supervised</p>
+<p>semi-supervised learning</p>
+<p>semisupervised</p>
+<p>التعلم حيث يكون التنبؤ المتوقع (التصنيف أو الحقيقة الأرضية) متاحًا فقط لبعض العينات المقدمة كبيانات تدريب عند تناسب النموذج. نطبق تقليديًا التسمية “-1” على العينات غير المُعنونة في التصنيف شبه الخاضع للإشراف.
+النص المترجم إلى اللغة العربية:</p>
+<p>مصفوفة متفرقة</p>
+<ul class="simple">
+<li><p>رسم بياني متفرق: تمثيل للبيانات الرقمية ثنائية الأبعاد أكثر كفاءة في الذاكرة
+من المصفوفة الكثيفة المناظرة حيث تكون جميع العناصر تقريبًا صفرًا. نستخدم
+إطار العمل scipy.sparse، والذي يوفر عدة تمثيلات أساسية للبيانات المتفرقة،
+أو “التنسيقات”. بعض التنسيقات أكثر كفاءة من غيرها لمهمام معينة، وعندما
+يوفر تنسيق معين فائدة خاصة، نحاول توثيق هذه الحقيقة في أوصاف معلمات
+Scikit-learn.</p></li>
+<li><p>تفرق بعض تنسيقات المصفوفة (خاصة CSR وCSC وCOO وLIL) بين الأصفار <em>الضمنية</em>
+و*الصريحة*. الأصفار الصريحة مخزنة (أي أنها تستهلك الذاكرة في مصفوفة
+“البيانات”) في بنية البيانات، بينما تشير الأصفار الضمنية إلى كل عنصر غير
+محدد بخلاف ذلك في التخزين الصريح.</p></li>
+<li><p>يتم استخدام دلالتين للمصفوفات المتناثرة في Scikit-learn:</p>
+<ul>
+<li><p>دلالة المصفوفة: يتم تفسير المصفوفة المتناثرة على أنها مصفوفة مع
+تفسير الأصفار الضمنية والصريحة على أنها الرقم 0. هذا هو التفسير
+المعتمد في معظم الأحيان، على سبيل المثال، عندما يتم استخدام المصفوفات
+المتناثرة لمصفوفات الميزات أو مصفوفات مؤشرات التصنيف المتعدد.</p></li>
+<li><p>دلالة الرسم البياني: كما هو الحال مع scipy.sparse.csgraph، يتم تفسير
+الأصفار الصريحة على أنها الرقم 0، ولكن تشير الأصفار الضمنية إلى قيمة
+مقنعة أو مفقودة، مثل غياب حافة بين رأسين في رسم بياني، حيث يشير
+قيمة صريحة إلى وزن الحافة. يتم اعتماد هذا التفسير لتمثيل الاتصال
+في التجميع، وفي تمثيلات الأحياء الأقرب (على سبيل المثال،
+neighbors.kneighbors_graph)، ولمسافات المحسوبة مسبقًا حيث تكون
+المسافات المطلوبة فقط في حي كل نقطة.</p></li>
+</ul>
+</li>
+<li><p>عند العمل مع المصفوفات المتناثرة، نفترض أنها متناثرة لسبب وجيه، ونتجنب
+كتابة كود يقوم بتكثيف مصفوفة متفرقة مقدمة من المستخدم، بدلاً من الحفاظ على
+التفرق أو إثارة خطأ إذا لم يكن ذلك ممكنًا (أي إذا لم يدعم/لم يتمكن
+المُقدر من دعم المصفوفات المتناثرة).</p></li>
+<li><p>عديم الحالة: يكون المُقدر عديم الحالة إذا لم يقم بتخزين أي معلومات يتم
+الحصول عليها أثناء التهيئة. يمكن أن تكون هذه المعلومات إما معلمات تم
+تعلمها أثناء التهيئة أو إحصاءات محسوبة من بيانات التدريب. يكون المُقدر
+عديم الحالة إذا لم يكن لديه أي سمات بخلاف تلك المحددة في init. ستعمل
+مكالمة التهيئة لهذه المقدرات فقط على التحقق من السمات العامة التي تم
+تمريرها في init.</p></li>
+<li><p>مشرف: التعلم الخاضع للإشراف</p></li>
+<li><p>التعلم الخاضع للإشراف: التعلم حيث يكون التنبؤ المتوقع (التصنيف أو الحقيقة
+الأرضية) متاحًا لكل عينة عند تناسب النموذج، ويتم توفيره على أنه y. هذا
+هو النهج المتبع في مصنف أو مرجع، من بين مقدرات أخرى.</p></li>
+<li><p>الهدف: الهدف في التعلم الخاضع للإشراف (ونصف الخاضع للإشراف)، والذي يتم
+تمريره كـ y إلى طريقة التهيئة للمُقدر. يُعرف أيضًا باسم المتغير التابع،
+أو متغير النتائج، أو متغير الاستجابة، أو الحقيقة الأرضية أو التصنيف.
+يعمل Scikit-learn مع الأهداف ذات البنية الدنيا: فئة من مجموعة محدودة،
+أو رقم حقيقي محدود، أو فئات متعددة، أو أرقام متعددة. راجع
+glossary_target_types.</p></li>
+<li><p>الاستقراء: الاستقراء (على عكس الاستقراء) هو طريقة للتعلم الآلي مصممة
+لنمذجة مجموعة بيانات محددة، ولكن ليس لتطبيق هذا النموذج على البيانات
+غير المرئية. تشمل الأمثلة manifold.TSNE وcluster.AgglomerativeClustering
+وneighbors.LocalOutlierFactor.</p></li>
+<li><p>غير معنون: بيانات غير معنونة لها حقيقة أرضية غير معروفة عند التهيئة؛
+أي ما يعادل القيم المفقودة في الهدف. راجع أيضًا التعلم نصف الخاضع
+للإشراف وغير الخاضع للإشراف.</p></li>
+<li><p>غير خاضع للإشراف: التعلم غير الخاضع للإشراف</p></li>
+<li><p>التعلم غير الخاضع للإشراف: التعلم حيث لا يتوفر التنبؤ المتوقع (التصنيف
+أو الحقيقة الأرضية) لكل عينة عند تناسب النموذج، كما هو الحال في
+التجميعات وأجهزة الكشف عن الأخطاء. تتجاهل المقدرات غير الخاضعة للإشراف
+أي y يتم تمريرها إلى التهيئة.</p></li>
+<li><p>أنواع المقدرات: واجهات برمجة تطبيقات الفصل وأنواع المقدرات</p></li>
+</ul>
+<p>بالتأكيد! فيما يلي ترجمة للنص المحدد بتنسيق ReStructuredText إلى اللغة العربية:</p>
+<hr class="docutils" />
+<dl class="glossary">
+<dt id="term-classifier">classifier<a class="headerlink" href="#term-classifier" title="Link to this term">#</a></dt><dt id="term-classifiers">classifiers<a class="headerlink" href="#term-classifiers" title="Link to this term">#</a></dt><dd><p>مصنف إشرافي (أو شبه إشرافي) يستخدم مجموعة محدودة من القيم المخرجة الممكنة المنفصلة.</p>
+<p>يدعم المصنف النمذجة لبعض الأهداف الثنائية أو متعددة الفئات أو متعددة التصنيفات أو متعددة الفئات والمتعددة المخرجات. وفي scikit-learn، تدعم جميع المصنفات التصنيف متعدد الفئات، مع التخلف إلى استخدام استراتيجية one-vs-rest عبر مشكلة التصنيف الثنائية.</p>
+<p>يجب على المصنفات تخزين سمة <a href="#id7"><span class="problematic" id="id8">classes_</span></a> بعد التجهيز، وعادة ما ترث من base.ClassifierMixin، والتي تحدد سمة _estimator_type الخاصة بها.</p>
+<p>يمكن التمييز بين المصنف والمقدرات الأخرى باستخدام base.is_classifier.</p>
+<p>يجب على المصنف تنفيذ:</p>
+<ul class="simple">
+<li><p>التجهيز</p></li>
+<li><p>التنبؤ</p></li>
+<li><p>النتيجة</p></li>
+</ul>
+<p>قد يكون من المناسب أيضًا تنفيذ decision_function، وpredict_proba، وpredict_log_proba.</p>
+</dd>
+<dt id="term-clusterer">clusterer<a class="headerlink" href="#term-clusterer" title="Link to this term">#</a></dt><dt id="term-clusterers">clusterers<a class="headerlink" href="#term-clusterers" title="Link to this term">#</a></dt><dd><p>مصنف غير إشرافي بقيم إخراج منفصلة محدودة.</p>
+<p>عادة ما يقوم المجمع بتخزين العلامات <a href="#id9"><span class="problematic" id="id10">labels_</span></a> بعد التجهيز، ويجب أن يفعل ذلك إذا كان استقرائيًا.</p>
+<p>يجب على المجمع تنفيذ:</p>
+<ul class="simple">
+<li><p>التجهيز</p></li>
+<li><p>fit_predict إذا كان استقرائيًا</p></li>
+<li><p>التنبؤ إذا كان استقرائيًا</p></li>
+</ul>
+</dd>
+<dt id="term-density-estimator">density estimator<a class="headerlink" href="#term-density-estimator" title="Link to this term">#</a></dt><dd><p>تقدير غير إشرافي لتوزيع الاحتمالية الكثيفة للإدخال. تقنيات الاستخدام الشائعة هي:</p>
+<ul class="simple">
+<li><p>kernel_density - يستخدم دالة kernel، يتحكم فيها معامل عرض النطاق لتمثيل الكثافة؛</p></li>
+<li><p>مزيج غاوسي - يستخدم مزيجًا من نماذج غاوس لتمثيل الكثافة.</p></li>
+</ul>
+</dd>
+<dt id="term-estimator">estimator<a class="headerlink" href="#term-estimator" title="Link to this term">#</a></dt><dt id="term-estimators">estimators<a class="headerlink" href="#term-estimators" title="Link to this term">#</a></dt><dd><p>كائن يدير تقدير وفك تشفير نموذج. يتم تقدير النموذج كدالة محددة من:</p>
+<ul class="simple">
+<li><p>المعلمات المقدمة في إنشاء الكائن أو باستخدام set_params؛</p></li>
+<li><p>حالة التعشيش العشوائي العالمي إذا كانت معلمة random_state للمصنف مضبوطة على None؛ و</p></li>
+<li><p>أي بيانات أو خصائص عينة تم تمريرها إلى آخر مكالمة إلى التجهيز أو fit_transform أو fit_predict، أو البيانات التي تم تمريرها بالمثل في تسلسل من الاستدعاءات إلى partial_fit.</p></li>
+</ul>
+<p>يتم تخزين النموذج المقدر في سمات عامة وخاصة على مثيل المقدر، مما يسهل فك التشفير من خلال طرق التنبؤ والتحويل.</p>
+<p>يجب أن توفر المقدرات طريقة التجهيز، ويجب أن توفر set_params وget_params، على الرغم من أن هذه عادة ما يتم توفيرها عن طريق الوراثة من base.BaseEstimator.</p>
+<p>قد تكون الوظيفة الأساسية لبعض المقدرات متاحة أيضًا كدالة.</p>
+</dd>
+<dt id="term-feature-extractor">feature extractor<a class="headerlink" href="#term-feature-extractor" title="Link to this term">#</a></dt><dt id="term-feature-extractors">feature extractors<a class="headerlink" href="#term-feature-extractors" title="Link to this term">#</a></dt><dd><p>محول يأخذ الإدخال حيث لا يتم تمثيل كل عينة ككائن يشبه المصفوفة بطول ثابت، وينتج كائن يشبه المصفوفة من الميزات لكل عينة (وبالتالي مصفوفة ثنائية الأبعاد لمجموعة من العينات). بمعنى آخر، فإنه (فقدان البيانات) يُمَثِّل بيانات غير مستطيلة إلى بيانات مستطيلة.</p>
+<p>يجب أن تقوم مستخلصات الميزات بتنفيذ على الأقل:</p>
+<ul class="simple">
+<li><p>التجهيز</p></li>
+<li><p>التحويل</p></li>
+<li><p>get_feature_names_out</p></li>
+</ul>
+</dd>
+<dt id="term-meta-estimator">meta-estimator<a class="headerlink" href="#term-meta-estimator" title="Link to this term">#</a></dt><dt id="term-meta-estimators">meta-estimators<a class="headerlink" href="#term-meta-estimators" title="Link to this term">#</a></dt><dt id="term-metaestimator">metaestimator<a class="headerlink" href="#term-metaestimator" title="Link to this term">#</a></dt><dt id="term-metaestimators">metaestimators<a class="headerlink" href="#term-metaestimators" title="Link to this term">#</a></dt><dd><p>مقدر يأخذ مقدرًا آخر كمعلمة. تشمل الأمثلة pipeline.Pipeline، وmodel_selection.GridSearchCV، وfeature_selection.SelectFromModel، وensemble.BaggingClassifier.</p>
+<p>في طريقة التجهيز الخاصة بالمقدر الفوقي، يجب استنساخ أي مقدرات مضمنة قبل تجهيزها (على الرغم من أن Pipeline وFeatureUnion لا تفعلان ذلك حاليًا). والاستثناء من ذلك هو أن المقدر قد يوثق صراحة أنه يقبل مقدرًا مُجهزًا مسبقًا (على سبيل المثال، باستخدام “prefit=True” في feature_selection.SelectFromModel). إحدى المشكلات المعروفة في ذلك هي أن المقدر المُجهز مسبقًا سيفقد نموذجه إذا تم استنساخ المقدر الفوقي. يجب استدعاء “التجهيز” في المقدر الفوقي قبل التنبؤ، حتى إذا تم تجهيز جميع المقدرات المضمنة مسبقًا.</p>
+<p>في الحالات التي تكون فيها السلوكيات الأساسية للمقدر الفوقي (على سبيل المثال، تنفيذ التنبؤ أو التحويل) عبارة عن دالات لطرق التنبؤ/التحويل الخاصة بمقدر <em>أساسي</em> (أو مقدرات أساسية متعددة)، يجب أن يوفر المقدر الفوقي على الأقل الطرق القياسية التي يوفرها المقدر الأساسي. قد لا يكون من الممكن تحديد الطرق التي يوفرها المقدر الأساسي حتى يتم تجهيز المقدر الفوقي (انظر أيضًا: الاستدلال بالبطة)، والتي قد تساعد فيها utils.metaestimators.available_if. يجب أن يوفر أيضًا (أو يعدل) علامات المقدر وسمة <a href="#id11"><span class="problematic" id="id12">classes_</span></a> التي يوفرها المقدر الأساسي.</p>
+<p>يجب أن يكون المقدرون الفوقيون حذرين للتحقق من صحة البيانات بشكل أقل قدر ممكن قبل تمريرها إلى مقدر أساسي. يوفر ذلك وقت الحساب، وقد يسمح، على سبيل المثال، للمقدر الأساسي بالعمل بسهولة مع البيانات التي لا تكون مستطيلة.</p>
+</dd>
+<dt id="term-outlier-detector">outlier detector<a class="headerlink" href="#term-outlier-detector" title="Link to this term">#</a></dt><dt id="term-outlier-detectors">outlier detectors<a class="headerlink" href="#term-outlier-detectors" title="Link to this term">#</a></dt><dd><p>مصنف غير إشرافي ثنائي يُمَثِّل التمييز بين العينات الأساسية والشاذة.</p>
+<p>يجب على كاشف الشذوذ تنفيذ:</p>
+<ul class="simple">
+<li><p>التجهيز</p></li>
+<li><p>fit_predict إذا كان استقرائيًا</p></li>
+<li><p>التنبؤ إذا كان استقرائيًا</p></li>
+</ul>
+<p>قد يقوم كاشف الشذوذ الاستقرائي أيضًا بتنفيذ decision_function لإعطاء درجة عادية حيث تكون النتيجة أقل من 0. قد توفر score_samples درجة غير معيارية لكل عينة.</p>
+</dd>
+<dt id="term-predictor">predictor<a class="headerlink" href="#term-predictor" title="Link to this term">#</a></dt><dt id="term-predictors">predictors<a class="headerlink" href="#term-predictors" title="Link to this term">#</a></dt><dd><p>مقدر يدعم التنبؤ و/أو fit_predict. ويشمل ذلك المصنف، والمرجع، وكاشف الشذوذ، والمجمع.</p>
+<p>في الإحصاءات، يشير “المتغيرات” إلى الميزات.</p>
+</dd>
+<dt id="term-regressor">regressor<a class="headerlink" href="#term-regressor" title="Link to this term">#</a></dt><dt id="term-regressors">regressors<a class="headerlink" href="#term-regressors" title="Link to this term">#</a></dt><dd><p>مصنف إشرافي (أو شبه إشرافي) بقيم إخراج مستمرة.</p>
+<p>عادة ما يرث المرجعون من base.RegressorMixin، والتي تحدد سمة _estimator_type الخاصة بهم.</p>
+<p>يمكن التمييز بين المرجع والمقدرات الأخرى باستخدام base.is_regressor.</p>
+<p>يجب أن ينفذ المرجع:</p>
+<ul class="simple">
+<li><p>التجهيز</p></li>
+<li><p>التنبؤ</p></li>
+<li><p>النتيجة</p></li>
+</ul>
+</dd>
+<dt id="term-transformer">transformer<a class="headerlink" href="#term-transformer" title="Link to this term">#</a></dt><dt id="term-transformers">transformers<a class="headerlink" href="#term-transformers" title="Link to this term">#</a></dt><dd><p>مقدر يدعم التحويل و/أو fit_transform. قد لا يقوم المحول الاستقرائي النقي، مثل manifold.TSNE، بتنفيذ “التحويل”.</p>
+</dd>
+<dt id="term-vectorizer">vectorizer<a class="headerlink" href="#term-vectorizer" title="Link to this term">#</a></dt><dt id="term-vectorizers">vectorizers<a class="headerlink" href="#term-vectorizers" title="Link to this term">#</a></dt><dd><p>راجع مستخرج الميزة.</p>
+</dd>
+</dl>
+<p>هناك واجهات برمجة تطبيقات أخرى تتعلق بعائلة صغيرة من المقدرات، مثل:</p>
+<dl class="simple glossary">
+<dt id="term-cross-validation-splitter">cross-validation splitter<a class="headerlink" href="#term-cross-validation-splitter" title="Link to this term">#</a></dt><dt id="term-CV-splitter">CV splitter<a class="headerlink" href="#term-CV-splitter" title="Link to this term">#</a></dt><dt id="term-cross-validation-generator">cross-validation generator<a class="headerlink" href="#term-cross-validation-generator" title="Link to this term">#</a></dt><dd><p>عائلة من الفئات غير المقدرة المستخدمة لتقسيم مجموعة من البيانات إلى تسلسل من أجزاء التدريب والاختبار (راجع: cross_validation)، من خلال توفير طرق الانقسام وget_n_splits.
+لاحظ أنه على عكس المقدرات، لا تحتوي هذه الفئات على طرق التجهيز ولا توفر set_params أو get_params.
+قد يتم تنفيذ التحقق من صحة المعلمات في “__init__”.</p>
+</dd>
+<dt id="term-cross-validation-estimator">cross-validation estimator<a class="headerlink" href="#term-cross-validation-estimator" title="Link to this term">#</a></dt><dd><p>مقدر له قدرات مدمجة للتحقق من صحة التقاطع لاختيار أفضل فرط المعلمات تلقائيًا (راجع: الدليل الإرشادي للمستخدم &lt;grid_search&gt;). بعض الأمثلة على المقدرات المتقاطعة هي ElasticNetCV &lt;linear_model.ElasticNetCV&gt; وLogisticRegressionCV &lt;linear_model.LogisticRegressionCV&gt;.
+يتم تسمية المقدرات المتقاطعة باسم “EstimatorCV” وتميل إلى أن تكون مكافئة تقريبًا لـ “GridSearchCV(Estimator(), …)”.
+تتمثل ميزة استخدام مقدر متقاطع بدلاً من فئة المقدر القياسية إلى جانب البحث الشبكي &lt;grid_search&gt; في أنه يمكنها الاستفادة من إعادة الاستخدام عن طريق إعادة استخدام النتائج المحسوبة مسبقًا في الخطوات السابقة لعملية التحقق من صحة التقاطع. يؤدي ذلك بشكل عام إلى تحسينات في السرعة. والاستثناء هو فئة RidgeCV &lt;linear_model.RidgeCV&gt;، والتي يمكنها بدلاً من ذلك إجراء التحقق من صحة Leave-One-Out (LOO) بكفاءة. بشكل افتراضي، سيتم إعادة تدريب جميع هذه المقدرات، باستثناء RidgeCV &lt;linear_model.RidgeCV&gt; مع LOO-CV، على مجموعة البيانات التدريبية الكاملة بعد العثور على أفضل مجموعة من فرط المعلمات.</p>
+</dd>
+<dt id="term-scorer">scorer<a class="headerlink" href="#term-scorer" title="Link to this term">#</a></dt><dd><p>كائن غير مقدر قابل للاستدعاء يقوم بتقييم مقدر على بيانات الاختبار المعطاة، ويعيد رقمًا. على عكس مقاييس التقييم، يجب أن يقابل العدد المرتجع الأكبر درجة <em>أفضل</em>.
+راجع: scoring_parameter.</p>
+</dd>
+</dl>
+<p>أمثلة أخرى:</p>
+<ul class="simple">
+<li><p>metrics.DistanceMetric</p></li>
+<li><p>gaussian_process.kernels.Kernel</p></li>
+<li><p>“tree.Criterion”</p></li>
+</ul>
+</section>
+<section id="glossary-metadata-routing">
+<span id="id2"></span><h1>توجيه البيانات الوصفية<a class="headerlink" href="#glossary-metadata-routing" title="Link to this heading">#</a></h1>
+<dl class="simple glossary">
+<dt id="term-consumer">consumer<a class="headerlink" href="#term-consumer" title="Link to this term">#</a></dt><dd><p>كائن يستهلك البيانات الوصفية. هذا الكائن هو عادةً مقدر أو مسجل نقاط أو مُقسِّم CV. يعني استهلاك البيانات الوصفية استخدامها في الحسابات، على سبيل المثال، استخدام sample_weight لحساب نوع معين من النتيجة. لا يعني كونك مستهلكًا أن الكائن يتلقى دائمًا بيانات وصفية معينة، بل يعني أنه يمكنه استخدامها إذا تم توفيرها.</p>
+</dd>
+<dt id="term-metadata">metadata<a class="headerlink" href="#term-metadata" title="Link to this term">#</a></dt><dd><p>بيانات تتعلق ببيانات X وy المعطاة، ولكنها ليست جزءًا مباشرًا من البيانات، على سبيل المثال sample_weight أو groups، ويتم تمريرها إلى كائنات وطرق مختلفة، على سبيل المثال إلى مسجل نقاط أو مُقسِّم CV.</p>
+</dd>
+<dt id="term-router">router<a class="headerlink" href="#term-router" title="Link to this term">#</a></dt><dd><p>كائن يقوم بتوجيه البيانات الوصفية إلى المستهلكين. هذا الكائن هو عادةً مقدر فائق، على سبيل المثال pipeline.Pipeline أو model_selection.GridSearchCV.
+يمكن أن يكون بعض الموجهين أيضًا مستهلكين. يحدث هذا، على سبيل المثال، عندما يستخدم المقدر الفائق المجموعات المعطاة، ويقوم أيضًا بتمريرها إلى بعض كائناته الفرعية، مثل مُقسِّم CV.</p>
+</dd>
+</dl>
+<p>يرجى الرجوع إلى: الدليل الإرشادي للمستخدم لتوجيه البيانات الوصفية &lt;metadata_routing&gt; للحصول على مزيد من المعلومات.</p>
+</section>
+<section id="glossary-target-types">
+<span id="id3"></span><h1>أنواع الأهداف<a class="headerlink" href="#glossary-target-types" title="Link to this heading">#</a></h1>
+<dl class="glossary">
+<dt id="term-binary">binary<a class="headerlink" href="#term-binary" title="Link to this term">#</a></dt><dd><p>هي مشكلة تصنيف تتكون من فئتين. يمكن تمثيل الهدف الثنائي على أنه مشكلة متعددة الفئات :term: ولكن مع وجود علامتين فقط. يتم تمثيل دالة القرار الثنائية كمصفوفة أحادية البعد.</p>
+<p>من الناحية الدلالية، غالبًا ما تعتبر إحدى الفئتين “إيجابية”.
+ما لم يُحدد خلاف ذلك (على سبيل المثال، باستخدام :term: <code class="docutils literal notranslate"><span class="pre">pos_label</span></code> في
+:term: <code class="docutils literal notranslate"><span class="pre">مقاييس</span> <span class="pre">التقييم</span></code>)، فإننا نعتبر فئة العلامات ذات القيمة الأكبر (رقميًا أو أبجديًا) على أنها الفئة الإيجابية:
+من العلامات [0، 1]، 1 هي الفئة الإيجابية؛ من [1، 2]، 2 هي الفئة الإيجابية؛ من [‘no’، ‘yes’]، ‘yes’ هي الفئة الإيجابية؛ من [‘no’، ‘YES’]،
+‘no’ هي الفئة الإيجابية. يؤثر هذا على إخراج :term: <code class="docutils literal notranslate"><span class="pre">decision_function</span></code>، على سبيل المثال.</p>
+<p>لاحظ أن مجموعة البيانات التي تم أخذ عينات منها من فئة متعددة “y” أو “y” مستمرة
+قد يبدو ثنائي.</p>
+<dl class="field-list simple">
+<dt class="field-odd">func<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">~</span> <span class="pre">utils.multiclass.type_of_target</span></code> سوف يعيد ‘binary’ لـ</p>
+</dd>
+</dl>
+<p>إدخال ثنائي، أو مصفوفة مماثلة مع وجود فئة واحدة فقط.</p>
+</dd>
+<dt id="term-continuous">continuous<a class="headerlink" href="#term-continuous" title="Link to this term">#</a></dt><dd><p>مشكلة ارتجاع حيث يكون هدف كل عينة رقمًا عائمًا محدودًا يتم تمثيله كمصفوفة أحادية البعد من النقاط العائمة (أو في بعض الأحيان ints).</p>
+<dl class="field-list simple">
+<dt class="field-odd">func<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">~</span> <span class="pre">utils.multiclass.type_of_target</span></code> سوف يعيد ‘continuous’ لـ</p>
+</dd>
+</dl>
+<p>إدخال مستمر، ولكن إذا كانت البيانات كلها أعداد صحيحة، فسيتم تحديدها على أنها ‘multiclass’.</p>
+</dd>
+<dt id="term-continuous-multioutput">continuous multioutput<a class="headerlink" href="#term-continuous-multioutput" title="Link to this term">#</a></dt><dt id="term-continuous-multi-output">continuous multi-output<a class="headerlink" href="#term-continuous-multi-output" title="Link to this term">#</a></dt><dt id="term-multioutput-continuous">multioutput continuous<a class="headerlink" href="#term-multioutput-continuous" title="Link to this term">#</a></dt><dt id="term-multi-output-continuous">multi-output continuous<a class="headerlink" href="#term-multi-output-continuous" title="Link to this term">#</a></dt><dd><p>مشكلة ارتجاع حيث يتكون هدف كل عينة من “n_outputs”
+:term: <code class="docutils literal notranslate"><span class="pre">outputs</span></code>، كل منها رقم عائم محدود، لـ
+عدد صحيح ثابت “n_outputs&gt; 1” في مجموعة بيانات معينة.</p>
+<p>يتم تمثيل الأهداف المستمرة متعددة الإخراج على أنها متعددة
+أهداف مستمرة :term:، مكدسة أفقيًا في مصفوفة
+الشكل “(n_samples، n_outputs)”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">func<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">~</span> <span class="pre">utils.multiclass.type_of_target</span></code> سوف يعيد</p>
+</dd>
+</dl>
+<p>‘continuous-multioutput’ لإدخال مستمر متعدد الإخراج، ولكن إذا كانت
+البيانات كلها أعداد صحيحة، فسيتم تحديدها على أنها
+‘multiclass-multioutput’.</p>
+</dd>
+<dt id="term-multiclass">multiclass<a class="headerlink" href="#term-multiclass" title="Link to this term">#</a></dt><dt id="term-multi-class">multi-class<a class="headerlink" href="#term-multi-class" title="Link to this term">#</a></dt><dd><p>مشكلة تصنيف تتكون من أكثر من فئتين. يمكن تمثيل الهدف متعدد الفئات على أنه مصفوفة أحادية البعد من
+السلاسل أو الأعداد الصحيحة. يتم أيضًا قبول متجه عمود ثنائي الأبعاد (أي
+إخراج واحد في مصطلحات :term: <code class="docutils literal notranslate"><span class="pre">multioutput</span></code>).</p>
+<p>لا ندعم رسميًا كائنات أخرى قابلة للترتيب وقابلة للتجزئة كعلامات فئات، حتى إذا كان من المحتمل أن تعمل التقديرات عند إعطائها
+أهداف التصنيف من هذا النوع.</p>
+<p>للتصنيف شبه المُشرف، يجب أن تحتوي العينات “غير المُوسومة” على العلامة الخاصة -1 في “y”.</p>
+<p>في scikit-learn، تدعم جميع التقديرات التي تدعم التصنيف الثنائي
+التصنيف متعدد الفئات أيضًا، باستخدام One-vs-Rest بشكل افتراضي.</p>
+<p>تساعد :class: <code class="docutils literal notranslate"><span class="pre">preprocessing.LabelEncoder</span></code> على توحيد الأهداف متعددة الفئات كأعداد صحيحة.</p>
+<dl class="field-list simple">
+<dt class="field-odd">func<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">~</span> <span class="pre">utils.multiclass.type_of_target</span></code> سوف يعيد ‘multiclass’ لـ</p>
+</dd>
+</dl>
+<p>إدخال متعدد الفئات. قد يرغب المستخدم أيضًا في التعامل مع إدخال ‘binary’
+بشكل متطابق مع ‘multiclass’.</p>
+</dd>
+<dt id="term-multiclass-multioutput">multiclass multioutput<a class="headerlink" href="#term-multiclass-multioutput" title="Link to this term">#</a></dt><dt id="term-multi-class-multi-output">multi-class multi-output<a class="headerlink" href="#term-multi-class-multi-output" title="Link to this term">#</a></dt><dt id="term-multioutput-multiclass">multioutput multiclass<a class="headerlink" href="#term-multioutput-multiclass" title="Link to this term">#</a></dt><dt id="term-multi-output-multi-class">multi-output multi-class<a class="headerlink" href="#term-multi-output-multi-class" title="Link to this term">#</a></dt><dd><p>مشكلة تصنيف حيث يتكون هدف كل عينة من
+“n_outputs” :term: <code class="docutils literal notranslate"><span class="pre">outputs</span></code>، كل منها تسمية فئة، لـ
+عدد صحيح ثابت “n_outputs&gt; 1” في مجموعة بيانات معينة. يحتوي كل إخراج على
+مجموعة ثابتة من الفئات المتاحة، ويتم وضع علامة على كل عينة باستخدام
+فئة لكل إخراج. قد يكون الإخراج ثنائيًا أو متعدد الفئات، وفي
+في الحالة التي تكون فيها جميع الإخراج ثنائية، يكون الهدف
+:term: <code class="docutils literal notranslate"><span class="pre">multilabel</span></code>.</p>
+<p>يتم تمثيل الأهداف متعددة الفئات متعددة الإخراج على أنها متعددة
+أهداف متعددة الفئات :term:، مكدسة أفقيًا في مصفوفة
+الشكل “(n_samples، n_outputs)”.</p>
+<p>XXX: من أجل البساطة، قد لا ندعم دائمًا تسميات الفئات السلسلة
+للأهداف متعددة الفئات متعددة الإخراج، ويجب استخدام تسميات الفئات الصحيحة.</p>
+<p>يوفر :mod: <code class="docutils literal notranslate"><span class="pre">~</span> <span class="pre">sklearn.multioutput</span></code> التقديرات التي تقدر مشكلات الإخراج المتعددة
+باستخدام العديد من التقديرات ذات الإخراج الفردي. قد لا يراعي هذا تمامًا
+الاعتماد على الإخراج المختلف، والذي قد تقوم به الطرق التي تتعامل بشكل طبيعي مع
+حالة الإخراج المتعدد (مثل أشجار القرار، والجيران الأقرب، والشبكات العصبية) بشكل أفضل.</p>
+<dl class="field-list simple">
+<dt class="field-odd">func<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">~</span> <span class="pre">utils.multiclass.type_of_target</span></code> سوف يعيد</p>
+</dd>
+</dl>
+<p>‘multiclass-multioutput’ لإدخال متعدد الفئات متعدد الإخراج.</p>
+</dd>
+<dt id="term-multilabel">multilabel<a class="headerlink" href="#term-multilabel" title="Link to this term">#</a></dt><dt id="term-multi-label">multi-label<a class="headerlink" href="#term-multi-label" title="Link to this term">#</a></dt><dd><dl class="field-list simple">
+<dt class="field-odd">term<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">multiclass</span> <span class="pre">multioutput</span></code> target حيث يكون كل إخراج</p>
+</dd>
+<dt class="field-even">term<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">binary</span></code>. قد يتم تمثيل هذا على أنه مصفوفة ثنائية الأبعاد (كثيفة) أو</p>
+</dd>
+</dl>
+<p>مصفوفة متفرقة من الأعداد الصحيحة، بحيث يكون كل عمود هدفًا ثنائيًا منفصلاً، حيث يتم الإشارة إلى العلامات الإيجابية بـ 1 والعلامات السلبية
+عادة -1 أو 0. لا يتم دعم الأهداف متعددة التصنيفات المتناثرة في كل مكان
+حيث يتم دعم الأهداف متعددة التصنيفات الكثيفة.</p>
+<p>من الناحية الدلالية، يمكن اعتبار الهدف متعدد التصنيفات على أنه مجموعة من التصنيفات
+لكل عينة. في حين أنه لا يستخدم داخليًا،
+:class: <code class="docutils literal notranslate"><span class="pre">preprocessing.MultiLabelBinarizer</span></code> يتم توفيرها كمرفق للتحويل من
+تمثيل قائمة المجموعات إلى مصفوفة ثنائية الأبعاد أو مصفوفة متفرقة. يؤدي الترميز الساخن لهدف متعدد الفئات باستخدام
+:class: <code class="docutils literal notranslate"><span class="pre">preprocessing.LabelBinarizer</span></code> يحوله إلى مشكلة متعددة التصنيفات.</p>
+<dl class="field-list simple">
+<dt class="field-odd">func<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">~</span> <span class="pre">utils.multiclass.type_of_target</span></code> سوف يعيد</p>
+</dd>
+</dl>
+<p>‘multilabel-indicator’ لإدخال متعدد التصنيفات، سواء كان متفرقًا أو كثيفًا.</p>
+</dd>
+<dt id="term-multioutput">multioutput<a class="headerlink" href="#term-multioutput" title="Link to this term">#</a></dt><dt id="term-multi-output">multi-output<a class="headerlink" href="#term-multi-output" title="Link to this term">#</a></dt><dd><p>هدف يحتوي على عدة تسميات تصنيف/ارتجاع لكل عينة. راجع :term: <code class="docutils literal notranslate"><span class="pre">multiclass</span> <span class="pre">multioutput</span></code> و: term: <code class="docutils literal notranslate"><span class="pre">continuous</span>
+<span class="pre">multioutput</span></code>. لا ندعم حاليًا نمذجة الأهداف المختلطة
+التصنيف والارتداد.</p>
+</dd>
+</dl>
+<p id="glossary-methods">الأساليب
+يسرد هذا القاموس المصطلحات المستخدمة في الوثائق المرجعية لـ scikit-learn، ويصف معناها في سياق المكتبة.</p>
+<dl class="glossary">
+<dt id="term-decision_function"><code class="docutils literal notranslate"><span class="pre">decision_function</span></code><a class="headerlink" href="#term-decision_function" title="Link to this term">#</a></dt><dd><p>في <a class="reference internal" href="#term-classifier"><span class="xref std std-term">classifier</span></a> أو <a class="reference internal" href="#term-outlier-detector"><span class="xref std std-term">outlier detector</span></a> المناسب، يتنبأ بـ “soft”
+النتيجة لكل عينة فيما يتعلق بكل فئة، بدلاً من التنبؤ “الصعب”
+التنبؤ التصنيفي الذي ينتجه <a class="reference internal" href="#term-predict"><span class="xref std std-term">predict</span></a>. عادةً ما يكون الإدخال
+فقط بعض البيانات الملاحظة، <a class="reference internal" href="#term-X"><span class="xref std std-term">X</span></a>.</p>
+<p>إذا لم يكن المثمن مناسبًا بالفعل، فيجب أن يؤدي استدعاء هذه الطريقة
+إلى رفع <code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.NotFittedError</span></code>.</p>
+<p>اتفاقيات الإخراج:</p>
+<dl class="simple">
+<dt>التصنيف الثنائي</dt><dd><p>مصفوفة أحادية البعد، حيث تشير القيم التي تزيد عن الصفر بشكل صارم
+إلى الفئة الإيجابية (أي الفئة الأخيرة في <a class="reference internal" href="#term-classes_"><span class="xref std std-term">classes_</span></a>).</p>
+</dd>
+<dt>التصنيف متعدد الفئات</dt><dd><p>مصفوفة ثنائية الأبعاد، حيث يكون الحد الأقصى للجدول هو الفئة المتوقعة.
+يتم ترتيب الأعمدة وفقًا لـ <a class="reference internal" href="#term-classes_"><span class="xref std std-term">classes_</span></a>.</p>
+</dd>
+<dt>التصنيف متعدد التصنيفات</dt><dd><p>لا يتسق Scikit-learn في تمثيله لـ <a class="reference internal" href="#term-multilabel"><span class="xref std std-term">multilabel</span></a>
+وظائف القرار. قد يتم تمثيله بطريقتين:</p>
+<ul class="simple">
+<li><p>قائمة من المصفوفات ثنائية الأبعاد، حيث تكون كل مصفوفة من الشكل:
+(‘n_samples’، 2)، كما هو الحال في التصنيف متعدد الفئات متعدد الإخراج.
+القائمة هي من طول ‘n_labels’.</p></li>
+<li><p>مصفوفة ثنائية الأبعاد واحدة من الشكل (‘n_samples’، ‘n_labels’)، مع
+يتم تمثيل كل “عمود” في المصفوفة بقرارات التصنيف الثنائية الفردية.
+هذا مطابق لتنسيق التصنيف متعدد الفئات، على الرغم من اختلاف الدلالات:
+يجب تفسيره، كما هو الحال في الحالة الثنائية، عن طريق العتبة عند
+0.</p></li>
+</ul>
+</dd>
+<dt>التصنيف متعدد الإخراج</dt><dd><p>قائمة من المصفوفات ثنائية الأبعاد، المقابلة لكل وظيفة قرار متعددة الفئات.</p>
+</dd>
+<dt>كشف الشذوذ</dt><dd><p>مصفوفة أحادية البعد، حيث تشير قيمة أكبر من أو تساوي الصفر
+إلى قيمة شاذة.</p>
+</dd>
+</dl>
+</dd>
+<dt id="term-fit"><code class="docutils literal notranslate"><span class="pre">fit</span></code><a class="headerlink" href="#term-fit" title="Link to this term">#</a></dt><dd><p>يتم توفير طريقة “fit” في كل مثمن. عادة ما يأخذ بعض
+<span class="xref std std-term">samples</span> <code class="docutils literal notranslate"><span class="pre">X</span></code>، <span class="xref std std-term">targets</span> <code class="docutils literal notranslate"><span class="pre">y</span></code> إذا كان النموذج مشرفًا،
+وربما خصائص العينة الأخرى مثل <a class="reference internal" href="#term-sample_weight"><span class="xref std std-term">sample_weight</span></a>. يجب أن:</p>
+<ul class="simple">
+<li><p>مسح أي <a class="reference internal" href="#term-attributes"><span class="xref std std-term">attributes</span></a> المخزنة مسبقًا على المثمن، ما لم
+<a class="reference internal" href="#term-warm_start"><span class="xref std std-term">warm_start</span></a> مستخدمة؛</p></li>
+<li><p>التحقق من صحة وتفسير أي <span class="xref std std-term">parameters</span>، ويفضل رفع خطأ
+إذا كانت غير صالحة؛</p></li>
+<li><p>التحقق من صحة بيانات الإدخال؛</p></li>
+<li><p>تقدير وتخزين سمات النموذج من المعلمات المقدرة
+وبيانات مقدمة؛ و</p></li>
+<li><p>إرجاع المثمن المناسب الآن لتسهيل تسلسل الطريقة.</p></li>
+</ul>
+<p><a class="reference internal" href="#glossary-target-types"><span class="std std-ref">أنواع الأهداف</span></a> يصف التنسيقات الممكنة لـ “y”.</p>
+</dd>
+<dt id="term-fit_predict"><code class="docutils literal notranslate"><span class="pre">fit_predict</span></code><a class="headerlink" href="#term-fit_predict" title="Link to this term">#</a></dt><dd><p>تستخدم بشكل خاص لمقدرات <span class="xref std std-term">unsupervised</span>، <span class="xref std std-term">transductive</span>
+، تناسب هذه الطريقة النموذج وتعيد التوقعات (مشابهة
+<a class="reference internal" href="#term-predict"><span class="xref std std-term">predict</span></a>) على بيانات التدريب. في التجميع، يتم أيضًا تخزين هذه التوقعات
+في <a class="reference internal" href="#term-labels_"><span class="xref std std-term">labels_</span></a> السمة، ويكون إخراج “fit_predict(X)” عادةً
+مكافئًا لـ “.fit(X).predict(X)”.
+تكون معلمات “fit_predict” هي نفسها الخاصة بـ “fit”.</p>
+</dd>
+<dt id="term-fit_transform"><code class="docutils literal notranslate"><span class="pre">fit_transform</span></code><a class="headerlink" href="#term-fit_transform" title="Link to this term">#</a></dt><dd><p>طريقة في <a class="reference internal" href="#term-transformers"><span class="xref std std-term">transformers</span></a> التي تناسب المثمن وتعيد
+بيانات التدريب المحولة. يأخذ المعلمات كما هو الحال في <a class="reference internal" href="#term-fit"><span class="xref std std-term">fit</span></a>
+يجب أن يكون شكل الإخراج هو نفسه كما هو الحال عند استدعاء “.fit(X،
+…).transform(X)”. ومع ذلك، هناك حالات نادرة حيث
+“fit_transform(X، …)” و “.fit(X، …).transform(X)”
+لا تعيد نفس القيمة، حيث يجب التعامل مع بيانات التدريب بشكل مختلف
+(بسبب مزج النماذج في المجموعات المكدسة، على سبيل المثال؛
+يجب توثيق مثل هذه الحالات بوضوح).
+قد توفر المحولات <span class="xref std std-term">Transductive</span> أيضًا
+<code class="docutils literal notranslate"><span class="pre">fit_transform</span></code> ولكن ليس <span class="xref std std-term">transform</span>.</p>
+<p>أحد أسباب تنفيذ “fit_transform” هو أن إجراء “fit”
+و “transform” بشكل منفصل سيكون أقل كفاءة من معًا.
+يوفر <code class="xref py py-class docutils literal notranslate"><span class="pre">base.TransformerMixin</span></code> تنفيذًا افتراضيًا،
+توفير واجهة متسقة عبر المحولات حيث “fit_transform”
+يتم أو لا يتم التخصص.</p>
+<p>في التعلم <span class="xref std std-term">inductive</span> - حيث يتمثل الهدف في تعلم نموذج معمم
+يمكن تطبيقه على بيانات جديدة - يجب أن يكون المستخدمون حذرين
+لا تطبق “fit_transform” على مجموعة البيانات بأكملها
+(أي بيانات التدريب واختبار معًا) قبل إجراء المزيد من النمذجة، كما هو الحال
+يؤدي ذلك إلى <span class="xref std std-term">data leakage</span>.</p>
+</dd>
+<dt id="term-get_feature_names_out"><code class="docutils literal notranslate"><span class="pre">get_feature_names_out</span></code><a class="headerlink" href="#term-get_feature_names_out" title="Link to this term">#</a></dt><dd><p>في المقام الأول لمستخلصات الميزات، ولكن أيضًا
+من قبل المحولات الأخرى لتوفير أسماء السلاسل لكل عمود في
+إخراج طريقة التحويل الخاصة بالمثمن. ينتج مصفوفة من السلاسل
+قد يأخذ كإدخال مصفوفة تشبه السلسلة المقابلة
+أسماء أعمدة الإدخال التي يمكن استخدامها لتوليد أسماء أعمدة الإخراج.
+إذا لم يتم تمرير ‘input_features’، فسيتم استخدام السمة
+<code class="docutils literal notranslate"><span class="pre">feature_names_in_</span></code>. إذا لم يتم تحديد السمة
+<code class="docutils literal notranslate"><span class="pre">feature_names_in_</span></code>، فسيتم تسمية أسماء الإدخال
+‘[x0، x1، …، x(<a href="#id13"><span class="problematic" id="id14">n_features_in_</span></a> - 1)]’.</p>
+</dd>
+<dt id="term-get_n_splits"><code class="docutils literal notranslate"><span class="pre">get_n_splits</span></code><a class="headerlink" href="#term-get_n_splits" title="Link to this term">#</a></dt><dd><p>على <a class="reference internal" href="#term-CV-splitter"><span class="xref std std-term">CV splitter</span></a> (ليس مثمنًا)، يعيد عدد العناصر التي سيتم الحصول عليها
+إذا تم التكرار خلال قيمة الإرجاع لـ <span class="xref std std-term">split</span>
+يتم تمرير نفس المعلمات. تأخذ نفس المعلمات مثل الانقسام.</p>
+</dd>
+<dt id="term-get_params"><code class="docutils literal notranslate"><span class="pre">get_params</span></code><a class="headerlink" href="#term-get_params" title="Link to this term">#</a></dt><dd><p>يحصل على جميع <span class="xref std std-term">parameters</span>، وقيمها، التي يمكن تعيينها باستخدام
+<span class="xref std std-term">set_params</span>. يمكن استخدام معلمة “عميقة” عند الإعداد
+إلى False للعودة فقط إلى تلك المعلمات التي لا تحتوي على “__”، أي
+ليس بسبب الاستدلال غير المباشر عبر المثمنات المحتواة.</p>
+<p>يعتمد معظم المقدرين التعريف من <code class="xref py py-class docutils literal notranslate"><span class="pre">base.BaseEstimator</span></code>،
+الذي يعتمد ببساطة المعلمات المحددة لـ “__init__”.
+يعيد <code class="xref py py-class docutils literal notranslate"><span class="pre">pipeline.Pipeline</span></code>، من بين أمور أخرى، تعريف “get_params”
+للإعلان عن المقدرات المسماة في معلمة “الخطوات” الخاصة بها
+أنفسهم كمعلمات.</p>
+</dd>
+<dt id="term-partial_fit"><code class="docutils literal notranslate"><span class="pre">partial_fit</span></code><a class="headerlink" href="#term-partial_fit" title="Link to this term">#</a></dt><dd><p>يسهل تناسب المثمن بطريقة عبر الإنترنت. على عكس “fit”،
+لا يؤدي استدعاء “partial_fit” بشكل متكرر إلى مسح النموذج، ولكنه
+تحديثه بالبيانات المقدمة. قد يُطلق على جزء البيانات
+المقدمة إلى “partial_fit” اسم مصغر.
+يجب أن يكون لكل مصغر نفس الشكل، إلخ. في المقدرات التكرارية،
+غالبًا ما يؤدي “partial_fit” إلى تنفيذ تكرار واحد فقط.</p>
+<p>قد يتم استخدام “partial_fit” أيضًا للتعلم <span class="xref std std-term">out-of-core</span>،
+على الرغم من أنه يقتصر عادةً على الحالة التي يمكن فيها إجراء التعلم عبر الإنترنت، أي
+يمكن استخدام النموذج بعد كل “partial_fit” وليس هناك
+معالجة منفصلة مطلوبة لإنهاء النموذج.
+يقدم <code class="xref py py-class docutils literal notranslate"><span class="pre">cluster.Birch</span></code> الاتفاقية التي تنص على أن استدعاء
+“partial_fit(X)” سينتج عنه نموذج غير نهائي، ولكن
+يمكن نهائي النموذج عن طريق استدعاء “partial_fit()” أي
+بدون تمرير مصغر آخر.</p>
+<p>بشكل عام، يجب ألا يتم تعديل معلمات المثمن بين الاستدعاءات
+إلى “partial_fit”، على الرغم من أنه يجب أن يتحقق منها
+وكذلك مصغر البيانات الجديد. على النقيض من ذلك، “warm_start”
+يتم استخدامه لتناسب نفس المثمن بنفس البيانات
+ولكن مع اختلاف المعلمات.</p>
+<p>مثل “fit”، يجب أن تعيد “partial_fit” كائن المقدر.</p>
+<p>لتنظيف النموذج، يجب إنشاء مثمن جديد، على سبيل المثال
+مع <code class="xref py py-func docutils literal notranslate"><span class="pre">base.clone</span></code>.</p>
+<p>ملاحظة: يؤدي استخدام “partial_fit” بعد “fit” إلى سلوك غير محدد.</p>
+</dd>
+<dt id="term-predict"><code class="docutils literal notranslate"><span class="pre">predict</span></code><a class="headerlink" href="#term-predict" title="Link to this term">#</a></dt><dd><p>يقوم بتنبؤ لكل عينة، وعادة ما يأخذ فقط <a class="reference internal" href="#term-X"><span class="xref std std-term">X</span></a> كإدخال (ولكن راجع
+اتفاقيات إخراج المُرجع أدناه). في <a class="reference internal" href="#term-classifier"><span class="xref std std-term">classifier</span></a> أو
+<a class="reference internal" href="#term-regressor"><span class="xref std std-term">regressor</span></a>، يكون هذا التنبؤ في نفس
+مساحة الهدف المستخدمة في التجهيز (على سبيل المثال، واحدة من {‘red’، ‘amber’، ‘green’} إذا
+كانت “y” في التجهيز تتكون من هذه السلاسل). على الرغم من ذلك، حتى عندما
+“y” التي تم تمريرها إلى <a class="reference internal" href="#term-fit"><span class="xref std std-term">fit</span></a> قائمة أو مصفوفة تشبه أخرى،
+يجب أن يكون إخراج “predict” مصفوفة أو مصفوفة متفرقة دائمًا. في
+<a class="reference internal" href="#term-clusterer"><span class="xref std std-term">clusterer</span></a> أو <a class="reference internal" href="#term-outlier-detector"><span class="xref std std-term">outlier detector</span></a> التنبؤ هو
+عدد صحيح.</p>
+<p>إذا لم يكن المثمن مناسبًا بالفعل، فيجب أن يؤدي استدعاء هذه الطريقة
+إلى رفع <code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.NotFittedError</span></code>.</p>
+<p>اتفاقيات الإخراج:</p>
+<dl class="simple">
+<dt>المصنف</dt><dd><p>مصفوفة من الشكل “(n_samples،)” “(n_samples، n_outputs)”.
+قد يتم تمثيل بيانات <a class="reference internal" href="#term-multilabel"><span class="xref std std-term">Multilabel</span></a> كمصفوفة متفرقة إذا
+تم استخدام مصفوفة متفرقة في التجهيز. يجب أن يكون كل عنصر
+واحدة من القيم الموجودة في سمة “<a href="#id15"><span class="problematic" id="id16">classes_</span></a>” الخاصة بالمصنف
+السمة.</p>
+</dd>
+<dt>التجميع</dt><dd><p>مصفوفة من الشكل “(n_samples،)” حيث تكون كل قيمة من 0 إلى
+“n_clusters - 1” إذا تم تجميع العينة المقابلة،
+و -1 إذا لم يتم تجميع العينة، كما هو الحال في
+<code class="xref py py-func docutils literal notranslate"><span class="pre">cluster.dbscan</span></code>.</p>
+</dd>
+<dt>كاشف الشذوذ</dt><dd><p>مصفوفة من الشكل “(n_samples،)” حيث تكون كل قيمة -1 لشذوذ و 1 خلاف ذلك.</p>
+</dd>
+<dt>المُرجع</dt><dd><p>مصفوفة رقمية من الشكل “(n_samples،)”، عادةً float64.
+تحتوي بعض المُرجعات على خيارات إضافية في طريقة “predict” الخاصة بها،
+السماح لهم بإرجاع الانحراف المعياري (<code class="docutils literal notranslate"><span class="pre">return_std=True</span></code>)
+أو التباين (<code class="docutils literal notranslate"><span class="pre">return_cov=True</span></code>) فيما يتعلق بالقيمة المتوقعة.
+في هذه الحالة، تكون قيمة الإرجاع عبارة عن مجموعة من المصفوفات
+(التنبؤ، std، cov) كما هو مطلوب.</p>
+</dd>
+</dl>
+</dd>
+<dt id="term-predict_log_proba"><code class="docutils literal notranslate"><span class="pre">predict_log_proba</span></code><a class="headerlink" href="#term-predict_log_proba" title="Link to this term">#</a></dt><dd><p>اللوغاريتم الطبيعي لإخراج <a class="reference internal" href="#term-predict_proba"><span class="xref std std-term">predict_proba</span></a>، المقدم
+لتسهيل الاستقرار العددي.</p>
+</dd>
+<dt id="term-predict_proba"><code class="docutils literal notranslate"><span class="pre">predict_proba</span></code><a class="headerlink" href="#term-predict_proba" title="Link to this term">#</a></dt><dd><p>طريقة في <a class="reference internal" href="#term-classifiers"><span class="xref std std-term">classifiers</span></a> و <a class="reference internal" href="#term-clusterers"><span class="xref std std-term">clusterers</span></a> التي يمكن
+إرجاع تقديرات الاحتمالية لكل class/cluster. عادة ما يكون الإدخال
+فقط بعض البيانات الملاحظة، <a class="reference internal" href="#term-X"><span class="xref std std-term">X</span></a>.</p>
+<p>إذا لم يكن المثمن مناسبًا بالفعل، فيجب أن يؤدي استدعاء هذه الطريقة
+إلى رفع <code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.NotFittedError</span></code>.</p>
+<p>اتفاقيات الإخراج مثل تلك الخاصة بـ <a class="reference internal" href="#term-decision_function"><span class="xref std std-term">decision_function</span></a> باستثناء
+في حالة التصنيف الثنائي، حيث يتم إخراج عمود لكل فئة (بينما
+ينتج “decision_function” مصفوفة أحادية البعد). للتنبؤات الثنائية والمتعددة الفئات،
+يجب أن يضيف كل صف إلى 1.</p>
+<p>مثل الطرق الأخرى، يجب ألا يكون “predict_proba” موجودًا إلا عندما
+يمكن للمثمن إجراء تنبؤات احتمالية (انظر <span class="xref std std-term">duck typing</span>).
+هذا يعني أن وجود الطريقة قد يعتمد على معلمات المثمن (على سبيل المثال في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">linear_model.SGDClassifier</span></code>) أو بيانات التدريب (على سبيل المثال في
+<code class="xref py py-class docutils literal notranslate"><span class="pre">model_selection.GridSearchCV</span></code>) وقد لا يظهر إلا بعد التجهيز.</p>
+</dd>
+<dt id="term-score"><code class="docutils literal notranslate"><span class="pre">score</span></code><a class="headerlink" href="#term-score" title="Link to this term">#</a></dt><dd><p>طريقة في المثمن، عادةً ما تكون <a class="reference internal" href="#term-predictor"><span class="xref std std-term">predictor</span></a>، والتي تقيم
+تنبؤاته على مجموعة بيانات معينة، وتعيد نتيجة رقمية واحدة.
+يجب أن يشير ناتج القيمة الأكبر إلى تنبؤات أفضل؛ يتم استخدام الدقة للتصنيفات و
+R^2 للمرجعيات بشكل افتراضي.</p>
+<p>إذا لم يكن المثمن مناسبًا بالفعل، فيجب أن يؤدي استدعاء هذه الطريقة
+إلى رفع <code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.NotFittedError</span></code>.</p>
+<p>يقوم بعض المقدرين بتنفيذ دالة تقييم مخصصة خاصة بالمثمن،
+غالبًا ما يكون احتمال البيانات وفقًا للنموذج.</p>
+</dd>
+<dt id="term-score_samples"><code class="docutils literal notranslate"><span class="pre">score_samples</span></code><a class="headerlink" href="#term-score_samples" title="Link to this term">#</a></dt><dd><p>طريقة تعيد درجة لكل عينة معينة. يعتمد التعريف الدقيق لـ
+<em>درجة</em> تختلف من فئة إلى أخرى. في حالة تقدير الكثافة، يمكن أن يكون
+سجل كثافة النموذج على البيانات، وفي حالة اكتشاف الشذوذ، يمكن أن يكون
+عكس عامل الشذوذ للبيانات.</p>
+<p>إذا لم يكن المثمن مناسبًا بالفعل، فيجب أن يؤدي استدعاء هذه الطريقة
+إلى رفع <code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.NotFittedError</span></code>.</p>
+</dd>
+</dl>
+<p>“set_params”
+تتوفر في أي أداة تقدير، وتأخذ وسائط الكلمات الرئيسية المقابلة للمفاتيح في: term: <code class="docutils literal notranslate"><span class="pre">get_params</span></code>. يتم توفير كل منها بقيمة جديدة لتعيينها بحيث يعكس استدعاء “get_params” بعد “set_params” تم تغيير: المصطلح: <code class="docutils literal notranslate"><span class="pre">parameters</span></code>. يستخدم معظم المقدرات التنفيذ في: class: <code class="docutils literal notranslate"><span class="pre">base.BaseEstimator</span></code>، والذي يتعامل مع المعلمات المضمنة، وإلا فإنه يحدد المعلمة كسمة للمقدّر. يتم تجاوز الطريقة في: class: <code class="docutils literal notranslate"><span class="pre">pipeline.Pipeline</span></code> والمقدرات ذات الصلة.</p>
+<p>“split”
+في أداة تقسيم CV (ليس مقدرًا)، تقبل هذه الطريقة المعلمات (X، y، groups)، حيث قد تكون جميعها اختيارية، وتعيد مؤشرًا إلى أزواج “train_idx، test_idx”. كل من train_idx وtest_idx عبارة عن مصفوفة أعداد صحيحة أحادية الأبعاد، بقيم تتراوح من 0 إلى “X.shape[0] - 1” بأي طول، بحيث لا تظهر أي قيم في كل من “train_idx” و”test_idx” المقابل.</p>
+<p>“التحويل”
+في: مصطلح: <code class="docutils literal notranslate"><span class="pre">transformer</span></code>، يحول المدخلات، عادةً فقط: مصطلح: <code class="docutils literal notranslate"><span class="pre">X</span></code>، إلى مساحة محولة (عادة ما يتم تمييزها بواسطة: مصطلح: <code class="docutils literal notranslate"><span class="pre">Xt</span></code>). الإخراج هو مصفوفة أو مصفوفة متفرقة بطول: مصطلح: <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> وبعدد أعمدة ثابت بعد: مصطلح: <code class="docutils literal notranslate"><span class="pre">fitting</span></code>.</p>
+<p>إذا لم يتم: مصطلح: <code class="docutils literal notranslate"><span class="pre">fitted</span></code> المقدر بالفعل، فيجب أن يؤدي استدعاء هذه الطريقة إلى إثارة: class: <code class="docutils literal notranslate"><span class="pre">exceptions.NotFittedError</span></code>.</p>
+<p id="glossary-parameters">المعلمات
+هذه الأسماء الشائعة لمعلمات، والتي تستخدم بشكل خاص في بناء المُقدِّر (راجع المفهوم: مصطلح “معلمة”)، تظهر أيضًا أحيانًا كمعلمات لوظائف أو بُناة غير المُقدِّر.</p>
+<dl class="glossary">
+<dt id="term-class_weight"><code class="docutils literal notranslate"><span class="pre">class_weight</span></code><a class="headerlink" href="#term-class_weight" title="Link to this term">#</a></dt><dd><p>تُستخدم لتحديد أوزان العينات عند تناسب المصنفات كدالة لفئة “الهدف”. عندما يكون “sample_weight” مدعومًا أيضًا ومُعطى، فإنه يُضرب في مساهمة “class_weight”. وبالمثل، عندما تُستخدم “class_weight” في مهام “multioutput” (بما في ذلك “multilabel”)، يتم ضرب الأوزان عبر المخرجات (أي أعمدة “y”).</p>
+<p>بشكل افتراضي، يكون لجميع العينات وزن متساوٍ بحيث يتم ترجيح الفئات فعليًا حسب انتشارها في بيانات التدريب. يمكن تحقيق ذلك بشكل صريح باستخدام “class_weight={label1: 1, label2: 1, …}” لجميع تسميات الفئات.</p>
+<p>بشكل عام، يتم تحديد “class_weight” كقاموس يقوم بمَوْضَعة تسميات الفئات إلى أوزان (<code class="docutils literal notranslate"><span class="pre">{class_label:</span> <span class="pre">weight}</span></code>)، بحيث يتم إعطاء كل عينة من الفئة المسماة ذلك الوزن.</p>
+<p>يمكن استخدام “class_weight=’balanced’” لإعطاء جميع الفئات وزنًا متساويًا عن طريق إعطاء كل عينة وزنًا عكسيًا يتعلق بانتشار فئتها في بيانات التدريب: “n_samples / (n_classes * np.bincount(y))”. ستُستخدم أوزان الفئات بشكل مختلف اعتمادًا على الخوارزمية: بالنسبة للنماذج الخطية (مثل SVM الخطي أو الانحدار اللوجستي)، ستعدل أوزان الفئات دالة الخسارة عن طريق ترجيح خسارة كل عينة بوزن فئتها. وبالنسبة لخوارزميات الأشجار، ستُستخدم أوزان الفئات لإعادة ترجيح معيار الانقسام. لاحظ مع ذلك أن هذا إعادة التوازن لا يأخذ في الاعتبار وزن العينات في كل فئة.</p>
+<p>بالنسبة للتصنيف متعدد المخرجات، يتم استخدام قائمة من القواميس لتحديد الأوزان لكل مخرج. على سبيل المثال، بالنسبة للتصنيف متعدد التصنيفات بأربع فئات، يجب أن تكون الأوزان “[{0: 1, 1: 1}, {0: 1, 1: 5}, {0: 1, 1: 1}, {0: 1, 1: 1}]” بدلاً من “[{1:1}, {2:5}, {3:1}, {4:1}]”.</p>
+<p>يتم التحقق من معلمة “class_weight” وتفسيرها باستخدام “utils.class_weight.compute_class_weight”.</p>
+</dd>
+<dt id="term-cv"><code class="docutils literal notranslate"><span class="pre">cv</span></code><a class="headerlink" href="#term-cv" title="Link to this term">#</a></dt><dd><p>يحدد استراتيجية تقسيم الصدق التصادفي، كما هو مستخدم في الروتينات المستندة إلى الصدق التصادفي. “cv” متاح أيضًا في المُقدِّرات مثل “multioutput.ClassifierChain” أو “calibration.CalibratedClassifierCV” والتي تستخدم تنبؤات مُقدِّر واحد كبيانات تدريب لمُقدِّر آخر، لعدم المبالغة في تناسب الإشراف التدريبي.</p>
+<p>المدخلات الممكنة لـ “cv” عادة ما تكون:</p>
+<ul class="simple">
+<li><p>رقم صحيح، يحدد عدد الطيات في الصدق التصادفي K-fold. سيتم تقسيم الصدق التصادفي K إلى طبقات عبر الفئات إذا كان المُقدِّر هو مصنف (يتم تحديده بواسطة “base.is_classifier”) وقد تمثل “الأهداف” مشكلة تصنيف ثنائي أو متعدد الفئات (ولكن ليس متعدد المخرجات) (يتم تحديده بواسطة “utils.multiclass.type_of_target”).</p></li>
+<li><p>مثيل “cross-validation splitter”. راجع “دليل المستخدم” للحصول على splitters المتاحة داخل Scikit-learn.</p></li>
+<li><p>iterable يعطي تقسيمات التدريب/الاختبار.</p></li>
+</ul>
+<p>مع بعض الاستثناءات (خاصة عندما يكون عدم استخدام الصدق التصادفي على الإطلاق خيارًا)، يكون الافتراضي هو 5-fold.</p>
+<p>يتم التحقق من قيم “cv” وتفسيرها باستخدام “model_selection.check_cv”.</p>
+</dd>
+<dt id="term-kernel"><code class="docutils literal notranslate"><span class="pre">kernel</span></code><a class="headerlink" href="#term-kernel" title="Link to this term">#</a></dt><dd><p>يحدد دالة النواة التي يجب استخدامها بواسطة خوارزميات طريقة النواة. على سبيل المثال، لكل من المُقدِّرات “svm.SVC” و”gaussian_process.GaussianProcessClassifier” معلمة “kernel” التي تأخذ اسم النواة التي سيتم استخدامها كسلسلة أو دالة نواة قابلة للاستدعاء تُستخدم لحساب مصفوفة النواة. لمزيد من المعلومات، راجع “kernel_approximation” و”gaussian_process” أدلة المستخدم.</p>
+</dd>
+<dt id="term-max_iter"><code class="docutils literal notranslate"><span class="pre">max_iter</span></code><a class="headerlink" href="#term-max_iter" title="Link to this term">#</a></dt><dd><p>بالنسبة للمُقدِّرات التي تنطوي على تحسين تكراري، يحدد هذا العدد الأقصى من التكرارات التي سيتم تنفيذها في “fit”. إذا تم تشغيل “max_iter” من التكرارات بدون تقارب، فيجب رفع “ConvergenceWarning”. لاحظ أن تفسير “تكرار واحد” غير متسق عبر المُقدِّرات: يستخدم البعض، ولكن ليس كلهم، للإشارة إلى حقبة واحدة (أي مرور عبر كل عينة في البيانات).</p>
+<p>FIXME ربما يجب أن تكون لدينا بعض الاختبارات الشائعة حول العلاقة بين “ConvergenceWarning” و”max_iter”.</p>
+</dd>
+<dt id="term-memory"><code class="docutils literal notranslate"><span class="pre">memory</span></code><a class="headerlink" href="#term-memory" title="Link to this term">#</a></dt><dd><p>يستخدم بعض المُقدِّرات “joblib.Memory” لتخزين الحلول الجزئية أثناء التجهيز. لذلك، عندما يتم استدعاء “fit” مرة أخرى، يتم استذكار الحلول الجزئية ويمكن إعادة استخدامها.</p>
+<p>يمكن تحديد معلمة “memory” كسلسلة تحتوي على مسار إلى دليل، أو يمكن استخدام مثيل “joblib.Memory” (أو كائن له واجهة مماثلة، أي طريقة “cache”)</p>
+</dd>
+<dt id="term-memory-utils.validation.check_memory-.">يتم التحقق من قيم “memory” وتفسيرها باستخدام “utils.validation.check_memory”.<a class="headerlink" href="#term-memory-utils.validation.check_memory-." title="Link to this term">#</a></dt><dt id="term-metric"><code class="docutils literal notranslate"><span class="pre">metric</span></code><a class="headerlink" href="#term-metric" title="Link to this term">#</a></dt><dd><p>كمعلمة، هذه هي خطة لتحديد المسافة بين نقطتي بيانات. راجع “metrics.pairwise_distances”. في الممارسة العملية، بالنسبة لبعض الخوارزميات، يمكن استخدام مسافة غير صحيحة (واحدة لا تلتزم بمتباينة المثلث، مثل المسافة التماثلية).</p>
+<p>XXX: يستخدم التجميع الهرمي “affinity” بهذا المعنى.</p>
+<p>نستخدم أيضًا “metric” للإشارة إلى مقاييس التقييم، ولكن نتجنب استخدام هذا المعنى كاسم معلمة.</p>
+</dd>
+<dt id="term-n_components"><code class="docutils literal notranslate"><span class="pre">n_components</span></code><a class="headerlink" href="#term-n_components" title="Link to this term">#</a></dt><dd><p>عدد الميزات التي يجب أن يحولها “المحول” الإدخال إليها. راجع “<a href="#id17"><span class="problematic" id="id18">components_</span></a>” للحالة الخاصة للمشروع المائل.</p>
+</dd>
+<dt id="term-n_iter_no_change"><code class="docutils literal notranslate"><span class="pre">n_iter_no_change</span></code><a class="headerlink" href="#term-n_iter_no_change" title="Link to this term">#</a></dt><dd><p>عدد التكرارات بدون تحسن في انتظار إيقاف الإجراء التكراري. يُعرف هذا أيضًا باسم معلمة “الصبر”. يتم استخدامه عادةً مع “التوقف المبكر” لتجنب التوقف المبكر جدًا.</p>
+</dd>
+<dt id="term-n_jobs"><code class="docutils literal notranslate"><span class="pre">n_jobs</span></code><a class="headerlink" href="#term-n_jobs" title="Link to this term">#</a></dt><dd><p>تُستخدم هذه المعلمة لتحديد عدد العمليات أو الخيوط المتزامنة التي يجب استخدامها للروتينات الموازية باستخدام “joblib”.</p>
+<p>“n_jobs” هو رقم صحيح، يحدد العدد الأقصى للعمال المتزامنين الذين يعملون. إذا تم إعطاء 1، فلن يتم استخدام أي موازاة joblib على الإطلاق، وهو أمر مفيد للتصحيح. إذا تم تعيينه على -1، فسيتم استخدام جميع وحدات المعالجة المركزية. بالنسبة لـ “n_jobs” أقل من -1، يتم استخدام (n_cpus + 1 + n_jobs). على سبيل المثال، مع “n_jobs=-2”، يتم استخدام جميع وحدات المعالجة المركزية باستثناء واحدة.</p>
+<p>“n_jobs” هو “None” بشكل افتراضي، مما يعني “غير محدد”؛ سيتم تفسيره بشكل عام على أنه “n_jobs=1”، ما لم يحدد سياق “joblib.Parallel” الخلفي الحالي خلاف ذلك.</p>
+<p>لاحظ أنه حتى إذا كان “n_jobs=1”، فقد يتم استخدام الموازاة منخفضة المستوى (عبر Numpy وOpenMP) في بعض التكوينات.</p>
+<p>لمزيد من التفاصيل حول استخدام “joblib” وتفاعلاته مع scikit-learn، يرجى الرجوع إلى ملاحظاتنا حول “الموازاة”.</p>
+</dd>
+<dt id="term-pos_label"><code class="docutils literal notranslate"><span class="pre">pos_label</span></code><a class="headerlink" href="#term-pos_label" title="Link to this term">#</a></dt><dd><p>القيمة التي يجب ترميز التسميات الإيجابية بها في مشكلات التصنيف الثنائية التي لا يتم افتراض الفئة الإيجابية فيها. هذه القيمة مطلوبة عادةً لحساب مقاييس التقييم غير المتماثلة مثل الدقة والاستدعاء.</p>
+</dd>
+<dt id="term-random_state"><code class="docutils literal notranslate"><span class="pre">random_state</span></code><a class="headerlink" href="#term-random_state" title="Link to this term">#</a></dt><dd><p>عندما يكون التمييز العشوائي جزءًا من خوارزمية Scikit-learn، يمكن توفير معلمة “random_state” للتحكم في مولد الأرقام العشوائية المستخدم. لاحظ أن مجرد وجود “random_state” لا يعني أن التمييز العشوائي مستخدم دائمًا، فقد يعتمد على معلمة أخرى، مثل “shuffle”، يتم تعيينها.</p>
+<p>سيؤثر القيمة الممرورة على قابلية نتائج الدالة للتكرار (“fit”، “split”، أو أي دالة أخرى مثل “sklearn.cluster.k_means”). قد تكون قيمة “random_state” على النحو التالي:</p>
+<dl class="simple">
+<dt>None (افتراضي)</dt><dd><p>استخدم مثيل حالة عشوائي عالمي من “numpy.random”. سيؤدي استدعاء الدالة عدة مرات إلى إعادة استخدام
+نفس المثيل، وسيؤدي إلى نتائج مختلفة.</p>
+</dd>
+<dt>رقم صحيح</dt><dd><p>استخدم مولد أرقام عشوائي جديد تمت تهيئته بواسطة الرقم الصحيح المُعطى. سيؤدي استخدام رقم صحيح إلى إنتاج نفس النتائج عبر استدعاءات مختلفة.
+ومع ذلك، فقد يكون من المفيد التحقق من استقرار نتائجك عبر عدد من الأرقام العشوائية المميزة المختلفة. الأرقام العشوائية الشائعة هي 0 و`42
+&lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Answer_to_the_Ultimate_Question_of_Life%2C_the_Universe%2C_and_Everything">https://en.wikipedia.org/wiki/Answer_to_the_Ultimate_Question_of_Life%2C_the_Universe%2C_and_Everything</a>&gt;`_. يجب أن تكون قيم الأرقام الصحيحة في النطاق <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">2**32</span> <span class="pre">-</span> <span class="pre">1]</span></code>.</p>
+</dd>
+<dt>مثيل “numpy.random.RandomState”</dt><dd><p>استخدم حالة عشوائية مقدمة، مما يؤثر فقط على المستخدمين الآخرين
+من مثيل الحالة العشوائية نفسه. سيؤدي استدعاء الدالة
+عدة مرات إلى إعادة استخدام نفس المثيل،
+وسيؤدي إلى نتائج مختلفة.</p>
+</dd>
+</dl>
+<p>يتم استخدام “utils.check_random_state” داخليًا للتحقق من إدخال “random_state” وإرجاع مثيل “numpy.random.RandomState”.</p>
+<p>لمزيد من التفاصيل حول كيفية التحكم في عشوائية كائنات scikit-learn وتجنب الفخاخ الشائعة، يمكنك الرجوع إلى “randomness”.</p>
+</dd>
+<dt id="term-scoring"><code class="docutils literal notranslate"><span class="pre">scoring</span></code><a class="headerlink" href="#term-scoring" title="Link to this term">#</a></dt><dd><p>يحدد دالة النتيجة التي يجب تعظيمها (عادةً بواسطة الصدق التصادفي)، أو - في بعض الحالات - نتائج وظائف النتيجة المتعددة التي يجب الإبلاغ عنها. قد تكون دالة النتيجة سلسلة مقبولة بواسطة “metrics.get_scorer” أو “scorer” قابل للاستدعاء، لا ينبغي الخلط بينه وبين “مقياس التقييم”، حيث أن الأخير له واجهة برمجة تطبيقات أكثر تنوعًا. قد يكون “التقييم” أيضًا “None”، وفي هذه الحالة يتم استخدام طريقة “score” للمُقدِّر. راجع “scoring_parameter” في “دليل المستخدم”.</p>
+<p>عندما يمكن تقييم مقاييس متعددة، يمكن إعطاء “التقييم” إما كقائمة من السلاسل الفريدة، أو قاموس بأسماء كمفاتيح ودالات قابلة للاستدعاء كقيم أو دالة قابلة للاستدعاء تقوم بإرجاع قاموس. لاحظ أن هذا لا يحدد دالة النتيجة التي سيتم تعظيمها، وقد يتم استخدام معلمة أخرى مثل “refit” لهذا الغرض.</p>
+<p>يتم التحقق من معلمة “التقييم” وتفسيرها باستخدام “metrics.check_scoring”.</p>
+</dd>
+<dt id="term-verbose"><code class="docutils literal notranslate"><span class="pre">verbose</span></code><a class="headerlink" href="#term-verbose" title="Link to this term">#</a></dt><dd><p>لا يتم التعامل مع التسجيل بشكل متسق في Scikit-learn في الوقت الحالي، ولكن عندما يكون خيارًا، تكون معلمة “verbose” متاحة عادةً لاختيار عدم التسجيل (يتم تعيينها على False). يجب أن يؤدي أي قيمة صحيحة إلى تمكين بعض التسجيل، ولكن قد تكون هناك حاجة إلى أرقام أكبر (على سبيل المثال، أعلى من 10) للتحقق من الفعالية الكاملة. يتم عادةً طباعة السجلات المفصلة إلى الإخراج القياسي.
+يجب ألا تنتج المُقدِّرات أي إخراج على الإخراج القياسي مع إعداد “verbose” الافتراضي.</p>
+</dd>
+<dt id="term-warm_start"><code class="docutils literal notranslate"><span class="pre">warm_start</span></code><a class="headerlink" href="#term-warm_start" title="Link to this term">#</a></dt><dd><p>عند تناسب مُقدِّر بشكل متكرر على نفس مجموعة البيانات، ولكن لقيم معلمات متعددة (مثل العثور على القيمة التي تعظم الأداء كما هو الحال في “grid search”)، فقد يكون من الممكن إعادة استخدام جوانب النموذج المُدرب من قيمة المعلمة السابقة، مما يوفر الوقت. عندما تكون “warm_start” صحيحة، يتم استخدام سمات “fitted” الموجودة لتهيئة النموذج الجديد في استدعاء لاحق إلى “fit”.</p>
+<p>لاحظ أن هذا لا ينطبق إلا على بعض النماذج وبعض المعلمات، وحتى بعض ترتيبات قيم المعلمات. بشكل عام، هناك تفاعل بين “warm_start” والمعلمة التي تتحكم في عدد تكرارات المُقدِّر.</p>
+</dd>
+</dl>
+<p>بالنسبة للمُقدّرات المستوردة من <a class="reference internal" href="api/sklearn.ensemble.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ensemble</span></code></a>، سوف يتفاعل معلمة <code class="docutils literal notranslate"><span class="pre">warm_start</span></code> مع <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code> أو <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>. بالنسبة لهذه النماذج، يتوافق عدد التكرارات، المُبلغ عنه عبر <code class="docutils literal notranslate"><span class="pre">len(estimators_)</span></code> أو <code class="docutils literal notranslate"><span class="pre">n_iter_</span></code>، مع العدد الإجمالي للمُقدّرات/التكرارات التي تم تعلمها منذ تهيئة النموذج. وبالتالي، إذا تم تهيئة نموذج مسبقًا بـ <code class="docutils literal notranslate"><span class="pre">N</span></code> مُقدّر، وتم استدعاء الدالة <code class="docutils literal notranslate"><span class="pre">fit</span></code> مع تعيين <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code> أو <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> إلى <code class="docutils literal notranslate"><span class="pre">M</span></code>، فسيقوم النموذج بتدريب <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">-</span> <span class="pre">N</span></code> مُقدّرات جديدة.</p>
+<p>تتبع النماذج الأخرى، التي تستخدم عادةً خوارزميات المُحَسَّلة المُتَوَزِّعة، سلوكًا مختلفًا. تعرض جميعها معلمة <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>. يتوافق المُبلغ عنه <code class="docutils literal notranslate"><span class="pre">n_iter_</span></code> مع عدد التكرارات التي تم إجراؤها أثناء آخر استدعاء للدالة <code class="docutils literal notranslate"><span class="pre">fit</span></code> وسيكون على الأكثر <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>. وبالتالي، لا نأخذ حالة المُقدّر منذ التهيئة في الاعتبار.</p>
+<p>يحتفظ <a class="reference internal" href="#term-partial_fit"><span class="xref std std-term">partial_fit</span></a> أيضًا بالنموذج بين الاستدعاءات، ولكنه يختلف: مع <code class="docutils literal notranslate"><span class="pre">warm_start</span></code>، تتغير المعلمات وتظل البيانات (أكثر أو أقل) ثابتة عبر استدعاءات الدالة <code class="docutils literal notranslate"><span class="pre">fit</span></code>؛ مع <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code>، تتغير مجموعة البيانات المصغرة وتظل معلمات النموذج ثابتة.</p>
+<p>هناك حالات تريد فيها استخدام <code class="docutils literal notranslate"><span class="pre">warm_start</span></code> للتناسب مع بيانات مختلفة، ولكنها ذات صلة وثيقة. على سبيل المثال، قد يقوم المرء أولاً بالتناسب مع مجموعة فرعية من البيانات، ثم ضبط دقيق للبحث عن المعلمات على المجموعة الكاملة من البيانات. بالنسبة للتصنيف، يجب أن تحتوي جميع البيانات في تسلسل من استدعاءات <code class="docutils literal notranslate"><span class="pre">warm_start</span></code> إلى الدالة <code class="docutils literal notranslate"><span class="pre">fit</span></code> على عينات من كل فئة.</p>
+<p id="glossary-attributes">السمات
+فيما يلي ترجمة للنص الموجود بتنسيق ReStructuredText إلى اللغة العربية:</p>
+<hr class="docutils" />
+<p>راجع المفهوم: المصطلح “attribute”.</p>
+<dl class="glossary">
+<dt id="term-classes_"><code class="docutils literal notranslate"><span class="pre">classes_</span></code><a class="headerlink" href="#term-classes_" title="Link to this term">#</a></dt><dd><p>قائمة من تسميات الفئات التي يعرفها المصنف، حيث يتم تعيين كل تسمية فئة إلى فهرس رقمي يستخدم في تمثيل النموذج أو الإخراج. على سبيل المثال، يكون للمصفوفة الناتجة عن <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> أعمدة محاذاة مع <code class="docutils literal notranslate"><span class="pre">classes_</span></code>. بالنسبة للمصنفات متعددة الإخراج، يجب أن تكون <code class="docutils literal notranslate"><span class="pre">classes_</span></code> قائمة من القوائم، مع قائمة تسميات لكل إخراج. يجب فرز الفئات لكل إخراج (رقميًا، أو أبجديًا بالنسبة للسلاسل النصية).</p>
+<p>عادةً ما يتم إدارة <code class="docutils literal notranslate"><span class="pre">classes_</span></code> وتعيينها إلى فهارس باستخدام <code class="docutils literal notranslate"><span class="pre">preprocessing.LabelEncoder</span></code>.</p>
+</dd>
+<dt id="term-components_"><code class="docutils literal notranslate"><span class="pre">components_</span></code><a class="headerlink" href="#term-components_" title="Link to this term">#</a></dt><dd><p>مصفوفة تحويل أفيني الشكل <code class="docutils literal notranslate"><span class="pre">(n_components,</span> <span class="pre">n_features)</span></code> المستخدمة في العديد من المحولات الخطية حيث <code class="docutils literal notranslate"><span class="pre">n_components</span></code> هو عدد الميزات الإخراج و <code class="docutils literal notranslate"><span class="pre">n_features</span></code> هو عدد الميزات الإدخال.</p>
+<p>راجع أيضًا <code class="docutils literal notranslate"><span class="pre">components_</span></code> وهو خاصية مشابهة للنماذج الخطية.</p>
+</dd>
+<dt id="term-coef_"><code class="docutils literal notranslate"><span class="pre">coef_</span></code><a class="headerlink" href="#term-coef_" title="Link to this term">#</a></dt><dd><p>مصفوفة الأوزان/المعاملات لنموذج خطي عام، الشكل <code class="docutils literal notranslate"><span class="pre">(n_features,)</span></code> للتصنيف الثنائي والانحدار أحادي الإخراج، و <code class="docutils literal notranslate"><span class="pre">(n_classes,</span> <span class="pre">n_features)</span></code> للتصنيف متعدد الفئات، و <code class="docutils literal notranslate"><span class="pre">(n_targets,</span> <span class="pre">n_features)</span></code> للانحدار متعدد الإخراج. لاحظ أن هذا لا يشمل مصطلح الاعتراض (أو الانحياز) الذي يتم تخزينه في <code class="docutils literal notranslate"><span class="pre">intercept_</span></code>.</p>
+<p>عندما تكون متاحة، عادةً ما لا يتم توفير <code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code> أيضًا، ولكن يمكن حسابها على أنها القيمة المطلقة لكل ميزة في <code class="docutils literal notranslate"><span class="pre">coef_</span></code>.</p>
+<p>راجع أيضًا <code class="docutils literal notranslate"><span class="pre">components_</span></code> وهو خاصية مشابهة للمحولات الخطية.</p>
+</dd>
+<dt id="term-embedding_"><code class="docutils literal notranslate"><span class="pre">embedding_</span></code><a class="headerlink" href="#term-embedding_" title="Link to this term">#</a></dt><dd><p>تمثيل مضغوط للبيانات التدريبية في خوارزميات التعلم على المنحنى، الشكل <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">n_components)</span></code>، مطابق للإخراج من <code class="docutils literal notranslate"><span class="pre">fit_transform</span></code>. راجع أيضًا <code class="docutils literal notranslate"><span class="pre">labels_</span></code>.</p>
+</dd>
+<dt id="term-n_iter_"><code class="docutils literal notranslate"><span class="pre">n_iter_</span></code><a class="headerlink" href="#term-n_iter_" title="Link to this term">#</a></dt><dd><p>عدد التكرارات التي تم تنفيذها بالفعل عند ملاءمة خوارزمية تكرارية قد تتوقف عند التقارب. راجع أيضًا <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>.</p>
+</dd>
+<dt id="term-feature_importances_"><code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code><a class="headerlink" href="#term-feature_importances_" title="Link to this term">#</a></dt><dd><p>متجه الشكل <code class="docutils literal notranslate"><span class="pre">(n_features,)</span></code> متاح في بعض النماذج لتوفير مقياس نسبي لأهمية كل ميزة في تنبؤات النموذج.</p>
+</dd>
+<dt id="term-labels_"><code class="docutils literal notranslate"><span class="pre">labels_</span></code><a class="headerlink" href="#term-labels_" title="Link to this term">#</a></dt><dd><p>متجه يحتوي على تسمية فئة لكل عينة من بيانات التدريب في خوارزميات التجميع، مطابق للإخراج من <code class="docutils literal notranslate"><span class="pre">fit_predict</span></code>. راجع أيضًا <code class="docutils literal notranslate"><span class="pre">embedding_</span></code>.</p>
+</dd>
+</dl>
+</section>
+<section id="glossary-sample-props">
+<span id="id4"></span><h1>خصائص البيانات والعينات<a class="headerlink" href="#glossary-sample-props" title="Link to this heading">#</a></h1>
+<p>راجع المفهوم: المصطلح “sample property”.</p>
+<dl class="glossary">
+<dt id="term-groups"><code class="docutils literal notranslate"><span class="pre">groups</span></code><a class="headerlink" href="#term-groups" title="Link to this term">#</a></dt><dd><p>تستخدم في روتين التقسيم الصليبي لتحديد العينات المترابطة. كل قيمة هي معرف بحيث، في مقسم CV المدعوم، قد لا تظهر العينات من بعض قيم “المجموعات” في كل من مجموعة التدريب ومجموعة الاختبار المقابلة. راجع <span class="xref std std-ref">group_cv</span>.</p>
+</dd>
+<dt id="term-sample_weight"><code class="docutils literal notranslate"><span class="pre">sample_weight</span></code><a class="headerlink" href="#term-sample_weight" title="Link to this term">#</a></dt><dd><p>وزن نسبي لكل عينة. بشكل حدسي، إذا كانت جميع الأوزان أعداد صحيحة، يجب أن يكون النموذج أو الدرجة المرجحة مكافئة لتلك المحسوبة عند تكرار العينة عدد المرات المحددة في الوزن. يمكن تحديد الأوزان على أنها أرقام عشرية، بحيث تكون أوزان العينات عادةً متكافئة حتى عامل قياس إيجابي ثابت.</p>
+<p>هل هذا التفسير صحيح دائمًا في الممارسة العملية؟ لا توجد اختبارات مشتركة.</p>
+<p>يدعم بعض المقدرات، مثل أشجار القرار، الأوزان السلبية. قد لا يتم اختبار هذه الميزة أو توثيقها في العديد من المقدرات.</p>
+<p>هذا ليس صحيحًا تمامًا عندما تأخذ المعلمات الأخرى للنموذج في الاعتبار عدد العينات في منطقة ما، كما هو الحال في “min_samples” في <code class="docutils literal notranslate"><span class="pre">cluster.DBSCAN</span></code>. في هذه الحالة، يصبح عدد العينات مجموع أوزانها.</p>
+<p>في التصنيف، يمكن أيضًا تحديد أوزان العينات كدالة للفئة باستخدام معلمة “class_weight” في المقدر.</p>
+</dd>
+<dt id="term-X"><code class="docutils literal notranslate"><span class="pre">X</span></code><a class="headerlink" href="#term-X" title="Link to this term">#</a></dt><dd><p>تشير إلى البيانات التي يتم ملاحظتها في وقت التدريب والتنبؤ، وتستخدم كمتغيرات مستقلة في التعلم. يكون الترميز بأحرف كبيرة للإشارة إلى أنه مصفوفة عادةً (راجع المصطلح “rectangular”).
+عندما يكون مصفوفة، يمكن تمثيل كل عينة بواسطة متجه ميزات، أو متجه من المسافات المحسوبة مسبقًا (أو التشابه) مع كل عينة تدريب. قد لا يكون “X” مصفوفة، وقد يتطلب مستخرج ميزات أو مقياسًا زوجيًا لتحويله إلى مصفوفة قبل تعلم النموذج.</p>
+</dd>
+<dt id="term-Xt"><code class="docutils literal notranslate"><span class="pre">Xt</span></code><a class="headerlink" href="#term-Xt" title="Link to this term">#</a></dt><dd><p>اختصار لـ “transformed X”.</p>
+</dd>
+<dt id="term-y"><code class="docutils literal notranslate"><span class="pre">y</span></code><a class="headerlink" href="#term-y" title="Link to this term">#</a></dt><dt id="term-Y"><code class="docutils literal notranslate"><span class="pre">Y</span></code><a class="headerlink" href="#term-Y" title="Link to this term">#</a></dt><dd><p>تشير إلى البيانات التي قد يتم ملاحظتها في وقت التدريب كمتغير تابع في التعلم، ولكنها غير متوفرة في وقت التنبؤ، وعادة ما تكون الهدف من التنبؤ. قد يكون الترميز بأحرف كبيرة للإشارة إلى أنه مصفوفة، مما يمثل أهداف الإخراج المتعددة، على سبيل المثال؛ ولكن عادةً ما نستخدم “y” ونفعل ذلك أحيانًا حتى عند افتراض الإخراج المتعدد.</p>
+</dd>
+</dl>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="whats_new/older_versions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">الإصدارات القديمة</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="faq.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">حول المشروع</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">المفاهيم العامة:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary-metadata-routing">توجيه البيانات الوصفية</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary-target-types">أنواع الأهداف</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#glossary-sample-props">خصائص البيانات والعينات</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/glossary.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
