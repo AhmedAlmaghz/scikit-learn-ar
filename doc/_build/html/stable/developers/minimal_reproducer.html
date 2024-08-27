@@ -1,0 +1,1017 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="قدم مثالاً توضيحياً فاشلاً مع تعليقات قليلة" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/developers/minimal_reproducer.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="# صياغة مثال توضيحي مبسط لمكتبة سكايت-ليرن سواء كنت تقدم تقريرا عن خلل ما، أو تصمم مجموعة من الاختبارات، أو حتى تطرح سؤالا في المناقشات، فإن القدرة على صياغة أمثلة توضيحية مبسطة وقابلة للتكرار (أو ..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="# صياغة مثال توضيحي مبسط لمكتبة سكايت-ليرن سواء كنت تقدم تقريرا عن خلل ما، أو تصمم مجموعة من الاختبارات، أو حتى تطرح سؤالا في المناقشات، فإن القدرة على صياغة أمثلة توضيحية مبسطة وقابلة للتكرار (أو ..." />
+
+    <title>قدم مثالاً توضيحياً فاشلاً مع تعليقات قليلة &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'developers/minimal_reproducer';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">قدم مثالاً...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p># صياغة مثال توضيحي مبسط لمكتبة سكايت-ليرن</p>
+<p>سواء كنت تقدم تقريرا عن خلل ما، أو تصمم مجموعة من الاختبارات، أو حتى تطرح سؤالا في المناقشات، فإن القدرة على صياغة أمثلة توضيحية مبسطة وقابلة للتكرار (أو أمثلة عمل مبسطة) هي المفتاح للتواصل بفعالية وكفاءة مع المجتمع.</p>
+<p>هناك إرشادات ممتازة على الإنترنت مثل “هذه الوثيقة من StackOverflow” أو “هذه التدوينة من ماثيو روكلين” حول صياغة أمثلة توضيحية كاملة يمكن التحقق منها (يشار إليها فيما يلي بالاختصار MCVE). هدفنا ليس تكرار هذه المراجع، بل تقديم دليل خطوة بخطوة حول كيفية تضييق نطاق الخلل حتى تصل إلى أقصر كود ممكن لتكراره.</p>
+<p>الخطوة الأولى قبل تقديم تقرير عن خلل في سكايت-ليرن هي قراءة “قالب القضية”. إنه بالفعل مفيد للغاية فيما يتعلق بالمعلومات التي سيُطلب منك تقديمها.</p>
+<p>## الممارسات الجيدة</p>
+<p>في هذا القسم، سنركز على قسم “الخطوات/الشفرة لتكرار الخلل” من “قالب القضية”. سنبدأ بمقطع من الشفرة يوفر بالفعل مثالا توضيحيا فاشلا ولكنه يحتاج إلى تحسين من حيث قابلية القراءة. بعد ذلك، سنصوغ منه مثالاً توضيحياً كاملاً يمكن التحقق منه (MCVE).</p>
+<p><strong>مثال</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># أنا أعمل حالياً في مشروع تعلم الآلة، وعندما حاولت ملاءمة مثيل</span>
+<span class="c1"># GradientBoostingRegressor لملف my_data.csv الخاص بي، حصلت على تحذير من المستخدم:</span>
+<span class="c1"># &quot;X لديه أسماء ميزات، ولكن تم ملاءمة DecisionTreeRegressor بدون</span>
+<span class="c1"># أسماء ميزات&quot;. يمكنك الحصول على نسخة من مجموعة البيانات الخاصة بي من</span>
+<span class="c1"># https://example.com/my_data.csv والتأكد من أن ميزاتي لها أسماء.</span>
+<span class="c1"># يبدو أن المشكلة تنشأ أثناء الملاءمة عندما أمرر عددا صحيحا</span>
+<span class="c1"># إلى وسيط n_iter_no_change.</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;my_data.csv&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;feature_name&quot;</span><span class="p">]]</span> <span class="c1"># ميزاتي لها أسماء بالفعل</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
+
+<span class="c1"># نحدد random_state=42 لتقسيم البيانات إلى مجموعات تدريب واختبار</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">with_mean</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># لا يثير مثيل مع القيمة الافتراضية n_iter_no_change أي خطأ أو تحذير</span>
+<span class="n">gbdt</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">gbdt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">default_score</span> <span class="o">=</span> <span class="n">gbdt</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="c1"># يظهر الخلل عندما أغير القيمة الافتراضية لـ n_iter_no_change</span>
+<span class="n">gbdt</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_iter_no_change</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">gbdt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">other_score</span> <span class="o">=</span> <span class="n">gbdt</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="n">other_score</span> <span class="o">=</span> <span class="n">gbdt</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id1">
+<h1>قدم مثالاً توضيحياً فاشلاً مع تعليقات قليلة<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>كتابة تعليمات لتكرار المشكلة باللغة الإنجليزية غالباً ما تكون غامضة. من الأفضل التأكد من أن جميع التفاصيل الضرورية لتكرار المشكلة موضحة في مقطع شفرة بايثون لتجنب أي غموض. علاوة على ذلك، في هذه المرحلة، أنت قد قدمت بالفعل وصفاً موجزاً في قسم “وصف الخلل” من “قالب القضية”.</p>
+<p>إن الشفرة التالية، على الرغم من أنها <strong>لا تزال غير مبسطة</strong>، إلا أنها <strong>أفضل بكثير</strong> لأنه يمكن نسخها ولصقها في محث بايثون لتكرار المشكلة في خطوة واحدة. على وجه التحديد:</p>
+<ul class="simple">
+<li><p>تحتوي على <strong>جميع عبارات الاستيراد الضرورية</strong>؛</p></li>
+<li><p>يمكنها جلب مجموعة البيانات العامة دون الحاجة إلى تنزيل ملف يدوياً ووضعه في الموقع المتوقع على القرص.</p></li>
+</ul>
+<p><strong>مثال محسن</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://example.com/my_data.csv&quot;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;feature_name&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">with_mean</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+
+<span class="n">gbdt</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">gbdt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>  <span class="c1"># لا يوجد تحذير</span>
+<span class="n">default_score</span> <span class="o">=</span> <span class="n">gbdt</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+<span class="n">gbdt</span> <span class="o">=</span> <span class="n">GradientBoostingRegress</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_iter_no_change</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">gbdt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>  <span class="c1"># يثير تحذيراً</span>
+<span class="n">other_score</span> <span class="o">=</span> <span class="n">gbdt</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">other_score</span> <span class="o">=</span> <span class="n">gbdt</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h1>اختزل نص البرنامج النصي الخاص بك إلى شيء صغير قدر الإمكان<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p>عليك أن تسأل نفسك أي سطور من الشفرة ذات صلة وأيها غير ذات صلة لتكرار الخلل. إن حذف سطور الشفرة غير الضرورية أو تبسيط استدعاءات الدوال عن طريق حذف الخيارات غير الافتراضية غير ذات الصلة سيساعدك ويساعد المساهمين الآخرين على تضييق نطاق سبب الخلل.</p>
+<p>على وجه التحديد، بالنسبة لهذا المثال المحدد:</p>
+<ul class="simple">
+<li><p>لا علاقة للتحذير بـ <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> لأنه يظهر بالفعل في خطوة التدريب، قبل استخدام مجموعة الاختبار.</p></li>
+<li><p>وبالمثل، فإن السطور التي تحسب الدرجات على مجموعة الاختبار ليست ضرورية.</p></li>
+<li><p>يمكن تكرار الخلل لأي قيمة من <code class="docutils literal notranslate"><span class="pre">random_state</span></code>، لذا اتركها كما هي افتراضياً.</p></li>
+<li><p>يمكن تكرار الخلل بدون معالجة البيانات مسبقاً باستخدام <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>.</p></li>
+</ul>
+<p><strong>مثال محسن</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://example.com/my_data.csv&quot;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;feature_name&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+
+<span class="n">gbdt</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">()</span>
+<span class="n">gbdt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># لا يوجد تحذير</span>
+
+<span class="n">gbdt</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_iter_no_change</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">gbdt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># يثير تحذيراً</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h1><strong>لا</strong> تبلغ عن بياناتك إلا إذا كان ذلك ضرورياً للغاية<a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<p>الفكرة هي جعل الشفرة مكتفية ذاتياً قدر الإمكان. للقيام بذلك، يمكنك استخدام <span class="xref std std-ref">synth_data</span>. يمكن توليدها باستخدام نومبي أو بانداس أو وحدة <a class="reference internal" href="../api/sklearn.datasets.html#module-sklearn.datasets" title="sklearn.datasets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.datasets</span></code></a>. في معظم الأحيان، لا يكون الخلل مرتبطاً بهيكل معين لبياناتك. حتى إذا كان الأمر كذلك، حاول العثور على مجموعة بيانات متاحة لها خصائص مماثلة لبياناتك وتكرر المشكلة. في هذه الحالة، نحن مهتمون ببيانات ذات أسماء ميزات موسومة.</p>
+<p><strong>مثال محسن</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;feature_name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">12.32</span><span class="p">,</span> <span class="mf">1.43</span><span class="p">,</span> <span class="mf">30.01</span><span class="p">,</span> <span class="mf">22.17</span><span class="p">],</span>
+        <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">72</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">43</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;feature_name&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
+
+<span class="n">gbdt</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">()</span>
+<span class="n">gbdt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1"># لا يوجد تحذير</span>
+<span class="n">gbdt</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_iter_no_change</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">gbdt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1"># يثير تحذيراً</span>
+</pre></div>
+</div>
+<p>كما ذكرنا سابقاً، فإن مفتاح التواصل هو قابلية قراءة الشفرة ويمكن أن يكون التنسيق الجيد إضافة حقيقية. لاحظ أنه في المقطع السابق:</p>
+<ul class="simple">
+<li><p>نحاول أن نجعل جميع الأسطر لا تتجاوز 79 حرفاً لتجنب أشرطة التمرير الأفقية في كتل مقاطع الشفرة التي يتم عرضها في قضية جيثب؛</p></li>
+<li><p>نستخدم أسطراً فارغة للفصل بين مجموعات الوظائف ذات الصلة؛</p></li>
+<li><p>نضع جميع الواردات في مجموعتها الخاصة في البداية.</p></li>
+</ul>
+<p>يمكن تنفيذ خطوات التبسيط المقدمة في هذا الدليل بترتيب مختلف عن التقدم الذي أظهرناه هنا. النقاط المهمة هي:</p>
+<ul class="simple">
+<li><p>يجب أن يكون المثال التوضيحي المبسط قابلاً للتشغيل عن طريق النسخ واللصق البسيط في محث بايثون؛</p></li>
+<li><p>يجب تبسيطه قدر الإمكان عن طريق إزالة أي خطوات شفرة غير ضرورية على الإطلاق لتكرار المشكلة الأصلية؛</p></li>
+<li><p>يجب أن يعتمد بشكل مثالي على مجموعة بيانات مبسطة يتم إنشاؤها أثناء التنفيذ عن طريق تشغيل الشفرة بدلاً من الاعتماد على بيانات خارجية، إذا أمكن ذلك.</p></li>
+</ul>
+<p>## استخدم تنسيق ماركداون</p>
+<p>لتنسيق الشفرة أو النص في كتلة خاصة به، استخدم ثلاثة علامات اقتباس خلفية. يدعم “ماركداون” محدد لغة اختياري لتمكين تظليل بناء الجملة في كتلة الشفرة المحاطة. على سبيل المثال:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+from sklearn.datasets import make_blobs
+
+n_samples = 100
+n_components = 3
+X, y = make_blobs(n_samples=n_samples, centers=n_components)
+```
+</pre></div>
+</div>
+<p>سيؤدي إلى عرض مقطع شفرة منسق على النحو التالي:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">n_components</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="n">n_components</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ليس من الضروري إنشاء عدة كتل من الشفرة عند تقديم تقرير عن خلل. تذكر أن المراجعين الآخرين سيقومون بنسخ ولصق شفرتك، وسيكون من الأسهل عليهم التعامل مع خلية واحدة.</p>
+<p>في القسم المسمى “النتائج الفعلية” من “قالب القضية”، يُطلب منك تقديم رسالة الخطأ بما في ذلك تتبع الاستثناء بالكامل. في هذه الحالة، استخدم مؤهل <code class="docutils literal notranslate"><span class="pre">python-traceback</span></code>. على سبيل المثال:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python-traceback
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-1-a674e682c281&gt; in &lt;module&gt;
+    4 vectorizer = CountVectorizer(input=docs, analyzer=&#39;word&#39;)
+    5 lda_features = vectorizer.fit_transform(docs)
+----&gt; 6 lda_model = LatentDirichletAllocation(
+    7     n_topics=10,
+    8     learning_method=&#39;online&#39;,
+
+TypeError: __init__() got an unexpected keyword argument &#39;n_topics&#39;
+```
+</pre></div>
+</div>
+<p>ينتج عنه ما يلي عند عرضه:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">a674e682c281</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="mi">4</span> <span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">docs</span><span class="p">,</span> <span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;word&#39;</span><span class="p">)</span>
+    <span class="mi">5</span> <span class="n">lda_features</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="o">----&gt;</span> <span class="mi">6</span> <span class="n">lda_model</span> <span class="o">=</span> <span class="n">LatentDirichletAllocation</span><span class="p">(</span>
+    <span class="mi">7</span>     <span class="n">n_topics</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="mi">8</span>     <span class="n">learning_method</span><span class="o">=</span><span class="s1">&#39;online&#39;</span><span class="p">,</span>
+
+<span class="ne">TypeError</span><span class="p">:</span> <span class="fm">__init__</span><span class="p">()</span> <span class="n">got</span> <span class="n">an</span> <span class="n">unexpected</span> <span class="n">keyword</span> <span class="n">argument</span> <span class="s1">&#39;n_topics&#39;</span>
+</pre></div>
+</div>
+<p id="synth-data">مجموعة بيانات اصطناعية
+بالتأكيد! فيما يلي ترجمة النص إلى اللغة العربية:</p>
+<p>قبل اختيار مجموعة بيانات اصطناعية معينة، يجب عليك أولاً تحديد نوع المشكلة التي تحاول حلها: هل هي مشكلة تصنيف، أو رجوع، أو تجميع، أو غير ذلك؟</p>
+<p>بمجرد أن تحدد نوع المشكلة، ستحتاج إلى توفير مجموعة بيانات اصطناعية مناسبة. في معظم الأحيان، ستحتاج فقط إلى مجموعة بيانات بسيطة. فيما يلي قائمة غير شاملة بالأدوات التي قد تساعدك في ذلك.</p>
+</section>
+<section id="numpy">
+<h1>NumPy<a class="headerlink" href="#numpy" title="Link to this heading">#</a></h1>
+<p>يمكن استخدام أدوات NumPy مثل “numpy.random.randn” و “numpy.random.randint” لإنشاء بيانات رقمية وهمية.</p>
+<ul>
+<li><p>الانحدار</p>
+<p>يأخذ الانحدار البيانات الرقمية المستمرة كخصائص وهدف.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>يمكن استخدام جزء مماثل كبيانات اصطناعية عند اختبار أدوات التوسيع مثل “sklearn.preprocessing.StandardScaler”.</p>
+<ul>
+<li><p>التصنيف</p>
+<p>إذا لم يتم اكتشاف الخطأ أثناء ترميز متغير فئوي، فيمكنك إدخال بيانات رقمية إلى مصنف. فقط تذكر التأكد من أن الهدف هو في الواقع عدد صحيح.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>  <span class="c1"># هدف ثنائي مع قيم في {0، 1}</span>
+</pre></div>
+</div>
+<p>إذا حدث الخطأ فقط مع تسميات الفئات غير الرقمية، فقد ترغب في إنشاء هدف عشوائي باستخدام “numpy.random.choice”.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;male&quot;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="p">,</span> <span class="s2">&quot;other&quot;</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.49</span><span class="p">,</span> <span class="mf">0.49</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="pandas">
+<h1>Pandas<a class="headerlink" href="#pandas" title="Link to this heading">#</a></h1>
+<p>يتوقع بعض كائنات scikit-learn أطر بيانات Pandas كإدخال. في هذه الحالة، يمكنك تحويل المصفوفات العددية إلى كائنات Pandas باستخدام “pandas.DataFrame” أو “pandas.Series”.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;continuous_feature&quot;</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">),</span>
+        <span class="s2">&quot;positive_feature&quot;</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">),</span>
+        <span class="s2">&quot;categorical_feature&quot;</span><span class="p">:</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>بالإضافة إلى ذلك، يتضمن scikit-learn مولدات عينات مختلفة يمكن استخدامها لبناء مجموعات بيانات اصطناعية ذات حجم وتعقيد محددين.</p>
+</section>
+<section id="make-regression">
+<h1><code class="docutils literal notranslate"><span class="pre">make_regression</span></code><a class="headerlink" href="#make-regression" title="Link to this heading">#</a></h1>
+<p>كما يوحي الاسم، يقوم “sklearn.datasets.make_regression” بإنتاج أهداف الانحدار مع الضوضاء كمجموعة خطية عشوائية اختيارية من الميزات العشوائية.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="make-classification">
+<h1><code class="docutils literal notranslate"><span class="pre">make_classification</span></code><a class="headerlink" href="#make-classification" title="Link to this heading">#</a></h1>
+<p>يقوم “sklearn.datasets.make_classification” بإنشاء مجموعات بيانات متعددة الفئات مع عدة مجموعات غاوسية لكل فئة. يمكن إدخال الضوضاء من خلال الميزات المرتبطة أو الزائدة أو غير المفيدة.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span>
+    <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="make-blobs">
+<h1><code class="docutils literal notranslate"><span class="pre">make_blobs</span></code><a class="headerlink" href="#make-blobs" title="Link to this heading">#</a></h1>
+<p>بشكل مشابه لـ “make_classification”، يقوم “sklearn.datasets.make_blobs” بإنشاء مجموعات بيانات متعددة الفئات باستخدام مجموعات من النقاط موزعة بشكل طبيعي. يوفر تحكمًا أكبر فيما يتعلق بمراكز وانحرافات كل مجموعة، وبالتالي فهو مفيد في توضيح التجميع.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h1>أدوات تحميل مجموعة البيانات<a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+<p>يمكنك استخدام “datasets” لتحميل واسترجاع العديد من مجموعات البيانات المرجعية الشائعة. هذا الخيار مفيد عندما يتعلق الخطأ بهيكل البيانات نفسه، على سبيل المثال، التعامل مع القيم المفقودة أو التعرف على الصور.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">قدم مثالاً توضيحياً فاشلاً مع تعليقات قليلة</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">اختزل نص البرنامج النصي الخاص بك إلى شيء صغير قدر الإمكان</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>لا</strong> تبلغ عن بياناتك إلا إذا كان ذلك ضرورياً للغاية</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy">NumPy</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas">Pandas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-regression"><code class="docutils literal notranslate"><span class="pre">make_regression</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-classification"><code class="docutils literal notranslate"><span class="pre">make_classification</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-blobs"><code class="docutils literal notranslate"><span class="pre">make_blobs</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">أدوات تحميل مجموعة البيانات</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/developers/minimal_reproducer.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
