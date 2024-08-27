@@ -1,0 +1,1074 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="التعقيد" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/tree.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="شجرة القرار شجرة القرار (DTs) هي طريقة تعلم إشرافية غير معلمية تستخدم للتصنيف والتنبؤ. الهدف هو إنشاء نموذج يتنبأ بقيمة متغير الهدف عن طريق تعلم قواعد اتخاذ القرار البسيطة المستنبطة من ميزات البيان..." />
+<meta property="og:image" content="https://scikit-learn/stable/_images/sphx_glr_plot_tree_regression_multioutput_001.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="شجرة القرار شجرة القرار (DTs) هي طريقة تعلم إشرافية غير معلمية تستخدم للتصنيف والتنبؤ. الهدف هو إنشاء نموذج يتنبأ بقيمة متغير الهدف عن طريق تعلم قواعد اتخاذ القرار البسيطة المستنبطة من ميزات البيان..." />
+
+    <title>التعقيد &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/tree';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">التعقيد</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>شجرة القرار</p>
+<p><strong>شجرة القرار (DTs)</strong> هي طريقة تعلم إشرافية غير معلمية تستخدم للتصنيف والتنبؤ. الهدف هو إنشاء نموذج يتنبأ بقيمة متغير الهدف عن طريق تعلم قواعد اتخاذ القرار البسيطة المستنبطة من ميزات البيانات. يمكن النظر إلى الشجرة على أنها تقريب ثابت قطاعي.</p>
+<p>على سبيل المثال، في المثال أدناه، تتعلم أشجار القرار من البيانات لتقريب منحنى الجيب بمجموعة من قواعد اتخاذ القرار if-then-else. كلما زاد عمق الشجرة، زادت تعقيد قواعد القرار، وزاد ملاءمة النموذج.</p>
+<p>بعض مزايا أشجار القرار هي:</p>
+<ul class="simple">
+<li><p>بسيطة الفهم والتفسير. يمكن تصور الأشجار.</p></li>
+<li><p>تتطلب القليل من الإعداد للبيانات. غالبًا ما تتطلب التقنيات الأخرى تطبيع البيانات، ويجب إنشاء متغيرات وهمية، ويجب إزالة القيم الفارغة. تدعم بعض مجموعات الأشجار والخوارزميات القيم المفقودة.</p></li>
+<li><p>تكلفة استخدام الشجرة (أي التنبؤ بالبيانات) لوغاريتمية في عدد نقاط البيانات المستخدمة لتدريب الشجرة.</p></li>
+<li><p>القدرة على التعامل مع البيانات العددية والتصنيفية. ومع ذلك، لا يدعم تنفيذ sklearn-learn المتغيرات التصنيفية حاليًا. عادة ما تتخصص التقنيات الأخرى في تحليل مجموعات البيانات التي تحتوي على نوع واحد فقط من المتغيرات. راجع الخوارزميات لمزيد من المعلومات.</p></li>
+<li><p>القدرة على التعامل مع المشكلات متعددة الإخراج.</p></li>
+<li><p>يستخدم نموذج الصندوق الأبيض. إذا كان من الممكن ملاحظة حالة معينة في نموذج، فمن السهل تفسير الشرط باستخدام المنطق البولياني. على النقيض من ذلك، في نموذج الصندوق الأسود (على سبيل المثال، في شبكة عصبية اصطناعية)، قد يكون من الصعب تفسير النتائج.</p></li>
+<li><p>من الممكن التحقق من صحة نموذج باستخدام الاختبارات الإحصائية. وهذا يجعل من الممكن مراعاة موثوقية النموذج.</p></li>
+<li><p>الأداء جيد حتى إذا كانت افتراضاته منتهكة إلى حد ما بواسطة النموذج الحقيقي الذي تم من خلاله إنشاء البيانات.</p></li>
+</ul>
+<p>تشمل عيوب أشجار القرار ما يلي:</p>
+<ul class="simple">
+<li><p>يمكن أن يؤدي متعلمو شجرة القرار إلى إنشاء أشجار معقدة للغاية لا تعمم البيانات جيدًا. يُعرف هذا الإفراط في الملاءمة. تعد الآليات، مثل التشذيب، وتحديد الحد الأدنى لعدد العينات المطلوبة في عقدة ورقة أو تعيين العمق الأقصى للشجرة، ضرورية لتجنب هذه المشكلة.</p></li>
+<li><p>يمكن أن تكون أشجار القرار غير مستقرة لأن التغيرات الطفيفة في البيانات قد تؤدي إلى ظهور شجرة مختلفة تمامًا. يتم تخفيف هذه المشكلة عن طريق استخدام أشجار القرار ضمن مجموعة.</p></li>
+<li><p>تنبؤات أشجار القرار ليست سلسة ولا مستمرة، ولكنها تقريبات ثابتة قطاعيًا كما هو موضح في الشكل أعلاه. لذلك، فإنهم لا يجيدون الاستقراء.</p></li>
+<li><p>تعتبر مشكلة تعلم شجرة قرار مثالية معروفة NP-كاملة من عدة جوانب للمثالية وحتى للمفاهيم البسيطة. وبالتالي، تستند خوارزميات تعلم شجرة القرار العملية إلى خوارزميات启发式 مثل الخوارزمية الجشعة حيث يتم اتخاذ قرارات محلية مثالية في كل عقدة. لا يمكن لهذه الخوارزميات أن تضمن العودة إلى شجرة القرار المثالية عالميًا. يمكن التخفيف من حدة ذلك عن طريق تدريب أشجار متعددة في متعلم مجموعة، حيث يتم أخذ عينات عشوائية من الميزات والعينات بالاستبدال.</p></li>
+<li><p>هناك مفاهيم يصعب تعلمها لأن أشجار القرار لا تعبر عنها بسهولة، مثل مشكلات XOR أو التكافؤ أو المضاعف.</p></li>
+<li><p>ينشئ متعلمو شجرة القرار أشجار متحيزة إذا كانت بعض الفئات تهيمن عليها. لذلك، يوصى بتوازن مجموعة البيانات قبل الملاءمة باستخدام شجرة القرار.</p></li>
+</ul>
+<p>التصنيف</p>
+<p>قادر على إجراء التصنيف متعدد الفئات على مجموعة من البيانات.</p>
+<p>كما هو الحال مع المصنفات الأخرى، يأخذ كإدخال صفيفين: صفيف X، ناقص أو كثيف، بشكل (n_samples، n_features) الذي يحمل عينات التدريب، ومصفوفة Y من القيم الصحيحة، الشكل (n_samples)، الذي يحمل تسميات الفصل لمجموعات التدريب:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>بعد الملاءمة، يمكن بعد ذلك استخدام النموذج للتنبؤ بفئة العينات:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([1])</span>
+</pre></div>
+</div>
+<p>في حالة وجود فئات متعددة بنفس الاحتمالية الأعلى، فإن المصنف سيتنبأ بالفئة ذات المؤشر الأدنى من بين تلك الفئات.</p>
+<p>كبديل لإخراج فئة محددة، يمكن التنبؤ باحتمالية كل فئة، والتي هي كسر عينات التدريب للفئة في ورقة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([[0., 1.]])</span>
+</pre></div>
+</div>
+<p>قادر على كل من التصنيف الثنائي (حيث التصنيفات هي [-1، 1]) والتصنيف متعدد الفئات (حيث التصنيفات هي [0، …، K-1]).</p>
+<p>باستخدام مجموعة بيانات Iris، يمكننا إنشاء شجرة كما يلي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>بمجرد التدريب، يمكنك رسم الشجرة باستخدام وظيفة plot_tree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">plot_tree</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+<span class="go">[...]</span>
+</pre></div>
+</div>
+<p>يمكن أيضًا تصدير الشجرة بتنسيق Graphviz باستخدام مصدر التصدير. إذا كنت تستخدم مدير الحزم conda، فيمكن تثبيت برامج Graphviz الثنائية وحزمة Python باستخدام conda install python-graphviz.</p>
+<p>بدلاً من ذلك، يمكن تنزيل البرامج الثنائية لـ Graphviz من صفحة مشروع Graphviz الرئيسية، ويمكن تثبيت الغلاف Python من pypi باستخدام pip install graphviz.</p>
+<p>فيما يلي مثال على تصدير Graphviz للشجرة الموضحة أعلاه والتي تم تدريبها على مجموعة بيانات Iris بالكامل؛ يتم حفظ النتائج في ملف إخراج يسمى iris.pdf:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">graphviz</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_data</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;iris&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>يدعم مصدر التصدير أيضًا مجموعة متنوعة من الخيارات الجمالية، بما في ذلك تلوين العقد حسب فئاتها (أو قيمتها للتنبؤ) واستخدام أسماء المتغيرات والفئات الصريحة إذا لزم الأمر. تعرض دفاتر Jupyter أيضًا هذه الرسوم البيانية تلقائيًا داخلها:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dot_data</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+<span class="gp">... </span>                     <span class="n">feature_names</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>  
+<span class="gp">... </span>                     <span class="n">class_names</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">,</span>  
+<span class="gp">... </span>                     <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  
+<span class="gp">... </span>                     <span class="n">special_characters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_data</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> 
+</pre></div>
+</div>
+<p>أمثلة</p>
+<ul class="simple">
+<li><p>sphx_glr_auto_examples_tree_plot_iris_dtc.py</p></li>
+<li><p>sphx_glr_auto_examples_tree_plot_unveil_tree_structure.py</p></li>
+</ul>
+<p>التنبؤ</p>
+<p>يمكن أيضًا تطبيق أشجار القرار على مشكلات الانحدار، باستخدام فئة DecisionTreeRegressor.</p>
+<p>كما هو الحال في إعداد التصنيف، ستأخذ طريقة التجهيز كحجج صفيفين X و y، باستثناء أنه في هذه الحالة، من المتوقع أن تكون y ذات قيم ذات نقطة عائمة بدلاً من قيم صحيحة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="go">array([0.5])</span>
+</pre></div>
+</div>
+<p>أمثلة</p>
+<ul class="simple">
+<li><p>sphx_glr_auto_examples_tree_plot_tree_regression.py</p></li>
+</ul>
+<p>مشكلات متعددة الإخراج
+مشكلة المخرجات المتعددة هي مشكلة تعلم إشرافي مع عدة مخرجات يتعين التنبؤ بها، أي عندما يكون Y مصفوفة ثنائية الأبعاد على الشكل (n_samples، n_outputs).</p>
+<p>عندما لا توجد علاقة بين المخرجات، هناك طريقة بسيطة جدًا لحل هذا النوع من المشكلات تتمثل في بناء n من النماذج المستقلة، أي نموذج واحد لكل مخرج، ثم استخدام تلك النماذج للتنبؤ بشكل مستقل بكل مخرج من المخرجات n. ومع ذلك، نظرًا لأنه من المحتمل أن تكون قيم المخرجات المتعلقة بنفس المدخلات مرتبطة ببعضها البعض، فغالبًا ما تكون هناك طريقة أفضل تتمثل في بناء نموذج واحد قادر على التنبؤ في وقت واحد بجميع المخرجات n. أولاً، يتطلب وقت تدريب أقل نظرًا لأنه يتم بناء مُقدِّر واحد فقط. ثانيًا، غالبًا ما يمكن زيادة دقة تعميم المُقدِّر الناتج.</p>
+<p>فيما يتعلق بشجرة القرارات، يمكن استخدام هذه الاستراتيجية بسهولة لدعم مشكلات المخرجات المتعددة. يتطلب ذلك التغييرات التالية:</p>
+<ul class="simple">
+<li><p>تخزين n من قيم المخرجات في الأوراق بدلاً من 1؛</p></li>
+<li><p>استخدام معايير التقسيم التي تحسب متوسط الانخفاض عبر جميع المخرجات n.</p></li>
+</ul>
+<p>تقدم هذه الوحدة دعمًا لمشكلات المخرجات المتعددة من خلال تنفيذ هذه الاستراتيجية في كل من class:DecisionTreeClassifier و class:DecisionTreeRegressor. إذا تم ضبط شجرة قرار على مصفوفة مخرجات Y ذات الشكل (n_samples، n_outputs)، فسيقوم المُقدِّر الناتج بما يلي:</p>
+<ul class="simple">
+<li><p>إخراج n_output من القيم عند التنبؤ؛</p></li>
+<li><p>إخراج قائمة بمصفوفات n_output من احتمالات الفئات عند التنبؤ بالاحتمالات.</p></li>
+</ul>
+<p>يتم توضيح استخدام أشجار المخرجات المتعددة للانحدار في مثال: ref:sphx_glr_auto_examples_tree_plot_tree_regression_multioutput.py. في هذا المثال، يكون المدخل X قيمة حقيقية واحدة والمخرجات Y هي جيب وجيب تمام X.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/tree/plot_tree_regression_multioutput.html"><img alt="../_images/sphx_glr_plot_tree_regression_multioutput_001.png" src="../_images/sphx_glr_plot_tree_regression_multioutput_001.png" style="width: 480.0px; height: 360.0px;" />
+</a>
+</figure>
+<p>يتم توضيح استخدام أشجار المخرجات المتعددة للتصنيف في مثال: ref:sphx_glr_auto_examples_miscellaneous_plot_multioutput_face_completion.py. في هذا المثال، تكون المدخلات X هي بكسلات النصف العلوي من الوجوه والمخرجات Y هي بكسلات النصف السفلي من تلك الوجوه.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p>:ref:sphx_glr_auto_examples_tree_plot_tree_regression_multioutput.py</p></li>
+<li><p>:ref:sphx_glr_auto_examples_miscellaneous_plot_multioutput_face_completion.py</p></li>
+</ul>
+<p class="rubric">المراجع</p>
+<ul class="simple">
+<li><ol class="upperalpha simple" start="13">
+<li><p>Dumont et al، Fast multi-class image annotation with random subwindows and multiple output randomized trees، International Conference on Computer Vision Theory and Applications 2009</p></li>
+</ol>
+</li>
+</ul>
+<section id="tree-complexity">
+<span id="id1"></span><h1>التعقيد<a class="headerlink" href="#tree-complexity" title="Link to this heading">#</a></h1>
+<p>بشكل عام، تبلغ تكلفة وقت التشغيل لبناء شجرة ثنائية متوازنة: math: <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">(n_</span> <span class="pre">{samples}</span> <span class="pre">n_</span> <span class="pre">{features}</span> <span class="pre">log</span> <span class="pre">(n_</span> <span class="pre">{samples}))</span></code> ووقت الاستعلام: math: <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">(log</span> <span class="pre">(n_</span> <span class="pre">{samples}))</span></code>. على الرغم من أن خوارزمية بناء الشجرة تحاول إنشاء أشجار متوازنة، إلا أنها لن تكون متوازنة دائمًا. بافتراض أن الأشجار الفرعية تظل متوازنة تقريبًا، فإن التكلفة في كل عقدة تتكون من البحث عبر: math: <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">(n_</span> <span class="pre">{features})</span></code> للعثور على الميزة التي توفر أكبر انخفاض في معيار عدم النقاء، على سبيل المثال. الخسارة اللوجستية (التي تعادل مكسب المعلومات). تبلغ تكلفتها: math: <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">(n_</span> <span class="pre">{features}</span> <span class="pre">n_</span> <span class="pre">{samples}</span> <span class="pre">log</span> <span class="pre">(n_</span> <span class="pre">{samples}))</span></code> في كل عقدة، مما يؤدي إلى تكلفة إجمالية عبر الأشجار بالكامل (عن طريق جمع التكلفة في كل عقدة) من: math: <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">(n_</span> <span class="pre">{features}</span> <span class="pre">n_</span> <span class="pre">{samples}</span> <span class="pre">^</span> <span class="pre">2</span> <span class="pre">log</span> <span class="pre">(n_</span> <span class="pre">{samples}))</span></code>.</p>
+</section>
+<section id="id2">
+<h1>نصائح حول الاستخدام العملي<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<ul>
+<li><p>تميل أشجار القرارات إلى الإفراط في تناسب البيانات التي تحتوي على عدد كبير من الميزات. من المهم الحصول على النسبة الصحيحة من العينات إلى عدد الميزات، لأن الشجرة ذات العينات القليلة في الفضاء عالي الأبعاد من المحتمل أن تفرط في التناسب.</p></li>
+<li><p>ضع في اعتبارك إجراء تقليل الأبعاد (PCA، ICA، أو feature_selection) مسبقًا لمنح شجرتك فرصة أفضل للعثور على ميزات مميزة.</p></li>
+<li><p>سوف يساعد المثال: ref:sphx_glr_auto_examples_tree_plot_unveil_tree_structure.py في اكتساب المزيد من الأفكار حول كيفية قيام شجرة القرارات بالتنبؤات، وهو أمر مهم لفهم الميزات المهمة في البيانات.</p></li>
+<li><p>قم بتصور شجرتك أثناء التدريب باستخدام وظيفة “التصدير”. استخدم “max_depth=3” كعمق شجرة أولي للحصول على شعور بكيفية ملاءمة الشجرة لبياناتك، ثم قم بزيادة العمق.</p></li>
+<li><p>تذكر أن عدد العينات المطلوبة لملء الشجرة يتضاعف لكل مستوى إضافي تنمو فيه الشجرة. استخدم “max_depth” للتحكم في حجم الشجرة لمنع الإفراط في التناسب.</p></li>
+<li><p>استخدم “min_samples_split” أو “min_samples_leaf” لضمان أن العديد من العينات تعلم كل قرار في الشجرة، عن طريق التحكم في الانقسامات التي سيتم أخذها في الاعتبار. عادة ما يعني العدد الصغير جدًا أن الشجرة ستفرط في التناسب، في حين أن العدد الكبير سيمنع الشجرة من تعلم البيانات. جرب “min_samples_leaf=5” كقيمة أولية. إذا اختلف حجم العينة بشكل كبير، فيمكن استخدام رقم عائم كنسبة مئوية في هذين المعلمين. في حين أن “min_samples_split” يمكن أن يخلق أوراقًا صغيرة بشكل تعسفي، فإن “min_samples_leaf” يضمن أن يكون لكل ورقة حد أدنى من الحجم، مما يتجنب عقد أوراق ذات انحدار منخفض، وعقد إفراط في تناسب في مشكلات الانحدار. بالنسبة للتصنيف باستخدام عدد قليل من الفئات، غالبًا ما يكون “min_samples_leaf=1” هو الخيار الأفضل.</p>
+<p>لاحظ أن “min_samples_split” يأخذ العينات في الاعتبار مباشرة وبشكل مستقل عن “sample_weight”، إذا تم توفيره (على سبيل المثال، تتم معاملة العقدة التي تحتوي على m من العينات المرجحة على أنها تحتوي بالضبط على m من العينات). ضع في اعتبارك “min_weight_fraction_leaf” أو “min_impurity_decrease” إذا كان المحاسبة للاوزان العينات مطلوبة في الانقسامات.</p>
+</li>
+<li><p>قم بموازنة مجموعة بياناتك قبل التدريب لمنع الشجرة من التحيز نحو الفئات السائدة. يمكن إجراء موازنة الفئات عن طريق أخذ عدد متساوٍ من العينات من كل فئة، أو يفضل عن طريق تطبيع مجموع أوزان العينات (sample_weight) لكل فئة إلى نفس القيمة. لاحظ أيضًا أن معايير التشذيب المسبق المستندة إلى الوزن، مثل “min_weight_fraction_leaf”، ستكون أقل تحيزًا نحو الفئات السائدة من المعايير التي لا تدرك أوزان العينات، مثل “min_samples_leaf”.</p></li>
+<li><p>إذا كانت العينات مرجحة، فسيصبح من الأسهل تحسين بنية الشجرة باستخدام معيار تشذيب مسبق يعتمد على الوزن مثل “min_weight_fraction_leaf”، والذي يضمن أن تحتوي عقد الأوراق على الأقل على جزء من إجمالي مجموع أوزان العينات.</p></li>
+<li><p>تستخدم جميع أشجار القرارات صفائف “np.float32” داخليًا. إذا لم تكن بيانات التدريب بهذا التنسيق، فسيتم إجراء نسخة من مجموعة البيانات.</p></li>
+<li><p>إذا كانت مصفوفة الإدخال X متفرقة جدًا، فيوصى بالتحويل إلى “csc_matrix” متفرقة قبل استدعاء fit و “csr_matrix” متفرقة قبل استدعاء التنبؤ. يمكن أن يكون وقت التدريب أسرع بعدة مرات لمصفوفة متفرقة مقارنة بالمصفوفة الكثيفة عندما تكون للميزات قيم صفرية في معظم العينات.</p></li>
+</ul>
+</section>
+<section id="tree-algorithms">
+<span id="id3-c4-5-c5-0-cart"></span><h1>خوارزميات الشجرة: ID3 و C4.5 و C5.0 و CART<a class="headerlink" href="#tree-algorithms" title="Link to this heading">#</a></h1>
+<p>ما هي جميع خوارزميات شجرة القرار المختلفة وكيف تختلف عن بعضها البعض؟ أي منها يتم تنفيذه في scikit-learn؟</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="خوارزميات-شجرة-القرار-المختلفة">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">خوارزميات شجرة القرار المختلفة<a class="headerlink" href="#خوارزميات-شجرة-القرار-المختلفة" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">تم تطوير <a class="reference external" href="https://en.wikipedia.org/wiki/ID3_algorithm">ID3</a> (Iterative Dichotomiser 3) في عام 1986 بواسطة Ross Quinlan. تقوم الخوارزمية بإنشاء شجرة متعددة الاتجاهات، حيث تجد لكل عقدة (أي بطريقة جشعة) الميزة الفئوية التي ستعطي أكبر مكسب للمعلومات للمستهدفات الفئوية. يتم تنمية الأشجار إلى حجمها الأقصى ثم يتم عادة تطبيق خطوة التشذيب لتحسين قدرة الشجرة على التعميم على البيانات غير المرئية.</p>
+<p class="sd-card-text">C4.5 هو الخلف لـ ID3 ويزيل القيد الذي يجب أن تكون الميزات فئوية من خلال تعريف سمة منفصلة (بناءً على المتغيرات العددية) تقوم بتقسيم قيمة السمة المستمرة إلى مجموعة من الفواصل الزمنية المحددة بشكل منفصل. يحول C4.5 الأشجار المدربة (أي إخراج خوارزمية ID3) إلى مجموعات من القواعد الشرطية. يتم بعد ذلك تقييم دقة كل قاعدة لتحديد الترتيب الذي يجب تطبيقها به. يتم التشذيب عن طريق إزالة الشرط المسبق للقاعدة إذا تحسنت دقة القاعدة بدونها.</p>
+<p class="sd-card-text">C5.0 هو أحدث إصدار لـ Quinlan تم إصداره بموجب ترخيص مملوك. يستخدم ذاكرة أقل ويبني مجموعات قواعد أصغر من C4.5 مع كونها أكثر دقة.</p>
+<p class="sd-card-text">CART (Classification and Regression Trees) مشابه جدًا لـ C4.5، ولكنه يختلف في أنه يدعم المتغيرات المستهدفة العددية (الانحدار) ولا يحسب مجموعات القواعد. يقوم CART ببناء أشجار ثنائية باستخدام الميزة والعتبة التي تعطي أكبر مكسب للمعلومات في كل عقدة.</p>
+</div>
+</details><p>يستخدم scikit-learn إصدارًا محسنًا من خوارزمية CART؛ ومع ذلك، لا يدعم التنفيذ في scikit-learn المتغيرات الفئوية الآن.</p>
+<p id="tree-mathematical-formulation">الصيغة الرياضية
+فيما يلي الترجمة العربية للنص المُقدم، مع الالتزام بالتعليمات المُرفقة:</p>
+<hr class="docutils" />
+<p>بالنسبة لمتجهات التدريب <span class="math notranslate nohighlight">\(x_i \in R^n\)</span>، حيث i=1,…, l ومتجه التصنيف <span class="math notranslate nohighlight">\(y \in R^l\)</span>، تقوم شجرة القرار بتقسيم مساحة الميزة بشكل متكرر بحيث يتم تجميع العينات التي لها نفس التصنيفات أو قيم الهدف المتشابهة معًا.</p>
+<p>دعنا نمثل البيانات في العقدة <span class="math notranslate nohighlight">\(m\)</span> بـ <span class="math notranslate nohighlight">\(Q_m\)</span> مع <span class="math notranslate nohighlight">\(n_m\)</span>
+عينات. بالنسبة لكل مرشح تقسيم <span class="math notranslate nohighlight">\(\theta = (j, t_m)\)</span> يتكون من ميزة <span class="math notranslate nohighlight">\(j\)</span> وعتبة <span class="math notranslate nohighlight">\(t_m\)</span>، قم بتقسيم البيانات إلى المجموعتين الفرعيتين <span class="math notranslate nohighlight">\(Q_m^{left}(\theta)\)</span> و <span class="math notranslate nohighlight">\(Q_m^{right}(\theta)\)</span></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}Q_m^{left}(\theta) = \{(x, y) | x_j \leq t_m\}\\Q_m^{right}(\theta) = Q_m \setminus Q_m^{left}(\theta)\end{aligned}\end{align} \]</div>
+<p>تُحسب جودة مرشح التقسيم للعقدة <span class="math notranslate nohighlight">\(m\)</span> باستخدام دالة عدم النقاء أو دالة الخسارة <span class="math notranslate nohighlight">\(H()\)</span>، ويعتمد اختيار الدالة على المهمة التي يتم حلها (تصنيف أو رجوع)</p>
+<div class="math notranslate nohighlight">
+\[G(Q_m, \theta) = \frac{n_m^{left}}{n_m} H(Q_m^{left}(\theta))
++ \frac{n_m^{right}}{n_m} H(Q_m^{right}(\theta))\]</div>
+<p>قم بتحديد المعلمات التي تقلل من عدم النقاء</p>
+<div class="math notranslate nohighlight">
+\[\theta^* = \operatorname{argmin}_\theta G(Q_m, \theta)\]</div>
+<p>كرر العملية للمجموعتين الفرعيتين <span class="math notranslate nohighlight">\(Q_m^{left}(\theta^*)\)</span> و
+<span class="math notranslate nohighlight">\(Q_m^{right}(\theta^*)\)</span> حتى يتم الوصول إلى العمق الأقصى المسموح به،
+<span class="math notranslate nohighlight">\(n_m &lt; \min_{samples}\)</span> أو <span class="math notranslate nohighlight">\(n_m = 1\)</span>.</p>
+<section id="id4">
+<h2>معايير التصنيف<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>إذا كان الهدف ناتج تصنيف يأخذ القيم 0،1,…,K-1،
+بالنسبة للعقدة <span class="math notranslate nohighlight">\(m\)</span>، دعنا</p>
+<div class="math notranslate nohighlight">
+\[p_{mk} = \frac{1}{n_m} \sum_{y \in Q_m} I(y = k)\]</div>
+<p>نسبة ملاحظات الفئة k في العقدة <span class="math notranslate nohighlight">\(m\)</span>. إذا كانت <span class="math notranslate nohighlight">\(m\)</span> عقدة
+نهائية، يتم تعيين <code class="docutils literal notranslate"><span class="pre">predict_proba</span></code> لهذه المنطقة إلى <span class="math notranslate nohighlight">\(p_{mk}\)</span>.
+تتمثل مقاييس عدم النقاء الشائعة فيما يلي.</p>
+<p>جيني:</p>
+<div class="math notranslate nohighlight">
+\[H(Q_m) = \sum_k p_{mk} (1 - p_{mk})\]</div>
+<p>خسارة اللوغاريتم أو الإنتروبيا:</p>
+<div class="math notranslate nohighlight">
+\[H(Q_m) = - \sum_k p_{mk} \log(p_{mk})\]</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="إنتروبيا-شانون">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">إنتروبيا شانون<a class="headerlink" href="#إنتروبيا-شانون" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">يحسب معيار الإنتروبيا إنتروبيا شانون للفئات الممكنة. إنه
+يأخذ تكرارات الفئات لنقاط البيانات التدريبية التي وصلت إلى ورقة معينة
+<span class="math notranslate nohighlight">\(m\)</span> كاحتمالية لها. إن استخدام <strong>إنتروبيا شانون كمعيار لتقسيم عقدة الشجرة يعادل تقليل خسارة اللوغاريتم</strong> (المعروف أيضًا باسم الإنتروبيا المتقاطعة وانحراف متعدد الحدود) بين التصنيفات الحقيقية <span class="math notranslate nohighlight">\(y_i\)</span></p>
+</div>
+</details><p>والتنبؤات الاحتمالية <span class="math notranslate nohighlight">\(T_k(x_i)\)</span> لنموذج الشجرة <span class="math notranslate nohighlight">\(T\)</span> للفئة <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>ولرؤية ذلك، تذكر أولاً أن خسارة اللوغاريتم لنموذج الشجرة
+<span class="math notranslate nohighlight">\(T\)</span> المحسوب لمجموعة بيانات <span class="math notranslate nohighlight">\(D\)</span> يتم تعريفه على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{LL}(D, T) = -\frac{1}{n} \sum_{(x_i, y_i) \in D} \sum_k I(y_i = k) \log(T_k(x_i))\]</div>
+<p>حيث <span class="math notranslate nohighlight">\(D\)</span> هي مجموعة بيانات تدريبية مكونة من <span class="math notranslate nohighlight">\(n\)</span> أزواج <span class="math notranslate nohighlight">\((x_i, y_i)\)</span>.</p>
+<p>في شجرة التصنيف، تكون احتمالية الفئة المتوقعة داخل العقد الورقية
+ثابتة، أي: لكل <span class="math notranslate nohighlight">\((x_i, y_i) \in Q_m\)</span>، لدينا:
+<span class="math notranslate nohighlight">\(T_k(x_i) = p_{mk)\)</span> لكل فئة <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<p>تسمح هذه الخاصية بإعادة كتابة <span class="math notranslate nohighlight">\(\mathrm{LL}(D, T)\)</span> كمجموع
+إنتروبيا شانون المحسوبة لكل ورقة من <span class="math notranslate nohighlight">\(T\)</span> مرجحة بعدد نقاط بيانات التدريب
+التي وصلت إلى كل ورقة:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{LL}(D, T) = \sum_{m \in T} \frac{n_m}{n} H(Q_m)\]</div>
+</section>
+<section id="id5">
+<h2>معايير الانحدار<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>إذا كانت القيمة المستهدفة قيمة مستمرة، فإن المعايير الشائعة لتقليلها لتحديد مواقع الانقسامات المستقبلية هي متوسط مربع الخطأ (MSE أو خطأ L2)، وانحراف بواسون، بالإضافة إلى متوسط الخطأ المطلق (MAE أو خطأ L1). يحدد كل من MSE وانحراف بواسون القيمة المتوقعة للعقد النهائية إلى القيمة المتوسطة المُتعلمة <span class="math notranslate nohighlight">\(\bar{y}_m\)</span> للعقدة
+بينما يحدد MAE القيمة المتوقعة للعقد النهائية إلى الوسيط
+<span class="math notranslate nohighlight">\(median(y)_m\)</span>.</p>
+<p>متوسط مربع الخطأ:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\bar{y}_m = \frac{1}{n_m} \sum_{y \in Q_m} y\\H(Q_m) = \frac{1}{n_m} \sum_{y \in Q_m} (y - \bar{y}_m)^2\end{aligned}\end{align} \]</div>
+<p>متوسط انحراف بواسون:</p>
+<div class="math notranslate nohighlight">
+\[H(Q_m) = \frac{2}{n_m} \sum_{y \in Q_m} (y \log\frac{y}{\bar{y}_m}
+- y + \bar{y}_m)\]</div>
+<p>قد يكون تحديد <code class="docutils literal notranslate"><span class="pre">criterion=&quot;poisson&quot;</span></code> خيارًا جيدًا إذا كان هدفك عبارة عن عدد
+أو تكرار (عدد لكل وحدة). وفي جميع الأحوال، <span class="math notranslate nohighlight">\(y &gt;= 0\)</span> هو
+شرط ضروري لاستخدام هذا المعيار. لاحظ أنه يناسب بشكل أبطأ بكثير من
+معيار MSE. لأسباب تتعلق بالأداء، فإن التنفيذ الفعلي يقلل من نصف انحراف بواسون المتوسط، أي انحراف بواسون المتوسط مقسومًا على 2.</p>
+<p>متوسط الخطأ المطلق:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}median(y)_m = \underset{y \in Q_m}{\mathrm{median}}(y)\\H(Q_m) = \frac{1}{n_m} \sum_{y \in Q_m} |y - median(y)_m|\end{aligned}\end{align} \]</div>
+<p>لاحظ أنه يناسب بشكل أبطأ بكثير من معيار MSE.</p>
+</section>
+</section>
+<section id="tree-missing-value-support">
+<span id="id6"></span><h1>دعم القيم المفقودة<a class="headerlink" href="#tree-missing-value-support" title="Link to this heading">#</a></h1>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">DecisionTreeRegressor</span></code>
+لديهما دعم مدمج للقيم المفقودة باستخدام <code class="docutils literal notranslate"><span class="pre">splitter='best'</span></code>، حيث
+يتم تحديد الانقسامات بطريقة جشعة.
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ExtraTreeClassifier</span></code>، و <code class="xref py py-class docutils literal notranslate"><span class="pre">ExtraTreeRegressor</span></code> لديهما دعم مدمج
+للقيم المفقودة لـ <code class="docutils literal notranslate"><span class="pre">splitter='random'</span></code>، حيث يتم تحديد الانقسامات بشكل عشوائي. لمزيد من التفاصيل حول كيفية اختلاف القاطع على
+القيم غير المفقودة، راجع قسم &lt;الغابة المرجعية`.</p>
+<p>المعيار المدعوم عند وجود قيم مفقودة هو
+<code class="docutils literal notranslate"><span class="pre">'gini'</span></code>، <code class="docutils literal notranslate"><span class="pre">'entropy'</span></code>، أو <code class="docutils literal notranslate"><span class="pre">'log_loss'</span></code>، للتصنيف أو
+<code class="docutils literal notranslate"><span class="pre">'squared_error'</span></code>، <code class="docutils literal notranslate"><span class="pre">'friedman_mse'</span></code>، أو <code class="docutils literal notranslate"><span class="pre">'poisson'</span></code> للانحدار.</p>
+<p>سنقوم أولاً بوصف كيفية تعامل <code class="xref py py-class docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code>، <code class="xref py py-class docutils literal notranslate"><span class="pre">DecisionTreeRegressor</span></code>
+مع القيم المفقودة في البيانات.</p>
+<p>بالنسبة لكل عتبة محتملة على البيانات غير المفقودة، سيقيم القاطع الانقسام
+مع انتقال جميع القيم المفقودة إلى العقدة اليسرى أو اليمنى.</p>
+<p>يتم اتخاذ القرارات على النحو التالي:</p>
+<ul>
+<li><p>بشكل افتراضي عند التنبؤ، يتم تصنيف العينات ذات القيم المفقودة
+باستخدام الفئة المستخدمة في الانقسام الذي تم العثور عليه أثناء التدريب:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([0, 0, 1, 1])</span>
+</pre></div>
+</div>
+</li>
+<li><p>إذا كان تقييم المعيار هو نفسه لكلتا العقدتين،
+يتم كسر التعادل للقيمة المفقودة عند التنبؤ بالانتقال إلى
+العقدة اليمنى. كما يتحقق القاطع من الانقسام الذي تنتقل فيه جميع القيم المفقودة
+إلى أحد الأبناء والقيم غير المفقودة إلى الآخر:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="go">array([1])</span>
+</pre></div>
+</div>
+</li>
+<li><p>إذا لم يتم رؤية أي قيم مفقودة أثناء التدريب لميزة معينة، فسيتم أثناء
+التنبؤ تعيين القيم المفقودة إلى الطفل الذي يحتوي على معظم العينات:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="go">array([1])</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtraTreeClassifier</span></code>، و <code class="xref py py-class docutils literal notranslate"><span class="pre">ExtraTreeRegressor</span></code> يتعاملان مع القيم المفقودة
+بطريقة مختلفة قليلاً. عند تقسيم عقدة، سيتم اختيار عتبة عشوائية
+للانقسام على القيم غير المفقودة. بعد ذلك، يتم إرسال القيم غير المفقودة إلى الطفل الأيسر والأيمن بناءً على العتبة العشوائية المحددة، بينما يتم أيضًا إرسال القيم المفقودة بشكل عشوائي إلى الطفل الأيسر أو الأيمن. يتم تكرار هذه العملية لكل ميزة يتم أخذها في الاعتبار في كل انقسام. ويتم اختيار أفضل انقسام من بين هذه الانقسامات.</p>
+<p>أثناء التنبؤ، يكون التعامل مع القيم المفقودة مماثلاً لطريقة شجرة القرار:</p>
+<ul class="simple">
+<li><p>بشكل افتراضي عند التنبؤ، يتم تصنيف العينات ذات القيم المفقودة
+باستخدام الفئة المستخدمة في الانقسام الذي تم العثور عليه أثناء التدريب.</p></li>
+<li><p>إذا لم يتم رؤية أي قيم مفقودة أثناء التدريب لميزة معينة، فسيتم أثناء
+التنبؤ تعيين القيم المفقودة إلى الطفل الذي يحتوي على معظم العينات.</p></li>
+</ul>
+</section>
+<section id="minimal-cost-complexity-pruning">
+<span id="id7"></span><h1>التقليم الأمثل لتكلفة التعقيد<a class="headerlink" href="#minimal-cost-complexity-pruning" title="Link to this heading">#</a></h1>
+<p>التقليم الأمثل لتكلفة التعقيد هو خوارزمية تستخدم لتقليم شجرة لتجنب
+المبالغة في التعلم، موصوفة في الفصل 3 من <a class="reference internal" href="#bre" id="id8"><span>[BRE]</span></a>. يتم معلمجة هذه الخوارزمية بواسطة <span class="math notranslate nohighlight">\(\alpha\ge0\)</span> المعروف باسم معامل التعقيد. يتم استخدام معامل التعقيد لتعريف تدبير تكلفة التعقيد، <span class="math notranslate nohighlight">\(R_\alpha(T)\)</span> لشجرة معينة <span class="math notranslate nohighlight">\(T\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[R_\alpha(T) = R(T) + \alpha|\widetilde{T}|\]</div>
+<p>حيث <span class="math notranslate nohighlight">\(|\widetilde{T}|\)</span> هو عدد العقد النهائية في <span class="math notranslate nohighlight">\(T\)</span> و <span class="math notranslate nohighlight">\(R(T)\)</span>
+يتم تعريفه تقليديًا على أنه معدل الخطأ الإجمالي للتصنيف للعقد
+النهائية. من ناحية أخرى، يستخدم sklearn مجموع عدم النقاء المرجح للعينة للعقد النهائية لـ <span class="math notranslate nohighlight">\(R(T)\)</span>. كما هو موضح أعلاه، يعتمد عدم نقاء العقدة على المعيار. يجد التقليم الأمثل لتكلفة التعقيد الجزء الفرعي من
+<span class="math notranslate nohighlight">\(T\)</span> الذي يقلل من <span class="math notranslate nohighlight">\(R_\alpha(T)\)</span>.</p>
+<p>إن تدبير تكلفة التعقيد لعقدة واحدة هو
+<span class="math notranslate nohighlight">\(R_\alpha(t)=R(t)+\alpha\)</span>. الفرع، <span class="math notranslate nohighlight">\(T_t\)</span>، هو شجرة حيث
+<span class="math notranslate nohighlight">\(t\)</span> هي العقدة الجذرية. بشكل عام، يكون عدم نقاء العقدة أكبر من مجموع عدم النقاء للعقد
+النهائية، <span class="math notranslate nohighlight">\(R(T_t)&lt;R(t)\)</span>. ومع ذلك، يمكن أن يكون تدبير تكلفة التعقيد لعقدة،
+<span class="math notranslate nohighlight">\(t\)</span>، وفرعها، <span class="math notranslate nohighlight">\(T_t\)</span>، متساويين اعتمادًا على
+<span class="math notranslate nohighlight">\(\alpha\)</span>. نحن نُعرف <span class="math notranslate nohighlight">\(\alpha\)</span> الفعال لعقدة على أنه
+القيمة التي يتساويان عندها، <span class="math notranslate nohighlight">\(R_\alpha(T_t)=R_\alpha(t)\)</span> أو
+<span class="math notranslate nohighlight">\(\alpha_{eff}(t)=\frac{R(t)-R(T_t)}{|T|-1}\)</span>. العقدة غير النهائية
+مع أقل قيمة لـ <span class="math notranslate nohighlight">\(\alpha_{eff}\)</span> هي الحلقة الأضعف وسيتم تقليمها. تتوقف هذه العملية عندما يكون <span class="math notranslate nohighlight">\(\alpha_{eff}\)</span> الأدنى للشجرة المقلمة أكبر من معلمة <code class="docutils literal notranslate"><span class="pre">ccp_alpha</span></code>.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/tree/plot_cost_complexity_pruning.html#sphx-glr-auto-examples-tree-plot-cost-complexity-pruning-py"><span class="std std-ref">Post pruning decision trees with cost complexity pruning</span></a></p></li>
+</ul>
+<p class="rubric">مراجع</p>
+<div role="list" class="citation-list">
+<div class="citation" id="bre" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">BRE</a><span class="fn-bracket">]</span></span>
+<p>L. Breiman, J. Friedman, R. Olshen, and C. Stone. Classification
+and Regression Trees. Wadsworth, Belmont, CA, 1984.</p>
+</div>
+</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Decision_tree_learning">https://en.wikipedia.org/wiki/Decision_tree_learning</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Predictive_analytics">https://en.wikipedia.org/wiki/Predictive_analytics</a></p></li>
+<li><p>J.R. Quinlan. C4. 5: programs for machine learning. Morgan
+Kaufmann, 1993.</p></li>
+<li><p>T. Hastie, R. Tibshirani and J. Friedman. Elements of Statistical
+Learning, Springer, 2009.</p></li>
+</ul>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">التعقيد</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">نصائح حول الاستخدام العملي</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-algorithms">خوارزميات الشجرة: ID3 و C4.5 و C5.0 و CART</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">معايير التصنيف</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">معايير الانحدار</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-missing-value-support">دعم القيم المفقودة</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-cost-complexity-pruning">التقليم الأمثل لتكلفة التعقيد</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/tree.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
