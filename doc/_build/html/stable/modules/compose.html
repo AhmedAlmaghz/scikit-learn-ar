@@ -1,0 +1,1234 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="6.1. خطوط الأنابيب ومقدّرات المُركّبات" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/compose.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="لإنشاء مُقدّر مُركّب، يتم عادةً دمج المحوّلات مع محوّلات أخرى أو مع مُتنبّئات (مثل المُصنّفات أو المُرتّبات). أكثر الأدوات شيوعًا المُستخدمة لتأليف المُقدّرات هي خط الأنابيب. تتطلّب خطوط الأنابيب أ..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="لإنشاء مُقدّر مُركّب، يتم عادةً دمج المحوّلات مع محوّلات أخرى أو مع مُتنبّئات (مثل المُصنّفات أو المُرتّبات). أكثر الأدوات شيوعًا المُستخدمة لتأليف المُقدّرات هي خط الأنابيب. تتطلّب خطوط الأنابيب أ..." />
+
+    <title>6.1. خطوط الأنابيب ومقدّرات المُركّبات &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/compose';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.4. استخراج الخصائص" href="feature_extraction.html" />
+    <link rel="prev" title="6. تحويلات مجموعة البيانات" href="../data_transforms.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../supervised_learning.html">1. التعلم الخَلفي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unsupervised_learning.html">2. التعلم غير الخاضع للإشراف</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixture.html">2.1. نماذج المزيج الغاوسي</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="manifold.html">2.3. تعلم المنوال</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="clustering.html">2.9. التجميع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decomposition.html">2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="covariance.html">2.13. التغاير التجريبي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="outlier_detection.html">2.16. تناسب غلاف إهليلجي</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="density.html">2.27. تقدير الكثافة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="neural_networks_unsupervised.html">2.30. نماذج الشبكات العصبية (غير الخاضعة للإشراف)</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../model_selection.html">3. اختيار النموذج وتقييمه</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation.html">3.1. التدقيق المتقاطع: تقييم أداء أداة التقدير</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="grid_search.html">3.4. البحث الشامل عن الشبكة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="classification_threshold.html">3.7. تعديل عتبة القرار للتنبؤ بالصنف</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="model_evaluation.html">3.9. مقاييس الأداء وتقييمها: تقييم جودة التنبؤات كميًا</a></li>
+<li class="toctree-l2"><a class="reference internal" href="learning_curve.html">3.10. منحنيات التحقق: رسم الدرجات لتقييم النماذج</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../inspection.html">4. التفتيش</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualizations.html">5. التمثيل المرئي</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_transforms.html">6. تحويلات مجموعة البيانات</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">6.1. خطوط الأنابيب ومقدّرات المُركّبات</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="feature_extraction.html">6.4. استخراج الخصائص</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">6.7. معالجة البيانات الأولية</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="impute.html">6.12. إكمال القيم المفقودة</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="unsupervised_reduction.html">6.19. PCA: التحليل التكويني الرئيسي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="random_projection.html">6.22. الإسقاط العشوائي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel_approximation.html">6.23. طريقة Nystroem لتقريب النواة</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">6.28. مقاييس الاقتران، الألفة والنواة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_targets.html">6.29. تحويل هدف التنبؤ (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../datasets.html">7. مرافق تحميل مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/toy_dataset.html">7.1. مجموعات البيانات التجريبية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/real_world.html">7.2. مجموعات البيانات من العالم الحقيقي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/sample_generators.html">7.3. المجموعات البيانات المولدة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/loading_other_datasets.html">7.4. أمثلة</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing.html">8. الحوسبة باستخدام scikit-learn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_persistence.html">9. نظرة عامة على سير العمل</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../common_pitfalls.html">14. المعالجة المسبقة غير المتسقة</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../dispatching.html">16. التشغيل التلقائي</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../machine_learning_map.html">17. اختيار المحلل المناسب</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentations.html">18. الموارد الخارجية، الفيديوهات، والمحاضرات</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">مرجع المستخدم</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../data_transforms.html" class="nav-link"><span class="section-number">6. </span>تحويلات مجموعة البيانات</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1><span class="section-number">6.1. </span>خطوط الأنابيب ومقدّرات المُركّبات<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>لإنشاء مُقدّر مُركّب، يتم عادةً دمج المحوّلات مع محوّلات أخرى أو مع مُتنبّئات
+(مثل المُصنّفات أو المُرتّبات). أكثر الأدوات شيوعًا المُستخدمة لتأليف المُقدّرات هي
+خط الأنابيب. تتطلّب خطوط الأنابيب أن تكون جميع الخطوات باستثناء الأخيرة مُحوّلًا.
+يمكن أن تكون الخطوة الأخيرة أي شيء، مُحوّل أو مُتنبّئ أو مُقدّر تجميع قد يكون أو لا
+يكون لديه طريقة “.predict(…)” . يُعرّض خط الأنابيب جميع الطرق التي يوفّرها المُقدّر
+الأخير: إذا وفّرت الخطوة الأخيرة طريقة “transform”، فسيكون لخط الأنابيب طريقة
+“transform” ويتصرّف مثل المُحوّل. إذا وفّرت الخطوة الأخيرة طريقة “predict”، فسيكشف
+خط الأنابيب عن تلك الطريقة، وبالنسبة لبيانات “X”، يستخدم جميع الخطوات باستثناء
+الأخيرة لتحويل البيانات، ثم يُمرّر تلك البيانات المُحوّلة إلى طريقة “predict”
+للخطوة الأخيرة من خط الأنابيب. غالبًا ما تُستخدم فئة “Pipeline” بالاقتران مع
+“ColumnTransformer” أو “FeatureUnion” الذي يُدمج ناتج المحوّلات في مساحة مُميّزة
+مُركّبة.</p>
+</section>
+<section id="id2">
+<h1><span class="section-number">6.2. </span>خط الأنابيب: تسلسل المُقدّرات<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p>يمكن استخدام “Pipeline” لتسلسل مُقدّرات مُتعدّدة في مُقدّر واحد. هذا مفيد لأن
+هناك غالبًا تسلسل ثابت من الخطوات في معالجة البيانات، على سبيل المثال اختيار
+السمات، التطبيع والتصنيف. يخدم خط الأنابيب أغراضًا مُتعدّدة هنا:</p>
+<dl class="simple">
+<dt>الراحة والتغليف</dt><dd><p>تحتاج فقط إلى استدعاء “fit” و “predict” مرة واحدة على بياناتك لتناسب تسلسلًا
+كاملًا من المُقدّرات.</p>
+</dd>
+<dt>اختيار المُعاملات المُشتركة</dt><dd><p>يمكنك البحث الشبكي على مُعاملات جميع المُقدّرات في خط الأنابيب في نفس الوقت.</p>
+</dd>
+<dt>السلامة</dt><dd><p>تُساعد خطوط الأنابيب على تجنّب تسريب الإحصاءات من بيانات الاختبار إلى النموذج
+المُدرّب في التصديق المُتقاطع، عن طريق ضمان استخدام نفس العينات لتدريب
+المُحوّلات والمُتنبّئات.</p>
+</dd>
+</dl>
+<p>يجب أن تكون جميع المُقدّرات في خط الأنابيب، باستثناء الأخير، مُحوّلات (أي يجب أن
+يكون لديها طريقة “transform”). قد يكون المُقدّر الأخير أي نوع (مُحوّل، مُصنّف،
+إلخ).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>إن استدعاء “fit” على خط الأنابيب هو نفسه استدعاء “fit” على كل مُقدّر بدوره،
+ويُحوّل الإدخال ويمرّره إلى الخطوة التالية. لدي خط الأنابيب جميع الطرق التي
+يمتلكها المُقدّر الأخير في خط الأنابيب، أي إذا كان المُقدّر الأخير مُصنّفًا،
+فيمكن استخدام “Pipeline” كمُصنّف. إذا كان المُقدّر الأخير مُحوّلًا، فسيصبح
+خط الأنابيب كذلك.</p>
+</div>
+<section id="id3">
+<h2><span class="section-number">6.2.1. </span>الاستخدام<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h3><span class="section-number">6.2.1.1. </span>بناء خط أنابيب<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>يتم بناء خط الأنابيب باستخدام قائمة من أزواج “(key, value)”، حيث “key” هو سلسلة
+تحتوي على الاسم الذي تريد منحه لهذه الخطوة و “value” هو كائن المُقدّر:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimators</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">())]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span>
+<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA()), (&#39;clf&#39;, SVC())])</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">6.2.1.2. </span>الوصول إلى خطوات خط الأنابيب<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>يتم تخزين مُقدّرات خط الأنابيب على شكل قائمة في سمة “steps”. يمكن استخراج
+خط أنابيب فرعي باستخدام ترميز الشرائح المُستخدم عادةً لتسلسلات Python مثل
+القوائم أو السلاسل (على الرغم من السماح فقط بخطوة واحدة). هذا مُفيد لأداء بعض
+التحويلات فقط (أو عكسها):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA())])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>
+<span class="go">Pipeline(steps=[(&#39;clf&#39;, SVC())])</span>
+</pre></div>
+</div>
+<dl>
+<dt>الوصول إلى خطوة حسب الاسم أو الموضع</dt><dd><p>يمكن أيضًا الوصول إلى خطوة مُحدّدة عن طريق الفهرسة (بـ “[idx]”) في خط الأنابيب:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">steps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">(&#39;reduce_dim&#39;, PCA())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">PCA()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">]</span>
+<span class="go">PCA()</span>
+</pre></div>
+</div>
+<p>تتيح سمة “named_steps” لخط الأنابيب الوصول إلى الخطوات حسب الاسم مع اكتمال التبويب
+في البيئات التفاعلية:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">named_steps</span><span class="o">.</span><span class="n">reduce_dim</span> <span class="ow">is</span> <span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</section>
+<section id="id6">
+<h3><span class="section-number">6.2.1.3. </span>تتبّع أسماء الميزات في خط أنابيب<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>لتمكين فحص النموذج، لدى “Pipeline” طريقة “get_feature_names_out()”، تمامًا مثل
+جميع المُحوّلات. يمكنك استخدام تقطيع خط الأنابيب للحصول على أسماء الميزات التي
+تدخل كل خطوة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectKBest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>   <span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">,</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span>
+<span class="gp">... </span>   <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">())])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="go">Pipeline(steps=[(&#39;select&#39;, SelectKBest(...)), (&#39;clf&#39;, LogisticRegression(...))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="go">array([&#39;x2&#39;, &#39;x3&#39;], ...)</span>
+</pre></div>
+</div>
+<dl>
+<dt>تخصيص أسماء الميزات</dt><dd><p>يمكنك أيضًا توفير أسماء ميزات مُخصّصة للبيانات المُدخلة باستخدام “get_feature_names_out”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="go">array([&#39;petal length (cm)&#39;, &#39;petal width (cm)&#39;], ...)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</section>
+<section id="id7">
+<h3><span class="section-number">6.2.1.4. </span>الوصول إلى المُعاملات المُتعرّشة<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>من الشائع ضبط مُعاملات مُقدّر ضمن خط أنابيب. لذلك، فإن هذا المُعامِل مُتعرّش
+لأنه ينتمي إلى خطوة فرعية مُحدّدة. يمكن الوصول إلى مُعاملات المُقدّرات في خط
+الأنابيب باستخدام بناء الجملة “&lt;estimator&gt; __ &lt;parameter&gt;”</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;reduce_dim&quot;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">()),</span> <span class="p">(</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">())])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">clf__C</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA()), (&#39;clf&#39;, SVC(C=10))])</span>
+</pre></div>
+</div>
+<dl>
+<dt>متى يهم الأمر؟</dt><dd><p>هذا مهم بشكل خاص للبحث الشبكي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">param_grid</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">reduce_dim__n_components</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+<span class="gp">... </span>                  <span class="n">clf__C</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>قد يتم أيضًا استبدال الخطوات الفردية كمُعاملات، ويمكن تجاهل الخطوات غير النهائية
+عن طريق تعيينها على “passthrough”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">param_grid</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">reduce_dim</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;passthrough&#39;</span><span class="p">,</span> <span class="n">PCA</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">PCA</span><span class="p">(</span><span class="mi">10</span><span class="p">)],</span>
+<span class="gp">... </span>                  <span class="n">clf</span><span class="o">=</span><span class="p">[</span><span class="n">SVC</span><span class="p">(),</span> <span class="n">LogisticRegression</span><span class="p">()],</span>
+<span class="gp">... </span>                  <span class="n">clf__C</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="grid_search.html#composite-grid-search"><span class="std std-ref">المثمنات المركبة ومساحات المعلمات</span></a></p></li>
+</ul>
+</div>
+</dd>
+</dl>
+</section>
+<section id="id8">
+<h3><span class="section-number">6.2.1.5. </span>الأمثلة<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/feature_selection/plot_feature_selection_pipeline.html#sphx-glr-auto-examples-feature-selection-plot-feature-selection-pipeline-py"><span class="std std-ref">Pipeline ANOVA SVM</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/model_selection/plot_grid_search_text_feature_extraction.html#sphx-glr-auto-examples-model-selection-plot-grid-search-text-feature-extraction-py"><span class="std std-ref">Sample pipeline for text feature extraction and evaluation</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/compose/plot_digits_pipe.html#sphx-glr-auto-examples-compose-plot-digits-pipe-py"><span class="std std-ref">Pipelining: chaining a PCA and a logistic regression</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/miscellaneous/plot_kernel_approximation.html#sphx-glr-auto-examples-miscellaneous-plot-kernel-approximation-py"><span class="std std-ref">Explicit feature map approximation for RBF kernels</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/svm/plot_svm_anova.html#sphx-glr-auto-examples-svm-plot-svm-anova-py"><span class="std std-ref">SVM-Anova: SVM with univariate feature selection</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/compose/plot_compare_reduction.html#sphx-glr-auto-examples-compose-plot-compare-reduction-py"><span class="std std-ref">Selecting dimensionality reduction with Pipeline and GridSearchCV</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/miscellaneous/plot_pipeline_display.html#sphx-glr-auto-examples-miscellaneous-plot-pipeline-display-py"><span class="std std-ref">Displaying Pipelines</span></a></p></li>
+</ul>
+</section>
+</section>
+<section id="id9">
+<h2><span class="section-number">6.2.2. </span>ذاكرة التخزين المؤقت للمُحوّلات: تجنّب الحساب المُتكرّر<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>قد يكون ضبط المُحوّلات مُكلفًا من الناحية الحسابية. باستخدام مُعامله “memory” المُعيّن،
+سيقوم “Pipeline” بتخزين كل مُحوّل في الذاكرة بعد استدعاء “fit”.
+يتم استخدام هذه الميزة لتجنّب حساب المُحوّلات المُلائمة ضمن خط أنابيب إذا كانت
+المُعاملات وبيانات الإدخال مُتطابقة. مثال نموذجي هو حالة البحث الشبكي حيث
+يمكن ملاءمة المُحوّلات مرة واحدة فقط وإعادة استخدامها لكل تكوين. لن يتم تخزين
+الخطوة الأخيرة مطلقًا، حتى إذا كانت مُحوّل.</p>
+<p>يتم استخدام مُعامِل “memory” لتخزين المُحوّلات في الذاكرة. يمكن أن يكون “memory”
+إما سلسلة تحتوي على الدليل الذي سيتم فيه تخزين المُحوّلات المؤقتة أو كائن
+“joblib.Memory”.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="الآثار-الجانبية-لتخزين-المُحوّلات-المؤقتة">
+<summary class="sd-summary-title sd-card-header sd-bg-warning sd-bg-text-warning">
+<span class="sd-summary-text">الآثار الجانبية لتخزين المُحوّلات المؤقتة<a class="headerlink" href="#الآثار-الجانبية-لتخزين-المُحوّلات-المؤقتة" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">بدون تمكين التخزين المؤقت، يمكن فحص مثيل المُحوّل الأصلي كما هو مُبيّن أدناه:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_digits</span><span class="p">,</span> <span class="n">y_digits</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca1</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">svm1</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">,</span> <span class="n">pca1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">svm1</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_digits</span><span class="p">,</span> <span class="n">y_digits</span><span class="p">)</span>
+<span class="go">Pipeline(steps=[(&#39;reduce_dim&#39;, PCA(n_components=10)), (&#39;clf&#39;, SVC())])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># يمكن فحص مثيل PCA مباشرةً</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca1</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(10, 64)</span>
+</pre></div>
+</div>
+<p class="sd-card-text">يؤدي تمكين التخزين المؤقت إلى تشغيل نسخة من المُحوّلات قبل الضبط. لذلك، لا
+يمكن فحص مثيل المُحوّل المُعطى لخط الأنابيب مباشرةً. في المثال التالي، سيؤدّي
+الوصول إلى مثيل “PCA” إلى رفع “AttributeError” نظرًا لأن “pca2” سيكون مُحوّلًا
+غير مُلائم. بدلاً من ذلك، استخدم سمة “named_steps” لفحص المُقدّرات ضمن
+خط الأنابيب:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cachedir</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca2</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">svm2</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cached_pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">,</span> <span class="n">pca2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">svm2</span><span class="p">)],</span>
+<span class="gp">... </span>                       <span class="n">memory</span><span class="o">=</span><span class="n">cachedir</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cached_pipe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_digits</span><span class="p">,</span> <span class="n">y_digits</span><span class="p">)</span>
+<span class="go">Pipeline(memory=...,</span>
+<span class="go">         steps=[(&#39;reduce_dim&#39;, PCA(n_components=10)), (&#39;clf&#39;, SVC())])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cached_pipe</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;reduce_dim&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(10, 64)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># إزالة دليل التخزين المؤقت</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rmtree</span><span class="p">(</span><span class="n">cachedir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details><section id="id10">
+<h3><span class="section-number">6.2.2.1. </span>الأمثلة<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/compose/plot_compare_reduction.html#sphx-glr-auto-examples-compose-plot-compare-reduction-py"><span class="std std-ref">Selecting dimensionality reduction with Pipeline and GridSearchCV</span></a></p></li>
+</ul>
+<p>تحويل الهدف في الانحدار
+يحوّل <code class="xref py py-class docutils literal notranslate"><span class="pre">TransformedTargetRegressor</span></code> الأهداف <code class="docutils literal notranslate"><span class="pre">y</span></code> قبل ضبط نموذج الانحدار. يتم إعادة تعيين التوقعات إلى المجال الأصلي عن طريق تحويل عكسي. يأخذ كحجة المنحنى الذي سيتم استخدامه للتنبؤ، والمحول الذي سيتم تطبيقه على متغير الهدف:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; استيراد numpy كالن
+&gt;&gt;&gt; من sklearn.datasets استيراد fetch_california_housing
+&gt;&gt;&gt; من sklearn.compose استيراد TransformedTargetRegressor
+&gt;&gt;&gt; من sklearn.preprocessing استيراد QuantileTransformer
+&gt;&gt;&gt; من sklearn.linear_model استيراد LinearRegression
+&gt;&gt;&gt; من sklearn.model_selection استيراد train_test_split
+&gt;&gt;&gt; X، y = fetch_california_housing(return_X_y=True)
+&gt;&gt;&gt; X، y = X [: 2000:،:]، y [: 2000] # حدد جزءًا من البيانات
+&gt;&gt;&gt; المحول = QuantileTransformer(output_distribution=&#39;normal&#39;)
+&gt;&gt;&gt; المنحنى = LinearRegression()
+&gt;&gt;&gt; regr = TransformedTargetRegressor(المنحنى = المنحنى،
+</pre></div>
+</div>
+<p>… المحول = المحول)
+&gt;&gt;&gt; X_train، X_test، y_train، y_test = train_test_split(X، y، random_state=0)
+&gt;&gt;&gt; regr.fit(X_train، y_train)
+TransformedTargetRegressor (…)
+&gt;&gt;&gt; طباعة (‘R2 score: {0:.2f}’.format(regr.score(X_test، y_test)))
+R2 score: 0.61
+&gt;&gt;&gt; raw_target_regr = LinearRegression().fit(X_train، y_train)
+&gt;&gt;&gt; طباعة (‘R2 score: {0:.2f}’.format(raw_target_regr.score(X_test، y_test)))
+R2 score: 0.59</p>
+<p>بالنسبة للتحويلات البسيطة، بدلاً من كائن Transformer، يمكن تمرير زوج من الدالات التي تحدد التحويل ورسمها العكسي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>… return np.log(x)
+&gt;&gt;&gt; def inverse_func(x):
+… return np.exp(x)</p>
+<p>بعد ذلك، يتم إنشاء الكائن على النحو التالي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; regr = TransformedTargetRegressor(المنحنى = المنحنى،
+</pre></div>
+</div>
+<p>… func = func،
+… inverse_func = inverse_func)
+&gt;&gt;&gt; regr.fit(X_train، y_train)
+TransformedTargetRegressor (…)
+&gt;&gt;&gt; طباعة (‘R2 score: {0:.2f}’.format(regr.score(X_test، y_test)))
+R2 score: 0.51</p>
+<p>بشكل افتراضي، يتم التحقق من الدالات المقدمة في كل عملية ضبط لكونها عكس بعضها البعض. ومع ذلك، من الممكن تجاوز هذا التحقق عن طريق تعيين <code class="docutils literal notranslate"><span class="pre">check_inverse</span></code> إلى <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">inverse_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>… return x
+&gt;&gt;&gt; regr = TransformedTargetRegressor(المنحنى = المنحنى،
+… func = func،
+… inverse_func = inverse_func،
+… check_inverse = False)
+&gt;&gt;&gt; regr.fit(X_train، y_train)
+TransformedTargetRegressor (…)
+&gt;&gt;&gt; طباعة (‘R2 score: {0:.2f}’.format(regr.score(X_test، y_test)))
+R2 score: -1.57</p>
+<p>يمكن تشغيل التحويل عن طريق تعيين إما <code class="docutils literal notranslate"><span class="pre">transformer</span></code> أو
+زوج من الدوال <code class="docutils literal notranslate"><span class="pre">func</span></code> و <code class="docutils literal notranslate"><span class="pre">inverse_func</span></code>. ومع ذلك، فإن تعيين كلا الخيارين سيرفع خطأ.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">ref<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘sphx_glr_auto_examples_compose_plot_transformed_target.py’</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="featureunion">
+<span id="feature-union"></span><h1><span class="section-number">6.3. </span>FeatureUnion: مساحات الميزات المركبة<a class="headerlink" href="#featureunion" title="Link to this heading">#</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘FeatureUnion’ يجمع بين العديد من كائنات المحول في محول جديد</p>
+</dd>
+</dl>
+<p>يضم إخراجها. يأخذ :class: ‘FeatureUnion’ قائمة من كائنات المحول. أثناء الضبط،
+يتم ضبط كل منها على البيانات بشكل مستقل. يتم تطبيق المحولات بالتوازي،
+ويتم ضم مصفوفات الميزات التي ينتجونها جنبًا إلى جنب في مصفوفة أكبر.</p>
+<p>عندما تريد تطبيق تحويلات مختلفة على كل حقل من البيانات،
+راجع فئة :class: ‘~sklearn.compose.ColumnTransformer’ ذات الصلة
+(راجع: ref: ‘دليل المستخدم &lt;column_transformer&gt;`__).</p>
+<dl class="field-list simple">
+<dt class="field-odd">class<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘FeatureUnion’ يخدم نفس الأغراض مثل :class: ‘Pipeline’ -</p>
+</dd>
+</dl>
+<p>الراحة والتقدير المشترك للمؤشرات والتحقق من صحتها.</p>
+<p>يمكن الجمع بين :class: ‘FeatureUnion’ و :class: ‘Pipeline’ ل
+إنشاء نماذج معقدة.</p>
+<p>(ليس لدى :class: ‘FeatureUnion’ طريقة للتحقق مما إذا كان محولان
+قد ينتجان ميزات متطابقة. فهو ينتج اتحادًا فقط عندما تكون مجموعات الميزات غير متداخلة،
+والتأكد من أنها كذلك هو مسؤولية المتصل.)</p>
+<section id="id11">
+<h2><span class="section-number">6.3.1. </span>الاستخدام<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<p>يتم بناء :class: ‘FeatureUnion’ باستخدام قائمة من أزواج <code class="docutils literal notranslate"><span class="pre">(key،</span> <span class="pre">value)</span></code>،
+حيث <code class="docutils literal notranslate"><span class="pre">key</span></code> هو الاسم الذي تريد إعطاءه لتحويل معين
+(سلسلة تعسفية؛ فهو يعمل فقط كمعرف)
+و <code class="docutils literal notranslate"><span class="pre">value</span></code> هو كائن مقدر:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; من sklearn.pipeline استيراد FeatureUnion
+&gt;&gt;&gt; من sklearn.decomposition استيراد PCA
+&gt;&gt;&gt; من sklearn.decomposition استيراد KernelPCA
+&gt;&gt;&gt; المقدرات = [(&#39;pca الخطي&#39;، PCA())، (&#39;kernel_pca&#39;، KernelPCA())]
+&gt;&gt;&gt; مجتمعة = FeatureUnion(المقدرات)
+&gt;&gt;&gt; مجتمعة
+</pre></div>
+</div>
+<p>FeatureUnion(قائمة المحول = [(‘pca الخطي’، PCA())،
+(‘kernel_pca’، KernelPCA())])</p>
+<p>مثل خطوط الأنابيب، لدى اتحادات الميزات بناء مختصر يسمى
+:func: ‘make_union’ الذي لا يتطلب تسمية صريحة للمكونات.</p>
+<p>مثل “خط الأنابيب”، يمكن استبدال الخطوات الفردية باستخدام “set_params”،
+ويتم تجاهلها عن طريق تعيينها على “drop”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">مجتمعة</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">kernel_pca</span><span class="o">=</span><span class="s1">&#39;drop&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>FeatureUnion(قائمة المحول = [(‘pca الخطي’، PCA())،
+(‘kernel_pca’، ‘drop’)])</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">ref<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘sphx_glr_auto_examples_compose_plot_feature_union.py’</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p id="column-transformer">ColumnTransformer للبيانات غير المتجانسة
+تحتوي العديد من مجموعات البيانات على سمات من أنواع مختلفة، مثل النصوص والأعداد العشرية والتواريخ، حيث يتطلب كل نوع من السمات خطوات معالجة أو استخراج سمات منفصلة. وغالبًا ما يكون من الأسهل معالجة البيانات قبل تطبيق أساليب التعلم في سكيت-ليرن، على سبيل المثال باستخدام بانداس.</p>
+<p>قد تكون معالجة بياناتك قبل تمريرها إلى سكيت-ليرن مشكلة لأحد الأسباب التالية:</p>
+<ol class="arabic simple">
+<li><p>يؤدي دمج الإحصاءات من بيانات الاختبار في معالجات ما قبل المعالجة إلى جعل درجات الضبط غير موثوقة (تُعرف باسم “تسرب البيانات”)، على سبيل المثال في حالة معايرات أو استكمال القيم المفقودة.</p></li>
+<li><p>قد ترغب في تضمين معلمات معالجات ما قبل المعالجة في بحث عن المعلمات.</p></li>
+</ol>
+<p>تساعد class ~ sklearn.compose.ColumnTransformer في إجراء تحويلات مختلفة لأعمدة مختلفة من البيانات، داخل class ~ sklearn.pipeline.Pipeline التي تكون آمنة من تسرب البيانات والتي يمكن معلمتها. تعمل class ~ sklearn.compose.ColumnTransformer على المصفوفات والمصفوفات المبعثرة، وبيانات الإطار من بانداس.</p>
+<p>يمكن تطبيق تحويل مختلف على كل عمود، مثل المعالجة المسبقة أو طريقة استخراج ميزات محددة:</p>
+<p>بالنسبة لهذه البيانات، قد نرغب في ترميز عمود “المدينة” كمتغير فئوي باستخدام class ~ sklearn.preprocessing.OneHotEncoder ولكن تطبيق class ~ sklearn.feature_extraction.text.CountVectorizer على عمود “العنوان”. نظرًا لأننا قد نستخدم طرق استخراج ميزات متعددة على نفس العمود، فإننا نعطي كل محول اسماً فريداً، مثل “city_category” و”title_bow”. يتم تجاهل أعمدة التصنيف المتبقية بشكل افتراضي (remainder=’drop’):</p>
+<p>في المثال أعلاه، يتوقع class ~ sklearn.feature_extraction.text.CountVectorizer مصفوفة أحادية البعد كإدخال، وبالتالي تم تحديد الأعمدة كسلسلة (“العنوان”). ومع ذلك، فإن class ~ sklearn.preprocessing.OneHotEncoder، مثل معظم المحولات الأخرى، يتوقع بيانات ثنائية الأبعاد، لذلك في هذه الحالة، يلزم تحديد العمود كقائمة من السلاسل ([“المدينة”]).</p>
+<p>وبصرف النظر عن قيمة قياسية أو قائمة فردية، يمكن تحديد اختيار العمود كقائمة من عدة عناصر، أو مصفوفة من الأعداد الصحيحة، أو شريحة، أو قناع منطقي، أو باستخدام: func ~ sklearn.compose.make_column_selector. يتم استخدام: func ~ sklearn.compose.make_column_selector لاختيار الأعمدة استنادًا إلى نوع البيانات أو اسم العمود:</p>
+<p>يمكن أن تشير السلاسل إلى أعمدة إذا كان الإدخال عبارة عن إطار بيانات، ويتم تفسير الأعداد الصحيحة دائمًا على أنها أعمدة موضعية.</p>
+<p>يمكننا الاحتفاظ بأعمدة التصنيف المتبقية عن طريق تعيين “remainder=’passthrough’”. يتم إضافة القيم إلى نهاية التحول:</p>
+<p>يمكن تعيين معلمة “remainder” إلى محدد مواقع معلومات لتحويل أعمدة التصنيف المتبقية. يتم إضافة القيم المحولة إلى نهاية التحول:</p>
+<p>يمكن الإشارة إلى الأعمدة بواسطة السلاسل إذا كان الإدخال عبارة عن إطار بيانات، ويتم تفسير الأعداد الصحيحة دائمًا على أنها أعمدة موضعية.</p>
+<p>يمكن عرض المحولات باستخدام تمثيل HTML عند عرضها في دفتر ملاحظات Jupyter. وهذا مفيد لتشخيص أو تصور خط أنابيب به العديد من المحولات. يتم تنشيط هذا التصور بشكل افتراضي:</p>
+<p>يمكن إلغاء تنشيطه عن طريق تعيين خيار “العرض” في: func ~ sklearn.set_config إلى “النص”:</p>
+<p>يمكن الاطلاع على مثال على إخراج HTML في قسم “تمثيل HTML لخط الأنابيب” من: ref: sphx_glr_auto_examples_compose_plot_column_transformer_mixed_types.py. كبديل، يمكن كتابة HTML في ملف باستخدام: func ~ sklearn.utils.estimator_html_repr:</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p>: ref: sphx_glr_auto_examples_compose_plot_column_transformer.py</p></li>
+<li><p>: ref: sphx_glr_auto_examples_compose_plot_column_transformer_mixed_types.py</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../data_transforms.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>تحويلات مجموعة البيانات</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="feature_extraction.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.4. </span>استخراج الخصائص</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">6.1. خطوط الأنابيب ومقدّرات المُركّبات</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.2. خط الأنابيب: تسلسل المُقدّرات</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.2.1. الاستخدام</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.2.1.1. بناء خط أنابيب</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.2.1.2. الوصول إلى خطوات خط الأنابيب</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6.2.1.3. تتبّع أسماء الميزات في خط أنابيب</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">6.2.1.4. الوصول إلى المُعاملات المُتعرّشة</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">6.2.1.5. الأمثلة</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">6.2.2. ذاكرة التخزين المؤقت للمُحوّلات: تجنّب الحساب المُتكرّر</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">6.2.2.1. الأمثلة</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#featureunion">6.3. FeatureUnion: مساحات الميزات المركبة</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6.3.1. الاستخدام</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/compose.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
