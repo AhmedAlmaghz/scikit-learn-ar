@@ -1,0 +1,1066 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="6.23. طريقة Nystroem لتقريب النواة" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/kernel_approximation.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="تقريب النواة يحتوي هذا البرنامج الفرعي على دوال تقريبية لتمثيل الخرائط التي تتوافق مع نوى معينة، كما هو مستخدم على سبيل المثال في آلات المتجهات الداعمة (راجع: ref: svm). تقوم دوال الخصائص التالية ب..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="تقريب النواة يحتوي هذا البرنامج الفرعي على دوال تقريبية لتمثيل الخرائط التي تتوافق مع نوى معينة، كما هو مستخدم على سبيل المثال في آلات المتجهات الداعمة (راجع: ref: svm). تقوم دوال الخصائص التالية ب..." />
+
+    <title>6.23. طريقة Nystroem لتقريب النواة &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/kernel_approximation';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.28. مقاييس الاقتران، الألفة والنواة" href="metrics.html" />
+    <link rel="prev" title="6.22. الإسقاط العشوائي" href="random_projection.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../supervised_learning.html">1. التعلم الخَلفي</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../unsupervised_learning.html">2. التعلم غير الخاضع للإشراف</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mixture.html">2.1. نماذج المزيج الغاوسي</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="manifold.html">2.3. تعلم المنوال</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="clustering.html">2.9. التجميع</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decomposition.html">2.10. تفكيك الإشارات إلى مكونات (مشاكل تحليل المصفوفة)</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="covariance.html">2.13. التغاير التجريبي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="outlier_detection.html">2.16. تناسب غلاف إهليلجي</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="density.html">2.27. تقدير الكثافة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="neural_networks_unsupervised.html">2.30. نماذج الشبكات العصبية (غير الخاضعة للإشراف)</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../model_selection.html">3. اختيار النموذج وتقييمه</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation.html">3.1. التدقيق المتقاطع: تقييم أداء أداة التقدير</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="grid_search.html">3.4. البحث الشامل عن الشبكة</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="classification_threshold.html">3.7. تعديل عتبة القرار للتنبؤ بالصنف</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="model_evaluation.html">3.9. مقاييس الأداء وتقييمها: تقييم جودة التنبؤات كميًا</a></li>
+<li class="toctree-l2"><a class="reference internal" href="learning_curve.html">3.10. منحنيات التحقق: رسم الدرجات لتقييم النماذج</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../inspection.html">4. التفتيش</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../visualizations.html">5. التمثيل المرئي</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_transforms.html">6. تحويلات مجموعة البيانات</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="compose.html">6.1. خطوط الأنابيب ومقدّرات المُركّبات</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="feature_extraction.html">6.4. استخراج الخصائص</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="preprocessing.html">6.7. معالجة البيانات الأولية</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="impute.html">6.12. إكمال القيم المفقودة</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="unsupervised_reduction.html">6.19. PCA: التحليل التكويني الرئيسي</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="random_projection.html">6.22. الإسقاط العشوائي</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">6.23. طريقة Nystroem لتقريب النواة</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="metrics.html">6.28. مقاييس الاقتران، الألفة والنواة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_targets.html">6.29. تحويل هدف التنبؤ (<code class="docutils literal notranslate"><span class="pre">y</span></code>)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../datasets.html">7. مرافق تحميل مجموعة البيانات</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/toy_dataset.html">7.1. مجموعات البيانات التجريبية</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/real_world.html">7.2. مجموعات البيانات من العالم الحقيقي</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/sample_generators.html">7.3. المجموعات البيانات المولدة</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets/loading_other_datasets.html">7.4. أمثلة</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../computing.html">8. الحوسبة باستخدام scikit-learn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_persistence.html">9. نظرة عامة على سير العمل</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../common_pitfalls.html">14. المعالجة المسبقة غير المتسقة</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../dispatching.html">16. التشغيل التلقائي</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../machine_learning_map.html">17. اختيار المحلل المناسب</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../presentations.html">18. الموارد الخارجية، الفيديوهات، والمحاضرات</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">مرجع المستخدم</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../data_transforms.html" class="nav-link"><span class="section-number">6. </span>تحويلات مجموعة البيانات</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>تقريب النواة
+يحتوي هذا البرنامج الفرعي على دوال تقريبية لتمثيل الخرائط التي تتوافق مع نوى معينة، كما هو مستخدم على سبيل المثال في آلات المتجهات الداعمة (راجع: ref: <code class="docutils literal notranslate"><span class="pre">svm</span></code>).</p>
+<p>تقوم دوال الخصائص التالية بتحويلات غير خطية للإدخال، والتي يمكن استخدامها كأساس للتصنيف الخطي أو الخوارزميات الأخرى.</p>
+<p>….. currentmodule:: sklearn.linear_model</p>
+<p>الميزة النسبية لاستخدام الخرائط الصريحة التقريبية مقارنة بـ “حيلة النواة &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_trick">https://en.wikipedia.org/wiki/Kernel_trick</a>&gt;`_، والتي تستخدم الخرائط الضمنية للخصائص، هي أن الخرائط الصريحة يمكن أن تكون أكثر ملاءمة للتعلم عبر الإنترنت ويمكن أن تقلل بشكل كبير من تكلفة التعلم مع مجموعات البيانات الكبيرة جدًا.</p>
+<p>لا تتوسع SVMs النواة القياسية جيدًا في مجموعات البيانات الكبيرة، ولكن باستخدام خريطة نواة تقريبية، من الممكن استخدام SVMs الخطية الأكثر كفاءة.</p>
+<p>وعلى وجه الخصوص، فإن الجمع بين تقريبات خريطة النواة مع: class: <code class="docutils literal notranslate"><span class="pre">SGDClassifier</span></code> يمكن أن يجعل التعلم غير الخطي على مجموعات البيانات الكبيرة ممكنًا.</p>
+<p>نظرًا لعدم وجود الكثير من العمل التجريبي الذي يستخدم التضمين التقريبي، فمن المستحسن مقارنة النتائج بطرق النواة الدقيقة عند الإمكان.</p>
+<p>….. seealso:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>: ref: `polynomial_regression` لتحويل متعدد الحدود الدقيق.
+</pre></div>
+</div>
+<p>….. currentmodule:: sklearn.kernel_approximation</p>
+<p>….. _nystroem_kernel_approx:</p>
+<section id="nystroem">
+<h1><span class="section-number">6.23. </span>طريقة Nystroem لتقريب النواة<a class="headerlink" href="#nystroem" title="Link to this heading">#</a></h1>
+<p>طريقة Nystroem، كما هو منفذ في: class: <code class="docutils literal notranslate"><span class="pre">Nystroem</span></code> هي طريقة عامة لتقريبات الترتيب المنخفض للنوى. ويحقق ذلك عن طريق أخذ عينات بدون استبدال للصفوف/الأعمدة للبيانات التي يتم تقييم النواة عليها. في حين أن التعقيد الحسابي للأسلوب الدقيق هو: math: <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">(n^3</span> <span class="pre">_{text</span> <span class="pre">{samples}})`</span></code>، فإن تعقيد التقريب هو: math: <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">(n^2</span> <span class="pre">_{text</span> <span class="pre">{components}}</span> <span class="pre">cdot</span> <span class="pre">n_</span> <span class="pre">{text</span> <span class="pre">{samples}})`</span></code>، حيث يمكن تعيين: math: <code class="docutils literal notranslate"><span class="pre">n_</span> <span class="pre">{text</span> <span class="pre">{components}}</span> <span class="pre">ll</span> <span class="pre">n_</span> <span class="pre">{text</span> <span class="pre">{samples}}`</span></code> بدون انخفاض كبير في الأداء [WS2001] _.</p>
+<p>يمكننا إنشاء التحلل الذاتى لنواة المصفوفة: math: <code class="docutils literal notranslate"><span class="pre">K`</span></code>، بناءً على ميزات البيانات، ثم تقسيمها إلى بيانات تم أخذ عينات منها وبيانات غير معاينة.</p>
+<p>….. math:</p>
+<p>K = U Lambda U ^ T
+= begin {bmatrix} U_1 \ U_2 end {bmatrix} Lambda begin {bmatrix} U_1 \ U_2 end {bmatrix} ^ T
+= begin {bmatrix} U_1 Lambda U_1 ^ T &amp; U_1 Lambda U_2 ^ T \ U_2 Lambda U_1 ^ T &amp; U_2 Lambda U_2 ^ T end {bmatrix}
+equiv begin {bmatrix} <a href="#id5"><span class="problematic" id="id6">K_</span></a> {11} &amp; <a href="#id7"><span class="problematic" id="id8">K_</span></a> {12} \ <a href="#id9"><span class="problematic" id="id10">K_</span></a> {21} &amp; <a href="#id11"><span class="problematic" id="id12">K_</span></a> {22} end {bmatrix}</p>
+<p>حيث:</p>
+<ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">math<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">U</span></code> هو متعامد</p>
+</dd>
+</dl>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">math<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Lambda</span></code> هو مصفوفة القطرية للقيم الذاتية</p>
+</dd>
+</dl>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">math<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">U_1</span></code> عبارة عن مصفوفة متعامدة للعينات التي تم اختيارها</p>
+</dd>
+</dl>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">math<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">U_2</span></code> عبارة عن مصفوفة متعامدة للعينات التي لم يتم اختيارها</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>نظرًا لأنه يمكن الحصول على: math: <code class="docutils literal notranslate"><span class="pre">U_1</span> <span class="pre">Lambda</span> <span class="pre">U_1</span> <span class="pre">^</span> <span class="pre">T</span></code> عن طريق التطبيع المتعامد للمصفوفة: math: <code class="docutils literal notranslate"><span class="pre">K_</span> <span class="pre">{11}</span></code>، ويمكن تقييم: math: <code class="docutils literal notranslate"><span class="pre">U_2</span> <span class="pre">Lambda</span> <span class="pre">U_1</span> <span class="pre">^</span> <span class="pre">T</span></code> (وكذلك نقلها)، فإن المصطلح المتبقي الوحيد الذي يجب توضيحه هو: math: <code class="docutils literal notranslate"><span class="pre">U_2</span> <span class="pre">Lambda</span> <span class="pre">U_2</span> <span class="pre">^</span> <span class="pre">T</span></code>. للقيام بذلك، يمكننا التعبير عنه من حيث المصفوفات التي تم تقييمها بالفعل:</p>
+<p>….. math:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\ <span class="n">begin</span> <span class="p">{</span><span class="n">محاذاة</span><span class="p">}</span> <span class="n">U_2</span> \ <span class="n">Lambda</span> <span class="n">U_2</span> <span class="o">^</span> <span class="n">T</span> <span class="o">&amp;=</span> <span class="n">left</span> <span class="p">(</span><span class="n">K_</span> <span class="p">{</span><span class="mi">21</span><span class="p">}</span> <span class="n">U_1</span> \ <span class="n">Lambda</span> <span class="o">^</span> <span class="p">{</span><span class="o">-</span> <span class="mi">1</span><span class="p">}</span> <span class="n">right</span><span class="p">)</span> \ <span class="n">Lambda</span> <span class="n">left</span> <span class="p">(</span><span class="n">K_</span> <span class="p">{</span><span class="mi">21</span><span class="p">}</span> <span class="n">U_1</span> \ <span class="n">Lambda</span> <span class="o">^</span> <span class="p">{</span><span class="o">-</span> <span class="mi">1</span><span class="p">}</span> <span class="n">right</span><span class="p">)</span> <span class="o">^</span> <span class="n">T</span>
+</pre></div>
+</div>
+<p>\ كان = <a href="#id13"><span class="problematic" id="id14">K_</span></a> {21} U_1 left (Lambda ^ {- 1} Lambda right) Lambda ^ {- 1} U_1 ^ T <a href="#id15"><span class="problematic" id="id16">K_</span></a> {21} ^ T
+\ كان = <a href="#id17"><span class="problematic" id="id18">K_</span></a> {21} U_1 Lambda ^ {- 1} U_1 ^ T <a href="#id19"><span class="problematic" id="id20">K_</span></a> {21} ^ T
+\ كان = <a href="#id21"><span class="problematic" id="id22">K_</span></a> {21} <a href="#id23"><span class="problematic" id="id24">K_</span></a> {11} ^ {- 1} <a href="#id25"><span class="problematic" id="id26">K_</span></a> {21} ^ T
+\ كان = left (<a href="#id27"><span class="problematic" id="id28">K_</span></a> {21} <a href="#id29"><span class="problematic" id="id30">K_</span></a> {11} ^ {- frac {1} {2}} right) left (<a href="#id31"><span class="problematic" id="id32">K_</span></a> {21} <a href="#id33"><span class="problematic" id="id34">K_</span></a> {11} ^ {- frac {1} {2}} right) ^ T
+. end {محاذاة}</p>
+<p>أثناء “التناسب”، تقيِّم الفئة: class: <code class="docutils literal notranslate"><span class="pre">Nystroem</span></code> الأساس: math: <code class="docutils literal notranslate"><span class="pre">U_1</span></code>، وتحسب ثابت التطبيع،: math: <code class="docutils literal notranslate"><span class="pre">K_</span> <span class="pre">{11}</span> <span class="pre">^</span> <span class="pre">{-</span> <span class="pre">frac</span> <span class="pre">{1}</span> <span class="pre">{2}}</span></code>. لاحقًا، أثناء “التحويل”، يتم تحديد مصفوفة النواة بين الأساس (معطى بواسطة السمة “<a href="#id35"><span class="problematic" id="id36">components_</span></a>”) ونقاط البيانات الجديدة، “X”. يتم بعد ذلك ضرب هذه المصفوفة بمصفوفة “<a href="#id37"><span class="problematic" id="id38">normalization_</span></a>” للحصول على النتيجة النهائية.</p>
+<p>بشكل افتراضي، يستخدم: class: <code class="docutils literal notranslate"><span class="pre">Nystroem</span></code> نواة “rbf”، ولكنه يمكن أن يستخدم أي دالة نواة أو مصفوفة نواة محسوبة مسبقًا. يتم إعطاء عدد العينات المستخدمة - وهو أيضًا أبعاد الميزات المحسوبة - بواسطة معلمة “n_components”.</p>
+<p>….. rubric:: أمثلة</p>
+<ul class="simple">
+<li><p>راجع المثال المعنون
+: ref: <code class="docutils literal notranslate"><span class="pre">sphx_glr_auto_examples_applications_plot_cyclical_feature_engineering.py</span></code>،
+الذي يوضح خط أنابيب التعلم الآلي الفعال الذي يستخدم نواة: class: <code class="docutils literal notranslate"><span class="pre">Nystroem</span></code>.</p></li>
+</ul>
+<p>….. _rbf_kernel_approx:</p>
+</section>
+<section id="id1">
+<h1><span class="section-number">6.24. </span>دالة الأساس الشعاعي<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>يقوم: class: <code class="docutils literal notranslate"><span class="pre">RBFSampler</span></code> ببناء خريطة تقريبية لدالة الأساس الشعاعي، والمعروفة أيضًا باسم <em>Random Kitchen Sinks</em> [RR2007] _. يمكن استخدام هذا التحويل لنمذجة خريطة النواة بشكل صريح، قبل تطبيق خوارزمية خطية، على سبيل المثال SVM الخطي:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; من sklearn.kernel_approximation import RBFSampler
+&gt;&gt;&gt; من sklearn.linear_model import SGDClassifier
+&gt;&gt;&gt; X = [[0،0]، [1،1]، [1،0]، [0،1]]
+&gt;&gt;&gt; y = [0،0،1،1]
+&gt;&gt;&gt; rbf_feature = RBFSampler (gamma = 1، random_state = 1)
+&gt;&gt;&gt; X_features = rbf_feature.fit_transform (X)
+&gt;&gt;&gt; clf = SGDClassifier (max_iter = 5)
+&gt;&gt;&gt; clf.fit (X_features، y)
+</pre></div>
+</div>
+<p>SGDClassifier (max_iter = 5)
+&gt;&gt;&gt; clf.score (X_features، y)
+1.0</p>
+<p>يعتمد التحويل على تقريب مونت كارلو لقيم النواة. تقوم دالة “التناسب” بتنفيذ أخذ العينات مونت كارلو، في حين أن طريقة “التحويل” تقوم بتحويل البيانات. نظرًا للعشوائية المتأصلة في العملية، قد تختلف النتائج بين مكالمات مختلفة لدالة “التناسب”.</p>
+<p>تأخذ دالة “التناسب” حجتين: “n_components”، وهو البعد المستهدف لتحويل الميزة، و”gamma”، وهو معلمة دالة RBF-kernel. ستؤدي قيمة أعلى لـ “n_components” إلى تقريب أفضل للنواة وستنتج نتائج أكثر تشابهًا لتلك التي ينتجها SVM النووي. لاحظ أن “تناسب” دالة الميزة لا يعتمد في الواقع على البيانات المقدمة إلى دالة “التناسب”.</p>
+<p>يتم استخدام أبعاد البيانات فقط. يمكن العثور على التفاصيل حول الأسلوب في [RR2007] _.</p>
+<p>بالنسبة لقيمة معينة من “n_components”، غالبًا ما يكون: class: <code class="docutils literal notranslate"><span class="pre">RBFSampler</span></code> أقل دقة من: class: <code class="docutils literal notranslate"><span class="pre">Nystroem</span></code>. : class: <code class="docutils literal notranslate"><span class="pre">RBFSampler</span></code> أرخص في الحساب، مما يجعل استخدام مساحات الميزات الأكبر أكثر كفاءة.</p>
+<p>….. figure:: ../auto_examples/miscellaneous/images/sphx_glr_plot_kernel_approximation_002.png
+: target: ../auto_examples/miscellaneous/plot_kernel_approximation.html
+: scale: 50٪
+: align: center</p>
+<p>مقارنة نواة RBF الدقيقة (يسار) بالتقريب (يمين)</p>
+<p>….. rubric:: أمثلة</p>
+<ul class="simple">
+<li><p>: ref: <code class="docutils literal notranslate"><span class="pre">sphx_glr_auto_examples_miscellaneous_plot_kernel_approximation.py</span></code></p></li>
+</ul>
+<p>….. _additive_chi_kernel_approx:</p>
+</section>
+<section id="id2">
+<h1><span class="section-number">6.25. </span>دالة النواة التربيعية الإضافية<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p>دالة النواة التربيعية الإضافية هي نواة على التوزيعات التكرارية، والتي تستخدم غالبًا في رؤية الكمبيوتر.</p>
+<p>دالة النواة التربيعية الإضافية المستخدمة هنا هي:</p>
+<p>….. math:</p>
+<p>k (x، y) = sum_i frac {2x_iy_i} {x_i + y_i}</p>
+<p>هذا لا يتوافق بالضبط مع: func: <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.pairwise.additive_chi2_kernel</span></code>. يفضل مؤلفو [VZ2010] _ الإصدار أعلاه لأنه إيجابي محدد دائمًا.</p>
+<p>نظرًا لأن النواة مضافة، فمن الممكن معاملة جميع المكونات: math: <code class="docutils literal notranslate"><span class="pre">x_i</span></code> بشكل منفصل للتضمين. وهذا يجعل من الممكن أخذ عينات من تحويل فورييه في فترات منتظمة، بدلاً من التقريب باستخدام أخذ العينات مونت كارلو.</p>
+<p>تنفذ الفئة: class: <code class="docutils literal notranslate"><span class="pre">AdditiveChi2Sampler</span></code> أخذ العينات المحددة المكونة من المكونات. يتم أخذ عينات من كل مكون: math: <code class="docutils literal notranslate"><span class="pre">n</span></code> مرة، مما يؤدي إلى: math: <code class="docutils literal notranslate"><span class="pre">2n</span> <span class="pre">+</span> <span class="pre">1</span></code> أبعاد لكل بعد إدخال (ينتج الضرب في اثنين عن الجزء الحقيقي والتخيلي لتحويل فورييه).</p>
+<p>في الأدبيات، يتم عادةً اختيار: math: <code class="docutils literal notranslate"><span class="pre">n</span></code> لتكون 1 أو 2، مما يحول مجموعة البيانات إلى حجم “n_samples * 5 * n_features” (في حالة: math: <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">2</span></code>).</p>
+<p>يمكن دمج خريطة الميزة التقريبية التي يوفرها: class: <code class="docutils literal notranslate"><span class="pre">AdditiveChi2Sampler</span></code> مع خريطة الميزة التقريبية التي يوفرها: class: <code class="docutils literal notranslate"><span class="pre">RBFSampler</span></code> لإنتاج خريطة ميزة تقريبية لدالة النواة التربيعية الأسية.</p>
+<p>راجع [VZ2010] _ للتفاصيل و [VVZ2010] _ للجمع مع: class: <code class="docutils literal notranslate"><span class="pre">RBFSampler</span></code>.</p>
+<p>….. _skewed_chi_kernel_approx:</p>
+</section>
+<section id="id3">
+<h1><span class="section-number">6.26. </span>دالة النواة التربيعية المنحرفة<a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<p>دالة النواة التربيعية المنحرفة هي:</p>
+<p>….. math:</p>
+<p>k (x، y) = prod_i frac {2 sqrt {x_i + c} sqrt {y_i + c}} {x_i + y_i + 2c}</p>
+<p>لديك خصائص مشابهة لدالة النواة التربيعية الأسية المستخدمة غالبًا في رؤية الكمبيوتر، ولكنها تسمح بتقريب مونت كارلو البسيط لخريطة الميزة.</p>
+<p>يتم استخدام: class: <code class="docutils literal notranslate"><span class="pre">SkewedChi2Sampler</span></code> بنفس طريقة الاستخدام الموضحة أعلاه لـ: class: <code class="docutils literal notranslate"><span class="pre">RBFSampler</span></code>. الفرق الوحيد هو في المعلمة الحرة، والتي يطلق عليها: math: <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
+<p>للاطلاع على الدافع وراء هذا التحويل والتفاصيل الرياضية، راجع [LS2010] _.</p>
+<p>….. _polynomial_kernel_approx:</p>
+</section>
+<section id="id4">
+<h1><span class="section-number">6.27. </span>تقريب دالة النواة متعددة الحدود عبر رسم تخطيطي للمخطط<a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+<p>دالة النواة متعددة الحدود: ref: <code class="docutils literal notranslate"><span class="pre">polynomial_kernel</span></code> هي نوع شائع من دالة النواة معطاة بواسطة:</p>
+<p>….. math:</p>
+<p>k (x، y) = (gamma x ^ top y +c_0) ^ d</p>
+<p>حيث:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>، <code class="docutils literal notranslate"><span class="pre">y</span></code> هما متجهات الإدخال</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">d</span></code> هو درجة النواة</p></li>
+</ul>
+<p>بديهياً، تتكون مساحة الميزة لدالة النواة متعددة الحدود من الدرجة <code class="docutils literal notranslate"><span class="pre">d</span></code></p>
+<p>من جميع المنتجات المحتملة من الدرجة <code class="docutils literal notranslate"><span class="pre">d</span></code> بين ميزات الإدخال، مما يمكّن</p>
+<p>خوارزميات التعلم التي تستخدم هذه النواة من مراعاة التفاعلات بين الميزات.</p>
+<p>تعد طريقة TensorSketch [PP2013] _، كما هو منفذ في: class: <code class="docutils literal notranslate"><span class="pre">PolynomialCountSketch</span></code>، طريقة قابلة للتطوير ومستقلة عن بيانات الإدخال لتقريب دالة النواة متعددة الحدود.</p>
+<p>يستند إلى مفهوم Count sketch [WIKICS] _ [CCF2002] _، وهي تقنية لخفض الأبعاد تشبه تجزئة الميزات، والتي تستخدم بدلاً من ذلك عدة دوال تجزئة مستقلة. يحصل TensorSketch على رسم تخطيطي للعدد من حاصل الضرب الخارجي لمتجهين (أو متجه مع نفسه)، والذي يمكن استخدامه كتقريب لمساحة ميزة دالة النواة متعددة الحدود. على وجه الخصوص، بدلاً من حساب الضرب الخارجي بشكل صريح، يحسب TensorSketch رسم تخطيطي للعدد من المتجهات ثم يستخدم الضرب متعدد الحدود عبر التحويل المتقطع السريع لحساب رسم تخطيطي للعدد من حاصل الضرب الخارجي.</p>
+<p>لحسن الحظ، تتكون مرحلة التدريب لـ TensorSketch ببساطة من تهيئة بعض المتغيرات العشوائية. وبالتالي فهو مستقل عن بيانات الإدخال، أي أنه يعتمد فقط على عدد ميزات الإدخال، وليس على قيم البيانات.</p>
+<p>بالإضافة إلى ذلك، يمكن لهذه الطريقة تحويل العينات في: math: <code class="docutils literal notranslate"><span class="pre">O</span> <span class="pre">(n_</span> <span class="pre">{text</span> <span class="pre">{samples}}</span> <span class="pre">(n_</span> <span class="pre">{text</span> <span class="pre">{features}}</span> <span class="pre">+</span> <span class="pre">n_</span> <span class="pre">{text</span> <span class="pre">{components}}</span> <span class="pre">log</span> <span class="pre">(n_</span> <span class="pre">{text</span> <span class="pre">{components}})))</span></code></p>
+<p>الوقت، حيث: math: <code class="docutils literal notranslate"><span class="pre">n_</span> <span class="pre">{text</span> <span class="pre">{components}}</span></code> هو البعد المطلوب،</p>
+<p>يتم تحديده بواسطة “n_components”.</p>
+<p>….. rubric:: أمثلة</p>
+<ul class="simple">
+<li><p>: ref: <code class="docutils literal notranslate"><span class="pre">sphx_glr_auto_examples_kernel_approximation_plot_scalable_poly_kernels.py</span></code></p></li>
+</ul>
+<p>….. _tensor_sketch_kernel_approx:</p>
+<p>التفاصيل الرياضية
+تعتمد طرق النواة مثل آلات المتجهات الداعمة أو التحليل الرئيسي المُحسّن باستخدام النواة على خاصية فضاءات هيلبرت ذات النواة القابلة للتكرار. بالنسبة لأي دالة نواة محددة إيجابية <span class="math notranslate nohighlight">\(k\)</span> (ما يسمى نواة ميرسر)، من المضمون وجود تطبيق <span class="math notranslate nohighlight">\(\phi\)</span> إلى فضاء هيلبرت <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>، بحيث</p>
+<div class="math notranslate nohighlight">
+\[k(x,y) = \langle \phi(x), \phi(y) \rangle\]</div>
+<p>حيث <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle\)</span> يرمز إلى المنتج الداخلي في
+فضاء هيلبرت.</p>
+<p>إذا كانت خوارزمية، مثل آلة المتجهات الداعمة الخطية أو التحليل الرئيسي،
+تعتمد فقط على المنتج القياسي لنقاط البيانات <span class="math notranslate nohighlight">\(x_i\)</span>، فيمكن استخدام
+قيمة <span class="math notranslate nohighlight">\(k(x_i, x_j)\)</span>، والتي تتوافق مع تطبيق الخوارزمية
+على نقاط البيانات المُمَثَلة <span class="math notranslate nohighlight">\(\phi(x_i)\)</span>.
+تكمن ميزة استخدام <span class="math notranslate nohighlight">\(k\)</span> في أنه لا يلزم أبدًا حساب التطبيق <span class="math notranslate nohighlight">\(\phi\)</span> بشكل صريح، مما يسمح بميزات كبيرة جدًا
+(حتى اللانهاية).</p>
+<p>أحد عيوب طرق النواة هو أنه قد يكون من الضروري
+تخزين العديد من قيم النواة <span class="math notranslate nohighlight">\(k(x_i, x_j)\)</span> أثناء التحسين.
+إذا تم تطبيق مُصنِّف مُحسَّن باستخدام النواة على بيانات جديدة <span class="math notranslate nohighlight">\(y_j\)</span>،
+فيجب حساب <span class="math notranslate nohighlight">\(k(x_i, y_j)\)</span> للتنبؤ،
+وربما بالنسبة للعديد من <span class="math notranslate nohighlight">\(x_i\)</span> المختلفة في مجموعة التدريب.</p>
+<p>تسمح الفئات في هذا الوحدة الفرعية بحساب التضمين التقريبي
+<span class="math notranslate nohighlight">\(\phi\)</span>، وبالتالي العمل بشكل صريح مع التمثيلات
+<span class="math notranslate nohighlight">\(\phi(x_i)\)</span>، مما يلغي الحاجة إلى تطبيق النواة
+أو تخزين أمثلة التدريب.</p>
+<p class="rubric">المراجع</p>
+<div role="list" class="citation-list">
+<div class="citation" id="ws2001" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WS2001<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://papers.nips.cc/paper_files/paper/2000/hash/19de10adbaa1b2ee13f77f679fa1483a-Abstract.html">“Using the Nyström method to speed up kernel machines”</a>
+Williams, C.K.I.; Seeger, M. - 2001.</p>
+</div>
+<div class="citation" id="rr2007" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RR2007<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://papers.nips.cc/paper/2007/hash/013a006f03dbc5392effeb8f18fda755-Abstract.html">“Random features for large-scale kernel machines”</a>
+Rahimi, A. and Recht, B. - Advances in neural information processing 2007,</p>
+</div>
+<div class="citation" id="ls2010" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LS2010<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.researchgate.net/publication/221114584_Random_Fourier_Approximations_for_Skewed_Multiplicative_Histogram_Kernels">“Random Fourier approximations for skewed multiplicative histogram kernels”</a>
+Li, F., Ionescu, C., and Sminchisescu, C.
+- Pattern Recognition,  DAGM 2010, Lecture Notes in Computer Science.</p>
+</div>
+<div class="citation" id="vz2010" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>VZ2010<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.robots.ox.ac.uk/~vgg/publications/2011/Vedaldi11/vedaldi11.pdf">“Efficient additive kernels via explicit feature maps”</a>
+Vedaldi, A. and Zisserman, A. - Computer Vision and Pattern Recognition 2010</p>
+</div>
+<div class="citation" id="vvz2010" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>VVZ2010<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.robots.ox.ac.uk/~vgg/publications/2010/Sreekanth10/sreekanth10.pdf">“Generalized RBF feature maps for Efficient Detection”</a>
+Vempati, S. and Vedaldi, A. and Zisserman, A. and Jawahar, CV - 2010</p>
+</div>
+<div class="citation" id="pp2013" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PP2013<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.1145/2487575.2487591">“Fast and scalable polynomial kernels via explicit feature maps”</a>
+Pham, N., &amp; Pagh, R. - 2013</p>
+</div>
+<div class="citation" id="ccf2002" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CCF2002<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.cs.princeton.edu/courses/archive/spring04/cos598B/bib/CharikarCF.pdf">“Finding frequent items in data streams”</a>
+Charikar, M., Chen, K., &amp; Farach-Colton - 2002</p>
+</div>
+<div class="citation" id="wikics" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WIKICS<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Count_sketch">“Wikipedia: Count sketch”</a></p>
+</div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="random_projection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6.22. </span>الإسقاط العشوائي</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="metrics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.28. </span>مقاييس الاقتران، الألفة والنواة</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">6.23. طريقة Nystroem لتقريب النواة</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">6.24. دالة الأساس الشعاعي</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.25. دالة النواة التربيعية الإضافية</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.26. دالة النواة التربيعية المنحرفة</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.27. تقريب دالة النواة متعددة الحدود عبر رسم تخطيطي للمخطط</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/kernel_approximation.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
