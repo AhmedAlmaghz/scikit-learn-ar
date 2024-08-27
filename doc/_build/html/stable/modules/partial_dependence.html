@@ -1,0 +1,897 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="مخططات الاعتماد الجزئي وتوقع الشرط الفردي" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/partial_dependence.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="يمكن استخدام مخططات الاعتماد الجزئي (PDP) وتوقع الشرط الفردي (ICE) لتصور وتحليل التفاعل بين استجابة الهدف [1] _ ومجموعة من ميزات الإدخال ذات الاهتمام. يفترض كل من PDPs [H2009] _ و ICEs [G2015] _ أن..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="يمكن استخدام مخططات الاعتماد الجزئي (PDP) وتوقع الشرط الفردي (ICE) لتصور وتحليل التفاعل بين استجابة الهدف [1] _ ومجموعة من ميزات الإدخال ذات الاهتمام. يفترض كل من PDPs [H2009] _ و ICEs [G2015] _ أن..." />
+
+    <title>مخططات الاعتماد الجزئي وتوقع الشرط الفردي &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/partial_dependence';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">مخططات...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>مخططات الاعتماد الجزئي وتوقع الشرط الفردي<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>يمكن استخدام مخططات الاعتماد الجزئي (PDP) وتوقع الشرط الفردي (ICE) لتصور وتحليل التفاعل بين استجابة الهدف [1] _ ومجموعة من ميزات الإدخال ذات الاهتمام.</p>
+<p>يفترض كل من PDPs [H2009] _ و ICEs [G2015] _ أن ميزات الإدخال ذات الاهتمام مستقلة عن الميزات المكملة، و غالبًا ما يتم انتهاك هذا الافتراض في الممارسة العملية. وبالتالي، في حالة الميزات المترابطة، سنقوم بإنشاء نقاط بيانات سخيفة لحساب PDP / ICE [M2019] _.</p>
+</section>
+<section id="id2">
+<h1>مخططات الاعتماد الجزئي<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p>توضح مخططات الاعتماد الجزئي (PDP) الاعتماد بين استجابة الهدف ومجموعة من ميزات الإدخال ذات الاهتمام، مع تجاهل قيم جميع ميزات الإدخال الأخرى (ميزات “التكملة”). يمكننا بداهة تفسير الاعتماد الجزئي على أنه استجابة الهدف المتوقعة كدالة لميزات الإدخال ذات الاهتمام.</p>
+<p>بسبب حدود الإدراك البشري، يجب أن يكون حجم مجموعة ميزات الإدخال ذات الاهتمام صغيرًا (عادةً ما يكون واحدًا أو اثنين) وبالتالي يتم عادةً اختيار ميزات الإدخال ذات الاهتمام من بين أهم الميزات.</p>
+<p>يوضح الشكل أدناه مخططين أحاديين الاتجاه ومخططًا ثنائي الاتجاه للاعتماد الجزئي لمجموعة بيانات مشاركة الدراجات، باستخدام
+: class: ~ sklearn.ensemble.HistGradientBoostingRegressor:</p>
+<figure class="align-default">
+<img alt="auto_examples/inspection/images/sphx_glr_plot_partial_dependence_006.png:target:../auto_examples/inspection/plot_partial_dependence.html:align:center:scale:70" src="auto_examples/inspection/images/sphx_glr_plot_partial_dependence_006.png:target:../auto_examples/inspection/plot_partial_dependence.html:align:center:scale:70" />
+</figure>
+<p>تخبرنا PDPs أحادية الاتجاه بالتفاعل بين استجابة الهدف وميزة إدخال ذات اهتمام (على سبيل المثال، خطي، غير خطي). يوضح المخطط الأيسر في الشكل أعلاه تأثير درجة الحرارة على عدد استئجار الدراجات؛ يمكننا أن نرى بوضوح أن ارتفاع درجة الحرارة يرتبط بارتفاع عدد استئجار الدراجات. وبالمثل، يمكننا تحليل تأثير الرطوبة على عدد استئجار الدراجات (المخطط الأوسط).</p>
+<p>وهكذا، تكون هذه التفسيرات هامشية، مع الأخذ في الاعتبار ميزة في كل مرة.</p>
+<p>توضح PDPs بميزتي إدخال الاهتمام التفاعلات بين الميزتين. على سبيل المثال، يوضح مخطط PDP ثنائي المتغيرات في الشكل أعلاه اعتماد عدد استئجار الدراجات على القيم المشتركة لدرجة الحرارة والرطوبة. يمكننا أن نرى بوضوح تفاعلًا بين الميزتين: عند درجة حرارة أعلى من 20 درجة مئوية، يكون للرطوبة بشكل أساسي تأثير قوي على عدد استئجار الدراجات. بالنسبة لدرجات الحرارة المنخفضة، لكل من درجة الحرارة والرطوبة تأثير على عدد استئجار الدراجات.</p>
+<p>توفر الوحدة النمطية sklearn.inspection دالة ملائمة
+: func: ~ PartialDependenceDisplay.from_estimator لإنشاء مخططات اعتماد جزئي أحادية الاتجاه وثنائية الاتجاه. في المثال أدناه، نوضح كيفية إنشاء شبكة من
+مخططات الاعتماد الجزئي: مخططان أحاديان الاتجاه لميزتي “0” و “1” ومخطط ثنائي الاتجاه بين الميزتين:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; from sklearn.datasets import make_hastie_10_2
+&gt;&gt;&gt; from sklearn.ensemble import GradientBoostingClassifier
+&gt;&gt;&gt; from sklearn.inspection import PartialDependenceDisplay
+
+&gt;&gt;&gt; X، y = make_hastie_10_2 (random_state=0)
+&gt;&gt;&gt; clf = GradientBoostingClassifier (n_estimators=100، learning_rate=1.0،
+...     max_depth=1، random_state=0).fit (X، y)
+&gt;&gt;&gt; الميزات = [0، 1، (0، 1)]
+&gt;&gt;&gt; PartialDependenceDisplay.from_estimator (clf، X، الميزات)
+&lt;...&gt;
+</pre></div>
+</div>
+<p>يمكنك الوصول إلى كائنات Figure و Axes التي تم إنشاؤها حديثًا باستخدام “plt.gcf()”
+و “plt.gca()”.</p>
+<p>لإنشاء مخطط اعتماد جزئي بميزات فئوية، يجب تحديد الميزات الفئوية باستخدام
+المعلمة ‘categorical_features’. يأخذ هذا المعلمة قائمة من المؤشرات، أو أسماء الميزات الفئوية، أو قناع منطقي. التمثيل الرسومي للاعتماد الجزئي للميزات الفئوية هو
+مخطط شريطي أو خريطة حرارية ثنائية الأبعاد.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="pdps-للتصنيف-متعدد-الفئات">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">PDPs للتصنيف متعدد الفئات<a class="headerlink" href="#pdps-للتصنيف-متعدد-الفئات" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><p>بالنسبة للتصنيف متعدد الفئات، يجب تعيين تسمية الفئة التي يجب إنشاء PDPs لها عبر
+حجة “الهدف”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; from sklearn.datasets import load_iris
+&gt;&gt;&gt; iris = load_iris()
+&gt;&gt;&gt; mc_clf = GradientBoostingClassifier (n_estimators=10،
+...     max_depth=1).fit (iris.data، iris.target)
+&gt;&gt;&gt; الميزات = [3، 2، (3، 2)]
+&gt;&gt;&gt; PartialDependenceDisplay.from_estimator (mc_clf، X، الميزات، الهدف=0)
+&lt;...&gt;
+</pre></div>
+</div>
+<p>يتم استخدام نفس المعلمة “الهدف” لتحديد الهدف في إعدادات الانحدار متعدد الإخراج.</p>
+<p>إذا كنت بحاجة إلى القيم الخام لدالة الاعتماد الجزئي بدلاً من
+المخططات، يمكنك استخدام الدالة
+: func: ‘sklearn.inspection.partial_dependence`:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; from sklearn.inspection import partial_dependence
+
+&gt;&gt;&gt; النتائج = partial_dependence (clf، X، [0])
+&gt;&gt;&gt; النتائج [&quot;متوسط&quot;]
+array ([[2.466 ...، 2.466 ...، ...
+&gt;&gt;&gt; النتائج [&quot;grid_values&quot;]
+[array ([-1.624 ...، -1.592 ...، ...
+</pre></div>
+</div>
+<p>تتم مباشرةً توليد القيم التي يجب تقييم الاعتماد الجزئي عندها من “X”. بالنسبة للاعتماد الجزئي ثنائي الاتجاه، يتم إنشاء شبكة ثنائية الأبعاد من القيم. يعيد الحقل “القيم” الذي تم إرجاعه بواسطة
+: func: ‘sklearn.inspection.partial_dependence` القيم الفعلية
+يتم استخدامها في الشبكة لكل ميزة إدخال ذات أهمية. كما أنها تتوافق مع
+محور المخططات.</p>
+</section>
+<section id="ice">
+<span id="individual-conditional"></span><h1>مخطط توقع الشرط الفردي (ICE)<a class="headerlink" href="#ice" title="Link to this heading">#</a></h1>
+<p>على غرار PDP، يوضح مخطط توقع الشرط الفردي (ICE) الاعتماد بين دالة الهدف وميزة إدخال ذات أهمية. ومع ذلك، على عكس PDP، الذي يوضح التأثير المتوسط ​​لميزة الإدخال، يقوم مخطط ICE بتصور اعتماد التنبؤ على ميزة لكل عينة بشكل منفصل مع خط واحد لكل عينة.
+بسبب حدود الإدراك البشري، يتم دعم ميزة إدخال اهتمام واحدة فقط لمخططات ICE.</p>
+<p>توضح الأشكال أدناه مخططين ICE لمجموعة بيانات مشاركة الدراجات،
+مع : class: ~ sklearn.ensemble.HistGradientBoostingRegressor:.
+ترسم الأشكال خط PD المقابل فوق خطوط ICE.</p>
+<figure class="align-default">
+<img alt="auto_examples/inspection/images/sphx_glr_plot_partial_dependence_004.png:target:../auto_examples/inspection/plot_partial_dependence.html:align:center:scale:70" src="auto_examples/inspection/images/sphx_glr_plot_partial_dependence_004.png:target:../auto_examples/inspection/plot_partial_dependence.html:align:center:scale:70" />
+</figure>
+<p>في حين أن مخططات PDP جيدة في إظهار التأثير المتوسط ​​لميزات الهدف، إلا أنها يمكن أن تحجب علاقة غير متجانسة ناتجة عن التفاعلات.
+عندما تكون التفاعلات موجودة، سيوفر مخطط ICE العديد من الأفكار.
+على سبيل المثال، نرى أن ICE لميزة درجة الحرارة يعطينا بعض
+معلومات إضافية: بعض خطوط ICE مسطحة في حين أن البعض الآخر
+يظهر انخفاض الاعتماد لدرجة حرارة أعلى من 35 درجة مئوية.
+نلاحظ نمطًا مشابهًا لميزة الرطوبة: يظهر بعض خطوط ICE انخفاضًا حادًا عندما تكون الرطوبة أعلى من 80%.</p>
+<p>يمكن استخدام دالة الراحة في الوحدة النمطية sklearn.inspection’s :meth: ‘PartialDependenceDisplay.from_estimator`
+لإنشاء مخططات ICE عن طريق تعيين “kind=’individual’”. في المثال أدناه، نوضح كيفية إنشاء شبكة من
+مخططات ICE:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_hastie_10_2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">PartialDependenceDisplay</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; X، y = make_hastie_10_2 (random_state=0)
+&gt;&gt;&gt; clf = GradientBoostingClassifier (n_estimators=100، learning_rate=1.0،
+...     max_depth=1، random_state=0).fit (X، y)
+&gt;&gt;&gt; الميزات = [0، 1]
+&gt;&gt;&gt; PartialDependenceDisplay.from_estimator (clf، X، الميزات،
+...     kind=&#39;individual&#39;)
+&lt;...&gt;
+</pre></div>
+</div>
+<p>في مخططات ICE، قد لا يكون من السهل رؤية التأثير المتوسط ​​لميزة الإدخال ذات الاهتمام. لذلك، يوصى باستخدام مخططات ICE جنبًا إلى جنب مع PDPs. يمكن رسمها معًا مع
+“kind=’both’”.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; PartialDependenceDisplay.from_estimator (clf، X، الميزات،
+...     kind=&#39;both&#39;)
+&lt;...&gt;
+</pre></div>
+</div>
+<p>إذا كان هناك الكثير من الخطوط في مخطط ICE، فقد يكون من الصعب رؤية
+الاختلافات بين العينات الفردية وفهم النموذج. إن تركيز ICE على القيمة الأولى على المحور x
+ينتج مخططات توقع شرطية فردية مركزة (cICE) [G2015] _. وهذا يسلط الضوء على تباعد
+التوقعات الشرطية الفردية من خط الوسط، مما يجعل من السهل
+استكشاف العلاقات غير المتجانسة. يمكن رسم مخططات cICE عن طريق تعيين “centered=True”:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; PartialDependenceDisplay.from_estimator (clf، X، الميزات،
+...     kind=&#39;both&#39;، centered=True)
+&lt;...&gt;
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h1>التعريف الرياضي<a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<p>دع :math: ‘X_S` تكون مجموعة ميزات الإدخال ذات الاهتمام (أي معلمة “الميزات”) ودع :math: ‘X_C` تكون المكملة لها.</p>
+<p>يتم تعريف الاعتماد الجزئي للاستجابة :math: ‘f` في نقطة :math: ‘x_S`
+كما يلي:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}pd_ {X_S} (x_S) &amp; \ overset {def} {=} \ mathbb {E} _ {X_C} \ left [f (x_S، X_C) \ right] \\
+              &amp;= \ int f (x_S، x_C) p (x_C) dx_C،\end{split}\]</div>
+<p>حيث :math: ‘f (x_S، x_C)` هي دالة الاستجابة (: term: ‘predict`،
+: term: ‘predict_proba` أو : term: ‘decision_function`) لعينة معينة يتم تعريف قيمها بواسطة :math: ‘x_S` للميزات في :math: ‘X_S`، وبـ :math: ‘x_C` للميزات في :math: ‘X_C <code class="docutils literal notranslate"><span class="pre">.</span> <span class="pre">لاحظ</span> <span class="pre">أن</span> <span class="pre">:math:</span> <span class="pre">'x_S</span></code> و
+:math: ‘x_C` قد تكون توابل.</p>
+<p>يحسب هذا التكامل لقيم مختلفة من :math: ‘x_S` ينتج مخطط PDP كما هو موضح أعلاه. يتم تعريف خط ICE على أنه :math: ‘f (<a href="#id5"><span class="problematic" id="id6">x_</span></a> {S}، <a href="#id7"><span class="problematic" id="id8">x_</span></a> {C} ^ { (i)})`
+تقييم في :math: ‘<a href="#id9"><span class="problematic" id="id10">x_</span></a> {S}`.</p>
+<p>طرق الحساب
+هناك طريقتان رئيسيتان لتقريب التكامل الموضح أعلاه، وهما طريقة “الكلية” (brute) وطريقة “الاستدعاء الذاتي” (recursion). يتحكم معامل “الطريقة” (method) في تحديد الطريقة التي سيتم استخدامها.</p>
+<p>طريقة “الكلية” هي طريقة عامة تعمل مع أي خوارزمية تقدير. تجدر الإشارة إلى أن حساب مخططات التأثير المشروط الفردي (ICE plots) مدعوم فقط باستخدام طريقة “الكلية”. تقوم هذه الطريقة بتقريب التكامل أعلاه من خلال حساب المتوسط على بيانات “X”:</p>
+<div class="math notranslate nohighlight">
+\[pd_{X_S}(x_S) \approx \frac{1}{n_\text{samples}} \sum_{i=1}^n f(x_S, x_C^{(i)}),\]</div>
+<p>حيث <span class="math notranslate nohighlight">\(x_C^{(i)}\)</span> هي قيمة العينة i-th للسمات في <span class="math notranslate nohighlight">\(X_C\)</span>. بالنسبة لكل قيمة من <span class="math notranslate nohighlight">\(x_S\)</span>، تتطلب هذه الطريقة المرور عبر مجموعة البيانات الكاملة “X” والتي تعد عملية مكثفة حسابياً.</p>
+<p>كل دالة من دوال <span class="math notranslate nohighlight">\(f(x_{S}, x_{C}^{(i)})\)</span> تقابل خط ICE مقيم عند <span class="math notranslate nohighlight">\(x_{S}\)</span>. وعند حساب هذه الدالة لقيم متعددة من <span class="math notranslate nohighlight">\(x_{S}\)</span>، نحصل على خط ICE كامل. كما هو واضح، متوسط خطوط ICE يقابل خط الاعتماد الجزئي.</p>
+<p>أما طريقة “الاستدعاء الذاتي” فهي أسرع من طريقة “الكلية”، ولكنها مدعومة فقط لمخططات PDP من قبل بعض خوارزميات التقدير القائمة على الشجرة. يتم حسابها على النحو التالي. بالنسبة لنقطة معينة <span class="math notranslate nohighlight">\(x_S\)</span>، يتم إجراء مسح شجري مرجح: إذا كانت عقدة الانقسام تتضمن سمة دخل مثيرة للاهتمام، يتم اتباع الفرع الأيسر أو الأيمن المقابل؛ وإلا يتم اتباع كلا الفرعين، مع إعطاء كل فرع وزنًا يعتمد على نسبة عينات التدريب التي دخلت ذلك الفرع. وأخيرًا، يتم حساب الاعتماد الجزئي كمتوسط مرجح لجميع قيم الأوراق التي تمت زيارتها.</p>
+<p>في طريقة “الكلية”، يتم استخدام معامل “X” لتوليد شبكة قيم <span class="math notranslate nohighlight">\(x_S\)</span> وقيم السمات المكملة <span class="math notranslate nohighlight">\(x_C\)</span>. ومع ذلك، في طريقة “الاستدعاء الذاتي”، يتم استخدام “X” فقط لقيم الشبكة: ضمنيًا، تكون قيم <span class="math notranslate nohighlight">\(x_C\)</span> هي قيم بيانات التدريب.</p>
+<p>وبشكل افتراضي، يتم استخدام طريقة “الاستدعاء الذاتي” لرسم مخططات PDP على خوارزميات التقدير القائمة على الشجرة التي تدعمها، بينما يتم استخدام طريقة “الكلية” لبقية الحالات.</p>
+<div class="admonition note" id="pdp-method-differences">
+<p class="admonition-title">Note</p>
+<p>على الرغم من أن الطريقتين يجب أن تكونا متشابهتين بشكل عام، إلا أنهما قد تختلفان في بعض الإعدادات المحددة. تفترض طريقة “الكلية” وجود نقاط البيانات <span class="math notranslate nohighlight">\((x_S، x_C^{(i)})\)</span>. عندما تكون السمات مترابطة، قد يكون لهذه العينات الافتراضية كتلة احتمال منخفضة جدًا. ومن المحتمل أن تختلف طريقتا “الكلية” و”الاستدعاء الذاتي” فيما يتعلق بقيمة الاعتماد الجزئي، لأنهما ستتعاملان مع هذه العينات غير المحتملة بشكل مختلف. ومع ذلك، تذكر أن الافتراض الأساسي لتفسير مخططات PDP هو أن السمات يجب أن تكون مستقلة.</p>
+</div>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/inspection/plot_partial_dependence.html#sphx-glr-auto-examples-inspection-plot-partial-dependence-py"><span class="std std-ref">Partial Dependence and Individual Conditional Expectation Plots</span></a></p></li>
+</ul>
+<p class="rubric">الحواشي السفلية</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>بالنسبة للتصنيف، قد يكون الاستجابة المستهدفة هي احتمال فئة (الفئة الإيجابية للتصنيف الثنائي)، أو دالة القرار.</p>
+</aside>
+</aside>
+<p class="rubric">المراجع</p>
+<div role="list" class="citation-list">
+<div class="citation" id="h2009" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>H2009<span class="fn-bracket">]</span></span>
+<p>T. Hastie, R. Tibshirani and J. Friedman,
+‘The Elements of Statistical Learning
+&lt;<a class="reference external" href="https://web.stanford.edu/~hastie/ElemStatLearn//">https://web.stanford.edu/~hastie/ElemStatLearn//</a>&gt;_’
+، الطبعة الثانية، القسم 10.13.2، سبرينغر، 2009.</p>
+</div>
+<div class="citation" id="m2019" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>M2019<span class="fn-bracket">]</span></span>
+<p>C. Molnar،
+‘Interpretable Machine Learning
+&lt;<a class="reference external" href="https://christophm.github.io/interpretable-ml-book/">https://christophm.github.io/interpretable-ml-book/</a>&gt;`_
+، القسم 5.1، 2019.</p>
+</div>
+<div class="citation" id="g2015" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>G2015<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://arxiv.org/abs/1309.6392">A. Goldstein, A. Kapelner, J. Bleich, and E. Pitkin,
+“Peeking Inside the Black Box: Visualizing Statistical
+Learning With Plots of Individual Conditional Expectation”،
+Journal of Computational and Graphical Statistics،
+24(1): 44-65, Springer, 2015.</a></p>
+</div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">مخططات الاعتماد الجزئي وتوقع الشرط الفردي</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">مخططات الاعتماد الجزئي</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ice">مخطط توقع الشرط الفردي (ICE)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">التعريف الرياضي</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/partial_dependence.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
