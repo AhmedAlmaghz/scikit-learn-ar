@@ -1,0 +1,1133 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="تنسيق الهدف" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/multiclass.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="في هذا القسم من دليل المستخدم، نغطي الوظائف المتعلقة بمشاكل التعلم المتعددة، بما في ذلك: multiclass و multilabel و multioutput classification والانحدار. تنفذ الوحدات النمطية في هذا القسم المصطلح: m..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="في هذا القسم من دليل المستخدم، نغطي الوظائف المتعلقة بمشاكل التعلم المتعددة، بما في ذلك: multiclass و multilabel و multioutput classification والانحدار. تنفذ الوحدات النمطية في هذا القسم المصطلح: m..." />
+
+    <title>تنسيق الهدف &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/multiclass';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">تنسيق الهدف</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p>في هذا القسم من دليل المستخدم، نغطي الوظائف المتعلقة بمشاكل التعلم المتعددة، بما في ذلك: multiclass و multilabel و multioutput classification والانحدار.</p>
+<p>تنفذ الوحدات النمطية في هذا القسم المصطلح: meta-estimators، والذي يتطلب توفير مُقدِّر أساسي في بنائه. تمدد برامج meta-estimators وظائف المُقدِّر الأساسي لدعم مشاكل التعلم المتعددة، ويتم تحقيق ذلك عن طريق تحويل مشكلة التعلم المتعدد إلى مجموعة من المشكلات البسيطة، ثم تناسب مُقدِّرًا واحدًا لكل مشكلة.</p>
+<p>يغطي هذا القسم وحدتين نمطيتين: sklearn.multiclass و sklearn.multioutput. يوضح الرسم البياني أدناه أنواع المشكلات التي تتحمل كل وحدة نمطية مسؤوليتها، والمُقدِّرات meta-estimators المقابلة التي توفرها كل وحدة نمطية.</p>
+<p>يوفر الجدول أدناه مرجعًا سريعًا حول الاختلافات بين أنواع المشكلات. يمكن العثور على تفسيرات أكثر تفصيلاً في الأقسام اللاحقة من هذا الدليل.</p>
+<div class="line-block">
+<div class="line">| عدد الأهداف | قابلية الهدف | صالح | |</div>
+<div class="line">| — | — | — | — |</div>
+<div class="line">التصنيف متعدد الفئات | 1 | &gt;2 | ‘multiclass’ |</div>
+<div class="line">| | | | |</div>
+<div class="line">تصنيف متعدد البطاقات | &gt;1 | 2 (0 أو 1) | ‘multilabel-indicator’ |</div>
+<div class="line">| | | | |</div>
+<div class="line">تصنيف متعدد الفئات ومتعدد الإخراج | &gt;1 | &gt;2 | ‘multiclass-multioutput’ |</div>
+<div class="line">| | | | |</div>
+<div class="line">الانحدار متعدد الإخراج | &gt;1 | مستمر | ‘continuous-multioutput’ |</div>
+</div>
+<p>فيما يلي ملخص لمُقدِّرات scikit-learn التي تدعم التعلم المتعدد المدمج، مجمعة حسب الاستراتيجية. لا تحتاج إلى برامج meta-estimators التي يوفرها هذا القسم إذا كنت تستخدم أحد هذه المُقدِّرات. ومع ذلك، يمكن أن توفر برامج meta-estimators استراتيجيات إضافية تتجاوز المدمج:</p>
+<ul class="simple">
+<li><p><strong>متعدد الفئات بشكل متأصل:</strong></p>
+<ul>
+<li><p>naive_bayes.BernoulliNB</p></li>
+<li><p>tree.DecisionTreeClassifier</p></li>
+<li><p>tree.ExtraTreeClassifier</p></li>
+<li><p>ensemble.ExtraTreesClassifier</p></li>
+<li><p>naive_bayes.GaussianNB</p></li>
+<li><p>neighbors.KNeighborsClassifier</p></li>
+<li><p>semi_supervised.LabelPropagation</p></li>
+<li><p>semi_supervised.LabelSpreading</p></li>
+<li><p>discriminant_analysis.LinearDiscriminantAnalysis</p></li>
+<li><p>svm.LinearSVC (تعيين multi_class=”crammer_singer”)</p></li>
+<li><p>linear_model.LogisticRegression (مع معظم المحللين)</p></li>
+<li><p>linear_model.LogisticRegressionCV (مع معظم المحللين)</p></li>
+<li><p>neural_network.MLPClassifier</p></li>
+<li><p>neighbors.NearestCentroid</p></li>
+<li><p>discriminant_analysis.QuadraticDiscriminantAnalysis</p></li>
+<li><p>neighbors.RadiusNeighborsClassifier</p></li>
+<li><p>ensemble.RandomForestClassifier</p></li>
+<li><p>linear_model.RidgeClassifier</p></li>
+<li><p>linear_model.RidgeClassifierCV</p></li>
+</ul>
+</li>
+<li><p><strong>متعدد الفئات كواحد مقابل واحد:</strong></p>
+<ul>
+<li><p>svm.NuSVC</p></li>
+<li><p>svm.SVC.</p></li>
+<li><p>gaussian_process.GaussianProcessClassifier (تعيين multi_class = “one_vs_one”)</p></li>
+</ul>
+</li>
+<li><p><strong>متعدد الفئات كواحد مقابل الباقي:</strong></p>
+<ul>
+<li><p>ensemble.GradientBoostingClassifier</p></li>
+<li><p>gaussian_process.GaussianProcessClassifier (تعيين multi_class = “one_vs_rest”)</p></li>
+<li><p>svm.LinearSVC (تعيين multi_class=”ovr”)</p></li>
+<li><p>linear_model.LogisticRegression (معظم المحللين)</p></li>
+<li><p>linear_model.LogisticRegressionCV (معظم المحللين)</p></li>
+<li><p>linear_model.SGDClassifier</p></li>
+<li><p>linear_model.Perceptron</p></li>
+<li><p>linear_model.PassiveAggressiveClassifier</p></li>
+</ul>
+</li>
+<li><p><strong>دعم التصنيف متعدد البطاقات:</strong></p>
+<ul>
+<li><p>tree.DecisionTreeClassifier</p></li>
+<li><p>tree.ExtraTreeClassifier</p></li>
+<li><p>ensemble.ExtraTreesClassifier</p></li>
+<li><p>neighbors.KNeighborsClassifier</p></li>
+<li><p>neural_network.MLPClassifier</p></li>
+<li><p>neighbors.RadiusNeighborsClassifier</p></li>
+<li><p>ensemble.RandomForestClassifier</p></li>
+<li><p>linear_model.RidgeClassifier</p></li>
+<li><p>linear_model.RidgeClassifierCV</p></li>
+</ul>
+</li>
+<li><p><strong>دعم التصنيف متعدد الفئات ومتعدد الإخراج:</strong></p>
+<ul>
+<li><p>tree.DecisionTreeClassifier</p></li>
+<li><p>tree.ExtraTreeClassifier</p></li>
+<li><p>ensemble.ExtraTreesClassifier</p></li>
+<li><p>neighbors.KNeighborsClassifier</p></li>
+<li><p>neighbors.RadiusNeighborsClassifier</p></li>
+<li><p>ensemble.RandomForestClassifier</p></li>
+</ul>
+</li>
+</ul>
+<p>التصنيف متعدد الفئات
+تحذير: جميع المصنفات في scikit-learn تقوم بالتصنيف متعدد الفئات بشكل افتراضي. لا تحتاج إلى استخدام نموذج sklearn.multiclass ما لم ترغب في تجربة استراتيجيات متعددة الفئات المختلفة.</p>
+<p>التصنيف متعدد الفئات هو مهمة تصنيف تحتوي على أكثر من فئتين. يمكن وضع علامة على كل عينة على أنها تنتمي إلى فئة واحدة فقط.</p>
+<p>على سبيل المثال، التصنيف باستخدام الميزات المستخرجة من مجموعة من الصور للفواكه، حيث قد تكون كل صورة إما برتقال أو تفاح أو كمثرى. كل صورة هي عينة واحدة ويتم وضع علامة عليها على أنها واحدة من الفئات الثلاث الممكنة. يفترض التصنيف متعدد الفئات أن كل عينة يتم تعيينها إلى فئة واحدة فقط - على سبيل المثال، لا يمكن أن تكون العينة الواحدة تفاحة وكمثرى في نفس الوقت.</p>
+<p>في حين أن جميع مصنفات scikit-learn قادرة على التصنيف متعدد الفئات، فإن المصنفات الفوقية التي يوفرها sklearn.multiclass تسمح بتغيير طريقة تعاملها مع أكثر من فئتين، لأن هذا قد يكون له تأثير على أداء المصنف (من حيث خطأ التعميم أو موارد الكمبيوتر المطلوبة).</p>
+<section id="id1">
+<h1>تنسيق الهدف<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>تمثيلات متعددة الفئات الصالحة لـ sklearn.utils.multiclass.type_of_target (y) هي:</p>
+<ul class="simple">
+<li><p>مصفوفة 1D أو متجه عمودي يحتوي على قيم منفصلة أكثر من اثنين. مثال على متجه y لعينات 4:</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">استيراد</span> <span class="n">نومبي</span> <span class="n">كما</span> <span class="n">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">طباعة</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">[&#39;apple&#39; &#39;pear&#39; &#39;apple&#39; &#39;orange&#39;]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>مصفوفة ثنائية كثيفة أو مبعثرة الشكل (n_samples، n_classes) مع عينة واحدة لكل صف، حيث يمثل كل عمود فئة واحدة. مثال على مصفوفة ثنائية كثيفة ومبعثرة y لعينات 4، حيث الأعمدة، بالترتيب، هي التفاح والبرتقال والكمثرى:</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">استيراد</span> <span class="n">نومبي</span> <span class="n">كما</span> <span class="n">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">من</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">preprocessing</span> <span class="n">استيراد</span> <span class="n">LabelBinarizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_dense</span> <span class="o">=</span> <span class="n">LabelBinarizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">طباعة</span> <span class="p">(</span><span class="n">y_dense</span><span class="p">)</span>
+<span class="go">[[1 0 0]</span>
+<span class="go"> [0 0 1]</span>
+<span class="go"> [1 0 0]</span>
+<span class="go"> [0 1 0]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">من</span> <span class="n">scipy</span> <span class="n">استيراد</span> <span class="n">متفرق</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_sparse</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">(</span><span class="n">y_dense</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">طباعة</span> <span class="p">(</span><span class="n">y_sparse</span><span class="p">)</span>
+<span class="go">&lt;Compressed Sparse Row sparse matrix of dtype &#39;int64&#39;</span>
+<span class="go">with 4 stored elements in Compressed Sparse Row format&gt;</span>
+</pre></div>
+</div>
+<p>للحصول على مزيد من المعلومات حول sklearn.preprocessing.LabelBinarizer، راجع preprocessing_targets.</p>
+</section>
+<section id="onevsrestclassifier">
+<h1>OneVsRestClassifier<a class="headerlink" href="#onevsrestclassifier" title="Link to this heading">#</a></h1>
+<p>تتمثل استراتيجية one-vs-rest، المعروفة أيضًا باسم one-vs-all، في sklearn.multiclass.OneVsRestClassifier. تتكون الاستراتيجية من ملاءمة مصنف واحد لكل فئة. لكل مصنف، يتم ضبط الفئة مقابل جميع الفئات الأخرى. بالإضافة إلى كفاءتها الحسابية (فقط n_classes من المصنفات مطلوبة)، تتمثل إحدى مزايا هذا النهج في إمكانية تفسيره. نظرًا لأن كل فئة ممثلة بمصنف واحد فقط، فمن الممكن اكتساب معرفة حول الفئة عن طريق فحص مصنفها المقابل. هذه هي الاستراتيجية الأكثر استخدامًا بشكل شائع وهي خيار افتراضي عادل.</p>
+<p>فيما يلي مثال على التعلم متعدد الفئات باستخدام OvR:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; من sklearn استيراد مجموعات البيانات
+&gt;&gt;&gt; من sklearn.multiclass استيراد OneVsRestClassifier
+&gt;&gt;&gt; من sklearn.svm استيراد LinearSVC
+&gt;&gt;&gt; X، y = datasets.load_iris (return_X_y = True)
+&gt;&gt;&gt; OneVsRestClassifier (LinearSVC (random_state = 0)). fit (X، y). predict (X)
+</pre></div>
+</div>
+<p>array ([0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0،
+0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0،
+0، 0، 0، 0، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1،
+1، 2، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 2، 2، 1، 1، 1، 1، 1، 1،
+1، 1، 1، 1، 1، 1، 1، 1، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2،
+2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2])</p>
+<p>يدعم sklearn.multiclass.OneVsRestClassifier أيضًا التصنيف متعدد التصنيفات. لاستخدام هذه الميزة، قم بتغذية المصنف بمصفوفة مؤشرات، حيث تشير الخلية [i، j] إلى وجود تسمية j في العينة i.</p>
+</section>
+<section id="onevsoneclassifier">
+<h1>OneVsOneClassifier<a class="headerlink" href="#onevsoneclassifier" title="Link to this heading">#</a></h1>
+<p>يقوم sklearn.multiclass.OneVsOneClassifier ببناء مصنف واحد لكل زوج من الفئات. في وقت التنبؤ، يتم اختيار الفئة التي حصلت على أكبر عدد من الأصوات. في حالة التعادل (بين فئتين بعدد متساوٍ من الأصوات)، فإنه يختار الفئة ذات مستوى الثقة الأعلى في التصنيف التراكمي عن طريق جمع مستويات الثقة في التصنيف الثنائي المحسوب بواسطة المصنفات الأساسية.</p>
+<p>نظرًا لأنه يتطلب ضبط n_classes * (n_classes - 1) / 2 من المصنفات، فإن هذه الطريقة تكون عادةً أبطأ من one-vs-the-rest، بسبب تعقيدها O (n_classes^2). ومع ذلك، قد تكون هذه الطريقة مفيدة للخوارزميات مثل خوارزميات النواة التي لا تتوسع جيدًا مع n_samples. ويرجع ذلك إلى أن كل مشكلة تعلم فردية لا تنطوي إلا على مجموعة فرعية صغيرة من البيانات، في حين أنه باستخدام one-vs-the-rest، يتم استخدام مجموعة البيانات الكاملة n_classes مرات. دالة القرار هي نتيجة تحويل أحادي الاتجاه للتصنيف أحادي الاتجاه.</p>
+<p>فيما يلي مثال على التعلم متعدد الفئات باستخدام OvO:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; من sklearn استيراد مجموعات البيانات
+&gt;&gt;&gt; من sklearn.multiclass استيراد OneVsOneClassifier
+&gt;&gt;&gt; من sklearn.svm استيراد LinearSVC
+&gt;&gt;&gt; X، y = datasets.load_iris (return_X_y = True)
+&gt;&gt;&gt; OneVsOneClassifier (LinearSVC (random_state = 0)). fit (X، y). predict (X)
+</pre></div>
+</div>
+<p>array ([0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0،
+0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0،
+0، 0، 0، 0، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1،
+1، 2، 1، 2، 1، 1، 1، 1، 1، 1، 1، 1، 1، 1، 2، 1، 1، 1، 1، 1، 1، 1،
+1، 1، 1، 1، 1، 1، 1، 1، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2،
+2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2])</p>
+</section>
+<section id="id2">
+<h1>المراجع<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>“النمط والتعرف الآلي والتعلم الآلي. سبرينغر”، كريستوفر م. بيشوب، الصفحة 183، (الطبعة الأولى)</p></li>
+</ul>
+</section>
+<section id="outputcodeclassifier">
+<h1>OutputCodeClassifier<a class="headerlink" href="#outputcodeclassifier" title="Link to this heading">#</a></h1>
+<p>تختلف استراتيجيات Output-Correcting Output Code اختلافًا كبيرًا عن one-vs-the-rest وone-vs-one. في هذه الاستراتيجيات، يتم تمثيل كل فئة في مساحة أوروبية، حيث يمكن أن يكون كل بُعد إما 0 أو 1. وبعبارة أخرى، يتم تمثيل كل فئة بواسطة رمز ثنائي (مصفوفة من 0 و1). تسمى المصفوفة التي تحتفظ بموقع/رمز كل فئة باسم كتاب الرموز. حجم الرمز هو أبعادية المساحة المذكورة. بديهيا، يجب تمثيل كل فئة برمز فريد قدر الإمكان، وينبغي تصميم كتاب رموز جيد لتحسين دقة التصنيف. في هذا التنفيذ، نستخدم ببساطة كتاب رموز تم إنشاؤه بشكل عشوائي كما هو موضح في <a href="#id13"><span class="problematic" id="id3">[3]_</span></a> على الرغم من أنه قد يتم إضافة طرق أكثر تعقيدًا في المستقبل.</p>
+<p>في وقت الضبط، يتم ضبط مصنف ثنائي واحد لكل بت في كتاب الرموز. في وقت التنبؤ، يتم استخدام المصنفات لمشروع النقاط الجديدة في مساحة الفئة ويتم اختيار الفئة الأقرب إلى النقاط.</p>
+<p>في sklearn.multiclass.OutputCodeClassifier، يسمح سمة code_size للمستخدم بالتحكم في عدد المصنفات التي سيتم استخدامها. إنها نسبة مئوية من العدد الإجمالي للفئات.</p>
+<p>سيؤدي الرقم الذي يتراوح بين 0 و1 إلى تقليل عدد المصنفات المطلوبة مقارنةً بـ one-vs-the-rest. من الناحية النظرية، فإن “log2 (n_classes) / n_classes” كافٍ لتمثيل كل فئة بشكل لا لبس فيه. ومع ذلك، في الممارسة العملية، قد لا يؤدي ذلك إلى دقة جيدة نظرًا لأن “log2 (n_classes)” أصغر بكثير من “n_classes”.</p>
+<p>سيؤدي الرقم الذي يزيد عن 1 إلى زيادة عدد المصنفات المطلوبة مقارنةً بـ one-vs-the-rest. في هذه الحالة، سيقوم بعض المصنفين من الناحية النظرية بتصحيح أخطاء المصنفين الآخرين، ومن هنا جاء اسم “تصحيح الخطأ”. ومع ذلك، في الممارسة العملية، قد لا يحدث ذلك حيث من المحتمل أن تكون أخطاء المصنف مرتبطة. تعمل رموز الإخراج التصحيحية على تصحيح الأخطاء بشكل مشابه لتصنيف Bagging.</p>
+<p>فيما يلي مثال على التعلم متعدد الفئات باستخدام رموز الإخراج:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; من sklearn استيراد مجموعات البيانات
+&gt;&gt;&gt; من sklearn.multiclass استيراد OutputCodeClassifier
+&gt;&gt;&gt; من sklearn.svm استيراد LinearSVC
+&gt;&gt;&gt; X، y = datasets.load_iris (return_X_y = True)
+&gt;&gt;&gt; clf = OutputCodeClassifier (LinearSVC (random_state = 0)، code_size = 2، random_state = 0)
+&gt;&gt;&gt; clf.fit (X، y). predict (X)
+</pre></div>
+</div>
+<p>array ([0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0،
+0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0، 0،
+0، 0، 0، 0، 1، 1، 1، 1، 1، 1، 2، 1، 1، 1، 1، 1، 1، 1، 1، 1، 2، 1، 1،
+1، 2، 1، 1، 1، 1، 1، 1، 2، 1، 1، 1، 1، 1، 2، 2، 2، 1، 1، 1، 1، 1، 1،
+1، 1، 1، 1، 1، 1، 1، 1، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2،
+2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2، 2])</p>
+</section>
+<section id="id4">
+<h1>المراجع<a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>“حل مشكلات التعلم متعدد الفئات عبر رموز الإخراج التصحيحية”، Dietterich T.، Bakiri G.، Journal of Artificial Intelligence Research 2، 1995.</p></li>
+<li><p>“طريقة الترميز التصحيحي ورسومات PICTs”، James G.، Hastie T.، Journal of Computational and Graphical statistics 7، 1998.</p></li>
+<li><p>“عناصر التعلم الإحصائي”، Hastie T.، Tibshirani R.، Friedman J.، الصفحة 606 (الطبعة الثانية)، 2008.</p></li>
+</ul>
+<p>التصنيف متعدد التصنيفات
+<strong>التصنيف متعدد التصنيفات</strong> (المتعلق ارتباطًا وثيقًا بـ <strong>التصنيف متعدد المخرجات</strong>) هي مهمة تصنيف يتم فيها وضع علامة على كل عينة باستخدام “m” تسميات من “n_classes” من الفئات المحتملة، حيث يمكن أن تكون “m” من 0 إلى “n_classes” بما في ذلك. يمكن اعتبار هذا كتوقع خصائص العينة التي ليست حصرية متبادلة. رسميًا، يتم تعيين إخراج ثنائي لكل فئة، لكل عينة. يتم الإشارة إلى الفئات الإيجابية بـ 1 والفئات السلبية بـ 0 أو -1. وبالتالي، يمكن مقارنته بتشغيل “n_classes” من مهام التصنيف الثنائية، على سبيل المثال مع: class: ~ sklearn.multioutput.MultiOutputClassifier. تعامل هذه الطريقة كل تسمية بشكل مستقل في حين أن مصنفات التصنيفات المتعددة <em>قد</em> تعامل الفئات المتعددة في وقت واحد، مع مراعاة السلوك المترابط بينها.</p>
+<p>على سبيل المثال، التنبؤ بالموضوعات ذات الصلة بوثيقة نصية أو فيديو. قد تكون الوثيقة أو الفيديو حول أحد “الدين” أو “السياسة” أو “المالية” أو “التعليم”، أو العديد من فئات الموضوعات أو جميع فئات الموضوعات.</p>
+</section>
+<section id="id5">
+<h1>تنسيق الهدف<a class="headerlink" href="#id5" title="Link to this heading">#</a></h1>
+<p>تمثيل صالح لـ: مصطلح: multilabel <code class="docutils literal notranslate"><span class="pre">y</span></code> هو مصفوفة ثنائية كثيفة أو مبعثرة الشكل: term: <code class="docutils literal notranslate"><span class="pre">(n_samples،</span> <span class="pre">n_classes)</span></code>. يمثل كل عمود فئة. تشير “1” في كل صف إلى الفئات الإيجابية التي تم وضع علامة على العينة بها. مثال على مصفوفة كثيفة “y” لثلاث عينات:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; y = np.array ([[1،0،0،1]، [0،0،1،1]، [0،0،0،0]])
+&gt;&gt;&gt; print (ي)
+[[1 0 0 1]
+ [0 0 1 1]
+ [0 0 0 0]]
+</pre></div>
+</div>
+<p>يمكن أيضًا إنشاء مصفوفات ثنائية كثيفة باستخدام: class: ~ sklearn.preprocessing.MultiLabelBinarizer. لمزيد من المعلومات، راجع: ref: preprocessing_targets.</p>
+<p>مثال على نفس “y” في شكل مصفوفة مبعثرة:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y_sparse</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">csr_matrix</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="p">(</span><span class="n">y_sparse</span><span class="p">)</span>
+<span class="go">&lt;مصفوفة مبعثرة صف مضغوط من النوع &#39;int64&#39;</span>
+<span class="go">  مع 4 عناصر مخزنة وشكل (3، 4)&gt;</span>
+<span class="go">  Coords      القيم</span>
+<span class="go">  (0، 0)      1</span>
+<span class="go">  (0، 3)      1</span>
+<span class="go">  (1، 2)      1</span>
+<span class="go">  (1، 3)      1</span>
+</pre></div>
+</div>
+</section>
+<section id="multioutputclassifier">
+<span id="multioutputclassfier"></span><h1>MultiOutputClassifier<a class="headerlink" href="#multioutputclassifier" title="Link to this heading">#</a></h1>
+<p>يمكن إضافة دعم التصنيف متعدد التصنيفات إلى أي مصنف باستخدام: class: ~ sklearn.multioutput.MultiOutputClassifier. تتكون هذه الاستراتيجية من ملاءمة مصنف واحد لكل هدف. يسمح هذا بالتصنيفات متعددة المتغيرات المستهدفة. الغرض من هذه الفئة هو توسيع المقدرين
+لتكون قادرة على تقدير سلسلة من وظائف الهدف (f1، f2، f3 …، fn)
+التي يتم تدريبها على مصفوفة X متغير تنبؤ واحد للتنبؤ بسلسلة
+من الاستجابات (y1، y2، y3 …، yn).</p>
+<p>يمكنك العثور على مثال للاستخدام
+: class: ~ sklearn.multioutput.MultiOutputClassifier
+كجزء من القسم: ref: multiclass_multioutput_classification
+نظرًا لأنه تعميم لتصنيف التصنيفات المتعددة على
+مخرجات متعددة الفئات بدلاً من المخرجات الثنائية.</p>
+</section>
+<section id="classifierchain">
+<span id="id6"></span><h1>ClassifierChain<a class="headerlink" href="#classifierchain" title="Link to this heading">#</a></h1>
+<p>سلاسل المصنفات (راجع: class: ~ sklearn.multioutput.ClassifierChain) هي طريقة
+لدمج عدد من المصنفات الثنائية في نموذج تصنيف واحد متعدد التسميات
+قادر على استغلال الارتباطات بين الأهداف.</p>
+<p>بالنسبة لمشكلة التصنيف متعدد التصنيفات ذات الفئات N، يتم تعيين N من المصنفات الثنائية
+رقم صحيح بين 0 و N-1. تحدد هذه الأعداد الصحيحة ترتيب النماذج في السلسلة. ثم يتم ضبط كل مصنف على بيانات التدريب المتاحة بالإضافة إلى التسميات الصحيحة للفئات التي تم تعيين نماذجها لرقم أقل.</p>
+<p>عند التنبؤ، لن تكون التسميات الصحيحة متاحة. بدلاً من ذلك، يتم تمرير تنبؤات كل نموذج إلى النماذج اللاحقة في
+السلسلة لاستخدامها كميزات.</p>
+<p>من الواضح أن ترتيب السلسلة مهم. لا يحتوي النموذج الأول في السلسلة على أي معلومات حول التسميات الأخرى في حين أن النموذج الأخير في السلسلة لديه ميزات تشير إلى وجود جميع التسميات الأخرى. بشكل عام
+لا يعرف المرء الترتيب الأمثل للنماذج في السلسلة، لذلك عادة ما يتم ضبط العديد من السلاسل ذات الترتيب العشوائي ويتم حساب متوسط تنبؤاتها معًا.</p>
+<p class="rubric">المراجع</p>
+<ul class="simple">
+<li><p>جيسي ريد، بيرنهارد بفارينجر، جيف هولمز، إيب فرانك،
+“سلاسل المصنفات للتصنيف متعدد التصنيفات”، 2009.</p></li>
+</ul>
+<section id="multiclass-multioutput-classification">
+<span id="id7"></span><h2>تصنيف متعدد الفئات متعدد المخرجات<a class="headerlink" href="#multiclass-multioutput-classification" title="Link to this heading">#</a></h2>
+<p><strong>تصنيف متعدد الفئات متعدد المخرجات</strong>
+(المعروف أيضًا باسم <strong>تصنيف المهام المتعددة</strong>) هي
+مهمة تصنيف يتم فيها وضع علامة على كل عينة بمجموعة من الخصائص <strong>غير الثنائية</strong>. كل من عدد الخصائص
+عدد الفئات
+لكل خاصية أكبر من 2. وبالتالي، فإن المقدر الفردي
+يتعامل مع العديد من مهام التصنيف المشتركة. هذا هو تعميم ل
+مهمة التصنيف متعددة <em>التسميات</em>، والتي تنظر فقط في السمات الثنائية، وكذلك تعميم
+مهمة التصنيف متعددة <em>الفئات</em>، حيث يتم النظر في خاصية واحدة فقط.</p>
+<p>على سبيل المثال، تصنيف خصائص “نوع الفاكهة” و “اللون”
+لمجموعة من الصور الفاكهة. تحتوي الخاصية “نوع الفاكهة” على الفئات المحتملة: “تفاحة” و “كمثرى” و “برتقال”. تحتوي الخاصية “اللون” على الفئات المحتملة: “أخضر” و “أحمر” و “أصفر” و “برتقالي”. كل عينة هي
+صورة فاكهة، يتم إخراج تسمية لكل من الخصائص وكل تسمية
+هي واحدة من الفئات المحتملة للخاصية المقابلة.</p>
+<p>لاحظ أن جميع المصنفات التي تتعامل مع التصنيف متعدد الفئات متعدد المخرجات (المعروف أيضًا باسم
+تصنيف المهام المتعددة) المهام، تدعم مهمة التصنيف متعدد التصنيفات كحالة خاصة. يشبه تصنيف المهام المتعددة مهمة التصنيف متعددة المخرجات مع صيغ نماذج مختلفة. لمزيد من المعلومات،
+راجع وثائق المقدر ذات الصلة.</p>
+<p>فيما يلي مثال على التصنيف متعدد الفئات متعدد المخرجات:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; من sklearn.datasets import make_classification
+&gt;&gt;&gt; من sklearn.multioutput import MultiOutputClassifier
+&gt;&gt;&gt; من sklearn.ensemble import RandomForestClassifier
+&gt;&gt;&gt; من sklearn.utils import shuffle
+&gt;&gt;&gt; استيراد numpy as np
+&gt;&gt;&gt; X، y1 = make_classification (n_samples = 10، n_features = 100،
+...                             n_informative = 30، n_classes = 3،
+...                             random_state = 1)
+&gt;&gt;&gt; y2 = shuffle (y1، random_state = 1)
+&gt;&gt;&gt; y3 = shuffle (y1، random_state = 2)
+&gt;&gt;&gt; Y = np.vstack ((y1، y2، y3)). T
+&gt;&gt;&gt; n_samples، n_features = X.shape # 10،100
+&gt;&gt;&gt; n_outputs = Y.shape [1] # 3
+&gt;&gt;&gt; n_classes = 3
+&gt;&gt;&gt; forest = RandomForestClassifier (random_state = 1)
+&gt;&gt;&gt; multi_target_forest = MultiOutputClassifier (forest، n_jobs = 2)
+&gt;&gt;&gt; multi_target_forest.fit (X، Y). predict (X)
+array ([[2، 2، 0]
+       [1، 2، 1]
+       [2، 1، 0]
+       [0، 0، 2]
+       [0، 2، 1]
+       [0، 0، 2]
+       [1، 1، 0]
+       [1، 1، 1]
+       [0، 0، 2]
+       [2، 0، 0]])
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>في الوقت الحالي، لا توجد مقاييس في: mod: sklearn.metrics
+يدعم مهمة التصنيف متعدد الفئات متعدد المخرجات.</p>
+</div>
+</section>
+</section>
+<section id="id8">
+<h1>تنسيق الهدف<a class="headerlink" href="#id8" title="Link to this heading">#</a></h1>
+<p>تمثيل صالح لـ: مصطلح: multioutput <code class="docutils literal notranslate"><span class="pre">y</span></code> هو مصفوفة كثيفة الشكل
+`` (n_samples، n_classes) ‘’ من تسميات الفئات. دمج عامودي لـ 1d
+: مصطلح: متغيرات متعددة الفئات. مثال على “y” لثلاث عينات:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; y = np.array ([[&#39;apple&#39;، &#39;green&#39;]، [&#39;orange&#39;، &#39;orange&#39;]، [&#39;pear&#39;، &#39;green&#39;]])
+&gt;&gt;&gt; print (y)
+[[&#39;apple&#39; &#39;green&#39;]
+ [&#39;orange&#39; &#39;orange&#39;]
+ [&#39;pear&#39; &#39;green&#39;]]
+</pre></div>
+</div>
+<section id="multioutput-regression">
+<span id="id9"></span><h2>الانحدار متعدد المخرجات<a class="headerlink" href="#multioutput-regression" title="Link to this heading">#</a></h2>
+<p><strong>الانحدار متعدد المخرجات</strong> يتنبأ بعدة خصائص رقمية لكل
+عينة. كل خاصية هي متغير رقمي وعدد الخصائص
+يتم التنبؤ بها لكل عينة أكبر من أو يساوي 2. بعض المقدرات التي تدعم الانحدار متعدد المخرجات أسرع من مجرد تشغيل “n_output”
+المقدرات.</p>
+<p>على سبيل المثال، التنبؤ بكل من سرعة الرياح واتجاه الرياح، بالدرجات،
+باستخدام البيانات التي تم الحصول عليها من موقع معين. ستكون كل عينة بيانات
+تم الحصول عليها من موقع واحد وسيتم إخراج كل من سرعة الرياح واتجاهها
+بالنسبة لكل عينة.</p>
+<p>تعتبر أدوات الانحدار التالية أصلية تدعم الانحدار متعدد المخرجات:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">cross_decomposition.CCA</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">tree.DecisionTreeRegressor</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">dummy.DummyRegressor</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.ElasticNet</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">tree.ExtraTreeRegressor</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">ensemble.ExtraTreesRegressor</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">gaussian_process.GaussianProcessRegressor</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">neighbors.KNeighborsRegressor</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">kernel_ridge.KernelRidge</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.Lars</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.Lasso</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.LassoLars</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.LinearRegression</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">multioutput.MultiOutputRegressor</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.MultiTaskElasticNet</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.MultiTaskElasticNetCV</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.MultiTaskLasso</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.MultiTaskLassoCV</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.OrthogonalMatchingPursuit</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">cross_decomposition.PLSCanonical</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">cross_decomposition.PLSRegression</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.RANSACRegressor</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">neighbors.RadiusNeighborsRegressor</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">ensemble.RandomForestRegressor</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">multioutput.RegressorChain</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.Ridge</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">linear_model.RidgeCV</span></code></p></li>
+<li><p>: class: <code class="docutils literal notranslate"><span class="pre">compose.TransformedTargetRegressor</span></code></p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="id10">
+<h1>تنسيق الهدف<a class="headerlink" href="#id10" title="Link to this heading">#</a></h1>
+<p>تمثيل صالح لـ: مصطلح: multioutput <code class="docutils literal notranslate"><span class="pre">y</span></code> هو مصفوفة كثيفة الشكل
+`` (n_samples، n_output) ‘’ من النقاط العائمة. دمج عامودي من
+: مصطلح: متغيرات مستمرة. مثال على “y” لثلاث عينات:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; y = np.array ([[31.4، 94]، [40.5، 109]، [25.0، 30]])
+&gt;&gt;&gt; print (y)
+[[31.4 94.]
+ [40.5 109.]
+ [25. 30.]]
+</pre></div>
+</div>
+</section>
+<section id="multioutputregressor">
+<span id="id11"></span><h1>MultiOutputRegressor<a class="headerlink" href="#multioutputregressor" title="Link to this heading">#</a></h1>
+<p>يمكن إضافة دعم الانحدار متعدد المخرجات إلى أي أداة انحدار باستخدام: class: ~ sklearn.multioutput.MultiOutputRegressor. تتكون هذه الاستراتيجية من
+ضبط أداة انحدار واحدة لكل هدف. نظرًا لأن كل هدف يمثله بالضبط
+يمكن لأداة انحدار واحدة اكتساب المعرفة حول الهدف عن طريق
+فحص المقدر المقابل لها. بما أن: class: ~ sklearn.multioutput.MultiOutputRegressor يتناسب مع أداة انحدار واحدة لكل
+الهدف لا يمكنه الاستفادة من الارتباطات بين الأهداف.</p>
+<p>فيما يلي مثال على الانحدار متعدد المخرجات:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; من sklearn.datasets import make_regression
+&gt;&gt;&gt; من sklearn.multioutput import MultiOutputRegressor
+&gt;&gt;&gt; من sklearn.ensemble import GradientBoostingRegressor
+&gt;&gt;&gt; X، y = make_regression (n_samples = 10، n_targets = 3، random_state = 1)
+&gt;&gt;&gt; MultiOutputRegressor (GradientBoostingRegressor (random_state = 0)). fit (X، y). predict (X)
+array ([[-154.75474165، -147.03498585، -50.03812219]
+       [7.12165031، 5.12914884، -81.46081961]
+       [-187.8948621، -100.44373091، 13.88978285]
+       [-141.62745778، 95.02891072، -191.48204257]
+       [97.03260883، 165.34867495، 139.52003279]
+       [123.92529176، 21.25719016، -7.84253]
+       [-122.25193977، -85.16443186، -107.12274212]
+       [-30.170388، -94.80956739، 12.16979946]
+       [140.72667194، 176.50941682، -17.50447799]
+       [149.37967282، -81.15699552، -5.72850319]])
+</pre></div>
+</div>
+</section>
+<section id="regressorchain">
+<span id="id12"></span><h1>RegressorChain<a class="headerlink" href="#regressorchain" title="Link to this heading">#</a></h1>
+<p>سلاسل أدوات الانحدار (راجع: class: ~ sklearn.multioutput.RegressorChain) مماثلة لـ: class: ~ sklearn.multioutput.ClassifierChain كطريقة
+لدمج عدد من الانحدارات في نموذج واحد متعدد الأهداف قادر على
+استغلال الارتباطات بين الأهداف.</p>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">تنسيق الهدف</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#onevsrestclassifier">OneVsRestClassifier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#onevsoneclassifier">OneVsOneClassifier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">المراجع</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#outputcodeclassifier">OutputCodeClassifier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">المراجع</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">تنسيق الهدف</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multioutputclassifier">MultiOutputClassifier</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#classifierchain">ClassifierChain</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiclass-multioutput-classification">تصنيف متعدد الفئات متعدد المخرجات</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">تنسيق الهدف</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multioutput-regression">الانحدار متعدد المخرجات</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">تنسيق الهدف</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multioutputregressor">MultiOutputRegressor</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#regressorchain">RegressorChain</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/multiclass.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
