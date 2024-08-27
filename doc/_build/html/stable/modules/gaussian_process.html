@@ -1,0 +1,1059 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="عمليات غاوس" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/gaussian_process.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="عمليات غاوس (GP) هي طريقة تعلم إشرافية غير معلمية تستخدم لحل مشكلات الانحدار و التصنيف الاحتمالي. مزايا عمليات غاوس هي: التنبؤ يعترض ملاحظات (على الأقل للنوى العادية)., التنبؤ احتمالي (غاوسي) بحيث ..." />
+<meta property="og:image" content="https://scikit-learn/stable/_images/sphx_glr_plot_gpr_noisy_targets_002.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="عمليات غاوس (GP) هي طريقة تعلم إشرافية غير معلمية تستخدم لحل مشكلات الانحدار و التصنيف الاحتمالي. مزايا عمليات غاوس هي: التنبؤ يعترض ملاحظات (على الأقل للنوى العادية)., التنبؤ احتمالي (غاوسي) بحيث ..." />
+
+    <title>عمليات غاوس &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/gaussian_process';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">عمليات غاوس</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>عمليات غاوس<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p><strong>عمليات غاوس (GP)</strong> هي طريقة تعلم إشرافية غير معلمية تستخدم
+لحل مشكلات <em>الانحدار</em> و <em>التصنيف الاحتمالي</em>.</p>
+<p>مزايا عمليات غاوس هي:</p>
+<ul class="simple">
+<li><p>التنبؤ يعترض ملاحظات (على الأقل للنوى العادية).</p></li>
+<li><p>التنبؤ احتمالي (غاوسي) بحيث يمكن حساب</p></li>
+</ul>
+<p>فترات الثقة التجريبية والبت على أساسها إذا كان ينبغي
+إعادة التثبيت (التثبيت عبر الإنترنت، التثبيت التكيفي) التنبؤ في بعض
+منطقة الاهتمام.</p>
+<ul class="simple">
+<li><p>متعدد الاستخدامات: يمكن تحديد نوى مختلفة <span class="xref std std-ref">&lt;gp_kernels&gt;</span>. يتم توفير النواة الشائعة، ولكن</p></li>
+</ul>
+<p>من الممكن أيضًا تحديد نوى مخصصة.</p>
+<p>تشمل عيوب عمليات غاوس ما يلي:</p>
+<ul class="simple">
+<li><p>تنفيذنا ليس ضئيلًا، أي أنه يستخدم عينات/معلومات ميزة كاملة</p></li>
+</ul>
+<p>أداء التنبؤ.</p>
+<ul class="simple">
+<li><p>تفقد الكفاءة في المساحات ذات الأبعاد العالية - وبالتحديد عندما يتجاوز عدد</p></li>
+</ul>
+<p>تتجاوز العشرات القليلة من الميزات.</p>
+</section>
+<section id="id2">
+<h1>انحدار عملية غاوس<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p>: class: <code class="docutils literal notranslate"><span class="pre">GaussianProcessRegressor</span></code> ينفذ عمليات غاوس (GP) لأغراض الانحدار. لهذا، يجب تحديد سابق لـ GP. سوف
+ستجمع GP بين هذه السابقة ودالة الاحتمالية بناءً على عينات التدريب.
+إنه يسمح باتباع نهج احتمالي للتنبؤ من خلال إعطاء المتوسط والانحراف المعياري
+كإخراج عند التنبؤ.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_noisy_targets.html"><img alt="../_images/sphx_glr_plot_gpr_noisy_targets_002.png" src="../_images/sphx_glr_plot_gpr_noisy_targets_002.png" />
+</a>
+</figure>
+<p>يُفترض أن متوسط القيمة السابقة ثابتًا وصفرًا (بالنسبة إلى <code class="docutils literal notranslate"><span class="pre">normalize_y=False</span></code>) أو
+متوسط بيانات التدريب (بالنسبة إلى <code class="docutils literal notranslate"><span class="pre">normalize_y=True</span></code>). يتم تحديد تغاير القيمة السابقة
+من خلال تمرير كائن <a class="reference internal" href="#gp-kernels"><span class="std std-ref">kernel</span></a>. يتم تحسين فرط معلمات النواة عند تركيب
+: class: <code class="docutils literal notranslate"><span class="pre">GaussianProcessRegressor</span></code>
+من خلال تعظيم سجل الهامشية-الاحتمالية (LML) بناءً على
+<code class="docutils literal notranslate"><span class="pre">المحسن</span></code> الممرّر. نظرًا لأن LML قد يكون له العديد من القيم المثلى المحلية، فيمكن
+يمكن بدء المحسن بشكل متكرر عن طريق تحديد <code class="docutils literal notranslate"><span class="pre">n_restarts_optimizer</span></code>. يتم دائمًا إجراء الجريان الأول
+بدءًا من قيم فرط المعلمات الأولية للنواة؛
+يتم إجراء الجولات اللاحقة من القيم التي تم اختيارها بشكل عشوائي
+من نطاق القيم المسموح بها. إذا كان يجب الاحتفاظ بفرط المعلمات الأولية
+ثابت، يمكن تمرير <code class="docutils literal notranslate"><span class="pre">None</span></code> كمحسن.</p>
+<p>يمكن تحديد مستوى الضوضاء في الأهداف عن طريق تمريره عبر
+المعلمة <code class="docutils literal notranslate"><span class="pre">alpha</span></code>، إما على المستوى العالمي كقيمة قياسية أو لكل نقطة بيانات. لاحظ أن مستوى الضوضاء المعتدل
+يمكن أن يكون مفيدًا أيضًا في التعامل مع عدم الاستقرار العددي أثناء
+التوصيل لأنه يتم تنفيذه بشكل فعال على أنه عادية
+الانتظام، أي عن طريق إضافته إلى القطر
+مصفوفة النواة. بدلاً من تحديد مستوى الضوضاء بشكل صريح، هو
+بديل لإدراج مكون
+: class: <code class="docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.WhiteKernel</span></code> في
+النواة، والتي يمكنها تقدير مستوى الضوضاء العالمي من البيانات (انظر المثال
+أدناه). يوضح الشكل أدناه تأثير الهدف الضبابي الذي تم التعامل معه عن طريق
+تعيين المعلمة <code class="docutils literal notranslate"><span class="pre">alpha</span></code>.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_noisy_targets.html"><img alt="../_images/sphx_glr_plot_gpr_noisy_targets_003.png" src="../_images/sphx_glr_plot_gpr_noisy_targets_003.png" />
+</a>
+</figure>
+<p>يستند التنفيذ إلى الخوارزمية 2.1 من [RW2006] _. بالإضافة إلى
+واجهة برمجة التطبيقات الخاصة بمقدّري Scikit-learn القياسي، : class: <code class="docutils literal notranslate"><span class="pre">GaussianProcessRegressor</span></code>:</p>
+<ul class="simple">
+<li><p>يسمح بالتنبؤ بدون تركيب مسبق (بناءً على سابق GP)</p></li>
+<li><p>يوفر طريقة إضافية <code class="docutils literal notranslate"><span class="pre">sample_y(X)</span></code>، والتي تقيّم العينات</p></li>
+</ul>
+<p>تم رسمها من GPR (سابق أو لاحق) في إدخالات معينة</p>
+<ul class="simple">
+<li><p>يكشف عن طريقة <code class="docutils literal notranslate"><span class="pre">log_marginal_likelihood(theta)</span></code>، والتي يمكن استخدامها</p></li>
+</ul>
+<p>خارجيًا لطرق أخرى لاختيار فرط المعلمات، على سبيل المثال، عبر
+سلسلة ماركوف مونت كارلو.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p>: ref: <code class="docutils literal notranslate"><span class="pre">sphx_glr_auto_examples_gaussian_process_plot_gpr_noisy_targets.py</span> <span class="pre">&lt;sphx_glr_auto_examples_gaussian_process_plot_gpr_noisy_targets.py&gt;</span></code></p></li>
+<li><p>: ref: <code class="docutils literal notranslate"><span class="pre">sphx_glr_auto_examples_gaussian_process_plot_gpr_noisy.py</span> <span class="pre">&lt;sphx_glr_auto_examples_gaussian_process_plot_gpr_noisy.py&gt;</span></code></p></li>
+<li><p>: ref: <code class="docutils literal notranslate"><span class="pre">sphx_glr_auto_examples_gaussian_process_plot_compare_gpr_krr.py</span> <span class="pre">&lt;sphx_glr_auto_examples_gaussian_process_plot_compare_gpr_krr.py&gt;</span></code></p></li>
+<li><p>: ref: <code class="docutils literal notranslate"><span class="pre">sphx_glr_auto_examples_gaussian_process_plot_gpr_co2.py</span> <span class="pre">&lt;sphx_glr_auto_examples_gaussian_process_plot_gpr_co2.py&gt;</span></code></p></li>
+</ul>
+</section>
+<section id="gpc">
+<span id="id3"></span><h1>تصنيف عملية غاوس<a class="headerlink" href="#gpc" title="Link to this heading">#</a></h1>
+<p>: class: <code class="docutils literal notranslate"><span class="pre">GaussianProcessClassifier</span></code> ينفذ عمليات غاوس (GP) لأغراض التصنيف، وبالتحديد لأغراض التصنيف الاحتمالي،
+حيث تأخذ تنبؤات الاختبار شكل احتمالات الفئات.
+يضع GaussianProcessClassifier سابق GP على وظيفة كامنة <span class="math notranslate nohighlight">\(f\)</span>،
+والذي يتم بعد ذلك سحقه من خلال دالة ارتباط للحصول على التصنيف الاحتمالي. الوظيفة الكامنة <span class="math notranslate nohighlight">\(f\)</span>
+هي ما يسمى وظيفة الإزعاج، والتي
+القيم غير مرصودة وغير ذات صلة في حد ذاتها.
+الغرض منه هو السماح بصياغة ملائمة للنموذج، و <span class="math notranslate nohighlight">\(f\)</span>
+يتم إزالته (دمجه) أثناء التنبؤ. ينفذ GaussianProcessClassifier دالة الارتباط اللوغاريتمية، والتي
+لا يمكن حساب التكامل التحليلي لها ولكنه يسهل تقريبه في الحالة الثنائية.</p>
+<p>على عكس إعداد الانحدار، فإن اللاحق من
+الوظيفة الكامنة <span class="math notranslate nohighlight">\(f\)</span> ليست غاوسية حتى بالنسبة إلى سابق GP منذ
+من غير المناسب استخدام احتمال غاوسي لعلامات تصنيف منفصلة. بدلاً من ذلك، يتم استخدام احتمال غير غاوسي
+التي تتوافق مع دالة الارتباط اللوغاريتمية (اللوغاريتم).
+يقوم GaussianProcessClassifier بتقريب اللاحق غير الغاوسي باستخدام غاوسي
+بناءً على تقريب لابلاس. يمكن العثور على مزيد من التفاصيل في
+الفصل 3 من [RW2006] _.</p>
+<p>يُفترض أن متوسط القيمة السابقة يساوي الصفر. يتم تحديد تغاير القيمة السابقة
+من خلال تمرير كائن <a class="reference internal" href="#gp-kernels"><span class="std std-ref">kernel</span></a>. يتم تحسين فرط معلمات النواة أثناء تركيب
+: class: <code class="docutils literal notranslate"><span class="pre">GaussianProcessRegressor</span></code> عن طريق تعظيم سجل الهامشية
+الاحتمالية (LML) بناءً على <code class="docutils literal notranslate"><span class="pre">المحسن</span></code> الممرّر. نظرًا لأن LML قد يكون له العديد من القيم المثلى المحلية، فيمكن
+يمكن بدء المحسن بشكل متكرر عن طريق تحديد <code class="docutils literal notranslate"><span class="pre">n_restarts_optimizer</span></code>. يتم دائمًا إجراء الجريان الأول
+بدءًا من قيم فرط المعلمات الأولية للنواة؛
+يتم إجراء الجولات اللاحقة من القيم التي تم اختيارها بشكل عشوائي
+من نطاق القيم المسموح بها. إذا كان يجب الاحتفاظ بفرط المعلمات الأولية
+ثابت، يمكن تمرير <code class="docutils literal notranslate"><span class="pre">None</span></code> كمحسن.</p>
+<p>يدعم : class: <code class="docutils literal notranslate"><span class="pre">GaussianProcessClassifier</span></code> التصنيف متعدد الفئات
+عن طريق إجراء تدريب وتنبؤ إما على أساس واحد مقابل بقية أو واحد مقابل واحد. في “one_vs_rest”،
+يتم تركيب مصنف عملية غاوس ثنائي واحد لكل فئة، والذي يتم تدريبه على
+فصل هذه الفئة عن بقية الفئات. في “one_vs_one”، يتم تركيب مصنف عملية غاوس ثنائي واحد لكل
+زوج من الفئات، والتي يتم تدريبها على فصل هاتين الفئتين. يتم دمج تنبؤات
+يتم دمج هذه المتنبئين الثنائيين إلى تنبؤات متعددة الفئات. راجع القسم
+: ref: <code class="docutils literal notranslate"><span class="pre">&lt;multiclass&gt;</span></code> لمزيد من التفاصيل.</p>
+<p>في حالة تصنيف عملية غاوس، قد يكون “one_vs_one”
+أرخص حسابياً لأنه يجب عليه حل العديد من المشكلات التي تتضمن فقط
+مجموعة فرعية من مجموعة التدريب بأكملها بدلاً من مشكلات أقل على
+مجموعة البيانات بأكملها. نظرًا لأن تصنيف عملية غاوس يتناسب مع مكعب
+حجم مجموعة البيانات، فقد يكون هذا أسرع بكثير. ومع ذلك، لاحظ أن
+لا يدعم “one_vs_one” تقديرات الاحتمال ولكن فقط التنبؤات العادية. علاوة على ذلك، لاحظ أن : class: <code class="docutils literal notranslate"><span class="pre">GaussianProcessClassifier</span></code>
+لا (بعد) تنفيذ تقريب لابلاس متعدد الفئات الحقيقي داخليًا، ولكن
+كما نوقش أعلاه، فهو يعتمد على حل العديد من مهام التصنيف الثنائية
+داخليا، والتي يتم دمجها باستخدام واحد مقابل بقية أو واحد مقابل واحد.</p>
+</section>
+<section id="id4">
+<h1>أمثلة GPC<a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+<section id="id5">
+<h2>التنبؤات الاحتمالية مع GPC<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>يوضح هذا المثال احتمال التنبؤ لـ GPC لنواة RBF
+مع خيارات مختلفة لفرط المعلمات. يوضح الشكل الأول
+احتمال التنبؤ لـ GPC مع فرط معلمات مختارة بشكل تعسفي ومع
+فرط المعلمات المقابلة للاحتمالية الهامشية القصوى (LML).</p>
+<p>في حين أن فرط المعلمات التي تم اختيارها عن طريق تحسين LML لها
+احتمالية هامشية أكبر بشكل ملحوظ، إلا أنها تؤدي بشكل أسوأ قليلاً وفقًا للخسارة اللوجستية على بيانات الاختبار.
+يوضح الشكل أن هذا يرجع إلى أنها تعرض
+تغيير حاد في احتمالات الفئات عند حدود الفئة (وهو أمر جيد) ولكن
+احتمالات التنبؤ القريبة من 0.5 بعيدًا عن حدود الفئة (وهو أمر سيء)
+يحدث هذا التأثير غير المرغوب فيه بسبب تقريب لابلاس المستخدم
+داخليًا بواسطة GPC.</p>
+<p>يوضح الشكل الثاني الاحتمالية الهامشية للوجستية لاختيارات مختلفة
+فرط معلمات النواة، مع تسليط الضوء على اختياري فرط المعلمات المستخدمة في
+الشكل الأول بنقطتين سوداوين.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpc.html"><img alt="../_images/sphx_glr_plot_gpc_001.png" src="../_images/sphx_glr_plot_gpc_001.png" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpc.html"><img alt="../_images/sphx_glr_plot_gpc_002.png" src="../_images/sphx_glr_plot_gpc_002.png" />
+</a>
+</figure>
+</section>
+<section id="gpc-xor">
+<h2>توضيح GPC على مجموعة بيانات XOR<a class="headerlink" href="#gpc-xor" title="Link to this heading">#</a></h2>
+<p>يوضح هذا المثال GPC على بيانات XOR. تتم مقارنة النواة الثابتة، متساوية الخواص
+النواة (: class: <code class="docutils literal notranslate"><span class="pre">RBF</span></code>) ونواة غير ثابتة (: class: <code class="docutils literal notranslate"><span class="pre">DotProduct</span></code>). في
+هذه المجموعة من البيانات بالذات، تحصل نواة : class: <code class="docutils literal notranslate"><span class="pre">DotProduct</span></code> على نتائج أفضل بكثير لأن
+حدود الفئة خطية وتتزامن مع محاور الإحداثيات. ومع ذلك، في
+الممارسة العملية، غالبًا ما تحصل النواة المتساوية الخواص مثل : class: <code class="docutils literal notranslate"><span class="pre">RBF</span></code>
+نتائج أفضل.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpc_xor.html"><img alt="../_images/sphx_glr_plot_gpc_xor_001.png" src="../_images/sphx_glr_plot_gpc_xor_001.png" />
+</a>
+</figure>
+</section>
+<section id="gpc-iris">
+<h2>تصنيف عملية غاوس (GPC) على مجموعة بيانات Iris<a class="headerlink" href="#gpc-iris" title="Link to this heading">#</a></h2>
+<p>يوضح هذا المثال احتمال التنبؤ لـ GPC لنواة RBF متساوية الخواص ومتغايرة الخواص
+على إصدار ثنائي الأبعاد لمجموعة بيانات Iris. يوضح هذا مثال على قابلية تطبيق GPC على
+تصنيف متعدد الفئات غير ثنائي.
+تحصل نواة RBF متغايرة الخواص على احتمال هامشي أعلى قليلاً عن طريق
+تعيين مقاييس طول مختلفة لبعدي الميزة.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpc_iris.html"><img alt="../_images/sphx_glr_plot_gpc_iris_001.png" src="../_images/sphx_glr_plot_gpc_iris_001.png" />
+</a>
+</figure>
+<p id="gp-kernels">نوى لعمليات غاوس
+نوى (تسمى أيضًا “دالات الارتباط” في سياق عمليات غاوس) هي مكون أساسي لعمليات غاوس التي تحدد شكل التوزيع السابق والتالي لعملية غاوس. إنها تشفر الافتراضات حول الدالة التي يجري تعلمها من خلال تعريف “التشابه” لنقطتي بيانات مجتمعتين مع الافتراض بأن نقاط البيانات المتشابهة يجب أن يكون لها قيم مستهدفة مماثلة. يمكن تمييز فئتين من النواة: تعتمد النواة الثابتة فقط على مسافة نقطتي بيانات وليس على قيمهما المطلقة :math:k(x_i, x_j)= k(d(x_i, x_j))، وبالتالي فهي لا تتغير بالنسبة للترجمات في مساحة الإدخال، في حين أن النواة غير الثابتة تعتمد أيضًا على القيم المحددة لنقاط البيانات. يمكن تقسيم النواة الثابتة بشكل أكبر إلى نوى متساوية الخواص ونوى غير متساوية الخواص، حيث تكون النواة المتساوية الخواص ثابتة أيضًا بالنسبة للدوران في مساحة الإدخال. لمزيد من التفاصيل، يمكن الرجوع إلى الفصل 4 من <a class="reference internal" href="#rw2006" id="id6"><span>[RW2006]</span></a>. للحصول على إرشادات حول كيفية الجمع بين النواة المختلفة بشكل أفضل، يمكن الرجوع إلى <a class="reference internal" href="#duv2014" id="id7"><span>[Duv2014]</span></a>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="واجهة-برمجة-التطبيقات-لنواة-عملية-غاوس">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">واجهة برمجة التطبيقات لنواة عملية غاوس<a class="headerlink" href="#واجهة-برمجة-التطبيقات-لنواة-عملية-غاوس" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">الاستخدام الرئيسي ل :class: ‘Kernel’ هو حساب الارتباط المشترك لعملية غاوس بين نقاط البيانات. للقيام بذلك، يمكن استدعاء طريقة <code class="docutils literal notranslate"><span class="pre">__call__</span></code> للنواة. يمكن استخدام هذه الطريقة لحساب “الارتباط الذاتي” لجميع أزواج نقاط البيانات في مصفوفة ثنائية الأبعاد X، أو “الارتباط المشترك” لجميع تركيبات نقاط البيانات في مصفوفة ثنائية الأبعاد X مع نقاط البيانات في مصفوفة ثنائية الأبعاد Y. الهوية التالية صحيحة لجميع النواة k (باستثناء :class: ‘WhiteKernel’): <code class="docutils literal notranslate"><span class="pre">k(X)</span> <span class="pre">==</span> <span class="pre">K(X,</span> <span class="pre">Y=X)</span></code></p>
+<p class="sd-card-text">إذا تم استخدام القطر فقط للارتباط الذاتي، فيمكن استدعاء طريقة <code class="docutils literal notranslate"><span class="pre">diag()</span></code> للنواة، والتي تكون أكثر كفاءة من الناحية الحسابية من المكالمات المكافئة إلى <code class="docutils literal notranslate"><span class="pre">__call__</span></code>: <code class="docutils literal notranslate"><span class="pre">np.diag(k(X,</span> <span class="pre">X))</span> <span class="pre">==</span> <span class="pre">k.diag(X)</span></code></p>
+<p class="sd-card-text">يتم معلمجة النواة بواسطة متجه :math: ‘theta’ من فرط المعلمات. يمكن لهذه المعلمات فائقة التحكم، على سبيل المثال، في مقاييس الطول أو الدورية للنواة (انظر أدناه). تدعم جميع النواة حساب التدرجات التحليلية للارتباط الذاتي للنواة فيما يتعلق بـ :math: ‘log(theta)’ من خلال تعيين <code class="docutils literal notranslate"><span class="pre">eval_gradient=True</span></code> في طريقة <code class="docutils literal notranslate"><span class="pre">__call__</span></code>.
+أي يتم إرجاع مصفوفة “len(X)، len(X)، len(theta)” حيث يحتوي الإدخال “ [i، j، l]” على: :math: ‘<a href="#id17"><span class="problematic" id="id18">partial_</span></a> {k_theta} (x_i، x_j) / <a href="#id19"><span class="problematic" id="id20">partial_</span></a> {log (theta_l)} <code class="docutils literal notranslate"><span class="pre">.</span>
+<span class="pre">يستخدم</span> <span class="pre">هذا</span> <span class="pre">التدرج</span> <span class="pre">بواسطة</span> <span class="pre">عملية</span> <span class="pre">غاوس</span> <span class="pre">(كل</span> <span class="pre">من</span> <span class="pre">المُرجِّع</span> <span class="pre">والمُصنِّف)</span> <span class="pre">في</span> <span class="pre">حساب</span> <span class="pre">تدرج</span> <span class="pre">سجل</span> <span class="pre">الاحتمالية</span> <span class="pre">الهامشية،</span> <span class="pre">والذي</span> <span class="pre">يستخدم</span> <span class="pre">بدوره</span> <span class="pre">لتحديد</span> <span class="pre">قيمة</span> <span class="pre">:math:</span> <span class="pre">'theta'،</span> <span class="pre">والتي</span> <span class="pre">تزيد</span> <span class="pre">من</span> <span class="pre">سجل</span> <span class="pre">الاحتمالية</span> <span class="pre">الهامشية،</span> <span class="pre">من</span> <span class="pre">خلال</span> <span class="pre">الصعود</span> <span class="pre">التدريجي.</span> <span class="pre">بالنسبة</span> <span class="pre">لكل</span> <span class="pre">معلمة</span> <span class="pre">فائقة،</span> <span class="pre">يجب</span> <span class="pre">تحديد</span> <span class="pre">القيمة</span> <span class="pre">الأولية</span> <span class="pre">والحدود</span> <span class="pre">عند</span> <span class="pre">إنشاء</span> <span class="pre">مثيل</span> <span class="pre">للنواة.</span> <span class="pre">يمكن</span> <span class="pre">الحصول</span> <span class="pre">على</span> <span class="pre">القيمة</span> <span class="pre">الحالية</span> <span class="pre">لـ</span> <span class="pre">:math:</span> <span class="pre">'theta'</span> <span class="pre">وتعيينها</span> <span class="pre">عبر</span> <span class="pre">خاصية</span> <span class="pre">``theta`</span></code> لموضوع النواة. علاوة على ذلك، يمكن الوصول إلى حدود المعلمات الفائقة من خلال خاصية <code class="docutils literal notranslate"><span class="pre">bounds</span></code> للنواة. لاحظ أن كلا الخاصيتين (theta وbounds) تعيدان القيم المحولة بواسطة الدالة اللوغاريتمية للقيم المستخدمة داخليًا نظرًا لأنها أكثر ملاءمة للتحسين القائم على التدرج.
+يتم تخزين مواصفات كل معلمة فائقة في شكل مثيل من :class: ‘Hyperparameter’ في النواة المقابلة. لاحظ أنه يجب أن يكون للنواة التي تستخدم معلمة فائقة باسم “x” السمات self.x وself.x_bounds.</p>
+<p class="sd-card-text">الفئة الأساسية المجردة لجميع النواة هي :class: ‘Kernel’. تقوم النواة بتنفيذ واجهة مماثلة لـ :class: ‘~sklearn.base.BaseEstimator’، وتوفر الطرق <code class="docutils literal notranslate"><span class="pre">get_params()</span></code>، و <code class="docutils literal notranslate"><span class="pre">set_params()</span></code>، و <code class="docutils literal notranslate"><span class="pre">clone()</span></code>. يسمح ذلك بتعيين قيم النواة أيضًا عبر المُقدرات الفائقة مثل :class: ‘~sklearn.pipeline.Pipeline’ أو :class: ‘~sklearn.model_selection.GridSearchCV’. لاحظ أنه بسبب البنية المضمنة للنواة (من خلال تطبيق مشغلات النواة، راجع أدناه)، قد تصبح أسماء معلمات النواة معقدة إلى حد ما. بشكل عام، بالنسبة لمشغل النواة الثنائي، يتم إضافة البادئات “<a href="#id14"><span class="problematic" id="id15">k1__</span></a>” و “<a href="#id14"><span class="problematic" id="id16">k2__</span></a>” إلى معلمات المشغل الأيسر والأيمن، على التوالي. هناك طريقة راحة إضافية هي <code class="docutils literal notranslate"><span class="pre">clone_with_theta(theta)</span></code>، والتي تعيد نسخة من النواة ولكن مع المعلمات الفائقة المحددة إلى “theta”. مثال توضيحي:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">ConstantKernel</span><span class="p">,</span> <span class="n">RBF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">ConstantKernel</span><span class="p">(</span><span class="n">constant_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">constant_value_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">length_scale_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span> <span class="o">+</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">length_scale_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">hyperparameter</span> <span class="ow">in</span> <span class="n">kernel</span><span class="o">.</span><span class="n">hyperparameters</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">hyperparameter</span><span class="p">)</span>
+<span class="go">Hyperparameter(name=&#39;k1__k1__constant_value&#39;, value_type=&#39;numeric&#39;, bounds=array([[ 0., 10.]]), n_elements=1, fixed=False)</span>
+<span class="go">Hyperparameter(name=&#39;k1__k2__length_scale&#39;, value_type=&#39;numeric&#39;, bounds=array([[ 0., 10.]]), n_elements=1, fixed=False)</span>
+<span class="go">Hyperparameter(name=&#39;k2__length_scale&#39;, value_type=&#39;numeric&#39;, bounds=array([[ 0., 10.]]), n_elements=1, fixed=False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+<span class="go">k1 : 1**2 * RBF(length_scale=0.5)</span>
+<span class="go">k1__k1 : 1**2</span>
+<span class="go">k1__k1__constant_value : 1.0</span>
+<span class="go">k1__k1__constant_value_bounds : (0.0, 10.0)</span>
+<span class="go">k1__k2 : RBF(length_scale=0.5)</span>
+<span class="go">k1__k2__length_scale : 0.5</span>
+<span class="go">k1__k2__length_scale_bounds : (0.0, 10.0)</span>
+<span class="go">k2 : RBF(length_scale=2)</span>
+<span class="go">k2__length_scale : 2.0</span>
+<span class="go">k2__length_scale_bounds : (0.0, 10.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>  <span class="c1"># لاحظ: محول لوغاريتميًا</span>
+<span class="go">[ 0.         -0.69314718  0.69314718]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>  <span class="c1"># لاحظ: محول لوغاريتميًا</span>
+<span class="go">[[      -inf 2.30258509]</span>
+<span class="go">[      -inf 2.30258509]</span>
+<span class="go">[      -inf 2.30258509]]</span>
+</pre></div>
+</div>
+<p class="sd-card-text">جميع نوى عملية غاوس متوافقة مع :mod: ‘sklearn.metrics.pairwise’ والعكس صحيح: يمكن تمرير مثيلات الفئات الفرعية لـ :class: ‘Kernel’ كـ <code class="docutils literal notranslate"><span class="pre">metric</span></code> إلى <code class="docutils literal notranslate"><span class="pre">pairwise_kernels</span></code> من :mod: ‘sklearn.metrics.pairwise’. علاوة على ذلك، يمكن استخدام دالات النواة من pairwise كنوى غاوسية من خلال استخدام فئة الغلاف :class: ‘PairwiseKernel’. التحذير الوحيد هو أن تدرج المعلمات الفائقة ليس تحليليًا ولكنه رقمي وأن جميع هذه النواة تدعم فقط المسافات متساوية الخواص. تعتبر المعلمة “gamma” معلمة فائقة ويمكن تحسينها. يتم تعيين معلمات النواة الأخرى مباشرة عند التهيئة ويتم تثبيتها.</p>
+</div>
+</details></section>
+<section id="id8">
+<h2>النوى الأساسية<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>يمكن استخدام نواة :class: ‘ConstantKernel’ كجزء من نواة :class: ‘Product’ حيث تقوم بمقياس حجم العامل الآخر (النواة) أو كجزء من نواة :class: ‘Sum’، حيث تقوم بتعديل متوسط عملية غاوس. إنه يعتمد على معلمة :math: ‘constant_value’. يتم تعريفها على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = constant_value \؛ \ forall \؛ x_1، x_2\]</div>
+<p>يتمثل الاستخدام الأساسي لنواة :class: ‘WhiteKernel’ في كونها جزءًا من نواة الجمع حيث تفسر مكون الضوضاء للإشارة. يتطابق ضبط معلمتها :math: ‘noise_level’ مع تقدير مستوى الضوضاء. يتم تعريفها على النحو التالي:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = noise_level \ text {if} x_i == x_j \ text {else} 0\]</div>
+</section>
+<section id="id9">
+<h2>مشغلات النواة<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>تأخذ مشغلات النواة نواة أساسية واحدة أو نواتين وتجمعها في نواة جديدة. تأخذ نواة :class: ‘Sum’ نواتين :math: ‘k_1’ و :math: ‘k_2’ وتجمعها عبر: :math: ‘<a href="#id21"><span class="problematic" id="id22">k_</span></a> {sum} (X، Y) = k_1 (X، Y) + k_2 (X، Y) <code class="docutils literal notranslate"><span class="pre">.</span>
+<span class="pre">تأخذ</span> <span class="pre">نواة</span> <span class="pre">:class:</span> <span class="pre">'Product'</span> <span class="pre">نواتين</span> <span class="pre">:math:</span> <span class="pre">'k_1'</span> <span class="pre">و</span> <span class="pre">:math:</span> <span class="pre">'k_2'</span> <span class="pre">وتجمعها</span> <span class="pre">عبر:</span> <span class="pre">:math:</span> <span class="pre">'k_</span> <span class="pre">{product}</span> <span class="pre">(X،</span> <span class="pre">Y)</span> <span class="pre">=</span> <span class="pre">k_1</span> <span class="pre">(X،</span> <span class="pre">Y)</span> <span class="pre">*</span> <span class="pre">k_2</span> <span class="pre">(X،</span> <span class="pre">Y)</span> <span class="pre">`.</span>
+<span class="pre">تأخذ</span> <span class="pre">نواة</span> <span class="pre">:class:</span> <span class="pre">'Exponentiation'</span> <span class="pre">نواة</span> <span class="pre">أساسية</span> <span class="pre">واحدة</span> <span class="pre">ومعلمة</span> <span class="pre">قياسية</span> <span class="pre">:math:</span> <span class="pre">'p'</span> <span class="pre">وتجمعها</span> <span class="pre">عبر</span>
+<span class="pre">:math:</span> <span class="pre">'k_</span> <span class="pre">{exp}</span> <span class="pre">(X،</span> <span class="pre">Y)</span> <span class="pre">=</span> <span class="pre">k</span> <span class="pre">(X،</span> <span class="pre">Y)</span> <span class="pre">^</span> <span class="pre">p</span> <span class="pre">`.</span>
+<span class="pre">لاحظ</span> <span class="pre">أنه</span> <span class="pre">يتم</span> <span class="pre">تجاوز</span> <span class="pre">الأساليب</span> <span class="pre">السحرية</span> <span class="pre">``__add__`</span></code>، و <code class="docutils literal notranslate"><span class="pre">__mul___</span></code> و <code class="docutils literal notranslate"><span class="pre">__pow__</span></code> على كائنات Kernel، لذا يمكن استخدامها على سبيل المثال <code class="docutils literal notranslate"><span class="pre">RBF()</span> <span class="pre">+</span> <span class="pre">RBF()</span></code> كاختصار لـ <code class="docutils literal notranslate"><span class="pre">Sum(RBF()،</span> <span class="pre">RBF())</span></code>.</p>
+</section>
+<section id="rbf">
+<h2>نواة الدالة الأسية الجذرية (RBF)<a class="headerlink" href="#rbf" title="Link to this heading">#</a></h2>
+<p>نواة :class: ‘RBF’ هي نواة ثابتة. كما أنه يُعرف باسم النواة “المتسارعة التربيعية”. يتم معلمجتها بواسطة معلمة مقياس طول :math: ‘l&gt;0’، والتي يمكن أن تكون إما قياسية (النسخة متساوية الخواص للنواة) أو متجهًا بنفس عدد الأبعاد مثل المدخلات :math: ‘x’ (النسخة غير متساوية الخواص للنواة).
+النواة هي:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \ text {exp} \ left (- \ frac {d (x_i، x_j) ^ 2} {2l ^ 2} \ right)\]</div>
+<p>حيث :math: ‘d (،) ‘ هي المسافة الإقليدية.
+هذه النواة قابلة للاشتقاق بشكل لا نهائي، مما يعني أن عمليات غاوس بهذه النواة كدالة ارتباط لها مشتقات تربيعية متوسطة من جميع الأوامر، وبالتالي فهي سلسة جدًا. يتم عرض التوزيع السابق والتالي لعملية غاوس الناتجة عن نواة RBF في الشكل التالي:</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_prior_posterior.html"><img alt="../_images/sphx_glr_plot_gpr_prior_posterior_001.png" src="../_images/sphx_glr_plot_gpr_prior_posterior_001.png" />
+</a>
+</figure>
+</section>
+<section id="matern">
+<h2>نواة Matérn<a class="headerlink" href="#matern" title="Link to this heading">#</a></h2>
+<p>نواة :class: ‘Matern’ هي نواة ثابتة وعمومية لنواة :class: ‘RBF’. لديها معلمة إضافية :math: ‘nu’ والتي تتحكم في نعومة الدالة الناتجة. يتم معلمجتها بواسطة معلمة مقياس طول :math: ‘l&gt;0’، والتي يمكن أن تكون إما قياسية (النسخة متساوية الخواص للنواة) أو متجهًا بنفس عدد الأبعاد مثل المدخلات :math: ‘x’ (النسخة غير متساوية الخواص للنواة).</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="التنفيذ-الرياضي-لنواة-matérn">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">التنفيذ الرياضي لنواة Matérn<a class="headerlink" href="#التنفيذ-الرياضي-لنواة-matérn" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">تعطى النواة بالصيغة التالية:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \frac{1}{\Gamma(\nu)2^{\nu-1}}\Bigg(\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg)^\nu K_\nu\Bigg(\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg)،\]</div>
+<p class="sd-card-text">حيث :math: ‘d (،) ‘ هي المسافة الإقليدية، :math: ‘K_nu (.) ‘ هي دالة بيسل المعدلة و :math: ‘Gamma (.) ‘ هي دالة غاما.
+مع :math: ‘nu rightarrow infty`، تتقارب نواة Matérn مع نواة RBF.
+عندما :math: ‘nu = 1/2`، تصبح نواة Matérn متطابقة مع النواة الأسية المطلقة، أي</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \exp \ Bigg (- \ frac {1} {l} d (x_i ، x_j) \ Bigg) \ quad \ quad \ nu= \ tfrac {1} {2}\]</div>
+<p class="sd-card-text">على وجه الخصوص، :math: ‘nu = 3/2`:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \ Bigg (1 + \ frac {\ sqrt {3}} {l} d (x_i ، x_j) \ Bigg) \ exp \ Bigg (-\ frac {\ sqrt {3}} {l} d (x_i ، x_j) \ Bigg) \ quad \ quad \ nu= \ tfrac {3} {2}\]</div>
+<p class="sd-card-text">و:math: ‘nu = 5/2`:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \Bigg(1 + \frac{\sqrt{5}}{l} d(x_i , x_j ) +\frac{5}{3l} d(x_i , x_j )^2 \Bigg) \exp \Bigg(-\frac{\sqrt{5}}{l} d(x_i , x_j ) \Bigg) \quad \quad \nu= \tfrac{5}{2}\]</div>
+<p class="sd-card-text">هي خيارات شائعة لتعلم الدوال التي ليست قابلة للاشتقاق بشكل لا نهائي (كما يفترض نواة RBF) ولكنها مشتقة على الأقل مرة واحدة (:math: ‘nu = 3/2`) أو مشتقة مرتين (:math: ‘nu = 5/2`).</p>
+<p class="sd-card-text">تسمح مرونة التحكم في نعومة الدالة المكتسبة عبر :math: ‘nu` بالتكيف مع خصائص العلاقة الوظيفية الأساسية الحقيقية.</p>
+</div>
+</details><p>يتم عرض التوزيع السابق والتالي لعملية غاوس الناتجة عن نواة Matérn في الشكل التالي:</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_prior_posterior.html"><img alt="../_images/sphx_glr_plot_gpr_prior_posterior_005.png" src="../_images/sphx_glr_plot_gpr_prior_posterior_005.png" />
+</a>
+</figure>
+<p>راجع <a class="reference internal" href="#rw2006" id="id10"><span>[RW2006]</span></a>، الصفحة 84 لمزيد من التفاصيل حول
+الاختلافات المختلفة لنواة Matérn.</p>
+</section>
+<section id="id11">
+<h2>نواة تربيعية عقلانية<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<p>يمكن اعتبار نواة :class: ‘RationalQuadratic’ مزيجًا مقياسيًا (مجموعًا لا نهائيًا)
+من نوى :class: ‘RBF’ ذات مقاييس طول مختلفة. يتم معلمجتها بواسطة معلمة مقياس طول :math: ‘l&gt;0’ ومعلمة مزيج مقياس :math: ‘alpha&gt;0’
+يتم دعم المتغير متساوي الخواص فقط حيث :math: ‘l’ عبارة عن قيمة قياسية في الوقت الحالي.
+النواة هي:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \left(1 + \frac{d(x_i, x_j)^2}{2\alpha l^2}\right)^{-\alpha}\]</div>
+<p>يتم عرض التوزيع السابق والتالي لعملية غاوس الناتجة عن نواة تربيعية عقلانية في الشكل التالي:</p>
+<p>نواة :class: <code class="docutils literal notranslate"><span class="pre">ExpSineSquared</span></code> تسمح بنمذجة الدوال الدورية.
+يتم معلمتها بواسطة معلم طول المقياس :math: <code class="docutils literal notranslate"><span class="pre">l&gt;0</span></code> ومعلم الدورية
+:math: <code class="docutils literal notranslate"><span class="pre">p&gt;0</span></code>. فقط المتغير اللااتجاهي حيث :math: <code class="docutils literal notranslate"><span class="pre">l</span></code> هو كمية قياسية مدعوم حالياً.
+النواة معطاة بالشكل التالي:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \text{exp}\left(- \frac{ 2\sin^2(\pi d(x_i, x_j) / p) }{ l^ 2} \right)\]</div>
+<p>التوزيع السابق والتالي لمتغير عشوائي غاوسي الناتج عن نواة ExpSineSquared موضحان في
+الشكل التالي:</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_prior_posterior.html"><img alt="../_images/sphx_glr_plot_gpr_prior_posterior_003.png" src="../_images/sphx_glr_plot_gpr_prior_posterior_003.png" />
+</a>
+</figure>
+</section>
+<section id="id12">
+<h2>نواة الضرب النقطي<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p>نواة :class: <code class="docutils literal notranslate"><span class="pre">DotProduct</span></code> غير ثابتة ويمكن الحصول عليها من الانحدار الخطي
+بوضع توزيع :math: <code class="docutils literal notranslate"><span class="pre">N(0,</span> <span class="pre">1)</span></code> سابق على معاملات :math: <code class="docutils literal notranslate"><span class="pre">x_d</span> <span class="pre">(d</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">.</span> <span class="pre">.</span> <span class="pre">.</span> <span class="pre">,</span> <span class="pre">D)</span></code> وتوزيع
+سابق :math: <code class="docutils literal notranslate"><span class="pre">N(0,</span> <span class="pre">sigma_0^2)</span></code> على الانحدار. نواة :class: <code class="docutils literal notranslate"><span class="pre">DotProduct</span></code> ثابتة بالنسبة لدوران
+الإحداثيات حول الأصل، ولكن ليست ثابتة بالنسبة للترجمات.
+يتم معلمتها بواسطة معلم :math: <code class="docutils literal notranslate"><span class="pre">sigma_0^2</span></code>. بالنسبة لـ :math: <code class="docutils literal notranslate"><span class="pre">sigma_0^2</span> <span class="pre">=</span> <span class="pre">0</span></code>، تسمى النواة
+بالنواة الخطية المتجانسة، وإلا فهي غير متجانسة. النواة معطاة بالشكل التالي:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \sigma_0 ^ 2 + x_i \cdot x_j\]</div>
+<p>عادة ما يتم دمج نواة :class: <code class="docutils literal notranslate"><span class="pre">DotProduct</span></code> مع أسّة. مثال على الأسّة 2 موضح في
+الشكل التالي:</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/gaussian_process/plot_gpr_prior_posterior.html"><img alt="../_images/sphx_glr_plot_gpr_prior_posterior_004.png" src="../_images/sphx_glr_plot_gpr_prior_posterior_004.png" />
+</a>
+</figure>
+</section>
+<section id="id13">
+<h2>مراجع<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<div role="list" class="citation-list">
+<div class="citation" id="rw2006" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RW2006<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
+<p><a class="reference external" href="https://www.gaussianprocess.org/gpml/chapters/RW.pdf">Carl E. Rasmussen and Christopher K.I. Williams,
+“Gaussian Processes for Machine Learning”,
+MIT Press 2006</a></p>
+</div>
+<div class="citation" id="duv2014" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">Duv2014</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.cs.toronto.edu/~duvenaud/cookbook/">David Duvenaud, “The Kernel Cookbook: Advice on Covariance functions”, 2014</a></p>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">عمليات غاوس</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">انحدار عملية غاوس</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gpc">تصنيف عملية غاوس</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">أمثلة GPC</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">التنبؤات الاحتمالية مع GPC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gpc-xor">توضيح GPC على مجموعة بيانات XOR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gpc-iris">تصنيف عملية غاوس (GPC) على مجموعة بيانات Iris</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">النوى الأساسية</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">مشغلات النواة</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rbf">نواة الدالة الأسية الجذرية (RBF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matern">نواة Matérn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">نواة تربيعية عقلانية</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">نواة الضرب النقطي</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">مراجع</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/gaussian_process.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
