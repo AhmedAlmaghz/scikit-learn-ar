@@ -1,0 +1,891 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="اختيار الخصائص" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/feature_selection.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="يمكن استخدام الفئات في وحدة sklearn.feature_selection لاختيار الخصائص/الحد من الأبعاد على مجموعات العينات، إما لتحسين درجات دقة المُقدّر أو لتعزيز أدائه على مجموعات البيانات عالية الأبعاد للغاية. إ..." />
+<meta property="og:image" content="https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="يمكن استخدام الفئات في وحدة sklearn.feature_selection لاختيار الخصائص/الحد من الأبعاد على مجموعات العينات، إما لتحسين درجات دقة المُقدّر أو لتعزيز أدائه على مجموعات البيانات عالية الأبعاد للغاية. إ..." />
+
+    <title>اختيار الخصائص &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/feature_selection';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">اختيار الخصائص</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="feature-selection">
+<span id="id1"></span><h1>اختيار الخصائص<a class="headerlink" href="#feature-selection" title="Link to this heading">#</a></h1>
+<p>يمكن استخدام الفئات في وحدة <a class="reference internal" href="../api/sklearn.feature_selection.html#module-sklearn.feature_selection" title="sklearn.feature_selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_selection</span></code></a> لاختيار الخصائص/الحد من الأبعاد على مجموعات العينات، إما لتحسين درجات دقة المُقدّر أو لتعزيز أدائه على مجموعات البيانات عالية الأبعاد للغاية.</p>
+<section id="variance-threshold">
+<span id="id2"></span><h2>إزالة الخصائص ذات التباين المنخفض<a class="headerlink" href="#variance-threshold" title="Link to this heading">#</a></h2>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">VarianceThreshold</span></code> هي طريقة بسيطة لاختيار الخصائص بناءً على خط الأساس. إنه يزيل جميع الميزات التي لا يفي تباينها بعتبة معينة. بشكل افتراضي، فإنه يزيل جميع الميزات ذات التباين الصفري، أي الميزات التي لها نفس القيمة في جميع العينات.</p>
+<p>على سبيل المثال، لنفترض أن لدينا مجموعة بيانات ذات ميزات منطقية، ونريد إزالة جميع الميزات التي تكون إما واحدًا أو صفرًا (تشغيل أو إيقاف) في أكثر من 80% من العينات.</p>
+<p>الميزات المنطقية هي متغيرات برنولي عشوائية، ويُعطى تباين هذه المتغيرات بالصيغة التالية:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Var}[X] = p(1 - p)\]</div>
+<p>لذلك، يمكننا الاختيار باستخدام العتبة <code class="docutils literal notranslate"><span class="pre">.8</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">-</span> <span class="pre">.8)</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">VarianceThreshold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span> <span class="o">=</span> <span class="n">VarianceThreshold</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="p">(</span><span class="mf">.8</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">.8</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [1, 0],</span>
+<span class="go">       [0, 0],</span>
+<span class="go">       [1, 1],</span>
+<span class="go">       [1, 0],</span>
+<span class="go">       [1, 1]])</span>
+</pre></div>
+</div>
+<p>كما هو متوقع، قام <code class="docutils literal notranslate"><span class="pre">VarianceThreshold</span></code> بإزالة العمود الأول، والذي لديه احتمال <span class="math notranslate nohighlight">\(p = 5/6 &gt; .8\)</span> لاحتواء الصفر.</p>
+</section>
+<section id="univariate-feature-selection">
+<span id="id3"></span><h2>اختيار ميزة أحادي المتغير<a class="headerlink" href="#univariate-feature-selection" title="Link to this heading">#</a></h2>
+<p>يعمل اختيار ميزة أحادي المتغير عن طريق اختيار أفضل الميزات بناءً على اختبارات إحصائية أحادية المتغير. يمكن اعتباره خطوة ما قبل المعالجة لمُقدّر. تعرض Scikit-learn روتينات اختيار الميزات ككائنات تقوم بتنفيذ طريقة “التحويل”:</p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectKBest</span></code> يزيل كل شيء باستثناء <span class="math notranslate nohighlight">\(k\)</span> الميزات ذات الدرجات الأعلى</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectPercentile</span></code> يزيل كل شيء باستثناء نسبة مئوية محددة من المستخدم لأعلى الميزات التي تم تسجيلها</p></li>
+<li><p>باستخدام الاختبارات الإحصائية أحادية المتغير الشائعة لكل ميزة:
+معدل الإيجابيات الخاطئة <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectFpr</span></code>، ومعدل الاكتشاف الخاطئ <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectFdr</span></code>، أو الخطأ الكلي للعائلة <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectFwe</span></code>.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericUnivariateSelect</span></code> يسمح بإجراء اختيار ميزة أحادي المتغير باستخدام استراتيجية قابلة للتكوين. يتيح ذلك اختيار أفضل استراتيجية اختيار أحادي المتغير باستخدام مُقدّر البحث عن أفضل وسيط.</p></li>
+</ul>
+<p>على سبيل المثال، يمكننا استخدام اختبار F-test لاسترداد أفضل ميزتين لمجموعة بيانات كما يلي:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectKBest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">f_classif</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(150, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">f_classif</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(150, 2)</span>
+</pre></div>
+</div>
+<p>تأخذ هذه الكائنات كإدخال دالة تسجيل تعيد درجات أحادية المتغير والقيم p (أو الدرجات فقط لـ <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectKBest</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectPercentile</span></code>):</p>
+<ul class="simple">
+<li><p>للانحدار: <code class="xref py py-func docutils literal notranslate"><span class="pre">r_regression</span></code>، <code class="xref py py-func docutils literal notranslate"><span class="pre">f_regression</span></code>، <code class="xref py py-func docutils literal notranslate"><span class="pre">mutual_info_regression</span></code></p></li>
+<li><p>للتصنيف: <code class="xref py py-func docutils literal notranslate"><span class="pre">chi2</span></code>، <code class="xref py py-func docutils literal notranslate"><span class="pre">f_classif</span></code>، <code class="xref py py-func docutils literal notranslate"><span class="pre">mutual_info_classif</span></code></p></li>
+</ul>
+<p>تقدر الطرق المستندة إلى اختبار F درجة الاعتماد الخطي بين متغيرين عشوائيين. من ناحية أخرى، يمكن لطرق المعلومات المتبادلة التقاط أي نوع من الاعتماد الإحصائي، ولكن نظرًا لأنها غير معلمية، فإنها تتطلب المزيد من العينات للتقدير الدقيق. لاحظ أنه يجب تطبيق اختبار <span class="math notranslate nohighlight">\(\chi^2\)</span> فقط على الميزات غير السالبة، مثل الترددات.</p>
+<aside class="topic">
+<p class="topic-title">اختيار الميزة مع البيانات المتناثرة</p>
+<p>إذا كنت تستخدم بيانات متناثرة (أي بيانات ممثلة على شكل مصفوفات متناثرة)، فسيتم التعامل مع <code class="xref py py-func docutils literal notranslate"><span class="pre">chi2</span></code>، <code class="xref py py-func docutils literal notranslate"><span class="pre">mutual_info_regression</span></code>، <code class="xref py py-func docutils literal notranslate"><span class="pre">mutual_info_classif</span></code> مع البيانات دون جعلها كثيفة.</p>
+</aside>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>احترس من عدم استخدام دالة تسجيل الانحدار مع مشكلة التصنيف، فستحصل على نتائج عديمة الفائدة.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>تدعم <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectPercentile</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectKBest</span></code> اختيار الميزات غير الخاضعة للإشراف أيضًا. يجب توفير دالة <code class="docutils literal notranslate"><span class="pre">score_func</span></code> حيث <code class="docutils literal notranslate"><span class="pre">y=None</span></code>. يجب أن تستخدم <code class="docutils literal notranslate"><span class="pre">score_func</span></code> داخليًا <code class="docutils literal notranslate"><span class="pre">X</span></code> لحساب الدرجات.</p>
+</div>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/feature_selection/plot_feature_selection.html#sphx-glr-auto-examples-feature-selection-plot-feature-selection-py"><span class="std std-ref">Univariate Feature Selection</span></a></p></li>
+<li><p><a class="reference internal" href="../auto_examples/feature_selection/plot_f_test_vs_mi.html#sphx-glr-auto-examples-feature-selection-plot-f-test-vs-mi-py"><span class="std std-ref">Comparison of F-test and mutual information</span></a></p></li>
+</ul>
+</section>
+<section id="rfe">
+<span id="id4"></span><h2>القضاء على الميزة التراجعية<a class="headerlink" href="#rfe" title="Link to this heading">#</a></h2>
+<p>بالنظر إلى مُقدّر خارجي يعين الأوزان للميزات (مثل معاملات نموذج خطي)، فإن الهدف من القضاء على الميزة التراجعية (<code class="xref py py-class docutils literal notranslate"><span class="pre">RFE</span></code>) هو اختيار الميزات عن طريق النظر بشكل متكرر في مجموعات أصغر وأصغر من الميزات. أولاً، يتم تدريب المُقدّر على مجموعة الميزات الأولية ويتم الحصول على أهمية كل ميزة إما من خلال أي سمة محددة (مثل “<a href="#id6"><span class="problematic" id="id7">coef_</span></a>”، “<a href="#id8"><span class="problematic" id="id9">feature_importances_</span></a>”) أو callable. ثم يتم تقليم الميزات الأقل أهمية من المجموعة الحالية من الميزات. يتم تكرار هذا الإجراء بشكل متكرر على المجموعة المقلمة حتى يتم الوصول إلى العدد المرغوب من الميزات التي سيتم اختيارها في النهاية.</p>
+<p>يؤدي <code class="xref py py-class docutils literal notranslate"><span class="pre">RFECV</span></code> إلى RFE في حلقة تصحيح عكسي للعثور على العدد الأمثل من الميزات. بمزيد من التفاصيل، يتم ضبط عدد الميزات المحددة تلقائيًا عن طريق ملاءمة مُحدد <code class="xref py py-class docutils literal notranslate"><span class="pre">RFE</span></code> على تقسيمات التصحيح العكسي المختلفة (التي يوفرها معلمة <code class="docutils literal notranslate"><span class="pre">cv</span></code>). يتم تقييم أداء مُحدد <code class="xref py py-class docutils literal notranslate"><span class="pre">RFE</span></code> باستخدام “scorer” لعدد مختلف من الميزات المحددة وتجميعها معًا. أخيرًا، يتم حساب متوسط الدرجات عبر الطيات ويتم تعيين عدد الميزات المحددة إلى عدد الميزات التي تحقق أقصى درجات التصحيح العكسي.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/feature_selection/plot_rfe_digits.html#sphx-glr-auto-examples-feature-selection-plot-rfe-digits-py"><span class="std std-ref">Recursive feature elimination</span></a>: مثال على القضاء على الميزة التراجعية
+إظهار أهمية البكسل في مهمة تصنيف الرقم.</p></li>
+<li><p><a class="reference internal" href="../auto_examples/feature_selection/plot_rfe_with_cross_validation.html#sphx-glr-auto-examples-feature-selection-plot-rfe-with-cross-validation-py"><span class="std std-ref">Recursive feature elimination with cross-validation</span></a>: مثال على القضاء على الميزة التراجعية
+مثال مع الضبط التلقائي لعدد الميزات المحددة باستخدام التصحيح العكسي.</p></li>
+</ul>
+</section>
+<section id="selectfrommodel">
+<span id="select-from-model"></span><h2>اختيار الميزة باستخدام SelectFromModel<a class="headerlink" href="#selectfrommodel" title="Link to this heading">#</a></h2>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectFromModel</span></code> هو محول عام يمكن استخدامه جنبًا إلى جنب مع أي مُقدّر يعين الأهمية لكل ميزة من خلال سمة محددة (مثل “<a href="#id10"><span class="problematic" id="id11">coef_</span></a>”، “<a href="#id12"><span class="problematic" id="id13">feature_importances_</span></a>”) أو عبر callable <code class="docutils literal notranslate"><span class="pre">importance_getter</span></code> بعد التجهيز. تعتبر الميزات غير مهمة ويتم إزالتها إذا كانت الأهمية المقابلة لقيم الميزة أقل من معلمة “threshold” المقدمة. بالإضافة إلى تحديد العتبة رقميًا، هناك استراتيجيات مدمجة للعثور على عتبة باستخدام حجة سلسلة. الاستراتيجيات المتوفرة هي “mean”، “median” ومضاعفات الأرقام العشرية لهذه القيم مثل “0.1*mean”. بالاشتراك مع معلمة <code class="docutils literal notranslate"><span class="pre">threshold</span></code>، يمكن استخدام معلمة <code class="docutils literal notranslate"><span class="pre">max_features</span></code> لتحديد حد على عدد الميزات التي سيتم اختيارها.</p>
+<p>للاطلاع على أمثلة حول كيفية استخدامها، راجع الأقسام أدناه.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/feature_selection/plot_select_from_model_diabetes.html#sphx-glr-auto-examples-feature-selection-plot-select-from-model-diabetes-py"><span class="std std-ref">Model-based and sequential feature selection</span></a></p></li>
+</ul>
+<section id="l1">
+<span id="l1-feature-selection"></span><h3>اختيار الميزة المستندة إلى L1<a class="headerlink" href="#l1" title="Link to this heading">#</a></h3>
+<p><span class="xref std std-ref">نماذج خطية</span> المعاقب عليها بمعيار L1 لها
+حلول متفرقة: العديد من معاملاتها المقدرة هي صفر. عندما يكون الهدف هو تقليل أبعاد البيانات لاستخدامها مع مُصنّف آخر، يمكن استخدامها جنبًا إلى جنب مع <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectFromModel</span></code>
+لتحديد المعاملات غير الصفرية. على وجه الخصوص، فإن المقدرات المتناثرة المفيدة لهذا الغرض هي <code class="xref py py-class docutils literal notranslate"><span class="pre">Lasso</span></code> للانحدار، و
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LogisticRegression</span></code> و <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code>
+للتصنيف:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectFromModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(150, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lsvc</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s2">&quot;l1&quot;</span><span class="p">,</span> <span class="n">dual</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">lsvc</span><span class="p">,</span> <span class="n">prefit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(150, 3)</span>
+</pre></div>
+</div>
+<p>مع SVMs والانحدار اللوجستي، يتحكم معلمة C في التفرقة:
+كلما قل C، قل عدد الميزات المحددة. مع Lasso، كلما زادت
+قيمة معلمة alpha، قل عدد الميزات المحددة.</p>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/linear_model/plot_lasso_dense_vs_sparse_data.html#sphx-glr-auto-examples-linear-model-plot-lasso-dense-vs-sparse-data-py"><span class="std std-ref">Lasso on dense and sparse data</span></a>.</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="compressive-sensing">
+<span id="l1-recovery-and-compressive-sensing"></span><summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">L1-recovery and compressive sensing<a class="headerlink" href="#l1-recovery-and-compressive-sensing" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">بالنسبة للاختيار الجيد لمعلمة alpha، يمكن أن يسترد <a class="reference internal" href="linear_model.html#lasso"><span class="std std-ref">Lasso</span></a> تمامًا
+مجموعة المتغيرات غير الصفرية تمامًا باستخدام عدد قليل من الملاحظات، بشرط
+تلبية شروط محددة. على وجه الخصوص، يجب أن يكون عدد
+يجب أن تكون العينات “كبيرة بما يكفي”، أو ستؤدي نماذج L1 أداءً عشوائيًا، حيث “كبيرة بما يكفي” تعتمد على عدد المعاملات غير الصفرية، واللوغاريتم من عدد الميزات، ومقدار
+الضوضاء، وأصغر قيمة مطلقة للمعاملات غير الصفرية، وهيكل مصفوفة التصميم X. بالإضافة إلى ذلك، يجب أن تعرض مصفوفة التصميم خصائص محددة، مثل عدم وجود ارتباط كبير.</p>
+<p class="sd-card-text">لا توجد قاعدة عامة لاختيار معلمة alpha لاسترداد المعاملات غير الصفرية. يمكن تعيينه بواسطة التصحيح العكسي
+(<code class="xref py py-class docutils literal notranslate"><span class="pre">LassoCV</span></code> أو
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsCV</span></code>)، على الرغم من أن هذا قد يؤدي إلى
+نماذج ناقصة العقاب: بما في ذلك عدد صغير من المتغيرات غير ذات الصلة ليس ضارًا
+على درجة التنبؤ. يميل BIC
+(<code class="xref py py-class docutils literal notranslate"><span class="pre">LassoLarsIC</span></code>)، على العكس من ذلك، إلى تعيين
+قيم عالية من alpha.</p>
+<p class="rubric">المراجع</p>
+<p class="sd-card-text">Richard G. Baraniuk “Compressive Sensing”، IEEE Signal
+معالجة مجلة [120] يوليو 2007
+<a class="reference external" href="http://users.isr.ist.utl.pt/~aguiar/CS_notes.pdf">http://users.isr.ist.utl.pt/~aguiar/CS_notes.pdf</a></p>
+</div>
+</details></section>
+<section id="id5">
+<h3>اختيار ميزة شجرة القرار<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>يمكن استخدام المقدرات القائمة على الشجرة (راجع وحدة <a class="reference internal" href="../api/sklearn.tree.html#module-sklearn.tree" title="sklearn.tree"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.tree</span></code></a> وغابة الأشجار في وحدة <a class="reference internal" href="../api/sklearn.ensemble.html#module-sklearn.ensemble" title="sklearn.ensemble"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.ensemble</span></code></a>) لحساب أهمية الميزات القائمة على عدم النقاء، والتي يمكن استخدامها بعد ذلك لتجاهل الميزات غير ذات الصلة (عند اقترانها بالمحول الميتا <code class="xref py py-class docutils literal notranslate"><span class="pre">SelectFromModel</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">ExtraTreesClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectFromModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(150, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">ExtraTreesClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">feature_importances_</span>  
+<span class="go">array([ 0.04...,  0.05...,  0.4...,  0.4...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">prefit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>               
+<span class="go">(150, 2)</span>
+</pre></div>
+</div>
+<p class="rubric">أمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/ensemble/plot_forest_importances.html#sphx-glr-auto-examples-ensemble-plot-forest-importances-py"><span class="std std-ref">Feature importances with a forest of trees</span></a>: مثال على
+بيانات اصطناعية تظهر استرداد الميزات ذات الصلة بالفعل.</p></li>
+<li><p><a class="reference internal" href="../auto_examples/ensemble/plot_forest_importances_faces.html#sphx-glr-auto-examples-ensemble-plot-forest-importances-faces-py"><span class="std std-ref">Pixel importances with a parallel forest of trees</span></a>: مثال
+على بيانات التعرف على الوجه.</p></li>
+</ul>
+<p id="sequential-feature-selection">اختيار الميزة التسلسلية
+يسمح اختيار السمات المتسلسل [sfs] _ (SFS) المتاح في محول :class: ~ sklearn.feature_selection.SequentialFeatureSelector بتحديد السمات إما للأمام أو للخلف:</p>
+<p>يعد اختيار السمات المتسلسل للأمام إجراءً جشعاً يجد بشكل تكراري أفضل سمة جديدة لإضافتها إلى مجموعة السمات المحددة. وبشكل ملموس، نبدأ في البداية بدون أي سمات ونبحث عن السمة الواحدة التي تعظم نتيجة التحقق من الصحة المتقاطعة عند تدريب مُقدِّر على هذه السمة الوحيدة. بمجرد اختيار أول سمة، نكرر الإجراء عن طريق إضافة سمة جديدة إلى مجموعة السمات المحددة. يتوقف الإجراء عند الوصول إلى عدد السمات المحددة المطلوب، كما يحدده معامل n_features_to_select.</p>
+<p>أما اختيار السمات المتسلسل للخلف فيتبع الفكرة نفسها ولكنه يعمل في الاتجاه المعاكس: بدلاً من البدء بدون أي سمات وإضافة السمات بطريقة جشعة، نبدأ بجميع السمات ونزيلها بطريقة جشعة من المجموعة. يتحكم معامل “الاتجاه” في ما إذا كان يتم استخدام اختيار السمات المتسلسل للأمام أو للخلف.</p>
+<p>يختلف اختيار السمات المتسلسل عمومًا عن طريق الاختيار للأمام والاختيار للخلف لا يحقق نتائج مكافئة. أيضًا، قد يكون أحدهما أسرع بكثير من الآخر اعتمادًا على عدد السمات المطلوبة: إذا كان لدينا 10 سمات ونريد 7 سمات محددة، فإن الاختيار المتجه للأمام يتطلب 7 تكرارات بينما يحتاج الاختيار المتجه للخلف إلى 3 تكرارات فقط.</p>
+<p>يختلف SFS عن :class: ~ sklearn.feature_selection.RFE و :class: ~ sklearn.feature_selection.SelectFromModel في أنه لا يتطلب من النموذج الأساسي الكشف عن معامل “<a href="#id14"><span class="problematic" id="id15">coef_</span></a>” أو “<a href="#id16"><span class="problematic" id="id17">feature_importances_</span></a>”. ومع ذلك، فقد يكون أبطأ نظرًا لضرورة تقييم المزيد من النماذج مقارنة بالطرق الأخرى. على سبيل المثال، في الاختيار المتجه للخلف، تتطلب التكرار الذي ينتقل من استخدام “m” سمة إلى “m - 1” سمة باستخدام التحقق من الصحة المتقاطع k-fold ملاءمة نماذج “m * k”، في حين أن :class: ~ sklearn.feature_selection.RFE سيتطلب ملاءمة واحدة فقط، و :class: ~ sklearn.feature_selection.SelectFromModel دائمًا ما يقوم بملاءمة واحدة فقط ولا يتطلب أي تكرارات.</p>
+<p>يمكن استخدام اختيار السمات كخطوة ما قبل المعالجة قبل التعلم الفعلي. الطريقة الموصى بها للقيام بذلك في Scikit-learn هي استخدام :class: ~ pipeline.Pipeline:</p>
+<p>في هذا المقطع، نستخدم :class: ~ svm.LinearSVC مقترنًا بـ :class: ~ feature_selection.SelectFromModel لتقييم أهمية السمات واختيار أكثرها ملاءمة. بعد ذلك، يتم تدريب :class: ~ ensemble.RandomForestClassifier على الإخراج المحول، أي باستخدام السمات ذات الصلة فقط. يمكنك إجراء عمليات مماثلة باستخدام طرق اختيار السمات الأخرى والتصنيفات التي توفر طريقة لتقييم أهمية السمات. راجع أمثلة :class: ~ pipeline.Pipeline لمزيد من التفاصيل.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-threshold">إزالة الخصائص ذات التباين المنخفض</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-feature-selection">اختيار ميزة أحادي المتغير</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rfe">القضاء على الميزة التراجعية</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selectfrommodel">اختيار الميزة باستخدام SelectFromModel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l1">اختيار الميزة المستندة إلى L1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">اختيار ميزة شجرة القرار</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/feature_selection.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
