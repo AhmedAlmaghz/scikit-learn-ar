@@ -1,0 +1,973 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="شبكات عصبية (خاضعة للإشراف)" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://scikit-learn/stable/modules/neural_networks_supervised.html" />
+<meta property="og:site_name" content="scikit-learn" />
+<meta property="og:description" content="طبقات الإدراك المتعددة: طبقات الإدراك المتعددة (MLP) هي خوارزمية تعلم خاضعة للإشراف تقوم بتعلُّم دالة f: R^m \rightarrow R^o عن طريق التدريب على مجموعة بيانات، حيث m هو عدد الأبعاد للمدخلات و:math:..." />
+<meta property="og:image" content="https://scikit-learn/stable/_images/multilayerperceptron_network.png" />
+<meta property="og:image:alt" content="scikit-learn" />
+<meta name="description" content="طبقات الإدراك المتعددة: طبقات الإدراك المتعددة (MLP) هي خوارزمية تعلم خاضعة للإشراف تقوم بتعلُّم دالة f: R^m \rightarrow R^o عن طريق التدريب على مجموعة بيانات، حيث m هو عدد الأبعاد للمدخلات و:math:..." />
+
+    <title>شبكات عصبية (خاضعة للإشراف) &#8212; scikit-learn 1.5.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/colors.css?v=cc94ab7d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/custom.css?v=e4cb1417" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=44dfd65d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=97f0b27d"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-domain="scikit-learn.org" defer="defer" src="https://views.scientific-python.org/js/script.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules/neural_networks_supervised';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://scikit-learn.org/dev/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.5.1';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <script src="../_static/scripts/dropdown.js?v=e2048168"></script>
+    <script src="../_static/scripts/version-switcher.js?v=a6dd8357"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo-small.png" class="logo__image only-light" alt="scikit-learn homepage"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo-small.png" class="logo__image only-dark" alt="scikit-learn homepage"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Install
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    مرجع المستخدم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../auto_examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://blog.scikit-learn.org/">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../getting_started.html">
+    بدء الاستخدام
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../whats_new.html">
+    تاريخ الإصدارات
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../glossary.html">
+    Glossary
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://scikit-learn.org/dev/developers/index.html">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../faq.html">
+    FAQ
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../support.html">
+    الدعم
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../related_projects.html">
+    التعاون مع الأطر الأخرى وتحسينها
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../roadmap.html">
+    خارطة الطريق
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../governance.html">
+    Governance
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    الحوكمة
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/scikit-learn/scikit-learn" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">شبكات عصبية...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>شبكات عصبية (خاضعة للإشراف)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>هذا التنفيذ غير مخصص للتطبيقات واسعة النطاق. وعلى وجه الخصوص، لا توفر
+سكيت-ليرن أي دعم لوحدات معالجة الرسومات (GPU). للحصول على تطبيقات أسرع
+تعتمد على وحدات معالجة الرسومات (GPU)، وكذلك الأطر التي توفر مرونة أكبر
+لبناء هندسات التعلم العميق، راجع <span class="xref std std-ref">related_projects</span>.</p>
+</div>
+</section>
+<section id="id2">
+<h1>طبقات الإدراك المتعددة<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p><strong>طبقات الإدراك المتعددة (MLP)</strong> هي خوارزمية تعلم خاضعة للإشراف تقوم بتعلُّم
+دالة <span class="math notranslate nohighlight">\(f: R^m \rightarrow R^o\)</span> عن طريق التدريب على مجموعة بيانات،
+حيث <span class="math notranslate nohighlight">\(m\)</span> هو عدد الأبعاد للمدخلات و:math:<code class="docutils literal notranslate"><span class="pre">o</span></code> هو عدد الأبعاد للمخرجات.
+وبالنظر إلى مجموعة من الخصائص <span class="math notranslate nohighlight">\(X = {x_1, x_2, ..., x_m}\)</span>
+وهدف <span class="math notranslate nohighlight">\(y\)</span>، يمكنها تعلم مُقَرِّب الدالة غير الخطية إما
+للتصنيف أو الانحدار. ويختلف عن الانحدار اللوجستي، من حيث أنه
+يمكن أن يكون هناك طبقة أو أكثر من الطبقات غير الخطية، تسمى الطبقات
+الخفية، بين طبقة الإدخال وطبقة الإخراج. يوضح الشكل 1 طبقة إدراك
+متعددة ذات طبقة خفية واحدة ومخرج قياسي.</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../_images/multilayerperceptron_network.png"><img alt="../_images/multilayerperceptron_network.png" src="../_images/multilayerperceptron_network.png" style="width: 469.79999999999995px; height: 510.59999999999997px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>الشكل 1: طبقة إدراك متعددة ذات طبقة خفية واحدة.</strong></span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>تتكون طبقة الإدخال، الموجودة على أقصى اليسار، من مجموعة من العصبونات
+<span class="math notranslate nohighlight">\(\{x_i | x_1, x_2, ..., x_m\}\)</span> التي تمثل خصائص الإدخال. ويقوم
+كل عصبون في الطبقة الخفية بتحويل القيم من الطبقة السابقة باستخدام
+مجموع مرجح خطي <span class="math notranslate nohighlight">\(w_1x_1 + w_2x_2 + ... + w_mx_m\)</span>، يليه
+دالة تنشيط غير خطية <span class="math notranslate nohighlight">\(g(\cdot):R \rightarrow R\)</span> - مثل
+دالة التانژانت الزائدي. وتستقبل طبقة الإخراج القيم من
+الطبقة الخفية الأخيرة وتحولها إلى قيم الإخراج.</p>
+<p>يحتوي الوحدة النمطية على الخاصيتين العامتين <code class="docutils literal notranslate"><span class="pre">coefs_</span></code> و <code class="docutils literal notranslate"><span class="pre">intercepts_</span></code>.
+“<a href="#id8"><span class="problematic" id="id9">coefs_</span></a>” هي قائمة من مصفوفات الأوزان، حيث تمثل مصفوفة الأوزان في الفهرس
+<span class="math notranslate nohighlight">\(i\)</span> الأوزان بين الطبقة <span class="math notranslate nohighlight">\(i\)</span> والطبقة
+<span class="math notranslate nohighlight">\(i+1\)</span>. “<a href="#id10"><span class="problematic" id="id11">intercepts_</span></a>” هي قائمة من متجهات الانحياز، حيث يمثل المتجه
+في الفهرس <span class="math notranslate nohighlight">\(i\)</span> قيم الانحياز المضافة إلى الطبقة <span class="math notranslate nohighlight">\(i+1\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="مزايا-وعيوب-طبقة-الإدراك-المتعددة">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">مزايا وعيوب طبقة الإدراك المتعددة<a class="headerlink" href="#مزايا-وعيوب-طبقة-الإدراك-المتعددة" title="Link to this dropdown">#</a></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">تتمثل مزايا طبقة الإدراك المتعددة فيما يلي:</p>
+<ul class="simple">
+<li><p class="sd-card-text">القدرة على تعلم النماذج غير الخطية.</p></li>
+<li><p class="sd-card-text">القدرة على تعلم النماذج في الوقت الفعلي (التعلم عبر الإنترنت)
+باستخدام <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code>.</p></li>
+</ul>
+<p class="sd-card-text">تشمل عيوب طبقة الإدراك المتعددة (MLP) ما يلي:</p>
+<ul class="simple">
+<li><p class="sd-card-text">تمتلك طبقة الإدراك المتعددة ذات الطبقات الخفية دالة خسارة غير محدبة حيث يوجد
+أكثر من حد أدنى محلي. لذلك، يمكن أن تؤدي التهيئات العشوائية المختلفة للأوزان
+إلى دقة تحقق مختلفة.</p></li>
+<li><p class="sd-card-text">تتطلب طبقة الإدراك المتعددة ضبط عدد من فرط المعلمات مثل عدد
+العصبونات الخفية والطبقات والتكرارات.</p></li>
+<li><p class="sd-card-text">طبقة الإدراك المتعددة حساسة لمقياس الميزة.</p></li>
+</ul>
+<p class="sd-card-text">يرجى الاطلاع على قسم <span class="xref std std-ref">نصائح حول الاستخدام العملي</span> الذي يعالج
+بعض هذه العيوب.</p>
+</div>
+</details></section>
+<section id="id3">
+<h1>التصنيف<a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<p>تنفذ فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">MLPClassifier</span></code> خوارزمية طبقة الإدراك المتعددة (MLP) التي
+تتدرب باستخدام <a class="reference external" href="http://ufldl.stanford.edu/wiki/index.php/Backpropagation_Algorithm">Backpropagation</a>.</p>
+<p>تتدرب طبقة الإدراك المتعددة على مصفوفتين: المصفوفة X ذات الحجم (n_samples، n_features)،
+التي تحتوي على عينات التدريب الممثلة كمتجهات ميزات ذات نقطة عائمة؛ والمصفوفة
+y ذات الحجم (n_samples,)، والتي تحتوي على القيم المستهدفة (ملصقات الفئات)
+لعينات التدريب:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">MLPClassifier(alpha=1e-05, hidden_layer_sizes=(5, 2), random_state=1,</span>
+<span class="go">              solver=&#39;lbfgs&#39;)</span>
+</pre></div>
+</div>
+<p>بعد التجهيز (التدريب)، يمكن للنموذج التنبؤ بالملصقات لعينات جديدة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([1, 0])</span>
+</pre></div>
+</div>
+<p>يمكن لطبقة الإدراك المتعددة أن تتناسب مع نموذج غير خطي لبيانات التدريب.
+“<a href="#id12"><span class="problematic" id="id13">clf.coefs_</span></a>” تحتوي على مصفوفات الأوزان التي تشكل معلمات النموذج:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">coef</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">coef</span> <span class="ow">in</span> <span class="n">clf</span><span class="o">.</span><span class="n">coefs_</span><span class="p">]</span>
+<span class="go">[(2, 5), (5, 2), (2, 1)]</span>
+</pre></div>
+</div>
+<p>حاليًا، تدعم فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">MLPClassifier</span></code> دالة الخسارة
+Cross-Entropy فقط، والتي تسمح بتقديرات الاحتمالية عن طريق تشغيل
+طريقة “predict_proba”.</p>
+<p>تتدرب طبقة الإدراك المتعددة باستخدام Backpropagation. وبشكل أكثر دقة،
+فهي تتدرب باستخدام شكل من أشكال الانحدار التدريجي وتُحسب الانحدارات
+باستخدام Backpropagation. بالنسبة للتصنيف، فإنه يقلل من دالة الخسارة
+Cross-Entropy، مما يعطي متجهًا من تقديرات الاحتمالية <span class="math notranslate nohighlight">\(P(y|x)\)</span>
+لكل عينة <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([[1.967...e-04, 9.998...-01],</span>
+<span class="go">       [1.967...e-04, 9.998...-01]])</span>
+</pre></div>
+</div>
+<p>تدعم فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">MLPClassifier</span></code> التصنيف متعدد الفئات عن طريق
+تطبيق <a class="reference external" href="https://en.wikipedia.org/wiki/Softmax_activation_function">Softmax</a>
+كدالة إخراج.</p>
+<p>علاوة على ذلك، يدعم النموذج <span class="xref std std-ref">التصنيف متعدد الملصقات</span>
+الذي يمكن أن تنتمي فيه العينة إلى أكثر من فئة واحدة. وبالنسبة لكل فئة،
+تمر المخرجات الخام عبر دالة اللوغاريتم. وتُقرَّب القيم الأكبر من أو تساوي <code class="docutils literal notranslate"><span class="pre">0.5</span></code>
+إلى <code class="docutils literal notranslate"><span class="pre">1</span></code>، وإلا فستكون <code class="docutils literal notranslate"><span class="pre">0</span></code>. وبالنسبة للمخرجات المتوقعة لعينة، تمثل المؤشرات
+التي تكون فيها القيمة <code class="docutils literal notranslate"><span class="pre">1</span></code> الفئات المعينة لتلك العينة:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbf太阳公, alpha=1e-5,</span>
+<span class="gp">... </span>                    <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">MLPClassifier(alpha=1e-05, hidden_layer_sizes=(15,), random_state=1,</span>
+<span class="go">              solver=&#39;lbfgs&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="go">array([[1, 1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+<span class="go">array([[0, 1]])</span>
+</pre></div>
+</div>
+<p>راجع الأمثلة أدناه ووثائق طريقة <code class="xref py py-meth docutils literal notranslate"><span class="pre">MLPClassifier.fit</span></code> للحصول على مزيد
+من المعلومات.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/neural_networks/plot_mlp_training_curves.html#sphx-glr-auto-examples-neural-networks-plot-mlp-training-curves-py"><span class="std std-ref">Compare Stochastic learning strategies for MLPClassifier</span></a></p></li>
+<li><p>راجع <a class="reference internal" href="../auto_examples/neural_networks/plot_mnist_filters.html#sphx-glr-auto-examples-neural-networks-plot-mnist-filters-py"><span class="std std-ref">Visualization of MLP weights on MNIST</span></a> للاطلاع
+على التمثيل المرئي للأوزان المدربة.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h1>الانحدار<a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
+<p>تنفذ فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">MLPRegressor</span></code> طبقة إدراك متعددة (MLP) تتدرب باستخدام
+الانتشار الخلفي بدون دالة تنشيط في طبقة الإخراج، والتي يمكن اعتبارها أيضًا
+استخدام دالة الهوية كدالة تنشيط. لذلك، فإنه يستخدم خطأ المربعات كدالة خسارة،
+ويكون الإخراج مجموعة من القيم المستمرة.</p>
+<p>تدعم فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">MLPRegressor</span></code> أيضًا الانحدار متعدد المخرجات،
+الذي يمكن أن يكون فيه للعينة أكثر من هدف واحد.</p>
+</section>
+<section id="id5">
+<h1>التنظيم<a class="headerlink" href="#id5" title="Link to this heading">#</a></h1>
+<p>يستخدم كل من فئة <code class="xref py py-class docutils literal notranslate"><span class="pre">MLPRegressor</span></code> وفئة <code class="xref py py-class docutils literal notranslate"><span class="pre">MLPClassifier</span></code>
+المعلمة “alpha” لمصطلح التنظيم (التنظيم L2) الذي يساعد في تجنب الإفراط في
+التناسب عن طريق معاقبة الأوزان ذات القيم الكبيرة. ويظهر الرسم البياني التالي
+دالة القرار المتغيرة مع قيمة ألفا.</p>
+<figure class="align-center">
+<a class="reference external image-reference" href="../auto_examples/neural_networks/plot_mlp_alpha.html"><img alt="../_images/sphx_glr_plot_mlp_alpha_001.png" src="../_images/sphx_glr_plot_mlp_alpha_001.png" style="width: 1275.0px; height: 675.0px;" />
+</a>
+</figure>
+<p>راجع الأمثلة أدناه للحصول على مزيد من المعلومات.</p>
+<p class="rubric">الأمثلة</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../auto_examples/neural_networks/plot_mlp_alpha.html#sphx-glr-auto-examples-neural-networks-plot-mlp-alpha-py"><span class="std std-ref">Varying regularization in Multi-layer Perceptron</span></a></p></li>
+</ul>
+</section>
+<section id="id6">
+<h1>الخوارزميات<a class="headerlink" href="#id6" title="Link to this heading">#</a></h1>
+<p>تتدرب طبقة الإدراك المتعددة باستخدام <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">Stochastic Gradient Descent</a>،
+<a class="reference external" href="https://arxiv.org/abs/1412.6980">Adam</a>، أو
+<a class="reference external" href="https://en.wikipedia.org/wiki/Limited-memory_BFGS">L-BFGS</a>.
+يقوم الانحدار التدريجي العشوائي (SGD) بتحديث المعلمات باستخدام تدرج دالة الخسارة
+بالنسبة إلى معلمة تحتاج إلى التكيف، أي</p>
+<div class="math notranslate nohighlight">
+\[w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
++ \frac{\partial Loss}{\partial w})\]</div>
+<p>حيث <span class="math notranslate nohighlight">\(\eta\)</span> هو معدل التعلم الذي يتحكم في حجم الخطوة
+في البحث عن مساحة المعلمة.  <span class="math notranslate nohighlight">\(Loss\)</span> هي دالة الخسارة المستخدمة
+للشبكة.</p>
+<p>يمكن العثور على مزيد من التفاصيل في وثائق
+<a class="reference external" href="https://scikit-learn.org/stable/modules/sgd.html">SGD</a></p>
+<p>آدم مشابه لـ SGD من حيث أنه محسن احتمالي، ولكنه يمكنه
+ضبط مقدار تحديث المعلمات تلقائيًا بناءً على تقديرات تكيفية
+لللحظات الدنيا.</p>
+<p>مع SGD أو Adam، يدعم التدريب التعلم عبر الإنترنت والتعلم المصغر.</p>
+<p>L-BFGS هو مُحسِّن يقارب مصفوفة هيس التي تمثل المشتق الجزئي الثاني لدالة.
+كما أنه يقارب معكوس مصفوفة هيس لإجراء تحديثات المعلمات. يستخدم
+التنفيذ إصدار Scipy من <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html">L-BFGS</a>.</p>
+<p>إذا كان المُحسِّن المحدد هو ‘L-BFGS’، فإن التدريب لا يدعم التعلم عبر الإنترنت
+ولا التعلم المصغر.</p>
+<p>التعقيد
+فيما يلي ترجمة لنص RST إلى اللغة العربية مع اتباع التعليمات المذكورة:</p>
+<p>لنفترض أن هناك n عينة تدريب، و m خاصية، و k طبقة مخفية، تحتوي كل منها على h من العصبونات - لتبسيط، و o من العصبونات
+الخرج. تعقيد الوقت للانتشار الخلفي هو O (i · n · (m · h + (k - 1) · h · h + h · o))، حيث i هو عدد
+من التكرارات. نظرًا لأن الانتشار الخلفي له تعقيد زمني مرتفع، فمن المستحسن البدء بعدد أصغر من العصبونات المخفية وبعض الطبقات المخفية للتدريب.</p>
+<p>…</p>
+<p>بالنظر إلى مجموعة من أمثلة التدريب (x1، y1)، (x2، y2)، …، (xn، yn)
+حيث xi ∈ R^n و yi ∈ {0، 1}، فإن شبكة عصبية اصطناعية متعددة الطبقات بطبقة مخفية واحدة وعصبون مخفي واحد تتعلم الدالة f(x) = W2 g(W1^T x + b1) + b2
+حيث W1 ∈ R^m و W2، b1، b2 ∈ R هي
+معلمات النموذج. تمثل W1 و W2 أوزان طبقة الإدخال والطبقة المخفية، على التوالي؛ و b1 و b2 تمثل التحيز المضافة
+إلى الطبقة المخفية وطبقة الإخراج، على التوالي.
+g(.) : R → R هي دالة التنشيط، يتم تعيينها افتراضيًا على أنها
+ظل التانژانت双曲ي. يتم إعطاؤه على النحو التالي،</p>
+<p>g(z)= (e^z-e^{-z})/(e^z+e^{-z})</p>
+<p>بالنسبة للتصنيف الثنائي، تمر f(x) عبر دالة اللوغستية
+g(z)=1/(1+e^{-z}) للحصول على قيم الإخراج بين الصفر والواحد. من شأن عتبة، يتم تعيينها إلى 0.5، تعيين عينات الإخراج أكبر من أو تساوي 0.5
+إلى الفئة الإيجابية، وبقية إلى الفئة السلبية.</p>
+<p>إذا كان هناك أكثر من فئتين، فإن f(x) نفسها ستكون متجهًا من
+الحجم (عدد الفئات،). بدلاً من المرور عبر الدالة اللوغستية، فإنه يمر
+عبر دالة softmax، والتي تكتب على النحو التالي،</p>
+<p>softmax(z)_i = exp(z_i)/sum_{l=1}^k exp(z_l)</p>
+<p>حيث z_i يمثل العنصر i من الإدخال إلى softmax،
+الذي يقابل الفئة i، و K هو عدد الفئات.
+النتيجة هي متجه يحتوي على احتمالات أن العينة x
+تنتمي إلى كل فئة. الإخراج هو الفئة ذات أعلى احتمال.</p>
+<p>في الانحدار، يظل الإخراج كما هو f(x) ؛ لذلك، دالة التنشيط الإخراج
+هي ببساطة دالة الهوية.</p>
+<p>تستخدم شبكة عصبية اصطناعية متعددة الطبقات (MLP) دالات خسارة مختلفة اعتمادًا على نوع المشكلة. دالة الخسارة للتصنيف هي متوسط التباين Crossing-Entropy، والتي في الحالة الثنائية تعطى على النحو التالي،</p>
+<p>Loss(^y,y,W) = -1/n sum_{i=0}^n (y_i ln ^{y_i} + (1-y_i) ln(1-^y_i)) + alpha/2n ||W||_2^2</p>
+<p>حيث alpha ||W||_2^2 هو مصطلح L2-التنظيم (المعروف أيضًا باسم العقوبة)
+التي تعاقب النماذج المعقدة؛ و alpha &gt; 0 هو
+ضابط غير سالب يتحكم في حجم العقوبة.</p>
+<p>بالنسبة للانحدار، تستخدم شبكة عصبية اصطناعية متعددة الطبقات (MLP) دالة خسارة خطأ المتوسط المربع؛ تكتب على النحو التالي،</p>
+<p>Loss(^y,y,W) = 1/2n sum_{i=0}^n||^y_i - y_i ||_2^2 + alpha/2n ||W||_2^2</p>
+<p>بدءًا من الأوزان العشوائية الأولية، تعمل شبكة عصبية اصطناعية متعددة الطبقات (MLP) على تقليل
+دالة الخسارة عن طريق تحديث هذه الأوزان بشكل متكرر. بعد حساب
+الخسارة، تمريرة للخلف تنشرها من طبقة الإخراج إلى الطبقات السابقة،
+تزويد كل معلمة وزن بقيمة تحديث تهدف إلى تقليل الخسارة.</p>
+<p>في الانحدار التدريجي، يتم حساب تدرج الخسارة فيما يتعلق
+الأوزان وخصمها من W.
+من الناحية الرسمية، يتم التعبير عن ذلك على النحو التالي،</p>
+<p>W^{i+1} = W^i - epsilon nabla {Loss}_{W}^{i}</p>
+<p>حيث i هي خطوة التكرار، و epsilon هي معدل التعلم
+مع قيمة أكبر من 0.</p>
+<p>يتوقف الخوارزمية عندما يصل إلى عدد محدد مسبقًا أقصى عدد من التكرارات؛ أو
+عندما يكون التحسن في الخسارة أقل من رقم صغير معين.</p>
+<p>…</p>
+<p>نصائح للاستخدام العملي:</p>
+<ul class="simple">
+<li><p>شبكة عصبية اصطناعية متعددة الطبقات (MLP) حساسة لقياس الميزة، لذا فمن المستحسن بشدة أن تقوم بضبط مقياس بياناتك. على سبيل المثال، قم بضبط كل</p></li>
+</ul>
+<p>سمة في متجه الإدخال X إلى [0، 1] أو [-1، +1]، أو قم بتوحيدها
+ليكون متوسطها 0 وانحرافها المعياري 1. لاحظ أنه يجب عليك تطبيق نفس
+قياس على مجموعة الاختبار للحصول على نتائج ذات معنى.
+يمكنك استخدام sklearn.preprocessing.StandardScaler للتوحيد.</p>
+<ul class="simple">
+<li><p>أفضل طريقة للعثور على معلمة التنظيم المعقولة α هي استخدام sklearn.model_selection.GridSearchCV، عادة في النطاق 10.0 ** -np.arange(1, 7).</p></li>
+<li><p>من الناحية التجريبية، لاحظنا أن L-BFGS يتقارب بشكل أسرع</p></li>
+</ul>
+<p>مع حلول أفضل لمجموعات البيانات الصغيرة. ومع ذلك، فإن “آدم” قوي جدًا
+لمجموعات البيانات الكبيرة نسبيًا. عادة ما يتقارب بسرعة ويعطي أداءً جيدًا جدًا. يمكن لـ SGD مع الزخم أو
+زخم نستيروف، من ناحية أخرى، أن يؤدي أداءً أفضل من
+هذان الخوارزميان إذا تم ضبط معدل التعلم بشكل صحيح.</p>
+<p>مزيد من التحكم مع warm_start:</p>
+<p>إذا كنت تريد مزيدًا من التحكم في معايير الإيقاف أو معدل التعلم في SGD،
+أو تريد إجراء مراقبة إضافية، فيمكن أن يكون استخدام “warm_start=True” و
+“max_iter=1” وتكرارها بنفسك مفيدًا:</p>
+<p>X = [[0.، 0.],[1.، 1.]]
+y = [0، 1]
+clf = MLPClassifier(hidden_layer_sizes=(15،)، random_state=1، max_iter=1، warm_start=True)
+عناصر لـ i في النطاق (10): … clf.fit(X، y) … # مراقبة / تفتيش إضافية
+MLPClassifier (…)</p>
+<p>…</p>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  <div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item">
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+                </footer>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">شبكات عصبية (خاضعة للإشراف)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">طبقات الإدراك المتعددة</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">التصنيف</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">الانحدار</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">التنظيم</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">الخوارزميات</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/modules/neural_networks_supervised.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2007 - 2024, scikit-learn developers (BSD License).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>
